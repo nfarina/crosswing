@@ -1,0 +1,14 @@
+{
+  "name": "cyber",
+  "private": true,
+  "version": "0.0.0",
+  "description": "",
+  "scripts": {},
+  "keywords": [],
+  "author": "nfarina@gmail.com",
+  "devDependencies": {
+    "@types/react": "^18.0.35",
+    "@types/react-dom": "^18.0.11",
+    "typescript": "^5.0.4"
+  }
+}
