@@ -1,5 +1,11 @@
 import { styled } from "@cyber/css";
-import { CyberColorStyle, CyberFontStyle, colors, fonts } from "@cyber/theme";
+import {
+  CyberColorStyle,
+  CyberFontStyle,
+  CyberWebStyle,
+  colors,
+  fonts,
+} from "@cyber/theme";
 import React from "react";
 
 export function App() {
@@ -7,6 +13,7 @@ export function App() {
     <StyledApp>
       <CyberColorStyle />
       <CyberFontStyle />
+      <CyberWebStyle />
       Lorem Ipsum
     </StyledApp>
   );
