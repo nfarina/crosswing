@@ -73,28 +73,28 @@ export const shadows = {
 export const CyberColorStyle = createGlobalStyle`
 
   html {
-    --text-color: ${hexToRgb(colors.darkGreen.hex)};
-    --text-background-color: ${hexToRgb(colors.white.hex)};
-    --text-background-panel-color: ${hexToRgb(colors.extraLightGray.hex)};
+    --text-color: ${hexToRgba(colors.darkGreen.hex)};
+    --text-background-color: ${hexToRgba(colors.white.hex)};
+    --text-background-panel-color: ${hexToRgba(colors.extraLightGray.hex)};
+    --text-background-alt-color: ${hexToRgba(colors.extraLightGray.hex)};
     --separator-color: ${colors.black({ alpha: 0.1 })};
     --card-shadow: 0px 4px 12px ${colors.darkGreen({ alpha: 0.2 })};
     --card-small-shadow: 0px 1px 4px ${colors.darkGreen({ alpha: 0.2 })};
     --card-border-shadow: 0px 0px 0px 1px ${colors.darkGreen({ alpha: 0.07 })};
-    --text-background-alt-color: ${hexToRgb(colors.extraLightGray.hex)};
     --image-border-shadow: inset 0 0 0 1px ${colors.black({ alpha: 0.1 })};
   
     @media (prefers-color-scheme: dark) {
-      --text-color: ${hexToRgb(colors.extraLightGray.hex)};
-      --text-background-color: ${hexToRgb(colors.extraExtraDarkGray.hex)};
-      --text-background-panel-color: ${hexToRgb(
+      --text-color: ${hexToRgba(colors.extraLightGray.hex)};
+      --text-background-color: ${hexToRgba(colors.extraExtraDarkGray.hex)};
+      --text-background-panel-color: ${hexToRgba(
+        colors.extraExtraExtraDarkGray.hex,
+      )};
+      --text-background-alt-color: ${hexToRgba(
         colors.extraExtraExtraDarkGray.hex,
       )};
       --separator-color: ${colors.white({ alpha: 0.15 })};
       --card-shadow: 0px 4px 12px ${colors.black()};
       --card-small-shadow: 0px 1px 4px ${colors.black()};
-      --text-background-alt-color: ${hexToRgb(
-        colors.extraExtraExtraDarkGray.hex,
-      )};
       --card-border-shadow: 0px 0px 0px 1px ${colors.black({ alpha: 0.2 })};
       --image-border-shadow: inset 0 0 0 1px ${colors.white({ alpha: 0.05 })};
     }
@@ -148,31 +148,35 @@ export function buildHexColor(
     if (lighten !== undefined) color = color.lighten(lighten);
     if (darken !== undefined) color = color.darken(darken);
     hex = color.hex();
-    rgb = hexToRgb(hex, p3);
-  } else {
-    // Render it out if you didn't give us a pre-rendered string.
-    rgb = hexToRgb(hex, p3);
   }
 
   if (p3 && SUPPORTS_P3_COLOR) {
+    const rgb = hexToColor(hex);
     return `color(display-p3 ${rgb} / ${alpha ?? 1})`;
   } else {
+    const rgb = hexToRgba(hex);
     return `rgba(${rgb}, ${alpha ?? 1})`;
   }
 }
 
-function hexToRgb(hex: string, p3: boolean = true): string {
+function hexToRgb(hex: string): [red: number, green: number, blue: number] {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   if (!result) throw new Error(`Invalid color ${hex}`);
   const [_, ...components] = result;
   const [r, g, b] = components.map((c) => parseInt(c, 16));
-  if (p3 && SUPPORTS_P3_COLOR) {
-    // Return a string suitable for embedding in the color() function.
-    return `calc(${r} / 255) calc(${g} / 255) calc(${b} / 255)`;
-  } else {
-    // Return a string suitable for emebdding in the rgba() function.
-    return `${r}, ${g}, ${b}`;
-  }
+  return [r, g, b];
+}
+
+/** Returns a string suitable for embedding in the color() function. */
+function hexToColor(hex: string): string {
+  const [r, g, b] = hexToRgb(hex);
+  return `calc(${r} / 255) calc(${g} / 255) calc(${b} / 255)`;
+}
+
+/** Returns a string suitable for emebdding in the rgba() function. */
+function hexToRgba(hex: string): string {
+  const [r, g, b] = hexToRgb(hex);
+  return `${r}, ${g}, ${b}`;
 }
 
 //

@@ -20,5 +20,7 @@
   "include": [
     "packages/*/src/**/*.ts",
     "packages/*/src/**/*.tsx",
+    // Allow including non-source files (for Webpack).
+    "assets.d.ts",
   ]
 }

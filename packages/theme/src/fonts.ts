@@ -1,1 +1,120 @@
-console.log("FONTS");
+import { createGlobalStyle } from "@cyber/css";
+import FiraSansBlackURL from "../fonts/fira-sans/FiraSans-Black.ttf";
+import FiraSansBoldURL from "../fonts/fira-sans/FiraSans-Bold.ttf";
+import FiraSansMediumURL from "../fonts/fira-sans/FiraSans-Medium.ttf";
+import FiraSansRegularURL from "../fonts/fira-sans/FiraSans-Regular.ttf";
+import LatoBlackURL from "../fonts/lato/Lato-Black.ttf";
+import LatoBoldURL from "../fonts/lato/Lato-Bold.ttf";
+import LatoRegularURL from "../fonts/lato/Lato-Regular.ttf";
+
+export const fonts = {
+  firaSans: fontBuilder({ family: "Fira Sans", weight: "400" }),
+  firaSansMedium: fontBuilder({ family: "Fira Sans", weight: "500" }),
+  firaSansBold: fontBuilder({ family: "Fira Sans", weight: "600" }),
+  firaSansBlack: fontBuilder({ family: "Fira Sans", weight: "800" }),
+  lato: fontBuilder({ family: "Lato", weight: "400" }),
+  latoBold: fontBuilder({ family: "Lato", weight: "600" }),
+  latoBlack: fontBuilder({ family: "Lato", weight: "800" }),
+};
+
+export const CyberFontStyle = createGlobalStyle`
+
+  /* Fira Sans */
+
+  @font-face {
+    font-family: 'Fira Sans';
+    src: url('${FiraSansRegularURL}') format('truetype');
+    font-weight: 400;
+  }
+
+  @font-face {
+    font-family: 'Fira Sans';
+    src: url('${FiraSansMediumURL}') format('truetype');
+    font-weight: 500;
+  }
+
+  @font-face {
+    font-family: 'Fira Sans';
+    src: url('${FiraSansBoldURL}') format('truetype');
+    font-weight: 600;
+  }
+
+  @font-face {
+    font-family: 'Fira Sans';
+    src: url('${FiraSansBlackURL}') format('truetype');
+    font-weight: 800;
+  }
+
+  /* Lato */
+
+  @font-face {
+    font-family: 'Lato';
+    src: url('${LatoRegularURL}') format('truetype');
+    font-weight: 400;
+  }
+
+  @font-face {
+    font-family: 'Lato';
+    src: url('${LatoBoldURL}') format('truetype');
+    font-weight: 600;
+  }
+
+  @font-face {
+    font-family: 'Lato';
+    src: url('${LatoBlackURL}') format('truetype');
+    font-weight: 800;
+  }
+`;
+
+export interface FontOptions {
+  size: number;
+  line?: string;
+  /** Prevents automatic font scaling. */
+  fixed?: boolean;
+}
+
+export type FontBuilder = {
+  (options: FontOptions): string;
+  family: string;
+  weight: string;
+  style: string;
+  monospace: boolean;
+};
+
+function fontBuilder({
+  family,
+  weight,
+  style = "normal",
+  monospace = false,
+}: {
+  family: string;
+  weight: string;
+  style?: string;
+  monospace?: boolean;
+}): FontBuilder {
+  const builder = ({ size, line, fixed }: FontOptions) => {
+    // You can define the CSS var "--font-scale" to globally scale up or
+    // down fonts created with FontBuilder. This is how we handle adjusting the
+    // entire UI for accessibility.
+    const scaledSize = fixed
+      ? `${size}px`
+      : `calc(${size}px * var(--font-scale, 1))`;
+
+    // Scale the line size if you defined it in points.
+    const scaledLine =
+      !fixed && (line ?? "").endsWith("px")
+        ? `calc(${line} * var(--font-scale, 1))`
+        : line ?? "normal";
+
+    return `${style} ${weight} ${scaledSize} / ${scaledLine} "${family}", sans-serif${
+      monospace ? ", monospace" : ""
+    }`;
+  };
+
+  builder.family = family;
+  builder.weight = weight;
+  builder.style = style;
+  builder.monospace = monospace;
+
+  return builder;
+}
