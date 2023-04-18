@@ -1,14 +1,16 @@
 {
   "name": "@cyber/example-client",
+  "type": "module",
+  "sideEffects": false,
   "private": true,
   "version": "0.0.0",
-  "main": "index.js",
   "scripts": {},
-  "keywords": [],
   "devDependencies": {
     "vite": "^4.2.1"
   },
   "dependencies": {
+    "@cyber/css": "workspace:^",
+    "@cyber/theme": "workspace:^",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }

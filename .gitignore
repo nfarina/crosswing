@@ -5,3 +5,12 @@
 ## pnpm
 
 node_modules
+
+## TypeScript
+
+*.tsbuildinfo
+
+## Build Products
+
+packages/*/src/**/*.js
+dist/

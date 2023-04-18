@@ -1,10 +1,10 @@
 {
   "name": "cyber",
+  "type": "module",
   "private": true,
   "version": "0.0.0",
   "description": "",
   "scripts": {},
-  "keywords": [],
   "author": "nfarina@gmail.com",
   "devDependencies": {
     "@types/react": "^18.0.35",

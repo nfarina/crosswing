@@ -1,0 +1,11 @@
+{
+  "name": "@cyber/css",
+  "type": "module",
+  "sideEffects": false,
+  "version": "0.0.0",
+  "exports": "./src/index.js",
+  "scripts": {},
+  "dependencies": {
+    "styled-components": "^5.3.9"
+  }
+}
