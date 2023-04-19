@@ -8,9 +8,22 @@ import Color from "color";
 const SUPPORTS_P3_COLOR =
   typeof CSS !== "undefined" && CSS.supports("color: color(display-p3 1 1 1)");
 
-const namedColors = {
+const neutrals = {
   black: hexColor("#000000"),
   white: hexColor("#FFFFFF"),
+  primary: hexColor("#FB5525"),
+  darkGray: hexColor("#919998"),
+  mediumGray: hexColor("#B5BFBE"),
+  lightGray: hexColor("#E1E5E5"),
+  extraLightGray: hexColor("#F7FAFA"),
+  extraDarkGray: hexColor("#020403"),
+  extraExtraLightGray: hexColor("#FEFEFE"),
+  extraExtraDarkGray: hexColor("#161D1C"),
+  extraExtraExtraDarkGray: hexColor("#0A100F"),
+};
+
+const other = {
+  darkGreen: hexColor("#1A4A44"),
   turquoise: hexColor("#32BBAB"),
   extraLightTurquoise: hexColor("#F5FAF9"),
   lime: hexColor("#90D98B"),
@@ -18,28 +31,18 @@ const namedColors = {
   cream: hexColor("#FCF8EE"),
   pink: hexColor("#F09CAB"),
   red: hexColor("#F2584D"),
-  orange: hexColor("#FB5525"),
   darkBlue: hexColor("#2B7DA5"),
   mediumBlue: hexColor("#7CB8D6"),
   lightBlue: hexColor("#8ED2F4"),
   babyBlue: hexColor("#D0E9F5"),
   purple: hexColor("#5765A1"),
-  darkGreen: hexColor("#1A4A44"),
-  darkGray: hexColor("#919998"),
-  mediumGray: hexColor("#B5BFBE"),
-  lightGray: hexColor("#E1E5E5"),
-  extraLightGray: hexColor("#F7FAFA"),
-  extraDarkGray: hexColor("#020403"),
   extraDarkBlue: hexColor("#0c2c3c"),
   extraDarkTurquoise: hexColor("#194e48"),
-  extraExtraLightGray: hexColor("#FEFEFE"),
-  extraExtraDarkGray: hexColor("#161D1C"),
-  extraExtraExtraDarkGray: hexColor("#0A100F"),
 };
 
-const dynamicColors = {
+const dynamic = {
   text: varColor("--text-color"),
-  textSecondary: namedColors.darkGray,
+  textSecondary: varColor("--text-secondary-color"),
   textBackground: varColor("--text-background-color"),
   /** Suitable for panels that appear further from the viewer than the page background. */
   textBackgroundPanel: varColor("--text-background-panel-color"),
@@ -49,16 +52,12 @@ const dynamicColors = {
 };
 
 const gradients = {
-  turquoiseGradient: gradientColor("to right", "#32BB94", "#16B4BD"),
-  blueGradient: gradientColor("to right", "#2B86A5", "#2671A7"),
-  orangeGradient: gradientColor("to right", "#FB6225", "#FB3025"),
-  darkGradient: gradientColor("to right", "#1A4A34", "#235563"),
-  pinkGradient: gradientColor("to left", "#F09CB2", "#F09CA4"),
+  primaryGradient: gradientColor("to right", "#FB6225", "#FB3025"),
 };
 
 export const colors = {
-  ...namedColors,
-  ...dynamicColors,
+  ...neutrals,
+  ...dynamic,
   ...gradients,
 };
 
@@ -73,30 +72,34 @@ export const shadows = {
 export const CyberColorStyle = createGlobalStyle`
 
   html {
-    --text-color: ${hexToRgba(colors.darkGreen.hex)};
-    --text-background-color: ${hexToRgba(colors.white.hex)};
-    --text-background-panel-color: ${hexToRgba(colors.extraLightGray.hex)};
-    --text-background-alt-color: ${hexToRgba(colors.extraLightGray.hex)};
-    --separator-color: ${colors.black({ alpha: 0.1 })};
-    --card-shadow: 0px 4px 12px ${colors.darkGreen({ alpha: 0.2 })};
-    --card-small-shadow: 0px 1px 4px ${colors.darkGreen({ alpha: 0.2 })};
-    --card-border-shadow: 0px 0px 0px 1px ${colors.darkGreen({ alpha: 0.07 })};
-    --image-border-shadow: inset 0 0 0 1px ${colors.black({ alpha: 0.1 })};
+    --text-color: ${hexToRgba(other.darkGreen.hex)};
+    --text-secondary-color: ${hexToRgba(neutrals.darkGray.hex)};
+    --text-background-color: ${hexToRgba(neutrals.white.hex)};
+    --text-background-panel-color: ${hexToRgba(neutrals.extraLightGray.hex)};
+    --text-background-alt-color: ${hexToRgba(neutrals.extraLightGray.hex)};
+    --separator-color: ${neutrals.black({ alpha: 0.1 })};
+    --card-shadow: 0px 4px 12px ${other.darkGreen({ alpha: 0.2 })};
+    --card-small-shadow: 0px 1px 4px ${other.darkGreen({ alpha: 0.2 })};
+    --card-border-shadow: 0px 0px 0px 1px ${other.darkGreen({
+      alpha: 0.07,
+    })};
+    --image-border-shadow: inset 0 0 0 1px ${neutrals.black({ alpha: 0.1 })};
   
     @media (prefers-color-scheme: dark) {
-      --text-color: ${hexToRgba(colors.extraLightGray.hex)};
-      --text-background-color: ${hexToRgba(colors.extraExtraDarkGray.hex)};
+      --text-color: ${hexToRgba(neutrals.extraLightGray.hex)};
+      --text-secondary-color: ${hexToRgba(neutrals.darkGray.hex)};
+      --text-background-color: ${hexToRgba(neutrals.extraExtraDarkGray.hex)};
       --text-background-panel-color: ${hexToRgba(
-        colors.extraExtraExtraDarkGray.hex,
+        neutrals.extraExtraExtraDarkGray.hex,
       )};
       --text-background-alt-color: ${hexToRgba(
-        colors.extraExtraExtraDarkGray.hex,
+        neutrals.extraExtraExtraDarkGray.hex,
       )};
-      --separator-color: ${colors.white({ alpha: 0.15 })};
-      --card-shadow: 0px 4px 12px ${colors.black()};
-      --card-small-shadow: 0px 1px 4px ${colors.black()};
-      --card-border-shadow: 0px 0px 0px 1px ${colors.black({ alpha: 0.2 })};
-      --image-border-shadow: inset 0 0 0 1px ${colors.white({ alpha: 0.05 })};
+      --separator-color: ${neutrals.white({ alpha: 0.15 })};
+      --card-shadow: 0px 4px 12px ${neutrals.black()};
+      --card-small-shadow: 0px 1px 4px ${neutrals.black()};
+      --card-border-shadow: 0px 0px 0px 1px ${neutrals.black({ alpha: 0.2 })};
+      --image-border-shadow: inset 0 0 0 1px ${neutrals.white({ alpha: 0.05 })};
     }
   }
 `;

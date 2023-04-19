@@ -8,13 +8,13 @@ import LatoBoldURL from "../fonts/lato/Lato-Bold.ttf";
 import LatoRegularURL from "../fonts/lato/Lato-Regular.ttf";
 
 export const fonts = {
-  firaSans: fontBuilder({ family: "Fira Sans", weight: "400" }),
-  firaSansMedium: fontBuilder({ family: "Fira Sans", weight: "500" }),
-  firaSansBold: fontBuilder({ family: "Fira Sans", weight: "600" }),
-  firaSansBlack: fontBuilder({ family: "Fira Sans", weight: "800" }),
-  lato: fontBuilder({ family: "Lato", weight: "400" }),
-  latoBold: fontBuilder({ family: "Lato", weight: "600" }),
-  latoBlack: fontBuilder({ family: "Lato", weight: "800" }),
+  display: fontBuilder({ family: "Fira Sans", weight: "400" }),
+  displayMedium: fontBuilder({ family: "Fira Sans", weight: "500" }),
+  displayBold: fontBuilder({ family: "Fira Sans", weight: "600" }),
+  displayBlack: fontBuilder({ family: "Fira Sans", weight: "800" }),
+  numeric: fontBuilder({ family: "Lato", weight: "400" }),
+  numericBold: fontBuilder({ family: "Lato", weight: "600" }),
+  numericBlack: fontBuilder({ family: "Lato", weight: "800" }),
 };
 
 export const CyberFontStyle = createGlobalStyle`

@@ -4,11 +4,11 @@
   "sideEffects": false,
   "private": true,
   "version": "0.0.0",
-  "scripts": {},
   "devDependencies": {
     "vite": "^4.2.1"
   },
   "dependencies": {
+    "@cyber/components": "workspace:^",
     "@cyber/css": "workspace:^",
     "@cyber/theme": "workspace:^",
     "react": "^18.2.0",
