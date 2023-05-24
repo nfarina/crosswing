@@ -1,11 +1,6 @@
 import { Button } from "@cyber/components";
 import { styled } from "@cyber/css";
-import {
-  CyberColorStyle,
-  CyberFontStyle,
-  CyberWebStyle,
-  colors,
-} from "@cyber/theme";
+import { CyberApp } from "@cyber/theme";
 import React, { useState } from "react";
 
 export function App() {
@@ -18,21 +13,15 @@ export function App() {
 
   return (
     <StyledApp>
-      <CyberColorStyle />
-      <CyberFontStyle />
-      <CyberWebStyle />
-      <Button primary onClick={onClick} working={working}>
-        Button
-      </Button>
+      <Button text="Button" primary onClick={onClick} working={working} />
     </StyledApp>
   );
 }
 
-export const StyledApp = styled.div`
+export const StyledApp = styled(CyberApp)`
   display: flex;
   flex-flow: column;
   align-items: center;
   justify-content: center;
   padding: 10px;
-  background: ${colors.textBackground()};
 `;

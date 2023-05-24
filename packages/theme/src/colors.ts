@@ -138,18 +138,16 @@ export function buildHexColor(
   hex: string,
   { alpha, lighten, darken, tint, p3 = true }: HexColorOptions = {},
 ): string {
-  let rgb: string;
-
   // Transform it if you so wish.
-  if (lighten !== undefined || darken !== undefined || tint !== undefined) {
+  if (lighten != null || darken != null || tint != null) {
     let color = Color(hex);
-    if (tint !== undefined) {
+    if (tint != null) {
       const { s, l } = color.hsl().object();
       const h = Color(tint()).hue();
       color = Color({ h, s, l });
     }
-    if (lighten !== undefined) color = color.lighten(lighten);
-    if (darken !== undefined) color = color.darken(darken);
+    if (lighten != null) color = color.lighten(lighten);
+    if (darken != null) color = color.darken(darken);
     hex = color.hex();
   }
 

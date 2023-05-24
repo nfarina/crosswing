@@ -4,8 +4,13 @@
   "sideEffects": false,
   "private": true,
   "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
   "devDependencies": {
-    "vite": "^4.2.1"
+    "vite": "^4.3.8"
   },
   "dependencies": {
     "@cyber/components": "workspace:^",
