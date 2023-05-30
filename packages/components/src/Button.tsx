@@ -132,11 +132,11 @@ export const StyledButton = styled(Clickable)`
       }
     }
 
-    background: ${colors.primaryGradient({ p3: true })};
+    background: ${colors.primaryGradient()};
 
     /* Override dark mode selector above. */
     @media (prefers-color-scheme: dark) {
-      background: ${colors.primaryGradient({ p3: true })};
+      background: ${colors.primaryGradient()};
     }
   }
 

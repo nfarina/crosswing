@@ -8,10 +8,10 @@ import Color from "color";
 const SUPPORTS_P3_COLOR =
   typeof CSS !== "undefined" && CSS.supports("color: color(display-p3 1 1 1)");
 
+/** A set of neutral-toned colors used by shared components. */
 const neutrals = {
   black: hexColor("#000000"),
   white: hexColor("#FFFFFF"),
-  primary: hexColor("#FB5525"),
   darkGray: hexColor("#919998"),
   mediumGray: hexColor("#B5BFBE"),
   lightGray: hexColor("#E1E5E5"),
@@ -22,12 +22,15 @@ const neutrals = {
   extraExtraExtraDarkGray: hexColor("#0A100F"),
 };
 
+/** A set of opinionated colors that work well with the neutrals above. */
 const other = {
   darkGreen: hexColor("#1A4A44"),
   turquoise: hexColor("#32BBAB"),
   extraLightTurquoise: hexColor("#F5FAF9"),
   lime: hexColor("#90D98B"),
   gold: hexColor("#E0B475"),
+  orange: hexColor("#FB5525"),
+  orangeGradient: gradientColor("to right", "#FB6225", "#FB3025"),
   cream: hexColor("#FCF8EE"),
   pink: hexColor("#F09CAB"),
   red: hexColor("#F2584D"),
@@ -40,7 +43,9 @@ const other = {
   extraDarkTurquoise: hexColor("#194e48"),
 };
 
+/** A set of dynamic colors that auto-adjust for light/dark modes. */
 const dynamic = {
+  primary: varColor("--primary-color"),
   text: varColor("--text-color"),
   textSecondary: varColor("--text-secondary-color"),
   textBackground: varColor("--text-background-color"),
@@ -51,8 +56,9 @@ const dynamic = {
   separator: () => `var(--separator-color)`,
 };
 
+/** Gradients that go well with the default colors. */
 const gradients = {
-  primaryGradient: gradientColor("to right", "#FB6225", "#FB3025"),
+  primaryGradient: () => `var(--primary-gradient)`,
 };
 
 export const colors = {
@@ -72,11 +78,13 @@ export const shadows = {
 export const CyberColorStyle = createGlobalStyle`
 
   html {
-    --text-color: ${hexToRgba(other.darkGreen.hex)};
-    --text-secondary-color: ${hexToRgba(neutrals.darkGray.hex)};
-    --text-background-color: ${hexToRgba(neutrals.white.hex)};
-    --text-background-panel-color: ${hexToRgba(neutrals.extraLightGray.hex)};
-    --text-background-alt-color: ${hexToRgba(neutrals.extraLightGray.hex)};
+    --primary-color: ${other.orange.rgb};
+    --primary-gradient: ${other.orangeGradient()};
+    --text-color: ${other.darkGreen.rgb};
+    --text-secondary-color: ${neutrals.darkGray.rgb};
+    --text-background-color: ${neutrals.white.rgb};
+    --text-background-panel-color: ${neutrals.extraLightGray.rgb};
+    --text-background-alt-color: ${neutrals.extraLightGray.rgb};
     --separator-color: ${neutrals.black({ alpha: 0.1 })};
     --card-shadow: 0px 4px 12px ${other.darkGreen({ alpha: 0.2 })};
     --card-small-shadow: 0px 1px 4px ${other.darkGreen({ alpha: 0.2 })};
@@ -86,15 +94,11 @@ export const CyberColorStyle = createGlobalStyle`
     --image-border-shadow: inset 0 0 0 1px ${neutrals.black({ alpha: 0.1 })};
   
     @media (prefers-color-scheme: dark) {
-      --text-color: ${hexToRgba(neutrals.extraLightGray.hex)};
-      --text-secondary-color: ${hexToRgba(neutrals.darkGray.hex)};
-      --text-background-color: ${hexToRgba(neutrals.extraExtraDarkGray.hex)};
-      --text-background-panel-color: ${hexToRgba(
-        neutrals.extraExtraExtraDarkGray.hex,
-      )};
-      --text-background-alt-color: ${hexToRgba(
-        neutrals.extraExtraExtraDarkGray.hex,
-      )};
+      --text-color: ${neutrals.extraLightGray.rgb};
+      --text-secondary-color: ${neutrals.darkGray.rgb};
+      --text-background-color: ${neutrals.extraExtraDarkGray.rgb};
+      --text-background-panel-color: ${neutrals.extraExtraExtraDarkGray.rgb};
+      --text-background-alt-color: ${neutrals.extraExtraExtraDarkGray.rgb};
       --separator-color: ${neutrals.white({ alpha: 0.15 })};
       --card-shadow: 0px 4px 12px ${neutrals.black()};
       --card-small-shadow: 0px 1px 4px ${neutrals.black()};
@@ -108,25 +112,27 @@ export const CyberColorStyle = createGlobalStyle`
 // Tools for working with colors based on a hex code.
 //
 
+export type HexColorBuilder = {
+  (options?: HexColorOptions): string;
+  /** The original hex string that the builder is based on. */
+  hex: string;
+  /** The RGB components - suitable for rgba() or color() depending on SUPPORTS_P3_COLOR. */
+  rgb: string;
+};
+
 export interface HexColorOptions {
   alpha?: number;
   lighten?: number;
   darken?: number;
   /** Will apply the given tint as the hue component. */
   tint?: HexColorBuilder;
-  /** Render this color in the P3 colorspace (if supported)? Default true. */
-  p3?: boolean;
 }
-
-export type HexColorBuilder = {
-  (options?: HexColorOptions): string;
-  hex: string;
-};
 
 export function hexColor(hex: string): HexColorBuilder {
   const builder = (options: HexColorOptions = {}) =>
     buildHexColor(hex, options);
   builder.hex = hex; // Store the original hex color string passed in for reuse.
+  builder.rgb = SUPPORTS_P3_COLOR ? hexToColor(hex) : hexToRgba(hex);
   return builder;
 }
 
@@ -136,7 +142,7 @@ export function hexColor(hex: string): HexColorBuilder {
  */
 export function buildHexColor(
   hex: string,
-  { alpha, lighten, darken, tint, p3 = true }: HexColorOptions = {},
+  { alpha, lighten, darken, tint }: HexColorOptions = {},
 ): string {
   // Transform it if you so wish.
   if (lighten != null || darken != null || tint != null) {
@@ -151,7 +157,7 @@ export function buildHexColor(
     hex = color.hex();
   }
 
-  if (p3 && SUPPORTS_P3_COLOR) {
+  if (SUPPORTS_P3_COLOR) {
     const rgb = hexToColor(hex);
     return `color(display-p3 ${rgb} / ${alpha ?? 1})`;
   } else {
@@ -181,13 +187,12 @@ function hexToRgba(hex: string): string {
 }
 
 //
-// Tools for working with colors based on a CSS variable.
+// Tools for working with colors based on a CSS variable. Var colors are mostly
+// "baked" but can be transformed with alpha.
 //
 
 export interface VarColorOptions {
   alpha?: number;
-  /** Render this color in the P3 colorspace (if supported)? Default true. */
-  p3?: boolean;
 }
 
 export type VarColorBuilder = (options?: VarColorOptions) => string;
@@ -198,9 +203,9 @@ export function varColor(cssVar: string): VarColorBuilder {
 
 export function buildVarColor(
   cssVar: string,
-  { alpha, p3 }: VarColorOptions = {},
+  { alpha }: VarColorOptions = {},
 ): string {
-  if (p3 && SUPPORTS_P3_COLOR) {
+  if (SUPPORTS_P3_COLOR) {
     return `color(display-p3 var(${cssVar}) / ${alpha ?? 1})`;
   } else {
     return `rgba(var(${cssVar}), ${alpha ?? 1})`;
@@ -211,10 +216,7 @@ export function buildVarColor(
 // Tools for working with CSS linear gradients.
 //
 
-export interface GradientOptions {
-  /** Render gradient stop colors in the P3 colorspace (if supported)? Default true. */
-  p3?: boolean;
-}
+export interface GradientOptions {}
 
 export type GradientBuilder = (options?: GradientOptions) => string;
 
