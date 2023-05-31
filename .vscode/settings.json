@@ -7,26 +7,19 @@
     "editor.codeActionsOnSave": [
       // The problem with this is that you end up dirtying more files in git
       // possibly unintentionally, and you also erase redo history when saving.
-      "source.organizeImports",
-    ],
+      "source.organizeImports"
+    ]
   },
   "[typescriptreact]": {
-    "editor.codeActionsOnSave": [
-      "source.organizeImports",
-    ],
+    "editor.codeActionsOnSave": ["source.organizeImports"]
   },
   "task.allowAutomaticTasks": "on",
   // Enable file nesting.
   "explorer.fileNesting.enabled": true,
-  // Customize how related files are nested when "file nesting" is enabled.
-  "explorer.fileNesting.patterns": {
-    "*.ts": "${capture}.js",
-    "*.tsx": "${capture}.js",
-  },
   // Customize icons when using the "Material Icon Theme".
   "material-icon-theme.folders.associations": {
     "src": "src",
     "node_modules": "node",
-    ".vscode": "vscode",
+    ".vscode": "vscode"
   }
 }

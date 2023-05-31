@@ -14,11 +14,14 @@
     "noImplicitAny": false,
     // Allow JSX syntax.
     "jsx": "react",
+    // Don't actually output code to the filesystem, just typecheck it.
+    "noEmit": true,
     // Dramatically speed up successive compilations.
-    "incremental": true,
+    "incremental": true
   },
   "include": [
     "packages/*/src/**/*.ts",
     "packages/*/src/**/*.tsx",
+    "assets.d.ts"
   ]
 }

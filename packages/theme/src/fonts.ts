@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "@cyber/css";
+import { useEffect } from "react";
 import FiraSansBlackURL from "../fonts/fira-sans/FiraSans-Black.ttf";
 import FiraSansBoldURL from "../fonts/fira-sans/FiraSans-Bold.ttf";
 import FiraSansMediumURL from "../fonts/fira-sans/FiraSans-Medium.ttf";
@@ -17,7 +17,7 @@ export const fonts = {
   numericBlack: fontBuilder({ family: "Lato", weight: "800" }),
 };
 
-export const CyberFontStyle = createGlobalStyle`
+export const CyberFontCSS = `
 
   /* Fira Sans */
 
@@ -65,6 +65,25 @@ export const CyberFontStyle = createGlobalStyle`
     font-weight: 800;
   }
 `;
+
+let fontsInstalled = false;
+function installFonts() {
+  if (fontsInstalled) return;
+
+  // Render our fonts statically only once, to work around flickering during
+  // development: https://github.com/styled-components/styled-components/issues/1593#issuecomment-409011695
+  const style = document.createElement("style");
+  style.innerHTML = CyberFontCSS;
+  document.head.appendChild(style);
+
+  fontsInstalled = true;
+}
+
+/** A React component that installs Cyber fonts automatically. */
+export function CyberFontStyle() {
+  useEffect(installFonts, []);
+  return null;
+}
 
 export interface FontOptions {
   size: number;

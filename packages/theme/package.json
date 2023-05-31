@@ -3,7 +3,10 @@
   "type": "module",
   "sideEffects": false,
   "version": "0.0.0",
-  "exports": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./decorators": "./src/decorators.js"
+  },
   "dependencies": {
     "@cyber/css": "workspace:^",
     "color": "^4.2.3",

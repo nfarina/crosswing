@@ -63,6 +63,7 @@ const gradients = {
 
 export const colors = {
   ...neutrals,
+  ...other,
   ...dynamic,
   ...gradients,
 };
