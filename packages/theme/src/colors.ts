@@ -26,6 +26,7 @@ const neutrals = {
 const other = {
   darkGreen: hexColor("#1A4A44"),
   turquoise: hexColor("#32BBAB"),
+  turquoiseGradient: gradientColor("to right", "#32BB94", "#16B4BD"),
   extraLightTurquoise: hexColor("#F5FAF9"),
   lime: hexColor("#90D98B"),
   gold: hexColor("#E0B475"),
@@ -79,8 +80,8 @@ export const shadows = {
 export const CyberColorStyle = createGlobalStyle`
 
   html {
-    --primary-color: ${other.orange.rgb};
-    --primary-gradient: ${other.orangeGradient()};
+    --primary-color: ${other.turquoise.rgb};
+    --primary-gradient: ${other.turquoiseGradient()};
     --text-color: ${other.darkGreen.rgb};
     --text-secondary-color: ${neutrals.darkGray.rgb};
     --text-background-color: ${neutrals.white.rgb};

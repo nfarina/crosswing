@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { Button } from "../Button.js";
 
 export default {
+  title: "Components/Button",
   component: Button,
   decorators: [CyberAppDecorator()],
   parameters: { layout: "centered" },

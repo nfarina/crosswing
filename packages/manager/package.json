@@ -1,11 +1,10 @@
 {
-  "name": "@cyber/example-client",
+  "name": "@cyber/manager",
   "type": "module",
   "sideEffects": false,
-  "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite --config ../../vite.config.ts --port 2701",
+    "dev": "vite --config ../../vite.config.ts --port 2700",
     "build": "vite --config ../../vite.config.ts build",
     "serve": "vite --config ../../vite.config.ts preview"
   },

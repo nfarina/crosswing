@@ -2,7 +2,7 @@ import { styled } from "@cyber/css";
 import React, { HTMLAttributes } from "react";
 import { CyberColorStyle, colors } from "./colors.js";
 import { CyberWebStyle } from "./containers.js";
-import { CyberFontStyle } from "./fonts.js";
+import { CyberFontStyle, fonts } from "./fonts.js";
 
 export function CyberApp({
   children,
@@ -20,4 +20,6 @@ export function CyberApp({
 
 export const StyledCyberApp = styled.div`
   background: ${colors.textBackground()};
+  color: ${colors.text()};
+  font: ${fonts.display({ size: 14 })};
 `;
