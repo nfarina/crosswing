@@ -9,15 +9,9 @@
     "build": "vite build",
     "serve": "vite preview"
   },
-  "devDependencies": {
-    "@vitejs/plugin-react": "^4.0.0",
-    "vite": "^4.3.9"
-  },
   "dependencies": {
     "@cyber/components": "workspace:^",
     "@cyber/css": "workspace:^",
-    "@cyber/theme": "workspace:^",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "@cyber/theme": "workspace:^"
   }
 }

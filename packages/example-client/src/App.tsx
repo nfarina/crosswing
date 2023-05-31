@@ -1,6 +1,7 @@
 import { Button } from "@cyber/components";
 import { styled } from "@cyber/css";
 import { CyberApp } from "@cyber/theme";
+import Close from "@cyber/theme/icons/Close.svg";
 import React, { useState } from "react";
 
 export function App() {
@@ -13,7 +14,13 @@ export function App() {
 
   return (
     <StyledApp>
-      <Button text="Button" primary onClick={onClick} working={working} />
+      <Button
+        text="Button"
+        icon={<Close />}
+        primary
+        onClick={onClick}
+        working={working}
+      />
     </StyledApp>
   );
 }

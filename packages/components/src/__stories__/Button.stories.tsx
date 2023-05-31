@@ -1,8 +1,8 @@
 import { CyberAppDecorator } from "@cyber/theme/decorators";
+import Close from "@cyber/theme/icons/Close.svg";
 import { Meta, StoryFn } from "@storybook/react";
 import React, { useState } from "react";
 import { Button } from "../Button.js";
-import Close from "./Close.svg";
 
 export default {
   component: Button,
@@ -81,17 +81,8 @@ export const WithSubtextLarger: Story = (args) => (
   />
 );
 
-export const TestIcon = () => <img src={Close} />;
+export const IconOnly: Story = (args) => <Button icon={<Close />} {...args} />;
 
-// export const IconOnly: Story = (args) => (
-//   <Button icon={<icons.Close />}  {...args} />
-// );
-
-// export const IconAndText: Story = (args) => (
-//   <Button
-//     icon={<icons.Close />}
-//     text="Close"
-
-//     {...args}
-//   />
-// );
+export const IconAndText: Story = (args) => (
+  <Button icon={<Close />} text="Close" {...args} />
+);

@@ -5,7 +5,8 @@
   "version": "0.0.0",
   "exports": {
     ".": "./src/index.js",
-    "./decorators": "./src/decorators.js"
+    "./decorators": "./src/decorators.js",
+    "./icons/*": "./icons/*"
   },
   "dependencies": {
     "@cyber/css": "workspace:^",
