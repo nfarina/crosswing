@@ -9,6 +9,8 @@
   ],
   "author": "nfarina@gmail.com",
   "scripts": {
+    "test": "vitest",
+    "coverage": "vitest run --coverage",
     "storybook": "storybook dev --ci -p 6006",
     "build-storybook": "storybook build"
   },
@@ -23,12 +25,14 @@
     "@types/react": "^18.2.7",
     "@types/react-dom": "^18.2.4",
     "@vitejs/plugin-react": "^4.0.0",
+    "@vitest/coverage-c8": "^0.31.3",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "storybook": "^7.0.18",
     "typescript": "^5.0.4",
     "vite": "^4.3.9",
-    "vite-plugin-svgr": "^3.2.0"
+    "vite-plugin-svgr": "^3.2.0",
+    "vitest": "^0.31.3"
   }
 }

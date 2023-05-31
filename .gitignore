@@ -10,6 +10,10 @@ node_modules
 
 *.tsbuildinfo
 
+## Test Coverage
+
+coverage
+
 ## Build Products
 
 packages/*/src/**/*.js
