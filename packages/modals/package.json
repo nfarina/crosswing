@@ -1,0 +1,12 @@
+{
+  "name": "@cyber/modals",
+  "type": "module",
+  "sideEffects": false,
+  "version": "0.0.0",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "dependencies": {
+    "@cyber/theme": "workspace:^"
+  }
+}
