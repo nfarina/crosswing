@@ -1,3 +1,4 @@
+export * from "./flattenChildren.js";
 export * from "./useDebounced.js";
 export * from "./useElementSize.js";
 export * from "./useGesture.js";

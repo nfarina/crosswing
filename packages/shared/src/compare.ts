@@ -24,8 +24,8 @@ export function deepEqual<T>(a: T, b: T): boolean {
 }
 
 export function shallowEqualArrays<T>(
-  a: Array<T> | void,
-  b: Array<T> | void,
+  a: Array<T> | null | void,
+  b: Array<T> | null | void,
   { ordered = true }: { ordered?: boolean } = {},
 ): boolean {
   // If either array is NOT an array (i.e. null or undefined) then just do

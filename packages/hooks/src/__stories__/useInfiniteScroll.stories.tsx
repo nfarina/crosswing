@@ -65,6 +65,10 @@ const Container = styled.div`
       flex-flow: column;
       align-items: center;
       justify-content: center;
+
+      @media (prefers-color-scheme: dark) {
+        color: white;
+      }
     }
 
     > .person + .person {

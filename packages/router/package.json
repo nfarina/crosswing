@@ -1,5 +1,5 @@
 {
-  "name": "@cyber/theme",
+  "name": "@cyber/router",
   "type": "module",
   "sideEffects": false,
   "version": "0.0.0",
@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "@cyber/css": "workspace:^",
-    "color": "^4.2.3",
-    "react": "^18.2.0"
+    "@cyber/hooks": "workspace:^",
+    "@cyber/host": "workspace:^",
+    "@cyber/theme": "workspace:^",
+    "react-transition-group": "^4.4.5"
   }
 }

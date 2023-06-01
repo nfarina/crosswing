@@ -10,12 +10,13 @@
   "author": "nfarina@gmail.com",
   "scripts": {
     "test": "vitest",
-    "testui": "vitest --ui --open=false --api.port 2703",
+    "testui": "vitest --ui --coverage --open=false --api.port 2703",
     "coverage": "vitest run --coverage",
     "storybook": "storybook dev --ci -p 2702",
     "build-storybook": "storybook build"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^7.0.18",
     "@storybook/addon-essentials": "^7.0.18",
     "@storybook/addon-interactions": "^7.0.18",
     "@storybook/addon-links": "^7.0.18",
@@ -26,12 +27,10 @@
     "@types/debug": "^4.1.8",
     "@types/react": "^18.2.7",
     "@types/react-dom": "^18.2.4",
+    "@types/react-is": "^18.2.0",
     "@vitejs/plugin-react": "^4.0.0",
     "@vitest/coverage-c8": "^0.31.3",
     "@vitest/ui": "^0.31.3",
-    "prop-types": "^15.8.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "storybook": "^7.0.18",
     "typescript": "^5.0.4",
     "vite": "^4.3.9",
@@ -39,6 +38,9 @@
     "vitest": "^0.31.3"
   },
   "dependencies": {
-    "debug": "^4.3.4"
+    "debug": "^4.3.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-is": "^18.2.0"
   }
 }

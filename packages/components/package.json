@@ -3,7 +3,10 @@
   "type": "module",
   "sideEffects": false,
   "version": "0.0.0",
-  "exports": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./icons/*": "./icons/*"
+  },
   "dependencies": {
     "@cyber/css": "workspace:^",
     "@cyber/theme": "workspace:^"
