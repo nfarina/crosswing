@@ -1,7 +1,8 @@
 import React from "react";
 import { createGlobalStyle, styled } from "styled-components";
-import { CyberApp } from "./app.js";
-import { colors } from "./colors.js";
+import { CyberColorStyle, colors } from "./colors.js";
+import { CyberWebStyle } from "./containers.js";
+import { CyberFontStyle } from "./fonts.js";
 
 /**
  * Decorator that injects Cyber global styles into the storybook environment.
@@ -15,11 +16,14 @@ export function CyberAppDecorator({
   // Actual decorator function.
   function CyberAppInnerDecorator(Story: () => any) {
     return (
-      <CyberApp>
+      <>
+        <CyberColorStyle />
+        <CyberFontStyle />
+        <CyberWebStyle />
         {layout === "mobile" && <MobileLayoutGlobalStyle />}
         {layout === "fullscreen" && <FullScreenLayoutGlobalStyle />}
         <Story />
-      </CyberApp>
+      </>
     );
   }
 
