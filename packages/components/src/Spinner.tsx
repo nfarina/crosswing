@@ -1,6 +1,6 @@
-import { keyframes, styled } from "@cyber/css";
 import { colors } from "@cyber/theme";
 import React, { HTMLAttributes } from "react";
+import { keyframes, styled } from "styled-components";
 
 export function Spinner({
   hidden,

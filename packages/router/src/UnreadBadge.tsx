@@ -1,5 +1,5 @@
-import { keyframes, styled } from "@cyber/css";
 import { colors, easing, fonts } from "@cyber/theme";
+import { keyframes, styled } from "styled-components";
 
 /**
  * We want to fade in on a delay when visible, for two reasons. First,

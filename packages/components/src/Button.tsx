@@ -1,6 +1,6 @@
-import { styled } from "@cyber/css";
 import { colors, fonts } from "@cyber/theme";
 import React, { ButtonHTMLAttributes, ReactNode } from "react";
+import { styled } from "styled-components";
 import { Clickable } from "./Clickable.js";
 import { Spinner, StyledSpinner } from "./Spinner.js";
 
@@ -118,6 +118,10 @@ export const StyledButton = styled(Clickable)`
 
   &[data-icon-and-children="true"] {
     padding-left: 10px;
+
+    > .content {
+      margin-left: 8px;
+    }
   }
 
   &[data-primary="true"] {

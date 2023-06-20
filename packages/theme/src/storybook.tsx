@@ -1,5 +1,5 @@
-import { createGlobalStyle, styled } from "@cyber/css";
 import React from "react";
+import { createGlobalStyle, styled } from "styled-components";
 import { CyberApp } from "./app.js";
 import { colors } from "./colors.js";
 

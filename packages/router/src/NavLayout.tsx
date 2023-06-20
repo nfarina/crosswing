@@ -1,7 +1,7 @@
-import { styled } from "@cyber/css";
 import { safeArea, useHost, useHostStatusBar } from "@cyber/host";
 import { colors } from "@cyber/theme";
 import React, { HTMLAttributes, MouseEvent, ReactNode } from "react";
+import { styled } from "styled-components";
 import Back from "../icons/Back.svg";
 import { NavAccessoryView } from "./NavAccessoryView.js";
 import { NavTitleView } from "./NavTitleView.js";
@@ -27,7 +27,7 @@ export interface NavProps {
   lightStatusBar?: boolean;
   /** Pass true to hide the nav bar entirely. */
   hidden?: boolean;
-  /** Marks this <Nav> as not having a way to go "back". Essential for good behavior on Android.  */
+  /** Marks this NavLayout as not having a way to go "back". Essential for good behavior on Android.  */
   isApplicationRoot?: boolean;
 }
 
@@ -102,12 +102,12 @@ export function NavLayout({
     flags?.isMobileApp
   ) {
     console.warn(
-      "Rendering a <Nav> without isApplicationRoot=true or any accessories marked as back=true. This will not be a good experience on Android!",
+      "Rendering a <NavLayout> without isApplicationRoot=true or any accessories marked as back=true. This will not be a good experience on Android!",
     );
   }
 
   return (
-    <StyledNav
+    <StyledNavLayout
       data-full-bleed={!!fullBleed}
       data-disabled={!!disabled}
       data-hidden={!!hidden}
@@ -127,7 +127,7 @@ export function NavLayout({
       {fullBleed && darkenUnderStatusBar && statusBar && (
         <div className="top-fade" />
       )}
-    </StyledNav>
+    </StyledNavLayout>
   );
 }
 
@@ -174,7 +174,7 @@ export const StyledNavHeader = styled.div`
   }
 `;
 
-const StyledNav = styled.div`
+const StyledNavLayout = styled.div`
   display: flex;
   flex-flow: column;
   background: ${colors.textBackground()};

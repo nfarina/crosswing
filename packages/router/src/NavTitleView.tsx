@@ -1,6 +1,6 @@
-import { styled } from "@cyber/css";
 import { colors, fonts } from "@cyber/theme";
 import React, { ReactNode } from "react";
+import { styled } from "styled-components";
 
 export function NavTitleView({
   title,

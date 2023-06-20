@@ -11,7 +11,7 @@ export const Default = () => {
   const [lines, setLines] = useState<ReactNode[]>([]);
 
   const task = useAsyncTask({
-    async func() {
+    async func(throwError?: boolean) {
       log(`[${this.invocation}] Inside task!`);
       for (let i = 0; i < 5; i++) {
         if (this.isCanceled()) {
@@ -20,9 +20,23 @@ export const Default = () => {
         }
         await wait(1000);
       }
+
+      if (throwError) {
+        throw new Error(`Error thrown from task ${this.invocation}!`);
+      }
     },
-    onComplete: () => log("Task complete."),
-    onError: (error) => log(error.message),
+    onStart: function () {
+      log(`[${this.invocation}] Task started.`);
+    },
+    onComplete: function () {
+      log(`[${this.invocation}] Task complete.`);
+    },
+    onError: function (error) {
+      log(`[${this.invocation}] ${error.message}`);
+    },
+    onFinally: function () {
+      log(`[${this.invocation}] Task finally.`);
+    },
   });
 
   function log(line: ReactNode) {
@@ -31,7 +45,8 @@ export const Default = () => {
 
   return (
     <div style={ContainerStyle}>
-      <button children="Run New Task" onClick={task.run} />
+      <button children="Run New Task" onClick={() => task.run()} />
+      <button children="Run Error Task" onClick={() => task.run(true)} />
       <button
         children="Cancel Task"
         onClick={task.cancel}

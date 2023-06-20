@@ -8,7 +8,7 @@
     "./storybook": "./src/storybook.js"
   },
   "dependencies": {
-    "@cyber/css": "workspace:^",
+    "styled-components": "^6.0.0-rc.3",
     "@cyber/hooks": "workspace:^",
     "@cyber/host": "workspace:^",
     "@cyber/theme": "workspace:^",

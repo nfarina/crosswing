@@ -3,5 +3,12 @@ import { defineConfig } from "vite";
 import svgr from "vite-plugin-svgr";
 
 export default defineConfig({
-  plugins: [react(), svgr({ exportAsDefault: true })],
+  plugins: [
+    react({
+      babel: {
+        plugins: [["babel-plugin-styled-components", { fileName: false }]],
+      },
+    }),
+    svgr({ exportAsDefault: true }),
+  ],
 });

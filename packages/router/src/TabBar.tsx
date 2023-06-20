@@ -1,4 +1,3 @@
-import { styled } from "@cyber/css";
 import { safeArea, useHost } from "@cyber/host";
 import { colors } from "@cyber/theme";
 import React, {
@@ -8,6 +7,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
+import { styled } from "styled-components";
 import { StyledTabLink, TabLink } from "./TabLink.js";
 import { TabProps } from "./Tabs.js";
 import { useMobileRouter } from "./context.js";

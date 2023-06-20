@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "@cyber/css";
+import { createGlobalStyle } from "styled-components";
 
 /** Top-level styles for a mobile website rendered with Cyber. */
 export const CyberWebStyle = createGlobalStyle`

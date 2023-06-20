@@ -1,8 +1,8 @@
-import { styled } from "@cyber/css";
 import { colors, fonts } from "@cyber/theme";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import React, { useContext } from "react";
+import { styled } from "styled-components";
 import { BrowserSimulator } from "../BrowserSimulator.js";
 import { Link } from "../Link.js";
 import { NavLayout } from "../NavLayout.js";

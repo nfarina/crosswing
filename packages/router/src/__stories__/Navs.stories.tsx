@@ -1,13 +1,13 @@
-import { styled } from "@cyber/css";
 import { colors, fonts } from "@cyber/theme";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import React from "react";
+import { styled } from "styled-components";
 import { NavLayout } from "../NavLayout.js";
 import { StyledNavTitleView } from "../NavTitleView.js";
 import { RouterDecorator } from "../RouterDecorator.js";
 
 export default {
-  title: "router/Navs",
+  title: "router/NavLayout",
   component: NavLayout,
   decorators: [RouterDecorator, CyberAppDecorator({ layout: "mobile" })],
   parameters: { layout: "centered" },

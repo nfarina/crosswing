@@ -1,8 +1,8 @@
 import { Button } from "@cyber/components";
-import { styled } from "@cyber/css";
 import { CyberApp } from "@cyber/theme";
-import Close from "@cyber/theme/icons/Close.svg";
 import React, { useState } from "react";
+import { styled } from "styled-components";
+import Favicon from "../icons/Favicon.svg";
 
 export function App() {
   const [working, setWorking] = useState(false);
@@ -16,7 +16,7 @@ export function App() {
     <StyledApp>
       <Button
         text="Button"
-        icon={<Close />}
+        icon={<Favicon />}
         primary
         onClick={onClick}
         working={working}

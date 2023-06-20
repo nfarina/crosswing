@@ -1,5 +1,5 @@
-import { styled } from "@cyber/css";
 import React, { ButtonHTMLAttributes, ReactNode } from "react";
+import { styled } from "styled-components";
 
 /**
  * Defines a basic clickable element that supports being disabled, and

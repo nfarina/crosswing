@@ -1,4 +1,3 @@
-import { styled } from "@cyber/css";
 import { flattenChildren } from "@cyber/hooks";
 import { safeArea, useHost } from "@cyber/host";
 import { colors } from "@cyber/theme";
@@ -11,6 +10,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { styled } from "styled-components";
 import { Redirect } from "./Redirect.js";
 import { RouterLocation } from "./RouterLocation.js";
 import { StyledTabBar, TabBar, TabBarContext } from "./TabBar.js";

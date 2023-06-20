@@ -1,5 +1,5 @@
-import { styled } from "@cyber/css";
 import React, { useRef, useState } from "react";
+import { styled } from "styled-components";
 import { useElementSize } from "../useElementSize.js";
 
 export default {

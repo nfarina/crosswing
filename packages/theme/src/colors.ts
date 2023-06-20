@@ -1,5 +1,5 @@
-import { createGlobalStyle } from "@cyber/css";
 import Color from "color";
+import { createGlobalStyle } from "styled-components";
 
 // Default Cyber colors.
 // Isomorphic.

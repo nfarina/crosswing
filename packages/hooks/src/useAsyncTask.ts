@@ -69,15 +69,15 @@ export function useAsyncTask<T extends TaskFunction>({
    * Setting this to true does not prevent your onComplete() from being called.
    */
   leaveRunning?: boolean;
-  onStart?: () => any;
-  onComplete?: (result: ThenArg<ReturnType<T>>) => any;
+  onStart?: (this: TaskFunctionThis) => any;
+  onComplete?: (this: TaskFunctionThis, result: ThenArg<ReturnType<T>>) => any;
   /**
    * We intentionally require defining an `onError` handler in order to prevent
    * accidentally ignoring problems that do not occur during development.
    */
-  onError: null | ((error: Error) => void);
+  onError: null | ((this: TaskFunctionThis, error: Error) => void);
   /** Any cleanup you wish to do regardless of success or failure. */
-  onFinally?: () => any;
+  onFinally?: (this: TaskFunctionThis) => any;
 }): AsyncTask<T> {
   const [status, setStatus] = useState({
     isRunning: !!runOnMount, // If we're running on mount, then we'll start in a running state!
@@ -141,7 +141,7 @@ export function useAsyncTask<T extends TaskFunction>({
 
     setStatus({ isRunning: true, result: null, error: null });
 
-    callbacksRef.current.onStart?.();
+    callbacksRef.current.onStart?.apply(thisArg);
 
     // Don't use async/await because we don't want to return a Promise to any
     // callers of this function.
@@ -154,8 +154,8 @@ export function useAsyncTask<T extends TaskFunction>({
         setStatus({ isRunning: !!leaveRunning, result, error: null });
 
         // Call handlers.
-        callbacksRef.current.onComplete?.(result);
-        callbacksRef.current.onFinally?.();
+        callbacksRef.current.onComplete?.apply(thisArg, [result]);
+        callbacksRef.current.onFinally?.apply(thisArg);
       })
       .catch((error: Error) => {
         // Log it to the console for analytics.
@@ -172,8 +172,8 @@ export function useAsyncTask<T extends TaskFunction>({
         setStatus({ isRunning: false, result: null, error });
 
         // Call handlers.
-        callbacksRef.current.onError?.(error);
-        callbacksRef.current.onFinally?.();
+        callbacksRef.current.onError?.apply(thisArg, [error]);
+        callbacksRef.current.onFinally?.apply(thisArg);
       });
   }
 

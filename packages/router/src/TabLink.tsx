@@ -1,7 +1,7 @@
-import { styled } from "@cyber/css";
 import { useHost } from "@cyber/host";
 import { colors, fonts } from "@cyber/theme";
 import React, { MouseEvent, ReactElement } from "react";
+import { styled } from "styled-components";
 import { Link } from "./Link.js";
 import { TabProps } from "./Tabs.js";
 import { UnreadBadge } from "./UnreadBadge.js";

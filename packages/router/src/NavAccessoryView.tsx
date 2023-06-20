@@ -1,7 +1,7 @@
-import { styled } from "@cyber/css";
 import { AndroidBackButtonClassName } from "@cyber/host";
 import { colors, fonts } from "@cyber/theme";
 import React from "react";
+import { styled } from "styled-components";
 import { Link } from "./Link.js";
 import { NavAccessory } from "./NavLayout.js";
 

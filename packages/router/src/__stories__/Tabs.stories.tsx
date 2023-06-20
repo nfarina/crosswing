@@ -1,7 +1,7 @@
-import { styled } from "@cyber/css";
 import { colors, fonts } from "@cyber/theme";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import React, { useState } from "react";
+import { styled } from "styled-components";
 import { AppRouter } from "../AppRouter.js";
 import { MemoryHistory } from "../MemoryHistory.js";
 import { Tab, Tabs } from "../Tabs.js";
