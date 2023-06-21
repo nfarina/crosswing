@@ -31,4 +31,8 @@ export const StyledApp = styled(CyberApp)`
   align-items: center;
   justify-content: center;
   padding: 10px;
+
+  > * {
+    flex-grow: 0;
+  }
 `;

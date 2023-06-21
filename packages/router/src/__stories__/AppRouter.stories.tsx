@@ -65,7 +65,7 @@ export const DynamicSwitch = () => (
             <div className="rendering">(Rendering refer/:code)</div>
             <Link to="/">Select Nothing</Link>
             <Link to="/nick">Select Nick</Link>
-            <Link to="/refer/abc">Select Referral</Link>
+            <Link to="/refer/abc">Select Referral [{code}]</Link>
             <Link to="/user1">Select User by ID</Link>
           </div>
         )}

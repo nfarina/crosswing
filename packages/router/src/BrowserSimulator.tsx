@@ -1,5 +1,12 @@
 import { colors, fonts } from "@cyber/theme";
-import React, { HTMLAttributes, ReactNode, useContext, useState } from "react";
+import React, {
+  ChangeEvent,
+  HTMLAttributes,
+  KeyboardEvent,
+  ReactNode,
+  useContext,
+  useState,
+} from "react";
 import { styled } from "styled-components";
 import { AppRouter } from "./AppRouter.js";
 import { MemoryHistory } from "./MemoryHistory.js";
@@ -31,19 +38,11 @@ export function BrowserSimulator({
   );
 }
 
-export const StyledAddressBar = styled.div`
-  background: ${colors.textBackgroundPanel()};
-  padding: 10px;
-  overflow: auto;
-  font: ${fonts.display({ size: 14, line: "1.3" })};
-  color: ${colors.textSecondary()};
-`;
-
 export const StyledBrowserSimulator = styled.div`
   display: flex;
   flex-flow: column;
 
-  > ${StyledAddressBar} {
+  > input {
     flex-shrink: 0;
     border-bottom: 1px solid ${colors.separator()};
   }
@@ -61,7 +60,50 @@ export const StyledBrowserSimulator = styled.div`
 `;
 
 export function AddressBar() {
-  const { location } = useContext(RouterContext);
+  const { history, location } = useContext(RouterContext);
+  const [focused, setFocused] = useState(false);
+  const [draftLocation, setDraftLocation] = useState("");
 
-  return <StyledAddressBar>{location.href()}</StyledAddressBar>;
+  function onFocus(e: ChangeEvent<HTMLInputElement>) {
+    setFocused(true);
+    setDraftLocation(location.href());
+  }
+
+  function onChange(e: ChangeEvent<HTMLInputElement>) {
+    setDraftLocation(e.target.value);
+  }
+
+  function onBlur() {
+    setFocused(false);
+    history.navigate(location.linkTo(draftLocation));
+  }
+
+  function onKeyDown(e: KeyboardEvent<HTMLInputElement>) {
+    if (e.key === "Enter") {
+      onBlur();
+
+      if (e.target instanceof HTMLInputElement) {
+        e.target.blur();
+      }
+    }
+  }
+
+  return (
+    <StyledAddressBar
+      value={focused ? draftLocation : location.href()}
+      onFocus={onFocus}
+      onChange={onChange}
+      onBlur={onBlur}
+      onKeyDown={onKeyDown}
+    />
+  );
 }
+
+export const StyledAddressBar = styled.input`
+  background: ${colors.textBackgroundPanel()};
+  padding: 10px;
+  font: ${fonts.display({ size: 14, line: "1.3" })};
+  color: ${colors.textSecondary()};
+  outline: none;
+  border: none;
+`;

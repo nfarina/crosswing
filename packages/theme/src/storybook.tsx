@@ -1,7 +1,6 @@
 import React from "react";
 import { createGlobalStyle, styled } from "styled-components";
 import { CyberColorStyle, colors } from "./colors.js";
-import { CyberWebStyle } from "./containers.js";
 import { CyberFontStyle } from "./fonts.js";
 
 /**
@@ -19,7 +18,8 @@ export function CyberAppDecorator({
       <>
         <CyberColorStyle />
         <CyberFontStyle />
-        <CyberWebStyle />
+        <CyberStorybookStyle />
+        {layout === "centered" && <CenteredLayoutGlobalStyle />}
         {layout === "mobile" && <MobileLayoutGlobalStyle />}
         {layout === "fullscreen" && <FullScreenLayoutGlobalStyle />}
         <Story />
@@ -30,13 +30,29 @@ export function CyberAppDecorator({
   return CyberAppInnerDecorator;
 }
 
+const CyberStorybookStyle = createGlobalStyle`
+  html {
+    > body {
+      /* A white background is typical for our stories, so we'll set the canvas background to a darker color. */
+      background: #E5E5E5;
+
+      /* Pick a nice default background for dark mode as well. */
+      @media (prefers-color-scheme: dark) {
+        background: #333;
+      }
+    }
+  }
+`;
+
+const CenteredLayoutGlobalStyle = createGlobalStyle``;
+
 const MobileLayoutGlobalStyle = createGlobalStyle`
   html {
     height: 100%;
 
     > body {
       height: 100%;
-      
+
       > #storybook-root {
         /* Approximate the visible content area of an iPhone 12 Pro. */
         width: 390px;
@@ -51,7 +67,7 @@ const MobileLayoutGlobalStyle = createGlobalStyle`
         /* Override Storybook's "centered" layout padding to get more space on my small MacBook Air screen. */
         padding: 0 !important;
 
-        /* Most components with mobile layout assume they're being rendered on a page with standard background. */
+        /* Make the mobile frame stand out from the default Storybook background. */
         background: ${colors.textBackground()};
 
         /* Rendered story itself. */
@@ -66,20 +82,20 @@ const MobileLayoutGlobalStyle = createGlobalStyle`
 const FullScreenLayoutGlobalStyle = createGlobalStyle`
   html {
     height: 100%;
+  }
 
-    > body {
+  body {
+    height: 100%;
+
+    > #storybook-root {
+      width: 100%;
       height: 100%;
+      display: flex;
+      flex-flow: column;
 
-      > #root {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-flow: column;
-
-        /* Rendered story itself. */
-        > * {
-          flex-grow: 1;
-        }
+      /* Rendered story itself. */
+      > * {
+        flex-grow: 1;
       }
     }
   }

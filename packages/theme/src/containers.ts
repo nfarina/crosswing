@@ -16,17 +16,17 @@ export const CyberWebStyle = createGlobalStyle`
     margin: 0;
     display: flex;
     flex-flow: column;
-  }
 
-  /* Whatever main <div> you're rendering your React app into. */
-  body > #root {
-    flex-grow: 1;
-    display: flex;
-    flex-flow: column;
-
-    /* Whatever *its* child is. */
-    > * {
+    /* The main <div> you're rendering your Cyber app into. */
+    > #cyber-root {
       flex-grow: 1;
+      display: flex;
+      flex-flow: column;
+  
+      /* Whatever *its* child is. */
+      > * {
+        flex-grow: 1;
+      }
     }
   }
 `;
