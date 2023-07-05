@@ -3,3 +3,4 @@ export * from "./Clickable.js";
 export * from "./Donut.js";
 export * from "./ProgressView.js";
 export * from "./Spinner.js";
+export * from "./Timestamp.js";

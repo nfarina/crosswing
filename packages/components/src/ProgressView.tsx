@@ -8,7 +8,7 @@ export function ProgressView({
   progress,
   animated = true,
   thickness,
-  foregroundColor = colors.orange,
+  foregroundColor = colors.primary,
   backgroundColor = colors.textBackgroundAlt,
   ...rest
 }: {

@@ -12,7 +12,7 @@ export default {
   parameters: { layout: "fullscreen" },
 };
 
-export function Alert() {
+export function Normal() {
   const alert = useAlert((name: string) => ({
     message: `Hello ${name}!`,
     onClose: action("close"),
@@ -20,12 +20,14 @@ export function Alert() {
 
   return (
     <ButtonContainer>
-      <Button onClick={() => alert.show("Bob")}>Show Alert</Button>
+      <Button primary onClick={() => alert.show("Bob")}>
+        Show Alert
+      </Button>
     </ButtonContainer>
   );
 }
 
-export function StickyAlert() {
+export function Sticky() {
   const alert = useAlert(
     () => ({
       title: "Working…",
@@ -47,19 +49,23 @@ export function StickyAlert() {
 
   return (
     <ButtonContainer>
-      <Button onClick={showAlert}>Show Sticky Alert</Button>
+      <Button primary onClick={showAlert}>
+        Show Sticky Alert
+      </Button>
     </ButtonContainer>
   );
 }
 
-export function StretchedAlert() {
+export function Stretched() {
   const alert = useAlert(() => ({ message: "Hi", onClose: action("close") }), {
     stretch: true,
   });
 
   return (
     <ButtonContainer>
-      <Button onClick={alert.show}>Show Alert</Button>
+      <Button primary onClick={alert.show}>
+        Show Alert
+      </Button>
     </ButtonContainer>
   );
 }

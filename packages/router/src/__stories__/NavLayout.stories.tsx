@@ -34,7 +34,7 @@ const SamplePage = styled.div`
 `;
 
 const CustomNavLayout = styled(NavLayout)`
-  background: ${colors.orange()};
+  background: ${colors.primary()};
 
   ${StyledNavTitleView} {
     > .title {

@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "@cyber/hooks": "workspace:^",
+    "@cyber/shared": "workspace:^",
     "@cyber/theme": "workspace:^",
+    "dayjs": "^1.11.9",
     "styled-components": "^6.0.2"
   }
 }
