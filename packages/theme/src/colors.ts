@@ -54,6 +54,7 @@ const dynamic = {
   textBackgroundPanel: varColor("--text-background-panel-color"),
   /** Different flavor of textBackground, suitable for alternating table rows. */
   textBackgroundAlt: varColor("--text-background-alt-color"),
+  controlBorder: varColor("--control-border-color"),
   separator: () => `var(--separator-color)`,
 };
 
@@ -87,6 +88,7 @@ export const CyberColorStyle = createGlobalStyle`
     --text-background-color: ${neutrals.white.rgb};
     --text-background-panel-color: ${neutrals.extraLightGray.rgb};
     --text-background-alt-color: ${neutrals.extraLightGray.rgb};
+    --control-border-color: ${neutrals.mediumGray.rgb};
     --separator-color: ${neutrals.black({ alpha: 0.1 })};
     --card-shadow: 0px 4px 12px ${other.darkGreen({ alpha: 0.2 })};
     --card-small-shadow: 0px 1px 4px ${other.darkGreen({ alpha: 0.2 })};
@@ -101,6 +103,7 @@ export const CyberColorStyle = createGlobalStyle`
       --text-background-color: ${neutrals.extraExtraDarkGray.rgb};
       --text-background-panel-color: ${neutrals.extraExtraExtraDarkGray.rgb};
       --text-background-alt-color: ${neutrals.extraExtraExtraDarkGray.rgb};
+      --control-border-color: ${hexColor("#828C8B").rgb};
       --separator-color: ${neutrals.white({ alpha: 0.15 })};
       --card-shadow: 0px 4px 12px ${neutrals.black()};
       --card-small-shadow: 0px 1px 4px ${neutrals.black()};

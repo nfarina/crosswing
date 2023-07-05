@@ -144,6 +144,9 @@ importers:
 
   packages/modals:
     dependencies:
+      '@cyber/hooks':
+        specifier: workspace:^
+        version: link:../hooks
       '@cyber/host':
         specifier: workspace:^
         version: link:../host
