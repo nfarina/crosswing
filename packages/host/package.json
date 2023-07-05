@@ -4,6 +4,10 @@
   "sideEffects": false,
   "version": "0.0.0",
   "exports": {
-    ".": "./src/index.js"
+    ".": "./src/index.js",
+    "./storybook": "./src/storybook.js"
+  },
+  "dependencies": {
+    "@cyber/shared": "workspace:^"
   }
 }
