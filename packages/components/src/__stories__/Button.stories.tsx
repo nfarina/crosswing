@@ -5,7 +5,7 @@ import { Button } from "../Button.js";
 import Close from "./Close.svg";
 
 export default {
-  title: "Components/Button",
+  title: "components/Button",
   component: Button,
   decorators: [CyberAppDecorator()],
   parameters: { layout: "centered" },

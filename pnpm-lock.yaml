@@ -96,6 +96,9 @@ importers:
 
   packages/components:
     dependencies:
+      '@cyber/hooks':
+        specifier: workspace:^
+        version: link:../hooks
       '@cyber/theme':
         specifier: workspace:^
         version: link:../theme
@@ -162,6 +165,10 @@ importers:
       styled-components:
         specifier: ^6.0.2
         version: 6.0.2(babel-plugin-styled-components@2.1.4)(react-dom@18.2.0)(react@18.2.0)
+    devDependencies:
+      '@cyber/components':
+        specifier: workspace:^
+        version: link:../components
 
   packages/router:
     dependencies:

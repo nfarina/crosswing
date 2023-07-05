@@ -113,6 +113,8 @@ export const CyberColorStyle = createGlobalStyle`
   }
 `;
 
+export type ColorBuilder = HexColorBuilder | VarColorBuilder;
+
 //
 // Tools for working with colors based on a hex code.
 //

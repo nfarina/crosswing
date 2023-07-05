@@ -8,6 +8,7 @@
     "./icons/*": "./icons/*"
   },
   "dependencies": {
+    "@cyber/hooks": "workspace:^",
     "@cyber/theme": "workspace:^",
     "styled-components": "^6.0.2"
   }
