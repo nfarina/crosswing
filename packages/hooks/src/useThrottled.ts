@@ -9,10 +9,13 @@ export function useThrottled<T>(
   const timeLeft = Date.now() - lastRan.current;
 
   useEffect(() => {
-    const handler = setTimeout(() => {
-      setThrottledValue(value);
-      lastRan.current = Date.now();
-    }, limit - (Date.now() - lastRan.current));
+    const handler = setTimeout(
+      () => {
+        setThrottledValue(value);
+        lastRan.current = Date.now();
+      },
+      limit - (Date.now() - lastRan.current),
+    );
 
     return () => {
       clearTimeout(handler);

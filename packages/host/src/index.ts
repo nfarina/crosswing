@@ -8,6 +8,8 @@ export type Host = {
   viewport: HostViewport;
   /** Attempts to scroll to the top based on what looks scrolled, if on iOS. Otherwise does nothing. */
   scrollToTop(): void;
+  /** Delays automatic updates (browser reloads) for the given amount of time. */
+  delayUpdates(duration: number): void;
 };
 
 export type HostContainer = "wkwebview" | "android" | "electron" | "web";
@@ -21,6 +23,7 @@ export const HostContext = createContext<Host>({
   container: "web",
   viewport: {},
   scrollToTop: () => {},
+  delayUpdates: () => {},
 });
 
 export function useHost(): Host {
@@ -34,7 +37,13 @@ export function HostProvider({
   container?: HostContainer;
   children?: ReactNode;
 }) {
-  const value = { container, viewport: {}, scrollToTop: () => {} };
+  const value = {
+    container,
+    viewport: {},
+    scrollToTop: () => {},
+    delayUpdates: () => {},
+  };
+
   return createElement(HostContext.Provider, { value }, children);
 }
 

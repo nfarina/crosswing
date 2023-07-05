@@ -7,6 +7,9 @@
     ".": "./src/index.js"
   },
   "dependencies": {
-    "@cyber/theme": "workspace:^"
+    "@cyber/host": "workspace:^",
+    "@cyber/shared": "workspace:^",
+    "@cyber/theme": "workspace:^",
+    "react-transition-group": "^4.4.5"
   }
 }
