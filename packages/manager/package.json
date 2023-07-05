@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@cyber/components": "workspace:^",
-    "styled-components": "^6.0.0-rc.3",
-    "@cyber/theme": "workspace:^"
+    "@cyber/theme": "workspace:^",
+    "styled-components": "^6.0.2"
   }
 }

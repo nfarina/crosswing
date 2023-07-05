@@ -8,10 +8,10 @@
     "./storybook": "./src/storybook.js"
   },
   "dependencies": {
-    "styled-components": "^6.0.0-rc.3",
     "@cyber/hooks": "workspace:^",
     "@cyber/host": "workspace:^",
     "@cyber/theme": "workspace:^",
-    "react-transition-group": "^4.4.5"
+    "react-transition-group": "^4.4.5",
+    "styled-components": "^6.0.2"
   }
 }
