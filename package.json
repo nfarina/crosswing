@@ -9,8 +9,8 @@
   ],
   "author": "nfarina@gmail.com",
   "scripts": {
-    "test": "pnpm run prettier && pnpm run typecheck && vitest",
-    "vitest": "vitest",
+    "test": "pnpm run prettier && pnpm run typecheck",
+    "vitest": "vitest --run",
     "test-ui": "vitest --ui --coverage --open=false --api.port 2703",
     "prettier": "prettier --check 'packages/*/src/**/*.ts?(x)'",
     "prettier:fix": "yarn prettier --write",
