@@ -159,6 +159,9 @@ importers:
       '@cyber/host':
         specifier: workspace:^
         version: link:../host
+      '@cyber/router':
+        specifier: workspace:^
+        version: link:../router
       '@cyber/shared':
         specifier: workspace:^
         version: link:../shared

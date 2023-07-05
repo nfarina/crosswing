@@ -2,9 +2,9 @@ import { Button, ProgressView } from "@cyber/components";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import React from "react";
-import { styled } from "styled-components";
 import { ModalDecorator } from "../ModalDecorator.js";
 import { useAlert } from "../useAlert.js";
+import { ButtonContainer } from "./ButtonContainer.js";
 
 export default {
   title: "modals/useAlert",
@@ -69,18 +69,3 @@ export function Stretched() {
     </ButtonContainer>
   );
 }
-
-//
-// Styles
-//
-
-const ButtonContainer = styled.div`
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
-
-  > * + * {
-    margin-top: 10px;
-  }
-`;

@@ -5,6 +5,7 @@ import React, { useCallback, useState } from "react";
 import { styled } from "styled-components";
 import { ModalDecorator } from "../ModalDecorator.js";
 import { useDialog } from "../useDialog.js";
+import { ButtonContainer } from "./ButtonContainer.js";
 
 export default {
   title: "modals/useDialog",
@@ -101,17 +102,6 @@ function StatefulDialog({
 //
 // Styles
 //
-
-const ButtonContainer = styled.div`
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
-
-  > * + * {
-    margin-top: 10px;
-  }
-`;
 
 const SampleDialog = styled.div`
   display: flex;

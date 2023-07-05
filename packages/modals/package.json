@@ -9,6 +9,7 @@
   "dependencies": {
     "@cyber/host": "workspace:^",
     "@cyber/hooks": "workspace:^",
+    "@cyber/router": "workspace:^",
     "@cyber/shared": "workspace:^",
     "@cyber/theme": "workspace:^",
     "react-transition-group": "^4.4.5",
