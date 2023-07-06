@@ -1,8 +1,8 @@
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import React from "react";
-import { ActionMenu, ActionSeparator } from "../ActionMenu.js";
-import { ActionContainer } from "../useActions.js";
+import { ActionMenu, ActionSeparator } from "../actions/ActionMenu.js";
+import { ActionContainer } from "../actions/useActions.js";
 
 export default {
   title: "modals/ActionMenu",

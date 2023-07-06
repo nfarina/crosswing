@@ -4,8 +4,10 @@
   "sideEffects": false,
   "version": "0.0.0",
   "exports": {
-    ".": "./src/index.js",
-    "./storybook": "./src/storybook.js"
+    "./context": "./src/context/index.js",
+    "./mocks": "./src/mocks/MockHostProvider.js",
+    "./plugins/safearea": "./src/plugins/safearea/SafeArea.js",
+    "./plugins/statusbar": "./src/plugins/statusbar/HostStatusBar.js"
   },
   "dependencies": {
     "@cyber/shared": "workspace:^"

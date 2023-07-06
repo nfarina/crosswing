@@ -1,4 +1,4 @@
-import { colors } from "@cyber/theme";
+import { colors } from "@cyber/theme/colors";
 import { styled } from "styled-components";
 
 export const ButtonContainer = styled.div`

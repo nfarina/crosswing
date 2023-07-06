@@ -1,4 +1,5 @@
-import { colors, fonts } from "@cyber/theme";
+import { colors } from "@cyber/theme/colors";
+import { fonts } from "@cyber/theme/fonts";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import dayjs from "dayjs";
 import React from "react";

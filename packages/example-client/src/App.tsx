@@ -1,16 +1,27 @@
-import { Button } from "@cyber/components";
-import { CyberApp } from "@cyber/theme";
-import React, { useState } from "react";
+import { Button } from "@cyber/components/Button";
+import { PopupMenu, PopupMenuText } from "@cyber/components/PopupMenu";
+import { ModalRootProvider } from "@cyber/modals/context";
+import { usePopup } from "@cyber/modals/popup";
+import { CyberApp } from "@cyber/theme/app";
+import { colors } from "@cyber/theme/colors";
+import React from "react";
 import { styled } from "styled-components";
 import Favicon from "../icons/Favicon.svg";
 
-export function App() {
-  const [working, setWorking] = useState(false);
+export function AppContainer() {
+  return (
+    <ModalRootProvider>
+      <App />
+    </ModalRootProvider>
+  );
+}
 
-  function onClick() {
-    setWorking(true);
-    setTimeout(() => setWorking(false), 1000);
-  }
+export function App() {
+  const popupMenu = usePopup(() => (
+    <PopupMenu>
+      <PopupMenuText children="Hello World" />
+    </PopupMenu>
+  ));
 
   return (
     <StyledApp>
@@ -18,8 +29,7 @@ export function App() {
         text="Button"
         icon={<Favicon />}
         primary
-        onClick={onClick}
-        working={working}
+        onClick={popupMenu.onClick}
       />
     </StyledApp>
   );
@@ -31,6 +41,7 @@ export const StyledApp = styled(CyberApp)`
   align-items: center;
   justify-content: center;
   padding: 10px;
+  background: ${colors.mediumBlue({ lighten: 0.34 })};
 
   > * {
     flex-grow: 0;

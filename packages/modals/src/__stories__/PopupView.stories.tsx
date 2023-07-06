@@ -1,9 +1,10 @@
-import { colors, fonts } from "@cyber/theme";
+import { colors } from "@cyber/theme/colors";
+import { fonts } from "@cyber/theme/fonts";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import { Meta, StoryFn } from "@storybook/react";
 import React from "react";
 import { styled } from "styled-components";
-import { PopupView } from "../PopupView.js";
+import { PopupView } from "../popup/PopupView.js";
 
 export default {
   title: "modals/PopupView",

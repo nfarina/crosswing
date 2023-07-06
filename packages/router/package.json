@@ -4,8 +4,16 @@
   "sideEffects": false,
   "version": "0.0.0",
   "exports": {
-    ".": "./src/index.js",
-    "./storybook": "./src/storybook.js"
+    "./context": "./src/context/RouterContext.js",
+    "./history": "./src/history/index.js",
+    "./link": "./src/link/Link.js",
+    "./mocks": "./src/mocks/MockRouter.js",
+    "./navs": "./src/navs/index.js",
+    "./switch": "./src/switch/Switch.js",
+    "./redirect": "./src/redirect/Redirect.js",
+    "./tabs": "./src/tabs/index.js",
+    "./storybook": "./src/storybook/index.js",
+    "./icons/*.svg": "./icons/*.svg"
   },
   "dependencies": {
     "@cyber/hooks": "workspace:^",

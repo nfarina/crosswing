@@ -1,4 +1,4 @@
-import { colors } from "@cyber/theme";
+import { colors } from "@cyber/theme/colors";
 import React, { HTMLAttributes } from "react";
 import { keyframes, styled } from "styled-components";
 

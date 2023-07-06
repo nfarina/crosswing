@@ -1,12 +1,13 @@
-import { Button } from "@cyber/components";
-import { colors, fonts } from "@cyber/theme";
+import { Button } from "@cyber/components/Button";
+import { colors } from "@cyber/theme/colors";
+import { fonts } from "@cyber/theme/fonts";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import React, { useState } from "react";
 import { styled } from "styled-components";
-import { ModalDecorator } from "../ModalDecorator.js";
-import { ModalRootProvider } from "../ModalRootProvider.js";
-import { PopupView } from "../PopupView.js";
-import { usePopup } from "../usePopup.js";
+import { ModalRootProvider } from "../context/ModalRootProvider.js";
+import { PopupView } from "../popup/PopupView.js";
+import { usePopup } from "../popup/usePopup.js";
+import { ModalDecorator } from "../storybook/ModalDecorator.js";
 
 export default {
   title: "modals/usePopup",

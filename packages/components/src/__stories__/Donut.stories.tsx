@@ -1,4 +1,4 @@
-import { colors } from "@cyber/theme";
+import { colors } from "@cyber/theme/colors";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import React from "react";
 import { Donut } from "../Donut.js";

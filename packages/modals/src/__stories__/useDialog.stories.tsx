@@ -1,10 +1,12 @@
-import { Button, Timestamp } from "@cyber/components";
-import { colors, fonts } from "@cyber/theme";
+import { Button } from "@cyber/components/Button";
+import { Timestamp } from "@cyber/components/Timestamp";
+import { colors } from "@cyber/theme/colors";
+import { fonts } from "@cyber/theme/fonts";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import React, { useCallback, useState } from "react";
 import { styled } from "styled-components";
-import { ModalDecorator } from "../ModalDecorator.js";
-import { useDialog } from "../useDialog.js";
+import { useDialog } from "../dialog/useDialog.js";
+import { ModalDecorator } from "../storybook/ModalDecorator.js";
 import { ButtonContainer } from "./ButtonContainer.js";
 
 export default {

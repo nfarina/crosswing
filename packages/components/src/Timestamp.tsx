@@ -1,4 +1,4 @@
-import { capitalize } from "@cyber/shared";
+import { capitalize } from "@cyber/shared/strings";
 import dayjs from "dayjs/esm";
 import calendar from "dayjs/esm/plugin/calendar";
 import timezone from "dayjs/esm/plugin/timezone";

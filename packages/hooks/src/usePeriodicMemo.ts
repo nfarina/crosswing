@@ -1,4 +1,4 @@
-import { deepEqual } from "@cyber/shared";
+import { deepEqual } from "@cyber/shared/compare";
 import { DependencyList, useEffect } from "react";
 import { useResettableState } from "./useResettableState.js";
 

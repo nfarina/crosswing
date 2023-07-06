@@ -1,10 +1,11 @@
-import { colors, fonts } from "@cyber/theme";
+import { colors } from "@cyber/theme/colors";
+import { fonts } from "@cyber/theme/fonts";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import React, { useState } from "react";
 import { styled } from "styled-components";
-import { AppRouter } from "../AppRouter.js";
-import { MemoryHistory } from "../MemoryHistory.js";
-import { Tab, Tabs } from "../Tabs.js";
+import { AppRouter } from "../history/AppRouter.js";
+import { MemoryHistory } from "../history/MemoryHistory.js";
+import { Tab, Tabs } from "../tabs/Tabs.js";
 
 export default {
   title: "router/Tabs",

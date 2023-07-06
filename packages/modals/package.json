@@ -4,7 +4,16 @@
   "sideEffects": false,
   "version": "0.0.0",
   "exports": {
-    ".": "./src/index.js"
+    "./actions": "./src/actions/index.js",
+    "./alert": "./src/alert/index.js",
+    "./banner": "./src/banner/index.js",
+    "./confirm": "./src/confirm/useConfirm.js",
+    "./context": "./src/context/index.js",
+    "./dialog": "./src/dialog/useDialog.js",
+    "./popup": "./src/popup/index.js",
+    "./sheet": "./src/sheet/useSheet.js",
+    "./storybook": "./src/storybook/index.js",
+    "./icons/*": "./icons/*.svg"
   },
   "dependencies": {
     "@cyber/host": "workspace:^",

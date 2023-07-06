@@ -1,9 +1,9 @@
-import { Button } from "@cyber/components";
+import { Button } from "@cyber/components/Button";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import React from "react";
-import { ModalDecorator } from "../ModalDecorator.js";
-import { useConfirm } from "../useConfirm.js";
+import { useConfirm } from "../confirm/useConfirm.js";
+import { ModalDecorator } from "../storybook/ModalDecorator.js";
 import { ButtonContainer } from "./ButtonContainer.js";
 
 export default {

@@ -99,6 +99,12 @@ importers:
       '@cyber/hooks':
         specifier: workspace:^
         version: link:../hooks
+      '@cyber/modals':
+        specifier: workspace:^
+        version: link:../modals
+      '@cyber/router':
+        specifier: workspace:^
+        version: link:../router
       '@cyber/shared':
         specifier: workspace:^
         version: link:../shared
@@ -117,6 +123,9 @@ importers:
       '@cyber/components':
         specifier: workspace:^
         version: link:../components
+      '@cyber/modals':
+        specifier: workspace:^
+        version: link:../modals
       '@cyber/theme':
         specifier: workspace:^
         version: link:../theme

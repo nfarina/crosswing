@@ -1,4 +1,4 @@
-import { usePropSequence } from "@cyber/hooks";
+import { usePropSequence } from "@cyber/hooks/usePropSequence";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import React from "react";
 import { ProgressView } from "../ProgressView.js";

@@ -1,10 +1,11 @@
-import { colors, fonts } from "@cyber/theme";
+import { colors } from "@cyber/theme/colors";
+import { fonts } from "@cyber/theme/fonts";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import React from "react";
 import { styled } from "styled-components";
-import { NavLayout } from "../NavLayout.js";
-import { StyledNavTitleView } from "../NavTitleView.js";
-import { RouterDecorator } from "../RouterDecorator.js";
+import { NavLayout } from "../navs/NavLayout.js";
+import { StyledNavTitleView } from "../navs/NavTitleView.js";
+import { RouterDecorator } from "../storybook/RouterDecorator.js";
 
 export default {
   title: "router/NavLayout",

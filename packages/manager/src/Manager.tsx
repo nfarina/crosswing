@@ -1,7 +1,7 @@
-import { CyberApp } from "@cyber/theme";
+import { ModalRootProvider } from "@cyber/modals/context";
+import { CyberApp } from "@cyber/theme/app";
 import React from "react";
 import { styled } from "styled-components";
-import { ModalRootProvider } from "../../modals/src/ModalRootProvider.js";
 
 export function Manager() {
   return (

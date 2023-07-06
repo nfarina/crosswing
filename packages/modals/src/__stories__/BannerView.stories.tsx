@@ -1,7 +1,7 @@
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import React from "react";
-import { BannerView } from "../BannerView.js";
+import { BannerView } from "../banner/BannerView.js";
 
 export default {
   title: "modals/BannerView",

@@ -1,4 +1,5 @@
-import { ColorBuilder, colors, easing } from "@cyber/theme";
+import { ColorBuilder, colors } from "@cyber/theme/colors";
+import { easing } from "@cyber/theme/easing";
 import React, { HTMLAttributes } from "react";
 import { keyframes, styled } from "styled-components";
 import { Donut } from "./Donut.js";

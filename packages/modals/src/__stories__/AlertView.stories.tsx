@@ -1,12 +1,13 @@
-import { useAsyncTask } from "@cyber/hooks";
-import { wait } from "@cyber/shared";
-import { colors, fonts } from "@cyber/theme";
+import { useAsyncTask } from "@cyber/hooks/useAsyncTask";
+import { wait } from "@cyber/shared/wait";
+import { colors } from "@cyber/theme/colors";
+import { fonts } from "@cyber/theme/fonts";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import React from "react";
 import { styled } from "styled-components";
-import { AlertView } from "../AlertView.js";
-import { DialogContainer } from "../useDialog.js";
+import { AlertView } from "../alert/AlertView.js";
+import { DialogContainer } from "../dialog/useDialog.js";
 
 export default {
   title: "modals/AlertView",

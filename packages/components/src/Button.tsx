@@ -1,4 +1,5 @@
-import { colors, fonts } from "@cyber/theme";
+import { colors } from "@cyber/theme/colors";
+import { fonts } from "@cyber/theme/fonts";
 import React, { ButtonHTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
 import { Clickable } from "./Clickable.js";

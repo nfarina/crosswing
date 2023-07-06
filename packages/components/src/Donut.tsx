@@ -1,4 +1,4 @@
-import { ColorBuilder } from "@cyber/theme";
+import { ColorBuilder } from "@cyber/theme/colors";
 import React, { CSSProperties, ReactElement, SVGAttributes } from "react";
 import { styled } from "styled-components";
 

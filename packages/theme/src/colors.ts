@@ -1,8 +1,10 @@
-import Color from "color";
 import { createGlobalStyle } from "styled-components";
 
 // Default Cyber colors.
 // Isomorphic.
+
+// TODO: convert to oklch() with polyfills.
+// https://evilmartians.com/chronicles/oklch-in-css-why-quit-rgb-hsl
 
 // https://webkit.org/blog/6682/improving-color-on-the-web/
 const SUPPORTS_P3_COLOR =
@@ -131,8 +133,6 @@ export interface HexColorOptions {
   alpha?: number;
   lighten?: number;
   darken?: number;
-  /** Will apply the given tint as the hue component. */
-  tint?: HexColorBuilder;
 }
 
 export function hexColor(hex: string): HexColorBuilder {
@@ -143,25 +143,35 @@ export function hexColor(hex: string): HexColorBuilder {
   return builder;
 }
 
+// Temporary hack until we convert to OKLCH.
+export function lightenHexColor(hex: string, percent: number) {
+  const num = parseInt(hex.replace("#", ""), 16);
+  const amt = Math.round(2.55 * percent * 100);
+  const R = (num >> 16) + amt;
+  const B = ((num >> 8) & 0x00ff) + amt;
+  const G = (num & 0x0000ff) + amt;
+
+  const lightened =
+    0x1000000 +
+    (R < 255 ? (R < 1 ? 0 : R) : 255) * 0x10000 +
+    (B < 255 ? (B < 1 ? 0 : B) : 255) * 0x100 +
+    (G < 255 ? (G < 1 ? 0 : G) : 255);
+
+  return "#" + lightened.toString(16).toUpperCase().slice(1);
+}
+
 /**
  * Utility function that builds a CSS color() or rgba() string based on a hex
  * code, with optional transformations.
  */
 export function buildHexColor(
   hex: string,
-  { alpha, lighten, darken, tint }: HexColorOptions = {},
+  { alpha, lighten, darken }: HexColorOptions = {},
 ): string {
   // Transform it if you so wish.
-  if (lighten != null || darken != null || tint != null) {
-    let color = Color(hex);
-    if (tint != null) {
-      const { s, l } = color.hsl().object();
-      const h = Color(tint()).hue();
-      color = Color({ h, s, l });
-    }
-    if (lighten != null) color = color.lighten(lighten);
-    if (darken != null) color = color.darken(darken);
-    hex = color.hex();
+  if (lighten != null || darken != null) {
+    if (lighten != null) hex = lightenHexColor(hex, lighten);
+    if (darken != null) hex = lightenHexColor(hex, -darken);
   }
 
   if (SUPPORTS_P3_COLOR) {

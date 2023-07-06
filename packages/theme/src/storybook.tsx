@@ -33,10 +33,7 @@ export function CyberAppDecorator({
 const CyberStorybookStyle = createGlobalStyle`
   html {
     > body {
-      /* A white background is typical for our stories, so we'll set the canvas background to a darker color. */
-      background: #E5E5E5;
-
-      /* Pick a nice default background for dark mode as well. */
+      /* We should always set a default background color for dark mode; Storybook doesn't do it automatically. */
       @media (prefers-color-scheme: dark) {
         background: #333;
       }
@@ -52,6 +49,9 @@ const MobileLayoutGlobalStyle = createGlobalStyle`
 
     > body {
       height: 100%;
+
+      /* Darken the canvas a bit so the default white background contrasts. */
+      background: #E5E5E5;
 
       > #storybook-root {
         /* Approximate the visible content area of an iPhone 12 Pro. */

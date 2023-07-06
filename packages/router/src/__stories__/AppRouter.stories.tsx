@@ -1,15 +1,16 @@
-import { colors, fonts } from "@cyber/theme";
+import { colors } from "@cyber/theme/colors";
+import { fonts } from "@cyber/theme/fonts";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import React, { useContext } from "react";
 import { styled } from "styled-components";
-import { BrowserSimulator } from "../BrowserSimulator.js";
-import { Link } from "../Link.js";
-import { NavLayout } from "../NavLayout.js";
-import { NavRoute, Navs } from "../Navs.js";
-import { Route, Switch } from "../Switch.js";
-import { Tab, Tabs } from "../Tabs.js";
-import { RouterContext } from "../context.js";
+import { RouterContext } from "../context/RouterContext.js";
+import { Link } from "../link/Link.js";
+import { NavLayout } from "../navs/NavLayout.js";
+import { NavRoute, Navs } from "../navs/Navs.js";
+import { BrowserSimulator } from "../storybook/BrowserSimulator.js";
+import { Route, Switch } from "../switch/Switch.js";
+import { Tab, Tabs } from "../tabs/Tabs.js";
 
 export default {
   title: "router/AppRouter",

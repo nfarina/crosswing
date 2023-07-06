@@ -7,10 +7,12 @@
   "scripts": {
     "dev": "vite --config ../../vite.config.ts --port 2701",
     "build": "vite --config ../../vite.config.ts build",
-    "serve": "vite --config ../../vite.config.ts preview"
+    "serve": "vite --config ../../vite.config.ts preview",
+    "analyze": "vite-bundle-visualizer"
   },
   "dependencies": {
     "@cyber/components": "workspace:^",
+    "@cyber/modals": "workspace:^",
     "@cyber/theme": "workspace:^",
     "styled-components": "^6.0.2"
   }
