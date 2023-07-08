@@ -11,7 +11,7 @@ import {
   modeP3,
   toGamut,
   useMode,
-} from "culori/fn";
+} from "./culori.js";
 
 // Color adjustments.
 //

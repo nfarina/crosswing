@@ -9,7 +9,6 @@
     "./storybook": "./src/storybook.js"
   },
   "dependencies": {
-    "culori": "^3.1.3",
     "react": "^18.2.0",
     "styled-components": "^6.0.2"
   }
