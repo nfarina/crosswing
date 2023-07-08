@@ -103,7 +103,7 @@ export const StyledToggle = styled.button`
 
     /* We need a separate element to fade in a linear gradient because we can't animate the CSS "background" property: https://stackoverflow.com/a/7364325/66673 */
     > .track-on {
-      background: ${colors.orangeGradient({ p3: true })};
+      background: ${colors.orangeGradient()};
       opacity: 0;
       transition: opacity 0.25s ease;
     }

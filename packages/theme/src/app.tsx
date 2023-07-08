@@ -1,6 +1,6 @@
 import React, { HTMLAttributes } from "react";
 import { styled } from "styled-components";
-import { CyberColorStyle, colors } from "./colors.js";
+import { CyberColorStyle, colors } from "./colors/index.js";
 import { CyberWebStyle } from "./containers.js";
 import { CyberFontStyle, fonts } from "./fonts.js";
 

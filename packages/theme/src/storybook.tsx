@@ -1,6 +1,6 @@
 import React from "react";
 import { createGlobalStyle, styled } from "styled-components";
-import { CyberColorStyle, colors } from "./colors.js";
+import { CyberColorStyle, colors } from "./colors/index.js";
 import { CyberFontStyle } from "./fonts.js";
 
 /**

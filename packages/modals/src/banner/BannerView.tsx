@@ -3,7 +3,7 @@ import { colors, shadows } from "@cyber/theme/colors";
 import { fonts } from "@cyber/theme/fonts";
 import React, { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
-import Close from "../icons/Close.svg";
+import Close from "../../icons/Close.svg";
 
 export function BannerView({
   title,
