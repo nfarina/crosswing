@@ -9,8 +9,6 @@ const modes: any = {};
 const parsers: any = [];
 const colorProfiles: any = {};
 
-const identity = (v) => v;
-
 const getMode = (mode) => modes[mode];
 
 export const useMode = (definition) => {
@@ -19,7 +17,7 @@ export const useMode = (definition) => {
     ...definition.toMode,
   };
 
-  Object.keys(definition.fromMode || {}).forEach((k) => {
+  Object.keys(definition.fromMode /*|| {}*/).forEach((k) => {
     if (!converters[k]) {
       converters[k] = {};
     }
@@ -41,9 +39,9 @@ export const useMode = (definition) => {
       definition.ranges[channel] = [0, 1];
     }
 
-    if (!definition.interpolate[channel]) {
-      throw new Error(`Missing interpolator for: ${channel}`);
-    }
+    // if (!definition.interpolate[channel]) {
+    //   throw new Error(`Missing interpolator for: ${channel}`);
+    // }
 
     if (typeof definition.interpolate[channel] === "function") {
       definition.interpolate[channel] = {
@@ -51,9 +49,9 @@ export const useMode = (definition) => {
       };
     }
 
-    if (!definition.interpolate[channel].fixup) {
-      definition.interpolate[channel].fixup = identity;
-    }
+    // if (!definition.interpolate[channel].fixup) {
+    //   definition.interpolate[channel].fixup = identity;
+    // }
   });
 
   modes[definition.mode] = definition;
@@ -67,36 +65,36 @@ export const useMode = (definition) => {
 const converter =
   (target_mode = "rgb") =>
   (color) =>
-    (color = prepare(color, target_mode)) !== undefined
-      ? // if the color's mode corresponds to our target mode
-        color.mode === target_mode
-        ? // then just return the color
-          color
-        : // otherwise check to see if we have a dedicated
+    // (color = prepare(color, target_mode)) !== undefined
+    //   ? // if the color's mode corresponds to our target mode
+    color.mode === target_mode
+      ? // then just return the color
+        color
+      : // otherwise check to see if we have a dedicated
         // converter for the target mode
-        converters[color.mode][target_mode]
-        ? // and return its result...
-          converters[color.mode][target_mode](color)
-        : // ...otherwise pass through RGB as an intermediary step.
-        // if the target mode is RGB...
-        target_mode === "rgb"
-        ? // just return the RGB
-          converters[color.mode].rgb(color)
-        : // otherwise convert color.mode -> RGB -> target_mode
-          converters.rgb[target_mode](converters[color.mode].rgb(color))
-      : undefined;
+        // converters[color.mode][target_mode]
+        // ? // and return its result...
+        //   converters[color.mode][target_mode](color)
+        // : // ...otherwise pass through RGB as an intermediary step.
+        // // if the target mode is RGB...
+        // target_mode === "rgb"
+        // ? // just return the RGB
+        //   converters[color.mode].rgb(color)
+        // : // otherwise convert color.mode -> RGB -> target_mode
+        converters.rgb[target_mode](converters[color.mode].rgb(color));
+// : undefined;
 
 const useParser = (parser, mode) => {
-  if (typeof parser === "string") {
-    if (!mode) {
-      throw new Error(`'mode' required when 'parser' is a string`);
-    }
-    colorProfiles[parser] = mode;
-  } else if (typeof parser === "function") {
-    if (parsers.indexOf(parser) < 0) {
-      parsers.push(parser);
-    }
-  }
+  // if (typeof parser === "string") {
+  //   if (!mode) {
+  //     throw new Error(`'mode' required when 'parser' is a string`);
+  //   }
+  colorProfiles[parser] = mode;
+  // } else if (typeof parser === "function") {
+  //   if (parsers.indexOf(parser) < 0) {
+  //     parsers.push(parser);
+  //   }
+  // }
 };
 
 export const normalizeHue = (hue) => ((hue = hue % 360) < 0 ? hue + 360 : hue);
@@ -294,9 +292,9 @@ export const convertXyz65ToRgb = ({ x, y, z, alpha }: any) => {
   return res;
 };
 
-export const lerp = (a, b, t) => a + t * (b - a);
+// export const lerp = (a, b, t) => a + t * (b - a);
 
-export const interpolatorPiecewise = (interpolator) => (arr) => {
+export const interpolatorPiecewise = (interpolator?: any) => {}; /*(arr) => {
   const get_classes = (arr) => {
     let classes: any = [];
     for (let i = 0; i < arr.length - 1; i++) {
@@ -322,50 +320,50 @@ export const interpolatorPiecewise = (interpolator) => (arr) => {
       ? undefined
       : interpolator(pair[0], pair[1], cls - idx);
   };
-};
+};*/
 
-export const interpolatorLinear = interpolatorPiecewise(lerp);
+export const interpolatorLinear = interpolatorPiecewise(/*lerp*/);
 
-const hue = (hues, fn) => {
-  return hues
-    .map((hue, idx, arr) => {
-      if (hue === undefined) {
-        return hue;
-      }
-      let normalized = normalizeHue(hue);
-      if (idx === 0 || hues[idx - 1] === undefined) {
-        return normalized;
-      }
-      return fn(normalized - normalizeHue(arr[idx - 1]));
-    })
-    .reduce((acc, curr) => {
-      if (
-        !acc.length ||
-        curr === undefined ||
-        acc[acc.length - 1] === undefined
-      ) {
-        acc.push(curr);
-        return acc;
-      }
-      acc.push(curr + acc[acc.length - 1]);
-      return acc;
-    }, []);
-};
+// const hue = (hues, fn) => {
+//   return hues
+//     .map((hue, idx, arr) => {
+//       if (hue === undefined) {
+//         return hue;
+//       }
+//       let normalized = normalizeHue(hue);
+//       if (idx === 0 || hues[idx - 1] === undefined) {
+//         return normalized;
+//       }
+//       return fn(normalized - normalizeHue(arr[idx - 1]));
+//     })
+//     .reduce((acc, curr) => {
+//       if (
+//         !acc.length ||
+//         curr === undefined ||
+//         acc[acc.length - 1] === undefined
+//       ) {
+//         acc.push(curr);
+//         return acc;
+//       }
+//       acc.push(curr + acc[acc.length - 1]);
+//       return acc;
+//     }, []);
+// };
 
-export const fixupHueShorter = (arr) =>
-  hue(arr, (d) => (Math.abs(d) <= 180 ? d : d - 360 * Math.sign(d)));
+// export const fixupHueShorter = (arr) =>
+//   hue(arr, (d) => (Math.abs(d) <= 180 ? d : d - 360 * Math.sign(d)));
 
-export const fixupAlpha = (arr) => {
-  let some_defined = false;
-  let res = arr.map((v) => {
-    if (v !== undefined) {
-      some_defined = true;
-      return v;
-    }
-    return 1;
-  });
-  return some_defined ? res : arr;
-};
+// export const fixupAlpha = (arr) => {
+//   let some_defined = false;
+//   let res = arr.map((v) => {
+//     if (v !== undefined) {
+//       some_defined = true;
+//       return v;
+//     }
+//     return 1;
+//   });
+//   return some_defined ? res : arr;
+// };
 
 export const lch = {
   mode: "lch",
@@ -395,10 +393,10 @@ export const lch = {
   // 	} ${c.h || 0}${c.alpha < 1 ? ` / ${c.alpha}` : ''})`,
 
   interpolate: {
-    h: { use: interpolatorLinear, fixup: fixupHueShorter },
+    h: { use: interpolatorLinear /*fixup: fixupHueShorter*/ },
     c: interpolatorLinear,
     l: interpolatorLinear,
-    alpha: { use: interpolatorLinear, fixup: fixupAlpha },
+    alpha: { use: interpolatorLinear /*fixup: fixupAlpha*/ },
   },
 
   difference: {
@@ -415,13 +413,13 @@ export const modeOklch = {
   mode: "oklch",
 
   toMode: {
-    oklab: (c) => convertLchToLab(c, "oklab"),
+    // oklab: (c) => convertLchToLab(c, "oklab"),
     rgb: (c) => convertOklabToRgb(convertLchToLab(c, "oklab")),
   },
 
   fromMode: {
     rgb: (c) => convertLabToLch(convertRgbToOklab(c), "oklch"),
-    oklab: (c) => convertLabToLch(c, "oklch"),
+    // oklab: (c) => convertLabToLch(c, "oklch"),
   },
 
   // parse: [parseOklch],
@@ -453,7 +451,7 @@ export const rgb = {
     r: interpolatorLinear,
     g: interpolatorLinear,
     b: interpolatorLinear,
-    alpha: { use: interpolatorLinear, fixup: fixupAlpha },
+    alpha: { use: interpolatorLinear /*fixup: fixupAlpha*/ },
   },
   gamut: true,
 };
@@ -510,27 +508,23 @@ const inrange_rgb = (c) => {
 
 export function inGamut(mode = "rgb") {
   const { gamut } = getMode(mode);
-  if (!gamut) {
-    return (color) => true;
-  }
+  // if (!gamut) {
+  //   return (color) => true;
+  // }
   const conv = converter(typeof gamut === "string" ? gamut : mode);
   return (color) => inrange_rgb(conv(color));
 }
 
-const parse: any = () => {
-  throw new Error("Not implemented");
-};
-
-const prepare = (color: any, mode?: any) =>
-  color === undefined
-    ? undefined
-    : typeof color !== "object"
-    ? parse(color)
-    : color.mode !== undefined
-    ? color
-    : mode
-    ? { ...color, mode }
-    : undefined;
+const prepare = (color: any, mode?: any) => color;
+// color === undefined
+//   ? undefined
+//   : typeof color !== "object"
+//   ? parse(color)
+//   : color.mode !== undefined
+//   ? color
+//   : mode
+//   ? { ...color, mode }
+//   : undefined;
 
 const fixup_rgb = (c) => {
   const res: any = {
@@ -547,9 +541,9 @@ const fixup_rgb = (c) => {
 
 export function clampGamut(mode = "rgb") {
   const { gamut } = getMode(mode);
-  if (!gamut) {
-    return (color) => prepare(color);
-  }
+  // if (!gamut) {
+  //   return (color) => prepare(color);
+  // }
   const destMode = typeof gamut === "string" ? gamut : mode;
   const destConv = converter(destMode);
   const inDestGamut = inGamut(destMode);
@@ -578,9 +572,9 @@ export function toGamut(
 ) {
   const destConv = converter(dest);
 
-  if (!getMode(dest).gamut) {
-    return (color) => destConv(color);
-  }
+  // if (!getMode(dest).gamut) {
+  //   return (color) => destConv(color);
+  // }
 
   const inDestinationGamut = inGamut(dest);
   const clipToGamut = clampGamut(dest);
@@ -588,29 +582,29 @@ export function toGamut(
   const ucs = converter(mode);
   const { ranges } = getMode(mode);
 
-  const White: any = undefined; // destConv("white"); // In the real culori library, White is undefined for P3.
-  const Black: any = undefined; // destConv("black"); // In the real culori library, Black is undefined for P3.
+  // const White = destConv("white");
+  // const Black = destConv("black");
 
   return (color) => {
     color = prepare(color);
-    if (color === undefined) {
-      return undefined;
-    }
+    // if (color === undefined) {
+    //   return undefined;
+    // }
     const candidate = { ...ucs(color) };
-    if (candidate.l >= ranges.l[1]) {
-      const res = { ...White };
-      if (color.alpha !== undefined) {
-        res.alpha = color.alpha;
-      }
-      return res;
-    }
-    if (candidate.l <= ranges.l[0]) {
-      const res = { ...Black };
-      if (color.alpha !== undefined) {
-        res.alpha = color.alpha;
-      }
-      return res;
-    }
+    // if (candidate.l >= ranges.l[1]) {
+    //   const res = { ...White };
+    //   if (color.alpha !== undefined) {
+    //     res.alpha = color.alpha;
+    //   }
+    //   return res;
+    // }
+    // if (candidate.l <= ranges.l[0]) {
+    //   const res = { ...Black };
+    //   if (color.alpha !== undefined) {
+    //     res.alpha = color.alpha;
+    //   }
+    //   return res;
+    // }
     if (inDestinationGamut(candidate)) {
       return destConv(candidate);
     }
