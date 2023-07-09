@@ -1,6 +1,6 @@
 import { flattenChildren } from "@cyber/hooks/flattenChildren";
 import { useHost } from "@cyber/host/context";
-import { safeArea } from "@cyber/host/plugins/safearea";
+import { safeArea } from "@cyber/host/plugins/SafeArea";
 import { colors } from "@cyber/theme/colors";
 import Debug from "debug";
 import React, {

@@ -3,8 +3,7 @@ import { colors } from "@cyber/theme/colors";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import React from "react";
 import { useBanner } from "../banner/useBanner.js";
-import { ModalDecorator } from "../storybook/ModalDecorator.js";
-import { ButtonContainer } from "./ButtonContainer.js";
+import { ButtonContainer, ModalDecorator } from "../storybook/index.js";
 
 export default {
   title: "modals/useBanner",

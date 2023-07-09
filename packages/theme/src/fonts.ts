@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import FiraMonoMediumURL from "../fonts/fira-mono/FiraMono-Medium.ttf";
+import FiraMonoRegularURL from "../fonts/fira-mono/FiraMono-Regular.ttf";
 import FiraSansBlackURL from "../fonts/fira-sans/FiraSans-Black.ttf";
 import FiraSansBoldURL from "../fonts/fira-sans/FiraSans-Bold.ttf";
 import FiraSansMediumURL from "../fonts/fira-sans/FiraSans-Medium.ttf";
@@ -15,6 +17,16 @@ export const fonts = {
   numeric: fontBuilder({ family: "Lato", weight: "400" }),
   numericBold: fontBuilder({ family: "Lato", weight: "600" }),
   numericBlack: fontBuilder({ family: "Lato", weight: "800" }),
+  displayMono: fontBuilder({
+    family: "Fira Mono",
+    weight: "400",
+    monospace: true,
+  }),
+  displayMonoMedium: fontBuilder({
+    family: "Fira Mono",
+    weight: "500",
+    monospace: true,
+  }),
 };
 
 export const CyberFontCSS = `
@@ -63,6 +75,20 @@ export const CyberFontCSS = `
     font-family: 'Lato';
     src: url('${LatoBlackURL}') format('truetype');
     font-weight: 800;
+  }
+
+  /* Fira Mono */
+
+  @font-face {
+    font-family: 'Fira Mono';
+    src: url('${FiraMonoRegularURL}') format('truetype');
+    font-weight: 400;
+  }
+
+  @font-face {
+    font-family: 'Fira Mono';
+    src: url('${FiraMonoMediumURL}') format('truetype');
+    font-weight: 500;
   }
 `;
 

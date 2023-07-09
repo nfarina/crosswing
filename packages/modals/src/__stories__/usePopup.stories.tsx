@@ -7,7 +7,7 @@ import { styled } from "styled-components";
 import { ModalRootProvider } from "../context/ModalRootProvider.js";
 import { PopupView } from "../popup/PopupView.js";
 import { usePopup } from "../popup/usePopup.js";
-import { ModalDecorator } from "../storybook/ModalDecorator.js";
+import { ModalDecorator } from "../storybook/index.js";
 
 export default {
   title: "modals/usePopup",

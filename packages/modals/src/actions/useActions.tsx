@@ -1,5 +1,5 @@
 import { HotKeyContextDataAttributes, useHotkey } from "@cyber/hooks/useHotkey";
-import { safeArea } from "@cyber/host/plugins/safearea";
+import { safeArea } from "@cyber/host/plugins/SafeArea";
 import { easing } from "@cyber/theme/easing";
 import React, { ReactElement, useCallback, useRef } from "react";
 import { keyframes, styled } from "styled-components";

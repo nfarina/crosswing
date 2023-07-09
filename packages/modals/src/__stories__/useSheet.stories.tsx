@@ -8,8 +8,7 @@ import { StoryObj } from "@storybook/react";
 import React from "react";
 import { ModalContextProvider } from "../context/ModalContextProvider.js";
 import { useSheet } from "../sheet/useSheet.js";
-import { ModalDecorator } from "../storybook/ModalDecorator.js";
-import { ButtonContainer } from "./ButtonContainer.js";
+import { ButtonContainer, ModalDecorator } from "../storybook/index.js";
 
 export default {
   title: "modals/useSheet",

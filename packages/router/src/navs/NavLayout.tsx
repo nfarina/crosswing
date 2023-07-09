@@ -1,6 +1,6 @@
 import { useHost } from "@cyber/host/context";
-import { safeArea } from "@cyber/host/plugins/safearea";
-import { useHostStatusBar } from "@cyber/host/plugins/statusbar";
+import { safeArea } from "@cyber/host/plugins/SafeArea";
+import { useHostStatusBar } from "@cyber/host/plugins/useHostStatusBar";
 import { colors } from "@cyber/theme/colors";
 import React, { HTMLAttributes, MouseEvent, ReactNode } from "react";
 import { styled } from "styled-components";

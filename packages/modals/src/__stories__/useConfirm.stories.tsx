@@ -3,8 +3,7 @@ import { CyberAppDecorator } from "@cyber/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import React from "react";
 import { useConfirm } from "../confirm/useConfirm.js";
-import { ModalDecorator } from "../storybook/ModalDecorator.js";
-import { ButtonContainer } from "./ButtonContainer.js";
+import { ButtonContainer, ModalDecorator } from "../storybook/index.js";
 
 export default {
   title: "modals/useConfirm",

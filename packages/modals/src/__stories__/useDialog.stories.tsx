@@ -6,8 +6,7 @@ import { CyberAppDecorator } from "@cyber/theme/storybook";
 import React, { useCallback, useState } from "react";
 import { styled } from "styled-components";
 import { useDialog } from "../dialog/useDialog.js";
-import { ModalDecorator } from "../storybook/ModalDecorator.js";
-import { ButtonContainer } from "./ButtonContainer.js";
+import { ButtonContainer, ModalDecorator } from "../storybook/index.js";
 
 export default {
   title: "modals/useDialog",
