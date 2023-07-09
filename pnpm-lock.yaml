@@ -157,9 +157,15 @@ importers:
       '@cyber/components':
         specifier: workspace:^
         version: link:../components
+      '@cyber/hooks':
+        specifier: workspace:^
+        version: link:../hooks
       '@cyber/modals':
         specifier: workspace:^
         version: link:../modals
+      '@cyber/shared':
+        specifier: workspace:^
+        version: link:../shared
       '@cyber/theme':
         specifier: workspace:^
         version: link:../theme

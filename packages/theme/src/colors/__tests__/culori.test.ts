@@ -6,7 +6,7 @@ test("transforms colors in oklch space", () => {
     alpha: 0.5,
     darken: 0.2,
     lighten: 0.2,
-    saturation: 0.2,
+    saturate: 0.2,
     hue: 0.2,
   });
 
@@ -14,7 +14,7 @@ test("transforms colors in oklch space", () => {
 
   const rendered2 = colors.mediumBlue({
     darken: 0.5,
-    saturation: 2,
+    saturate: 2,
     hue: 0,
   });
 

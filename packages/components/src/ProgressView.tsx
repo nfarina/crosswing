@@ -2,7 +2,7 @@ import { ColorBuilder, colors } from "@cyber/theme/colors";
 import { easing } from "@cyber/theme/easing";
 import React, { HTMLAttributes } from "react";
 import { keyframes, styled } from "styled-components";
-import { Donut } from "./Donut.js";
+import { Donut, StyledDonut } from "./Donut.js";
 
 export function ProgressView({
   size,
@@ -21,33 +21,28 @@ export function ProgressView({
   foregroundColor?: ColorBuilder | string;
   backgroundColor?: ColorBuilder | string;
 } & HTMLAttributes<HTMLDivElement>) {
-  if (progress === undefined || progress === null) {
-    return (
-      <StyledProgressView {...rest}>
-        <IndeterminateDonut
-          size={size}
-          thickness={thickness}
-          sections={[
-            { amount: 1, color: foregroundColor },
-            { amount: 10, color: backgroundColor },
-            { amount: 1, color: foregroundColor },
-          ]}
-        />
-      </StyledProgressView>
-    );
+  function renderSections() {
+    if (progress != null) {
+      return [
+        { amount: progress, color: foregroundColor },
+        { amount: 1 - progress, color: backgroundColor },
+      ];
+    } else {
+      return [
+        { amount: 1, color: foregroundColor },
+        { amount: 10, color: backgroundColor },
+        { amount: 1, color: foregroundColor },
+      ];
+    }
   }
 
   return (
-    <StyledProgressView {...rest}>
-      <AnimatedDonut
-        size={size}
-        thickness={thickness}
-        data-animate={!!animated}
-        sections={[
-          { amount: progress, color: foregroundColor },
-          { amount: 1 - progress, color: backgroundColor },
-        ]}
-      />
+    <StyledProgressView
+      data-is-indeterminate={progress == null}
+      data-animated={!!animated}
+      {...rest}
+    >
+      <Donut size={size} thickness={thickness} sections={renderSections()} />
     </StyledProgressView>
   );
 }
@@ -65,16 +60,18 @@ export const StyledProgressView = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
 
-const IndeterminateDonut = styled(Donut)`
-  animation: ${spin} 1s ease-in-out infinite;
-`;
+  &[data-is-indeterminate="true"] {
+    > ${StyledDonut} {
+      animation: ${spin} 1s ease-in-out infinite;
+    }
+  }
 
-const AnimatedDonut = styled(Donut)`
-  &[data-animate="true"] > circle {
-    transition:
-      stroke-dasharray 0.5s ${easing.inOutCubic},
-      stroke-dashoffset 0.5s ${easing.inOutCubic};
+  &[data-is-indeterminate="false"][data-animated="true"] {
+    > ${StyledDonut} > circle {
+      transition:
+        stroke-dasharray 0.5s ${easing.inOutCubic},
+        stroke-dashoffset 0.5s ${easing.inOutCubic};
+    }
   }
 `;

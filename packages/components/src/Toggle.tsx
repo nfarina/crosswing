@@ -1,5 +1,6 @@
-import { colors } from "@cyber/theme/colors";
+import { ColorBuilder, colors } from "@cyber/theme/colors";
 import React, {
+  CSSProperties,
   HTMLAttributes,
   MouseEvent,
   SyntheticEvent,
@@ -14,6 +15,8 @@ export function Toggle({
   onClick,
   disabled,
   as,
+  style,
+  trackBackground = colors.primaryGradient,
   ...rest
 }: {
   on?: boolean;
@@ -21,6 +24,7 @@ export function Toggle({
   onClick?: (e: SyntheticEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
   as?: string | React.ComponentType<any>;
+  trackBackground?: ColorBuilder;
 } & HTMLAttributes<HTMLButtonElement>) {
   // Our visual appearance is of something draggable, but we don't implement
   // dragging the knob around. To mitigate this, we want to fire onClick
@@ -43,6 +47,11 @@ export function Toggle({
     if (onClick) onClick(e);
   }
 
+  const cssProperties = {
+    ...style,
+    "--track-background": trackBackground(),
+  } as CSSProperties;
+
   return (
     <StyledToggle
       data-on={!!on}
@@ -54,6 +63,7 @@ export function Toggle({
       role="switch"
       aria-checked={!!on}
       as={as}
+      style={cssProperties}
       {...rest}
     >
       <div className="container">
@@ -103,7 +113,7 @@ export const StyledToggle = styled.button`
 
     /* We need a separate element to fade in a linear gradient because we can't animate the CSS "background" property: https://stackoverflow.com/a/7364325/66673 */
     > .track-on {
-      background: ${colors.primaryGradient()};
+      background: var(--track-background);
       opacity: 0;
       transition: opacity 0.25s ease;
     }

@@ -59,7 +59,9 @@ export interface HexColorOptions {
    * The final rendered maximum value will be clamped to the maximum amount
    * possible for the given hue.
    */
-  saturation?: number; // | HexColorBuilder;
+  saturate?: number | HexColorBuilder;
+  /** For better semantics, same as saturate() with a flipped sign. */
+  desaturate?: number | HexColorBuilder;
 }
 
 /**
@@ -87,10 +89,16 @@ export function hexColor(hex: string): HexColorBuilder {
  */
 export function buildHexColor(
   hex: string,
-  { alpha, lighten, darken, hue, saturation }: HexColorOptions = {},
+  { alpha, lighten, darken, hue, saturate, desaturate }: HexColorOptions = {},
 ): string {
   // Transform it if you so wish.
-  if (lighten != null || darken != null || hue != null || saturation != null) {
+  if (
+    lighten != null ||
+    darken != null ||
+    hue != null ||
+    saturate != null ||
+    desaturate != null
+  ) {
     // Convert to Oklch for easier manipulation.
     const oklch = parseOklch(hex);
 
@@ -118,11 +126,19 @@ export function buildHexColor(
       }
     }
 
-    if (saturation != null) {
-      if (typeof saturation === "number") {
-        oklch.c *= 1 + saturation;
+    if (saturate != null) {
+      if (typeof saturate === "number") {
+        oklch.c *= 1 + saturate;
       } else {
-        // oklch.c = parseOklch(saturation.hex).c;
+        oklch.c = parseOklch(saturate.hex).c;
+      }
+    }
+
+    if (desaturate != null) {
+      if (typeof desaturate === "number") {
+        oklch.c *= 1 - desaturate;
+      } else {
+        oklch.c = parseOklch(desaturate.hex).c;
       }
     }
 

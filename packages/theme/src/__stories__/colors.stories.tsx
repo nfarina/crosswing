@@ -79,7 +79,7 @@ export const Transform = () => {
               "--color": colors.mediumBlue({
                 hue: i * 35,
                 darken: 0.5,
-                saturation: 2,
+                saturate: 2,
               }),
             } as CSSProperties
           }
