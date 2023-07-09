@@ -3,7 +3,7 @@ import { CyberAppDecorator } from "@cyber/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import React from "react";
 import { Button } from "../Button.js";
-import { numericTransformer } from "../transformers/numericTransformer.js";
+import { urlTransformer } from "../transformers/urlTransformer.js";
 import { usePrompt } from "../usePrompt.js";
 
 export default {
@@ -65,38 +65,37 @@ export function WithValidation() {
 
 export function WithTransformer() {
   const prompt = usePrompt(() => ({
-    numeric: true,
-    title: "Choose Number",
-    message: "What is your favorite number?",
-    placeholder: "Enter a Number",
-    initialValue: 42,
-    transformer: numericTransformer(),
-    onSubmit: (value: number) => action("onSubmit")(value, typeof value),
+    title: "Enter URL",
+    message: "What's your favorite website?",
+    placeholder: "http://example.com",
+    transformer: urlTransformer(),
+    onSubmit: (value: string) => action("onSubmit")(value, typeof value),
   }));
 
   return (
     <ButtonContainer>
-      <Button onClick={prompt.show}>Choose Number…</Button>
+      <Button onClick={prompt.show}>Enter URL…</Button>
     </ButtonContainer>
   );
 }
 
 export function WithTransformerAndValidation() {
   const prompt = usePrompt(() => ({
-    numeric: true,
-    title: "Choose Number",
-    message: "What is your favorite number?",
-    placeholder: "Enter a Number",
-    transformer: numericTransformer(),
-    validate(value: number) {
-      if (value !== 42) throw new Error("Number must be 42.");
+    title: "Enter URL",
+    message: "What's your favorite website?",
+    placeholder: "https://example.com",
+    transformer: urlTransformer(),
+    validate(value) {
+      if (!value.startsWith("https://")) {
+        throw new Error("URL must be HTTPS.");
+      }
     },
-    onSubmit: (value: number) => action("onSubmit")(value, typeof value),
+    onSubmit: (value: string) => action("onSubmit")(value),
   }));
 
   return (
     <ButtonContainer>
-      <Button onClick={prompt.show}>Choose Number…</Button>
+      <Button onClick={prompt.show}>Enter Secure URL…</Button>
     </ButtonContainer>
   );
 }
