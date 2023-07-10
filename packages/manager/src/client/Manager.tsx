@@ -33,7 +33,7 @@ export function Manager() {
 
   const updateStatusTask = useAsyncTask({
     async func() {
-      const response = await fetch("//localhost:3000/api/status");
+      const response = await fetch("//localhost:2700/api/status");
       const json = await response.json();
       setStatus(json);
     },
@@ -91,10 +91,12 @@ export const StyledManager = styled.div`
       display: flex;
       flex-flow: column;
       padding: 10px;
+      justify-content: center;
 
       > * {
         flex-shrink: 0;
         flex-grow: 1;
+        max-height: 100px;
       }
 
       > * + * {

@@ -11,4 +11,7 @@ export default defineConfig({
     }),
     svgr({ exportAsDefault: true }),
   ],
+  // Don't clear the screen when logging certain things; it makes the
+  // manager server harder to read (since multiple Vite servers can be running).
+  clearScreen: false,
 });

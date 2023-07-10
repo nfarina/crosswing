@@ -1,0 +1,27 @@
+{
+  "example-client": {
+    "title": "Example Client",
+    "description": "Vite development server for the Cyber example app",
+    "run": {
+      "workspace": "example-client",
+      "script": "dev"
+    },
+    "link": "http://localhost:2701"
+  },
+  "storybook": {
+    "title": "Storybook",
+    "description": "Storybook server",
+    "run": {
+      "script": "storybook"
+    },
+    "link": "http://localhost:2702"
+  },
+  "vitest": {
+    "title": "Test Runner",
+    "description": "Vitest UI",
+    "run": {
+      "script": "test-ui"
+    },
+    "link": "http://localhost:2703/__vitest__/"
+  }
+}
