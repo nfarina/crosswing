@@ -18,7 +18,8 @@
     "coverage": "vitest run --coverage",
     "storybook": "storybook dev --ci -p 2702",
     "build-storybook": "storybook build",
-    "upgrade": "pnpm upgrade -ir --latest"
+    "upgrade": "pnpm upgrade -ir --latest",
+    "node": "vite-node"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^7.0.26",
@@ -50,6 +51,7 @@
     "debug": "^4.3.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-is": "^18.2.0"
+    "react-is": "^18.2.0",
+    "vite-node": "^0.33.0"
   }
 }

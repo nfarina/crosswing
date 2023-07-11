@@ -6,7 +6,7 @@ const isTest = process.env.NODE_ENV === "test";
 
 /*
  * Returns a Promise that waits for the given number of milliseconds
- * (via setTimeout), then resolves.
+ * (via setTimeout), then resolves. Does not wait when running tests.
  */
 export async function wait(ms: number = 0): Promise<void> {
   // Don't wait when running tests!

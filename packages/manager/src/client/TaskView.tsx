@@ -1,5 +1,6 @@
 import { Badge } from "@cyber/components/Badge";
 import { StyledButton } from "@cyber/components/Button";
+import { StatusBadge, StyledStatusBadge } from "@cyber/components/StatusBadge";
 import { StyledToggle, Toggle } from "@cyber/components/Toggle";
 import { useAsyncTask } from "@cyber/hooks/useAsyncTask";
 import { useHotkey } from "@cyber/hooks/useHotkey";
@@ -69,14 +70,21 @@ export function TaskView({
       data-running={running.value}
       data-working={setRunningTask.isRunning}
       onClick={onClick}
-      title={`${task.name} (${task.pid ?? "not running"})`}
+      title={`${task.name} (${task.process?.pid ?? "not running"})`}
     >
       <div className="hotkey">{hotkey}</div>
       <div className="content">
         <div className="title">{task.title}</div>
         <div className="description">{task.description}</div>
+        {task.orphaned && (
+          <StatusBadge size="smallest" type="warning">
+            Running task removed from tasks.json
+          </StatusBadge>
+        )}
       </div>
-      {task.memory && <div className="memory">{renderMemory(task.memory)}</div>}
+      {task.process?.memory && (
+        <div className="memory">{renderMemory(task.process.memory)}</div>
+      )}
       {task.link && (
         <a className="link" href={task.link} target="_blank">
           {task.link.split("//")[1].split("/")[0]}
@@ -153,6 +161,11 @@ export const StyledTaskView = styled.div`
 
     > * {
       flex-shrink: 0;
+    }
+
+    > ${StyledStatusBadge} {
+      align-self: flex-start;
+      margin-top: 3px;
     }
 
     > .title {

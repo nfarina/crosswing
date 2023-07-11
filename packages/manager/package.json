@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite --config ../../vite.config.ts --port 2800 src/client",
     "build": "vite --config ../../vite.config.ts build src/client",
-    "serve": "node src/server",
+    "serve": "vite-node src/server",
     "analyze": "cd src/client; vite-bundle-visualizer"
   },
   "dependencies": {
