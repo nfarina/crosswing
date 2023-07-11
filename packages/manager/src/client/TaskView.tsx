@@ -76,7 +76,7 @@ export function TaskView({
         <div className="title">{task.title}</div>
         <div className="description">{task.description}</div>
       </div>
-      {task.memory && <Badge>{renderMemory(task.memory)}</Badge>}
+      {task.memory && <div className="memory">{renderMemory(task.memory)}</div>}
       {task.link && (
         <a className="link" href={task.link} target="_blank">
           {task.link.split("//")[1].split("/")[0]}
@@ -167,9 +167,16 @@ export const StyledTaskView = styled.div`
     }
   }
 
-  > ${Badge} {
-    min-height: 31px;
-    padding: 1px 13px;
+  > .memory {
+    height: 31px;
+    border-radius: 6px;
+    padding: 1px 10px;
+    box-sizing: border-box;
+    border: 1px solid ${colors.separator()};
+    display: flex;
+    align-items: center;
+    color: ${colors.turquoise()};
+    font: ${fonts.numericBlack({ size: 13 })};
   }
 
   > .link {
