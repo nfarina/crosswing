@@ -7,7 +7,7 @@ export type NavigateListener = (location: RouterLocation) => any;
 export type Unsubscribe = () => void;
 
 export class BrowserHistory {
-  public type = "browser";
+  public type: "browser" = "browser";
   private listeners: Set<NavigateListener> = new Set();
 
   // You can set a base path and it will cause all navigation events to be
@@ -17,8 +17,18 @@ export class BrowserHistory {
   // basePath is always prepended.
   public basePath: string;
 
-  constructor(basePath: string = "") {
+  // If true, always reload the page when navigating. Useful for traditional
+  // "website" behavior. If false (default), we will try to use pushState() to
+  // navigate to the new page without reloading, which is best for single-page
+  // apps.
+  public alwaysReloadPage: boolean;
+
+  constructor({
+    basePath = "",
+    alwaysReloadPage = false,
+  }: { basePath?: string; alwaysReloadPage?: boolean } = {}) {
     this.basePath = basePath;
+    this.alwaysReloadPage = alwaysReloadPage;
   }
 
   public top() {

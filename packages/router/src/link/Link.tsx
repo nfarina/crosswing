@@ -1,6 +1,7 @@
 import React, { AnchorHTMLAttributes, MouseEvent, ReactNode } from "react";
 import { useMobileRouter } from "../context/RouterContext.js";
 import { BrowserHistory } from "../history/BrowserHistory.js";
+import { MemoryHistory } from "../history/MemoryHistory.js";
 
 export function Link({
   to,
@@ -48,7 +49,7 @@ export function Link({
 
     const [href] = getHref();
 
-    if (shouldNavigate(href, rest.target, e)) {
+    if (shouldNavigate(history, href, rest.target, e)) {
       e.preventDefault();
       history.navigate(href, { replace });
     }
@@ -74,10 +75,16 @@ export function Link({
 }
 
 function shouldNavigate(
+  history: BrowserHistory | MemoryHistory,
   href: string,
   target: string | undefined,
   e: MouseEvent,
 ): boolean {
+  // If we are always reloading the page, we can just let the anchor handle this.
+  if (history.type === "browser" && history.alwaysReloadPage) {
+    return false;
+  }
+
   return (
     target !== "_blank" &&
     !href.startsWith("http://") &&

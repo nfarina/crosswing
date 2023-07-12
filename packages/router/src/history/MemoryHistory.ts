@@ -5,7 +5,7 @@ import { RouterLocation } from "./RouterLocation.js";
 const debug = Debug("router:MemoryHistory");
 
 export class MemoryHistory {
-  public type = "memory";
+  public type: "memory" = "memory";
   public location: RouterLocation;
   public listeners: Set<NavigateListener> = new Set();
 

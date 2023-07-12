@@ -84,6 +84,32 @@ export class RouterLocation {
   }
 
   /**
+   * Returns true if the given possibly-relative path matches the current
+   * location. If you pass {prefixOnly: true}, it will return true if the
+   * current location starts with the given path.
+   */
+  public isLinkActive(
+    path: string,
+    { prefixOnly }: { prefixOnly?: boolean } = {},
+  ): boolean {
+    const fullPath = this.linkTo(path);
+    if (prefixOnly) {
+      return this.href().startsWith(fullPath);
+    } else {
+      return this.href() === fullPath;
+    }
+  }
+
+  /**
+   * Returns just the portion of the path that hsa been claimed.
+   * So for "[app/home]/blah?test=true", returns "/app/home".
+   */
+  public claimedPath(): string {
+    const claimedSegments = this.segments.slice(0, this.claimIndex);
+    return claimedSegments.length > 0 ? claimedSegments.join("/") : "";
+  }
+
+  /**
    * Returns just the portion of the path that hasn't been claimed.
    * So for "[app/home]/blah?test=true", returns "blah".
    */
@@ -177,6 +203,7 @@ export class RouterLocation {
     });
   }
 
+  /** Returns an absolute path, given a possibly-relative path. */
   public linkTo(path: string): string {
     // Path already absolute? We're done.
     if (path && path.startsWith("/")) return path;
