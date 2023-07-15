@@ -16,15 +16,12 @@
     "./icons/*": "./icons/*.svg"
   },
   "dependencies": {
-    "@cyber/host": "workspace:^",
     "@cyber/hooks": "workspace:^",
+    "@cyber/host": "workspace:^",
     "@cyber/router": "workspace:^",
     "@cyber/shared": "workspace:^",
     "@cyber/theme": "workspace:^",
     "react-transition-group": "^4.4.5",
-    "styled-components": "^6.0.2"
-  },
-  "devDependencies": {
-    "@cyber/components": "workspace:^"
+    "styled-components": "^6.0.4"
   }
 }

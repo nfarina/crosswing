@@ -1,5 +1,3 @@
-import { Button } from "@cyber/components/Button";
-import { Timestamp } from "@cyber/components/Timestamp";
 import { colors } from "@cyber/theme/colors";
 import { fonts } from "@cyber/theme/fonts";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
@@ -7,6 +5,7 @@ import React, { useCallback, useState } from "react";
 import { styled } from "styled-components";
 import { useDialog } from "../dialog/useDialog.js";
 import { ButtonContainer, ModalDecorator } from "../storybook/index.js";
+import { Button } from "./Button.js";
 
 export default {
   title: "modals/useDialog",
@@ -37,9 +36,7 @@ export function Normal() {
 
   return (
     <ButtonContainer>
-      <Button primary onClick={() => dialog.show(Date.now())}>
-        Show Dialog
-      </Button>
+      <Button onClick={() => dialog.show(Date.now())}>Show Dialog</Button>
     </ButtonContainer>
   );
 }
@@ -57,9 +54,7 @@ export function Sticky() {
 
   return (
     <ButtonContainer>
-      <Button primary onClick={dialog.show}>
-        Show Sticky Dialog
-      </Button>
+      <Button onClick={dialog.show}>Show Sticky Dialog</Button>
     </ButtonContainer>
   );
 }
@@ -86,9 +81,7 @@ function StatefulDialog({
 
   return (
     <SampleDialog>
-      <div>
-        Dialog created <Timestamp date={created} />
-      </div>
+      <div>Dialog created {new Date(created).toString()}</div>
       <div>
         Host count is {count}, local count is {local}
       </div>

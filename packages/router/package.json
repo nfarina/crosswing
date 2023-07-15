@@ -20,6 +20,6 @@
     "@cyber/host": "workspace:^",
     "@cyber/theme": "workspace:^",
     "react-transition-group": "^4.4.5",
-    "styled-components": "^6.0.2"
+    "styled-components": "^6.0.4"
   }
 }

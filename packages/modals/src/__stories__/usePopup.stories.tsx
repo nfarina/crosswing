@@ -1,4 +1,3 @@
-import { Button } from "@cyber/components/Button";
 import { colors } from "@cyber/theme/colors";
 import { fonts } from "@cyber/theme/fonts";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
@@ -8,6 +7,7 @@ import { ModalRootProvider } from "../context/ModalRootProvider.js";
 import { PopupView } from "../popup/PopupView.js";
 import { usePopup } from "../popup/usePopup.js";
 import { ModalDecorator } from "../storybook/index.js";
+import { Button } from "./Button.js";
 
 export default {
   title: "modals/usePopup",
@@ -30,21 +30,11 @@ export function Normal() {
 
   return (
     <FourCorners>
-      <Button primary onClick={popup1.onClick}>
-        Show Popup
-      </Button>
-      <Button primary onClick={popup2.onClick}>
-        Show Popup
-      </Button>
-      <Button primary onClick={popup3.onClick}>
-        Show Popup
-      </Button>
-      <Button primary onClick={popup4.onClick}>
-        Show Popup
-      </Button>
-      <Button primary onClick={popup5.onClick}>
-        Show Popup
-      </Button>
+      <Button onClick={popup1.onClick}>Show Popup</Button>
+      <Button onClick={popup2.onClick}>Show Popup</Button>
+      <Button onClick={popup3.onClick}>Show Popup</Button>
+      <Button onClick={popup4.onClick}>Show Popup</Button>
+      <Button onClick={popup5.onClick}>Show Popup</Button>
     </FourCorners>
   );
 }

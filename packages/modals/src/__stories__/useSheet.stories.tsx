@@ -1,4 +1,3 @@
-import { Button } from "@cyber/components/Button";
 import { MockHostProvider } from "@cyber/host/mocks";
 import { NavLayout } from "@cyber/router/navs";
 import { RouterDecorator } from "@cyber/router/storybook";
@@ -9,6 +8,7 @@ import React from "react";
 import { ModalContextProvider } from "../context/ModalContextProvider.js";
 import { useSheet } from "../sheet/useSheet.js";
 import { ButtonContainer, ModalDecorator } from "../storybook/index.js";
+import { Button } from "./Button.js";
 
 export default {
   title: "modals/useSheet",
@@ -74,9 +74,7 @@ function SheetPresenter() {
 
   return (
     <ButtonContainer>
-      <Button primary onClick={sheet.show}>
-        Show Sheet
-      </Button>
+      <Button onClick={sheet.show}>Show Sheet</Button>
     </ButtonContainer>
   );
 }

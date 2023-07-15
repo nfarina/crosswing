@@ -1,9 +1,9 @@
-import { Button } from "@cyber/components/Button";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import React from "react";
 import { useConfirm } from "../confirm/useConfirm.js";
 import { ButtonContainer, ModalDecorator } from "../storybook/index.js";
+import { Button } from "./Button.js";
 
 export default {
   title: "modals/useConfirm",
@@ -21,9 +21,7 @@ export function Normal() {
 
   return (
     <ButtonContainer>
-      <Button primary onClick={confirm.show}>
-        Skin Cat
-      </Button>
+      <Button onClick={confirm.show}>Skin Cat</Button>
     </ButtonContainer>
   );
 }

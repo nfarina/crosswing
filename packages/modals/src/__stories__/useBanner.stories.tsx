@@ -1,9 +1,9 @@
-import { Button } from "@cyber/components/Button";
 import { colors } from "@cyber/theme/colors";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import React from "react";
 import { useBanner } from "../banner/useBanner.js";
 import { ButtonContainer, ModalDecorator } from "../storybook/index.js";
+import { Button } from "./Button.js";
 
 export default {
   title: "modals/useBanner",
@@ -28,12 +28,8 @@ export function Normal() {
 
   return (
     <ButtonContainer style={{ background: colors.textBackgroundAlt() }}>
-      <Button primary onClick={banner.show}>
-        Show Banner
-      </Button>
-      <Button primary onClick={sticky.show}>
-        Show Sticky
-      </Button>
+      <Button onClick={banner.show}>Show Banner</Button>
+      <Button onClick={sticky.show}>Show Sticky</Button>
     </ButtonContainer>
   );
 }

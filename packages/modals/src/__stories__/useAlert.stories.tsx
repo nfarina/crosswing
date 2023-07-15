@@ -1,10 +1,9 @@
-import { Button } from "@cyber/components/Button";
-import { ProgressView } from "@cyber/components/ProgressView";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import React from "react";
 import { useAlert } from "../alert/useAlert.js";
 import { ButtonContainer, ModalDecorator } from "../storybook/index.js";
+import { Button } from "./Button.js";
 
 export default {
   title: "modals/useAlert",
@@ -20,9 +19,7 @@ export function Normal() {
 
   return (
     <ButtonContainer>
-      <Button primary onClick={() => alert.show("Bob")}>
-        Show Alert
-      </Button>
+      <Button onClick={() => alert.show("Bob")}>Show Alert</Button>
     </ButtonContainer>
   );
 }
@@ -31,12 +28,6 @@ export function Sticky() {
   const alert = useAlert(
     () => ({
       title: "Working…",
-      message: (
-        <>
-          <br />
-          <ProgressView size="50px" />
-        </>
-      ),
       hideButtons: true,
     }),
     { sticky: true },
@@ -49,9 +40,7 @@ export function Sticky() {
 
   return (
     <ButtonContainer>
-      <Button primary onClick={showAlert}>
-        Show Sticky Alert
-      </Button>
+      <Button onClick={showAlert}>Show Sticky Alert</Button>
     </ButtonContainer>
   );
 }
@@ -63,9 +52,7 @@ export function Stretched() {
 
   return (
     <ButtonContainer>
-      <Button primary onClick={alert.show}>
-        Show Alert
-      </Button>
+      <Button onClick={alert.show}>Show Alert</Button>
     </ButtonContainer>
   );
 }

@@ -1,10 +1,10 @@
-import { Button } from "@cyber/components/Button";
 import { RouterDecorator } from "@cyber/router/storybook";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import React from "react";
 import { useActions } from "../actions/useActions.js";
 import { ButtonContainer, ModalDecorator } from "../storybook/index.js";
+import { Button } from "./Button.js";
 
 export default {
   title: "modals/useActions",
@@ -29,9 +29,7 @@ export function Normal() {
 
   return (
     <ButtonContainer>
-      <Button primary onClick={actions.show}>
-        Show Actions
-      </Button>
+      <Button onClick={actions.show}>Show Actions</Button>
     </ButtonContainer>
   );
 }
