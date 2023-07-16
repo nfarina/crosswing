@@ -9,7 +9,7 @@
   ],
   "author": "nfarina@gmail.com",
   "scripts": {
-    "dev": "pnpm --filter=manager run serve",
+    "dev": "cd packages/manager; pnpm run serve",
     "test": "pnpm run prettier && pnpm run typecheck",
     "vitest": "vitest --run",
     "test-ui": "vitest --ui --coverage --open=false --api.port 2703",
