@@ -1,8 +1,8 @@
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import { Meta, StoryFn } from "@storybook/react";
 import React, { useState } from "react";
+import Close from "../icons/Close.svg";
 import { Button } from "./Button.js";
-import Close from "./__stories__/Close.svg";
 
 export default {
   title: "components/Button",

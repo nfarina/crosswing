@@ -229,7 +229,7 @@ export const ActionButtonView = styled(Link)`
     }
 
     > .subtitle {
-      font: ${fonts.displayBold({ size: 14 })};
+      font: ${fonts.displayMedium({ size: 14 })};
     }
   }
 
