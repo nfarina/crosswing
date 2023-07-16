@@ -16,11 +16,15 @@
   "task.allowAutomaticTasks": "on",
   // Enable file nesting.
   "explorer.fileNesting.enabled": true,
+  // Customize file nesting patterns.
+  "explorer.fileNesting.patterns": {
+    "*.ts": "${capture}.test.ts",
+    "*.tsx": "${capture}.stories.tsx"
+  },
   // Customize icons when using the "Material Icon Theme".
   "material-icon-theme.folders.associations": {
     "src": "src",
     "node_modules": "node",
     ".vscode": "vscode"
-  },
-  "testing.automaticallyOpenPeekView": "never"
+  }
 }

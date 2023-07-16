@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { colors } from "../index.js";
+import { colors } from "./index.js";
 
 test("transforms colors in oklch space", () => {
   const rendered = colors.mediumBlue({
