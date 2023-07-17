@@ -5,5 +5,10 @@
   "version": "0.0.0",
   "exports": {
     "./*": "./src/*.js"
-  }
+  },
+  "files": [
+    "src",
+    "!src/**/*.test.ts",
+    "!src/**/*.stories.ts"
+  ]
 }

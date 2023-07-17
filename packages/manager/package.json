@@ -23,5 +23,11 @@
     "pidusage": "^3.0.2",
     "ps-tree": "^1.2.0",
     "styled-components": "^6.0.4"
-  }
+  },
+  "files": [
+    "src",
+    "!src/client/dist",
+    "!src/**/*.test.ts",
+    "!src/**/*.stories.ts"
+  ]
 }

@@ -12,5 +12,10 @@
   },
   "dependencies": {
     "@cyber/shared": "workspace:^"
-  }
+  },
+  "files": [
+    "src",
+    "!src/**/*.test.ts",
+    "!src/**/*.stories.ts"
+  ]
 }
