@@ -113,7 +113,7 @@ const InnerSelect = styled.select`
   padding-right: calc(3px + 24px + 10px);
 
   @media (prefers-color-scheme: dark) {
-    background: ${colors.extraDarkGray({ darken: 0.2 })};
+    background: ${colors.black()};
   }
 
   &:disabled {

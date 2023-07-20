@@ -27,41 +27,23 @@ export interface HexColorOptions {
    */
   alpha?: number;
   /**
-   * If a number is given, it will adjust the lightness of the color by that
-   * percentage. So 0.1 will lighten by 10%, and -0.1 will darken by 10%. The
-   * lightness component of a color is in the range of [0...1].
-   *
-   * If a HexColorBuilder is given, the lightness component of the rendered
-   * color will be replaced with the lightness of the given color.
+   * Adjusts the lightness of the color by the given multiplier. So 0.1 will
+   * lighten by 10%, and -0.1 will darken by 10%. The lightness component of a
+   * color is in the range of [0...1].
    */
-  lighten?: number | HexColorBuilder;
+  lighten?: number;
   /** For better semantics, same as lighten() with a flipped sign. */
-  darken?: number | HexColorBuilder;
+  darken?: number;
   /**
-   * If a number is given, it will adjust the hue of the color by that
-   * amount. The hue component of a color is in the range of [0...360].
-   * Values outside of that range will be wrapped around.
-   *
-   * If a HexColorBuilder is given, the hue component of the rendered
-   * color will be replaced with the hue of the given color.
+   * Adjusts the hue of the color by adding the given amount. The hue component
+   * of a color is in the range of [0...360]. Values outside of that range will
+   * be wrapped around.
    */
-  hue?: number | HexColorBuilder;
-  /**
-   * If a number is given, it will adjust the saturation of the color by that
-   * amount. The saturation component of a color is, in theory, in the range
-   * of [0...∞], but in our system (OKLCH) the maximum value depends on the
-   * hue component! This is the essential nature of a limited color space.
-   * For both P3, the value will be always below 0.37.
-   *
-   * If a HexColorBuilder is given, the saturation component of the rendered
-   * color will be replaced with the saturation of the given color.
-   *
-   * The final rendered maximum value will be clamped to the maximum amount
-   * possible for the given hue.
-   */
-  saturate?: number | HexColorBuilder;
+  hue?: number;
+  /** Adjusts the saturation of the color by the given multiplier, so 0.2 means "20% more saturated." */
+  saturate?: number;
   /** For better semantics, same as saturate() with a flipped sign. */
-  desaturate?: number | HexColorBuilder;
+  desaturate?: number;
 }
 
 /**
@@ -99,50 +81,21 @@ export function buildHexColor(
     saturate != null ||
     desaturate != null
   ) {
-    // Convert to Oklch for easier manipulation.
-    const oklch = parseOklch(hex);
+    // Convert to Hsl for easier manipulation.
+    const hsl = parseOklch(hex);
 
-    if (lighten != null) {
-      if (typeof lighten === "number") {
-        oklch.l *= 1 + lighten;
-      } else {
-        oklch.l = parseOklch(lighten.hex).l;
-      }
-    }
+    if (lighten != null) hsl.l *= 1 + lighten;
+    if (darken != null) hsl.l *= 1 - darken;
+    if (hue != null) hsl.h = (hsl.h + hue) % 360;
+    if (saturate != null) hsl.c *= 1 + saturate;
+    if (desaturate != null) hsl.c *= 1 - desaturate;
 
-    if (darken != null) {
-      if (typeof darken === "number") {
-        oklch.l *= 1 - darken;
-      } else {
-        oklch.l = parseOklch(darken.hex).l;
-      }
-    }
+    // Clamp the values to their valid ranges.
+    // hsl.h = Math.max(0, Math.min(360, hsl.h));
+    // hsl.s = Math.max(0, Math.min(1, hsl.s));
+    // hsl.l = Math.max(0, Math.min(1, hsl.l));
 
-    if (hue != null) {
-      if (typeof hue === "number") {
-        oklch.h = (oklch.h + hue) % 360;
-      } else {
-        oklch.h = parseOklch(hue.hex).h;
-      }
-    }
-
-    if (saturate != null) {
-      if (typeof saturate === "number") {
-        oklch.c *= 1 + saturate;
-      } else {
-        oklch.c = parseOklch(saturate.hex).c;
-      }
-    }
-
-    if (desaturate != null) {
-      if (typeof desaturate === "number") {
-        oklch.c *= 1 - desaturate;
-      } else {
-        oklch.c = parseOklch(desaturate.hex).c;
-      }
-    }
-
-    hex = formatOklch(oklch);
+    hex = formatOklch(hsl);
   }
 
   if (SUPPORTS_P3_COLOR) {
