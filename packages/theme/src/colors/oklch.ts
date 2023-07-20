@@ -13,7 +13,7 @@ import {
   useMode,
 } from "./culori.js";
 
-// Color adjustments.
+// OKLCH Color adjustments.
 //
 // RGB, that is, the idea of defining a color by its red, green, and blue
 // components, really only makes sense for displays. In the old days, you would
@@ -66,8 +66,7 @@ export function parseOklch(hex: string): Oklch {
 }
 
 // Prepare culori's converter to go from Oklch to P3 while adjusting to fit
-// within the P3 gamut. At some point we should extract and embed just the parts
-// of culori we need.
+// within the P3 gamut.
 useMode(modeOklch);
 useMode(modeP3);
 const p3Converter = toGamut("p3", "oklch");

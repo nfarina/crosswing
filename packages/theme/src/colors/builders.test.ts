@@ -1,7 +1,7 @@
 import { expect, test } from "vitest";
 import { colors } from "./index.js";
 
-test("transforms colors in oklch space", () => {
+test("transforms colors", () => {
   const rendered = colors.mediumBlue({
     alpha: 0.5,
     darken: 0.2,
@@ -10,6 +10,7 @@ test("transforms colors in oklch space", () => {
     hue: 0.2,
   });
 
+  // Using OKLCH.
   expect(rendered).toMatchInlineSnapshot('"rgba(102, 176, 212, 0.5)"');
 
   const rendered2 = colors.mediumBlue({
@@ -18,5 +19,6 @@ test("transforms colors in oklch space", () => {
     hue: 0,
   });
 
+  // Using OKLCH.
   expect(rendered2).toMatchInlineSnapshot('"rgba(0, 72, 99, 1)"');
 });

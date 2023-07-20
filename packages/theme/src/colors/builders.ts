@@ -1,4 +1,4 @@
-import { formatOklch, parseHex, parseOklch } from "./util.js";
+import { formatOklch, parseHex, parseOklch } from "./oklch.js";
 
 // Check if this browser supports the `color()` function, specifically with
 // the `display-p3` color space.
