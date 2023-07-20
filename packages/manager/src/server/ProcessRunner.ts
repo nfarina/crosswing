@@ -17,6 +17,8 @@ const WORKSPACE_DIR = path.dirname(PACKAGES_DIR);
 export class ProcessRunner {
   private name: string;
   private child: ChildProcess;
+  private exited: boolean = false; // Guard against race conditions (unproven).
+  private stopWasCalled: boolean = false;
 
   constructor(
     { name, run }: ServerTask,
@@ -59,11 +61,16 @@ export class ProcessRunner {
       detached: true,
     });
 
-    child.on("exit", (code) => {
+    child.on("exit", (code, signal) => {
       if (name) {
-        console.log(`[${name}] exited with code ${code}`);
+        console.log(`[${name}] exited with code ${code} and signal ${signal}`);
       }
       onExit?.(code);
+
+      if (signal === "SIGINT" && !this.stopWasCalled) {
+        // Child process was killed by SIGINT issued by the user. Shut down the manager server.
+        process.exit();
+      }
     });
 
     this.name = name;
@@ -71,6 +78,8 @@ export class ProcessRunner {
   }
 
   async getStats(): Promise<ProcessStats | null> {
+    if (this.exited) return null;
+
     const { pid } = this.child;
     if (!pid) return null;
 
@@ -97,6 +106,8 @@ export class ProcessRunner {
   }
 
   stop() {
+    if (this.exited) return;
+
     const { name, child } = this;
 
     if (name) {
@@ -107,6 +118,8 @@ export class ProcessRunner {
       throw new Error("Child process does not have a PID");
     }
 
-    process.kill(-child.pid, "SIGINT");
+    this.stopWasCalled = true;
+
+    process.kill(-child.pid, "SIGTERM");
   }
 }

@@ -10,6 +10,8 @@
     "skipLibCheck": true,
     // Import non-ES modules as default imports.
     "esModuleInterop": true,
+    // Allow importing JSON files.
+    "resolveJsonModule": true,
     // Allow importing non-TS files as "any".
     "noImplicitAny": false,
     // Allow JSX syntax.

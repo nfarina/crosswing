@@ -20,15 +20,13 @@ if (dirname.endsWith(".ts")) {
 
 const DIST_DIR = path.resolve(dirname, "../client/dist");
 
-console.log(dirname, DIST_DIR);
-
 const app = new Koa();
 const router = new Router();
 
 router.get("/api/status", async (ctx) => {
   const status: ServerStatus = { tasks: {} };
 
-  for (const task of await getTasks()) {
+  for (const task of getTasks()) {
     status.tasks[task.name] = {
       name: task.name,
       title: task.title,
@@ -36,7 +34,6 @@ router.get("/api/status", async (ctx) => {
       link: task.link,
       running: !!task.process,
       process: (await task.process?.getStats()) ?? null,
-      orphaned: !!task.orphaned,
     };
   }
 
@@ -45,7 +42,6 @@ router.get("/api/status", async (ctx) => {
 
 router.post("/api/tasks/running", (ctx) => {
   const { name, running } = ctx.request.body;
-  console.log(ctx.request.body);
   if (running) {
     startTask(name);
   } else if (!running) {
@@ -60,7 +56,7 @@ async function startTask(name: string) {
 
   // Start any prerequisites first.
   for (const subtask of task.requires ?? []) {
-    startTask(subtask);
+    await startTask(subtask);
   }
 
   if (!task.process) {
@@ -95,25 +91,25 @@ Visit http://localhost:2700 to start local development services.
 });
 
 process.once("SIGINT", async function (code: number) {
-  const allTasks = await getTasks();
+  const allTasks = getTasks();
   if (allTasks.some((task) => task.process)) {
     console.log("Ctrl-C received; shutting down child processes…");
 
     for (const task of allTasks) {
-      if (task.process) {
-        task.process.stop();
-      }
+      task.process?.stop();
     }
 
     for (let i = 0; i < 10; i++) {
       await wait(1000);
       if (!allTasks.some((task) => task.process)) {
         console.log("All child processes stopped.");
-        break;
+        process.exit();
       }
     }
 
     console.log("Child processes still running!");
+  } else {
+    console.log("Ctrl-C received; exiting with no child processes running.");
   }
 
   process.exit();

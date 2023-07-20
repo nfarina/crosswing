@@ -1,6 +1,5 @@
 import { Badge } from "@cyber/components/Badge";
 import { StyledButton } from "@cyber/components/Button";
-import { StatusBadge, StyledStatusBadge } from "@cyber/components/StatusBadge";
 import { StyledToggle, Toggle } from "@cyber/components/Toggle";
 import { useAsyncTask } from "@cyber/hooks/useAsyncTask";
 import { useHotkey } from "@cyber/hooks/useHotkey";
@@ -76,11 +75,6 @@ export function TaskView({
       <div className="content">
         <div className="title">{task.title}</div>
         <div className="description">{task.description}</div>
-        {task.orphaned && (
-          <StatusBadge size="smallest" type="warning">
-            Running task removed from tasks.json
-          </StatusBadge>
-        )}
       </div>
       {task.process?.memory && (
         <div className="memory">{renderMemory(task.process.memory)}</div>
@@ -161,11 +155,6 @@ export const StyledTaskView = styled.div`
 
     > * {
       flex-shrink: 0;
-    }
-
-    > ${StyledStatusBadge} {
-      align-self: flex-start;
-      margin-top: 3px;
     }
 
     > .title {

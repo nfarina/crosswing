@@ -9,7 +9,6 @@ export interface Task {
 
 export interface ClientTask extends Task {
   running: boolean;
-  orphaned: boolean;
   process: ProcessStats | null;
 }
 
