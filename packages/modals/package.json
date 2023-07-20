@@ -12,8 +12,7 @@
     "./dialog": "./src/dialog/useDialog.js",
     "./popup": "./src/popup/index.js",
     "./sheet": "./src/sheet/useSheet.js",
-    "./storybook": "./src/storybook/index.js",
-    "./icons/*": "./icons/*.svg"
+    "./storybook": "./src/storybook/index.js"
   },
   "dependencies": {
     "@cyber/hooks": "workspace:^",

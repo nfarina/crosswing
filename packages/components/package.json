@@ -6,8 +6,7 @@
   "exports": {
     "./transformers/*": "./src/transformers/*.js",
     "./forms/*": "./src/forms/*.js",
-    "./*": "./src/*.js",
-    "./icons/*": "./icons/*.svg"
+    "./*": "./src/*.js"
   },
   "dependencies": {
     "@cyber/hooks": "workspace:^",

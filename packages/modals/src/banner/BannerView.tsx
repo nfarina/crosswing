@@ -1,9 +1,9 @@
 import { useGesture } from "@cyber/hooks/useGesture";
 import { colors, shadows } from "@cyber/theme/colors";
 import { fonts } from "@cyber/theme/fonts";
+import Close from "@cyber/theme/icons/Close.svg";
 import React, { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
-import Close from "../../icons/Close.svg";
 
 export function BannerView({
   title,

@@ -1,9 +1,9 @@
 import { colors } from "@cyber/theme/colors";
 import { fonts } from "@cyber/theme/fonts";
+import InfoCircleIcon from "@cyber/theme/icons/InfoCircle.svg";
+import WarningIcon from "@cyber/theme/icons/Warning.svg";
 import React, { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
-import InfoCircleIcon from "../icons/InfoCircle.svg";
-import WarningIcon from "../icons/Warning.svg";
 
 export function StatusBadge({
   children,

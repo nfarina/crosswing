@@ -12,8 +12,7 @@
     "./switch": "./src/switch/Switch.js",
     "./redirect": "./src/redirect/Redirect.js",
     "./tabs": "./src/tabs/index.js",
-    "./storybook": "./src/storybook/index.js",
-    "./icons/*.svg": "./icons/*.svg"
+    "./storybook": "./src/storybook/index.js"
   },
   "dependencies": {
     "@cyber/hooks": "workspace:^",

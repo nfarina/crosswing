@@ -1,6 +1,7 @@
 import { flattenChildren } from "@cyber/hooks/flattenChildren";
 import { colors } from "@cyber/theme/colors";
 import { fonts } from "@cyber/theme/fonts";
+import DownArrow from "@cyber/theme/icons/DownArrow.svg";
 import React, {
   ChangeEvent,
   ReactElement,
@@ -9,7 +10,6 @@ import React, {
   isValidElement,
 } from "react";
 import { styled } from "styled-components";
-import DownArrow from "../icons/DownArrow.svg";
 
 export interface SelectOptionProps {
   title?: string;
