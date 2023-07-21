@@ -1,5 +1,7 @@
 import Close from "@cyber/theme/icons/Close.svg";
+import Warning from "@cyber/theme/icons/Warning.svg";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { action } from "@storybook/addon-actions";
 import { Meta, StoryFn } from "@storybook/react";
 import React, { useState } from "react";
 import { Button } from "./Button.js";
@@ -13,21 +15,23 @@ export default {
 
 type Story = StoryFn<typeof Button>;
 
-export const WithText: Story = (args) => <Button text="Hello!" {...args} />;
-
-export const WithChildren: Story = (args) => (
-  <Button children="Hello!" {...args} />
+export const WithText: Story = () => (
+  <Button title="Hello!" onClick={action("onClick")} />
 );
 
-export const Disabled: Story = (args) => (
-  <Button disabled text="Hello!" {...args} />
+export const WithChildren: Story = () => (
+  <Button children="Hello!" onClick={action("onClick")} />
 );
 
-export const Working: Story = (args) => (
-  <Button working text="Hello!" {...args} />
+export const Disabled: Story = () => (
+  <Button disabled title="Hello!" onClick={action("onClick")} />
 );
 
-export const WorkingState: Story = (args) => {
+export const Working: Story = () => (
+  <Button working title="Hello!" onClick={action("onClick")} />
+);
+
+export const WorkingState: Story = () => {
   const [working, setWorking] = useState(false);
 
   function onClick() {
@@ -35,55 +39,66 @@ export const WorkingState: Story = (args) => {
     setTimeout(() => setWorking(false), 2000);
   }
 
-  return <Button text="Hello!" onClick={onClick} working={working} {...args} />;
+  return <Button title="Hello!" onClick={onClick} working={working} />;
 };
 
-export const PrimarySmaller: Story = (args) => (
-  <Button size="smaller" primary text="Hello!" {...args} />
+export const PrimarySmaller: Story = () => (
+  <Button size="smaller" primary title="Hello!" onClick={action("onClick")} />
 );
 
-export const PrimaryNormal: Story = (args) => (
-  <Button primary text="Hello!" {...args} />
+export const PrimaryNormal: Story = () => (
+  <Button primary title="Hello!" onClick={action("onClick")} />
 );
 
-export const PrimaryNormalWithDescender: Story = (args) => (
-  <Button primary text="Engage!" {...args} />
+export const PrimaryNormalWithDescender: Story = () => (
+  <Button primary title="Engage!" onClick={action("onClick")} />
 );
 
-export const PrimaryLarger: Story = (args) => (
-  <Button size="larger" primary text="Hello!" {...args} />
+export const PrimaryLarger: Story = () => (
+  <Button size="larger" primary title="Hello!" onClick={action("onClick")} />
 );
 
-export const PrimaryLargest: Story = (args) => (
-  <Button size="largest" primary text="Hello!" {...args} />
+export const PrimaryLargest: Story = () => (
+  <Button size="largest" primary title="Hello!" onClick={action("onClick")} />
 );
 
-export const WithSubtext: Story = (args) => (
-  <Button primary text="Buy Now" subtext="Terms Apply" {...args} />
+export const WithSubtext: Story = () => (
+  <Button
+    primary
+    title="Buy Now"
+    subtitle="Terms Apply"
+    onClick={action("onClick")}
+  />
 );
 
-export const WithSubtextSmaller: Story = (args) => (
+export const WithSubtextSmaller: Story = () => (
   <Button
     primary
     size="smaller"
-    text="Buy Now"
-    subtext="Terms Apply"
-    {...args}
+    title="Buy Now"
+    subtitle="Terms Apply"
+    onClick={action("onClick")}
   />
 );
 
-export const WithSubtextLarger: Story = (args) => (
+export const WithSubtextLarger: Story = () => (
   <Button
     primary
     size="larger"
-    text="Buy Now"
-    subtext="Terms Apply"
-    {...args}
+    title="Buy Now"
+    subtitle="Terms Apply"
+    onClick={action("onClick")}
   />
 );
 
-export const IconOnly: Story = (args) => <Button icon={<Close />} {...args} />;
+export const IconOnly: Story = () => (
+  <Button icon={<Close />} onClick={action("onClick")} />
+);
 
-export const IconAndText: Story = (args) => (
-  <Button icon={<Close />} text="Close" {...args} />
+export const IconAndText: Story = () => (
+  <Button
+    icon={<Warning />}
+    title="Error Details"
+    onClick={action("onClick")}
+  />
 );

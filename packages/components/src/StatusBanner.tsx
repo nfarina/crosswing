@@ -19,7 +19,7 @@ export function StatusBanner({
   const actionButton = action ? (
     <ActionButton
       className="action"
-      text={action}
+      title={action}
       onClick={() => onActionClick?.()}
       // We don't use the "working" property because it adds a spinner to
       // the button, making it wider which can cause the message to be

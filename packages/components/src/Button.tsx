@@ -11,25 +11,25 @@ export function Button({
   primary,
   size = "normal",
   icon,
-  text,
-  subtext,
+  title,
+  subtitle,
   children,
   working,
   disabled,
   ...rest
-}: ButtonHTMLAttributes<HTMLButtonElement> & {
+}: {
   primary?: boolean;
   size?: ButtonSize;
   icon?: ReactNode;
-  text?: ReactNode;
-  subtext?: ReactNode;
+  title?: ReactNode;
+  subtitle?: ReactNode;
   disabled?: boolean;
   working?: boolean;
-}) {
-  const hasText = !!children || !!text || !!subtext;
+} & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "title">) {
+  const hasText = !!children || !!title || !!subtitle;
   const hasIcon = !!icon;
 
-  const resolvedText = text ?? children;
+  const resolvedTitle = title ?? children;
 
   return (
     <StyledButton
@@ -44,8 +44,8 @@ export function Button({
       {icon}
       {hasText && (
         <div className="content">
-          {!!resolvedText && <div className="text">{resolvedText}</div>}
-          {!!subtext && !working && <div className="subtext">{subtext}</div>}
+          {!!resolvedTitle && <div className="title">{resolvedTitle}</div>}
+          {!!subtitle && !working && <div className="subtitle">{subtitle}</div>}
         </div>
       )}
       {working && <Spinner smaller />}

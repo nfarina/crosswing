@@ -25,7 +25,7 @@ export function App() {
   return (
     <StyledApp>
       <Button
-        text="Button"
+        title="Button"
         icon={<Favicon />}
         primary
         onClick={popupMenu.onClick}
