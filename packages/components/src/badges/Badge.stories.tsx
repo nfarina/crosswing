@@ -4,7 +4,6 @@ import React from "react";
 import { Badge } from "./Badge.js";
 
 export default {
-  title: "components/Badge",
   component: Badge,
   decorators: [CyberAppDecorator()],
   parameters: { layout: "centered" },

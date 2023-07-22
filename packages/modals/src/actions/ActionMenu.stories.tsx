@@ -1,18 +1,18 @@
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import { action } from "@storybook/addon-actions";
+import { Meta } from "@storybook/react";
 import React from "react";
 import { ActionMenu, ActionSeparator } from "./ActionMenu.js";
 import { ActionContainer } from "./useActions.js";
 
 export default {
-  title: "modals/ActionMenu",
   component: ActionMenu,
   decorators: [
     CyberAppDecorator({ layout: "mobile" }),
     ActionContainerDecorator,
   ],
   parameters: { layout: "centered" },
-};
+} satisfies Meta<typeof ActionMenu>;
 
 function ActionContainerDecorator(Story: () => any) {
   return (

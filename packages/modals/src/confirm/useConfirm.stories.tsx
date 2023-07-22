@@ -6,7 +6,7 @@ import { ButtonContainer, ModalDecorator } from "../storybook/index.js";
 import { useConfirm } from "./useConfirm.js";
 
 export default {
-  title: "modals/useConfirm",
+  title: "modals/confirm/useConfirm",
   decorators: [CyberAppDecorator({ layout: "fullscreen" }), ModalDecorator],
   parameters: { layout: "fullscreen" },
 };

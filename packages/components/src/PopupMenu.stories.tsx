@@ -3,7 +3,7 @@ import { ModalDecorator } from "@cyber/modals/storybook";
 import { RouterDecorator } from "@cyber/router/storybook";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import { action } from "@storybook/addon-actions";
-import { StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { styled } from "styled-components";
 import { Button } from "./Button.js";
@@ -17,10 +17,10 @@ import {
 import { SelectOption } from "./forms/Select.js";
 
 export default {
-  title: "components/PopupMenu",
+  component: PopupMenu,
   decorators: [CyberAppDecorator(), RouterDecorator, ModalDecorator],
   parameters: { layout: "centered" },
-};
+} satisfies Meta<typeof PopupMenu>;
 
 export const Mixed = () => (
   <PopupMenu>

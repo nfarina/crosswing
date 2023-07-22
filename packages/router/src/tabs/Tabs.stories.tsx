@@ -8,7 +8,6 @@ import { MemoryHistory } from "../history/MemoryHistory.js";
 import { Tab, Tabs } from "./Tabs.js";
 
 export default {
-  title: "router/Tabs",
   component: Tabs,
   decorators: [CyberAppDecorator({ layout: "mobile" })],
   parameters: { layout: "centered" },

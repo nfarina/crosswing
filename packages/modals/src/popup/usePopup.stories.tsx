@@ -10,7 +10,7 @@ import { PopupView } from "./PopupView.js";
 import { usePopup } from "./usePopup.js";
 
 export default {
-  title: "modals/usePopup",
+  title: "modals/popup/usePopup",
   decorators: [CyberAppDecorator({ layout: "fullscreen" }), ModalDecorator],
   parameters: { layout: "fullscreen" },
 };

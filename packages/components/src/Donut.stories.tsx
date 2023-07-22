@@ -1,13 +1,14 @@
 import { colors } from "@cyber/theme/colors";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { Meta } from "@storybook/react";
 import React from "react";
 import { Donut } from "./Donut.js";
 
 export default {
-  title: "components/Donut",
+  component: Donut,
   decorators: [CyberAppDecorator()],
   parameters: { layout: "centered" },
-};
+} satisfies Meta<typeof Donut>;
 
 export const OneSection = () => (
   <Donut size="50px" sections={[{ amount: 1, color: colors.purple }]} />

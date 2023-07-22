@@ -8,7 +8,6 @@ import { NavLayout } from "./NavLayout.js";
 import { StyledNavTitleView } from "./NavTitleView.js";
 
 export default {
-  title: "router/NavLayout",
   component: NavLayout,
   decorators: [RouterDecorator, CyberAppDecorator({ layout: "mobile" })],
   parameters: { layout: "centered" },

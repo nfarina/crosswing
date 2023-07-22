@@ -5,7 +5,6 @@ import React from "react";
 import { StatusBanner } from "./StatusBanner.js";
 
 export default {
-  title: "components/StatusBanner",
   component: StatusBanner,
   decorators: [Decorator, CyberAppDecorator()],
   parameters: { layout: "centered" },

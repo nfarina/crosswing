@@ -1,12 +1,12 @@
+import { Meta } from "@storybook/react";
 import React, { useState } from "react";
 import { styled } from "styled-components";
 import { AspectLayout, StyledAspectLayout } from "./AspectLayout.js";
 
 export default {
-  title: "components/AspectLayout",
   component: AspectLayout,
   parameters: { layout: "centered" },
-};
+} satisfies Meta<typeof AspectLayout>;
 
 export const Default = () => {
   const [large, setLarge] = useState(false);

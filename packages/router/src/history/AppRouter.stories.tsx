@@ -2,6 +2,7 @@ import { colors } from "@cyber/theme/colors";
 import { fonts } from "@cyber/theme/fonts";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import { action } from "@storybook/addon-actions";
+import { Meta } from "@storybook/react";
 import React, { useContext } from "react";
 import { styled } from "styled-components";
 import { RouterContext } from "../context/RouterContext.js";
@@ -11,12 +12,13 @@ import { NavRoute, Navs } from "../navs/Navs.js";
 import { BrowserSimulator } from "../storybook/BrowserSimulator.js";
 import { Route, Switch } from "../switch/Switch.js";
 import { Tab, Tabs } from "../tabs/Tabs.js";
+import { AppRouter } from "./AppRouter.js";
 
 export default {
-  title: "router/AppRouter",
+  component: AppRouter,
   decorators: [CyberAppDecorator({ layout: "mobile" })],
   parameters: { layout: "centered" },
-};
+} satisfies Meta<typeof AppRouter>;
 
 export const StaticSwitch = () => (
   <StyledBrowserSimulator>

@@ -3,7 +3,6 @@ import { styled } from "styled-components";
 import { useElementSize } from "./useElementSize.js";
 
 export default {
-  title: "hooks/useElementSize",
   component: useElementSize,
   parameters: { layout: "centered" },
 };

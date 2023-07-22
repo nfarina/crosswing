@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { Checkbox } from "./Checkbox.js";
 
 export default {
-  title: "components/Checkbox",
   component: Checkbox,
   decorators: [CyberAppDecorator()],
   parameters: { layout: "centered" },
@@ -12,7 +11,7 @@ export default {
     checked: { control: "boolean" },
     onClick: { action: "onClick" },
   },
-} as Meta<typeof Checkbox>;
+} satisfies Meta<typeof Checkbox>;
 
 type Story = StoryFn<typeof Checkbox>;
 

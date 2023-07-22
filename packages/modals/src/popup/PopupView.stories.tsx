@@ -7,7 +7,6 @@ import { styled } from "styled-components";
 import { PopupView } from "./PopupView.js";
 
 export default {
-  title: "modals/PopupView",
   component: PopupView,
   decorators: [CyberAppDecorator()],
   parameters: { layout: "centered" },

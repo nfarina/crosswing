@@ -1,13 +1,14 @@
 import { RouterDecorator } from "@cyber/router/storybook";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { Meta } from "@storybook/react";
 import React from "react";
 import { LinkButton } from "./LinkButton.js";
 
 export default {
-  title: "components/LinkButton",
+  component: LinkButton,
   decorators: [CyberAppDecorator(), RouterDecorator],
   parameters: { layout: "centered" },
-};
+} satisfies Meta<typeof LinkButton>;
 
 export const WithText = () => <LinkButton children="Hello!" to="/somewhere" />;
 

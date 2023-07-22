@@ -1,16 +1,17 @@
 import { RouterDecorator } from "@cyber/router/storybook";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import { action } from "@storybook/addon-actions";
+import { Meta } from "@storybook/react";
 import React from "react";
 import { Button } from "./Button.js";
 import { ButtonGroup } from "./ButtonGroup.js";
 import { LinkButton } from "./LinkButton.js";
 
 export default {
-  title: "components/ButtonGroup",
+  component: ButtonGroup,
   decorators: [CyberAppDecorator(), RouterDecorator],
   parameters: { layout: "centered" },
-};
+} satisfies Meta<typeof ButtonGroup>;
 
 export const WithSingleButton = () => (
   <ButtonGroup>

@@ -1,13 +1,14 @@
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import { action } from "@storybook/addon-actions";
+import { Meta } from "@storybook/react";
 import React from "react";
 import { BannerView } from "../banner/BannerView.js";
 
 export default {
-  title: "modals/BannerView",
+  component: BannerView,
   decorators: [CyberAppDecorator({ layout: "centered" })],
   parameters: { layout: "centered" },
-};
+} satisfies Meta<typeof BannerView>;
 
 export const TitleAndText = () => (
   <BannerView

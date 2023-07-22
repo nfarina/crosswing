@@ -1,19 +1,20 @@
 import { colors } from "@cyber/theme/colors";
 import { fonts } from "@cyber/theme/fonts";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { Meta } from "@storybook/react";
 import React, { useState } from "react";
 import { styled } from "styled-components";
 import { Button } from "../Button.js";
 import { StyledTextArea, TextArea } from "./TextArea.js";
 
 export default {
-  title: "components/TextArea",
+  component: TextArea,
   decorators: [
     CyberAppDecorator(),
     (Story: () => any) => <Container children={<Story />} />,
   ],
   parameters: { layout: "centered" },
-};
+} satisfies Meta<typeof TextArea>;
 
 export const AutoTrimDemo = () => {
   const [value, setValue] = useState("");

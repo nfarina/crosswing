@@ -11,7 +11,6 @@ import {
 } from "./DateRange.js";
 
 export default {
-  title: "components/CalendarView",
   component: CalendarView,
   decorators: [CyberAppDecorator({ layout: "mobile" })],
   parameters: { layout: "centered" },

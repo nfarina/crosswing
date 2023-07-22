@@ -1,12 +1,13 @@
 import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { Meta } from "@storybook/react";
 import React from "react";
 import { LoadingCurtain } from "./LoadingCurtain.js";
 
 export default {
-  title: "components/LoadingCurtain",
+  component: LoadingCurtain,
   decorators: [CyberAppDecorator({ layout: "mobile" })],
   parameters: { layout: "centered" },
-};
+} satisfies Meta<typeof LoadingCurtain>;
 
 export const Hidden = () => <LoadingCurtain hidden />;
 

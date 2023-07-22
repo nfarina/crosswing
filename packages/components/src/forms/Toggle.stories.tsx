@@ -2,14 +2,15 @@ import { useAsyncTask } from "@cyber/hooks/useAsyncTask";
 import { wait } from "@cyber/shared/wait";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import { action } from "@storybook/addon-actions";
+import { Meta } from "@storybook/react";
 import React, { useState } from "react";
 import { Toggle } from "./Toggle.js";
 
 export default {
-  title: "components/Toggle",
+  component: Toggle,
   decorators: [CyberAppDecorator()],
   parameters: { layout: "centered" },
-};
+} satisfies Meta<typeof Toggle>;
 
 export const On = () => <Toggle on onClick={action("click")} />;
 

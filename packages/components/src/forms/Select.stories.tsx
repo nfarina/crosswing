@@ -1,12 +1,13 @@
 import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { Meta } from "@storybook/react";
 import React from "react";
 import { Select, SelectOption } from "./Select.js";
 
 export default {
-  title: "components/Select",
+  component: Select,
   decorators: [CyberAppDecorator()],
   parameters: { layout: "centered" },
-};
+} satisfies Meta<typeof Select>;
 
 export const WithOptions = () => (
   <Select>

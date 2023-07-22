@@ -8,7 +8,7 @@ import { ButtonContainer, ModalDecorator } from "../storybook/index.js";
 import { useDialog } from "./useDialog.js";
 
 export default {
-  title: "modals/useDialog",
+  title: "modals/dialog/useDialog",
   decorators: [CyberAppDecorator({ layout: "fullscreen" }), ModalDecorator],
   parameters: { layout: "fullscreen" },
 };

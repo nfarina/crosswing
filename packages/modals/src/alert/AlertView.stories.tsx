@@ -4,19 +4,20 @@ import { colors } from "@cyber/theme/colors";
 import { fonts } from "@cyber/theme/fonts";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import { action } from "@storybook/addon-actions";
+import { Meta } from "@storybook/react";
 import React from "react";
 import { styled } from "styled-components";
 import { DialogContainer } from "../dialog/useDialog.js";
 import { AlertView } from "./AlertView.js";
 
 export default {
-  title: "modals/AlertView",
+  component: AlertView,
   decorators: [
     CyberAppDecorator({ layout: "fullscreen" }),
     DialogContainerDecorator,
   ],
   parameters: { layout: "fullscreen" },
-};
+} satisfies Meta<typeof AlertView>;
 
 function DialogContainerDecorator(Story: () => any) {
   return (

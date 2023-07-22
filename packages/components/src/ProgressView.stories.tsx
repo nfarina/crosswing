@@ -1,13 +1,14 @@
 import { usePropSequence } from "@cyber/hooks/usePropSequence";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { Meta } from "@storybook/react";
 import React from "react";
 import { ProgressView } from "./ProgressView.js";
 
 export default {
-  title: "components/ProgressView",
+  component: ProgressView,
   decorators: [CyberAppDecorator()],
   parameters: { layout: "centered" },
-};
+} satisfies Meta<typeof ProgressView>;
 
 export const Indeterminate = () => <ProgressView size="50px" />;
 

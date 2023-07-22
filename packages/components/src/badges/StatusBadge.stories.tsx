@@ -5,7 +5,6 @@ import React from "react";
 import { StatusBadge } from "./StatusBadge.js";
 
 export default {
-  title: "components/StatusBadge",
   component: StatusBadge,
   decorators: [CyberAppDecorator()],
   parameters: { layout: "centered" },

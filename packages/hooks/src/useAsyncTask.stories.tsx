@@ -2,7 +2,6 @@ import React, { CSSProperties, ReactNode, useState } from "react";
 import { useAsyncTask } from "./useAsyncTask.js";
 
 export default {
-  title: "hooks/useAsyncTask",
   component: useAsyncTask,
   parameters: { layout: "centered" },
 };

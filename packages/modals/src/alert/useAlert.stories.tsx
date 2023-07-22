@@ -6,7 +6,7 @@ import { Button } from "../storybook/Button.js";
 import { ButtonContainer, ModalDecorator } from "../storybook/index.js";
 
 export default {
-  title: "modals/useAlert",
+  title: "modals/alert/useAlert",
   decorators: [CyberAppDecorator({ layout: "fullscreen" }), ModalDecorator],
   parameters: { layout: "fullscreen" },
 };

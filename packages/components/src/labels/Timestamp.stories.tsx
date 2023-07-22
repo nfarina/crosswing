@@ -1,6 +1,7 @@
 import { colors } from "@cyber/theme/colors";
 import { fonts } from "@cyber/theme/fonts";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { Meta } from "@storybook/react";
 import dayjs from "dayjs";
 import React from "react";
 import { styled } from "styled-components";
@@ -9,10 +10,10 @@ import { Timestamp, setTimestampUpdateInterval } from "./Timestamp.js";
 setTimestampUpdateInterval(500);
 
 export default {
-  title: "components/Timestamp",
+  component: Timestamp,
   decorators: [ContainerDecorator, CyberAppDecorator()],
   parameters: { layout: "centered" },
-};
+} satisfies Meta<typeof Timestamp>;
 
 export const Default = () => <Timestamp date={1554744840915} />;
 
