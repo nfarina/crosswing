@@ -2,8 +2,8 @@ import { ButtonContainer, ModalDecorator } from "@cyber/modals/storybook";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import React from "react";
-import { Button } from "./Button.js";
-import { urlTransformer } from "./transformers/urlTransformer.js";
+import { Button } from "../Button.js";
+import { urlTransformer } from "./urlTransformer.js";
 import { usePrompt } from "./usePrompt.js";
 
 export default {

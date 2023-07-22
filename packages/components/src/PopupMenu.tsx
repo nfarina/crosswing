@@ -9,8 +9,8 @@ import React, {
   useContext,
 } from "react";
 import { styled } from "styled-components";
-import { Select } from "./Select.js";
-import { StyledToggle, Toggle } from "./Toggle.js";
+import { Select } from "./forms/Select.js";
+import { StyledToggle, Toggle } from "./forms/Toggle.js";
 
 // Used to drill the onClose prop down to the PopupMenu children without
 // having to clone elements and deal with "keys".

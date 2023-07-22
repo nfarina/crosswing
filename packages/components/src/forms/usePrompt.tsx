@@ -6,7 +6,7 @@ import { fonts } from "@cyber/theme/fonts";
 import React, { FormEvent, ReactNode, useState } from "react";
 import { styled } from "styled-components";
 import { StyledTextInput, TextInput } from "./TextInput.js";
-import { InputTransformer, useInputValue } from "./values/useInputValue.js";
+import { InputTransformer, useInputValue } from "./useInputValue.js";
 
 // Automagically adjusts the type given to onSubmit() to be nullable, based on
 // whether you've provided nullable = true.

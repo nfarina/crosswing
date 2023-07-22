@@ -1,7 +1,7 @@
 import { useResettableState } from "@cyber/hooks/useResettableState";
 import { DependencyList, useState } from "react";
-import { TextArea } from "../TextArea.js";
-import { TextInput } from "../TextInput.js";
+import { TextArea } from "./TextArea.js";
+import { TextInput } from "./TextInput.js";
 
 export interface InputValue<T> {
   /** Current raw value; null if empty or invalid. */

@@ -1,7 +1,7 @@
 import { fonts } from "@cyber/theme/fonts";
 import React, { ReactNode } from "react";
 import { styled } from "styled-components";
-import { Button } from "./Button.js";
+import { Button } from "../Button.js";
 import { StatusBadge } from "./StatusBadge.js";
 
 export function StatusBanner({

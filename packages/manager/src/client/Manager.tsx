@@ -3,7 +3,7 @@ import { Scrollable, StyledScrollable } from "@cyber/components/Scrollable";
 import {
   StatusBanner,
   StyledStatusBanner,
-} from "@cyber/components/StatusBanner";
+} from "@cyber/components/badges/StatusBanner";
 import { useAsyncTask } from "@cyber/hooks/useAsyncTask";
 import { useInterval } from "@cyber/hooks/useInterval";
 import { ModalRootProvider } from "@cyber/modals/context";

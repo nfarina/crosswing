@@ -5,60 +5,50 @@ import { fonts } from "@cyber/theme/fonts";
 import React, {
   ChangeEvent,
   FocusEvent,
-  TextareaHTMLAttributes,
+  InputHTMLAttributes,
   useLayoutEffect,
   useRef,
   useState,
 } from "react";
 import { styled } from "styled-components";
-import { StatusBadge, StyledStatusBadge } from "./StatusBadge.js";
+import { StatusBadge, StyledStatusBadge } from "../badges/StatusBadge.js";
 
 /** How to render errors when given via the `TextInput.error` property. */
-export type TextAreaErrorStyle = "color" | "message";
+export type TextInputErrorStyle = "color" | "message";
 
 /**
- * Automatically trims text entered by the user, and adjusts height to fit
- * the content.
+ * A text input that supports automatically trimming user-entered input.
  *
  * Note that the "onChange" event is not exposed since it will bypass our
  * automatic trimming.
  */
-export function TextArea({
+export function TextInput({
   value = "",
   autoFocusOnDesktop,
   autoSelect,
   onValueChange,
   error,
   errorStyle = "message",
-  autoSizing,
+  /** If true, uses a more number-friendly font. */
+  numeric,
   autoTrim = true,
   style,
   className,
   onFocus,
   onBlur,
-  minHeight = 22, // default line height
-  maxHeight = Number.POSITIVE_INFINITY,
   ...rest
-}: Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "onChange"> & {
+}: Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> & {
   value?: string;
   autoFocusOnDesktop?: boolean;
   /** When the input is auto-focused initially, any existing value will be selected. */
   autoSelect?: boolean;
+  numeric?: boolean;
   /** Automatically trims text entered by the user. */
   autoTrim?: boolean;
   onValueChange?: (newValue: string) => void;
   error?: Error | null;
-  errorStyle?: TextAreaErrorStyle;
-  autoSizing?: boolean;
-  minHeight?: number;
-  maxHeight?: number;
+  errorStyle?: TextInputErrorStyle;
 }) {
-  const ref = useRef<HTMLTextAreaElement>(null);
-
-  //
-  // Auto-trimming copied from TextInput
-  //
-
   const { container } = useHost();
 
   // Track whether you've ever focused the input so we don't open up a new
@@ -66,7 +56,9 @@ export function TextArea({
   const [hasEverFocused, setHasEverFocused] = useState(false);
   const [focused, setFocused] = useState(false);
 
-  const [innerValue, setInnerValue] = useState(value);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const [innerValue, setInnerValue] = useState<string>(value);
 
   // If the value unexpectedly changes, reset our internal state.
   if (autoTrim && innerValue.trim() !== value.trim()) {
@@ -85,51 +77,27 @@ export function TextArea({
     rest.autoFocus ?? (autoFocusOnDesktop && container === "web");
 
   useLayoutEffect(() => {
-    if (autoFocus && autoSelect && ref.current) {
-      ref.current.focus();
-      ref.current.select();
+    if (autoFocus && autoSelect && inputRef.current) {
+      inputRef.current.focus();
+      inputRef.current.select();
     }
   }, []);
 
-  useScrollAboveKeyboard(ref);
+  useScrollAboveKeyboard(inputRef);
 
-  function onInputChange(e: ChangeEvent<HTMLTextAreaElement>) {
+  function onInputChange(e: ChangeEvent<HTMLInputElement>) {
     const newValue = e.currentTarget.value;
     setInnerValue(newValue);
-    onValueChange?.(newValue.trim());
+    onValueChange?.(autoTrim ? newValue.trim() : newValue);
   }
 
-  //
-  // Auto-sizing
-  //
-
-  useLayoutEffect(() => {
-    if (!autoSizing) return;
-
-    const element = ref.current!;
-
-    // When mounted in Storybook, our rects will be 0,0,0,0, so we need to wait a tic.
-    requestAnimationFrame(() => {
-      element.style.height = minHeight + "px";
-      const newHeight = Math.max(
-        Math.min(element.scrollHeight, maxHeight),
-        minHeight,
-      );
-      element.style.height = `${newHeight}px`;
-    });
-  });
-
-  //
-  // Focus & Error Management
-  //
-
-  function onInputFocus(e: FocusEvent<HTMLTextAreaElement>) {
+  function onInputFocus(e: FocusEvent<HTMLInputElement>) {
     setFocused(true);
     setHasEverFocused(true);
     onFocus?.(e);
   }
 
-  function onInputBlur(e: FocusEvent<HTMLTextAreaElement>) {
+  function onInputBlur(e: FocusEvent<HTMLInputElement>) {
     setFocused(false);
     onBlur?.(e);
   }
@@ -148,7 +116,7 @@ export function TextArea({
   }
 
   return (
-    <StyledTextArea
+    <StyledTextInput
       style={style}
       className={className}
       data-error={showError}
@@ -156,14 +124,15 @@ export function TextArea({
       data-value-empty={!innerValue}
       {...dataAttrs}
     >
-      <textarea
+      <input
+        ref={inputRef}
         value={innerValue}
         onChange={onInputChange}
+        data-numeric={!!numeric}
+        {...(numeric ? { inputMode: "decimal" } : null)}
+        autoFocus={autoFocus}
         onFocus={onInputFocus}
         onBlur={onInputBlur}
-        autoFocus={autoFocus}
-        data-auto-sizing={!!autoSizing}
-        ref={ref}
         {...restAttrs}
       />
       {showError && (
@@ -174,45 +143,42 @@ export function TextArea({
           children={error.message}
         />
       )}
-    </StyledTextArea>
+    </StyledTextInput>
   );
 }
 
-export const StyledTextArea = styled.div`
+export const StyledTextInput = styled.div`
   display: flex;
   flex-flow: row;
   box-sizing: border-box;
 
-  > textarea {
+  > input {
     /* Remove intrinsic size and allow it to fit whatever container you put it in. */
     width: 0;
     flex-grow: 1;
 
     appearance: none;
-    outline: none;
     display: block;
     box-sizing: border-box;
-    font: ${fonts.display({ size: 16, line: "22px" })};
+    font: ${fonts.display({ size: 16 })};
     color: ${colors.text()};
     border: none;
     border-radius: 0;
-    padding: 0;
     background: transparent;
 
-    &[data-auto-sizing="true"] {
-      /* Hide the little resize grip since we are auto-sizing. */
-      resize: none;
+    &[data-numeric="true"] {
+      font: ${fonts.numeric({ size: 16 })};
+      letter-spacing: 0.5px;
+    }
+
+    &:focus {
+      /* Better outline styles on focus for desktop TBD. */
+      outline: none;
     }
 
     &::-webkit-input-placeholder {
       color: ${colors.darkGray()};
       font: inherit;
-    }
-
-    /* Target Safari browsers only, which drop the bottom padding from the placeholder: http://browserbu.gs/css-hacks/webkit-full-page-media/ */
-    _::-webkit-full-page-media,
-    &::-webkit-input-placeholder {
-      padding-bottom: inherit;
     }
 
     &:disabled {
@@ -230,12 +196,12 @@ export const StyledTextArea = styled.div`
     display: none;
     margin: 7px 7px 7px 0;
     align-self: center;
-    max-width: 30%;
+    max-width: 50%;
   }
 
   &[data-error="true"][data-error-style="color"],
   &[data-error="true"][data-error-style="message"] {
-    > textarea {
+    > input {
       color: ${colors.red()};
     }
   }

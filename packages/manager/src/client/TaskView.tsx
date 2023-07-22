@@ -1,6 +1,6 @@
-import { Badge } from "@cyber/components/Badge";
 import { StyledButton } from "@cyber/components/Button";
-import { StyledToggle, Toggle } from "@cyber/components/Toggle";
+import { Badge } from "@cyber/components/badges/Badge";
+import { StyledToggle, Toggle } from "@cyber/components/forms/Toggle";
 import { useAsyncTask } from "@cyber/hooks/useAsyncTask";
 import { useHotkey } from "@cyber/hooks/useHotkey";
 import { usePersistedState } from "@cyber/hooks/usePersistedState";

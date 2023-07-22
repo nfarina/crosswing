@@ -14,7 +14,7 @@ import {
   PopupMenuText,
   PopupMenuToggle,
 } from "./PopupMenu.js";
-import { SelectOption } from "./Select.js";
+import { SelectOption } from "./forms/Select.js";
 
 export default {
   title: "components/PopupMenu",

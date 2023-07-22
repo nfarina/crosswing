@@ -1,6 +1,6 @@
 import { useResettableState } from "@cyber/hooks/useResettableState";
 import { DependencyList } from "react";
-import { Toggle } from "../Toggle.js";
+import { Toggle } from "./Toggle.js";
 
 export interface ToggleValue {
   /** Current value. */

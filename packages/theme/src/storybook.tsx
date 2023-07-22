@@ -1,7 +1,7 @@
 import React from "react";
 import { createGlobalStyle, styled } from "styled-components";
 import { CyberColorStyle, colors } from "./colors/index.js";
-import { CyberFontStyle } from "./fonts.js";
+import { CyberFontStyle, fonts } from "./fonts.js";
 
 /**
  * Decorator that injects Cyber global styles into the storybook environment.
@@ -39,7 +39,13 @@ const CyberStorybookStyle = createGlobalStyle`
   }
 `;
 
-const CenteredLayoutGlobalStyle = createGlobalStyle``;
+const CenteredLayoutGlobalStyle = createGlobalStyle`
+  html > body {
+    /* Make raw text readable. */
+    color: ${colors.text()};
+    font: ${fonts.display({ size: 14 })};
+  }
+`;
 
 const MobileLayoutGlobalStyle = createGlobalStyle`
   html {

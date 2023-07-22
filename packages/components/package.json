@@ -4,7 +4,6 @@
   "sideEffects": false,
   "version": "0.0.0",
   "exports": {
-    "./transformers/*": "./src/transformers/*.js",
     "./forms/*": "./src/forms/*.js",
     "./*": "./src/*.js"
   },

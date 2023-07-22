@@ -3,11 +3,11 @@ import { fonts } from "@cyber/theme/fonts";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import React, { useState } from "react";
 import { styled } from "styled-components";
-import { Button } from "./Button.js";
-import { StyledTextArea, TextArea } from "./TextArea.js";
+import { Button } from "../Button.js";
+import { StyledTextInput, TextInput } from "./TextInput.js";
 
 export default {
-  title: "components/TextArea",
+  title: "components/TextInput",
   decorators: [
     CyberAppDecorator(),
     (Story: () => any) => <Container children={<Story />} />,
@@ -20,17 +20,16 @@ export const AutoTrimDemo = () => {
 
   return (
     <>
-      <TextArea
+      <TextInput
         placeholder="Display Name"
         value={value}
         onValueChange={setValue}
-        autoSizing
       />
       <Button
         children="Reset Value to 'Blue '"
         onClick={() => setValue("Blue ")}
       />
-      <pre>TextArea Value: "{value}"</pre>
+      <pre>TextInput Value: "{value}"</pre>
     </>
   );
 };
@@ -39,11 +38,10 @@ export const WithPlaceholder = () => {
   const [name, setName] = useState("");
 
   return (
-    <TextArea
+    <TextInput
       placeholder={'Ex: "Kitchen Remodel"'}
       value={name}
       onValueChange={setName}
-      autoSizing
     />
   );
 };
@@ -51,28 +49,61 @@ export const WithPlaceholder = () => {
 export const WithValue = () => {
   const [name, setName] = useState("John Smith");
 
-  return <TextArea value={name} onValueChange={setName} autoSizing />;
+  return <TextInput value={name} onValueChange={setName} />;
 };
 
-export const Disabled = () => (
-  <TextArea value="John Smith" disabled autoSizing />
-);
+export const WithErrorColorOnly = () => {
+  const [text, setText] = useState("Forty");
 
-export const FixedSize = () => {
-  const [name, setName] = useState("John Smith");
-
-  return <TextArea value={name} onValueChange={setName} />;
+  return (
+    <TextInput
+      value={text}
+      onValueChange={setText}
+      error={new Error("Invalid Number")}
+      errorStyle="color"
+    />
+  );
 };
+
+export const WithError = () => {
+  const [text, setText] = useState("Forty");
+
+  return (
+    <TextInput
+      value={text}
+      onValueChange={setText}
+      error={new Error("Invalid Number")}
+    />
+  );
+};
+
+export const WithLongError = () => {
+  const [name, setName] = useState("Bob");
+
+  return (
+    <TextInput
+      value={name}
+      onValueChange={setName}
+      error={new Error("Name must be at least 10 characters long.")}
+    />
+  );
+};
+
+export const Disabled = () => <TextInput value="John Smith" disabled />;
 
 const Container = styled.div`
   width: 350px;
   display: flex;
   flex-flow: column;
 
-  > ${StyledTextArea} {
+  > ${StyledTextInput} {
+    /* Make it stand out in Storybook against the background. */
     border: 1px solid ${colors.separator()};
     border-radius: 6px;
-    padding: 10px;
+
+    > input {
+      padding: 10px;
+    }
   }
 
   > pre {
