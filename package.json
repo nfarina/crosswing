@@ -10,11 +10,12 @@
   "author": "nfarina@gmail.com",
   "scripts": {
     "dev": "vite-node packages/manager/src/server",
-    "test": "pnpm run prettier && pnpm run typecheck",
+    "test": "pnpm run prettier && pnpm run circular && pnpm run typecheck && pnpm run vitest",
     "vitest": "vitest --run",
     "test-ui": "vitest --ui --coverage --open=false --api.port 2703",
     "prettier": "prettier --check 'packages/*/src/**/*.ts?(x)'",
     "prettier:fix": "yarn prettier --write",
+    "circular": "madge --extensions ts,tsx --circular packages",
     "typecheck": "tsc",
     "coverage": "vitest run --coverage",
     "storybook": "storybook dev --ci -p 2702",

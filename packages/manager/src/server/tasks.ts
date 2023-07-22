@@ -1,5 +1,4 @@
 import { Task } from "../shared/types.js";
-import { ProcessRunner } from "./ProcessRunner.js";
 import tasksJson from "./tasks.json";
 
 export interface ServerTask extends Task {
@@ -9,7 +8,6 @@ export interface ServerTask extends Task {
     script: string;
     args?: string;
   };
-  process: ProcessRunner | null;
 }
 
 let tasks: ServerTask[] | null = null;
@@ -19,11 +17,7 @@ export function getTasks(): ServerTask[] {
     tasks = [];
 
     for (const [name, task] of Object.entries(tasksJson)) {
-      tasks.push({
-        ...task,
-        name,
-        process: null,
-      });
+      tasks.push({ ...task, name });
     }
   }
 

@@ -1,12 +1,19 @@
 import { useHost } from "@cyber/host/context";
 import { colors } from "@cyber/theme/colors";
 import { fonts } from "@cyber/theme/fonts";
-import React, { MouseEvent, ReactElement } from "react";
+import React, { MouseEvent, ReactElement, ReactNode } from "react";
 import { styled } from "styled-components";
 import { useMobileRouter } from "../context/RouterContext.js";
 import { Link } from "../link/Link.js";
-import { TabProps } from "./Tabs.js";
 import { UnreadBadge } from "./UnreadBadge.js";
+
+export interface TabProps {
+  path: string;
+  title: ReactNode;
+  icon?: ReactNode;
+  badge?: number | null | "any";
+  render: () => ReactNode;
+}
 
 export function TabLink({
   to,

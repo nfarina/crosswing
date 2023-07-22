@@ -14,6 +14,21 @@ const PROJECT_DIR = path.resolve(__dirname, "../../");
 const PACKAGES_DIR = path.dirname(PROJECT_DIR);
 const WORKSPACE_DIR = path.dirname(PACKAGES_DIR);
 
+// Running processes.
+const runners: Record<string, ProcessRunner> = {};
+
+export function getRunner(task: ServerTask): ProcessRunner | null {
+  return runners[task.name] ?? null;
+}
+
+export function setRunner(task: ServerTask, runner: ProcessRunner) {
+  runners[task.name] = runner;
+}
+
+export function deleteRunner(task: ServerTask) {
+  delete runners[task.name];
+}
+
 export class ProcessRunner {
   private name: string;
   private child: ChildProcess;

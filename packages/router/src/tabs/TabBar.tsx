@@ -10,8 +10,7 @@ import React, {
 } from "react";
 import { styled } from "styled-components";
 import { useMobileRouter } from "../context/RouterContext.js";
-import { StyledTabLink, TabLink } from "./TabLink.js";
-import { TabProps } from "./Tabs.js";
+import { StyledTabLink, TabLink, TabProps } from "./TabLink.js";
 
 export function TabBar({
   tabs,

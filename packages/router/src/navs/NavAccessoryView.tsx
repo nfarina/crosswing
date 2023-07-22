@@ -1,10 +1,20 @@
 import { AndroidBackButtonClassName } from "@cyber/host/context";
 import { colors } from "@cyber/theme/colors";
 import { fonts } from "@cyber/theme/fonts";
-import React from "react";
+import React, { MouseEvent, ReactNode } from "react";
 import { styled } from "styled-components";
 import { Link } from "../link/Link.js";
-import { NavAccessory } from "./NavLayout.js";
+
+export interface NavAccessory {
+  icon?: ReactNode;
+  title?: ReactNode;
+  disabled?: boolean;
+  destructive?: boolean;
+  /** True if this accessory should be triggered by the hardware "Back" button on Android devices. */
+  back?: boolean;
+  to?: string;
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => any;
+}
 
 export interface NavAccessoryViewProps {
   accessory: NavAccessory;

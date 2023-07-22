@@ -3,10 +3,10 @@ import { safeArea } from "@cyber/host/plugins/SafeArea";
 import { useHostStatusBar } from "@cyber/host/plugins/useHostStatusBar";
 import { colors } from "@cyber/theme/colors";
 import Back from "@cyber/theme/icons/Back.svg";
-import React, { HTMLAttributes, MouseEvent, ReactNode } from "react";
+import React, { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
 import { useMobileRouter } from "../context/RouterContext.js";
-import { NavAccessoryView } from "./NavAccessoryView.js";
+import { NavAccessory, NavAccessoryView } from "./NavAccessoryView.js";
 import { NavTitleView } from "./NavTitleView.js";
 import { StatusBarStyleAttribute } from "./useAutoStatusBar.js";
 
@@ -31,17 +31,6 @@ export interface NavProps {
   hidden?: boolean;
   /** Marks this NavLayout as not having a way to go "back". Essential for good behavior on Android.  */
   isApplicationRoot?: boolean;
-}
-
-export interface NavAccessory {
-  icon?: ReactNode;
-  title?: ReactNode;
-  disabled?: boolean;
-  destructive?: boolean;
-  /** True if this accessory should be triggered by the hardware "Back" button on Android devices. */
-  back?: boolean;
-  to?: string;
-  onClick?: (e: MouseEvent<HTMLButtonElement>) => any;
 }
 
 export function NavLayout({

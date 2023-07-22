@@ -16,16 +16,9 @@ import { RouterContext, useMobileRouter } from "../context/RouterContext.js";
 import { RouterLocation } from "../history/RouterLocation.js";
 import { Redirect } from "../redirect/Redirect.js";
 import { StyledTabBar, TabBar, TabBarContext } from "./TabBar.js";
+import { TabProps } from "./TabLink.js";
 
 const debug = Debug("router:Tabs");
-
-export interface TabProps {
-  path: string;
-  title: ReactNode;
-  icon?: ReactNode;
-  badge?: number | null | "any";
-  render: () => ReactNode;
-}
 
 export function Tabs({ children }: { children: ReactNode }) {
   // Coerce children to array, flattening fragments and falsy conditionals.

@@ -7,7 +7,12 @@ import serve from "koa-static";
 import path from "path";
 import { fileURLToPath } from "url";
 import { ServerStatus } from "../shared/types.js";
-import { ProcessRunner } from "./ProcessRunner.js";
+import {
+  ProcessRunner,
+  deleteRunner,
+  getRunner,
+  setRunner,
+} from "./ProcessRunner.js";
 import { getOneTask, getTasks } from "./tasks.js";
 
 let dirname = fileURLToPath(import.meta.url);
@@ -27,13 +32,15 @@ router.get("/api/status", async (ctx) => {
   const status: ServerStatus = { tasks: {} };
 
   for (const task of getTasks()) {
+    const runner = getRunner(task);
+
     status.tasks[task.name] = {
       name: task.name,
       title: task.title,
       description: task.description,
       link: task.link,
-      running: !!task.process,
-      process: (await task.process?.getStats()) ?? null,
+      running: !!runner,
+      process: (await runner?.getStats()) ?? null,
     };
   }
 
@@ -59,17 +66,19 @@ async function startTask(name: string) {
     await startTask(subtask);
   }
 
-  if (!task.process) {
-    task.process = new ProcessRunner({ ...task, name }, () => {
-      task.process = null;
+  if (!getRunner(task)) {
+    const runner = new ProcessRunner({ ...task, name }, () => {
+      deleteRunner(task);
     });
+
+    setRunner(task, runner);
   }
 }
 
 async function stopTask(name: string) {
   const task = await getOneTask(name);
-  task.process?.stop();
-  task.process = null;
+  getRunner(task)?.stop();
+  deleteRunner(task);
 }
 
 app.use(cors());
@@ -92,16 +101,16 @@ Visit http://localhost:2700 to start local development services.
 
 process.once("SIGINT", async function (code: number) {
   const allTasks = getTasks();
-  if (allTasks.some((task) => task.process)) {
+  if (allTasks.some((task) => getRunner(task))) {
     console.log("Ctrl-C received; shutting down child processes…");
 
     for (const task of allTasks) {
-      task.process?.stop();
+      getRunner(task)?.stop();
     }
 
     for (let i = 0; i < 10; i++) {
       await wait(1000);
-      if (!allTasks.some((task) => task.process)) {
+      if (!allTasks.some((task) => getRunner(task))) {
         console.log("All child processes stopped.");
         process.exit();
       }

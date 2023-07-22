@@ -3,9 +3,9 @@ import { PopupMenu, PopupMenuText } from "@cyber/components/PopupMenu";
 import { ModalRootProvider } from "@cyber/modals/context";
 import { usePopup } from "@cyber/modals/popup";
 import { CyberApp } from "@cyber/theme/app";
-import Favicon from "@cyber/theme/icons/Favicon.svg";
 import React from "react";
 import { styled } from "styled-components";
+import Favicon from "../icons/Favicon.svg";
 
 export function AppContainer() {
   return (
