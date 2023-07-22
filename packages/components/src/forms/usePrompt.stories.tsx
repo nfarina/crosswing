@@ -7,7 +7,7 @@ import { urlTransformer } from "./urlTransformer.js";
 import { usePrompt } from "./usePrompt.js";
 
 export default {
-  title: "components/forms/usePrompt",
+  component: usePrompt,
   decorators: [CyberAppDecorator({ layout: "fullscreen" }), ModalDecorator],
   parameters: { layout: "fullscreen" },
 };

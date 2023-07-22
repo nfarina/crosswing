@@ -11,7 +11,7 @@ import { ButtonContainer, ModalDecorator } from "../storybook/index.js";
 import { useSheet } from "./useSheet.js";
 
 export default {
-  title: "modals/sheet/useSheet",
+  component: useSheet,
 };
 
 export const Normal: StoryObj = {

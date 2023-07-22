@@ -7,7 +7,7 @@ import { ButtonContainer, ModalDecorator } from "../storybook/index.js";
 import { useActions } from "./useActions.js";
 
 export default {
-  title: "modals/actions/useActions",
+  component: useActions,
   decorators: [
     CyberAppDecorator({ layout: "fullscreen" }),
     ModalDecorator,

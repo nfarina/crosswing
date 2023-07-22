@@ -6,7 +6,7 @@ import { ButtonContainer, ModalDecorator } from "../storybook/index.js";
 import { useBanner } from "./useBanner.js";
 
 export default {
-  title: "modals/banner/useBanner",
+  component: useBanner,
   decorators: [CyberAppDecorator({ layout: "fullscreen" }), ModalDecorator],
   parameters: { layout: "fullscreen" },
 };

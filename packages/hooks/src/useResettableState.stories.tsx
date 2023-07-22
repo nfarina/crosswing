@@ -2,7 +2,7 @@ import React, { CSSProperties, useState } from "react";
 import { useResettableState } from "./useResettableState.js";
 
 export default {
-  title: "hooks/useResettableState",
+  component: useResettableState,
   parameters: { layout: "centered" },
 };
 

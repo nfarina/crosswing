@@ -6,7 +6,7 @@ import { CyberAppDecorator } from "../storybook.js";
 import { ColorBuilder, colors } from "./index.js";
 
 export default {
-  title: "theme/colors",
+  component: colors as any, // Just for the auto-title.
   parameters: { layout: "centered" },
   decorators: [CyberAppDecorator({ layout: "centered" })],
 } satisfies Meta;

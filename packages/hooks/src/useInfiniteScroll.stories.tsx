@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import { useInfiniteScroll } from "./useInfiniteScroll.js";
 
 export default {
-  title: "hooks/useInfiniteScroll",
+  component: useInfiniteScroll,
   parameters: { layout: "centered" },
 };
 
