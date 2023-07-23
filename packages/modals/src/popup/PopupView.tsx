@@ -82,6 +82,7 @@ export const StyledPopupView = styled.div`
     flex-shrink: 0;
     z-index: 0;
     border-radius: 6px;
+    overflow: hidden;
     background: var(--background);
     box-shadow:
       ${shadows.cardSmall()},

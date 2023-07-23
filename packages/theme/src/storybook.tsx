@@ -9,9 +9,16 @@ import { CyberFontStyle, fonts } from "./fonts.js";
  */
 export function CyberAppDecorator({
   layout = "centered",
+  width = undefined,
+  height = undefined,
 }: {
   layout?: "fullscreen" | "centered" | "mobile";
+  width?: number | "wide";
+  height?: number;
 } = {}) {
+  // "Wide" is just a convenient way to get a phone-sized width for a component.
+  const resolvedWidth = width === "wide" ? 380 : width;
+
   // Actual decorator function.
   function CyberAppInnerDecorator(Story: () => any) {
     return (
@@ -22,6 +29,10 @@ export function CyberAppDecorator({
         {layout === "centered" && <CenteredLayoutGlobalStyle />}
         {layout === "mobile" && <MobileLayoutGlobalStyle />}
         {layout === "fullscreen" && <FullScreenLayoutGlobalStyle />}
+        {resolvedWidth != null && (
+          <DefinedWidthGlobalStyle width={resolvedWidth} />
+        )}
+        {height != null && <DefinedHeightGlobalStyle height={height} />}
         <Story />
       </>
     );
@@ -105,6 +116,32 @@ const FullScreenLayoutGlobalStyle = createGlobalStyle`
       > * {
         flex-grow: 1;
       }
+    }
+  }
+`;
+
+/**
+ * Renders a story within a root container that is sized with a fixed width, so
+ * that children that typically expand to fill their container can be rendered
+ * in a non-squished way.
+ */
+const DefinedWidthGlobalStyle = createGlobalStyle<{ width: number }>`
+  #storybook-root {
+    width: ${(p) => p.width}px;
+  }
+`;
+
+const DefinedHeightGlobalStyle = createGlobalStyle<{ height: number }>`
+  #storybook-root {
+    height: ${(p) => p.height}px;
+
+    /* Make the main component grow to fit our defined height. */
+    display: flex;
+    flex-flow: column;
+
+    /* Rendered story itself. */
+    > * {
+      flex-grow: 1;
     }
   }
 `;

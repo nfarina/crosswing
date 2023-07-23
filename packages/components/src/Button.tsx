@@ -29,8 +29,6 @@ export function Button({
   const hasText = !!children || !!title || !!subtitle;
   const hasIcon = !!icon;
 
-  const resolvedTitle = title ?? children;
-
   return (
     <StyledButton
       data-primary={!!primary}
@@ -44,10 +42,11 @@ export function Button({
       {icon}
       {hasText && (
         <div className="content">
-          {!!resolvedTitle && <div className="title">{resolvedTitle}</div>}
+          {!!title && <div className="title">{title}</div>}
           {!!subtitle && !working && <div className="subtitle">{subtitle}</div>}
         </div>
       )}
+      {children}
       {working && <Spinner smaller />}
     </StyledButton>
   );
