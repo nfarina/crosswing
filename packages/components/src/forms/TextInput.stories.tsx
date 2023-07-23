@@ -10,7 +10,7 @@ import { StyledTextInput, TextInput } from "./TextInput.js";
 export default {
   component: TextInput,
   decorators: [
-    CyberAppDecorator(),
+    CyberAppDecorator({ width: "wide" }),
     (Story: () => any) => <Container children={<Story />} />,
   ],
   parameters: { layout: "centered" },
@@ -93,7 +93,6 @@ export const WithLongError = () => {
 export const Disabled = () => <TextInput value="John Smith" disabled />;
 
 const Container = styled.div`
-  width: 350px;
   display: flex;
   flex-flow: column;
 

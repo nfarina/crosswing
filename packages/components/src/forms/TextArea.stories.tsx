@@ -10,7 +10,7 @@ import { StyledTextArea, TextArea } from "./TextArea.js";
 export default {
   component: TextArea,
   decorators: [
-    CyberAppDecorator(),
+    CyberAppDecorator({ width: "wide" }),
     (Story: () => any) => <Container children={<Story />} />,
   ],
   parameters: { layout: "centered" },
@@ -66,7 +66,6 @@ export const FixedSize = () => {
 };
 
 const Container = styled.div`
-  width: 350px;
   display: flex;
   flex-flow: column;
 

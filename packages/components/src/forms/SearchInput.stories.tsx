@@ -13,7 +13,7 @@ export default {
 
 export const Empty = () => <SearchInput placeholder="Display Name" />;
 
-// Annoying to steal focus in Storybook
+// Disabled - it's annoying to steal focus in Storybook.
 // export const AutoFocus = () => (
 //   <SearchInput placeholder="Display Name" autoFocusOnDesktop />
 // );

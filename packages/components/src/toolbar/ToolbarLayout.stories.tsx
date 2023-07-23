@@ -1,10 +1,13 @@
 import { useAsyncTask } from "@cyber/hooks/useAsyncTask";
 import { RouterDecorator } from "@cyber/router/storybook";
 import { wait } from "@cyber/shared/wait";
+import { colors } from "@cyber/theme/colors";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import { action } from "@storybook/addon-actions";
+import { Meta } from "@storybook/react";
 import React, { useState } from "react";
 import { createPortal } from "react-dom";
+import { styled } from "styled-components";
 import { NoContent } from "../NoContent.js";
 import { SelectOption } from "../forms/Select.js";
 import {
@@ -22,9 +25,13 @@ import { ToolbarTab } from "./ToolbarTab.js";
 
 export default {
   component: ToolbarLayout,
-  decorators: [CyberAppDecorator({ width: 500, height: 400 }), RouterDecorator],
+  decorators: [
+    (Story) => <Container children={<Story />} />,
+    CyberAppDecorator({ width: 500, height: 400 }),
+    RouterDecorator,
+  ],
   parameters: { layout: "centered" },
-};
+} satisfies Meta<typeof ToolbarLayout>;
 
 export const InsertionPoints = () => (
   <ToolbarLayout>
@@ -138,3 +145,11 @@ export const ExpandedTabs = () => {
     </ToolbarLayout>
   );
 };
+
+const Container = styled.div`
+  border: 1px solid ${colors.separator()};
+
+  > * {
+    height: 100%;
+  }
+`;

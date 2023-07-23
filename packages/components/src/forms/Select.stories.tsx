@@ -5,7 +5,7 @@ import { Select, SelectOption } from "./Select.js";
 
 export default {
   component: Select,
-  decorators: [CyberAppDecorator()],
+  decorators: [CyberAppDecorator({ width: 200 })],
   parameters: { layout: "centered" },
 } satisfies Meta<typeof Select>;
 

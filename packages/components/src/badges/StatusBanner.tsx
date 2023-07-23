@@ -75,8 +75,8 @@ const ActionButton = styled(Button)`
   padding: 4px 10px;
   color: currentColor;
 
-  > .content > .text {
-    font: ${fonts.display({ size: 12 })};
+  > .content > .title {
+    font: ${fonts.displayMedium({ size: 12 })};
     color: currentColor;
   }
 `;
