@@ -5,7 +5,7 @@ import { easing } from "@cyber/theme/easing";
 import React, { ReactElement, cloneElement, useEffect, useRef } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { keyframes, styled } from "styled-components";
-import { useMobileRouter } from "../context/RouterContext.js";
+import { useRouter } from "../context/RouterContext.js";
 import { RouterLocation } from "../history/RouterLocation.js";
 
 export function NavStack({
@@ -16,7 +16,7 @@ export function NavStack({
   children: ReactElement<any>[];
 }) {
   const stackRef = useRef<HTMLDivElement | null>(null);
-  const { history } = useMobileRouter();
+  const { history } = useRouter();
   const { container } = useHost();
 
   /**

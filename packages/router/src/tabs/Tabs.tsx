@@ -12,7 +12,7 @@ import React, {
   useState,
 } from "react";
 import { styled } from "styled-components";
-import { RouterContext, useMobileRouter } from "../context/RouterContext.js";
+import { RouterContext, useRouter } from "../context/RouterContext.js";
 import { RouterLocation } from "../history/RouterLocation.js";
 import { Redirect } from "../redirect/Redirect.js";
 import { StyledTabBar, TabBar, TabBarContext } from "./TabBar.js";
@@ -25,7 +25,7 @@ export function Tabs({ children }: { children: ReactNode }) {
   const tabs = flattenChildren(children).filter(isTab);
 
   // Pull our route information from context.
-  const { location, history, parent, flags } = useMobileRouter();
+  const { location, history, parent, flags } = useRouter();
 
   // Grab the viewport information from our native host so we can hide
   // the tab bar if the keyboard is visible.

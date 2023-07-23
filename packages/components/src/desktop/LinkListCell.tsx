@@ -1,4 +1,4 @@
-import { useMobileRouter } from "@cyber/router/context";
+import { useRouter } from "@cyber/router/context";
 import { Link } from "@cyber/router/link";
 import { formatCurrency } from "@cyber/shared/numeric";
 import { colors } from "@cyber/theme/colors";
@@ -39,7 +39,7 @@ export function LinkListCell({
   preserveTab?: boolean;
   children?: ReactNode;
 }) {
-  const { location } = useMobileRouter();
+  const { location } = useRouter();
 
   // Preserve the "tab" that you were on (like Devices/Support/Details).
   // If we are rendering at the "/users" point of the path, then the full path

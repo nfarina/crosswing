@@ -9,7 +9,7 @@ import React, {
   useState,
 } from "react";
 import { styled } from "styled-components";
-import { useMobileRouter } from "../context/RouterContext.js";
+import { useRouter } from "../context/RouterContext.js";
 import { StyledTabLink, TabLink, TabProps } from "./TabLink.js";
 
 export function TabBar({
@@ -117,7 +117,7 @@ export function useAutoHidesTabBar() {
   const [id] = useState(() => String(++nextId));
   const { setTabBarHidden } = useTabBarContext();
 
-  const { history, location } = useMobileRouter();
+  const { history, location } = useRouter();
 
   const top = history.top();
   const fullyClaimed = location.claimIndex === location.segments.length;

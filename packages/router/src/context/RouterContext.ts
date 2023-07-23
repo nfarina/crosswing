@@ -28,7 +28,7 @@ export const RouterContext = React.createContext<Router>({
   },
 });
 
-export function useMobileRouter({
+export function useRouter({
   ignoreDefaultWarning,
 }: { ignoreDefaultWarning?: boolean } = {}): Router {
   const context = useContext(RouterContext);

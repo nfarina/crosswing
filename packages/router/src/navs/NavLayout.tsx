@@ -5,7 +5,7 @@ import { colors } from "@cyber/theme/colors";
 import Back from "@cyber/theme/icons/Back.svg";
 import React, { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
-import { useMobileRouter } from "../context/RouterContext.js";
+import { useRouter } from "../context/RouterContext.js";
 import { NavAccessory, NavAccessoryView } from "./NavAccessoryView.js";
 import { NavTitleView } from "./NavTitleView.js";
 import { StatusBarStyleAttribute } from "./useAutoStatusBar.js";
@@ -50,7 +50,7 @@ export function NavLayout({
   ...rest
 }: NavProps & Omit<HTMLAttributes<HTMLDivElement>, "title">) {
   // Pull our back link (if any) from context.
-  const { back, flags } = useMobileRouter();
+  const { back, flags } = useRouter();
 
   // Pull host info for safe area.
   const { container, viewport } = useHost();

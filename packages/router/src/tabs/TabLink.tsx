@@ -3,7 +3,7 @@ import { colors } from "@cyber/theme/colors";
 import { fonts } from "@cyber/theme/fonts";
 import React, { MouseEvent, ReactElement, ReactNode } from "react";
 import { styled } from "styled-components";
-import { useMobileRouter } from "../context/RouterContext.js";
+import { useRouter } from "../context/RouterContext.js";
 import { Link } from "../link/Link.js";
 import { UnreadBadge } from "./UnreadBadge.js";
 
@@ -25,7 +25,7 @@ export function TabLink({
   tab: ReactElement<TabProps>;
 }) {
   const { icon, title, badge } = tab.props;
-  const { location } = useMobileRouter();
+  const { location } = useRouter();
   const { scrollToTop } = useHost();
 
   // If you click a tab and have nowhere to navigate to (i.e. you're

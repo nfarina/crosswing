@@ -3,7 +3,7 @@ import React, { ReactNode, useLayoutEffect, useState } from "react";
 import {
   RouterContext,
   RouterFlags,
-  useMobileRouter,
+  useRouter,
 } from "../context/RouterContext.js";
 import { Redirect } from "../redirect/Redirect.js";
 import { BrowserHistory } from "./BrowserHistory.js";
@@ -24,7 +24,7 @@ export function AppRouter({
 }) {
   // AppRouters can be nested! You might need to talk to your parent router
   // in rare situations.
-  const parentRouter = useMobileRouter({ ignoreDefaultWarning: true });
+  const parentRouter = useRouter({ ignoreDefaultWarning: true });
   const parent = parentRouter.flags?.isDefault ? undefined : parentRouter;
 
   const flags: RouterFlags = {

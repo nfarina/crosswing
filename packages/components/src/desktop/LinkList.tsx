@@ -1,4 +1,4 @@
-import { useMobileRouter } from "@cyber/router/context";
+import { useRouter } from "@cyber/router/context";
 import { colors } from "@cyber/theme/colors";
 import { fonts } from "@cyber/theme/fonts";
 import React, {
@@ -36,7 +36,7 @@ export function LinkList<T extends { id: string }>({
   // const [scrolledToActive, setScrolledToActive] = useState(false);
   const listRef = useRef<HTMLDivElement | null>(null);
 
-  const { history, location } = useMobileRouter();
+  const { history, location } = useRouter();
 
   // Get the next path component after our current location, if any.
   // This will be the ID of the item that's currently selected.

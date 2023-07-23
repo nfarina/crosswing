@@ -7,7 +7,7 @@ import React, {
   useEffect,
   useRef,
 } from "react";
-import { RouterContext, useMobileRouter } from "../context/RouterContext.js";
+import { RouterContext, useRouter } from "../context/RouterContext.js";
 import { MatchParams, RouterLocation } from "../history/RouterLocation.js";
 import { Redirect } from "../redirect/Redirect.js";
 import { NavProps } from "./NavLayout.js";
@@ -25,7 +25,7 @@ export function Navs({ children }: { children: ReactNode }) {
   const routes = flattenChildren(children).filter(isNavRoute);
 
   // Pull our route information from context.
-  const { location, history, parent, flags } = useMobileRouter();
+  const { location, history, parent, flags } = useRouter();
 
   const selected = selectRoute(routes, location);
   const root = selectRoot(routes, location);

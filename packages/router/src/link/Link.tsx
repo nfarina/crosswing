@@ -1,5 +1,5 @@
 import React, { AnchorHTMLAttributes, MouseEvent, ReactNode } from "react";
-import { useMobileRouter } from "../context/RouterContext.js";
+import { useRouter } from "../context/RouterContext.js";
 import { BrowserHistory } from "../history/BrowserHistory.js";
 import { MemoryHistory } from "../history/MemoryHistory.js";
 
@@ -14,7 +14,7 @@ export function Link({
   replace?: boolean;
   children?: ReactNode;
 }) {
-  const { location, history } = useMobileRouter();
+  const { location, history } = useRouter();
 
   function getHref(): [href: string, basePath: string] {
     // Allow the `to` parameter to be optional, which creates a dead link that

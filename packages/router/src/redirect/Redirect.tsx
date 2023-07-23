@@ -1,9 +1,9 @@
 import React, { useLayoutEffect } from "react";
-import { useMobileRouter } from "../context/RouterContext.js";
+import { useRouter } from "../context/RouterContext.js";
 import { looksLikeHref } from "../link/Link.js";
 
 export function Redirect({ to }: { to: string }) {
-  const { location, history } = useMobileRouter();
+  const { location, history } = useRouter();
 
   // Use layout effect so we can re-render before any DOM gets on screen.
   useLayoutEffect(() => {

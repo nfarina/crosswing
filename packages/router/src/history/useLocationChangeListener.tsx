@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useMobileRouter } from "../context/RouterContext.js";
+import { useRouter } from "../context/RouterContext.js";
 import { RouterLocation } from "./RouterLocation.js";
 
 export type LocationChangeListener = ({
@@ -16,7 +16,7 @@ export type LocationChangeListener = ({
  */
 export function useLocationChangeListener(callback: LocationChangeListener) {
   // Grab the top level location - if it changes, we may need to dismiss ourselves.
-  const { location } = useMobileRouter();
+  const { location } = useRouter();
 
   const [initialLocation] = useState(location);
 
