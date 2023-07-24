@@ -11,7 +11,7 @@ export type Host = {
   openUrl(url: string): void;
 };
 
-export type HostContainer = "wkwebview" | "android" | "electron" | "web";
+export type HostContainer = "ios" | "android" | "electron" | "web";
 
 export interface HostViewport {
   height?: number;

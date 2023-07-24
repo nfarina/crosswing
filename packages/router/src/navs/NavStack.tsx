@@ -59,7 +59,7 @@ export function NavStack({
 
   return (
     <StyledNavStack
-      onTouchStart={container === "wkwebview" ? onTouchStart : undefined}
+      onTouchStart={container === "ios" ? onTouchStart : undefined}
       data-container={container}
     >
       <TransitionGroup component={null}>
@@ -161,7 +161,7 @@ export const StyledNavStack = styled.div`
     display: none;
   }
 
-  &[data-container="wkwebview"] {
+  &[data-container="ios"] {
     > .page-enter-active {
       animation: ${slideIn} 0.4s ${easing.outCubic} backwards;
       /* This makes the animation smoother as React has a chance to render the content first. */

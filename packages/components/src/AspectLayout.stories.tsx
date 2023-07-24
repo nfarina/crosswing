@@ -1,3 +1,5 @@
+import { colors } from "@cyber/theme/colors";
+import { CyberAppDecorator } from "@cyber/theme/storybook";
 import { Meta } from "@storybook/react";
 import React, { useState } from "react";
 import { styled } from "styled-components";
@@ -5,6 +7,7 @@ import { AspectLayout, StyledAspectLayout } from "./AspectLayout.js";
 
 export default {
   component: AspectLayout,
+  decorators: [CyberAppDecorator()],
   parameters: { layout: "centered" },
 } satisfies Meta<typeof AspectLayout>;
 
@@ -16,7 +19,10 @@ export const Default = () => {
       <AspectLayout aspect={1.586}>
         <div className="card" />
       </AspectLayout>
-      <button children="Resize" onClick={() => setLarge((l) => !l)} />
+      <button
+        children={<>Resize to {large ? "100x100" : "200x200"}</>}
+        onClick={() => setLarge((l) => !l)}
+      />
     </Container>
   );
 };
@@ -35,8 +41,8 @@ const Container = styled.div`
     border: 1px dashed lightgray;
 
     > .card {
-      background: #bb26c9;
-      border-radius: 6px;
+      background: ${colors.purple()};
+      border-radius: 16px;
     }
   }
 

@@ -72,7 +72,7 @@ export function NavLayout({
   }
 
   function getRightAccessory() {
-    if (container === "wkwebview" && viewport.keyboardVisible) {
+    if (container === "ios" && viewport.keyboardVisible) {
       // No onClick handler is needed because simply clicking it will remove
       // focus from whatever is causing the keyboard to appear in the first
       // place!
@@ -139,7 +139,7 @@ export const StyledNavHeader = styled.div`
     background-color: ${colors.textBackground()};
   }
 
-  &[data-container="wkwebview"] {
+  &[data-container="ios"] {
     height: 44px;
   }
 

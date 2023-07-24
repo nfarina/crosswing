@@ -1,3 +1,5 @@
+import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { Meta } from "@storybook/react";
 import React, { useState } from "react";
 import { styled } from "styled-components";
 import {
@@ -8,8 +10,9 @@ import {
 
 export default {
   component: ResponsiveLayout,
+  decorators: [CyberAppDecorator()],
   parameters: { layout: "centered" },
-};
+} satisfies Meta<typeof ResponsiveLayout>;
 
 export const Default = () => {
   const [large, setLarge] = useState(false);

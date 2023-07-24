@@ -95,7 +95,7 @@ export const SheetContainer = ({
     if (animation) {
       // You asked for something specific.
       return animation;
-    } else if (container === "wkwebview") {
+    } else if (container === "ios") {
       return "slide";
     } else {
       return "pop";

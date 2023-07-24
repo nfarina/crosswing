@@ -25,7 +25,6 @@ export function CyberAppDecorator({
       <>
         <CyberColorStyle />
         <CyberFontStyle />
-        <CyberStorybookStyle />
         {layout === "centered" && <CenteredLayoutGlobalStyle />}
         {layout === "mobile" && <MobileLayoutGlobalStyle />}
         {layout === "fullscreen" && <FullScreenLayoutGlobalStyle />}
@@ -41,20 +40,16 @@ export function CyberAppDecorator({
   return CyberAppInnerDecorator;
 }
 
-const CyberStorybookStyle = createGlobalStyle`
+const CenteredLayoutGlobalStyle = createGlobalStyle`
   html {
     > body {
       /* We should always set a default background color; Storybook doesn't do it automatically for dark mode. */
       background: ${colors.textBackground()};
-    }
-  }
-`;
 
-const CenteredLayoutGlobalStyle = createGlobalStyle`
-  html > body {
-    /* Make raw text readable. */
-    color: ${colors.text()};
-    font: ${fonts.display({ size: 14 })};
+      /* Make raw text readable. */
+      color: ${colors.text()};
+      font: ${fonts.display({ size: 14 })};
+    }
   }
 `;
 
@@ -105,6 +100,9 @@ const FullScreenLayoutGlobalStyle = createGlobalStyle`
 
   body {
     height: 100%;
+
+    /* We should always set a default background color; Storybook doesn't do it automatically for dark mode. */
+    background: ${colors.textBackground()};
 
     > #storybook-root {
       width: 100%;

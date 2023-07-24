@@ -24,7 +24,7 @@ export function Carousel({
   return (
     <StyledCarousel style={cssProps} data-container={container} {...rest}>
       {/* From <Scrollable> */}
-      {container === "wkwebview" && <div className="bouncer" />}
+      {container === "ios" && <div className="bouncer" />}
       {children}
     </StyledCarousel>
   );

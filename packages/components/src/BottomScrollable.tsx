@@ -10,7 +10,7 @@ export function BottomScrollable({
 
   return (
     <StyledBottomScrollable {...rest}>
-      {container === "wkwebview" && <div className="bouncer" />}
+      {container === "ios" && <div className="bouncer" />}
       <div className="spacer" />
       {children}
     </StyledBottomScrollable>

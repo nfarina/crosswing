@@ -1,3 +1,4 @@
+import { MockHostProvider } from "@cyber/host/mocks";
 import { colors } from "@cyber/theme/colors";
 import { fonts } from "@cyber/theme/fonts";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
@@ -17,6 +18,14 @@ export const Normal = () => (
   <NavLayout title="Cupcakes" isApplicationRoot>
     <SamplePage>Cupcakes are tasty.</SamplePage>
   </NavLayout>
+);
+
+export const WithSafeArea = () => (
+  <MockHostProvider container="ios">
+    <NavLayout title="Cupcakes" isApplicationRoot>
+      <SamplePage>Cupcakes are tasty.</SamplePage>
+    </NavLayout>
+  </MockHostProvider>
 );
 
 export const CustomBackground = () => (

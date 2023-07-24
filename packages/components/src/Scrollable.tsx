@@ -24,7 +24,7 @@ export function Scrollable({
 
   return (
     <StyledScrollable {...rest}>
-      {container === "wkwebview" && alwaysBounce !== "none" && (
+      {container === "ios" && alwaysBounce !== "none" && (
         <div className="bouncer" data-bounce={alwaysBounce} />
       )}
       {children}

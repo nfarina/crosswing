@@ -27,7 +27,7 @@ export const Normal: StoryObj = {
 export const Sliding: StoryObj = {
   render: () => (
     // Simulate an iOS device which gets the slide-up animation.
-    <MockHostProvider container="wkwebview">
+    <MockHostProvider container="ios">
       {/* Redeclare this to pick up the simulated host. */}
       <ModalContextProvider>
         <SheetPresenter />
