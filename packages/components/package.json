@@ -4,7 +4,12 @@
   "sideEffects": false,
   "version": "0.0.0",
   "exports": {
+    "./badges/*": "./src/badges/*.js",
+    "./desktop/*": "./src/desktop/*.js",
     "./forms/*": "./src/forms/*.js",
+    "./labels/*": "./src/labels/*.js",
+    "./sites/*": "./src/sites/*.js",
+    "./toolbar/*": "./src/toolbar/*.js",
     "./*": "./src/*.js"
   },
   "dependencies": {

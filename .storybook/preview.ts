@@ -1,4 +1,10 @@
 import { Preview } from "@storybook/react";
+import timemachine from "timemachine";
+
+timemachine.config({
+  // The date of the first Cyber commit.
+  dateString: "April 16, 2023 21:59:00",
+});
 
 export default {
   parameters: {

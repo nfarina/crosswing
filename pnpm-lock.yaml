@@ -84,6 +84,9 @@ importers:
       storybook:
         specifier: ^7.1.0
         version: 7.1.0
+      timemachine:
+        specifier: ^0.3.2
+        version: 0.3.2
       typescript:
         specifier: ^5.1.6
         version: 5.1.6
@@ -7612,6 +7615,10 @@ packages:
   /through@2.3.8:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
     dev: false
+
+  /timemachine@0.3.2:
+    resolution: {integrity: sha512-JNKeKZXQJc8UC19JcIq0XziBud+fNNJfatZ57lwk+o1O9mpW2FmzWvRw7FTTOKuN6M0zsjGIlNi0O0QrF5WVRA==}
+    dev: true
 
   /tiny-invariant@1.3.1:
     resolution: {integrity: sha512-AD5ih2NlSssTCwsMznbvwMZpJ1cbhkGd2uueNxzv2jDlEeZdU04JQfRnggJQ8DrcVBGjAsCKwFBbDlVNtEMlzw==}
