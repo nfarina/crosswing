@@ -13,6 +13,7 @@ export function HostProvider({
     viewport: {},
     scrollToTop: () => {},
     delayUpdates: () => {},
+    openUrl: () => {},
   };
 
   return createElement(HostContext.Provider, { value }, children);

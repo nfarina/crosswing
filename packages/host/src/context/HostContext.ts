@@ -8,6 +8,7 @@ export type Host = {
   scrollToTop(): void;
   /** Delays automatic updates (browser reloads) for the given amount of time. */
   delayUpdates(duration: number): void;
+  openUrl(url: string): void;
 };
 
 export type HostContainer = "wkwebview" | "android" | "electron" | "web";
@@ -29,6 +30,7 @@ export function defaultHostContext(mergeContext: DeepPartial<Host> = {}): Host {
     viewport: {},
     scrollToTop: () => {},
     delayUpdates: () => {},
+    openUrl: () => {},
   };
 
   return merge(defaultContext, mergeContext);
