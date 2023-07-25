@@ -1,10 +1,9 @@
-import { createGlobalStyle } from "styled-components";
 import { gradientColor, hexColor, varColor } from "./builders.js";
 
 export {
   gradientColor,
   hexColor,
-  varColor as varColor,
+  varColor,
   type ColorBuilder,
 } from "./builders.js";
 
@@ -17,6 +16,7 @@ const neutrals = {
   extraExtraExtraDarkGray: hexColor("#0A100F"),
   extraExtraDarkGray: hexColor("#161D1C"),
   extraDarkGray: hexColor("#020403"),
+  darkerGray: hexColor("#828C8B"),
   darkGray: hexColor("#919998"),
   mediumGray: hexColor("#B5BFBE"),
   lightGray: hexColor("#E1E5E5"),
@@ -53,22 +53,56 @@ const other = {
  * the CSS for light/dark mode, but you can adjust their alpha when using them.
  */
 const responsive = {
-  primary: varColor("--primary-color"),
-  text: varColor("--text-color"),
-  textSecondary: varColor("--text-secondary-color"),
-  textBackground: varColor("--text-background-color"),
+  primary: varColor({ light: other.turquoise.rgb, var: "--primary-color" }),
+  text: varColor({
+    light: other.darkGreen.rgb,
+    dark: neutrals.extraLightGray.rgb,
+    var: "--text-color",
+  }),
+  textSecondary: varColor({
+    light: neutrals.darkGray.rgb,
+    dark: neutrals.darkGray.rgb,
+    var: "--text-secondary-color",
+  }),
+  textBackground: varColor({
+    light: neutrals.white.rgb,
+    dark: neutrals.extraExtraDarkGray.rgb,
+    var: "--text-background-color",
+  }),
   /** Suitable for panels that appear further from the viewer than the page background. */
-  textBackgroundPanel: varColor("--text-background-panel-color"),
+  textBackgroundPanel: varColor({
+    light: neutrals.extraLightGray.rgb,
+    dark: neutrals.extraExtraExtraDarkGray.rgb,
+    var: "--text-background-panel-color",
+  }),
   /** Different flavor of textBackground, suitable for alternating table rows. */
-  textBackgroundAlt: varColor("--text-background-alt-color"),
-  controlBorder: varColor("--control-border-color"),
-  /** Not a varColor because the alpha is baked in. */
-  separator: varColor("--separator-color", { static: true }),
+  textBackgroundAlt: varColor({
+    light: neutrals.extraLightGray.rgb,
+    dark: neutrals.extraExtraExtraDarkGray.rgb,
+    var: "--text-background-alt-color",
+  }),
+  /** Suitable for borders around controls, like <ButtonGroup>. */
+  controlBorder: varColor({
+    light: neutrals.mediumGray.rgb,
+    dark: neutrals.darkerGray.rgb,
+    var: "--control-border-color",
+  }),
+  /** Static because the alpha is baked in. */
+  separator: varColor({
+    light: neutrals.black({ alpha: 0.1 }),
+    dark: neutrals.white({ alpha: 0.15 }),
+    var: "--separator-color",
+    static: true,
+  }),
 };
 
 /** Gradients that go well with the default colors. */
 const gradients = {
-  primaryGradient: varColor("--primary-gradient", { static: true }),
+  primaryGradient: varColor({
+    light: other.turquoiseGradient(),
+    var: "--primary-gradient",
+    static: true,
+  }),
 };
 
 export const colors = {
@@ -79,49 +113,29 @@ export const colors = {
 };
 
 export const shadows = {
-  card: varColor("--card-shadow", { static: true }),
-  cardSmall: varColor("--card-small-shadow", { static: true }),
-  cardBorder: varColor("--card-border-shadow", { static: true }),
+  card: varColor({
+    light: `0px 4px 12px ${other.darkGreen({ alpha: 0.2 })}`,
+    dark: `0px 4px 12px ${neutrals.black()}`,
+    var: "--card-shadow",
+    static: true,
+  }),
+  cardSmall: varColor({
+    light: `0px 1px 4px ${other.darkGreen({ alpha: 0.2 })}`,
+    dark: `0px 1px 4px ${neutrals.black()}`,
+    var: "--card-small-shadow",
+    static: true,
+  }),
+  cardBorder: varColor({
+    light: `0px 0px 0px 1px ${other.darkGreen({ alpha: 0.07 })}`,
+    dark: `0px 0px 0px 1px ${neutrals.black({ alpha: 0.2 })}`,
+    var: "--card-border-shadow",
+    static: true,
+  }),
   /* Good for layering on top of images to give them a subtle border when they are otherwise "floating" on a page. */
-  imageBorder: varColor("--image-border-shadow", { static: true }),
+  imageBorder: varColor({
+    light: `inset 0 0 0 1px ${neutrals.black({ alpha: 0.1 })}`,
+    dark: `inset 0 0 0 1px ${neutrals.white({ alpha: 0.05 })}`,
+    var: "--image-border-shadow",
+    static: true,
+  }),
 };
-
-/**
- * Defines all the colors that could change depending on light or dark mode.
- * Most Cyber components try to use these so that they can automatically
- * adjust for light/dark mode, and so that you can define your own CSS color
- * style (use this as a guide) to override things like the accent color.
- */
-export const CyberColorStyle = createGlobalStyle`
-  html {
-    --primary-color: ${other.turquoise.rgb};
-    --primary-gradient: ${other.turquoiseGradient()};
-    --text-color: ${other.darkGreen.rgb};
-    --text-secondary-color: ${neutrals.darkGray.rgb};
-    --text-background-color: ${neutrals.white.rgb};
-    --text-background-panel-color: ${neutrals.extraLightGray.rgb};
-    --text-background-alt-color: ${neutrals.extraLightGray.rgb};
-    --control-border-color: ${neutrals.mediumGray.rgb};
-    --separator-color: ${neutrals.black({ alpha: 0.1 })};
-    --card-shadow: 0px 4px 12px ${other.darkGreen({ alpha: 0.2 })};
-    --card-small-shadow: 0px 1px 4px ${other.darkGreen({ alpha: 0.2 })};
-    --card-border-shadow: 0px 0px 0px 1px ${other.darkGreen({
-      alpha: 0.07,
-    })};
-    --image-border-shadow: inset 0 0 0 1px ${neutrals.black({ alpha: 0.1 })};
-  
-    @media (prefers-color-scheme: dark) {
-      --text-color: ${neutrals.extraLightGray.rgb};
-      --text-secondary-color: ${neutrals.darkGray.rgb};
-      --text-background-color: ${neutrals.extraExtraDarkGray.rgb};
-      --text-background-panel-color: ${neutrals.extraExtraExtraDarkGray.rgb};
-      --text-background-alt-color: ${neutrals.extraExtraExtraDarkGray.rgb};
-      --control-border-color: ${hexColor("#828C8B").rgb};
-      --separator-color: ${neutrals.white({ alpha: 0.15 })};
-      --card-shadow: 0px 4px 12px ${neutrals.black()};
-      --card-small-shadow: 0px 1px 4px ${neutrals.black()};
-      --card-border-shadow: 0px 0px 0px 1px ${neutrals.black({ alpha: 0.2 })};
-      --image-border-shadow: inset 0 0 0 1px ${neutrals.white({ alpha: 0.05 })};
-    }
-  }
-`;

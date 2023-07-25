@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
-/** Top-level styles for a mobile website rendered with Cyber. */
-export const CyberWebStyle = createGlobalStyle`
+/** Top-level styles for a mobile app or website rendered with Cyber. */
+export const CyberRootStyle = createGlobalStyle`
   html {
     height: 100%;
 

@@ -9,6 +9,9 @@ import LatoBlackURL from "../fonts/lato/Lato-Black.ttf";
 import LatoBoldURL from "../fonts/lato/Lato-Bold.ttf";
 import LatoRegularURL from "../fonts/lato/Lato-Regular.ttf";
 
+// TODO: make this overridable and defined at the CyberApp element level; not
+// the document level.
+
 export const fonts = {
   display: fontBuilder({ family: "Fira Sans", weight: "400" }),
   displayMedium: fontBuilder({ family: "Fira Sans", weight: "500" }),

@@ -1,6 +1,7 @@
 import React from "react";
 import { createGlobalStyle, styled } from "styled-components";
-import { CyberColorStyle, colors } from "./colors/index.js";
+import { getBuilderVarCss } from "./colors/builders.js";
+import { ColorBuilder, colors, shadows } from "./colors/index.js";
 import { CyberFontStyle, fonts } from "./fonts.js";
 
 /**
@@ -19,15 +20,22 @@ export function CyberAppDecorator({
   // "Wide" is just a convenient way to get a phone-sized width for a component.
   const resolvedWidth = width === "wide" ? 380 : width;
 
+  const builders = [...Object.values(colors), ...Object.values(shadows)];
+
   // Actual decorator function.
   function CyberAppInnerDecorator(Story: () => any) {
     return (
       <>
-        <CyberColorStyle />
         <CyberFontStyle />
-        {layout === "centered" && <CenteredLayoutGlobalStyle />}
-        {layout === "mobile" && <MobileLayoutGlobalStyle />}
-        {layout === "fullscreen" && <FullScreenLayoutGlobalStyle />}
+        {layout === "centered" && (
+          <CenteredLayoutGlobalStyle $builders={builders} />
+        )}
+        {layout === "mobile" && (
+          <MobileLayoutGlobalStyle $builders={builders} />
+        )}
+        {layout === "fullscreen" && (
+          <FullScreenLayoutGlobalStyle $builders={builders} />
+        )}
         {resolvedWidth != null && (
           <DefinedWidthGlobalStyle width={resolvedWidth} />
         )}
@@ -40,9 +48,14 @@ export function CyberAppDecorator({
   return CyberAppInnerDecorator;
 }
 
-const CenteredLayoutGlobalStyle = createGlobalStyle`
+const CenteredLayoutGlobalStyle = createGlobalStyle<{
+  $builders: ColorBuilder[];
+}>`
   html {
     > body {
+      /* Define our color vars so stories have access to the default theme. */
+      ${(p) => getBuilderVarCss(p.$builders)}
+
       /* We should always set a default background color; Storybook doesn't do it automatically for dark mode. */
       background: ${colors.textBackground()};
 
@@ -53,12 +66,17 @@ const CenteredLayoutGlobalStyle = createGlobalStyle`
   }
 `;
 
-const MobileLayoutGlobalStyle = createGlobalStyle`
+const MobileLayoutGlobalStyle = createGlobalStyle<{
+  $builders: ColorBuilder[];
+}>`
   html {
     height: 100%;
 
     > body {
       height: 100%;
+
+      /* Define our color vars so stories have access to the default theme. */
+      ${(p) => getBuilderVarCss(p.$builders)}
 
       /* Darken the canvas a bit so the default white background contrasts. */
       background: #E5E5E5;
@@ -93,13 +111,18 @@ const MobileLayoutGlobalStyle = createGlobalStyle`
   }
 `;
 
-const FullScreenLayoutGlobalStyle = createGlobalStyle`
+const FullScreenLayoutGlobalStyle = createGlobalStyle<{
+  $builders: ColorBuilder[];
+}>`
   html {
     height: 100%;
   }
 
   body {
     height: 100%;
+
+    /* Define our color vars so stories have access to the default theme. */
+    ${(p) => getBuilderVarCss(p.$builders)}
 
     /* We should always set a default background color; Storybook doesn't do it automatically for dark mode. */
     background: ${colors.textBackground()};

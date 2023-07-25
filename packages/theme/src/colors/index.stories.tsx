@@ -3,7 +3,8 @@ import React, { CSSProperties, ReactNode } from "react";
 import { styled } from "styled-components";
 import { fonts } from "../fonts.js";
 import { CyberAppDecorator } from "../storybook.js";
-import { ColorBuilder, colors } from "./index.js";
+import { ColorView } from "./ColorView.js";
+import { colors } from "./index.js";
 
 export default {
   component: colors as any, // Just for the auto-title.
@@ -15,7 +16,7 @@ export const Palette = () => {
   const views: ReactNode[] = [];
 
   for (const [name, builder] of Object.entries(colors)) {
-    views.push(<ColorView key={name} name={name} builder={builder} />);
+    views.push(<ColorView key={name} name={name} color={builder} />);
   }
 
   return <PaletteView>{views}</PaletteView>;
@@ -26,40 +27,6 @@ const PaletteView = styled.div`
   grid-gap: 20px;
   padding: 10px;
   grid-template-columns: repeat(5, minmax(60px, 1fr));
-`;
-
-function ColorView({ name, builder }: { name: string; builder: ColorBuilder }) {
-  return (
-    <SolidColorView style={{ background: builder() }}>
-      <div className="name">{name}</div>
-    </SolidColorView>
-  );
-}
-
-const SolidColorView = styled.div`
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  display: inline-block;
-  position: relative;
-
-  > .name {
-    position: absolute;
-    bottom: -3px;
-    left: 50%;
-    transform: translate(-50%, 100%);
-    padding: 3px 10px;
-    border-radius: 3px;
-    background: ${colors.textBackgroundPanel()};
-    color: ${colors.text()};
-    font: ${fonts.displayMedium({ size: 12 })};
-    z-index: 1;
-    display: none;
-  }
-
-  &:hover > .name {
-    display: block;
-  }
 `;
 
 export const Transform = () => {

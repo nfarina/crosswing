@@ -9,6 +9,7 @@ import { styled } from "styled-components";
 import { Button } from "./Button.js";
 import {
   PopupMenu,
+  PopupMenuHeader,
   PopupMenuSelect,
   PopupMenuSeparator,
   PopupMenuText,
@@ -24,6 +25,7 @@ export default {
 
 export const Mixed = () => (
   <PopupMenu>
+    <PopupMenuHeader children="Account" />
     <PopupMenuText
       children="Sync with Stripe…"
       onClick={action("onStripeClick")}

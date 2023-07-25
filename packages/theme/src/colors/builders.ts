@@ -135,15 +135,38 @@ export interface VarColorOptions {
 export type VarColorBuilder = {
   (options?: VarColorOptions): string;
   type: "var";
+  var: string;
+  light: string | ColorBuilder;
+  dark: string | ColorBuilder | null;
+  override({
+    light,
+    dark,
+  }: {
+    light: string | ColorBuilder;
+    dark?: string | ColorBuilder | null;
+  }): VarColorBuilder;
 };
 
-export function varColor(
-  cssVar: string,
-  { static: staticOnly }: { static?: boolean } = {},
-): VarColorBuilder {
+export function varColor({
+  var: cssVar,
+  light,
+  dark,
+  static: staticOnly,
+}: {
+  var: string;
+  light: string | ColorBuilder;
+  dark?: string | ColorBuilder | null;
+  static?: boolean;
+}): VarColorBuilder {
   const builder: VarColorBuilder = (options: VarColorOptions = {}) =>
     staticOnly ? `var(${cssVar})` : buildVarColor(cssVar, options);
   builder.type = "var";
+  builder.var = cssVar;
+  builder.light = light;
+  builder.dark = dark ?? null;
+  builder.override = ({ light, dark }) => {
+    return varColor({ var: cssVar, light, dark, static: staticOnly });
+  };
   return builder;
 }
 
@@ -180,4 +203,35 @@ export function gradientColor(
   };
   builder.type = "gradient";
   return builder;
+}
+
+//
+// Tools for outputting CSS based on "var" colors.
+//
+
+export function getBuilderVarCss(builders: ColorBuilder[]): string {
+  let css = "";
+  let darkCss = "";
+
+  for (const builder of builders) {
+    if (builder.type === "var") {
+      const rendered =
+        typeof builder.light === "string" ? builder.light : builder.light();
+      css += `${builder.var}: ${rendered};\n`;
+
+      if (builder.dark) {
+        const rendered =
+          typeof builder.dark === "string" ? builder.dark : builder.dark();
+        darkCss += `${builder.var}: ${rendered};\n`;
+      }
+    }
+  }
+
+  return `
+    ${css}
+
+    @media (prefers-color-scheme: dark) {
+      ${darkCss}
+    }
+  `.trim();
 }

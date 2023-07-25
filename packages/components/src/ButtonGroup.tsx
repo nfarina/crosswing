@@ -19,7 +19,7 @@ export function ButtonGroup({
 
 export const StyledButtonGroup = styled.div`
   background: ${colors.extraExtraLightGray()};
-  box-shadow: inset 0 0 0 1px ${colors.mediumGray()};
+  box-shadow: inset 0 0 0 1px ${colors.controlBorder()};
   border-radius: 6px;
   display: flex;
   flex-flow: row;
@@ -49,7 +49,7 @@ export const StyledButtonGroup = styled.div`
   }
 
   > * + * {
-    border-left: 1px solid ${colors.mediumGray()};
+    border-left: 1px solid ${colors.controlBorder()};
   }
 
   > ${StyledButton} {
