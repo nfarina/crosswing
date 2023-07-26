@@ -1,47 +1,37 @@
-import { Button } from "@cyber/components/Button";
-import { PopupMenu, PopupMenuText } from "@cyber/components/PopupMenu";
+import { MobileAppFrame } from "@cyber/components/desktop/MobileAppFrame";
 import { ModalRootProvider } from "@cyber/modals/context";
-import { usePopup } from "@cyber/modals/popup";
+import { AppRouter, BrowserHistory } from "@cyber/router/history";
+import { Tab, Tabs } from "@cyber/router/tabs";
 import { CyberApp } from "@cyber/theme/app";
-import React from "react";
-import { styled } from "styled-components";
-import Favicon from "../icons/Favicon.svg";
+import React, { lazy, useState } from "react";
 
-export function AppContainer() {
+const TabOne = lazy(() => import("./TabOne.js"));
+const TabTwo = lazy(() => import("./TabTwo.js"));
+
+export default function AppContainer() {
   return (
-    <ModalRootProvider>
-      <App />
-    </ModalRootProvider>
+    <CyberApp>
+      <ModalRootProvider>
+        <MobileAppFrame restorationKey={AppContainer}>
+          <App />
+        </MobileAppFrame>
+      </ModalRootProvider>
+    </CyberApp>
   );
 }
 
-export function App() {
-  const popupMenu = usePopup(() => (
-    <PopupMenu>
-      <PopupMenuText children="Hello World" />
-    </PopupMenu>
-  ));
+function App() {
+  const [history] = useState(() => new BrowserHistory());
 
   return (
-    <StyledApp>
-      <Button
-        title="Button"
-        icon={<Favicon />}
-        primary
-        onClick={popupMenu.onClick}
-      />
-    </StyledApp>
+    <AppRouter
+      history={history}
+      render={() => (
+        <Tabs>
+          <Tab title="One" path="one" render={() => <TabOne />} />
+          <Tab title="Two" path="two" render={() => <TabTwo />} />
+        </Tabs>
+      )}
+    />
   );
 }
-
-export const StyledApp = styled(CyberApp)`
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-
-  > * {
-    flex-grow: 0;
-  }
-`;

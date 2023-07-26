@@ -10,7 +10,7 @@
     "@cyber/shared": "workspace:^"
   },
   "devDependencies": {
-    "styled-components": "^6.0.4"
+    "styled-components": "^6.0.5"
   },
   "files": [
     "src",

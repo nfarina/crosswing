@@ -32,7 +32,7 @@ export default {
   ],
   framework: {
     name: "@storybook/react-vite",
-    options: {},
+    options: { strictMode: true },
   },
   docs: {
     autodocs: "tag",

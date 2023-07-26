@@ -20,7 +20,8 @@
     "@cyber/shared": "workspace:^",
     "@cyber/theme": "workspace:^",
     "dayjs": "^1.11.9",
-    "styled-components": "^6.0.4"
+    "react-transition-group": "^4.4.5",
+    "styled-components": "^6.0.5"
   },
   "files": [
     "src",

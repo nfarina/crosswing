@@ -22,7 +22,7 @@
     "koa-static": "^5.0.0",
     "pidusage": "^3.0.2",
     "ps-tree": "^1.2.0",
-    "styled-components": "^6.0.4"
+    "styled-components": "^6.0.5"
   },
   "files": [
     "src",

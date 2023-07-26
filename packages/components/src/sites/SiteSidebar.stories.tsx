@@ -1,8 +1,6 @@
 import { AppRouter, MemoryHistory } from "@cyber/router/history";
 import { colors } from "@cyber/theme/colors";
 import Globe from "@cyber/theme/icons/Globe.svg";
-import Users from "@cyber/theme/icons/Users.svg";
-import Visits from "@cyber/theme/icons/Visits.svg";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import { Meta } from "@storybook/react";
 import React, { useState } from "react";
@@ -23,12 +21,8 @@ export const Default = () => (
   <AppRouter
     render={() => (
       <SiteSidebar logo={<Logo />}>
-        <SiteSidebarArea path="users" title="Users" classicIcon={<Users />} />
-        <SiteSidebarArea
-          path="activity"
-          title="Activity"
-          classicIcon={<Visits />}
-        />
+        <SiteSidebarArea path="users" title="Users" />
+        <SiteSidebarArea path="activity" title="Activity" />
       </SiteSidebar>
     )}
   />
@@ -43,15 +37,11 @@ export const Expandable = () => {
       history={history}
       render={() => (
         <SiteSidebar logo={<Logo />}>
-          <SiteSidebarArea path="users" title="Users" classicIcon={<Users />}>
+          <SiteSidebarArea path="users" title="Users">
             <SiteSidebarLink path="active" title="Active" />
             <SiteSidebarLink path="deleted" title="Deleted" />
           </SiteSidebarArea>
-          <SiteSidebarArea
-            path="activity"
-            title="Activity"
-            classicIcon={<Visits />}
-          >
+          <SiteSidebarArea path="activity" title="Activity">
             <SiteSidebarLink path="payments" title="Payments" />
           </SiteSidebarArea>
         </SiteSidebar>

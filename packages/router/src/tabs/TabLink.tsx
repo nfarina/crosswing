@@ -1,6 +1,7 @@
 import { useHost } from "@cyber/host/context";
 import { colors } from "@cyber/theme/colors";
 import { fonts } from "@cyber/theme/fonts";
+import PlaceholderIcon from "@cyber/theme/icons/Placeholder.svg";
 import React, { MouseEvent, ReactElement, ReactNode } from "react";
 import { styled } from "styled-components";
 import { useRouter } from "../context/RouterContext.js";
@@ -24,7 +25,7 @@ export function TabLink({
   active?: boolean;
   tab: ReactElement<TabProps>;
 }) {
-  const { icon, title, badge } = tab.props;
+  const { icon = <PlaceholderIcon />, title, badge } = tab.props;
   const { location } = useRouter();
   const { scrollToTop } = useHost();
 
@@ -38,12 +39,7 @@ export function TabLink({
   };
 
   return (
-    <StyledTabLink
-      to={to}
-      data-active={active}
-      data-has-icon={!!icon}
-      onClick={onClick}
-    >
+    <StyledTabLink to={to} data-active={active} onClick={onClick}>
       <div className="icon" children={icon} />
       <div className="text">{title}</div>
       {!!badge && (
@@ -71,7 +67,7 @@ export const StyledTabLink = styled(Link)`
   > .icon {
     display: flex;
 
-    > svg path {
+    > svg * {
       fill: currentcolor;
     }
   }
@@ -90,13 +86,5 @@ export const StyledTabLink = styled(Link)`
     position: absolute;
     top: 3px;
     left: calc(50% + 3px);
-  }
-
-  &[data-has-icon="false"] {
-    > ${UnreadBadge} {
-      left: 50%;
-      top: -14px;
-      transform: translateX(-50%);
-    }
   }
 `;

@@ -133,4 +133,16 @@ export const StyledMobileAppFrame = styled.div`
       }
     }
   }
+
+  /* If we are just a little bit bigger than our 600px frame, then expand it to
+      eliminate the tiny margins. */
+  @media (max-height: 700px) {
+    &[data-tablet-layout="false"] {
+      justify-content: stretch;
+
+      > * {
+        max-height: unset;
+      }
+    }
+  }
 `;

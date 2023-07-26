@@ -1,6 +1,6 @@
 import { colors } from "@cyber/theme/colors";
 import { fonts } from "@cyber/theme/fonts";
-import React, { HTMLAttributes, ReactNode } from "react";
+import React, { HTMLAttributes, MouseEvent, ReactNode } from "react";
 import { styled } from "styled-components";
 import { Button } from "./Button.js";
 import { Clickable } from "./Clickable.js";
@@ -28,7 +28,7 @@ export function NoContent({
   actionTo?: string;
   actionWorking?: boolean;
   primaryAction?: boolean;
-  onActionClick?: () => void;
+  onActionClick?: (event: MouseEvent<HTMLButtonElement>) => void;
   orAction?: ReactNode;
   orText?: ReactNode;
   onOrActionClick?: () => void;
@@ -41,7 +41,7 @@ export function NoContent({
         <Button
           className="action"
           children={action}
-          onClick={() => onActionClick?.()}
+          onClick={onActionClick}
           primary={primaryAction}
           working={actionWorking}
         />

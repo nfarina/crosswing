@@ -6,7 +6,7 @@ import { colors } from "@cyber/theme/colors";
 import { HexColorBuilder } from "@cyber/theme/colors/builders";
 import { fonts } from "@cyber/theme/fonts";
 import Globe from "@cyber/theme/icons/Globe.svg";
-import MissingSidebarIcon from "@cyber/theme/icons/MissingSidebarIcon.svg";
+import PlaceholderIcon from "@cyber/theme/icons/Placeholder.svg";
 import React, {
   CSSProperties,
   Fragment,
@@ -57,8 +57,8 @@ export function SiteSidebar({
     const {
       path,
       title,
-      icon: standardIcon,
-      classicIcon: icon,
+      icon: standardIcon = <PlaceholderIcon />,
+      classicIcon,
       children,
       badge,
     } = area.props;
@@ -75,10 +75,10 @@ export function SiteSidebar({
           className="area-link"
           to={path}
           data-selected={isSelected}
-          data-is-classic-icon={!!icon}
+          data-is-classic-icon={!!classicIcon}
           onClick={links.length === 0 ? onAreaClick : undefined}
         >
-          {standardIcon ?? icon ?? <MissingSidebarIcon />}
+          {classicIcon ?? standardIcon}
           <div className="title">{title}</div>
           {!!badge && (
             <UnreadBadge children={badge === "any" ? <>&nbsp;</> : badge} />
@@ -224,9 +224,9 @@ export const StyledSiteSidebar = styled.div`
         width: 20px;
         height: 20px;
         margin-left: -2.5px;
-        margin-right: 5px;
+        margin-right: 6.5px;
 
-        path {
+        * {
           fill: ${colors.text({ alpha: 0.5 })};
 
           @media (prefers-color-scheme: dark) {
@@ -257,7 +257,7 @@ export const StyledSiteSidebar = styled.div`
 
       &[data-selected="true"] {
         > svg {
-          path {
+          * {
             fill: var(--tint-color-light);
           }
         }

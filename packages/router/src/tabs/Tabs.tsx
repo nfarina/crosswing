@@ -6,6 +6,7 @@ import Debug from "debug";
 import React, {
   ReactElement,
   ReactNode,
+  Suspense,
   isValidElement,
   useEffect,
   useRef,
@@ -97,7 +98,7 @@ export function Tabs({ children }: { children: ReactNode }) {
       return (
         <TabContent key={childLocation.claimedHref()} className={className}>
           <RouterContext.Provider value={childContext}>
-            {render()}
+            <Suspense>{render()}</Suspense>
           </RouterContext.Provider>
         </TabContent>
       );
@@ -201,7 +202,7 @@ export const StyledTabs = styled.div`
 
   > ${TabContent}.inactive {
     /* display: none; */ /* Causes images to flash as they are reloaded when switching back to an already-loaded tab. */
-    visibility: hidden;
+    /* visibility: hidden; */ /* Since we are promoting <Suspense> and React.lazy for tab contents, we just keep all tab content "visible" so that the current tab content persists when switching to a new one and the new contents are still loading. */
   }
 
   > ${StyledTabBar} {
