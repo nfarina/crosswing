@@ -54,19 +54,27 @@ export function TabbedButtonLayout({
     | null
     | boolean;
 }) {
-  const { history, location } = useRouter();
+  // We always want to render using "nextLocation" instead of "location" because
+  // content may be loading via <Suspense> and we want to highlight the tab that
+  // will be selected next regardless of that loading state.
+  const { history, location, nextLocation } = useRouter();
   const { container } = useHost();
 
   // Coerce children to array, flattening fragments and falsy conditionals.
   const buttons = flattenChildren(children).filter(isTabbedButton);
 
+  // What React wants us to render right now, possibly suspended.
   const paramValue = searchParam && location.searchParams().get(searchParam);
   const paramChild =
     paramValue && buttons.find((c) => c.props.value === paramValue);
 
+  // What we will be rendering next, possibly suspended.
+  const nextParamValue =
+    searchParam && nextLocation.searchParams().get(searchParam);
+
   const [innerValue, setInnerValue] = useResettableState(() => {
-    return paramValue ?? defaultValue ?? buttons[0]?.props.value ?? 0;
-  }, [paramValue, defaultValue, buttons.length]);
+    return nextParamValue ?? defaultValue ?? buttons[0]?.props.value ?? 0;
+  }, [nextParamValue, defaultValue, buttons.length]);
 
   // Keep track of child values we've rendered, for lazy children.
   const [renderedValues, setRenderedValues] = useState<Set<string>>(new Set());
@@ -90,7 +98,7 @@ export function TabbedButtonLayout({
 
       // Update our router's location with the new search param value if needed.
       if (searchParam) {
-        const newLocation = location.withParam(searchParam, newValue);
+        const newLocation = nextLocation.withParam(searchParam, newValue);
         history.navigate(newLocation.href(), { replace: true });
       }
     }
@@ -152,6 +160,8 @@ export function TabbedButtonLayout({
 
   // Using our Router integration, and trying to render an invalid paramValue?
   // Redirect to our first child's value if it defines one.
+  // Note that we are not using the "nextLocation" value here, because we want
+  // React might be concurrently rendering us.
   if (
     searchParam &&
     !paramChild &&

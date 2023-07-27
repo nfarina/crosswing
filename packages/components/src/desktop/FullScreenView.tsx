@@ -191,6 +191,7 @@ export interface FullScreenContextValue {
 export const FullScreenContext = createContext<FullScreenContextValue>({
   isFullScreen: false,
 });
+FullScreenContext.displayName = "FullScreenContext";
 
 export function useFullScreen(): FullScreenContextValue {
   return useContext(FullScreenContext);

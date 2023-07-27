@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import { createContext, useContext } from "react";
 import { BrowserHistory } from "../history/BrowserHistory.js";
 import { MemoryHistory } from "../history/MemoryHistory.js";
 import { RouterLocation } from "../history/RouterLocation.js";
 
 export type Router = {
   location: RouterLocation;
+  nextLocation: RouterLocation;
   history: MemoryHistory | BrowserHistory;
   back?: string; // href for Nav descendants to render a Back link.
   parent?: Router;
@@ -20,13 +21,15 @@ export type RouterFlags = {
   isMobileApp?: boolean;
 };
 
-export const RouterContext = React.createContext<Router>({
+export const RouterContext = createContext<Router>({
   location: new RouterLocation(),
+  nextLocation: new RouterLocation(),
   history: new MemoryHistory(),
   flags: {
     isDefault: true,
   },
 });
+RouterContext.displayName = "RouterContext";
 
 export function useRouter({
   ignoreDefaultWarning,

@@ -1,4 +1,4 @@
-import React, { MutableRefObject, ReactNode } from "react";
+import { MutableRefObject, ReactNode, createContext } from "react";
 
 /**
  * The shape of the modal context.
@@ -17,11 +17,12 @@ export interface ModalContextType {
 /**
  * Modal Context Object
  */
-export const ModalContext = React.createContext<ModalContextType>({
+export const ModalContext = createContext<ModalContextType>({
   showModal: invariantViolation,
   hideModal: invariantViolation,
   modalRoot: { current: null },
 });
+ModalContext.displayName = "ModalContext";
 
 /**
  * Throw error when ModalContext is used outside of context provider.

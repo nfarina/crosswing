@@ -57,6 +57,8 @@ export function NavStack({
     onGestureComplete: () => history.navigate(back!.href()),
   });
 
+  const lastChild = children[children.length - 1];
+
   return (
     <StyledNavStack
       onTouchStart={container === "ios" ? onTouchStart : undefined}

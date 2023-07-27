@@ -4,6 +4,7 @@ import { colors } from "@cyber/theme/colors";
 import React, {
   ReactElement,
   ReactNode,
+  createContext,
   useContext,
   useEffect,
   useState,
@@ -78,7 +79,7 @@ export type TabBarContextValue = {
   isMock?: boolean;
 };
 
-export const TabBarContext = React.createContext<TabBarContextValue>({
+export const TabBarContext = createContext<TabBarContextValue>({
   isTabBarHidden: false,
   setTabBarHidden: () => {},
   isDefault: true,

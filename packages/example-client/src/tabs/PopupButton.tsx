@@ -1,4 +1,4 @@
-import { NoContent } from "@cyber/components/NoContent";
+import { Button } from "@cyber/components/Button";
 import {
   PopupMenu,
   PopupMenuHeader,
@@ -7,20 +7,13 @@ import {
 import { usePopup } from "@cyber/modals/popup";
 import React from "react";
 
-export default function TabTwo() {
-  const popupMenu = usePopup(() => (
+export default function PopupButton() {
+  const popup = usePopup(() => (
     <PopupMenu>
       <PopupMenuHeader children="Message" />
       <PopupMenuText children="Hello World" />
     </PopupMenu>
   ));
 
-  return (
-    <NoContent
-      title="Tab Two"
-      action="Show Popup"
-      primaryAction
-      onActionClick={popupMenu.onClick}
-    />
-  );
+  return <Button primary title="Show Popup" onClick={popup.onClick} />;
 }

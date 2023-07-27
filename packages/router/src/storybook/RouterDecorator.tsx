@@ -18,10 +18,11 @@ export function RouterDecorator(Story: () => any) {
   } as any;
 
   const location = new RouterLocation();
+  const nextLocation = new RouterLocation();
 
   return (
     <RouterContext.Provider
-      value={{ location, history, flags: { isMock: true } }}
+      value={{ location, nextLocation, history, flags: { isMock: true } }}
     >
       <TabBarContext.Provider
         value={{ isTabBarHidden: false, setTabBarHidden: () => {} }}

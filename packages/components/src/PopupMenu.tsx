@@ -6,6 +6,7 @@ import React, {
   HTMLAttributes,
   ReactNode,
   SyntheticEvent,
+  createContext,
   useContext,
 } from "react";
 import { styled } from "styled-components";
@@ -15,7 +16,10 @@ import { StyledToggle, Toggle } from "./forms/Toggle.js";
 // Used to drill the onClose prop down to the PopupMenu children without
 // having to clone elements and deal with "keys".
 export type OnCloseHandler = (() => any) | null | undefined;
-export const OnCloseContext = React.createContext<OnCloseHandler>(null);
+
+export const OnCloseContext = createContext<OnCloseHandler>(null);
+OnCloseContext.displayName = "OnCloseContext";
+
 export function useOnClose(): OnCloseHandler {
   return useContext(OnCloseContext);
 }

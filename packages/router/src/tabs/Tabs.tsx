@@ -6,7 +6,6 @@ import Debug from "debug";
 import React, {
   ReactElement,
   ReactNode,
-  Suspense,
   isValidElement,
   useEffect,
   useRef,
@@ -26,7 +25,7 @@ export function Tabs({ children }: { children: ReactNode }) {
   const tabs = flattenChildren(children).filter(isTab);
 
   // Pull our route information from context.
-  const { location, history, parent, flags } = useRouter();
+  const { location, nextLocation, history, parent, flags } = useRouter();
 
   // Grab the viewport information from our native host so we can hide
   // the tab bar if the keyboard is visible.
@@ -35,8 +34,14 @@ export function Tabs({ children }: { children: ReactNode }) {
   // Construct our storage for inactive tabs.
   const { current: tabLocations } = useRef(new Map<string, RouterLocation>());
 
-  debug(`Render <Tabs> with location "${location}"`);
+  debug(
+    `Render <Tabs> with location "${location}" and next location "${nextLocation}"`,
+  );
 
+  // The tab that will be selected next, regardless of whether it is loaded.
+  const nextSelected = selectTab(tabs, nextLocation);
+
+  // The "deferred" contents we are rendering currently.
   const selected = selectTab(tabs, location);
   const { path } = selected.tab.props;
 
@@ -85,20 +90,32 @@ export function Tabs({ children }: { children: ReactNode }) {
 
   function renderTabContents(tab: ReactElement<TabProps>): ReactNode {
     const { path: tabPath, render } = tab.props;
+
     const isSelected = tab === selected.tab;
     const childLocation = isSelected
       ? selected.location
       : tabLocations.get(tabPath);
 
+    const isNextSelected = tab === nextSelected.tab;
+    const nextChildLocation = isNextSelected
+      ? nextSelected.location
+      : tabLocations.get(tabPath);
+
     // Do we have a current or old location for this tab? Render it if so.
-    if (childLocation) {
-      const childContext = { history, location: childLocation, parent, flags };
+    if (childLocation && nextChildLocation) {
+      const childContext = {
+        history,
+        location: childLocation,
+        nextLocation: nextChildLocation,
+        parent,
+        flags,
+      };
       const className = isSelected ? "active" : "inactive";
 
       return (
         <TabContent key={childLocation.claimedHref()} className={className}>
           <RouterContext.Provider value={childContext}>
-            <Suspense>{render()}</Suspense>
+            {render()}
           </RouterContext.Provider>
         </TabContent>
       );
@@ -123,7 +140,7 @@ export function Tabs({ children }: { children: ReactNode }) {
         {tabs.map(renderTabContents)}
         <TabBar
           tabs={tabs}
-          selectedTab={selected.tab}
+          selectedTab={nextSelected.tab}
           getTabLink={getTabLink}
           collapsed={collapsed}
         />
@@ -202,7 +219,7 @@ export const StyledTabs = styled.div`
 
   > ${TabContent}.inactive {
     /* display: none; */ /* Causes images to flash as they are reloaded when switching back to an already-loaded tab. */
-    /* visibility: hidden; */ /* Since we are promoting <Suspense> and React.lazy for tab contents, we just keep all tab content "visible" so that the current tab content persists when switching to a new one and the new contents are still loading. */
+    visibility: hidden;
   }
 
   > ${StyledTabBar} {

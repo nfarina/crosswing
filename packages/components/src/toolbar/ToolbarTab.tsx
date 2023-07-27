@@ -19,14 +19,17 @@ export function ToolbarTab({
   selected,
   ...rest
 }: ToolbarTabProps & Pick<HTMLAttributes<HTMLElement>, "className" | "style">) {
-  const { location } = useRouter();
+  // We always want to render using "nextLocation" instead of "location" because
+  // content may be loading via <Suspense> and we want to highlight the tab that
+  // will be selected next regardless of that loading state.
+  const { nextLocation } = useRouter();
 
   if (to) {
     return (
       <StyledToolbarTabLink
         to={to}
         data-is-toolbar-tab
-        data-selected={!!location.tryClaim(to)}
+        data-selected={!!nextLocation.tryClaim(to)}
         {...rest}
       />
     );

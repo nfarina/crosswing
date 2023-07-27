@@ -35,6 +35,20 @@ export class RouterLocation {
     return new URLSearchParams(this.search);
   }
 
+  public serialize(): string {
+    return JSON.stringify({
+      search: this.search,
+      params: this.params,
+      segments: this.segments,
+      claimIndex: this.claimIndex,
+    });
+  }
+
+  public static deserialize(serialized: string): RouterLocation {
+    const { search, params, segments, claimIndex } = JSON.parse(serialized);
+    return new RouterLocation({ search, params, segments, claimIndex });
+  }
+
   /**
    * Utility method for getting a cloned copy of RouterLocation that adds or
    * changes one or more parameters on the querystring. You can pass null
@@ -100,13 +114,25 @@ export class RouterLocation {
     }
   }
 
+  public claimedSegments(): string[] {
+    return this.segments.slice(0, this.claimIndex);
+  }
+
   /**
    * Returns just the portion of the path that hsa been claimed.
    * So for "[app/home]/blah?test=true", returns "/app/home".
    */
   public claimedPath(): string {
-    const claimedSegments = this.segments.slice(0, this.claimIndex);
-    return claimedSegments.length > 0 ? claimedSegments.join("/") : "";
+    const segments = this.claimedSegments();
+    return segments.length > 0 ? segments.join("/") : "";
+  }
+
+  /**
+   * Returns any unclaimed path segments.
+   * So for "[app/home]/blah?test=true", returns ["blah"].
+   */
+  public unclaimedSegments(): string[] {
+    return this.segments.slice(this.claimIndex);
   }
 
   /**
@@ -114,8 +140,8 @@ export class RouterLocation {
    * So for "[app/home]/blah?test=true", returns "blah".
    */
   public unclaimedPath(): string {
-    const remainingSegments = this.segments.slice(this.claimIndex);
-    return remainingSegments.length > 0 ? remainingSegments.join("/") : "";
+    const segments = this.unclaimedSegments();
+    return segments.length > 0 ? segments.join("/") : "";
   }
 
   /**

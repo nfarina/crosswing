@@ -1,5 +1,11 @@
 import Debug from "debug";
-import React, { ReactNode, useLayoutEffect, useState } from "react";
+import React, {
+  ReactNode,
+  Suspense,
+  useDeferredValue,
+  useLayoutEffect,
+  useState,
+} from "react";
 import {
   RouterContext,
   RouterFlags,
@@ -8,6 +14,7 @@ import {
 import { Redirect } from "../redirect/Redirect.js";
 import { BrowserHistory } from "./BrowserHistory.js";
 import { MemoryHistory } from "./MemoryHistory.js";
+import { RouterLocation } from "./RouterLocation.js";
 
 const debug = Debug("router:AppRouter");
 
@@ -37,7 +44,14 @@ export function AppRouter({
   const [defaultHistory] = useState(() => new MemoryHistory());
   const history = customHistory ?? defaultHistory;
 
-  const [location, setLocation] = useState(() => history.top());
+  const [nextLocation, setNextLocation] = useState(() => history.top());
+
+  // Use React 18's deferred value to avoid rendering the next route's contents
+  // until they are completely loaded (for instance, if contents are loaded
+  // via React.lazy imports).
+  const location = RouterLocation.deserialize(
+    useDeferredValue(nextLocation.serialize()),
+  );
 
   // We use a layout effect to listen to history events so we can re-render
   // on <Redirect> without flashing anything on screen.
@@ -49,20 +63,23 @@ export function AppRouter({
     // in it rendering a <Redirect> to "/newhome". So we need to see if
     // we need to propagate a new location.
     if (history.top().href() !== location.href()) {
-      setLocation(history.top());
+      setNextLocation(history.top());
     }
 
     // Sign up for future location change events and return the unsubscribe
     // callback for cleanup.
-    return history.listen((newLocation) => setLocation(newLocation));
+    return history.listen((newLocation) => setNextLocation(newLocation));
   }, []);
 
-  debug(`Render <AppRouter> with location "${location}"`);
+  debug(
+    `Render <AppRouter> with location "${location}" and next location "${nextLocation}"`,
+  );
 
   // Inspect the current location to see what we should render.
   const childLocation = path ? location.tryClaim(path) : location;
+  const nextChildLocation = path ? nextLocation.tryClaim(path) : nextLocation;
 
-  if (childLocation) {
+  if (childLocation && nextChildLocation) {
     // OK we're good, path is like "app" and we're at "app/something".
     // cut off the "app" part that we "own" and continue on.
     debug(`Location matches; starts with "${path}"`);
@@ -71,12 +88,13 @@ export function AppRouter({
       <RouterContext.Provider
         value={{
           location: childLocation,
+          nextLocation: nextChildLocation,
           history,
           parent,
           flags,
         }}
       >
-        {render()}
+        <Suspense>{render()}</Suspense>
       </RouterContext.Provider>
     );
   } else {
@@ -85,7 +103,9 @@ export function AppRouter({
     // We'll need to wrap this <Redirect> in a context provider so it can
     // access history.
     return (
-      <RouterContext.Provider value={{ location, history, flags }}>
+      <RouterContext.Provider
+        value={{ location, nextLocation, history, flags }}
+      >
         <Redirect to={location.rewrite(path).href()} />
       </RouterContext.Provider>
     );

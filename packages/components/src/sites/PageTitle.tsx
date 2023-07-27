@@ -6,6 +6,7 @@ import { fonts } from "@cyber/theme/fonts";
 import Back from "@cyber/theme/icons/Back.svg";
 import React, {
   ReactNode,
+  createContext,
   useContext,
   useEffect,
   useLayoutEffect,
@@ -77,7 +78,7 @@ interface PageTitleData {
   removeCrumb(id: number): void;
 }
 
-export const PageTitleContext = React.createContext<PageTitleData>({
+export const PageTitleContext = createContext<PageTitleData>({
   crumbs: new Map(),
   setCrumb: () => {
     throw new Error("Expected a <PageTitleProvider> as an ancestor!");
@@ -86,6 +87,7 @@ export const PageTitleContext = React.createContext<PageTitleData>({
     throw new Error("Expected a <PageTitleProvider> as an ancestor!");
   },
 });
+PageTitleContext.displayName = "PageTitleContext";
 
 interface Breadcrumb {
   title: ReactNode;

@@ -10,6 +10,7 @@ export interface GlobalErrorHandler {
 }
 
 export const GlobalErrorHandlerContext = createContext<GlobalErrorHandler>({});
+GlobalErrorHandlerContext.displayName = "GlobalErrorHandlerContext";
 
 export function useGlobalErrorHandler(): GlobalErrorHandler {
   return useContext(GlobalErrorHandlerContext);

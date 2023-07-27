@@ -24,9 +24,11 @@ export function Switch({ children }: { children: ReactNode }) {
   const routes = flattenChildren(children).filter(isRoute);
 
   // Pull our route information from context.
-  const { location, history, parent, flags } = useRouter();
+  const { location, nextLocation, history, parent, flags } = useRouter();
 
-  debug(`Render <Switch> with location "${location}"`);
+  debug(
+    `Render <Switch> with location "${location}" and next location ${nextLocation}`,
+  );
 
   // Select the best child <Route> to render.
   const selected = selectRoute(routes, location);
@@ -42,7 +44,13 @@ export function Switch({ children }: { children: ReactNode }) {
   }
 
   const { render } = selected.route.props;
-  const childContext = { history, location: selected.location, parent, flags };
+  const childContext = {
+    history,
+    location: selected.location,
+    nextLocation,
+    parent,
+    flags,
+  };
 
   return (
     <RouterContext.Provider value={childContext}>

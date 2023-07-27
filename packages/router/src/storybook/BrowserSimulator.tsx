@@ -32,7 +32,7 @@ export function BrowserSimulator({
       render={() => (
         <StyledBrowserSimulator {...rest}>
           <AddressBar />
-          <div className="content">{children}</div>
+          <div className="children">{children}</div>
         </StyledBrowserSimulator>
       )}
     />
@@ -48,7 +48,7 @@ export const StyledBrowserSimulator = styled.div`
     border-bottom: 1px solid ${colors.separator()};
   }
 
-  > .content {
+  > .children {
     height: 0;
     flex-grow: 1;
     display: flex;

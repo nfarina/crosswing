@@ -12,8 +12,10 @@
   },
   "dependencies": {
     "@cyber/components": "workspace:^",
+    "@cyber/host": "workspace:^",
     "@cyber/modals": "workspace:^",
     "@cyber/router": "workspace:^",
+    "@cyber/shared": "workspace:^",
     "@cyber/theme": "workspace:^",
     "styled-components": "^6.0.5"
   }

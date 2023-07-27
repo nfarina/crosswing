@@ -7,7 +7,7 @@ import React, {
   useEffect,
   useRef,
 } from "react";
-import { RouterContext, useRouter } from "../context/RouterContext.js";
+import { Router, RouterContext, useRouter } from "../context/RouterContext.js";
 import { MatchParams, RouterLocation } from "../history/RouterLocation.js";
 import { Redirect } from "../redirect/Redirect.js";
 import { NavProps } from "./NavLayout.js";
@@ -25,7 +25,7 @@ export function Navs({ children }: { children: ReactNode }) {
   const routes = flattenChildren(children).filter(isNavRoute);
 
   // Pull our route information from context.
-  const { location, history, parent, flags } = useRouter();
+  const { location, nextLocation, history, parent, flags } = useRouter();
 
   const selected = selectRoute(routes, location);
   const root = selectRoot(routes, location);
@@ -35,7 +35,7 @@ export function Navs({ children }: { children: ReactNode }) {
   const previousLocations = useRef<RouterLocation[]>([]);
 
   debug(
-    `Render <Navs> with location "${location}" and previous locations: ${previousLocations.current}`,
+    `Render <Navs> with location "${location}" and next location "${nextLocation}" and previous locations: ${previousLocations.current}`,
   );
 
   // Construct the new list of locations to render.
@@ -51,7 +51,9 @@ export function Navs({ children }: { children: ReactNode }) {
   }, [location.href()]);
 
   if (selected.redirect) {
-    debug(`No routes matched. Redirecting to "${selected.location}"`);
+    console.warn(
+      `No routes exactly matched location "${location}". Redirecting to "${selected.location}"`,
+    );
     return <Redirect to={selected.location.href()} />;
   }
 
@@ -67,8 +69,11 @@ export function Navs({ children }: { children: ReactNode }) {
     );
     const backLocation = allLocations[index - 1];
 
-    const context = {
+    const { location: nextChildLocation } = selectRoute(routes, nextLocation);
+
+    const context: Router = {
       location: childLocation,
+      nextLocation: nextChildLocation,
       history,
       flags,
       ...(parent ? { parent } : null),

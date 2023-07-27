@@ -14,7 +14,7 @@ export function Link({
   replace?: boolean;
   children?: ReactNode;
 }) {
-  const { location, history } = useRouter();
+  const { location, nextLocation, history } = useRouter();
 
   function getHref(): [href: string, basePath: string] {
     // Allow the `to` parameter to be optional, which creates a dead link that
@@ -57,7 +57,11 @@ export function Link({
 
   const [href, basePath] = getHref();
   const [path] = href.split("?");
-  const currentPath = location.href({ excludeSearch: true });
+
+  // Consider the "nextLocation" when rendering the link, so that the active
+  // state updates immediately even if content is still loading via
+  // <Suspense>.
+  const currentPath = nextLocation.href({ excludeSearch: true });
   const active = currentPath === path;
   const prefixActive = active || currentPath.startsWith(path + "/");
 

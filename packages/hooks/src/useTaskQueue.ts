@@ -1,5 +1,6 @@
 import React, {
   ReactNode,
+  createContext,
   useCallback,
   useContext,
   useMemo,
@@ -35,12 +36,13 @@ export interface TaskQueue {
   lastError: Error | null;
 }
 
-export const TaskQueueContext = React.createContext<TaskQueue>({
+export const TaskQueueContext = createContext<TaskQueue>({
   tasks: new Set(),
   tasksOfType: invariantViolation,
   queueTask: invariantViolation,
   lastError: null,
 });
+TaskQueueContext.displayName = "TaskQueueContext";
 
 /**
  * Provides a TaskQueue using React.Context. The queue will re-render when

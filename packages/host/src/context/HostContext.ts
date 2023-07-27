@@ -19,6 +19,7 @@ export interface HostViewport {
 }
 
 export const HostContext = createContext<Host>(defaultHostContext());
+HostContext.displayName = "HostContext";
 
 export function useHost(): Host {
   return useContext(HostContext);

@@ -10,7 +10,6 @@
     "./storybook": "./src/storybook.js"
   },
   "dependencies": {
-    "react": "^18.2.0",
     "styled-components": "^6.0.5"
   },
   "files": [

@@ -1,7 +1,7 @@
 import { Link } from "@cyber/router/link";
 import { colors, shadows } from "@cyber/theme/colors";
 import { fonts } from "@cyber/theme/fonts";
-import React, { ReactNode } from "react";
+import React from "react";
 import { styled } from "styled-components";
 
 /**
@@ -9,9 +9,9 @@ import { styled } from "styled-components";
  * screen quickly that isn't distractingly-ugly.
  */
 export function Placeholder({
-  children,
-}: Record<string, any> & { children?: ReactNode }) {
-  return <StyledPlaceholder children={children} />;
+  ...rest
+}: Record<string, any> & Parameters<typeof Link>[0]) {
+  return <StyledPlaceholder {...rest} />;
 }
 
 export const StyledPlaceholder = styled(Link)`
