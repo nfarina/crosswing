@@ -1,5 +1,5 @@
 import { safeArea } from "@cyber/host/plugins/SafeArea";
-import { NavLayout } from "@cyber/router/navs";
+import { NavLayout } from "@cyber/router/navs/NavLayout.js";
 import React from "react";
 import { styled } from "styled-components";
 import { Button, StyledButton } from "../Button.js";

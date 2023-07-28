@@ -1,21 +1,28 @@
 import { useGesture } from "@cyber/hooks/useGesture";
-import { HostContainer, useHost } from "@cyber/host/context";
+import { useHost } from "@cyber/host/context";
 import { colors } from "@cyber/theme/colors";
 import { easing } from "@cyber/theme/easing";
-import React, { ReactElement, cloneElement, useEffect, useRef } from "react";
+import React, { ReactElement, RefObject } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-import { keyframes, styled } from "styled-components";
-import { useRouter } from "../context/RouterContext.js";
+import { styled } from "styled-components";
+import { Router, RouterContext, useRouter } from "../context/RouterContext.js";
 import { RouterLocation } from "../history/RouterLocation.js";
+
+export type NavStackItem = {
+  key: string;
+  context: Router;
+  child: ReactElement<any>;
+  ref: RefObject<HTMLDivElement>;
+};
 
 export function NavStack({
   back,
-  children,
+  items,
 }: {
   back: RouterLocation | null;
-  children: ReactElement<any>[];
+  items: NavStackItem[];
 }) {
-  const stackRef = useRef<HTMLDivElement | null>(null);
+  // const stackRef = useRef<HTMLDivElement | null>(null);
   const { history } = useRouter();
   const { container } = useHost();
 
@@ -27,26 +34,26 @@ export function NavStack({
    * This is done as DOM operation instead of modifying the `{child}` so that we
    * don't incorrectly assign the attribute to something like a <Content.Provider>.
    */
-  useEffect(() => {
-    const stackEl = stackRef.current;
-    if (!stackEl) return;
+  // useEffect(() => {
+  //   const stackEl = stackRef.current;
+  //   if (!stackEl) return;
 
-    const observeMutations = () => {
-      for (let i = stackEl.children.length - 1; i >= 0; i--) {
-        const child = stackEl.children[i];
-        if (i === stackEl.children.length - 1) {
-          child.setAttribute("aria-hidden", "false");
-        } else {
-          child.setAttribute("aria-hidden", "true");
-        }
-      }
-    };
+  //   const observeMutations = () => {
+  //     for (let i = stackEl.children.length - 1; i >= 0; i--) {
+  //       const child = stackEl.children[i];
+  //       if (i === stackEl.children.length - 1) {
+  //         child.setAttribute("aria-hidden", "false");
+  //       } else {
+  //         child.setAttribute("aria-hidden", "true");
+  //       }
+  //     }
+  //   };
 
-    const observer = new MutationObserver(observeMutations);
-    observer.observe(stackEl, { childList: true });
+  //   const observer = new MutationObserver(observeMutations);
+  //   observer.observe(stackEl, { childList: true });
 
-    return () => observer.disconnect();
-  }, []);
+  //   return () => observer.disconnect();
+  // }, []);
 
   // On iOS devices, we allow you to swipe right from the left edge of the
   // stack to go back, similar to native apps.
@@ -57,135 +64,112 @@ export function NavStack({
     onGestureComplete: () => history.navigate(back!.href()),
   });
 
-  const lastChild = children[children.length - 1];
-
   return (
     <StyledNavStack
       onTouchStart={container === "ios" ? onTouchStart : undefined}
       data-container={container}
     >
       <TransitionGroup component={null}>
-        {children.map((child) => (
+        {items.map((item) => (
           <CSSTransition
-            key={String(child.key)}
-            classNames="page"
+            key={item.key}
+            nodeRef={item.ref}
             unmountOnExit
             timeout={{
               enter: container !== "web" ? 400 + 250 : 0,
               exit: container !== "web" ? 300 : 0,
             }}
           >
-            {child}
+            <div className="item" ref={item.ref}>
+              <RouterContext.Provider value={item.context}>
+                {item.child}
+              </RouterContext.Provider>
+            </div>
           </CSSTransition>
-          // <NavStackItem
-          //   key={String(child.key)}
-          //   container={container}
-          //   child={child}
-          // />
         ))}
       </TransitionGroup>
     </StyledNavStack>
   );
 }
 
-// Not working quite yet; the transitions aren't animating. No time to fix, and
-// we're not running in StrictMode yet, so we'll defer this for later.
-function NavStackItem({
-  container,
-  child,
-  ...transitionGroupProps
-}: {
-  container: HostContainer;
-  child: ReactElement<any>;
-}) {
-  // Use refs so CSSTransition doesn't use the deprecated `findDOMNode` API.
-  const ref = useRef(null);
-
-  return (
-    <CSSTransition
-      classNames="page"
-      unmountOnExit
-      nodeRef={ref}
-      timeout={{
-        enter: container !== "web" ? 400 + 250 : 0,
-        exit: container !== "web" ? 300 : 0,
-      }}
-      {...transitionGroupProps}
-    >
-      {cloneElement(child, { ref })}
-    </CSSTransition>
-  );
-}
-
-const slideIn = keyframes`
-  from {
-    transform: translateX(calc(100% + 20px));
-  }
-`;
-
-const slideOut = keyframes`
-  to {
-    transform: translateX(calc(100% + 20px));
-  }
-`;
-
-const popIn = keyframes`
-  from {
-    transform: scale(0.9);
-    opacity: 0;
-  }
-`;
-
-const popOut = keyframes`
-  to {
-    transform: scale(0.9);
-    opacity: 0;
-  }
-`;
-
-const boxShadow = "-4px 0px 20px " + colors.black({ alpha: 0.2 });
-
 export const StyledNavStack = styled.div`
   position: relative;
   overflow: hidden;
 
-  > * {
+  > .item {
     position: absolute;
     /* Strangely, "0px" is required (not "0") for the app to look right in FullStory while running in Safari. */
     top: 0px;
     right: 0px;
     bottom: 0px;
     left: 0px;
+
+    /* Whatever the single child of item is. */
+    > * {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+      left: 0px;
+    }
   }
 
   /* Hide all except the last two to (maybe) increase browser render performance. */
-  > :not(:nth-last-child(-n + 2)) {
+  > .item:not(:nth-last-child(-n + 2)) {
     display: none;
   }
 
   &[data-container="ios"] {
-    > .page-enter-active {
-      animation: ${slideIn} 0.4s ${easing.outCubic} backwards;
-      /* This makes the animation smoother as React has a chance to render the content first. */
-      animation-delay: 250ms;
-      box-shadow: ${boxShadow};
+    > .item.enter {
+      transform: translateX(calc(100% + 20px));
     }
 
-    > .page-exit-active {
-      animation: ${slideOut} 0.25s ${easing.inSine} forwards;
-      box-shadow: ${boxShadow};
+    > .item.enter-active {
+      transform: none;
+      transition: transform 0.4s ${easing.outCubic};
+      /* This makes the animation smoother as React has a chance to render the content first. */
+      transition-delay: 250ms;
+      box-shadow: -4px 0px 20px ${colors.black({ alpha: 0.2 })};
+    }
+
+    > .item.exit {
+      transition: transform 0.3s ${easing.inCubic};
+      transform: none;
+    }
+
+    > .item.exit-active {
+      transform: translateX(calc(100% + 20px));
+      box-shadow: -4px 0px 20px ${colors.black({ alpha: 0.2 })};
     }
   }
 
   &[data-container="android"] {
-    > .page-enter-active {
-      animation: ${popIn} 0.3s ${easing.outCubic} backwards;
-      /* This makes the animation smoother as React has a chance to render the content first. */
-      animation-delay: 250ms;
+    > .item.enter {
+      transform: scale(0.9);
+      opacity: 0;
     }
 
-    > .page-exit-active {
-      animation: ${popOut} 0.25s ${easing.inCubic} forwards;
+    > .item.enter-active {
+      transform: none;
+      opacity: 1;
+      transition:
+        transform 0.3s ${easing.outCubic},
+        opacity 0.3s ${easing.outCubic};
+      /* This makes the animation smoother as React has a chance to render the content first. */
+      transition-delay: 250ms;
+    }
+
+    > .item.exit {
+      transform: none;
+      opacity: 1;
+    }
+
+    > .item.exit-active {
+      transform: scale(0.9);
+      opacity: 0;
+      transition:
+        transform 0.25s ${easing.inCubic},
+        opacity 0.25s ${easing.inCubic};
     }
   }
 `;

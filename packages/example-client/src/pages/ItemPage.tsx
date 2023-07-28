@@ -4,7 +4,7 @@ import {
 } from "@cyber/components/TabbedButtonLayout";
 import { StyledToolbar } from "@cyber/components/toolbar/Toolbar";
 import { useRouter } from "@cyber/router/context";
-import { NavLayout } from "@cyber/router/navs";
+import { NavLayout } from "@cyber/router/navs/NavLayout.js";
 import { colors } from "@cyber/theme/colors";
 import React, { lazy } from "react";
 import { styled } from "styled-components";

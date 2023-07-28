@@ -1,6 +1,7 @@
 import { useRouter } from "@cyber/router/context";
 import { Link } from "@cyber/router/link";
-import { NavAccessoryView, NavTitleView } from "@cyber/router/navs";
+import { NavAccessoryView } from "@cyber/router/navs/NavAccessoryView.js";
+import { NavTitleView } from "@cyber/router/navs/NavTitleView.js";
 import { colors } from "@cyber/theme/colors";
 import { fonts } from "@cyber/theme/fonts";
 import Back from "@cyber/theme/icons/Back.svg";

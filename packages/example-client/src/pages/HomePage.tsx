@@ -1,6 +1,6 @@
 import { NoContent } from "@cyber/components/NoContent";
 import { Link } from "@cyber/router/link";
-import { NavLayout } from "@cyber/router/navs";
+import { NavLayout } from "@cyber/router/navs/NavLayout.js";
 import React, { useState } from "react";
 import { styled } from "styled-components";
 

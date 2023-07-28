@@ -8,7 +8,7 @@
     "./history": "./src/history/index.js",
     "./link": "./src/link/Link.js",
     "./mocks": "./src/mocks/MockRouter.js",
-    "./navs": "./src/navs/index.js",
+    "./navs/*.js": "./src/navs/*.js",
     "./switch": "./src/switch/Switch.js",
     "./redirect": "./src/redirect/Redirect.js",
     "./tabs": "./src/tabs/index.js",

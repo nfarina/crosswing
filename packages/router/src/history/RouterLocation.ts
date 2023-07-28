@@ -50,6 +50,21 @@ export class RouterLocation {
   }
 
   /**
+   * When creating new RouterLocations to give to the context of children, you
+   * only want to expose them to the "next" location when it is within their
+   * "known universe", i.e. the path they are claiming.
+   */
+  public static getNextChildLocation(
+    currentChildLocation: RouterLocation,
+    nextChildLocation: RouterLocation,
+  ): RouterLocation {
+    return nextChildLocation.claimedPath() ===
+      currentChildLocation.claimedPath()
+      ? nextChildLocation
+      : currentChildLocation;
+  }
+
+  /**
    * Utility method for getting a cloned copy of RouterLocation that adds or
    * changes one or more parameters on the querystring. You can pass null
    * for a param value to delete it from the querystring entirely (if it was
@@ -119,8 +134,10 @@ export class RouterLocation {
   }
 
   /**
-   * Returns just the portion of the path that hsa been claimed.
-   * So for "[app/home]/blah?test=true", returns "/app/home".
+   * Returns just the portion of the path that has been claimed, without a
+   * leading slash and without any search query.
+   *
+   * So for "[app/home]/blah?test=true", returns "app/home".
    */
   public claimedPath(): string {
     const segments = this.claimedSegments();
@@ -145,12 +162,13 @@ export class RouterLocation {
   }
 
   /**
-   * Returns just the portion of the href that HAS been claimed.
+   * Returns just the portion of the href that has been claimed, with a leading
+   * slash and without any search query.
+   *
    * So for "[app/home]/blah?test=true", returns "/app/home".
    */
   public claimedHref(): string {
-    const claimedSegments = this.segments.slice(0, this.claimIndex);
-    return "/" + (claimedSegments.length > 0 ? claimedSegments.join("/") : "");
+    return "/" + this.claimedPath();
   }
 
   /**

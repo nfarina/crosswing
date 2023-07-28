@@ -1,5 +1,5 @@
 import { MockHostProvider } from "@cyber/host/mocks";
-import { NavLayout } from "@cyber/router/navs";
+import { NavLayout } from "@cyber/router/navs/NavLayout.js";
 import { RouterDecorator } from "@cyber/router/storybook";
 import { colors } from "@cyber/theme/colors";
 import { CyberAppDecorator } from "@cyber/theme/storybook";

@@ -88,7 +88,10 @@ export function AppRouter({
       <RouterContext.Provider
         value={{
           location: childLocation,
-          nextLocation: nextChildLocation,
+          nextLocation: RouterLocation.getNextChildLocation(
+            childLocation,
+            nextChildLocation,
+          ),
           history,
           parent,
           flags,

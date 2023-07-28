@@ -106,7 +106,10 @@ export function Tabs({ children }: { children: ReactNode }) {
       const childContext = {
         history,
         location: childLocation,
-        nextLocation: nextChildLocation,
+        nextLocation: RouterLocation.getNextChildLocation(
+          childLocation,
+          nextChildLocation,
+        ),
         parent,
         flags,
       };
@@ -135,7 +138,7 @@ export function Tabs({ children }: { children: ReactNode }) {
   const collapsed = container !== "android" && viewport.keyboardVisible;
 
   return (
-    <StyledTabs data-tab-bar-hidden={isTabBarHidden}>
+    <StyledTabs data-container={container} data-tab-bar-hidden={isTabBarHidden}>
       <TabBarContext.Provider value={{ isTabBarHidden, setTabBarHidden }}>
         {tabs.map(renderTabContents)}
         <TabBar
@@ -210,6 +213,12 @@ export const StyledTabs = styled.div`
 
     > * {
       flex-grow: 1;
+    }
+  }
+
+  &[data-container="android"] {
+    > ${TabContent}.inactive, > ${TabContent}.active {
+      bottom: calc(58px + ${safeArea.bottom()});
     }
   }
 

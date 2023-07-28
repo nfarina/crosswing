@@ -1,4 +1,4 @@
-import { NavRoute, Navs } from "@cyber/router/navs";
+import { NavRoute, Navs } from "@cyber/router/navs/Navs.js";
 import React, { lazy } from "react";
 
 const HomePage = lazy(() => import("../pages/HomePage.js"));

@@ -1,17 +1,18 @@
 import { flattenChildren } from "@cyber/hooks/flattenChildren";
 import Debug from "debug";
 import React, {
+  createRef,
   isValidElement,
   ReactElement,
   ReactNode,
   useEffect,
   useRef,
 } from "react";
-import { Router, RouterContext, useRouter } from "../context/RouterContext.js";
+import { Router, useRouter } from "../context/RouterContext.js";
 import { MatchParams, RouterLocation } from "../history/RouterLocation.js";
 import { Redirect } from "../redirect/Redirect.js";
 import { NavProps } from "./NavLayout.js";
-import { NavStack } from "./NavStack.js";
+import { NavStack, NavStackItem } from "./NavStack.js";
 
 const debug = Debug("router:Navs");
 
@@ -59,41 +60,43 @@ export function Navs({ children }: { children: ReactNode }) {
 
   debug(`Rendering locations: ${allLocations}`);
 
-  function renderLocation(
+  function getNavStackItem(
     savedLocation: RouterLocation,
     index: number,
-  ): ReactElement<any> {
+  ): NavStackItem {
     const { route, location: childLocation } = selectRoute(
       routes,
       savedLocation,
     );
     const backLocation = allLocations[index - 1];
 
+    // Get the next location in the universe of these <Navs>.
     const { location: nextChildLocation } = selectRoute(routes, nextLocation);
 
     const context: Router = {
       location: childLocation,
-      nextLocation: nextChildLocation,
+      nextLocation: RouterLocation.getNextChildLocation(
+        childLocation,
+        nextChildLocation,
+      ),
       history,
       flags,
       ...(parent ? { parent } : null),
       ...(backLocation ? { back: backLocation.href() } : null),
     };
 
-    return (
-      <RouterContext.Provider
-        key={index + ": " + childLocation.claimedHref()}
-        value={context}
-      >
-        {route.props.render(childLocation.params)}
-      </RouterContext.Provider>
-    );
+    return {
+      key: index + " - " + childLocation.claimedHref(),
+      context,
+      child: route.props.render(childLocation.params),
+      ref: createRef(),
+    };
   }
 
   // Figure out where to go if you swipe right on the nav stack.
   const back = allLocations[allLocations.length - 2];
 
-  return <NavStack back={back}>{allLocations.map(renderLocation)}</NavStack>;
+  return <NavStack back={back} items={allLocations.map(getNavStackItem)} />;
 }
 
 interface SelectedRoute {
