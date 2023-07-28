@@ -1,4 +1,5 @@
 import React, { AnchorHTMLAttributes, MouseEvent, ReactNode } from "react";
+import { styled } from "styled-components";
 import { useRouter } from "../context/RouterContext.js";
 import { BrowserHistory } from "../history/BrowserHistory.js";
 import { MemoryHistory } from "../history/MemoryHistory.js";
@@ -66,7 +67,7 @@ export function Link({
   const prefixActive = active || currentPath.startsWith(path + "/");
 
   return (
-    <a
+    <StyledLink
       onClick={onAnchorClick}
       href={basePath + href}
       data-active={active}
@@ -74,7 +75,7 @@ export function Link({
       {...rest}
     >
       {children}
-    </a>
+    </StyledLink>
   );
 }
 
@@ -108,3 +109,10 @@ export function looksLikeHref(link: string): boolean {
     link.startsWith("blob:")
   );
 }
+
+export const StyledLink = styled.a`
+  &[data-active="true"],
+  &:active {
+    /* TODO: do something here, but also need to refactor every component based on Link! */
+  }
+`;

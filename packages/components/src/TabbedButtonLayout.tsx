@@ -57,8 +57,15 @@ export function TabbedButtonLayout({
   // We always want to render using "nextLocation" instead of "location" because
   // content may be loading via <Suspense> and we want to highlight the tab that
   // will be selected next regardless of that loading state.
-  const { history, location, nextLocation } = useRouter();
+  const { history, location, nextLocation: unsafeNextLocation } = useRouter();
   const { container } = useHost();
+
+  // The nextLocation could be _anywhere_. We only want to pre-render the
+  // active button if the path matches our current location.
+  const nextLocation =
+    unsafeNextLocation.claimedPath() === location.claimedPath()
+      ? unsafeNextLocation
+      : location;
 
   // Coerce children to array, flattening fragments and falsy conditionals.
   const buttons = flattenChildren(children).filter(isTabbedButton);

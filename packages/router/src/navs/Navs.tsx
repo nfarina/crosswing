@@ -75,10 +75,7 @@ export function Navs({ children }: { children: ReactNode }) {
 
     const context: Router = {
       location: childLocation,
-      nextLocation: RouterLocation.getNextChildLocation(
-        childLocation,
-        nextChildLocation,
-      ),
+      nextLocation: nextChildLocation,
       history,
       flags,
       ...(parent ? { parent } : null),

@@ -106,10 +106,7 @@ export function Tabs({ children }: { children: ReactNode }) {
       const childContext = {
         history,
         location: childLocation,
-        nextLocation: RouterLocation.getNextChildLocation(
-          childLocation,
-          nextChildLocation,
-        ),
+        nextLocation: nextChildLocation,
         parent,
         flags,
       };

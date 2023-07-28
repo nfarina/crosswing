@@ -50,21 +50,6 @@ export class RouterLocation {
   }
 
   /**
-   * When creating new RouterLocations to give to the context of children, you
-   * only want to expose them to the "next" location when it is within their
-   * "known universe", i.e. the path they are claiming.
-   */
-  public static getNextChildLocation(
-    currentChildLocation: RouterLocation,
-    nextChildLocation: RouterLocation,
-  ): RouterLocation {
-    return nextChildLocation.claimedPath() ===
-      currentChildLocation.claimedPath()
-      ? nextChildLocation
-      : currentChildLocation;
-  }
-
-  /**
    * Utility method for getting a cloned copy of RouterLocation that adds or
    * changes one or more parameters on the querystring. You can pass null
    * for a param value to delete it from the querystring entirely (if it was
