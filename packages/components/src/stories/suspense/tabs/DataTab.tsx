@@ -1,6 +1,6 @@
-import { NoContent } from "@cyber/components/NoContent";
 import { wait } from "@cyber/shared/wait";
 import React from "react";
+import { NoContent } from "../../../NoContent.js";
 
 export default function DataTab() {
   const result = use(fetchData());

@@ -61,13 +61,13 @@ export const StyledBrowserSimulator = styled.div`
 `;
 
 export function AddressBar() {
-  const { history, location } = useContext(RouterContext);
+  const { history, nextLocation } = useContext(RouterContext);
   const [focused, setFocused] = useState(false);
   const [draftLocation, setDraftLocation] = useState("");
 
   function onFocus(e: ChangeEvent<HTMLInputElement>) {
     setFocused(true);
-    setDraftLocation(location.href());
+    setDraftLocation(nextLocation.href());
   }
 
   function onChange(e: ChangeEvent<HTMLInputElement>) {
@@ -76,7 +76,7 @@ export function AddressBar() {
 
   function onBlur() {
     setFocused(false);
-    history.navigate(location.linkTo(draftLocation));
+    history.navigate(nextLocation.linkTo(draftLocation));
   }
 
   function onKeyDown(e: KeyboardEvent<HTMLInputElement>) {
@@ -91,7 +91,7 @@ export function AddressBar() {
 
   return (
     <StyledAddressBar
-      value={focused ? draftLocation : location.href()}
+      value={focused ? draftLocation : nextLocation.href()}
       onFocus={onFocus}
       onChange={onChange}
       onBlur={onBlur}

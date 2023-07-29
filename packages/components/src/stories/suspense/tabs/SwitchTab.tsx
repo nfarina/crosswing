@@ -1,10 +1,10 @@
-import { StyledToolbar, Toolbar } from "@cyber/components/toolbar/Toolbar";
-import { ToolbarTab } from "@cyber/components/toolbar/ToolbarTab";
 import { Redirect } from "@cyber/router/redirect";
 import { Route, Switch } from "@cyber/router/switch";
 import { colors } from "@cyber/theme/colors";
 import React, { lazy } from "react";
 import { styled } from "styled-components";
+import { StyledToolbar, Toolbar } from "../../../toolbar/Toolbar.js";
+import { ToolbarTab } from "../../../toolbar/ToolbarTab.js";
 
 const PanelOne = lazy(() => import("../panels/PanelOne.js"));
 

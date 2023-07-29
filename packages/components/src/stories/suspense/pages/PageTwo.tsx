@@ -1,13 +1,13 @@
-import {
-  TabbedButton,
-  TabbedButtonLayout,
-} from "@cyber/components/TabbedButtonLayout";
-import { StyledToolbar } from "@cyber/components/toolbar/Toolbar";
 import { useRouter } from "@cyber/router/context";
 import { NavLayout } from "@cyber/router/navs/NavLayout.js";
 import { colors } from "@cyber/theme/colors";
 import React, { lazy } from "react";
 import { styled } from "styled-components";
+import {
+  TabbedButton,
+  TabbedButtonLayout,
+} from "../../../TabbedButtonLayout.js";
+import { StyledToolbar } from "../../../toolbar/Toolbar.js";
 
 const PanelOne = lazy(() => import("../panels/PanelOne.js"));
 
@@ -20,13 +20,13 @@ const PanelTwo = lazy(() => {
   });
 });
 
-export default function ItemPage({ itemId }: { itemId: string }) {
+export default function PageTwo() {
   const { location } = useRouter();
 
   const panel = location.searchParams().get("panel");
 
   return (
-    <NavLayout title="Item" subtitle={<>Item ID: {itemId}</>}>
+    <NavLayout title="Page Two">
       <StyledItemPage>
         <TabbedButtonLayout searchParam="panel">
           <TabbedButton value="one" title="Panel One" />

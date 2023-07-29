@@ -1,11 +1,11 @@
-import { Button } from "@cyber/components/Button";
+import { usePopup } from "@cyber/modals/popup";
+import React from "react";
+import { Button } from "../../../Button.js";
 import {
   PopupMenu,
   PopupMenuHeader,
   PopupMenuText,
-} from "@cyber/components/PopupMenu";
-import { usePopup } from "@cyber/modals/popup";
-import React from "react";
+} from "../../../PopupMenu.js";
 
 export default function PopupButton() {
   const popup = usePopup(() => (

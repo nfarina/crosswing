@@ -57,14 +57,17 @@ export function TabbedButtonLayout({
   // We always want to render using "nextLocation" instead of "location" because
   // content may be loading via <Suspense> and we want to highlight the tab that
   // will be selected next regardless of that loading state.
-  const { history, location, nextLocation: unsafeNextLocation } = useRouter();
+  const { history, location, nextLocation: anyNextLocation } = useRouter();
   const { container } = useHost();
 
   // The nextLocation could be _anywhere_. We only want to pre-render the
-  // active button if the path matches our current location.
+  // active button if the path matches our current location. Otherwise we might
+  // want to highlight the default first button when no querystring is present
+  // (because we're going to like, another screen entirely, or navigating
+  // backwards in a <Navs>).
   const nextLocation =
-    unsafeNextLocation.claimedPath() === location.claimedPath()
-      ? unsafeNextLocation
+    anyNextLocation.claimedPath() === location.claimedPath()
+      ? anyNextLocation
       : location;
 
   // Coerce children to array, flattening fragments and falsy conditionals.

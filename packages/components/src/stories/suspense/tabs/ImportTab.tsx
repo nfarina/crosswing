@@ -1,5 +1,5 @@
-import { NoContent } from "@cyber/components/NoContent";
 import React, { lazy } from "react";
+import { NoContent } from "../../../NoContent.js";
 
 const PopupButton = lazy(() => {
   return new Promise((resolve) => {

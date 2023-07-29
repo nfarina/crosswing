@@ -1,13 +1,13 @@
-import { Placeholder } from "@cyber/components/Placeholder";
 import { colors } from "@cyber/theme/colors";
 import React from "react";
+import { StyledPanel } from "./PanelOne.js";
 
 export default function PanelTwo({}: any) {
   return (
-    <Placeholder
+    <StyledPanel
       style={{ background: colors.darkBlue(), color: colors.white() }}
     >
-      Panel Two
-    </Placeholder>
+      Two
+    </StyledPanel>
   );
 }
