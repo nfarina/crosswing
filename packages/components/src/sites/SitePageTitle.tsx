@@ -4,8 +4,9 @@ import { NavAccessoryView } from "@cyber/router/navs/NavAccessoryView.js";
 import { NavTitleView } from "@cyber/router/navs/NavTitleView.js";
 import { colors } from "@cyber/theme/colors";
 import { fonts } from "@cyber/theme/fonts";
-import Back from "@cyber/theme/icons/Back.svg";
+import BackIcon from "@cyber/theme/icons/Back.svg";
 import React, {
+  CSSProperties,
   ReactNode,
   createContext,
   useContext,
@@ -15,10 +16,17 @@ import React, {
   useState,
 } from "react";
 import { styled } from "styled-components";
+import { SiteHeaderAccessory } from "./SiteHeaderAccessory.js";
 
 // This is pretty fancy for a breadcrumbs system.
 
-export function PageTitle({ siteTitle }: { siteTitle: string }) {
+export function SitePageTitle({
+  siteTitle,
+  accessories,
+}: {
+  siteTitle: string;
+  accessories?: SiteHeaderAccessory[] | null;
+}) {
   const { crumbs } = useContext(PageTitleContext);
 
   const sorted = Array.from(crumbs.values()).sort(
@@ -51,10 +59,14 @@ export function PageTitle({ siteTitle }: { siteTitle: string }) {
           </React.Fragment>
         ))}
       </DesktopPageTitle>
-      <MobilePageTitle>
+      <MobilePageTitle
+        style={
+          { "--num-accessories": accessories?.length ?? 0 } as CSSProperties
+        }
+      >
         {backCrumb ? (
           <NavAccessoryView
-            accessory={{ icon: <Back />, to: backCrumb.link }}
+            accessory={{ icon: <BackIcon />, to: backCrumb.link }}
             align="left"
           />
         ) : (

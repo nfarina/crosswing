@@ -1,24 +1,33 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import { styled } from "styled-components";
-import { PageTitle, StyledPageTitle } from "./PageTitle.js";
+import {
+  SiteHeaderAccessory,
+  SiteHeaderAccessoryView,
+  StyledSiteHeaderAccessoryView,
+} from "./SiteHeaderAccessory.js";
+import { SitePageTitle, StyledPageTitle } from "./SitePageTitle.js";
 
 export function SiteHeader({
   siteTitle,
-  tasksButton,
-  searchButton,
-  rightButton,
+  accessories,
 }: {
+  /**
+   * Used for the DOM document title, prepending with the current page if using
+   * usePageTitle(). Example: "Cyber Admin" or "Users | Cyber Admin"
+   */
   siteTitle: string;
-  tasksButton?: ReactNode | null;
-  searchButton?: ReactNode | null;
-  rightButton?: ReactNode;
+  accessories?: SiteHeaderAccessory[] | null;
 }) {
   return (
-    <StyledSiteHeader>
-      <PageTitle siteTitle={siteTitle} />
-      {tasksButton && <div className="tasks">{tasksButton}</div>}
-      {searchButton && <div className="search">{searchButton}</div>}
-      {rightButton && <div className="right">{rightButton}</div>}
+    <StyledSiteHeader data-num-accessories={accessories?.length ?? 0}>
+      <SitePageTitle siteTitle={siteTitle} accessories={accessories} />
+      {accessories?.map((accessory, i) => (
+        <SiteHeaderAccessoryView
+          key={String(`accessory-${i}`)}
+          data-last-accessory={i === accessories.length - 1}
+          accessory={accessory}
+        />
+      ))}
     </StyledSiteHeader>
   );
 }
@@ -36,36 +45,19 @@ export const StyledSiteHeader = styled.div`
     flex-grow: 1;
   }
 
-  > .tasks {
-    display: flex;
-    flex-flow: row;
+  > ${StyledSiteHeaderAccessoryView} {
+    padding: 5px;
 
-    > * {
-      flex-grow: 1;
+    &[data-last-accessory="true"] {
+      padding-right: 10px;
     }
   }
 
-  > .search {
-    width: 40px;
-    display: flex;
-    flex-flow: row;
-
-    > * {
-      flex-grow: 1;
+  /* Only one accessory? We can properly center the title on mobile layouts by balancing out the 80px left spacer. */
+  &[data-num-accessories="1"] {
+    > ${StyledSiteHeaderAccessoryView} {
+      width: 80px;
+      justify-content: flex-end;
     }
-  }
-
-  > .right {
-    width: 80px;
-    display: flex;
-    flex-flow: row;
-
-    > * {
-      flex-grow: 1;
-    }
-  }
-
-  > .search + .right {
-    width: 40px;
   }
 `;

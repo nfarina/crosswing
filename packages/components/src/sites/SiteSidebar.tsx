@@ -5,19 +5,24 @@ import { UnreadBadge } from "@cyber/router/tabs";
 import { colors } from "@cyber/theme/colors";
 import { HexColorBuilder } from "@cyber/theme/colors/builders";
 import { fonts } from "@cyber/theme/fonts";
-import Globe from "@cyber/theme/icons/Globe.svg";
+import CyberLogoIcon from "@cyber/theme/icons/CyberLogo.svg";
 import PlaceholderIcon from "@cyber/theme/icons/Placeholder.svg";
 import React, {
   CSSProperties,
   Fragment,
   HTMLAttributes,
+  isValidElement,
   ReactElement,
   ReactNode,
-  isValidElement,
 } from "react";
 import { styled } from "styled-components";
+import {
+  SiteHeaderAccessory,
+  SiteHeaderAccessoryView,
+  StyledSiteHeaderAccessoryView,
+} from "./SiteHeaderAccessory.js";
 
-export interface SiteSidebarAreaProps {
+export type SiteSidebarAreaProps = {
   path: string;
   title: ReactNode;
   classicIcon?: ReactNode;
@@ -25,26 +30,26 @@ export interface SiteSidebarAreaProps {
   /** Expects <SiteSidebarLink> */
   children?: ReactNode;
   badge?: number | null | "any";
-}
+};
 
-export interface SiteSidebarLinkProps {
+export type SiteSidebarLinkProps = {
   path: string;
   title: ReactNode;
-}
+};
 
 export function SiteSidebar({
-  logo = <Globe />,
+  logo = <CyberLogoIcon style={{ width: "50px", height: "50px" }} />,
   tint = colors.turquoise,
+  accessories,
   children,
-  accountButton,
   onLinkClick,
   style,
   ...rest
 }: {
   logo?: ReactNode;
   tint?: HexColorBuilder;
+  accessories?: SiteHeaderAccessory[] | null;
   children?: ReactNode;
-  accountButton?: ReactNode;
   onLinkClick?: (path: string) => void;
 } & HTMLAttributes<HTMLDivElement>) {
   // Coerce children to array, flattening fragments and falsy conditionals.
@@ -132,11 +137,16 @@ export function SiteSidebar({
     <StyledSiteSidebar
       {...rest}
       style={cssProperties}
-      data-showing-account={!!accountButton}
+      data-showing-accessories={!!accessories?.length}
     >
       <Link className="home" to="/" children={logo} />
       <div className="menu">{areas.map(renderArea)}</div>
-      {accountButton && <div className="account">{accountButton}</div>}
+      {accessories?.map((accessory, i) => (
+        <SiteHeaderAccessoryView
+          key={String(`accessory-${i}`)}
+          accessory={accessory}
+        />
+      ))}
     </StyledSiteSidebar>
   );
 }
@@ -180,18 +190,10 @@ export const StyledSiteSidebar = styled.div`
     flex-shrink: 0;
   }
 
-  > .account {
+  > ${StyledSiteHeaderAccessoryView} {
     height: 60px;
     margin: -10px;
-    display: flex;
-    flex-flow: row;
     border-bottom: 1px solid ${colors.separator()};
-
-    > * {
-      flex-grow: 1;
-      justify-content: center;
-      margin-right: 0;
-    }
   }
 
   > .home {
@@ -201,6 +203,12 @@ export const StyledSiteSidebar = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    > svg {
+      > * {
+        fill: ${colors.primary()};
+      }
+    }
   }
 
   > .menu {
@@ -310,7 +318,7 @@ export const StyledSiteSidebar = styled.div`
     }
   }
 
-  &[data-showing-account="true"] {
+  &[data-showing-accessories="true"] {
     flex-direction: column-reverse;
 
     > .menu {

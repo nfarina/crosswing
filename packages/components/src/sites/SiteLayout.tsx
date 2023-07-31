@@ -3,19 +3,19 @@ import { useMatchMedia } from "@cyber/hooks/useMatchMedia";
 import { Redirect } from "@cyber/router/redirect";
 import { Route, Switch } from "@cyber/router/switch";
 import { colors } from "@cyber/theme/colors";
-import Menu from "@cyber/theme/icons/Menu.svg";
+import MenuIcon from "@cyber/theme/icons/Menu.svg";
 import React, {
   Fragment,
-  isValidElement,
   ReactElement,
   ReactNode,
+  isValidElement,
   useState,
 } from "react";
 import { styled } from "styled-components";
-import { Clickable } from "../Clickable.js";
 import { NoContent } from "../NoContent.js";
-import { PageTitleProvider } from "./PageTitle.js";
 import { SiteHeader, StyledSiteHeader } from "./SiteHeader.js";
+import { SiteHeaderAccessory } from "./SiteHeaderAccessory.js";
+import { PageTitleProvider } from "./SitePageTitle.js";
 import {
   SiteSidebar,
   SiteSidebarArea,
@@ -37,25 +37,21 @@ export function SiteLayout({
   children,
   title,
   logo,
-  accountButton,
-  tasksButton,
-  searchButton,
+  accessories,
 }: {
   /** Expects <SiteAreaProps> */
   children?: ReactNode;
   title: string;
   logo?: ReactNode;
-  accountButton?: ReactNode;
-  tasksButton?: ReactNode;
-  searchButton?: ReactNode;
+  accessories?: SiteHeaderAccessory[] | null;
 }) {
   // The sidebar defaults to hidden in a mobile layout but can be shown with
   // a button.
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Automaticaly close the sidebar when the current location changes.
+  // Disabled because it's annoying!
   // const { location } = useMobileRouter();
-
   // useEffect(() => {
   //   setSidebarOpen(false);
   // }, [location.href({ excludeSearch: true })]);
@@ -127,24 +123,30 @@ export function SiteLayout({
     return render && <Route key={path} path={fullPath} render={render} />;
   }
 
-  // Create a button to open the sidebar, when on mobile.
-  const sidebarButton = (
-    <SidebarButton onClick={() => setSidebarOpen(true)} children={<Menu />} />
+  const headerAccessories = (accessories ?? []).filter(
+    (accessory) => !mobileLayout || accessory.mobilePlacement !== "sidebar",
+  );
+
+  if (mobileLayout) {
+    // Create a button to open the sidebar, when on mobile.
+    headerAccessories.push({
+      icon: <MenuIcon />,
+      onClick: () => setSidebarOpen(true),
+      mobilePlacement: "sidebar",
+    });
+  }
+
+  const sidebarAccessories = (accessories ?? []).filter(
+    (accessory) => mobileLayout && accessory.mobilePlacement === "sidebar",
   );
 
   return (
     <PageTitleProvider>
       <StyledSiteLayout data-sidebar-open={sidebarOpen}>
-        <SiteHeader
-          siteTitle={title}
-          // leftButton={sidebarButton}
-          tasksButton={tasksButton}
-          searchButton={searchButton}
-          rightButton={mobileLayout ? sidebarButton : accountButton}
-        />
+        <SiteHeader siteTitle={title} accessories={headerAccessories} />
         <SiteSidebar
           logo={logo}
-          accountButton={mobileLayout && accountButton}
+          accessories={sidebarAccessories}
           onLinkClick={onLinkClick}
         >
           {areas.map(renderSidebarArea)}
@@ -287,23 +289,6 @@ export const StyledSiteLayout = styled.div`
         opacity: 1;
         pointer-events: all;
       }
-    }
-  }
-`;
-
-const SidebarButton = styled(Clickable)`
-  display: flex;
-  flex-flow: row;
-  align-items: center;
-  justify-content: flex-end;
-  margin-right: 10px;
-
-  > svg {
-    width: 24px;
-    height: 24px;
-
-    > path {
-      fill: ${colors.text()};
     }
   }
 `;

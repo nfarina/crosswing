@@ -1,7 +1,7 @@
 import { flattenChildren } from "@cyber/hooks/flattenChildren";
 import { Redirect } from "@cyber/router/redirect";
 import { Route, Switch } from "@cyber/router/switch";
-import React, { isValidElement, ReactElement, ReactNode } from "react";
+import React, { ReactElement, ReactNode, isValidElement } from "react";
 import { NoContent } from "../NoContent.js";
 import {
   Toolbar,
@@ -10,7 +10,7 @@ import {
 } from "../toolbar/Toolbar.js";
 import { ToolbarLayout } from "../toolbar/ToolbarLayout.js";
 import { ToolbarTab } from "../toolbar/ToolbarTab.js";
-import { usePageTitle } from "./PageTitle.js";
+import { usePageTitle } from "./SitePageTitle.js";
 
 export interface SiteTabProps {
   path: string;
