@@ -1,11 +1,18 @@
 import React, { lazy } from "react";
-import { SiteLayout } from "../../sites/SiteLayout.js";
+import { SiteArea, SiteLayout, SiteLink } from "../../sites/SiteLayout.js";
+import { NormalTab } from "./tabs/NormalTab.js";
 
-const NavsTab = lazy(() => import("./tabs/NavsTab.js"));
 const SwitchTab = lazy(() => import("./tabs/SwitchTab.js"));
-const ImportTab = lazy(() => import("./tabs/ImportTab.js"));
 const DataTab = lazy(() => import("./tabs/DataTab.js"));
 
 // A kitchen-sink demo app that tests our router's <Suspense> features and
 // how some of our components interact with them.
-export const SuspenseSite = () => <SiteLayout title="Cyber Admin" />;
+export const SuspenseSite = () => (
+  <SiteLayout title="Cyber Admin">
+    <SiteArea path="demos" title="Demos">
+      <SiteLink path="normal" title="Normal" render={() => <NormalTab />} />
+      <SiteLink path="switch" title="Switch" render={() => <SwitchTab />} />
+      <SiteLink path="data" title="Data" render={() => <DataTab />} />
+    </SiteArea>
+  </SiteLayout>
+);

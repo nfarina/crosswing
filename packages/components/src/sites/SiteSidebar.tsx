@@ -55,8 +55,10 @@ export function SiteSidebar({
   // Coerce children to array, flattening fragments and falsy conditionals.
   const areas = flattenChildren(children).filter(isSidebarArea);
 
-  // Pull our route information from context.
-  const { location } = useRouter();
+  // Pull our route information from context. Use "nextLocation" so we can
+  // highlight the link that is *being* navigated to, not the one that is
+  // currently being viewed.
+  const { nextLocation } = useRouter();
 
   function renderArea(area: ReactElement<SiteSidebarAreaProps>) {
     const {
@@ -70,7 +72,7 @@ export function SiteSidebar({
 
     const links = flattenChildren(children).filter(isSidebarLink);
 
-    const isSelected = !!location.tryClaim(path);
+    const isSelected = !!nextLocation.tryClaim(path);
 
     const onAreaClick = () => onLinkClick?.(path);
 
@@ -106,8 +108,8 @@ export function SiteSidebar({
 
     const fullPath = `${areaPath}/${path}`;
 
-    const isSelected = !!location.tryClaim(fullPath);
-    const isAreaSelected = !!location.tryClaim(areaPath);
+    const isSelected = !!nextLocation.tryClaim(fullPath);
+    const isAreaSelected = !!nextLocation.tryClaim(areaPath);
 
     return (
       <Link

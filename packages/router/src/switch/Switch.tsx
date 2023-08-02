@@ -24,16 +24,31 @@ export function Switch({ children }: { children: ReactNode }) {
   const routes = flattenChildren(children).filter(isRoute);
 
   // Pull our route information from context.
-  const { location, nextLocation, history, parent, flags } = useRouter();
+  const {
+    location,
+    nextLocation: anyNextLocation,
+    history,
+    parent,
+    flags,
+  } = useRouter();
+
+  // The nextLocation could be _anywhere_. We only want to pre-render any
+  // UI if the path matches our current location. Otherwise we might
+  // want to highlight a default link or button.
+  const nextLocation =
+    anyNextLocation.claimedPath() === location.claimedPath()
+      ? anyNextLocation
+      : location;
 
   debug(
-    `Render <Switch> with location "${location}" and next location ${nextLocation}`,
+    `Render <Switch> with location "${location}" and next location "${nextLocation}"`,
   );
 
   // Select the best child <Route> to render.
   const selected = selectRoute(routes, location);
+  const nextSelected = selectRoute(routes, nextLocation);
 
-  if (!selected) {
+  if (!selected || !nextSelected) {
     debug(`No routes matched, and no default found. Rendering nothing.`);
     return <noscript />;
   }
@@ -47,7 +62,7 @@ export function Switch({ children }: { children: ReactNode }) {
   const childContext = {
     history,
     location: selected.location,
-    nextLocation,
+    nextLocation: nextSelected.location,
     parent,
     flags,
   };

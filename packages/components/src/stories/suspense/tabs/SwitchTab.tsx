@@ -3,6 +3,7 @@ import { Route, Switch } from "@cyber/router/switch";
 import { colors } from "@cyber/theme/colors";
 import React, { lazy } from "react";
 import { styled } from "styled-components";
+import { usePageTitle } from "../../../sites/SitePageTitle.js";
 import { StyledToolbar, Toolbar } from "../../../toolbar/Toolbar.js";
 import { ToolbarTab } from "../../../toolbar/ToolbarTab.js";
 
@@ -18,6 +19,8 @@ const PanelTwo = lazy(() => {
 });
 
 export default function SwitchTab() {
+  usePageTitle("Switch"); // For <SuspenseSite> story.
+
   return (
     <StyledSwitchTab>
       <Toolbar expandTabs>

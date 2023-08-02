@@ -26,8 +26,7 @@ async function getData() {
   return 42;
 }
 
-// This is a workaround for a bug to get the demo running.
-// TODO: replace with real implementation when the bug is fixed.
+// From https://codesandbox.io/s/005whu?file=/Albums.js&utm_medium=sandpack
 function use(promise) {
   if (promise.status === "fulfilled") {
     return promise.value;
