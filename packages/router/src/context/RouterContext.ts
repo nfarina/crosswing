@@ -4,10 +4,26 @@ import { MemoryHistory } from "../history/MemoryHistory.js";
 import { RouterLocation } from "../history/RouterLocation.js";
 
 export type Router = {
+  /** Current location, potentially partially-claimed. */
   location: RouterLocation;
+  /**
+   * The "next" location that React may be rendering concurrently via <Suspense>
+   * boundary, even if the claimed portion is different than `location`.
+   */
   nextLocation: RouterLocation;
+  /**
+   * The history object that is being used to manage navigation. This is
+   * typically a MemoryHistory or BrowserHistory, but it could be something
+   * else, like a mock history for Storybook.
+   */
   history: MemoryHistory | BrowserHistory;
-  back?: string; // href for Nav descendants to render a Back link.
+  /**
+   * Could be an href for Nav descendants to render a Back link.
+   */
+  back?: string;
+  /**
+   * "Parent" router, if this AppRouter is nexted inside another AppRouter.
+   */
   parent?: Router;
   flags?: RouterFlags;
 };

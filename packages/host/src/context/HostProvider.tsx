@@ -1,4 +1,4 @@
-import { ReactNode, createElement } from "react";
+import React, { ReactNode } from "react";
 import { HostContainer, HostContext } from "./HostContext.js";
 
 export function HostProvider({
@@ -16,5 +16,5 @@ export function HostProvider({
     openUrl: () => {},
   };
 
-  return createElement(HostContext.Provider, { value }, children);
+  return <HostContext.Provider value={value} children={children} />;
 }

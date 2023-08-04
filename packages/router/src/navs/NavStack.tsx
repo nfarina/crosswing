@@ -10,7 +10,7 @@ import { RouterLocation } from "../history/RouterLocation.js";
 
 export type NavStackItem = {
   key: string;
-  context: Router;
+  childContext: Router;
   child: ReactElement<any>;
   ref: RefObject<HTMLDivElement>;
 };
@@ -81,7 +81,7 @@ export function NavStack({
             }}
           >
             <div className="item" ref={item.ref}>
-              <RouterContext.Provider value={item.context}>
+              <RouterContext.Provider value={item.childContext}>
                 {item.child}
               </RouterContext.Provider>
             </div>

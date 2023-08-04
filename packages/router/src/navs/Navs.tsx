@@ -73,7 +73,7 @@ export function Navs({ children }: { children: ReactNode }) {
     // Get the next location in the universe of these <Navs>.
     const { location: nextChildLocation } = selectRoute(routes, nextLocation);
 
-    const context: Router = {
+    const childContext: Router = {
       location: childLocation,
       nextLocation: nextChildLocation,
       history,
@@ -84,7 +84,7 @@ export function Navs({ children }: { children: ReactNode }) {
 
     return {
       key: index + " - " + childLocation.claimedHref(),
-      context,
+      childContext,
       child: route.props.render(childLocation.params),
       ref: createRef(),
     };
