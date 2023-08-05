@@ -21,7 +21,7 @@
     "@cyber/theme": "workspace:^",
     "dayjs": "^1.11.9",
     "react-transition-group": "^4.4.5",
-    "styled-components": "^6.0.5"
+    "styled-components": "^6.0.7"
   },
   "files": [
     "src",

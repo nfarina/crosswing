@@ -13,7 +13,7 @@
     "./storybook": "./src/storybook.js"
   },
   "dependencies": {
-    "styled-components": "^6.0.5"
+    "styled-components": "^6.0.7"
   },
   "files": [
     "src",

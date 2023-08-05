@@ -22,7 +22,7 @@
     "@cyber/shared": "workspace:^",
     "@cyber/theme": "workspace:^",
     "react-transition-group": "^4.4.5",
-    "styled-components": "^6.0.5"
+    "styled-components": "^6.0.7"
   },
   "files": [
     "src",
