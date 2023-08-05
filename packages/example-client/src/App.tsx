@@ -7,7 +7,7 @@ import React from "react";
 import { styled } from "styled-components";
 import Favicon from "../icons/Favicon.svg";
 
-export default function App() {
+export function App() {
   return (
     <MockHostProvider container="ios">
       <CyberApp>

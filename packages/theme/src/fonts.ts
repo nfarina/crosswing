@@ -1,99 +1,66 @@
 import { useEffect } from "react";
-import FiraMonoMediumURL from "../fonts/fira-mono/FiraMono-Medium.ttf";
-import FiraMonoRegularURL from "../fonts/fira-mono/FiraMono-Regular.ttf";
-import FiraSansBlackURL from "../fonts/fira-sans/FiraSans-Black.ttf";
-import FiraSansBoldURL from "../fonts/fira-sans/FiraSans-Bold.ttf";
-import FiraSansMediumURL from "../fonts/fira-sans/FiraSans-Medium.ttf";
-import FiraSansRegularURL from "../fonts/fira-sans/FiraSans-Regular.ttf";
-import LatoBlackURL from "../fonts/lato/Lato-Black.ttf";
-import LatoBoldURL from "../fonts/lato/Lato-Bold.ttf";
-import LatoRegularURL from "../fonts/lato/Lato-Regular.ttf";
+import FiraMonoMedium from "../fonts/fira-mono/FiraMono-Medium.ttf";
+import FiraMonoRegular from "../fonts/fira-mono/FiraMono-Regular.ttf";
+import FiraSansBlack from "../fonts/fira-sans/FiraSans-Black.ttf";
+import FiraSansBold from "../fonts/fira-sans/FiraSans-Bold.ttf";
+import FiraSansMedium from "../fonts/fira-sans/FiraSans-Medium.ttf";
+import FiraSansRegular from "../fonts/fira-sans/FiraSans-Regular.ttf";
+import LatoBlack from "../fonts/lato/Lato-Black.ttf";
+import LatoBold from "../fonts/lato/Lato-Bold.ttf";
+import LatoRegular from "../fonts/lato/Lato-Regular.ttf";
 
 // TODO: make this overridable and defined at the CyberApp element level; not
 // the document level.
 
 export const fonts = {
-  display: fontBuilder({ family: "Fira Sans", weight: "400" }),
-  displayMedium: fontBuilder({ family: "Fira Sans", weight: "500" }),
-  displayBold: fontBuilder({ family: "Fira Sans", weight: "600" }),
-  displayBlack: fontBuilder({ family: "Fira Sans", weight: "800" }),
-  numeric: fontBuilder({ family: "Lato", weight: "400" }),
-  numericBold: fontBuilder({ family: "Lato", weight: "600" }),
-  numericBlack: fontBuilder({ family: "Lato", weight: "800" }),
+  display: fontBuilder({
+    url: FiraSansRegular,
+    family: "Fira Sans",
+    weight: "400",
+  }),
+  displayMedium: fontBuilder({
+    url: FiraSansMedium,
+    family: "Fira Sans",
+    weight: "500",
+  }),
+  displayBold: fontBuilder({
+    url: FiraSansBold,
+    family: "Fira Sans",
+    weight: "600",
+  }),
+  displayBlack: fontBuilder({
+    url: FiraSansBlack,
+    family: "Fira Sans",
+    weight: "800",
+  }),
+  numeric: fontBuilder({
+    url: LatoRegular,
+    family: "Lato",
+    weight: "400",
+  }),
+  numericBold: fontBuilder({
+    url: LatoBold,
+    family: "Lato",
+    weight: "600",
+  }),
+  numericBlack: fontBuilder({
+    url: LatoBlack,
+    family: "Lato",
+    weight: "800",
+  }),
   displayMono: fontBuilder({
+    url: FiraMonoRegular,
     family: "Fira Mono",
     weight: "400",
     monospace: true,
   }),
   displayMonoMedium: fontBuilder({
+    url: FiraMonoMedium,
     family: "Fira Mono",
     weight: "500",
     monospace: true,
   }),
 };
-
-export const CyberFontCSS = `
-
-  /* Fira Sans */
-
-  @font-face {
-    font-family: 'Fira Sans';
-    src: url('${FiraSansRegularURL}') format('truetype');
-    font-weight: 400;
-  }
-
-  @font-face {
-    font-family: 'Fira Sans';
-    src: url('${FiraSansMediumURL}') format('truetype');
-    font-weight: 500;
-  }
-
-  @font-face {
-    font-family: 'Fira Sans';
-    src: url('${FiraSansBoldURL}') format('truetype');
-    font-weight: 600;
-  }
-
-  @font-face {
-    font-family: 'Fira Sans';
-    src: url('${FiraSansBlackURL}') format('truetype');
-    font-weight: 800;
-  }
-
-  /* Lato */
-
-  @font-face {
-    font-family: 'Lato';
-    src: url('${LatoRegularURL}') format('truetype');
-    font-weight: 400;
-  }
-
-  @font-face {
-    font-family: 'Lato';
-    src: url('${LatoBoldURL}') format('truetype');
-    font-weight: 600;
-  }
-
-  @font-face {
-    font-family: 'Lato';
-    src: url('${LatoBlackURL}') format('truetype');
-    font-weight: 800;
-  }
-
-  /* Fira Mono */
-
-  @font-face {
-    font-family: 'Fira Mono';
-    src: url('${FiraMonoRegularURL}') format('truetype');
-    font-weight: 400;
-  }
-
-  @font-face {
-    font-family: 'Fira Mono';
-    src: url('${FiraMonoMediumURL}') format('truetype');
-    font-weight: 500;
-  }
-`;
 
 let fontsInstalled = false;
 function installFonts() {
@@ -102,7 +69,7 @@ function installFonts() {
   // Render our fonts statically only once, to work around flickering during
   // development: https://github.com/styled-components/styled-components/issues/1593#issuecomment-409011695
   const style = document.createElement("style");
-  style.innerHTML = CyberFontCSS;
+  style.innerHTML = getFontVarCSS(Object.values(fonts));
   document.head.appendChild(style);
 
   fontsInstalled = true;
@@ -127,14 +94,17 @@ export type FontBuilder = {
   weight: string;
   style: string;
   monospace: boolean;
+  url: string;
 };
 
 function fontBuilder({
+  url,
   family,
   weight,
   style = "normal",
   monospace = false,
 }: {
+  url: string;
   family: string;
   weight: string;
   style?: string;
@@ -159,10 +129,27 @@ function fontBuilder({
     }`;
   };
 
+  builder.url = url;
   builder.family = family;
   builder.weight = weight;
   builder.style = style;
   builder.monospace = monospace;
 
   return builder;
+}
+
+export function getFontVarCSS(builders: FontBuilder[]) {
+  let css = "";
+
+  for (const { url, family, weight } of builders) {
+    css += `
+      @font-face {
+        font-family: '${family}';
+        src: url('${url}') format('truetype');
+        font-weight: ${weight};
+      }
+    `;
+  }
+
+  return css;
 }
