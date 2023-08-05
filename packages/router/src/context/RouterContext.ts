@@ -1,9 +1,9 @@
 import { createContext, useContext } from "react";
+import { RouterLocation } from "../RouterLocation.js";
 import { BrowserHistory } from "../history/BrowserHistory.js";
 import { MemoryHistory } from "../history/MemoryHistory.js";
-import { RouterLocation } from "../history/RouterLocation.js";
 
-export type Router = {
+export type RouterContextValue = {
   /** Current location, potentially partially-claimed. */
   location: RouterLocation;
   /**
@@ -22,9 +22,9 @@ export type Router = {
    */
   back?: string;
   /**
-   * "Parent" router, if this AppRouter is nexted inside another AppRouter.
+   * "Parent" router, if this Router is nexted inside another Router.
    */
-  parent?: Router;
+  parent?: RouterContextValue;
   flags?: RouterFlags;
 };
 
@@ -37,7 +37,7 @@ export type RouterFlags = {
   isMobileApp?: boolean;
 };
 
-export const RouterContext = createContext<Router>({
+export const RouterContext = createContext<RouterContextValue>({
   location: new RouterLocation(),
   nextLocation: new RouterLocation(),
   history: new MemoryHistory(),
@@ -49,12 +49,12 @@ RouterContext.displayName = "RouterContext";
 
 export function useRouter({
   ignoreDefaultWarning,
-}: { ignoreDefaultWarning?: boolean } = {}): Router {
+}: { ignoreDefaultWarning?: boolean } = {}): RouterContextValue {
   const context = useContext(RouterContext);
 
   if (!ignoreDefaultWarning && context.flags?.isDefault) {
     console.warn(
-      "You are attempting to use a RouterContext without an <AppRouter> ancestor. Things like links may not work.",
+      "You are attempting to use a RouterContext without an <Router> ancestor. Things like links may not work.",
     );
   }
 

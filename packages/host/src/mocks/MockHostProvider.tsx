@@ -1,7 +1,7 @@
 import React, { ReactNode, useMemo } from "react";
 import {
-  Host,
   HostContext,
+  HostContextValue,
   defaultHostContext,
 } from "../context/HostContext.js";
 
@@ -11,7 +11,7 @@ import {
 export function MockHostProvider({
   children,
   ...host
-}: { children?: ReactNode } & Partial<Host>) {
+}: { children?: ReactNode } & Partial<HostContextValue>) {
   const context = useMemo(() => defaultHostContext(host), [host]);
 
   return <HostContext.Provider value={context} children={children} />;

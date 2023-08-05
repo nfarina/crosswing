@@ -1,7 +1,7 @@
 import React, { HTMLAttributes } from "react";
 import { styled } from "styled-components";
 import { getBuilderVarCss } from "./colors/builders.js";
-import { ColorBuilder, colors, shadows } from "./colors/index.js";
+import { ColorBuilder, colors, shadows } from "./colors/colors.js";
 import { CyberFontStyle, fonts } from "./fonts.js";
 
 export function CyberApp({

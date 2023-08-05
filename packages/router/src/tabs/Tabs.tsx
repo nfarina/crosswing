@@ -12,11 +12,15 @@ import React, {
   useState,
 } from "react";
 import { styled } from "styled-components";
+import { RouterLocation } from "../RouterLocation.js";
 import { RouterContext, useRouter } from "../context/RouterContext.js";
-import { RouterLocation } from "../history/RouterLocation.js";
 import { Redirect } from "../redirect/Redirect.js";
 import { StyledTabBar, TabBar, TabBarContext } from "./TabBar.js";
 import { TabProps } from "./TabLink.js";
+
+export * from "./TabBar.js";
+export * from "./TabLink.js";
+export * from "./UnreadBadge.js";
 
 const debug = Debug("router:Tabs");
 

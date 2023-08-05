@@ -6,19 +6,19 @@ import React, {
   useLayoutEffect,
   useState,
 } from "react";
+import { RouterLocation } from "./RouterLocation.js";
 import {
   RouterContext,
   RouterFlags,
   useRouter,
-} from "../context/RouterContext.js";
-import { Redirect } from "../redirect/Redirect.js";
-import { BrowserHistory } from "./BrowserHistory.js";
-import { MemoryHistory } from "./MemoryHistory.js";
-import { RouterLocation } from "./RouterLocation.js";
+} from "./context/RouterContext.js";
+import { BrowserHistory } from "./history/BrowserHistory.js";
+import { MemoryHistory } from "./history/MemoryHistory.js";
+import { Redirect } from "./redirect/Redirect.js";
 
-const debug = Debug("router:AppRouter");
+const debug = Debug("router:Router");
 
-export function AppRouter({
+export function Router({
   path = "",
   render,
   history: customHistory,
@@ -29,7 +29,7 @@ export function AppRouter({
   history?: MemoryHistory | BrowserHistory;
   isMobileApp?: boolean;
 }) {
-  // AppRouters can be nested! You might need to talk to your parent router
+  // Routers can be nested! You might need to talk to your parent router
   // in rare situations.
   const parentRouter = useRouter({ ignoreDefaultWarning: true });
   const parent = parentRouter.flags?.isDefault ? undefined : parentRouter;
@@ -72,7 +72,7 @@ export function AppRouter({
   }, []);
 
   debug(
-    `Render <AppRouter> with location "${location}" and next location "${nextLocation}"`,
+    `Render <Router> with location "${location}" and next location "${nextLocation}"`,
   );
 
   // Inspect the current location to see what we should render.

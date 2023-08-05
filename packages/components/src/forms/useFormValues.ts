@@ -1,4 +1,4 @@
-import { NavAccessory } from "@cyber/router/navs/NavAccessoryView.js";
+import { NavAccessory } from "@cyber/router/navs";
 import { ButtonHTMLAttributes, FormHTMLAttributes } from "react";
 import { InputValue } from "./useInputValue.js";
 import { ObjectValue } from "./useObjectValue.js";

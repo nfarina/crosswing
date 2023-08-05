@@ -1,5 +1,7 @@
 import { gradientColor, hexColor, varColor } from "./builders.js";
 
+export * from "./builders.js";
+
 export {
   gradientColor,
   hexColor,

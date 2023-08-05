@@ -5,20 +5,20 @@ import { action } from "@storybook/addon-actions";
 import { Meta } from "@storybook/react";
 import React, { useContext } from "react";
 import { styled } from "styled-components";
-import { RouterContext } from "../context/RouterContext.js";
-import { Link } from "../link/Link.js";
-import { NavLayout } from "../navs/NavLayout.js";
-import { NavRoute, Navs } from "../navs/Navs.js";
-import { BrowserSimulator } from "../storybook/BrowserSimulator.js";
-import { Route, Switch } from "../switch/Switch.js";
-import { Tab, Tabs } from "../tabs/Tabs.js";
-import { AppRouter } from "./AppRouter.js";
+import { Link } from "./Link.js";
+import { Router } from "./Router.js";
+import { RouterContext } from "./context/RouterContext.js";
+import { NavLayout } from "./navs/NavLayout.js";
+import { NavRoute, Navs } from "./navs/Navs.js";
+import { BrowserSimulator } from "./storybook/BrowserSimulator.js";
+import { Route, Switch } from "./switch/Switch.js";
+import { Tab, Tabs } from "./tabs/Tabs.js";
 
 export default {
-  component: AppRouter,
+  component: Router,
   decorators: [CyberAppDecorator({ layout: "mobile" })],
   parameters: { layout: "centered" },
-} satisfies Meta<typeof AppRouter>;
+} satisfies Meta<typeof Router>;
 
 export const StaticSwitch = () => (
   <StyledBrowserSimulator>

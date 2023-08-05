@@ -244,6 +244,9 @@ importers:
       '@cyber/host':
         specifier: workspace:^
         version: link:../host
+      '@cyber/shared':
+        specifier: workspace:^
+        version: link:../shared
       '@cyber/theme':
         specifier: workspace:^
         version: link:../theme

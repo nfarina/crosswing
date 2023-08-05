@@ -1,5 +1,5 @@
 import { useRouter } from "@cyber/router/context";
-import { NavLayout } from "@cyber/router/navs/NavLayout.js";
+import { NavLayout } from "@cyber/router/navs";
 import { colors } from "@cyber/theme/colors";
 import React, { lazy } from "react";
 import { styled } from "styled-components";

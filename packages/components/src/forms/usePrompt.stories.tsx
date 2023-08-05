@@ -1,7 +1,9 @@
-import { ButtonContainer, ModalDecorator } from "@cyber/modals/storybook";
+import { ModalDecorator } from "@cyber/modals/storybook";
+import { colors } from "@cyber/theme/colors";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import React from "react";
+import { styled } from "styled-components";
 import { Button } from "../Button.js";
 import { urlTransformer } from "./urlTransformer.js";
 import { usePrompt } from "./usePrompt.js";
@@ -99,3 +101,15 @@ export function WithTransformerAndValidation() {
     </ButtonContainer>
   );
 }
+
+const ButtonContainer = styled.div`
+  background: ${colors.textBackground()};
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+
+  > * + * {
+    margin-top: 10px;
+  }
+`;

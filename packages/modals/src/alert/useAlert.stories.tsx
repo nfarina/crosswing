@@ -2,8 +2,8 @@ import { CyberAppDecorator } from "@cyber/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import React from "react";
 import { useAlert } from "../alert/useAlert.js";
-import { Button } from "../storybook/Button.js";
-import { ButtonContainer, ModalDecorator } from "../storybook/index.js";
+import { Button, ButtonContainer } from "../storybook/Button.js";
+import { ModalDecorator } from "../storybook/ModalDecorator.js";
 
 export default {
   component: useAlert,

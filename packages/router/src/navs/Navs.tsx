@@ -8,11 +8,16 @@ import React, {
   useEffect,
   useRef,
 } from "react";
-import { Router, useRouter } from "../context/RouterContext.js";
-import { MatchParams, RouterLocation } from "../history/RouterLocation.js";
+import { RouterContextValue, useRouter } from "../context/RouterContext.js";
 import { Redirect } from "../redirect/Redirect.js";
+import { MatchParams, RouterLocation } from "../RouterLocation.js";
 import { NavProps } from "./NavLayout.js";
 import { NavStack, NavStackItem } from "./NavStack.js";
+
+export * from "./NavAccessoryView.js";
+export * from "./NavLayout.js";
+export * from "./NavStack.js";
+export * from "./NavTitleView.js";
 
 const debug = Debug("router:Navs");
 
@@ -73,7 +78,7 @@ export function Navs({ children }: { children: ReactNode }) {
     // Get the next location in the universe of these <Navs>.
     const { location: nextChildLocation } = selectRoute(routes, nextLocation);
 
-    const childContext: Router = {
+    const childContext: RouterContextValue = {
       location: childLocation,
       nextLocation: nextChildLocation,
       history,

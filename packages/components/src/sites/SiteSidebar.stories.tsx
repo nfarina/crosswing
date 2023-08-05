@@ -1,4 +1,5 @@
-import { AppRouter, MemoryHistory } from "@cyber/router/history";
+import { Router } from "@cyber/router";
+import { MemoryHistory } from "@cyber/router/history/memory";
 import { colors } from "@cyber/theme/colors";
 import Globe from "@cyber/theme/icons/Globe.svg";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
@@ -18,7 +19,7 @@ export default {
 } satisfies Meta<typeof SiteSidebar>;
 
 export const Default = () => (
-  <AppRouter
+  <Router
     render={() => (
       <SiteSidebar logo={<Logo />}>
         <SiteSidebarArea path="users" title="Users" />
@@ -33,7 +34,7 @@ export const Expandable = () => {
   const [history] = useState(() => new MemoryHistory("/users/active"));
 
   return (
-    <AppRouter
+    <Router
       history={history}
       render={() => (
         <SiteSidebar logo={<Logo />}>

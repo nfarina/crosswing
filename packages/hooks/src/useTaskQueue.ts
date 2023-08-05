@@ -25,7 +25,7 @@ export interface Task {
   run(): Promise<void>;
 }
 
-export interface TaskQueue {
+export type TaskQueueContextValue = {
   /** All tasks currently running. */
   tasks: Set<Task>;
   /** Convenience method that filters out only the tasks of a given class type. */
@@ -34,9 +34,9 @@ export interface TaskQueue {
   queueTask(task: Task): void;
   /** If a Task encountered an error, it will be propagated to here. */
   lastError: Error | null;
-}
+};
 
-export const TaskQueueContext = createContext<TaskQueue>({
+export const TaskQueueContext = createContext<TaskQueueContextValue>({
   tasks: new Set(),
   tasksOfType: invariantViolation,
   queueTask: invariantViolation,
@@ -132,7 +132,7 @@ export function TaskQueueProvider({ children }: { children: ReactNode }) {
 /**
  * Grab the current TaskQueue from React.Context.
  */
-export function useTaskQueue(): TaskQueue {
+export function useTaskQueue(): TaskQueueContextValue {
   return useContext(TaskQueueContext);
 }
 

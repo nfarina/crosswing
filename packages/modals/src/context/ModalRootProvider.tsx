@@ -3,6 +3,10 @@ import { styled } from "styled-components";
 import { ModalContext, invariantViolation } from "./ModalContext.js";
 import { ModalContextProvider } from "./ModalContextProvider.js";
 
+export * from "./ModalContext.js";
+export * from "./ModalContextProvider.js";
+export * from "./useModal.js";
+
 /**
  * Provides a surface for modals to be rendered inside. The result is an element
  * that you can size and position like any other <div>, that will render any

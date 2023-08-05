@@ -4,8 +4,8 @@ import { fonts } from "@cyber/theme/fonts";
 import PlaceholderIcon from "@cyber/theme/icons/Placeholder.svg";
 import React, { MouseEvent, ReactElement, ReactNode } from "react";
 import { styled } from "styled-components";
+import { Link } from "../Link.js";
 import { useRouter } from "../context/RouterContext.js";
-import { Link } from "../link/Link.js";
 import { UnreadBadge } from "./UnreadBadge.js";
 
 export interface TabProps {

@@ -3,8 +3,8 @@ import { fonts } from "@cyber/theme/fonts";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import React, { useCallback, useState } from "react";
 import { styled } from "styled-components";
-import { Button } from "../storybook/Button.js";
-import { ButtonContainer, ModalDecorator } from "../storybook/index.js";
+import { Button, ButtonContainer } from "../storybook/Button.js";
+import { ModalDecorator } from "../storybook/ModalDecorator.js";
 import { useDialog } from "./useDialog.js";
 
 export default {

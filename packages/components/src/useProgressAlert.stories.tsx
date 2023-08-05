@@ -1,5 +1,5 @@
 import { useAsyncTask } from "@cyber/hooks/useAsyncTask";
-import { useErrorAlert } from "@cyber/modals/alert";
+import { useErrorAlert } from "@cyber/modals/alert/error";
 import { ModalDecorator } from "@cyber/modals/storybook";
 import { wait } from "@cyber/shared/wait";
 import { CyberAppDecorator } from "@cyber/theme/storybook";

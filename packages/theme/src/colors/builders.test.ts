@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { colors } from "./index.js";
+import { colors } from "./colors.js";
 
 test("transforms colors", () => {
   const rendered = colors.mediumBlue({

@@ -3,7 +3,7 @@ import { fonts } from "@cyber/theme/fonts";
 import { CyberAppDecorator } from "@cyber/theme/storybook";
 import React, { useState } from "react";
 import { styled } from "styled-components";
-import { AppRouter } from "../history/AppRouter.js";
+import { Router } from "../Router.js";
 import { MemoryHistory } from "../history/MemoryHistory.js";
 import { Tab, Tabs } from "./Tabs.js";
 
@@ -17,7 +17,7 @@ export const Normal = () => {
   const [history] = useState(() => new MemoryHistory());
 
   return (
-    <AppRouter
+    <Router
       history={history}
       render={() => (
         <Tabs>

@@ -6,6 +6,8 @@ import { keyframes, styled } from "styled-components";
 import { Modal, useModal } from "../context/useModal.js";
 import { BannerView } from "./BannerView.js";
 
+export * from "./BannerView.js";
+
 const AUTO_DISMISS_TIME = 2000;
 
 export interface Banner {

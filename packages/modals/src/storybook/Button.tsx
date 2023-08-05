@@ -19,3 +19,15 @@ export const Button = styled.button`
   align-items: center;
   justify-content: center;
 `;
+
+export const ButtonContainer = styled.div`
+  background: ${colors.textBackground()};
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+
+  > * + * {
+    margin-top: 10px;
+  }
+`;

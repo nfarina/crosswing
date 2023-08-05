@@ -3,6 +3,8 @@ import React, { CSSProperties, HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
 import { PopupChildProps } from "./usePopup.js";
 
+export * from "./usePopup.js";
+
 export function PopupView({
   placement = "below",
   background,

@@ -1,7 +1,6 @@
 import { useRouter } from "@cyber/router/context";
 import { Link } from "@cyber/router/link";
-import { NavAccessoryView } from "@cyber/router/navs/NavAccessoryView.js";
-import { NavTitleView } from "@cyber/router/navs/NavTitleView.js";
+import { NavAccessoryView, NavTitleView } from "@cyber/router/navs";
 import { colors } from "@cyber/theme/colors";
 import { fonts } from "@cyber/theme/fonts";
 import BackIcon from "@cyber/theme/icons/Back.svg";
@@ -85,13 +84,13 @@ export function SitePageTitle({
   );
 }
 
-interface PageTitleData {
+export type PageTitleContextValue = {
   crumbs: Map<number, Breadcrumb>;
   setCrumb(id: number, crumb: Breadcrumb): void;
   removeCrumb(id: number): void;
-}
+};
 
-export const PageTitleContext = createContext<PageTitleData>({
+export const PageTitleContext = createContext<PageTitleContextValue>({
   crumbs: new Map(),
   setCrumb: () => {
     throw new Error("Expected a <PageTitleProvider> as an ancestor!");

@@ -4,7 +4,7 @@
   "sideEffects": false,
   "version": "0.0.0",
   "exports": {
-    "./context": "./src/context/index.js",
+    "./context": "./src/context/HostProvider.js",
     "./mocks": "./src/mocks/MockHostProvider.js",
     "./plugins/SafeArea": "./src/plugins/SafeArea.js",
     "./plugins/useHostStatusBar": "./src/plugins/HostStatusBar.js",

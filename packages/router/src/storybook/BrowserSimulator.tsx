@@ -9,8 +9,8 @@ import React, {
   useState,
 } from "react";
 import { styled } from "styled-components";
+import { Router } from "../Router.js";
 import { RouterContext } from "../context/RouterContext.js";
-import { AppRouter } from "../history/AppRouter.js";
 import { MemoryHistory } from "../history/MemoryHistory.js";
 
 export function BrowserSimulator({
@@ -26,7 +26,7 @@ export function BrowserSimulator({
   const [history] = useState(() => new MemoryHistory(initialPath));
 
   return (
-    <AppRouter
+    <Router
       path={rootPath}
       history={history}
       render={() => (

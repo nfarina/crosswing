@@ -1,6 +1,6 @@
 import Debug from "debug";
+import { RouterLocation } from "../RouterLocation.js";
 import { NavigateListener } from "./BrowserHistory.js";
-import { RouterLocation } from "./RouterLocation.js";
 
 const debug = Debug("router:MemoryHistory");
 

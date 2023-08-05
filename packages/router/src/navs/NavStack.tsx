@@ -5,12 +5,16 @@ import { easing } from "@cyber/theme/easing";
 import React, { ReactElement, RefObject } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { styled } from "styled-components";
-import { Router, RouterContext, useRouter } from "../context/RouterContext.js";
-import { RouterLocation } from "../history/RouterLocation.js";
+import { RouterLocation } from "../RouterLocation.js";
+import {
+  RouterContext,
+  RouterContextValue,
+  useRouter,
+} from "../context/RouterContext.js";
 
 export type NavStackItem = {
   key: string;
-  childContext: Router;
+  childContext: RouterContextValue;
   child: ReactElement<any>;
   ref: RefObject<HTMLDivElement>;
 };

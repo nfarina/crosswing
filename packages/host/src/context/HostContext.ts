@@ -1,7 +1,7 @@
 import { DeepPartial, merge } from "@cyber/shared/merge";
 import { createContext, useContext } from "react";
 
-export type Host = {
+export type HostContextValue = {
   container: HostContainer;
   viewport: HostViewport;
   /** Attempts to scroll to the top based on what looks scrolled, if on iOS. Otherwise does nothing. */
@@ -18,15 +18,19 @@ export interface HostViewport {
   keyboardVisible?: boolean;
 }
 
-export const HostContext = createContext<Host>(defaultHostContext());
+export const HostContext = createContext<HostContextValue>(
+  defaultHostContext(),
+);
 HostContext.displayName = "HostContext";
 
-export function useHost(): Host {
+export function useHost(): HostContextValue {
   return useContext(HostContext);
 }
 
-export function defaultHostContext(mergeContext: DeepPartial<Host> = {}): Host {
-  const defaultContext: Host = {
+export function defaultHostContext(
+  mergeContext: DeepPartial<HostContextValue> = {},
+): HostContextValue {
+  const defaultContext: HostContextValue = {
     container: "web",
     viewport: {},
     scrollToTop: () => {},

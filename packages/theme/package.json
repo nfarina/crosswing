@@ -4,8 +4,11 @@
   "sideEffects": false,
   "version": "0.0.0",
   "exports": {
-    "./colors": "./src/colors/index.js",
-    "./*": "./src/*.js",
+    "./colors": "./src/colors/colors.js",
+    "./app": "./src/app.js",
+    "./containers": "./src/containers.js",
+    "./easing": "./src/easing.js",
+    "./fonts": "./src/fonts.js",
     "./icons/*": "./icons/*",
     "./storybook": "./src/storybook.js"
   },

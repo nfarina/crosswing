@@ -15,13 +15,7 @@ import {
 } from "./ProcessRunner.js";
 import { getOneTask, getTasks } from "./tasks.js";
 
-let dirname = fileURLToPath(import.meta.url);
-
-// If we were run like `vite-note src/server/index.ts` instead of `src/server`,
-// then dirname will be the path to the file itself, not the directory.
-if (dirname.endsWith(".ts")) {
-  dirname = path.dirname(dirname);
-}
+let dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const DIST_DIR = path.resolve(dirname, "../client/dist");
 

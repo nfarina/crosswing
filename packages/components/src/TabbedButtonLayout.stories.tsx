@@ -134,7 +134,7 @@ export const WithRouter = () => (
   </BrowserSimulator>
 );
 
-// This has to be a separate component to get the AppRouter context from
+// This has to be a separate component to get the Router context from
 // BrowserSimulator.
 function RoutedRedFish() {
   const { history } = useRouter();

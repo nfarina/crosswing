@@ -1,6 +1,8 @@
 import React, { ReactNode } from "react";
 import { HostContainer, HostContext } from "./HostContext.js";
 
+export * from "./HostContext.js";
+
 export function HostProvider({
   container = "web",
   children,

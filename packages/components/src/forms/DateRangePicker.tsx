@@ -1,4 +1,4 @@
-import { NavLayout } from "@cyber/router/navs/NavLayout.js";
+import { NavLayout } from "@cyber/router/navs";
 import React, { useState } from "react";
 import { DateRange } from "./DateRange.js";
 import { DateRangeControl } from "./DateRangeControl.js";

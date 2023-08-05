@@ -4,15 +4,16 @@
   "sideEffects": false,
   "version": "0.0.0",
   "exports": {
-    "./actions": "./src/actions/index.js",
-    "./alert": "./src/alert/index.js",
-    "./banner": "./src/banner/index.js",
+    "./actions": "./src/actions/useActions.js",
+    "./alert": "./src/alert/useAlert.js",
+    "./alert/error": "./src/alert/useErrorAlert.js",
+    "./banner": "./src/banner/useBanner.js",
     "./confirm": "./src/confirm/useConfirm.js",
-    "./context": "./src/context/index.js",
+    "./context": "./src/context/ModalRootProvider.js",
     "./dialog": "./src/dialog/useDialog.js",
-    "./popup": "./src/popup/index.js",
+    "./popup": "./src/popup/PopupView.js",
     "./sheet": "./src/sheet/useSheet.js",
-    "./storybook": "./src/storybook/index.js"
+    "./storybook": "./src/storybook/ModalDecorator.js"
   },
   "dependencies": {
     "@cyber/hooks": "workspace:^",

@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { styled } from "styled-components";
 import { ModalRootProvider } from "../context/ModalRootProvider.js";
 import { Button } from "../storybook/Button.js";
-import { ModalDecorator } from "../storybook/index.js";
+import { ModalDecorator } from "../storybook/ModalDecorator.js";
 import { PopupView } from "./PopupView.js";
 import { usePopup } from "./usePopup.js";
 

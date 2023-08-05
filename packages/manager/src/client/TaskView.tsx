@@ -4,7 +4,7 @@ import { StyledToggle, Toggle } from "@cyber/components/forms/Toggle";
 import { useAsyncTask } from "@cyber/hooks/useAsyncTask";
 import { useHotkey } from "@cyber/hooks/useHotkey";
 import { usePersistedState } from "@cyber/hooks/usePersistedState";
-import { useErrorAlert } from "@cyber/modals/alert";
+import { useErrorAlert } from "@cyber/modals/alert/error";
 import { wait } from "@cyber/shared/wait";
 import { colors, shadows } from "@cyber/theme/colors";
 import { fonts } from "@cyber/theme/fonts";

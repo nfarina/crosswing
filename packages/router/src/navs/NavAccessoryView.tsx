@@ -3,7 +3,7 @@ import { colors } from "@cyber/theme/colors";
 import { fonts } from "@cyber/theme/fonts";
 import React, { MouseEvent, ReactNode } from "react";
 import { styled } from "styled-components";
-import { Link } from "../link/Link.js";
+import { Link } from "../Link.js";
 
 export interface NavAccessory {
   icon?: ReactNode;

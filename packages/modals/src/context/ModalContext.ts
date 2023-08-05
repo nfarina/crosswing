@@ -3,7 +3,7 @@ import { MutableRefObject, ReactNode, createContext } from "react";
 /**
  * The shape of the modal context.
  */
-export interface ModalContextType {
+export type ModalContextValue = {
   showModal(
     key: string,
     modal: (...args: any) => ReactNode,
@@ -12,12 +12,12 @@ export interface ModalContextType {
   hideModal(key: string): void;
   modalRoot: MutableRefObject<HTMLDivElement | null>;
   allowDesktopPresentation?: boolean;
-}
+};
 
 /**
  * Modal Context Object
  */
-export const ModalContext = createContext<ModalContextType>({
+export const ModalContext = createContext<ModalContextValue>({
   showModal: invariantViolation,
   hideModal: invariantViolation,
   modalRoot: { current: null },

@@ -1,8 +1,10 @@
 import { action } from "@storybook/addon-actions";
 import React from "react";
+import { RouterLocation } from "../RouterLocation.js";
 import { RouterContext } from "../context/RouterContext.js";
-import { RouterLocation } from "../history/RouterLocation.js";
 import { TabBarContext } from "../tabs/TabBar.js";
+
+export * from "./BrowserSimulator.js";
 
 // Useful for hosting Storybook components designed to be presented
 // in a mobile-app setting.

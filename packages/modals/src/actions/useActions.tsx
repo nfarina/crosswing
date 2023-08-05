@@ -6,6 +6,8 @@ import { keyframes, styled } from "styled-components";
 import { Modal, useModal } from "../context/useModal.js";
 import { ActionItem, ActionMenu } from "./ActionMenu.js";
 
+export * from "./ActionMenu.js";
+
 export function useActions<T extends any[]>(
   actions: (...args: T) => ActionItem[],
 ): Modal<T> {

@@ -4,15 +4,19 @@
   "sideEffects": false,
   "version": "0.0.0",
   "exports": {
+    ".": "./src/Router.js",
     "./context": "./src/context/RouterContext.js",
-    "./history": "./src/history/index.js",
-    "./link": "./src/link/Link.js",
+    "./location": "./src/RouterLocation.js",
+    "./history/browser": "./src/history/BrowserHistory.js",
+    "./history/memory": "./src/history/MemoryHistory.js",
+    "./link": "./src/Link.js",
     "./mocks": "./src/mocks/MockRouter.js",
-    "./navs/*.js": "./src/navs/*.js",
+    "./navs": "./src/navs/Navs.js",
+    "./navs/useAutoStatusBar": "./src/navs/useAutoStatusBar.js",
     "./switch": "./src/switch/Switch.js",
     "./redirect": "./src/redirect/Redirect.js",
-    "./tabs": "./src/tabs/index.js",
-    "./storybook": "./src/storybook/index.js"
+    "./tabs": "./src/tabs/Tabs.js",
+    "./storybook": "./src/storybook/RouterDecorator.js"
   },
   "dependencies": {
     "@cyber/hooks": "workspace:^",

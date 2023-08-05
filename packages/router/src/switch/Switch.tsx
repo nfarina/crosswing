@@ -2,8 +2,8 @@ import { flattenChildren } from "@cyber/hooks/flattenChildren";
 import Debug from "debug";
 import React, { isValidElement, ReactElement, ReactNode } from "react";
 import { RouterContext, useRouter } from "../context/RouterContext.js";
-import { MatchParams, RouterLocation } from "../history/RouterLocation.js";
 import { Redirect } from "../redirect/Redirect.js";
+import { MatchParams, RouterLocation } from "../RouterLocation.js";
 
 const debug = Debug("router:Switch");
 

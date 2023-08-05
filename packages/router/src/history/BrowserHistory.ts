@@ -1,5 +1,5 @@
 import Debug from "debug";
-import { RouterLocation } from "./RouterLocation.js";
+import { RouterLocation } from "../RouterLocation.js";
 
 const debug = Debug("router:BrowserHistory");
 
@@ -11,8 +11,8 @@ export class BrowserHistory {
   private listeners: Set<NavigateListener> = new Set();
 
   // You can set a base path and it will cause all navigation events to be
-  // "rooted" under this path. Useful for embedding an <AppRouter> inside
-  // another <AppRouter> - the child router will live in its own "universe" and
+  // "rooted" under this path. Useful for embedding an <Router> inside
+  // another <Router> - the child router will live in its own "universe" and
   // navigating to absolute paths won't cause it to leave that universe since
   // basePath is always prepended.
   public basePath: string;
