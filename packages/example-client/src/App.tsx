@@ -7,13 +7,13 @@ import React from "react";
 import { styled } from "styled-components";
 import Favicon from "../icons/Favicon.svg";
 
-export default function AppContainer() {
+export default function App() {
   return (
     <MockHostProvider container="ios">
       <CyberApp>
         <ModalRootProvider>
-          <MobileAppFrame restorationKey={AppContainer}>
-            <App />
+          <MobileAppFrame restorationKey={App}>
+            <AppContent />
           </MobileAppFrame>
         </ModalRootProvider>
       </CyberApp>
@@ -21,7 +21,7 @@ export default function AppContainer() {
   );
 }
 
-function App() {
+function AppContent() {
   return (
     <StyledApp>
       <Button primary title="Hello World" icon={<Favicon />} />

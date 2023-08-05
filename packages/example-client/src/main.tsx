@@ -1,12 +1,12 @@
 import { CyberRootStyle } from "@cyber/theme/containers";
 import React, { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import AppContainer from "./App.js";
+import App from "./App.js";
 
 const root = createRoot(document.getElementById("cyber-root")!);
 root.render(
   <StrictMode>
     <CyberRootStyle />
-    <AppContainer />
+    <App />
   </StrictMode>,
 );
