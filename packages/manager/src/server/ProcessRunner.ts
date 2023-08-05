@@ -5,7 +5,7 @@ import pidusage from "pidusage";
 import psTree from "ps-tree";
 import { fileURLToPath } from "url";
 import { ProcessStats } from "../shared/types.js";
-import { ServerTask } from "./tasks.js";
+import { ServerTask } from "./ServerTasks.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

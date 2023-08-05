@@ -9,7 +9,7 @@
   ],
   "author": "nfarina@gmail.com",
   "scripts": {
-    "dev": "cd packages/manager; vite-node src/server/server.ts",
+    "dev": "cd packages/manager; vite-node src/server/server.ts -- ../../tasks.json",
     "test": "pnpm run prettier && pnpm run circular && pnpm run typecheck && pnpm run vitest",
     "vitest": "vitest --run",
     "test-ui": "vitest --ui --coverage --open=false --api.port 2703",

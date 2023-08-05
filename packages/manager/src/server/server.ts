@@ -1,6 +1,7 @@
 import { wait } from "@cyber/shared/wait";
 import cors from "@koa/cors";
 import Router from "@koa/router";
+import fs from "fs";
 import Koa from "koa";
 import { koaBody } from "koa-body";
 import serve from "koa-static";
@@ -13,7 +14,29 @@ import {
   getRunner,
   setRunner,
 } from "./ProcessRunner.js";
-import { getOneTask, getTasks } from "./tasks.js";
+import { ServerTasks } from "./ServerTasks.js";
+
+// This script accepts a single argument, the path to tasks.json.
+// It then reads the file and parses it as JSON.
+// This is a workaround for the fact that we can't import JSON files in ESM.
+let tasksJsonPath = process.argv[2];
+
+if (!tasksJsonPath) {
+  // Maybe it's in the current directory?
+  tasksJsonPath = path.resolve(process.cwd(), "tasks.json");
+
+  if (!fs.existsSync(tasksJsonPath)) {
+    console.error(
+      "Usage: vite-node server.js <path to tasks.json>\n\n" +
+        "You can also run this script from the root of the project, " +
+        "in which case it will look for tasks.json in the current directory.",
+    );
+    process.exit(1);
+  }
+}
+
+const tasksJson = JSON.parse(fs.readFileSync(tasksJsonPath, "utf8"));
+const tasks = ServerTasks.fromJson(tasksJson);
 
 let dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -25,7 +48,7 @@ const router = new Router();
 router.get("/api/status", async (ctx) => {
   const status: ServerStatus = { tasks: {} };
 
-  for (const task of getTasks()) {
+  for (const task of tasks.all()) {
     const runner = getRunner(task);
 
     status.tasks[task.name] = {
@@ -53,7 +76,7 @@ router.post("/api/tasks/running", (ctx) => {
 });
 
 async function startTask(name: string) {
-  const task = await getOneTask(name);
+  const task = tasks.getOne(name);
 
   // Start any prerequisites first.
   for (const subtask of task.requires ?? []) {
@@ -70,7 +93,7 @@ async function startTask(name: string) {
 }
 
 async function stopTask(name: string) {
-  const task = await getOneTask(name);
+  const task = tasks.getOne(name);
   getRunner(task)?.stop();
   deleteRunner(task);
 }
@@ -94,7 +117,8 @@ Visit http://localhost:2700 to start local development services.
 });
 
 process.once("SIGINT", async function (code: number) {
-  const allTasks = getTasks();
+  const allTasks = tasks.all();
+
   if (allTasks.some((task) => getRunner(task))) {
     console.log("Ctrl-C received; shutting down child processes…");
 
