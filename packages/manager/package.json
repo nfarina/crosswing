@@ -4,7 +4,7 @@
   "sideEffects": false,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite --config ../../vite.config.ts --port 2800 src/client",
+    "dev": "vite --config ../../vite.config.ts --port 2750 src/client",
     "build": "vite --config ../../vite.config.ts build src/client",
     "analyze": "cd src/client; vite-bundle-visualizer"
   },
