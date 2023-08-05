@@ -48,6 +48,9 @@ importers:
       '@storybook/testing-library':
         specifier: ^0.2.0
         version: 0.2.0
+      '@types/animejs':
+        specifier: ^3.1.7
+        version: 3.1.7
       '@types/debug':
         specifier: ^4.1.8
         version: 4.1.8
@@ -166,9 +169,18 @@ importers:
 
   packages/host:
     dependencies:
+      '@cyber/hooks':
+        specifier: workspace:^
+        version: link:../hooks
       '@cyber/shared':
         specifier: workspace:^
         version: link:../shared
+      animejs:
+        specifier: ^3.2.1
+        version: 3.2.1
+      styled-components:
+        specifier: ^6.0.5
+        version: 6.0.5(babel-plugin-styled-components@2.1.4)(react-dom@18.2.0)(react@18.2.0)
 
   packages/manager:
     dependencies:
@@ -3135,6 +3147,10 @@ packages:
       '@types/node': 20.3.3
     dev: false
 
+  /@types/animejs@3.1.7:
+    resolution: {integrity: sha512-kFSyjM+fLo3oE9noWEtUvF82ttN8fTrKohiEMIrSzEzEjnsCmtO0rBCUQBlSPEb2w8vfN+v4/Zo0tK21Bgmq4g==}
+    dev: true
+
   /@types/aria-query@5.0.1:
     resolution: {integrity: sha512-XTIieEY+gvJ39ChLcB4If5zHtPxt3Syj5rgZR+e1ctpmK8NjPf0zFqsz4JpLJT0xla9GFDKjy8Cpu331nrmE1Q==}
     dev: true
@@ -3657,6 +3673,10 @@ packages:
       clean-stack: 2.2.0
       indent-string: 4.0.0
     dev: true
+
+  /animejs@3.2.1:
+    resolution: {integrity: sha512-sWno3ugFryK5nhiDm/2BKeFCpZv7vzerWUcUPyAZLDhMek3+S/p418ldZJbJXo5ZUOpfm2kP2XRO4NJcULMy9A==}
+    dev: false
 
   /ansi-regex@5.0.1:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}

@@ -1,22 +1,7 @@
-import { DeepPartial, merge } from "@cyber/shared/merge";
 import { createContext, useContext } from "react";
-
-export type HostContextValue = {
-  container: HostContainer;
-  viewport: HostViewport;
-  /** Attempts to scroll to the top based on what looks scrolled, if on iOS. Otherwise does nothing. */
-  scrollToTop(): void;
-  /** Delays automatic updates (browser reloads) for the given amount of time. */
-  delayUpdates(duration: number): void;
-  openUrl(url: string): void;
-};
-
-export type HostContainer = "ios" | "android" | "electron" | "web";
-
-export interface HostViewport {
-  height?: number;
-  keyboardVisible?: boolean;
-}
+import { detectContainer } from "../util/ipc.js";
+import { openExternalLink } from "../util/openExternalLink.js";
+import { DeepLink, HostContextValue } from "../util/types.js";
 
 export const HostContext = createContext<HostContextValue>(
   defaultHostContext(),
@@ -28,17 +13,57 @@ export function useHost(): HostContextValue {
 }
 
 export function defaultHostContext(
-  mergeContext: DeepPartial<HostContextValue> = {},
+  merge?: Partial<HostContextValue>,
 ): HostContextValue {
-  const defaultContext: HostContextValue = {
-    container: "web",
+  return {
+    container: detectContainer(),
     viewport: {},
+    safeArea: {
+      top: "0px",
+      right: "0px",
+      bottom: "0px",
+      left: "0px",
+    },
+    preferredFontSize: 17, // From iOS defaults.
+    deepLink: new DeepLink(),
+    supportsEmailSignIn: false,
+    supportsLogin: false,
+    supportsNotifications: false,
+    supportsContacts: false,
+    requiresNotificationAuthorization: false,
+    supportsLightStatusBar: false,
+    supportsPlaid: false,
+    getPlugin: () => null,
+    openUrl: async (url) => openExternalLink(url),
+    sendSignInLink: async () => {},
+    login: async () => {},
+    requestNotificationAuthorization: async () => {},
+    requestLocationWhenInUseAuthorization: async () => {},
+    requestTemporaryFullAccuracyLocationAuthorization: async () => {},
+    requestLocationUpdate: async () => {},
+    openSettings: async () => {},
+    badgeAppIcon: async () => {},
     scrollToTop: () => {},
-    delayUpdates: () => {},
-    openUrl: () => {},
+    copyToClipboard: (dataString: string) => {
+      navigator.clipboard.writeText(dataString);
+    },
+    showShareSheet: () => {},
+    showMessageSheet: () => {},
+    showEmailSheet: () => {},
+    getContacts: async () => [],
+    startSmsRetriever: async () => {},
+    setWakeLock: async () => {},
+    getBrightness: async () => 0,
+    setBrightness: async () => {},
+    setLightStatusBar: async () => {},
+    openPlaid: async () => {},
+    closePlaid: async () => {},
+    delayUpdates: async () => {},
+    unsafe_features: () => ({}),
+    unsafe_send: async () => ({}),
+    unsafe_post: () => {},
+    ...merge,
   };
-
-  return merge(defaultContext, mergeContext);
 }
 
 export const AndroidBackButtonClassName = "hardware-back";

@@ -6,12 +6,18 @@
   "exports": {
     "./context": "./src/context/HostProvider.js",
     "./mocks": "./src/mocks/MockHostProvider.js",
+    "./types": "./src/util/types.js",
+    "./console": "./src/util/attachConsole.js",
     "./plugins/SafeArea": "./src/plugins/SafeArea.js",
+    "./plugins/usePlaid": "./src/plugins/usePlaid.js",
     "./plugins/useHostStatusBar": "./src/plugins/HostStatusBar.js",
     "./plugins/useScrollAboveKeyboard": "./src/plugins/useScrollAboveKeyboard.js"
   },
   "dependencies": {
-    "@cyber/shared": "workspace:^"
+    "@cyber/hooks": "workspace:^",
+    "@cyber/shared": "workspace:^",
+    "animejs": "^3.2.1",
+    "styled-components": "^6.0.5"
   },
   "files": [
     "src",
