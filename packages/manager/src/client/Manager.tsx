@@ -15,17 +15,17 @@ import { ServerStatus } from "../shared/types.js";
 import { TaskView } from "./TaskView.js";
 import { useDocumentVisible } from "./useDocumentVisible.js";
 
-export function ManagerContainer() {
+export function Manager() {
   return (
     <ModalRootProvider>
       <CyberApp>
-        <Manager />
+        <ManagerContent />
       </CyberApp>
     </ModalRootProvider>
   );
 }
 
-export function Manager() {
+export function ManagerContent() {
   const [status, setStatus] = useState<ServerStatus | null>(null);
   const [error, setError] = useState<Error | null>(null);
   const ref = useRef<HTMLDivElement | null>(null);
@@ -33,7 +33,7 @@ export function Manager() {
 
   const updateStatusTask = useAsyncTask({
     async func() {
-      const response = await fetch("//localhost:2700/api/status");
+      const response = await fetch("/api/status");
       const json = await response.json();
       setStatus(json);
     },

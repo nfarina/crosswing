@@ -5,6 +5,7 @@ import fs from "fs";
 import Koa from "koa";
 import { koaBody } from "koa-body";
 import serve from "koa-static";
+import parseArgs from "minimist";
 import path from "path";
 import { fileURLToPath } from "url";
 import { ServerStatus } from "../shared/types.js";
@@ -19,7 +20,10 @@ import { ServerTasks } from "./ServerTasks.js";
 // This script accepts a single argument, the path to tasks.json.
 // It then reads the file and parses it as JSON.
 // This is a workaround for the fact that we can't import JSON files in ESM.
-let tasksJsonPath = process.argv[2];
+let {
+  port = 2700,
+  _: [tasksJsonPath],
+} = parseArgs(process.argv.slice(2));
 
 if (!tasksJsonPath) {
   // Maybe it's in the current directory?
@@ -35,7 +39,10 @@ if (!tasksJsonPath) {
   }
 }
 
+console.log(tasksJsonPath);
+
 const tasksJson = JSON.parse(fs.readFileSync(tasksJsonPath, "utf8"));
+const baseDir = path.dirname(tasksJsonPath);
 const tasks = ServerTasks.fromJson(tasksJson);
 
 let dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -84,7 +91,7 @@ async function startTask(name: string) {
   }
 
   if (!getRunner(task)) {
-    const runner = new ProcessRunner({ ...task, name }, () => {
+    const runner = new ProcessRunner(baseDir, { ...task, name }, () => {
       deleteRunner(task);
     });
 
@@ -104,14 +111,14 @@ app.use(router.routes());
 app.use(router.allowedMethods());
 app.use(serve(DIST_DIR));
 
-app.listen(2700, () => {
+app.listen(port, () => {
   console.log(
     `
 =========================
 === Cyber Dev Manager ===
 =========================
 
-Visit http://localhost:2700 to start local development services.
+Visit http://localhost:${port} to start local development services.
 `,
   );
 });

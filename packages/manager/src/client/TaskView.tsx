@@ -23,7 +23,7 @@ export function TaskView({
 
   const setRunningTask = useAsyncTask({
     async func(running: boolean) {
-      await fetch("//localhost:2700/api/tasks/running", {
+      await fetch("/api/tasks/running", {
         method: "POST",
         headers: {
           Accept: "application/json",

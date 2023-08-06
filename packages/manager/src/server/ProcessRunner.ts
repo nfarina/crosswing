@@ -3,16 +3,8 @@ import fs from "fs";
 import path from "path";
 import pidusage from "pidusage";
 import psTree from "ps-tree";
-import { fileURLToPath } from "url";
 import { ProcessStats } from "../shared/types.js";
 import { ServerTask } from "./ServerTasks.js";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const PROJECT_DIR = path.resolve(__dirname, "../../");
-const PACKAGES_DIR = path.dirname(PROJECT_DIR);
-const WORKSPACE_DIR = path.dirname(PACKAGES_DIR);
 
 // Running processes.
 const runners: Record<string, ProcessRunner> = {};
@@ -36,6 +28,7 @@ export class ProcessRunner {
   private stopWasCalled: boolean = false;
 
   constructor(
+    private baseDir: string,
     { name, run }: ServerTask,
     onExit: (code: number | null) => void,
   ) {
@@ -43,11 +36,11 @@ export class ProcessRunner {
       throw new Error(`Task "${name}" does not have a "run" property`);
     }
 
+    const packagesDir = path.join(baseDir, "packages");
+
     const { workspace, script, args = "" } = run;
 
-    const packageDir = workspace
-      ? path.join(PACKAGES_DIR, workspace)
-      : WORKSPACE_DIR;
+    const packageDir = workspace ? path.join(packagesDir, workspace) : baseDir;
 
     const packagePath = path.join(packageDir, "package.json");
 
@@ -55,7 +48,11 @@ export class ProcessRunner {
       ? JSON.parse(fs.readFileSync(packagePath, "utf8"))
       : null;
 
-    let command = packageJson?.scripts[script];
+    if (!packageJson) {
+      throw new Error(`Could not find package.json for package "${workspace}"`);
+    }
+
+    let command = packageJson.scripts[script];
 
     if (!command) {
       throw new Error(
@@ -67,7 +64,7 @@ export class ProcessRunner {
       console.log(`[${name}] Executing: `, command + " " + args);
     }
 
-    const cmdWithPath = `export PATH=$PATH:${WORKSPACE_DIR}/node_modules/.bin; ${command} ${args}`;
+    const cmdWithPath = `export PATH=$PATH:${baseDir}/node_modules/.bin; ${command} ${args}`;
 
     const child = spawn(cmdWithPath, [], {
       shell: true,
