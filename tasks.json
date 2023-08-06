@@ -1,10 +1,9 @@
 {
   "example-client": {
-    "title": "Example Client",
+    "title": "Client",
     "description": "Vite development server for the Cyber example app",
     "run": {
-      "workspace": "example-client",
-      "script": "dev"
+      "script": "client:dev"
     },
     "link": "http://localhost:2701"
   },
