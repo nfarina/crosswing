@@ -1,6 +1,6 @@
-import dayjs from "dayjs";
-import isSameOrAfter from "dayjs/plugin/isSameOrAfter.js";
-import isSameOrBefore from "dayjs/plugin/isSameOrBefore.js";
+import dayjs from "dayjs/esm";
+import isSameOrAfter from "dayjs/esm/plugin/isSameOrAfter";
+import isSameOrBefore from "dayjs/esm/plugin/isSameOrBefore";
 import React, {
   HTMLAttributes,
   ReactNode,

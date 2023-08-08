@@ -1,4 +1,4 @@
-import dayjs from "dayjs";
+import dayjs from "dayjs/esm";
 import React, { useState } from "react";
 import { styled } from "styled-components";
 import { CyberAppDecorator } from "../../theme/storybook.js";

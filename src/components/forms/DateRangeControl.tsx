@@ -1,4 +1,4 @@
-import dayjs from "dayjs";
+import dayjs from "dayjs/esm";
 import React, { useRef } from "react";
 import { styled } from "styled-components";
 import { useResponsiveLayout } from "../../hooks/useResponsiveLayout.js";

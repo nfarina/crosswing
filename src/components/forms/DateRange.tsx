@@ -1,4 +1,4 @@
-import dayjs from "dayjs";
+import dayjs from "dayjs/esm";
 
 /** An exact range of defined timestamps. */
 export type DateRange = {

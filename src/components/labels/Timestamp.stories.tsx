@@ -1,5 +1,5 @@
 import { Meta } from "@storybook/react";
-import dayjs from "dayjs";
+import dayjs from "dayjs/esm";
 import React from "react";
 import { styled } from "styled-components";
 import { colors } from "../../theme/colors/colors.js";
