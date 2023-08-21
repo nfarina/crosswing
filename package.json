@@ -43,7 +43,8 @@
     "./host/mocks": "./src/host/mocks/MockHostProvider.tsx",
     "./host/types": "./src/host/util/types.ts",
     "./host/console": "./src/host/util/attachConsole.ts",
-    "./host/features/*": "./src/host/features/*.ts"
+    "./host/features/*": "./src/host/features/*.ts",
+    "./host/util/smoothScroll": "./src/host/util/smoothScroll.ts"
   },
   "scripts": {
     "dev": "vite-node src/manager/server/server.ts",
