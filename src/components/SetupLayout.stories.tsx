@@ -1,7 +1,7 @@
 import React from "react";
-import { CyberAppDecorator } from "../theme/storybook.js";
-import { Button } from "./Button.js";
-import { SetupLayout } from "./SetupLayout.js";
+import { CyberAppDecorator } from "../theme/storybook";
+import { Button } from "./Button";
+import { SetupLayout } from "./SetupLayout";
 
 export default {
   component: SetupLayout,

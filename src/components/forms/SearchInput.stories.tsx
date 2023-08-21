@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useAsyncTask } from "../../hooks/useAsyncTask.js";
-import { useDebounced } from "../../hooks/useDebounced.js";
-import { wait } from "../../shared/wait.js";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { SearchInput } from "./SearchInput.js";
+import { useAsyncTask } from "../../hooks/useAsyncTask";
+import { useDebounced } from "../../hooks/useDebounced";
+import { wait } from "../../shared/wait";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { SearchInput } from "./SearchInput";
 
 export default {
   component: SearchInput,

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { smoothScroll } from "./smoothScroll.js";
+import { smoothScroll } from "./smoothScroll";
 
 export type ScrollToTop = () => void;
 

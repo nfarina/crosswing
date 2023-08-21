@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { formatOklch, parseOklch } from "./oklch.js";
+import { formatOklch, parseOklch } from "./oklch";
 
 test("transforms colors in oklch space", () => {
   const oklch = parseOklch("#7CB8D6");

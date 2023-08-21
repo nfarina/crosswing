@@ -1,14 +1,14 @@
-import dayjs from "dayjs/esm";
+import dayjs from "dayjs";
 import React, { useState } from "react";
 import { styled } from "styled-components";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { CalendarView } from "./CalendarView.js";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { CalendarView } from "./CalendarView";
 import {
   areDateRangesEqual,
   DateRange,
   dateRange,
   isSameDay,
-} from "./DateRange.js";
+} from "./DateRange";
 
 export default {
   component: CalendarView,

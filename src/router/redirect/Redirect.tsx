@@ -1,6 +1,6 @@
 import React, { useLayoutEffect } from "react";
-import { looksLikeHref } from "../Link.js";
-import { useRouter } from "../context/RouterContext.js";
+import { looksLikeHref } from "../Link";
+import { useRouter } from "../context/RouterContext";
 
 export function Redirect({ to }: { to: string }) {
   const { location, history } = useRouter();

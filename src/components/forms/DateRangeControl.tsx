@@ -1,17 +1,17 @@
-import dayjs from "dayjs/esm";
+import dayjs from "dayjs";
 import React, { useRef } from "react";
 import { styled } from "styled-components";
-import { useResponsiveLayout } from "../../hooks/useResponsiveLayout.js";
-import { colors } from "../../theme/colors/colors.js";
-import { fonts } from "../../theme/fonts.js";
-import { Button, StyledButton } from "../Button.js";
-import { CalendarView, StyledCalendarInput } from "./CalendarView.js";
+import { useResponsiveLayout } from "../../hooks/useResponsiveLayout";
+import { colors } from "../../theme/colors/colors";
+import { fonts } from "../../theme/fonts";
+import { Button, StyledButton } from "../Button";
+import { CalendarView, StyledCalendarInput } from "./CalendarView";
 import {
   DateRange,
   areDateRangesEqual,
   dateRange,
   isSameDay,
-} from "./DateRange.js";
+} from "./DateRange";
 
 export interface DateRangePreset {
   title: string;

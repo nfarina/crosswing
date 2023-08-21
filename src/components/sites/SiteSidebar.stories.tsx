@@ -2,15 +2,11 @@ import { Meta } from "@storybook/react";
 import React, { useState } from "react";
 import { styled } from "styled-components";
 import Globe from "../../../icons/Globe.svg";
-import { Router } from "../../router/Router.js";
-import { MemoryHistory } from "../../router/history/MemoryHistory.js";
-import { colors } from "../../theme/colors/colors.js";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import {
-  SiteSidebar,
-  SiteSidebarArea,
-  SiteSidebarLink,
-} from "./SiteSidebar.js";
+import { Router } from "../../router/Router";
+import { MemoryHistory } from "../../router/history/MemoryHistory";
+import { colors } from "../../theme/colors/colors";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { SiteSidebar, SiteSidebarArea, SiteSidebarLink } from "./SiteSidebar";
 
 export default {
   component: SiteSidebar,

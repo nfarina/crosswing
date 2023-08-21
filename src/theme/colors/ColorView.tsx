@@ -1,7 +1,7 @@
 import React, { CSSProperties, HTMLAttributes } from "react";
 import { styled } from "styled-components";
-import { fonts } from "../fonts.js";
-import { ColorBuilder, colors } from "./colors.js";
+import { fonts } from "../fonts";
+import { ColorBuilder, colors } from "./colors";
 
 export function ColorView({
   name,

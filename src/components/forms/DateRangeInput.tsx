@@ -1,17 +1,17 @@
-import dayjs from "dayjs/esm";
+import dayjs from "dayjs";
 import React from "react";
 import { styled } from "styled-components";
 import DisclosureArrow from "../../../icons/DisclosureArrow.svg";
 import DownArrow from "../../../icons/DownArrow.svg";
-import { useMatchMedia } from "../../hooks/useMatchMedia.js";
-import { PopupView } from "../../modals/popup/PopupView.js";
-import { usePopup } from "../../modals/popup/usePopup.js";
-import { useSheet } from "../../modals/sheet/useSheet.js";
-import { fonts } from "../../theme/fonts.js";
-import { Button } from "../Button.js";
-import { DateRange, areDateRangesEqual } from "./DateRange.js";
-import { AllDateRangePresets, DateRangeControl } from "./DateRangeControl.js";
-import { DateRangePicker } from "./DateRangePicker.js";
+import { useMatchMedia } from "../../hooks/useMatchMedia";
+import { PopupView } from "../../modals/popup/PopupView";
+import { usePopup } from "../../modals/popup/usePopup";
+import { useSheet } from "../../modals/sheet/useSheet";
+import { fonts } from "../../theme/fonts";
+import { Button } from "../Button";
+import { DateRange, areDateRangesEqual } from "./DateRange";
+import { AllDateRangePresets, DateRangeControl } from "./DateRangeControl";
+import { DateRangePicker } from "./DateRangePicker";
 
 export function DateRangeInput({
   value,

@@ -1,7 +1,7 @@
 import React, { HTMLAttributes } from "react";
 import { styled } from "styled-components";
-import { FormatNumberOptions, formatNumber } from "../../shared/numeric.js";
-import { fonts } from "../../theme/fonts.js";
+import { FormatNumberOptions, formatNumber } from "../../shared/numeric";
+import { fonts } from "../../theme/fonts";
 
 export function NumberLabel({
   amount,

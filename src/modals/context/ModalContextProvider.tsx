@@ -9,9 +9,9 @@ import React, {
 } from "react";
 import { createPortal } from "react-dom";
 import { TransitionGroup } from "react-transition-group";
-import { useHost } from "../../host/context/HostContext.js";
-import { Minutes } from "../../shared/timespan.js";
-import { ModalContext } from "./ModalContext.js";
+import { useHost } from "../../host/context/HostContext";
+import { Minutes } from "../../shared/timespan";
+import { ModalContext } from "./ModalContext";
 
 // When any modal is being displayed, we ask our native host (if present) to
 // delay updates for 30 minutes.

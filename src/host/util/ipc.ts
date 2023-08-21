@@ -1,5 +1,5 @@
-import { openExternalLink } from "./openExternalLink.js";
-import { HostContact, HostContainer, HostFeatures } from "./types.js";
+import { openExternalLink } from "./openExternalLink";
+import { HostContact, HostContainer, HostFeatures } from "./types";
 
 //
 // Container Detection

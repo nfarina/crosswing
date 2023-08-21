@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { deepEqual, shallowEqualArrays } from "./compare.js";
+import { deepEqual, shallowEqualArrays } from "./compare";
 
 describe("deepEqual", () => {
   test("returns true for equal primitives", () => {

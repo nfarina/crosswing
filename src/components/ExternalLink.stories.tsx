@@ -1,11 +1,11 @@
 import { action } from "@storybook/addon-actions";
 import React from "react";
 import { styled } from "styled-components";
-import { MockHostProvider } from "../host/mocks/MockHostProvider.js";
-import { colors } from "../theme/colors/colors.js";
-import { fonts } from "../theme/fonts.js";
-import { CyberAppDecorator } from "../theme/storybook.js";
-import { ExternalLink } from "./ExternalLink.js";
+import { MockHostProvider } from "../host/mocks/MockHostProvider";
+import { colors } from "../theme/colors/colors";
+import { fonts } from "../theme/fonts";
+import { CyberAppDecorator } from "../theme/storybook";
+import { ExternalLink } from "./ExternalLink";
 
 export default {
   component: ExternalLink,

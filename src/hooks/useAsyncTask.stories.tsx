@@ -1,5 +1,5 @@
 import React, { CSSProperties, ReactNode, useState } from "react";
-import { useAsyncTask } from "./useAsyncTask.js";
+import { useAsyncTask } from "./useAsyncTask";
 
 export default {
   component: useAsyncTask,

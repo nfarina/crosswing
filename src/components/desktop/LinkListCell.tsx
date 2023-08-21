@@ -2,11 +2,11 @@ import React, { ReactNode } from "react";
 import { styled } from "styled-components";
 import Checkmark from "../../../icons/Checkmark.svg";
 import Close from "../../../icons/Close.svg";
-import { Link } from "../../router/Link.js";
-import { useRouter } from "../../router/context/RouterContext.js";
-import { formatCurrency } from "../../shared/numeric.js";
-import { colors } from "../../theme/colors/colors.js";
-import { fonts } from "../../theme/fonts.js";
+import { Link } from "../../router/Link";
+import { useRouter } from "../../router/context/RouterContext";
+import { formatCurrency } from "../../shared/numeric";
+import { colors } from "../../theme/colors/colors";
+import { fonts } from "../../theme/fonts";
 
 /**
  * A versatile way to display list items on the desktop.

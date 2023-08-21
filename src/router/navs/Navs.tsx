@@ -7,17 +7,17 @@ import React, {
   useEffect,
   useRef,
 } from "react";
-import { flattenChildren } from "../../hooks/flattenChildren.js";
-import { RouterContextValue, useRouter } from "../context/RouterContext.js";
-import { Redirect } from "../redirect/Redirect.js";
-import { MatchParams, RouterLocation } from "../RouterLocation.js";
-import { NavProps } from "./NavLayout.js";
-import { NavStack, NavStackItem } from "./NavStack.js";
+import { flattenChildren } from "../../hooks/flattenChildren";
+import { RouterContextValue, useRouter } from "../context/RouterContext";
+import { Redirect } from "../redirect/Redirect";
+import { MatchParams, RouterLocation } from "../RouterLocation";
+import { NavProps } from "./NavLayout";
+import { NavStack, NavStackItem } from "./NavStack";
 
-export * from "./NavAccessoryView.js";
-export * from "./NavLayout.js";
-export * from "./NavStack.js";
-export * from "./NavTitleView.js";
+export * from "./NavAccessoryView";
+export * from "./NavLayout";
+export * from "./NavStack";
+export * from "./NavTitleView";
 
 const debug = Debug("router:Navs");
 

@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/react";
 import React from "react";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { Select, SelectOption } from "./Select.js";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { Select, SelectOption } from "./Select";
 
 export default {
   component: Select,

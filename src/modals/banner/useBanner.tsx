@@ -1,12 +1,12 @@
 import React, { ReactNode, useCallback, useRef } from "react";
 import { keyframes, styled } from "styled-components";
-import { useHotkey } from "../../hooks/useHotkey.js";
-import { useInterval } from "../../hooks/useInterval.js";
-import { safeArea } from "../../host/plugins/SafeArea.js";
-import { Modal, useModal } from "../context/useModal.js";
-import { BannerView } from "./BannerView.js";
+import { useHotkey } from "../../hooks/useHotkey";
+import { useInterval } from "../../hooks/useInterval";
+import { safeArea } from "../../host/features/safeArea";
+import { Modal, useModal } from "../context/useModal";
+import { BannerView } from "./BannerView";
 
-export * from "./BannerView.js";
+export * from "./BannerView";
 
 const AUTO_DISMISS_TIME = 2000;
 

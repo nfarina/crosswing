@@ -1,9 +1,9 @@
 import { Meta } from "@storybook/react";
 import React from "react";
-import { CyberApp } from "./app.js";
-import { ColorView } from "./colors/ColorView.js";
-import { colors } from "./colors/colors.js";
-import { CyberAppDecorator } from "./storybook.js";
+import { CyberApp } from "./app";
+import { ColorView } from "./colors/ColorView";
+import { colors } from "./colors/colors";
+import { CyberAppDecorator } from "./storybook";
 
 export default {
   component: CyberApp,

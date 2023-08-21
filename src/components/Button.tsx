@@ -1,9 +1,9 @@
 import React, { ButtonHTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
-import { colors } from "../theme/colors/colors.js";
-import { fonts } from "../theme/fonts.js";
-import { Clickable } from "./Clickable.js";
-import { Spinner, StyledSpinner } from "./Spinner.js";
+import { colors } from "../theme/colors/colors";
+import { fonts } from "../theme/fonts";
+import { Clickable } from "./Clickable";
+import { Spinner, StyledSpinner } from "./Spinner";
 
 export type ButtonSize = "smaller" | "normal" | "larger" | "largest";
 

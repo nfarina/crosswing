@@ -6,17 +6,17 @@ import React, {
   useState,
 } from "react";
 import { styled } from "styled-components";
-import { flattenChildren } from "../hooks/flattenChildren.js";
-import { useDebounced } from "../hooks/useDebounced.js";
-import { useResettableState } from "../hooks/useResettableState.js";
-import { useHost } from "../host/context/HostContext.js";
-import { useRouter } from "../router/context/RouterContext.js";
-import { Redirect } from "../router/redirect/Redirect.js";
-import { UnreadBadge } from "../router/tabs/UnreadBadge.js";
-import { colors, shadows } from "../theme/colors/colors.js";
-import { easing } from "../theme/easing.js";
-import { fonts } from "../theme/fonts.js";
-import { Button } from "./Button.js";
+import { flattenChildren } from "../hooks/flattenChildren";
+import { useDebounced } from "../hooks/useDebounced";
+import { useResettableState } from "../hooks/useResettableState";
+import { useHost } from "../host/context/HostContext";
+import { useRouter } from "../router/context/RouterContext";
+import { Redirect } from "../router/redirect/Redirect";
+import { UnreadBadge } from "../router/tabs/UnreadBadge";
+import { colors, shadows } from "../theme/colors/colors";
+import { easing } from "../theme/easing";
+import { fonts } from "../theme/fonts";
+import { Button } from "./Button";
 
 export interface TabbedButtonProps {
   title: ReactNode;

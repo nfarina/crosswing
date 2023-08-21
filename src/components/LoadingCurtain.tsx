@@ -1,9 +1,9 @@
 import React, { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
-import { colors } from "../theme/colors/colors.js";
-import { fonts } from "../theme/fonts.js";
-import { ProgressView } from "./ProgressView.js";
-import { Spinner } from "./Spinner.js";
+import { colors } from "../theme/colors/colors";
+import { fonts } from "../theme/fonts";
+import { ProgressView } from "./ProgressView";
+import { Spinner } from "./Spinner";
 
 export function LoadingCurtain({
   hidden,

@@ -7,15 +7,15 @@ import React, {
 } from "react";
 import { styled } from "styled-components";
 import MenuIcon from "../../../icons/Menu.svg";
-import { flattenChildren } from "../../hooks/flattenChildren.js";
-import { useMatchMedia } from "../../hooks/useMatchMedia.js";
-import { Redirect } from "../../router/redirect/Redirect.js";
-import { Route, Switch } from "../../router/switch/Switch.js";
-import { colors } from "../../theme/colors/colors.js";
-import { NoContent } from "../NoContent.js";
-import { SiteHeader, StyledSiteHeader } from "./SiteHeader.js";
-import { SiteHeaderAccessory } from "./SiteHeaderAccessory.js";
-import { PageTitleProvider } from "./SitePageTitle.js";
+import { flattenChildren } from "../../hooks/flattenChildren";
+import { useMatchMedia } from "../../hooks/useMatchMedia";
+import { Redirect } from "../../router/redirect/Redirect";
+import { Route, Switch } from "../../router/switch/Switch";
+import { colors } from "../../theme/colors/colors";
+import { NoContent } from "../NoContent";
+import { SiteHeader, StyledSiteHeader } from "./SiteHeader";
+import { SiteHeaderAccessory } from "./SiteHeaderAccessory";
+import { PageTitleProvider } from "./SitePageTitle";
 import {
   SiteSidebar,
   SiteSidebarArea,
@@ -23,7 +23,7 @@ import {
   SiteSidebarLink,
   SiteSidebarLinkProps,
   StyledSiteSidebar,
-} from "./SiteSidebar.js";
+} from "./SiteSidebar";
 
 export interface SiteAreaProps extends SiteSidebarAreaProps {
   render?: () => ReactElement<any>;

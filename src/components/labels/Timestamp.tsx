@@ -1,10 +1,10 @@
-import dayjs from "dayjs/esm";
-import calendar from "dayjs/esm/plugin/calendar";
-import timezone from "dayjs/esm/plugin/timezone";
-import utc from "dayjs/esm/plugin/utc";
+import dayjs from "dayjs";
+import calendar from "dayjs/plugin/calendar.js";
+import timezone from "dayjs/plugin/timezone.js";
+import utc from "dayjs/plugin/utc.js";
 import React, { HTMLAttributes, useEffect, useRef } from "react";
 import { styled } from "styled-components";
-import { capitalize } from "../../shared/strings.js";
+import { capitalize } from "../../shared/strings";
 
 dayjs.extend(calendar);
 dayjs.extend(utc);

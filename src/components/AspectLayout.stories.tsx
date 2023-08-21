@@ -1,9 +1,9 @@
 import { Meta } from "@storybook/react";
 import React, { useState } from "react";
 import { styled } from "styled-components";
-import { colors } from "../theme/colors/colors.js";
-import { CyberAppDecorator } from "../theme/storybook.js";
-import { AspectLayout, StyledAspectLayout } from "./AspectLayout.js";
+import { colors } from "../theme/colors/colors";
+import { CyberAppDecorator } from "../theme/storybook";
+import { AspectLayout, StyledAspectLayout } from "./AspectLayout";
 
 export default {
   component: AspectLayout,

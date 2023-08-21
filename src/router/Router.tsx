@@ -6,15 +6,11 @@ import React, {
   useLayoutEffect,
   useState,
 } from "react";
-import { RouterLocation } from "./RouterLocation.js";
-import {
-  RouterContext,
-  RouterFlags,
-  useRouter,
-} from "./context/RouterContext.js";
-import { BrowserHistory } from "./history/BrowserHistory.js";
-import { MemoryHistory } from "./history/MemoryHistory.js";
-import { Redirect } from "./redirect/Redirect.js";
+import { RouterLocation } from "./RouterLocation";
+import { RouterContext, RouterFlags, useRouter } from "./context/RouterContext";
+import { BrowserHistory } from "./history/BrowserHistory";
+import { MemoryHistory } from "./history/MemoryHistory";
+import { Redirect } from "./redirect/Redirect";
 
 const debug = Debug("router:Router");
 

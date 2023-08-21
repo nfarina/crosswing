@@ -1,12 +1,12 @@
 import React, { FormEvent, ReactNode, useState } from "react";
 import { styled } from "styled-components";
-import { AlertButton, AlertView } from "../../modals/alert/AlertView.js";
-import { Modal } from "../../modals/context/useModal.js";
-import { useDialog } from "../../modals/dialog/useDialog.js";
-import { colors } from "../../theme/colors/colors.js";
-import { fonts } from "../../theme/fonts.js";
-import { StyledTextInput, TextInput } from "./TextInput.js";
-import { InputTransformer, useInputValue } from "./useInputValue.js";
+import { AlertButton, AlertView } from "../../modals/alert/AlertView";
+import { Modal } from "../../modals/context/useModal";
+import { useDialog } from "../../modals/dialog/useDialog";
+import { colors } from "../../theme/colors/colors";
+import { fonts } from "../../theme/fonts";
+import { StyledTextInput, TextInput } from "./TextInput";
+import { InputTransformer, useInputValue } from "./useInputValue";
 
 // Automagically adjusts the type given to onSubmit() to be nullable, based on
 // whether you've provided nullable = true.

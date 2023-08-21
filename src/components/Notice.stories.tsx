@@ -1,8 +1,8 @@
 import React from "react";
-import { RouterDecorator } from "../router/storybook/RouterDecorator.js";
-import { CyberAppDecorator } from "../theme/storybook.js";
-import { Notice } from "./Notice.js";
-import { SeparatorLayout } from "./SeparatorLayout.js";
+import { RouterDecorator } from "../router/storybook/RouterDecorator";
+import { CyberAppDecorator } from "../theme/storybook";
+import { Notice } from "./Notice";
+import { SeparatorLayout } from "./SeparatorLayout";
 
 export default {
   component: Notice,

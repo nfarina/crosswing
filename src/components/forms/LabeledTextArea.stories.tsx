@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { SeparatorDecorator } from "../SeparatorLayout.js";
-import { LabeledTextArea } from "./LabeledTextArea.js";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { SeparatorDecorator } from "../SeparatorLayout";
+import { LabeledTextArea } from "./LabeledTextArea";
 
 export default {
   component: LabeledTextArea,

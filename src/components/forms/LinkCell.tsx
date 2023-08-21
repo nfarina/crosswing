@@ -1,9 +1,9 @@
 import React, { HTMLAttributes, KeyboardEvent, ReactNode } from "react";
 import { styled } from "styled-components";
 import DisclosureArrow from "../../../icons/DisclosureArrow.svg";
-import { Link } from "../../router/Link.js";
-import { colors } from "../../theme/colors/colors.js";
-import { fonts } from "../../theme/fonts.js";
+import { Link } from "../../router/Link";
+import { colors } from "../../theme/colors/colors";
+import { fonts } from "../../theme/fonts";
 
 /**
  * A versatile mobile clickable form component. Is a Link but can behave like

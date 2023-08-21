@@ -1,12 +1,12 @@
 import { action } from "@storybook/addon-actions";
 import React from "react";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { ModalDecorator } from "../storybook/ModalDecorator.js";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { ModalDecorator } from "../storybook/ModalDecorator";
 import {
   ModalStoryButton,
   ModalStoryButtons,
-} from "../storybook/ModalStoryButtons.js";
-import { useConfirm } from "./useConfirm.js";
+} from "../storybook/ModalStoryButtons";
+import { useConfirm } from "./useConfirm";
 
 export default {
   component: useConfirm,

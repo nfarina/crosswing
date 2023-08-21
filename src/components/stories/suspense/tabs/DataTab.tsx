@@ -1,6 +1,6 @@
 import React from "react";
-import { wait } from "../../../../shared/wait.js";
-import { NoContent } from "../../../NoContent.js";
+import { wait } from "../../../../shared/wait";
+import { NoContent } from "../../../NoContent";
 
 export default function DataTab() {
   const result = use(fetchData());

@@ -1,10 +1,10 @@
 import { action } from "@storybook/addon-actions";
 import React from "react";
 import Attachment from "../../../icons/Attachment.svg";
-import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { SeparatorDecorator } from "../SeparatorLayout.js";
-import { LinkCell } from "./LinkCell.js";
+import { RouterDecorator } from "../../router/storybook/RouterDecorator";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { SeparatorDecorator } from "../SeparatorLayout";
+import { LinkCell } from "./LinkCell";
 
 export default {
   component: LinkCell,

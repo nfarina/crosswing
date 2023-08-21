@@ -1,11 +1,11 @@
 import { Meta } from "@storybook/react";
 import React, { useState } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../theme/colors/colors.js";
-import { fonts } from "../../theme/fonts.js";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { Button } from "../Button.js";
-import { StyledTextArea, TextArea } from "./TextArea.js";
+import { colors } from "../../theme/colors/colors";
+import { fonts } from "../../theme/fonts";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { Button } from "../Button";
+import { StyledTextArea, TextArea } from "./TextArea";
 
 export default {
   component: TextArea,

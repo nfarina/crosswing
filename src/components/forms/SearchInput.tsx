@@ -8,11 +8,11 @@ import React, {
 import { styled } from "styled-components";
 import CloseCircle from "../../../icons/CloseCircle.svg";
 import Search from "../../../icons/Search.svg";
-import { useHotkey } from "../../hooks/useHotkey.js";
-import { useHost } from "../../host/context/HostContext.js";
-import { colors } from "../../theme/colors/colors.js";
-import { fonts } from "../../theme/fonts.js";
-import { Spinner } from "../Spinner.js";
+import { useHotkey } from "../../hooks/useHotkey";
+import { useHost } from "../../host/context/HostContext";
+import { colors } from "../../theme/colors/colors";
+import { fonts } from "../../theme/fonts";
+import { Spinner } from "../Spinner";
 
 export function SearchInput({
   placeholder = "Search",

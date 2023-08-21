@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react";
-import { detectContainer } from "../util/ipc.js";
-import { openExternalLink } from "../util/openExternalLink.js";
-import { DeepLink, HostContextValue } from "../util/types.js";
+import { detectContainer } from "../util/ipc";
+import { openExternalLink } from "../util/openExternalLink";
+import { DeepLink, HostContextValue } from "../util/types";
 
 export const HostContext = createContext<HostContextValue>(
   defaultHostContext(),

@@ -1,8 +1,8 @@
 import React, { FocusEvent, useState } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../theme/colors/colors.js";
-import { fonts } from "../../theme/fonts.js";
-import { StyledTextArea, TextArea } from "./TextArea.js";
+import { colors } from "../../theme/colors/colors";
+import { fonts } from "../../theme/fonts";
+import { StyledTextArea, TextArea } from "./TextArea";
 
 export const LabeledTextArea = ({
   label,

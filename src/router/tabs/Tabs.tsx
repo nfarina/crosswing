@@ -8,19 +8,19 @@ import React, {
   useState,
 } from "react";
 import { styled } from "styled-components";
-import { flattenChildren } from "../../hooks/flattenChildren.js";
-import { useHost } from "../../host/context/HostContext.js";
-import { safeArea } from "../../host/plugins/SafeArea.js";
-import { colors } from "../../theme/colors/colors.js";
-import { RouterLocation } from "../RouterLocation.js";
-import { RouterContext, useRouter } from "../context/RouterContext.js";
-import { Redirect } from "../redirect/Redirect.js";
-import { StyledTabBar, TabBar, TabBarContext } from "./TabBar.js";
-import { TabProps } from "./TabLink.js";
+import { flattenChildren } from "../../hooks/flattenChildren";
+import { useHost } from "../../host/context/HostContext";
+import { safeArea } from "../../host/features/safeArea";
+import { colors } from "../../theme/colors/colors";
+import { RouterLocation } from "../RouterLocation";
+import { RouterContext, useRouter } from "../context/RouterContext";
+import { Redirect } from "../redirect/Redirect";
+import { StyledTabBar, TabBar, TabBarContext } from "./TabBar";
+import { TabProps } from "./TabLink";
 
-export * from "./TabBar.js";
-export * from "./TabLink.js";
-export * from "./UnreadBadge.js";
+export * from "./TabBar";
+export * from "./TabLink";
+export * from "./UnreadBadge";
 
 const debug = Debug("router:Tabs");
 

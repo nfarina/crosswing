@@ -6,9 +6,9 @@ import {
   useReducer,
   useRef,
 } from "react";
-import { deepEqual } from "../shared/compare.js";
-import { Falsy } from "./useAsyncTask.js";
-import { useIsMounted } from "./useIsMounted.js";
+import { deepEqual } from "../shared/compare";
+import { Falsy } from "./useAsyncTask";
+import { useIsMounted } from "./useIsMounted";
 
 export interface PersistedState<S> {
   /** Current persisted or draft value. The value to display to the user as they are editing. */

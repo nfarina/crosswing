@@ -1,6 +1,6 @@
 import React from "react";
-import { colors } from "../../../../theme/colors/colors.js";
-import { StyledPanel } from "./PanelOne.js";
+import { colors } from "../../../../theme/colors/colors";
+import { StyledPanel } from "./PanelOne";
 
 export default function PanelTwo({}: any) {
   return (

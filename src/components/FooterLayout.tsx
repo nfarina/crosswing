@@ -1,9 +1,9 @@
 import React, { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
-import { safeArea } from "../host/plugins/SafeArea.js";
-import { colors } from "../theme/colors/colors.js";
-import { MobileLayout, StyledMobileLayout } from "./MobileLayout.js";
-import { Scrollable, StyledScrollable } from "./Scrollable.js";
+import { safeArea } from "../host/features/safeArea";
+import { colors } from "../theme/colors/colors";
+import { MobileLayout, StyledMobileLayout } from "./MobileLayout";
+import { Scrollable, StyledScrollable } from "./Scrollable";
 
 /**
  * A common mobile layout with scrollable content and a fixed footer, usually

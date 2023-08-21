@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
-import { ModalDecorator } from "../../modals/storybook/ModalDecorator.js";
-import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { DateRange } from "./DateRange.js";
-import { DateRangeInput, StyledDateRangeInput } from "./DateRangeInput.js";
+import { ModalDecorator } from "../../modals/storybook/ModalDecorator";
+import { RouterDecorator } from "../../router/storybook/RouterDecorator";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { DateRange } from "./DateRange";
+import { DateRangeInput, StyledDateRangeInput } from "./DateRangeInput";
 
 export default {
   component: DateRangeInput,

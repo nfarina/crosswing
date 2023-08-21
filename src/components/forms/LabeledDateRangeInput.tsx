@@ -1,10 +1,10 @@
 import React, { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
-import { useSheet } from "../../modals/sheet/useSheet.js";
-import { DateRangeLabel } from "../labels/DateRangeLabel.js";
-import { DateRange } from "./DateRange.js";
-import { DateRangePicker } from "./DateRangePicker.js";
-import { TextCell } from "./TextCell.js";
+import { useSheet } from "../../modals/sheet/useSheet";
+import { DateRangeLabel } from "../labels/DateRangeLabel";
+import { DateRange } from "./DateRange";
+import { DateRangePicker } from "./DateRangePicker";
+import { TextCell } from "./TextCell";
 
 /**
  * Renders a date range that the user can change, with a label.

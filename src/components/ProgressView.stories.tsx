@@ -1,8 +1,8 @@
 import { Meta } from "@storybook/react";
 import React from "react";
-import { usePropSequence } from "../hooks/usePropSequence.js";
-import { CyberAppDecorator } from "../theme/storybook.js";
-import { ProgressView } from "./ProgressView.js";
+import { usePropSequence } from "../hooks/usePropSequence";
+import { CyberAppDecorator } from "../theme/storybook";
+import { ProgressView } from "./ProgressView";
 
 export default {
   component: ProgressView,

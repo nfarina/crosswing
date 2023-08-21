@@ -1,8 +1,8 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import React from "react";
-import { useResettableState } from "../../hooks/useResettableState.js";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { Slider } from "./Slider.js";
+import { useResettableState } from "../../hooks/useResettableState";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { Slider } from "./Slider";
 
 export default {
   component: Slider,

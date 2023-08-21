@@ -1,10 +1,10 @@
 import { Meta } from "@storybook/react";
 import React from "react";
-import { MockHostProvider } from "../../../host/mocks/MockHostProvider.js";
-import { ModalRootProvider } from "../../../modals/context/ModalRootProvider.js";
-import { BrowserSimulator } from "../../../router/storybook/BrowserSimulator.js";
-import { CyberAppDecorator } from "../../../theme/storybook.js";
-import { SuspenseSite } from "./SuspenseSite.js";
+import { MockHostProvider } from "../../../host/mocks/MockHostProvider";
+import { ModalRootProvider } from "../../../modals/context/ModalRootProvider";
+import { BrowserSimulator } from "../../../router/storybook/BrowserSimulator";
+import { CyberAppDecorator } from "../../../theme/storybook";
+import { SuspenseSite } from "./SuspenseSite";
 
 export default {
   component: SuspenseSite,

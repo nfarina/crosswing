@@ -1,9 +1,9 @@
 import { Meta } from "@storybook/react";
 import React, { useState } from "react";
-import { ModalDecorator } from "../../modals/storybook/ModalDecorator.js";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { SeparatorDecorator } from "../SeparatorLayout.js";
-import { LabeledDateInput } from "./LabeledDateInput.js";
+import { ModalDecorator } from "../../modals/storybook/ModalDecorator";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { SeparatorDecorator } from "../SeparatorLayout";
+import { LabeledDateInput } from "./LabeledDateInput";
 
 export default {
   component: LabeledDateInput,

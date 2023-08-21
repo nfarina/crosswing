@@ -2,13 +2,13 @@ import { action } from "@storybook/addon-actions";
 import { Meta } from "@storybook/react";
 import React from "react";
 import { styled } from "styled-components";
-import { useAsyncTask } from "../../hooks/useAsyncTask.js";
-import { wait } from "../../shared/wait.js";
-import { colors } from "../../theme/colors/colors.js";
-import { fonts } from "../../theme/fonts.js";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { DialogContainer } from "../dialog/useDialog.js";
-import { AlertView } from "./AlertView.js";
+import { useAsyncTask } from "../../hooks/useAsyncTask";
+import { wait } from "../../shared/wait";
+import { colors } from "../../theme/colors/colors";
+import { fonts } from "../../theme/fonts";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { DialogContainer } from "../dialog/useDialog";
+import { AlertView } from "./AlertView";
 
 export default {
   component: AlertView,

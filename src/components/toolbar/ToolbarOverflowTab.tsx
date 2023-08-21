@@ -9,12 +9,12 @@ import React, {
 } from "react";
 import { styled } from "styled-components";
 import DownArrow from "../../../icons/DownArrow.svg";
-import { flattenChildren } from "../../hooks/flattenChildren.js";
-import { usePopup } from "../../modals/popup/usePopup.js";
-import { useRouter } from "../../router/context/RouterContext.js";
-import { colors } from "../../theme/colors/colors.js";
-import { PopupMenu, PopupMenuText } from "../PopupMenu.js";
-import { ToolbarTab, ToolbarTabProps } from "./ToolbarTab.js";
+import { flattenChildren } from "../../hooks/flattenChildren";
+import { usePopup } from "../../modals/popup/usePopup";
+import { useRouter } from "../../router/context/RouterContext";
+import { colors } from "../../theme/colors/colors";
+import { PopupMenu, PopupMenuText } from "../PopupMenu";
+import { ToolbarTab, ToolbarTabProps } from "./ToolbarTab";
 
 /**
  * Like a <ToolbarTab> but with a built-in "overflow" menu to contain the actual

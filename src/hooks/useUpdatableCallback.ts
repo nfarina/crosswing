@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 // Some Hooks like useGesture permanently cache the closure you pass it
 // for the lifetime of the component. So this hook uses a ref to

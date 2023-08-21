@@ -25,26 +25,26 @@ import {
   showMessageSheet,
   showShareSheet,
   startSmsRetriever,
-} from "../util/ipc.js";
+} from "../util/ipc";
 import {
   HostContainer,
   HostContextValue,
   HostFeatures,
   HostPlugin,
   SafeArea,
-} from "../util/types.js";
-import { useBackButton } from "../util/useBackButton.js";
-import { useClipboard } from "../util/useClipboard.js";
-import { useDeepLinks } from "../util/useDeepLinks.js";
-import { useFeatures } from "../util/useFeatures.js";
-import { useHostViewport } from "../util/useHostViewport.js";
-import { usePreferredFontSize } from "../util/usePreferredFontSize.js";
-import { useSafeArea } from "../util/useSafeArea.js";
-import { useScrollToTop } from "../util/useScrollToTop.js";
-import { useWindowListener } from "../util/useWindowListener.js";
-import { HostContext } from "./HostContext.js";
+} from "../util/types";
+import { useBackButton } from "../util/useBackButton";
+import { useClipboard } from "../util/useClipboard";
+import { useDeepLinks } from "../util/useDeepLinks";
+import { useFeatures } from "../util/useFeatures";
+import { useHostViewport } from "../util/useHostViewport";
+import { usePreferredFontSize } from "../util/usePreferredFontSize";
+import { useSafeArea } from "../util/useSafeArea";
+import { useScrollToTop } from "../util/useScrollToTop";
+import { useWindowListener } from "../util/useWindowListener";
+import { HostContext } from "./HostContext";
 
-export * from "./HostContext.js";
+export * from "./HostContext";
 
 export function HostProvider({
   container = detectContainer(),

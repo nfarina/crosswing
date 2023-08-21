@@ -2,17 +2,17 @@ import { action } from "@storybook/addon-actions";
 import { Meta } from "@storybook/react";
 import React, { useContext } from "react";
 import { styled } from "styled-components";
-import { colors } from "../theme/colors/colors.js";
-import { fonts } from "../theme/fonts.js";
-import { CyberAppDecorator } from "../theme/storybook.js";
-import { Link } from "./Link.js";
-import { Router } from "./Router.js";
-import { RouterContext } from "./context/RouterContext.js";
-import { NavLayout } from "./navs/NavLayout.js";
-import { NavRoute, Navs } from "./navs/Navs.js";
-import { BrowserSimulator } from "./storybook/BrowserSimulator.js";
-import { Route, Switch } from "./switch/Switch.js";
-import { Tab, Tabs } from "./tabs/Tabs.js";
+import { colors } from "../theme/colors/colors";
+import { fonts } from "../theme/fonts";
+import { CyberAppDecorator } from "../theme/storybook";
+import { Link } from "./Link";
+import { Router } from "./Router";
+import { RouterContext } from "./context/RouterContext";
+import { NavLayout } from "./navs/NavLayout";
+import { NavRoute, Navs } from "./navs/Navs";
+import { BrowserSimulator } from "./storybook/BrowserSimulator";
+import { Route, Switch } from "./switch/Switch";
+import { Tab, Tabs } from "./tabs/Tabs";
 
 export default {
   component: Router,

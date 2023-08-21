@@ -1,10 +1,10 @@
 import { action } from "@storybook/addon-actions";
 import { Meta } from "@storybook/react";
 import React, { useState } from "react";
-import { useAsyncTask } from "../../hooks/useAsyncTask.js";
-import { wait } from "../../shared/wait.js";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { Toggle } from "./Toggle.js";
+import { useAsyncTask } from "../../hooks/useAsyncTask";
+import { wait } from "../../shared/wait";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { Toggle } from "./Toggle";
 
 export default {
   component: Toggle,

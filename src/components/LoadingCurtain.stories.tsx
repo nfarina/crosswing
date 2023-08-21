@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/react";
 import React from "react";
-import { CyberAppDecorator } from "../theme/storybook.js";
-import { LoadingCurtain } from "./LoadingCurtain.js";
+import { CyberAppDecorator } from "../theme/storybook";
+import { LoadingCurtain } from "./LoadingCurtain";
 
 export default {
   component: LoadingCurtain,

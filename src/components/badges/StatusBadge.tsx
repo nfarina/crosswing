@@ -2,8 +2,8 @@ import React, { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
 import InfoCircleIcon from "../../../icons/InfoCircle.svg";
 import WarningIcon from "../../../icons/Warning.svg";
-import { colors } from "../../theme/colors/colors.js";
-import { fonts } from "../../theme/fonts.js";
+import { colors } from "../../theme/colors/colors";
+import { fonts } from "../../theme/fonts";
 
 export function StatusBadge({
   children,

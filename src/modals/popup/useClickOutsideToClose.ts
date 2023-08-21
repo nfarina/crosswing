@@ -1,5 +1,5 @@
 import { MutableRefObject, useContext, useEffect } from "react";
-import { ModalContext } from "../context/ModalContext.js";
+import { ModalContext } from "../context/ModalContext";
 
 /**
  * Listens for clicks outside the given container and calls onClose.

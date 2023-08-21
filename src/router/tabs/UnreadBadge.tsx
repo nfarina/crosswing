@@ -1,7 +1,7 @@
 import { keyframes, styled } from "styled-components";
-import { colors } from "../../theme/colors/colors.js";
-import { easing } from "../../theme/easing.js";
-import { fonts } from "../../theme/fonts.js";
+import { colors } from "../../theme/colors/colors";
+import { easing } from "../../theme/easing";
+import { fonts } from "../../theme/fonts";
 
 /**
  * We want to fade in on a delay when visible, for two reasons. First,

@@ -1,8 +1,8 @@
 import React, { ReactNode, SelectHTMLAttributes } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../theme/colors/colors.js";
-import { fonts } from "../../theme/fonts.js";
-import { Select } from "./Select.js";
+import { colors } from "../../theme/colors/colors";
+import { fonts } from "../../theme/fonts";
+import { Select } from "./Select";
 
 export function LabeledSelect({
   label,

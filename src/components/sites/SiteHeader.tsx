@@ -4,8 +4,8 @@ import {
   SiteHeaderAccessory,
   SiteHeaderAccessoryView,
   StyledSiteHeaderAccessoryView,
-} from "./SiteHeaderAccessory.js";
-import { SitePageTitle, StyledPageTitle } from "./SitePageTitle.js";
+} from "./SiteHeaderAccessory";
+import { SitePageTitle, StyledPageTitle } from "./SitePageTitle";
 
 export function SiteHeader({
   siteTitle,

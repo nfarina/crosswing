@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { merge } from "./merge.js";
+import { merge } from "./merge";
 
 test("merges into empty object", () => {
   expect(merge({}, { color: "blue" })).toEqual({ color: "blue" });

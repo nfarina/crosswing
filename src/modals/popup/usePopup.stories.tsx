@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../theme/colors/colors.js";
-import { fonts } from "../../theme/fonts.js";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { ModalRootProvider } from "../context/ModalRootProvider.js";
-import { ModalDecorator } from "../storybook/ModalDecorator.js";
-import { ModalStoryButton } from "../storybook/ModalStoryButtons.js";
-import { PopupView } from "./PopupView.js";
-import { usePopup } from "./usePopup.js";
+import { colors } from "../../theme/colors/colors";
+import { fonts } from "../../theme/fonts";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { ModalRootProvider } from "../context/ModalRootProvider";
+import { ModalDecorator } from "../storybook/ModalDecorator";
+import { ModalStoryButton } from "../storybook/ModalStoryButtons";
+import { PopupView } from "./PopupView";
+import { usePopup } from "./usePopup";
 
 export default {
   component: usePopup,

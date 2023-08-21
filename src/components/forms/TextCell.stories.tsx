@@ -1,9 +1,9 @@
 import React from "react";
 import Attachment from "../../../icons/Attachment.svg";
-import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { SeparatorDecorator } from "../SeparatorLayout.js";
-import { TextCell } from "./TextCell.js";
+import { RouterDecorator } from "../../router/storybook/RouterDecorator";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { SeparatorDecorator } from "../SeparatorLayout";
+import { TextCell } from "./TextCell";
 
 export default {
   component: TextCell,

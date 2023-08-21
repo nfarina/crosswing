@@ -1,10 +1,10 @@
 import React from "react";
 import { styled } from "styled-components";
-import { Button } from "../components/Button.js";
-import { MobileAppFrame } from "../components/desktop/MobileAppFrame.js";
-import { MockHostProvider } from "../host/mocks/MockHostProvider.js";
-import { ModalRootProvider } from "../modals/context/ModalRootProvider.js";
-import { CyberApp } from "../theme/app.js";
+import { Button } from "../components/Button";
+import { MobileAppFrame } from "../components/desktop/MobileAppFrame";
+import { MockHostProvider } from "../host/mocks/MockHostProvider";
+import { ModalRootProvider } from "../modals/context/ModalRootProvider";
+import { CyberApp } from "../theme/app";
 import Favicon from "./Favicon.svg";
 
 export function App() {

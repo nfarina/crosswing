@@ -1,9 +1,9 @@
 import React from "react";
-import { useAsyncTask } from "../hooks/useAsyncTask.js";
-import { wait } from "../shared/wait.js";
-import { CyberAppDecorator } from "../theme/storybook.js";
-import { BannerLayout } from "./BannerLayout.js";
-import { NoContent } from "./NoContent.js";
+import { useAsyncTask } from "../hooks/useAsyncTask";
+import { wait } from "../shared/wait";
+import { CyberAppDecorator } from "../theme/storybook";
+import { BannerLayout } from "./BannerLayout";
+import { NoContent } from "./NoContent";
 
 export default {
   component: BannerLayout,

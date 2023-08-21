@@ -1,4 +1,4 @@
-import { Task } from "../shared/types.js";
+import { Task } from "../shared/types";
 
 export interface ServerTask extends Task {
   requires?: string[]; // Names of other tasks which must be running first.

@@ -1,11 +1,11 @@
 import { Meta } from "@storybook/react";
 import React, { useState } from "react";
-import { ModalDecorator } from "../../modals/storybook/ModalDecorator.js";
-import { Days } from "../../shared/timespan.js";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { SeparatorDecorator } from "../SeparatorLayout.js";
-import { DateRange, dateRange } from "./DateRange.js";
-import { LabeledDateRangeInput } from "./LabeledDateRangeInput.js";
+import { ModalDecorator } from "../../modals/storybook/ModalDecorator";
+import { Days } from "../../shared/timespan";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { SeparatorDecorator } from "../SeparatorLayout";
+import { DateRange, dateRange } from "./DateRange";
+import { LabeledDateRangeInput } from "./LabeledDateRangeInput";
 
 export default {
   component: LabeledDateRangeInput,

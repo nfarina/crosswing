@@ -7,19 +7,19 @@ import serve from "koa-static";
 import parseArgs from "minimist";
 import path from "path";
 import { fileURLToPath } from "url";
-import { wait } from "../../shared/wait.js";
-import { ServerStatus } from "../shared/types.js";
+import { wait } from "../../shared/wait";
+import { ServerStatus } from "../shared/types";
 import {
   ProcessRunner,
   deleteRunner,
   getRunner,
   setRunner,
-} from "./ProcessRunner.js";
-import { ServerTasks } from "./ServerTasks.js";
+} from "./ProcessRunner";
+import { ServerTasks } from "./ServerTasks";
 
 // This script accepts a single argument, the path to tasks.json.
 // It then reads the file and parses it as JSON.
-// This is a workaround for the fact that we can't import JSON files in ESM.
+// This is a workaround for the fact that we can't import  JSON files in ESM.
 let {
   port = 2700,
   _: [tasksJsonPath],
@@ -71,12 +71,12 @@ router.get("/api/status", async (ctx) => {
   ctx.body = status;
 });
 
-router.post("/api/tasks/running", (ctx) => {
+router.post("/api/tasks/running", async (ctx) => {
   const { name, running } = ctx.request.body;
   if (running) {
-    startTask(name);
+    await startTask(name);
   } else if (!running) {
-    stopTask(name);
+    await stopTask(name);
   }
 
   ctx.body = {};
@@ -104,6 +104,17 @@ async function stopTask(name: string) {
   getRunner(task)?.stop();
   deleteRunner(task);
 }
+
+// Expose errors to the client.
+app.use(async (ctx, next) => {
+  try {
+    await next();
+  } catch (error: any) {
+    // Respond with JSON.
+    ctx.status = error.statusCode || error.status || 500;
+    ctx.body = { message: error.message };
+  }
+});
 
 app.use(cors());
 app.use(koaBody());

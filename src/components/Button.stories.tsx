@@ -3,8 +3,8 @@ import { Meta, StoryFn } from "@storybook/react";
 import React, { useState } from "react";
 import Close from "../../icons/Close.svg";
 import Warning from "../../icons/Warning.svg";
-import { CyberAppDecorator } from "../theme/storybook.js";
-import { Button } from "./Button.js";
+import { CyberAppDecorator } from "../theme/storybook";
+import { Button } from "./Button";
 
 export default {
   component: Button,

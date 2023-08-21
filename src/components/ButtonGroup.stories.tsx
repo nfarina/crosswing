@@ -1,11 +1,11 @@
 import { action } from "@storybook/addon-actions";
 import { Meta } from "@storybook/react";
 import React from "react";
-import { RouterDecorator } from "../router/storybook/RouterDecorator.js";
-import { CyberAppDecorator } from "../theme/storybook.js";
-import { Button } from "./Button.js";
-import { ButtonGroup } from "./ButtonGroup.js";
-import { LinkButton } from "./LinkButton.js";
+import { RouterDecorator } from "../router/storybook/RouterDecorator";
+import { CyberAppDecorator } from "../theme/storybook";
+import { Button } from "./Button";
+import { ButtonGroup } from "./ButtonGroup";
+import { LinkButton } from "./LinkButton";
 
 export default {
   component: ButtonGroup,

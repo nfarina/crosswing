@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../theme/colors/colors.js";
-import { fonts } from "../../theme/fonts.js";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { Router } from "../Router.js";
-import { MemoryHistory } from "../history/MemoryHistory.js";
-import { Tab, Tabs } from "./Tabs.js";
+import { colors } from "../../theme/colors/colors";
+import { fonts } from "../../theme/fonts";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { Router } from "../Router";
+import { MemoryHistory } from "../history/MemoryHistory";
+import { Tab, Tabs } from "./Tabs";
 
 export default {
   component: Tabs,

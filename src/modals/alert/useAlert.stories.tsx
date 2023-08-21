@@ -1,12 +1,12 @@
 import { action } from "@storybook/addon-actions";
 import React from "react";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { useAlert } from "../alert/useAlert.js";
-import { ModalDecorator } from "../storybook/ModalDecorator.js";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { useAlert } from "../alert/useAlert";
+import { ModalDecorator } from "../storybook/ModalDecorator";
 import {
   ModalStoryButton,
   ModalStoryButtons,
-} from "../storybook/ModalStoryButtons.js";
+} from "../storybook/ModalStoryButtons";
 
 export default {
   component: useAlert,

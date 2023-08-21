@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { NavLayout } from "../../router/navs/NavLayout.js";
-import { DateRange } from "./DateRange.js";
-import { DateRangeControl } from "./DateRangeControl.js";
+import { NavLayout } from "../../router/navs/NavLayout";
+import { DateRange } from "./DateRange";
+import { DateRangeControl } from "./DateRangeControl";
 
 export function DateRangePicker({
   defaultRange,

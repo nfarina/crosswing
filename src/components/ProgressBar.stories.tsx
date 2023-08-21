@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { CyberAppDecorator } from "../theme/storybook.js";
-import { ProgressBar } from "./ProgressBar.js";
+import { CyberAppDecorator } from "../theme/storybook";
+import { ProgressBar } from "./ProgressBar";
 
 export default {
   component: ProgressBar,

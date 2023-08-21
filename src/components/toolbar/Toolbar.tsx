@@ -8,19 +8,15 @@ import React, {
 import { styled } from "styled-components";
 import AddSmall from "../../../icons/AddSmall.svg";
 import DotDotDot from "../../../icons/DotDotDot.svg";
-import { colors } from "../../theme/colors/colors.js";
-import { fonts } from "../../theme/fonts.js";
-import { Button } from "../Button.js";
-import { LinkButton } from "../LinkButton.js";
-import { StyledDateRangeInput } from "../forms/DateRangeInput.js";
-import { SearchInput } from "../forms/SearchInput.js";
-import { Select } from "../forms/Select.js";
-import {
-  ToolbarInsertionRef,
-  ToolbarRef,
-  useToolbar,
-} from "./ToolbarContext.js";
-import { StyledToolbarIDView } from "./ToolbarIDView.js";
+import { colors } from "../../theme/colors/colors";
+import { fonts } from "../../theme/fonts";
+import { Button } from "../Button";
+import { LinkButton } from "../LinkButton";
+import { StyledDateRangeInput } from "../forms/DateRangeInput";
+import { SearchInput } from "../forms/SearchInput";
+import { Select } from "../forms/Select";
+import { ToolbarInsertionRef, ToolbarRef, useToolbar } from "./ToolbarContext";
+import { StyledToolbarIDView } from "./ToolbarIDView";
 
 export function Toolbar({
   expandTabs,

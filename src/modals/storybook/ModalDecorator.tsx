@@ -1,5 +1,5 @@
 import React from "react";
-import { ModalRootProvider } from "../context/ModalRootProvider.js";
+import { ModalRootProvider } from "../context/ModalRootProvider";
 
 /**
  * For Storybook; renders your story inside a <ModalRootProvider>.

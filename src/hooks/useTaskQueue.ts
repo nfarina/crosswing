@@ -6,7 +6,7 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import { useIsMounted } from "./useIsMounted.js";
+import { useIsMounted } from "./useIsMounted";
 
 // It's named "Queue" but it's really not, all tasks are run immediately in
 // parallel. But I do reserve the right to make it a real queue in the future.

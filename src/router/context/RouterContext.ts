@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react";
-import { RouterLocation } from "../RouterLocation.js";
-import { BrowserHistory } from "../history/BrowserHistory.js";
-import { MemoryHistory } from "../history/MemoryHistory.js";
+import { RouterLocation } from "../RouterLocation";
+import { BrowserHistory } from "../history/BrowserHistory";
+import { MemoryHistory } from "../history/MemoryHistory";
 
 export type RouterContextValue = {
   /** Current location, potentially partially-claimed. */

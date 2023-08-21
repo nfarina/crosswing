@@ -1,12 +1,12 @@
 import React, { MouseEvent, ReactElement, ReactNode } from "react";
 import { styled } from "styled-components";
 import PlaceholderIcon from "../../../icons/Placeholder.svg";
-import { useHost } from "../../host/context/HostContext.js";
-import { colors } from "../../theme/colors/colors.js";
-import { fonts } from "../../theme/fonts.js";
-import { Link } from "../Link.js";
-import { useRouter } from "../context/RouterContext.js";
-import { UnreadBadge } from "./UnreadBadge.js";
+import { useHost } from "../../host/context/HostContext";
+import { colors } from "../../theme/colors/colors";
+import { fonts } from "../../theme/fonts";
+import { Link } from "../Link";
+import { useRouter } from "../context/RouterContext";
+import { UnreadBadge } from "./UnreadBadge";
 
 export interface TabProps {
   path: string;

@@ -1,4 +1,4 @@
-import { formatOklch, parseHex, parseOklch } from "./oklch.js";
+import { formatOklch, parseHex, parseOklch } from "./oklch";
 
 // Check if this browser supports the `color()` function, specifically with
 // the `display-p3` color space.
@@ -44,6 +44,8 @@ export interface HexColorOptions {
   saturate?: number;
   /** For better semantics, same as saturate() with a flipped sign. */
   desaturate?: number;
+  /** Output format, either CSS to be used as a CSS color value, or raw HEX. */
+  format?: "css" | "hex";
 }
 
 /**
@@ -71,7 +73,15 @@ export function hexColor(hex: string): HexColorBuilder {
  */
 export function buildHexColor(
   hex: string,
-  { alpha, lighten, darken, hue, saturate, desaturate }: HexColorOptions = {},
+  {
+    alpha,
+    lighten,
+    darken,
+    hue,
+    saturate,
+    desaturate,
+    format,
+  }: HexColorOptions = {},
 ): string {
   // Transform it if you so wish.
   if (
@@ -82,20 +92,19 @@ export function buildHexColor(
     desaturate != null
   ) {
     // Convert to Hsl for easier manipulation.
-    const hsl = parseOklch(hex);
+    const lch = parseOklch(hex);
 
-    if (lighten != null) hsl.l *= 1 + lighten;
-    if (darken != null) hsl.l *= 1 - darken;
-    if (hue != null) hsl.h = (hsl.h + hue) % 360;
-    if (saturate != null) hsl.c *= 1 + saturate;
-    if (desaturate != null) hsl.c *= 1 - desaturate;
+    if (lighten != null) lch.l *= 1 + lighten;
+    if (darken != null) lch.l *= 1 - darken;
+    if (hue != null) lch.h = (lch.h + hue) % 360;
+    if (saturate != null) lch.c *= 1 + saturate;
+    if (desaturate != null) lch.c *= 1 - desaturate;
 
-    // Clamp the values to their valid ranges.
-    // hsl.h = Math.max(0, Math.min(360, hsl.h));
-    // hsl.s = Math.max(0, Math.min(1, hsl.s));
-    // hsl.l = Math.max(0, Math.min(1, hsl.l));
+    hex = formatOklch(lch);
+  }
 
-    hex = formatOklch(hsl);
+  if (format === "hex") {
+    return hex;
   }
 
   if (SUPPORTS_P3_COLOR) {

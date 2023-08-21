@@ -3,8 +3,8 @@ import fs from "fs";
 import path from "path";
 import pidusage from "pidusage";
 import psTree from "ps-tree";
-import { ProcessStats } from "../shared/types.js";
-import { ServerTask } from "./ServerTasks.js";
+import { ProcessStats } from "../shared/types";
+import { ServerTask } from "./ServerTasks";
 
 // Running processes.
 const runners: Record<string, ProcessRunner> = {};

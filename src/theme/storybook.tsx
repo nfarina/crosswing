@@ -1,8 +1,8 @@
 import React from "react";
 import { createGlobalStyle, styled } from "styled-components";
-import { getBuilderVarCss } from "./colors/builders.js";
-import { ColorBuilder, colors, shadows } from "./colors/colors.js";
-import { CyberFontStyle, fonts } from "./fonts.js";
+import { getBuilderVarCss } from "./colors/builders";
+import { ColorBuilder, colors, shadows } from "./colors/colors";
+import { CyberFontStyle, fonts } from "./fonts";
 
 /**
  * Decorator that injects Cyber global styles into the storybook environment.

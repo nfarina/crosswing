@@ -1,6 +1,6 @@
 import React, { lazy } from "react";
-import { NoContent } from "../../../NoContent.js";
-import { usePageTitle } from "../../../sites/SitePageTitle.js";
+import { NoContent } from "../../../NoContent";
+import { usePageTitle } from "../../../sites/SitePageTitle";
 
 const PopupButton = lazy(() => {
   return new Promise((resolve) => {

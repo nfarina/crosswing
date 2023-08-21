@@ -1,13 +1,13 @@
-import { gradientColor, hexColor, varColor } from "./builders.js";
+import { gradientColor, hexColor, varColor } from "./builders";
 
-export * from "./builders.js";
+export * from "./builders";
 
 export {
   gradientColor,
   hexColor,
   varColor,
   type ColorBuilder,
-} from "./builders.js";
+} from "./builders";
 
 // Default Cyber colors.
 // Isomorphic.

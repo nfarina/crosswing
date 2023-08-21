@@ -1,16 +1,16 @@
 import React, { ReactElement, RefObject } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { styled } from "styled-components";
-import { useGesture } from "../../hooks/useGesture.js";
-import { useHost } from "../../host/context/HostContext.js";
-import { colors } from "../../theme/colors/colors.js";
-import { easing } from "../../theme/easing.js";
-import { RouterLocation } from "../RouterLocation.js";
+import { useGesture } from "../../hooks/useGesture";
+import { useHost } from "../../host/context/HostContext";
+import { colors } from "../../theme/colors/colors";
+import { easing } from "../../theme/easing";
+import { RouterLocation } from "../RouterLocation";
 import {
   RouterContext,
   RouterContextValue,
   useRouter,
-} from "../context/RouterContext.js";
+} from "../context/RouterContext";
 
 export type NavStackItem = {
   key: string;

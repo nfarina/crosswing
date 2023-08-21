@@ -7,8 +7,8 @@ import React, {
   useRef,
 } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../theme/colors/colors.js";
-import { fonts } from "../../theme/fonts.js";
+import { colors } from "../../theme/colors/colors";
+import { fonts } from "../../theme/fonts";
 
 /**
  * Like LabeledTextArea, but using a <div> with the contentEditable flag, so

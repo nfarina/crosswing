@@ -1,27 +1,27 @@
 import React, { useRef, useState } from "react";
 import { styled } from "styled-components";
-import { LoadingCurtain } from "../../components/LoadingCurtain.js";
-import { Scrollable, StyledScrollable } from "../../components/Scrollable.js";
+import { LoadingCurtain } from "../../components/LoadingCurtain";
+import { Scrollable, StyledScrollable } from "../../components/Scrollable";
 import {
   StatusBanner,
   StyledStatusBanner,
-} from "../../components/badges/StatusBanner.js";
-import { useAsyncTask } from "../../hooks/useAsyncTask.js";
-import { useInterval } from "../../hooks/useInterval.js";
-import { ModalRootProvider } from "../../modals/context/ModalRootProvider.js";
-import { CyberApp } from "../../theme/app.js";
-import { colors } from "../../theme/colors/colors.js";
-import { ServerStatus } from "../shared/types.js";
-import { TaskView } from "./TaskView.js";
-import { useDocumentVisible } from "./useDocumentVisible.js";
+} from "../../components/badges/StatusBanner";
+import { useAsyncTask } from "../../hooks/useAsyncTask";
+import { useInterval } from "../../hooks/useInterval";
+import { ModalRootProvider } from "../../modals/context/ModalRootProvider";
+import { CyberApp } from "../../theme/app";
+import { colors } from "../../theme/colors/colors";
+import { ServerStatus } from "../shared/types";
+import { TaskView } from "./TaskView";
+import { useDocumentVisible } from "./useDocumentVisible";
 
 export function Manager() {
   return (
-    <ModalRootProvider>
-      <CyberApp>
+    <CyberApp>
+      <ModalRootProvider>
         <ManagerContent />
-      </CyberApp>
-    </ModalRootProvider>
+      </ModalRootProvider>
+    </CyberApp>
   );
 }
 

@@ -2,14 +2,14 @@ import { action } from "@storybook/addon-actions";
 import React from "react";
 import Browser from "../../icons/Browser.svg";
 import Trash from "../../icons/Trash.svg";
-import { CyberAppDecorator } from "../theme/storybook.js";
+import { CyberAppDecorator } from "../theme/storybook";
 import {
   MobileToolbar,
   MobileToolbarButton,
   MobileToolbarLayout,
   MobileToolbarSpace,
-} from "./MobileToolbar.js";
-import { NoContent } from "./NoContent.js";
+} from "./MobileToolbar";
+import { NoContent } from "./NoContent";
 
 export default {
   component: MobileToolbar,

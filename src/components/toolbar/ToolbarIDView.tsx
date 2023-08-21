@@ -1,11 +1,11 @@
 import React, { useRef } from "react";
 import { styled } from "styled-components";
 import Copy from "../../../icons/Copy.svg";
-import { useElementSize } from "../../hooks/useElementSize.js";
-import { useBanner } from "../../modals/banner/useBanner.js";
-import { colors } from "../../theme/colors/colors.js";
-import { fonts } from "../../theme/fonts.js";
-import { Clickable } from "../Clickable.js";
+import { useElementSize } from "../../hooks/useElementSize";
+import { useBanner } from "../../modals/banner/useBanner";
+import { colors } from "../../theme/colors/colors";
+import { fonts } from "../../theme/fonts";
+import { Clickable } from "../Clickable";
 
 export function ToolbarIDView({ name, id }: { name: string; id: string }) {
   const copiedBanner = useBanner(() => `${name} ID copied to clipboard.`);

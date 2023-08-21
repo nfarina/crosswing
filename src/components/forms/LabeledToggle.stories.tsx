@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { SeparatorDecorator } from "../SeparatorLayout.js";
-import { LabeledToggle } from "./LabeledToggle.js";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { SeparatorDecorator } from "../SeparatorLayout";
+import { LabeledToggle } from "./LabeledToggle";
 
 export default {
   component: LabeledToggle,

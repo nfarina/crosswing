@@ -1,8 +1,8 @@
 import { Meta } from "@storybook/react";
 import React from "react";
-import { colors } from "../theme/colors/colors.js";
-import { CyberAppDecorator } from "../theme/storybook.js";
-import { Donut } from "./Donut.js";
+import { colors } from "../theme/colors/colors";
+import { CyberAppDecorator } from "../theme/storybook";
+import { Donut } from "./Donut";
 
 export default {
   component: Donut,

@@ -1,10 +1,10 @@
 import { action } from "@storybook/addon-actions";
-import { useAsyncTask } from "../hooks/useAsyncTask.js";
-import { useErrorAlert } from "../modals/alert/useErrorAlert.js";
-import { ModalDecorator } from "../modals/storybook/ModalDecorator.js";
-import { wait } from "../shared/wait.js";
-import { CyberAppDecorator } from "../theme/storybook.js";
-import { useProgressAlert } from "./useProgressAlert.js";
+import { useAsyncTask } from "../hooks/useAsyncTask";
+import { useErrorAlert } from "../modals/alert/useErrorAlert";
+import { ModalDecorator } from "../modals/storybook/ModalDecorator";
+import { wait } from "../shared/wait";
+import { CyberAppDecorator } from "../theme/storybook";
+import { useProgressAlert } from "./useProgressAlert";
 
 export default {
   component: useProgressAlert,

@@ -1,8 +1,8 @@
 import React, { ReactNode } from "react";
 import { styled } from "styled-components";
-import { safeArea } from "../host/plugins/SafeArea.js";
-import { colors } from "../theme/colors/colors.js";
-import { Clickable } from "./Clickable.js";
+import { safeArea } from "../host/features/safeArea";
+import { colors } from "../theme/colors/colors";
+import { Clickable } from "./Clickable";
 
 export const MobileToolbarLayout = styled.div`
   display: flex;

@@ -1,10 +1,10 @@
 import React from "react";
 import { styled } from "styled-components";
-import { safeArea } from "../../host/plugins/SafeArea.js";
-import { NavLayout } from "../../router/navs/NavLayout.js";
-import { Button, StyledButton } from "../Button.js";
-import { CalendarView, StyledCalendarInput } from "./CalendarView.js";
-import { dateRange } from "./DateRange.js";
+import { safeArea } from "../../host/features/safeArea";
+import { NavLayout } from "../../router/navs/NavLayout";
+import { Button, StyledButton } from "../Button";
+import { CalendarView, StyledCalendarInput } from "./CalendarView";
+import { dateRange } from "./DateRange";
 
 export function DatePicker({
   defaultDate,

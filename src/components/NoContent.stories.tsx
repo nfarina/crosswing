@@ -1,8 +1,8 @@
 import React from "react";
-import { Link } from "../router/Link.js";
-import { RouterDecorator } from "../router/storybook/RouterDecorator.js";
-import { CyberAppDecorator } from "../theme/storybook.js";
-import { NoContent } from "./NoContent.js";
+import { Link } from "../router/Link";
+import { RouterDecorator } from "../router/storybook/RouterDecorator";
+import { CyberAppDecorator } from "../theme/storybook";
+import { NoContent } from "./NoContent";
 
 export default {
   component: NoContent,

@@ -7,9 +7,9 @@ import React, {
 } from "react";
 import { styled } from "styled-components";
 import DownArrow from "../../../icons/DownArrow.svg";
-import { flattenChildren } from "../../hooks/flattenChildren.js";
-import { colors } from "../../theme/colors/colors.js";
-import { fonts } from "../../theme/fonts.js";
+import { flattenChildren } from "../../hooks/flattenChildren";
+import { colors } from "../../theme/colors/colors";
+import { fonts } from "../../theme/fonts";
 
 export interface SelectOptionProps {
   title?: string;

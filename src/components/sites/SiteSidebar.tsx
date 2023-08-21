@@ -9,17 +9,17 @@ import React, {
 import { styled } from "styled-components";
 import CyberLogoIcon from "../../../icons/CyberLogo.svg";
 import PlaceholderIcon from "../../../icons/Placeholder.svg";
-import { flattenChildren } from "../../hooks/flattenChildren.js";
-import { useRouter } from "../../router/context/RouterContext.js";
-import { Link } from "../../router/Link.js";
-import { UnreadBadge } from "../../router/tabs/UnreadBadge.js";
-import { colors, HexColorBuilder } from "../../theme/colors/colors.js";
-import { fonts } from "../../theme/fonts.js";
+import { flattenChildren } from "../../hooks/flattenChildren";
+import { useRouter } from "../../router/context/RouterContext";
+import { Link } from "../../router/Link";
+import { UnreadBadge } from "../../router/tabs/UnreadBadge";
+import { colors, HexColorBuilder } from "../../theme/colors/colors";
+import { fonts } from "../../theme/fonts";
 import {
   SiteHeaderAccessory,
   SiteHeaderAccessoryView,
   StyledSiteHeaderAccessoryView,
-} from "./SiteHeaderAccessory.js";
+} from "./SiteHeaderAccessory";
 
 export type SiteSidebarAreaProps = {
   path: string;

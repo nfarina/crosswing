@@ -6,13 +6,13 @@ import React, {
   useContext,
 } from "react";
 import { styled } from "styled-components";
-import { PopupView } from "../modals/popup/PopupView.js";
-import { PopupChildProps } from "../modals/popup/usePopup.js";
-import { Link } from "../router/Link.js";
-import { colors } from "../theme/colors/colors.js";
-import { fonts } from "../theme/fonts.js";
-import { Select } from "./forms/Select.js";
-import { StyledToggle, Toggle } from "./forms/Toggle.js";
+import { PopupView } from "../modals/popup/PopupView";
+import { PopupChildProps } from "../modals/popup/usePopup";
+import { Link } from "../router/Link";
+import { colors } from "../theme/colors/colors";
+import { fonts } from "../theme/fonts";
+import { Select } from "./forms/Select";
+import { StyledToggle, Toggle } from "./forms/Toggle";
 
 // Used to drill the onClose prop down to the PopupMenu children without
 // having to clone elements and deal with "keys".

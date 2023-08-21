@@ -1,12 +1,12 @@
 import React from "react";
 import { styled } from "styled-components";
-import { BrowserSimulator } from "../../router/storybook/RouterDecorator.js";
-import { capitalize } from "../../shared/strings.js";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { LinkButton } from "../LinkButton.js";
+import { BrowserSimulator } from "../../router/storybook/RouterDecorator";
+import { capitalize } from "../../shared/strings";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { LinkButton } from "../LinkButton";
 import CSSColors from "./CSSColors.json";
-import { LinkList, StyledLinkList } from "./LinkList.js";
-import { LinkListCell } from "./LinkListCell.js";
+import { LinkList, StyledLinkList } from "./LinkList";
+import { LinkListCell } from "./LinkListCell";
 
 export default {
   component: LinkList,

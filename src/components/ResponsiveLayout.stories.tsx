@@ -1,12 +1,12 @@
 import { Meta } from "@storybook/react";
 import React, { useState } from "react";
 import { styled } from "styled-components";
-import { CyberAppDecorator } from "../theme/storybook.js";
+import { CyberAppDecorator } from "../theme/storybook";
 import {
   ResponsiveChild,
   ResponsiveLayout,
   StyledResponsiveLayout,
-} from "./ResponsiveLayout.js";
+} from "./ResponsiveLayout";
 
 export default {
   component: ResponsiveLayout,

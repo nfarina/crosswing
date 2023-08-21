@@ -1,15 +1,15 @@
 import React, { SyntheticEvent } from "react";
 import { styled } from "styled-components";
-import { StyledButton } from "../../components/Button.js";
-import { Badge } from "../../components/badges/Badge.js";
-import { StyledToggle, Toggle } from "../../components/forms/Toggle.js";
-import { useHotkey } from "../../hooks/useHotkey.js";
-import { usePersistedState } from "../../hooks/usePersistedState.js";
-import { useErrorAlert } from "../../modals/alert/useErrorAlert.js";
-import { wait } from "../../shared/wait.js";
-import { colors, shadows } from "../../theme/colors/colors.js";
-import { fonts } from "../../theme/fonts.js";
-import { ClientTask } from "../shared/types.js";
+import { StyledButton } from "../../components/Button";
+import { Badge } from "../../components/badges/Badge";
+import { StyledToggle, Toggle } from "../../components/forms/Toggle";
+import { useHotkey } from "../../hooks/useHotkey";
+import { usePersistedState } from "../../hooks/usePersistedState";
+import { useErrorAlert } from "../../modals/alert/useErrorAlert";
+import { wait } from "../../shared/wait";
+import { colors, shadows } from "../../theme/colors/colors";
+import { fonts } from "../../theme/fonts";
+import { ClientTask } from "../shared/types";
 
 export function TaskView({
   task,
@@ -23,7 +23,7 @@ export function TaskView({
   const running = usePersistedState({
     persistedValue: task.running,
     updateFunc: async (running) => {
-      await fetch("/api/tasks/running", {
+      const result = await fetch("/api/tasks/running", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -31,6 +31,11 @@ export function TaskView({
         },
         body: JSON.stringify({ name: task.name, running }),
       });
+
+      if (!result.ok) {
+        const error = await result.json();
+        throw new Error(error.message);
+      }
 
       await wait(1000);
     },

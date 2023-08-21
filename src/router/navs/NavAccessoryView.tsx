@@ -1,9 +1,9 @@
 import React, { MouseEvent, ReactNode } from "react";
 import { styled } from "styled-components";
-import { AndroidBackButtonClassName } from "../../host/context/HostContext.js";
-import { colors } from "../../theme/colors/colors.js";
-import { fonts } from "../../theme/fonts.js";
-import { Link } from "../Link.js";
+import { AndroidBackButtonClassName } from "../../host/context/HostContext";
+import { colors } from "../../theme/colors/colors";
+import { fonts } from "../../theme/fonts";
+import { Link } from "../Link";
 
 export interface NavAccessory {
   icon?: ReactNode;

@@ -11,12 +11,12 @@ import { createPortal } from "react-dom";
 import { styled } from "styled-components";
 import Close from "../../../icons/Close.svg";
 import FullScreen from "../../../icons/FullScreen.svg";
-import { useHotkey } from "../../hooks/useHotkey.js";
-import { useSessionStorage } from "../../hooks/useSessionStorage.js";
-import { ModalContext } from "../../modals/context/ModalContext.js";
-import { colors } from "../../theme/colors/colors.js";
-import { fonts } from "../../theme/fonts.js";
-import { Button, StyledButton } from "../Button.js";
+import { useHotkey } from "../../hooks/useHotkey";
+import { useSessionStorage } from "../../hooks/useSessionStorage";
+import { ModalContext } from "../../modals/context/ModalContext";
+import { colors } from "../../theme/colors/colors";
+import { fonts } from "../../theme/fonts";
+import { Button, StyledButton } from "../Button";
 
 export function FullScreenView({
   restorationKey,

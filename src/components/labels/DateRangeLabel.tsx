@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
-import { DateRange, isSameDay } from "../forms/DateRange.js";
-import { Timestamp, TimestampFormatter } from "./Timestamp.js";
+import { DateRange, isSameDay } from "../forms/DateRange";
+import { Timestamp, TimestampFormatter } from "./Timestamp";
 
 export function DateRangeLabel({
   range,

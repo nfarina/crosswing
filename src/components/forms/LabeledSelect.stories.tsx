@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { SeparatorDecorator } from "../SeparatorLayout.js";
-import { LabeledSelect } from "./LabeledSelect.js";
-import { SelectOption } from "./Select.js";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { SeparatorDecorator } from "../SeparatorLayout";
+import { LabeledSelect } from "./LabeledSelect";
+import { SelectOption } from "./Select";
 
 export default {
   component: LabeledSelect,

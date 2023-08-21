@@ -1,8 +1,8 @@
 import React, { HTMLAttributes } from "react";
 import { styled } from "styled-components";
-import { getBuilderVarCss } from "./colors/builders.js";
-import { ColorBuilder, colors, shadows } from "./colors/colors.js";
-import { CyberFontStyle, fonts } from "./fonts.js";
+import { getBuilderVarCss } from "./colors/builders";
+import { ColorBuilder, colors, shadows } from "./colors/colors";
+import { CyberFontStyle, fonts } from "./fonts";
 
 export function CyberApp({
   colors: overriddenColors,

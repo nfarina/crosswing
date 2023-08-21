@@ -1,5 +1,5 @@
 import React, { lazy } from "react";
-import { NavRoute, Navs } from "../../../../router/navs/Navs.js";
+import { NavRoute, Navs } from "../../../../router/navs/Navs";
 
 const PageOne = lazy(() => import("../pages/PageOne.js"));
 

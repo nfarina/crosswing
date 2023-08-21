@@ -1,5 +1,5 @@
 import { DependencyList, useEffect, useRef } from "react";
-import { Callback } from "./useInterval.js";
+import { Callback } from "./useInterval";
 
 /**
  * Similar to useInterval, but only runs once after the delay or deps change.

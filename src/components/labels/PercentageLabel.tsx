@@ -1,7 +1,7 @@
 import React from "react";
 import { styled } from "styled-components";
-import { formatPercentage } from "../../shared/numeric.js";
-import { NumberLabel } from "./NumberLabel.js";
+import { formatPercentage } from "../../shared/numeric";
+import { NumberLabel } from "./NumberLabel";
 
 export function PercentageLabel({
   ...rest

@@ -6,7 +6,7 @@ import React, {
   ReactNode,
 } from "react";
 import { styled } from "styled-components";
-import { colors } from "../theme/colors/colors.js";
+import { colors } from "../theme/colors/colors";
 
 export type SeparatorEdges = "none" | "top" | "bottom" | "both";
 

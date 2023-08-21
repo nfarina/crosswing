@@ -7,11 +7,11 @@ import React, {
   useState,
 } from "react";
 import { styled } from "styled-components";
-import { useHost } from "../../host/context/HostContext.js";
-import { safeArea } from "../../host/plugins/SafeArea.js";
-import { colors } from "../../theme/colors/colors.js";
-import { useRouter } from "../context/RouterContext.js";
-import { StyledTabLink, TabLink, TabProps } from "./TabLink.js";
+import { useHost } from "../../host/context/HostContext";
+import { safeArea } from "../../host/features/safeArea";
+import { colors } from "../../theme/colors/colors";
+import { useRouter } from "../context/RouterContext";
+import { StyledTabLink, TabLink, TabProps } from "./TabLink";
 
 export function TabBar({
   tabs,

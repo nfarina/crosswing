@@ -1,10 +1,10 @@
 import React, { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
-import { colors } from "../theme/colors/colors.js";
-import { fonts } from "../theme/fonts.js";
-import { StyledButton } from "./Button.js";
-import { StyledLinkButton } from "./LinkButton.js";
-import { StyledSpinner } from "./Spinner.js";
+import { colors } from "../theme/colors/colors";
+import { fonts } from "../theme/fonts";
+import { StyledButton } from "./Button";
+import { StyledLinkButton } from "./LinkButton";
+import { StyledSpinner } from "./Spinner";
 
 // Designed to hold a group of other form components like <Button>.
 // Restyles them appropriately.

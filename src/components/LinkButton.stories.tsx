@@ -1,8 +1,8 @@
 import { Meta } from "@storybook/react";
 import React from "react";
-import { RouterDecorator } from "../router/storybook/RouterDecorator.js";
-import { CyberAppDecorator } from "../theme/storybook.js";
-import { LinkButton } from "./LinkButton.js";
+import { RouterDecorator } from "../router/storybook/RouterDecorator";
+import { CyberAppDecorator } from "../theme/storybook";
+import { LinkButton } from "./LinkButton";
 
 export default {
   component: LinkButton,

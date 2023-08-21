@@ -1,7 +1,7 @@
 import Debug from "debug";
 import React, { HTMLAttributes, ReactNode, useRef } from "react";
 import { styled } from "styled-components";
-import { useElementSize } from "../hooks/useElementSize.js";
+import { useElementSize } from "../hooks/useElementSize";
 
 const debug = Debug("components:AspectLayout");
 

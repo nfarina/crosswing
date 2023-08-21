@@ -1,6 +1,6 @@
 import React, { CSSProperties, HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
-import { useHost } from "../host/context/HostContext.js";
+import { useHost } from "../host/context/HostContext";
 
 export function Carousel({
   inset = [20, 20],

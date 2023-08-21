@@ -2,11 +2,11 @@ import { action } from "@storybook/addon-actions";
 import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { styled } from "styled-components";
-import { usePopup } from "../modals/popup/usePopup.js";
-import { ModalDecorator } from "../modals/storybook/ModalDecorator.js";
-import { RouterDecorator } from "../router/storybook/RouterDecorator.js";
-import { CyberAppDecorator } from "../theme/storybook.js";
-import { Button } from "./Button.js";
+import { usePopup } from "../modals/popup/usePopup";
+import { ModalDecorator } from "../modals/storybook/ModalDecorator";
+import { RouterDecorator } from "../router/storybook/RouterDecorator";
+import { CyberAppDecorator } from "../theme/storybook";
+import { Button } from "./Button";
 import {
   PopupMenu,
   PopupMenuHeader,
@@ -14,8 +14,8 @@ import {
   PopupMenuSeparator,
   PopupMenuText,
   PopupMenuToggle,
-} from "./PopupMenu.js";
-import { SelectOption } from "./forms/Select.js";
+} from "./PopupMenu";
+import { SelectOption } from "./forms/Select";
 
 export default {
   component: PopupMenu,

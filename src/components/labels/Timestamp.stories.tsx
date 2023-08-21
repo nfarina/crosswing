@@ -1,11 +1,11 @@
 import { Meta } from "@storybook/react";
-import dayjs from "dayjs/esm";
+import dayjs from "dayjs";
 import React from "react";
 import { styled } from "styled-components";
-import { colors } from "../../theme/colors/colors.js";
-import { fonts } from "../../theme/fonts.js";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { Timestamp, setTimestampUpdateInterval } from "./Timestamp.js";
+import { colors } from "../../theme/colors/colors";
+import { fonts } from "../../theme/fonts";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { Timestamp, setTimestampUpdateInterval } from "./Timestamp";
 
 setTimestampUpdateInterval(500);
 

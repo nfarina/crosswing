@@ -1,6 +1,6 @@
 import { DependencyList, useEffect } from "react";
-import { deepEqual } from "../shared/compare.js";
-import { useResettableState } from "./useResettableState.js";
+import { deepEqual } from "../shared/compare";
+import { useResettableState } from "./useResettableState";
 
 /**
  * Returns the result of executing the given factory function, then

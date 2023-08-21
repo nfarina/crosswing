@@ -1,15 +1,15 @@
 import { action } from "@storybook/addon-actions";
 import React, { Suspense, useState } from "react";
-import { useRouter } from "../router/context/RouterContext.js";
+import { useRouter } from "../router/context/RouterContext";
 import {
   BrowserSimulator,
   RouterDecorator,
-} from "../router/storybook/RouterDecorator.js";
-import { wait } from "../shared/wait.js";
-import { CyberAppDecorator } from "../theme/storybook.js";
-import { LoadingCurtain } from "./LoadingCurtain.js";
-import { NoContent } from "./NoContent.js";
-import { TabbedButton, TabbedButtonLayout } from "./TabbedButtonLayout.js";
+} from "../router/storybook/RouterDecorator";
+import { wait } from "../shared/wait";
+import { CyberAppDecorator } from "../theme/storybook";
+import { LoadingCurtain } from "./LoadingCurtain";
+import { NoContent } from "./NoContent";
+import { TabbedButton, TabbedButtonLayout } from "./TabbedButtonLayout";
 
 export default {
   component: TabbedButtonLayout,

@@ -1,8 +1,8 @@
 import React from "react";
 import { styled } from "styled-components";
-import { NavLayout } from "../../../../router/navs/NavLayout.js";
-import { LinkButton } from "../../../LinkButton.js";
-import { NoContent } from "../../../NoContent.js";
+import { NavLayout } from "../../../../router/navs/NavLayout";
+import { LinkButton } from "../../../LinkButton";
+import { NoContent } from "../../../NoContent";
 
 export default function PageOne() {
   return (

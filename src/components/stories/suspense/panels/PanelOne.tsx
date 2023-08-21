@@ -1,8 +1,8 @@
 import React from "react";
 import { styled } from "styled-components";
-import { colors } from "../../../../theme/colors/colors.js";
-import { fonts } from "../../../../theme/fonts.js";
-import { Placeholder } from "../../../Placeholder.js";
+import { colors } from "../../../../theme/colors/colors";
+import { fonts } from "../../../../theme/fonts";
+import { Placeholder } from "../../../Placeholder";
 
 export default function PanelOne({}: any) {
   return (

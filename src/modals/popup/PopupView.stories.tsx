@@ -1,10 +1,10 @@
 import { Meta, StoryFn } from "@storybook/react";
 import React from "react";
 import { styled } from "styled-components";
-import { colors } from "../../theme/colors/colors.js";
-import { fonts } from "../../theme/fonts.js";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { PopupView } from "./PopupView.js";
+import { colors } from "../../theme/colors/colors";
+import { fonts } from "../../theme/fonts";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { PopupView } from "./PopupView";
 
 export default {
   component: PopupView,

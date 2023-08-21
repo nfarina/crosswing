@@ -1,7 +1,7 @@
 import Debug from "debug";
 import React, { ReactElement, ReactNode, useRef, useState } from "react";
 import { styled } from "styled-components";
-import { ElementSize, useElementSize } from "../hooks/useElementSize.js";
+import { ElementSize, useElementSize } from "../hooks/useElementSize";
 
 const debug = Debug("components:ResponsiveLayout");
 

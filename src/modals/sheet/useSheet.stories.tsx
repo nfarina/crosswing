@@ -1,17 +1,17 @@
 import { StoryObj } from "@storybook/react";
 import React from "react";
-import { MockHostProvider } from "../../host/mocks/MockHostProvider.js";
-import { NavLayout } from "../../router/navs/NavLayout.js";
-import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
-import { colors } from "../../theme/colors/colors.js";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { ModalContextProvider } from "../context/ModalContextProvider.js";
-import { ModalDecorator } from "../storybook/ModalDecorator.js";
+import { MockHostProvider } from "../../host/mocks/MockHostProvider";
+import { NavLayout } from "../../router/navs/NavLayout";
+import { RouterDecorator } from "../../router/storybook/RouterDecorator";
+import { colors } from "../../theme/colors/colors";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { ModalContextProvider } from "../context/ModalContextProvider";
+import { ModalDecorator } from "../storybook/ModalDecorator";
 import {
   ModalStoryButton,
   ModalStoryButtons,
-} from "../storybook/ModalStoryButtons.js";
-import { useSheet } from "./useSheet.js";
+} from "../storybook/ModalStoryButtons";
+import { useSheet } from "./useSheet";
 
 export default {
   component: useSheet,

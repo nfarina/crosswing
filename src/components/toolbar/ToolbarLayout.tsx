@@ -6,13 +6,13 @@ import React, {
   useState,
 } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../theme/colors/colors.js";
-import { StyledToolbar } from "./Toolbar.js";
+import { colors } from "../../theme/colors/colors";
+import { StyledToolbar } from "./Toolbar";
 import {
   ToolbarContext,
   ToolbarContextValue,
   ToolbarInsertionRef,
-} from "./ToolbarContext.js";
+} from "./ToolbarContext";
 
 export function ToolbarLayout({
   children,

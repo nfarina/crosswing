@@ -1,8 +1,8 @@
 import React, { ReactElement, useLayoutEffect, useRef } from "react";
 import { styled } from "styled-components";
-import { useHotkey } from "../../hooks/useHotkey.js";
-import { useSessionStorage } from "../../hooks/useSessionStorage.js";
-import { colors } from "../../theme/colors/colors.js";
+import { useHotkey } from "../../hooks/useHotkey";
+import { useSessionStorage } from "../../hooks/useSessionStorage";
+import { colors } from "../../theme/colors/colors";
 
 export function MobileAppFrame({
   children,

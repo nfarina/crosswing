@@ -1,8 +1,8 @@
 import { action } from "@storybook/addon-actions";
 import { Meta } from "@storybook/react";
 import React from "react";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { BannerView } from "../banner/BannerView.js";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { BannerView } from "../banner/BannerView";
 
 export default {
   component: BannerView,

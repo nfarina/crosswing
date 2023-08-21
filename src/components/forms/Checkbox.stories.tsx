@@ -1,7 +1,7 @@
 import { Meta, StoryFn } from "@storybook/react";
 import React, { useState } from "react";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { Checkbox } from "./Checkbox.js";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { Checkbox } from "./Checkbox";
 
 export default {
   component: Checkbox,

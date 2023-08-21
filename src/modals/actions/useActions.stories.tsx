@@ -1,13 +1,13 @@
 import { action } from "@storybook/addon-actions";
 import React from "react";
-import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { ModalDecorator } from "../storybook/ModalDecorator.js";
+import { RouterDecorator } from "../../router/storybook/RouterDecorator";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { ModalDecorator } from "../storybook/ModalDecorator";
 import {
   ModalStoryButton,
   ModalStoryButtons,
-} from "../storybook/ModalStoryButtons.js";
-import { useActions } from "./useActions.js";
+} from "../storybook/ModalStoryButtons";
+import { useActions } from "./useActions";
 
 export default {
   component: useActions,

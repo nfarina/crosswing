@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { DeepLink, HostFeatures } from "./types.js";
+import { DeepLink, HostFeatures } from "./types";
 
 // Returns the current DeepLink that our host wishes us to navigate to, else
 // undefined if not yet determined.

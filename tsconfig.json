@@ -3,7 +3,18 @@
     // Do as little "transformation" as possible.
     "target": "ESNext",
     // Leave "import" statements alone since we are using ESM.
-    "module": "NodeNext",
+    "module": "ESNext",
+    // Allow importing CJS modules written as ESM modules without the
+    // "double default" problem. https://github.com/microsoft/TypeScript/issues/50058#issuecomment-1404411380
+    // This assumes TSC never emits JS code that is run "raw" by Node, which is
+    // true for our project: our code is only ever run through Vite or Rollup.
+    // Further reading here: https://stackoverflow.com/a/71473145/66673
+    "moduleResolution": "Bundler",
+    // Allow importing .ts files with or without specifying the extension.
+    // Normally under ESM we must import .js only, but we don't actually
+    // have any JS files on disk. Again, this assumes all code is run through
+    // tooling and not emitted to JS and run through Node.
+    "allowImportingTsExtensions": true,
     // Enable strictest settings like strictNullChecks & noImplicitAny.
     "strict": true,
     // Speed up compilation by assuming .d.ts files are valid.
@@ -21,9 +32,5 @@
     // Dramatically speed up successive compilations.
     "incremental": true
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "assets.d.ts"
-  ]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "assets.d.ts"]
 }

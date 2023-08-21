@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { CyberAppDecorator } from "../theme/storybook.js";
-import { ExpandButton } from "./ExpandButton.js";
+import { CyberAppDecorator } from "../theme/storybook";
+import { ExpandButton } from "./ExpandButton";
 
 export default {
   component: ExpandButton,

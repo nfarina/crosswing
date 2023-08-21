@@ -1,9 +1,9 @@
 import React, { ReactNode, useState } from "react";
 import { styled } from "styled-components";
-import { AlertButton, AlertView } from "../modals/alert/AlertView.js";
-import { Modal } from "../modals/context/useModal.js";
-import { useDialog } from "../modals/dialog/useDialog.js";
-import { ProgressView } from "./ProgressView.js";
+import { AlertButton, AlertView } from "../modals/alert/AlertView";
+import { Modal } from "../modals/context/useModal";
+import { useDialog } from "../modals/dialog/useDialog";
+import { ProgressView } from "./ProgressView";
 
 export type ProgressHandler = (message?: ReactNode) => void;
 

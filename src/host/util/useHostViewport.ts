@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { HostViewport } from "./types.js";
+import { HostViewport } from "./types";
 
 export function useHostViewport(): HostViewport {
   // Initialize with an empty object for default value, indicating

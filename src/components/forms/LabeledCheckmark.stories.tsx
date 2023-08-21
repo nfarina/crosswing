@@ -1,8 +1,8 @@
 import { action } from "@storybook/addon-actions";
 import React from "react";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { SeparatorDecorator } from "../SeparatorLayout.js";
-import { LabeledCheckmark } from "./LabeledCheckmark.js";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { SeparatorDecorator } from "../SeparatorLayout";
+import { LabeledCheckmark } from "./LabeledCheckmark";
 
 export default {
   component: LabeledCheckmark,

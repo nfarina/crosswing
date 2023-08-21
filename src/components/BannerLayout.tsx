@@ -1,9 +1,9 @@
 import React, { ReactNode, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 import { styled } from "styled-components";
-import { colors } from "../theme/colors/colors.js";
-import { fonts } from "../theme/fonts.js";
-import { Spinner, StyledSpinner } from "./Spinner.js";
+import { colors } from "../theme/colors/colors";
+import { fonts } from "../theme/fonts";
+import { Spinner, StyledSpinner } from "./Spinner";
 
 export function BannerLayout({
   title = "Look at Banner, Michael!",

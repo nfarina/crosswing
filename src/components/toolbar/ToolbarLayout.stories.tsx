@@ -3,13 +3,13 @@ import { Meta } from "@storybook/react";
 import React, { useState } from "react";
 import { createPortal } from "react-dom";
 import { styled } from "styled-components";
-import { useAsyncTask } from "../../hooks/useAsyncTask.js";
-import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
-import { wait } from "../../shared/wait.js";
-import { colors } from "../../theme/colors/colors.js";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { NoContent } from "../NoContent.js";
-import { SelectOption } from "../forms/Select.js";
+import { useAsyncTask } from "../../hooks/useAsyncTask";
+import { RouterDecorator } from "../../router/storybook/RouterDecorator";
+import { wait } from "../../shared/wait";
+import { colors } from "../../theme/colors/colors";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { NoContent } from "../NoContent";
+import { SelectOption } from "../forms/Select";
 import {
   Toolbar,
   ToolbarButton,
@@ -18,10 +18,10 @@ import {
   ToolbarSelect,
   ToolbarSidebarButton,
   ToolbarSpace,
-} from "../toolbar/Toolbar.js";
-import { useToolbar } from "./ToolbarContext.js";
-import { ToolbarLayout } from "./ToolbarLayout.js";
-import { ToolbarTab } from "./ToolbarTab.js";
+} from "../toolbar/Toolbar";
+import { useToolbar } from "./ToolbarContext";
+import { ToolbarLayout } from "./ToolbarLayout";
+import { ToolbarTab } from "./ToolbarTab";
 
 export default {
   component: ToolbarLayout,

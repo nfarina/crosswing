@@ -1,9 +1,9 @@
 import React, { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
 import Close from "../../../icons/Close.svg";
-import { useGesture } from "../../hooks/useGesture.js";
-import { colors, shadows } from "../../theme/colors/colors.js";
-import { fonts } from "../../theme/fonts.js";
+import { useGesture } from "../../hooks/useGesture";
+import { colors, shadows } from "../../theme/colors/colors";
+import { fonts } from "../../theme/fonts";
 
 export function BannerView({
   title,

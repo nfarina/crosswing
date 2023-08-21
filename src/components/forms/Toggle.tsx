@@ -7,7 +7,7 @@ import React, {
   useRef,
 } from "react";
 import { styled } from "styled-components";
-import { ColorBuilder, colors } from "../../theme/colors/colors.js";
+import { ColorBuilder, colors } from "../../theme/colors/colors";
 
 export function Toggle({
   on,

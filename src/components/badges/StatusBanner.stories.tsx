@@ -1,8 +1,8 @@
 import { action } from "@storybook/addon-actions";
 import { Meta, StoryFn } from "@storybook/react";
 import React from "react";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { StatusBanner } from "./StatusBanner.js";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { StatusBanner } from "./StatusBanner";
 
 export default {
   component: StatusBanner,

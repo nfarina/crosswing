@@ -1,8 +1,8 @@
 import React, { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
 import DisclosureArrow from "../../../icons/DisclosureArrow.svg";
-import { colors } from "../../theme/colors/colors.js";
-import { fonts } from "../../theme/fonts.js";
+import { colors } from "../../theme/colors/colors";
+import { fonts } from "../../theme/fonts";
 
 /**
  * A versatile way to display data in a form setting.

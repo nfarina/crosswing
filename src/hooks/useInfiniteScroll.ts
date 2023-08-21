@@ -1,6 +1,6 @@
 import Debug from "debug";
 import { DependencyList, UIEvent } from "react";
-import { useResettableState } from "./useResettableState.js";
+import { useResettableState } from "./useResettableState";
 
 const debug = Debug("useInfiniteScroll");
 

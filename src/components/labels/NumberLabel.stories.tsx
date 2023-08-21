@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/react";
 import React from "react";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { NumberLabel } from "./NumberLabel.js";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { NumberLabel } from "./NumberLabel";
 
 export default {
   component: NumberLabel,

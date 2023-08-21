@@ -1,8 +1,8 @@
 import { ButtonHTMLAttributes, FormHTMLAttributes } from "react";
-import { NavAccessory } from "../../router/navs/NavAccessoryView.js";
-import { InputValue } from "./useInputValue.js";
-import { ObjectValue } from "./useObjectValue.js";
-import { ToggleValue } from "./useToggleValue.js";
+import { NavAccessory } from "../../router/navs/NavAccessoryView";
+import { InputValue } from "./useInputValue";
+import { ObjectValue } from "./useObjectValue";
+import { ToggleValue } from "./useToggleValue";
 
 export type FormValue = InputValue<any> | ToggleValue | ObjectValue<any>;
 

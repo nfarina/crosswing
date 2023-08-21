@@ -2,11 +2,11 @@ import { action } from "@storybook/addon-actions";
 import { Meta, StoryFn } from "@storybook/react";
 import React from "react";
 import { styled } from "styled-components";
-import { colors } from "../../theme/colors/colors.js";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { SeparatorDecorator } from "../SeparatorLayout.js";
-import { FileInput } from "./FileInput.js";
-import { TextCell } from "./TextCell.js";
+import { colors } from "../../theme/colors/colors";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { SeparatorDecorator } from "../SeparatorLayout";
+import { FileInput } from "./FileInput";
+import { TextCell } from "./TextCell";
 
 export default {
   component: FileInput,

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { goBack } from "./ipc.js";
+import { goBack } from "./ipc";
 
 // Support for Android's hardware back buttons.
 

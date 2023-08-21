@@ -1,6 +1,6 @@
 import React from "react";
-import { CyberAppDecorator } from "../theme/storybook.js";
-import { ImageViewer } from "./ImageViewer.js";
+import { CyberAppDecorator } from "../theme/storybook";
+import { ImageViewer } from "./ImageViewer";
 import SampleImage from "./SampleImage.jpg";
 
 export default {

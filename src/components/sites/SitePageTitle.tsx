@@ -10,13 +10,13 @@ import React, {
 } from "react";
 import { styled } from "styled-components";
 import BackIcon from "../../../icons/Back.svg";
-import { Link } from "../../router/Link.js";
-import { useRouter } from "../../router/context/RouterContext.js";
-import { NavAccessoryView } from "../../router/navs/NavAccessoryView.js";
-import { NavTitleView } from "../../router/navs/NavTitleView.js";
-import { colors } from "../../theme/colors/colors.js";
-import { fonts } from "../../theme/fonts.js";
-import { SiteHeaderAccessory } from "./SiteHeaderAccessory.js";
+import { Link } from "../../router/Link";
+import { useRouter } from "../../router/context/RouterContext";
+import { NavAccessoryView } from "../../router/navs/NavAccessoryView";
+import { NavTitleView } from "../../router/navs/NavTitleView";
+import { colors } from "../../theme/colors/colors";
+import { fonts } from "../../theme/fonts";
+import { SiteHeaderAccessory } from "./SiteHeaderAccessory";
 
 // This is pretty fancy for a breadcrumbs system.
 

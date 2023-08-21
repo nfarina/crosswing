@@ -7,11 +7,11 @@ import React, {
   useRef,
 } from "react";
 import { keyframes, styled } from "styled-components";
-import { useHotkey } from "../../hooks/useHotkey.js";
-import { useHost } from "../../host/context/HostContext.js";
-import { easing } from "../../theme/easing.js";
-import { useModal } from "../context/useModal.js";
-import { useClickOutsideToClose } from "./useClickOutsideToClose.js";
+import { useHotkey } from "../../hooks/useHotkey";
+import { useHost } from "../../host/context/HostContext";
+import { easing } from "../../theme/easing";
+import { useModal } from "../context/useModal";
+import { useClickOutsideToClose } from "./useClickOutsideToClose";
 
 export interface Popup<T extends any[]> {
   /** Shows the popup around the given target. */

@@ -1,12 +1,12 @@
 import React from "react";
-import { colors } from "../../theme/colors/colors.js";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { ModalDecorator } from "../storybook/ModalDecorator.js";
+import { colors } from "../../theme/colors/colors";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { ModalDecorator } from "../storybook/ModalDecorator";
 import {
   ModalStoryButton,
   ModalStoryButtons,
-} from "../storybook/ModalStoryButtons.js";
-import { useBanner } from "./useBanner.js";
+} from "../storybook/ModalStoryButtons";
+import { useBanner } from "./useBanner";
 
 export default {
   component: useBanner,

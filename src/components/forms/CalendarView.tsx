@@ -1,6 +1,6 @@
-import dayjs from "dayjs/esm";
-import isSameOrAfter from "dayjs/esm/plugin/isSameOrAfter";
-import isSameOrBefore from "dayjs/esm/plugin/isSameOrBefore";
+import dayjs from "dayjs";
+import isSameOrAfter from "dayjs/plugin/isSameOrAfter.js";
+import isSameOrBefore from "dayjs/plugin/isSameOrBefore.js";
 import React, {
   HTMLAttributes,
   ReactNode,
@@ -8,9 +8,9 @@ import React, {
   useRef,
 } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../theme/colors/colors.js";
-import { fonts } from "../../theme/fonts.js";
-import { DateRange, isDateInRange, isSameDay } from "./DateRange.js";
+import { colors } from "../../theme/colors/colors";
+import { fonts } from "../../theme/fonts";
+import { DateRange, isDateInRange, isSameDay } from "./DateRange";
 
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);

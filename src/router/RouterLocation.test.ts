@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { RouterLocation } from "./RouterLocation.js";
+import { RouterLocation } from "./RouterLocation";
 
 describe("linkTo", () => {
   const location = RouterLocation.fromHref("/customers/cus1").claimAll();

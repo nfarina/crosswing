@@ -1,10 +1,10 @@
 import { Meta } from "@storybook/react";
 import React, { CSSProperties, ReactNode } from "react";
 import { styled } from "styled-components";
-import { fonts } from "../fonts.js";
-import { CyberAppDecorator } from "../storybook.js";
-import { ColorView } from "./ColorView.js";
-import { colors } from "./colors.js";
+import { fonts } from "../fonts";
+import { CyberAppDecorator } from "../storybook";
+import { ColorView } from "./ColorView";
+import { colors } from "./colors";
 
 export default {
   component: colors as any, // Just for the auto-title.

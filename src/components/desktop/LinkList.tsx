@@ -7,15 +7,15 @@ import React, {
   useRef,
 } from "react";
 import { styled } from "styled-components";
-import { useRouter } from "../../router/context/RouterContext.js";
-import { colors } from "../../theme/colors/colors.js";
-import { fonts } from "../../theme/fonts.js";
+import { useRouter } from "../../router/context/RouterContext";
+import { colors } from "../../theme/colors/colors";
+import { fonts } from "../../theme/fonts";
 import {
   SeparatorEdges,
   SeparatorLayout,
   StyledSeparatorLayout,
-} from "../SeparatorLayout.js";
-import { LinkListCell } from "./LinkListCell.js";
+} from "../SeparatorLayout";
+import { LinkListCell } from "./LinkListCell";
 
 export function LinkList<T extends { id: string }>({
   items = [],

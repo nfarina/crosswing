@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { ToggleButton } from "./ToggleButton.js";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { ToggleButton } from "./ToggleButton";
 
 export default {
   component: ToggleButton,

@@ -5,12 +5,12 @@ import React, {
   ReactNode,
 } from "react";
 import { styled } from "styled-components";
-import { safeArea } from "../host/plugins/SafeArea.js";
-import { colors } from "../theme/colors/colors.js";
-import { fonts } from "../theme/fonts.js";
-import { Scrollable, StyledScrollable } from "./Scrollable.js";
-import { StyledSeparatorLayout } from "./SeparatorLayout.js";
-import { FormValues } from "./forms/useFormValues.js";
+import { safeArea } from "../host/features/safeArea";
+import { colors } from "../theme/colors/colors";
+import { fonts } from "../theme/fonts";
+import { Scrollable, StyledScrollable } from "./Scrollable";
+import { StyledSeparatorLayout } from "./SeparatorLayout";
+import { FormValues } from "./forms/useFormValues";
 
 /**
  * A common "wizard" like layout for going through a step by step process.

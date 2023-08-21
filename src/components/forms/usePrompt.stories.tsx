@@ -1,12 +1,12 @@
 import { action } from "@storybook/addon-actions";
 import React from "react";
 import { styled } from "styled-components";
-import { ModalDecorator } from "../../modals/storybook/ModalDecorator.js";
-import { colors } from "../../theme/colors/colors.js";
-import { CyberAppDecorator } from "../../theme/storybook.js";
-import { Button } from "../Button.js";
-import { urlTransformer } from "./urlTransformer.js";
-import { usePrompt } from "./usePrompt.js";
+import { ModalDecorator } from "../../modals/storybook/ModalDecorator";
+import { colors } from "../../theme/colors/colors";
+import { CyberAppDecorator } from "../../theme/storybook";
+import { Button } from "../Button";
+import { urlTransformer } from "./urlTransformer";
+import { usePrompt } from "./usePrompt";
 
 export default {
   component: usePrompt,

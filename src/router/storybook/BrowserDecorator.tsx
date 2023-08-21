@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserSimulator } from "./BrowserSimulator.js";
+import { BrowserSimulator } from "./BrowserSimulator";
 
 // Useful for hosting Storybook components designed to be presented
 // in a mobile-app setting, with a working Router parent and address bar.

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useNativeHost } from "./useNativeHost.js";
+import { useNativeHost } from "./useNativeHost";
 
 export function useWindowListener(
   name: string,
