@@ -38,7 +38,7 @@ export type SiteSidebarLinkProps = {
 
 export function SiteSidebar({
   logo = <CyberLogoIcon style={{ width: "50px", height: "50px" }} />,
-  tint = colors.turquoise,
+  tint = colors.orange,
   accessories,
   children,
   onLinkClick,
