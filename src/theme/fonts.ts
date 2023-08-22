@@ -12,72 +12,79 @@ import LatoRegular from "../../fonts/lato/Lato-Regular.ttf";
 // TODO: make this overridable and defined at the CyberApp element level; not
 // the document level.
 
+export type FontBuilders = Record<string, FontBuilder>;
+
 export const fonts = {
-  display: fontBuilder({
+  display: font({
     url: FiraSansRegular,
     family: "Fira Sans",
     weight: "400",
   }),
-  displayMedium: fontBuilder({
+  displayMedium: font({
     url: FiraSansMedium,
     family: "Fira Sans",
     weight: "500",
   }),
-  displayBold: fontBuilder({
+  displayBold: font({
     url: FiraSansBold,
     family: "Fira Sans",
     weight: "600",
   }),
-  displayBlack: fontBuilder({
+  displayBlack: font({
     url: FiraSansBlack,
     family: "Fira Sans",
     weight: "800",
   }),
-  numeric: fontBuilder({
+  numeric: font({
     url: LatoRegular,
     family: "Lato",
     weight: "400",
   }),
-  numericBold: fontBuilder({
+  numericBold: font({
     url: LatoBold,
     family: "Lato",
     weight: "600",
   }),
-  numericBlack: fontBuilder({
+  numericBlack: font({
     url: LatoBlack,
     family: "Lato",
     weight: "800",
   }),
-  displayMono: fontBuilder({
+  displayMono: font({
     url: FiraMonoRegular,
     family: "Fira Mono",
     weight: "400",
     monospace: true,
   }),
-  displayMonoMedium: fontBuilder({
+  displayMonoMedium: font({
     url: FiraMonoMedium,
     family: "Fira Mono",
     weight: "500",
     monospace: true,
   }),
-};
+} satisfies FontBuilders;
 
-let fontsInstalled = false;
-function installFonts() {
-  if (fontsInstalled) return;
+const installedFonts: Set<FontBuilders> = new Set();
 
-  // Render our fonts statically only once, to work around flickering during
-  // development: https://github.com/styled-components/styled-components/issues/1593#issuecomment-409011695
-  const style = document.createElement("style");
-  style.innerHTML = getFontVarCSS(Object.values(fonts));
-  document.head.appendChild(style);
+export function useFonts(fonts: FontBuilders) {
+  useEffect(() => {
+    // Did some other component calling this same hook already install these
+    // fonts? If so, we don't need to do it again.
+    if (installedFonts.has(fonts)) return;
 
-  fontsInstalled = true;
+    // Render our fonts statically only once, to work around flickering during
+    // development: https://github.com/styled-components/styled-components/issues/1593#issuecomment-409011695
+    const style = document.createElement("style");
+    style.innerHTML = getFontVarCSS(Object.values(fonts));
+    document.head.appendChild(style);
+
+    installedFonts.add(fonts);
+  }, []);
 }
 
 /** A React component that installs Cyber fonts automatically. */
 export function CyberFontStyle() {
-  useEffect(installFonts, []);
+  useFonts(fonts);
   return null;
 }
 
@@ -97,7 +104,7 @@ export type FontBuilder = {
   url: string;
 };
 
-function fontBuilder({
+export function font({
   url,
   family,
   weight,

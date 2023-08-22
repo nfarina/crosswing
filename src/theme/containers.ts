@@ -28,5 +28,37 @@ export const CyberRootStyle = createGlobalStyle`
         flex-grow: 1;
       }
     }
+    
+    strong {
+      /* Otherwise browsers may select the "Fira Sans Black" font which is too heavy. */
+      font-weight: 600;
+    }
+  }
+`;
+
+/**
+ * When viewing the mobile app on a desktop browser, this will
+ * "frame" it so the UI doesn't appear stretched.
+ */
+export const CyberAppDesktopFrame = createGlobalStyle`
+  @media (min-width: 500px) {
+    body > #cyber-root {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      background: #cdd6d6;
+
+      @media (prefers-color-scheme: dark) {
+        background: #3C4444; /* From Figma */
+      }
+
+      > * {
+        /* Approximate the visible content area of an iPhone 12 Pro. */
+        width: 390px;
+        max-height: 715px;
+      }
+    }
   }
 `;

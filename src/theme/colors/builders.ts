@@ -39,7 +39,7 @@ export interface HexColorOptions {
    * of a color is in the range of [0...360]. Values outside of that range will
    * be wrapped around.
    */
-  hue?: number;
+  hue?: number | HexColorBuilder;
   /** Adjusts the saturation of the color by the given multiplier, so 0.2 means "20% more saturated." */
   saturate?: number;
   /** For better semantics, same as saturate() with a flipped sign. */
@@ -96,7 +96,14 @@ export function buildHexColor(
 
     if (lighten != null) lch.l *= 1 + lighten;
     if (darken != null) lch.l *= 1 - darken;
-    if (hue != null) lch.h = (lch.h + hue) % 360;
+    if (hue != null) {
+      if (typeof hue === "number") {
+        lch.h = (lch.h + hue) % 360;
+      } else {
+        const otherLch = parseOklch(hue.hex);
+        lch.h = otherLch.h;
+      }
+    }
     if (saturate != null) lch.c *= 1 + saturate;
     if (desaturate != null) lch.c *= 1 - desaturate;
 

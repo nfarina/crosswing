@@ -39,12 +39,14 @@
     "./router/redirect": "./src/router/redirect/Redirect.tsx",
     "./router/tabs": "./src/router/tabs/Tabs.tsx",
     "./router/storybook": "./src/router/storybook/RouterDecorator.tsx",
+    "./router/listener": "./src/router/util/useLocationChangeListener.tsx",
     "./host/context": "./src/host/context/HostProvider.tsx",
     "./host/mocks": "./src/host/mocks/MockHostProvider.tsx",
     "./host/types": "./src/host/util/types.ts",
     "./host/console": "./src/host/util/attachConsole.ts",
     "./host/features/*": "./src/host/features/*.ts",
-    "./host/util/smoothScroll": "./src/host/util/smoothScroll.ts"
+    "./host/util/smoothScroll": "./src/host/util/smoothScroll.ts",
+    "./host/util/openExternalLink": "./src/host/util/openExternalLink.ts"
   },
   "scripts": {
     "dev": "vite-node src/manager/server/server.ts",

@@ -44,6 +44,7 @@ const other = {
   mediumBlue: hexColor("#7CB8D6"),
   lightBlue: hexColor("#8ED2F4"),
   babyBlue: hexColor("#D0E9F5"),
+  blueGradient: gradientColor("to right", "#2B86A5", "#2671A7"),
   purple: hexColor("#5765A1"),
   extraDarkBlue: hexColor("#0c2c3c"),
   extraDarkTurquoise: hexColor("#194e48"),
@@ -55,7 +56,7 @@ const other = {
  * the CSS for light/dark mode, but you can adjust their alpha when using them.
  */
 const responsive = {
-  primary: varColor({ light: other.turquoise.rgb, var: "--primary-color" }),
+  primary: varColor({ light: other.orange.rgb, var: "--primary-color" }),
   text: varColor({
     light: other.darkGreen.rgb,
     dark: neutrals.extraLightGray.rgb,
@@ -101,7 +102,7 @@ const responsive = {
 /** Gradients that go well with the default colors. */
 const gradients = {
   primaryGradient: varColor({
-    light: other.turquoiseGradient(),
+    light: other.orangeGradient(),
     var: "--primary-gradient",
     static: true,
   }),
