@@ -26,7 +26,7 @@ export const StyledButtonGroup = styled.div`
   height: 30px;
 
   @media (prefers-color-scheme: dark) {
-    background: ${colors.extraDarkGray()};
+    background: ${colors.extraExtraExtraDarkGray()};
     color: ${colors.lightGray()};
   }
 

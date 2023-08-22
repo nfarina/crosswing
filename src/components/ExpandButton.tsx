@@ -47,7 +47,7 @@ export const StyledExpandButton = styled(Clickable)`
     transform: rotate(calc(-90deg + var(--rotate)));
 
     @media (prefers-color-scheme: dark) {
-      background: ${colors.extraDarkGray()};
+      background: ${colors.extraExtraExtraDarkGray()};
     }
 
     &[data-transparent="true"] {

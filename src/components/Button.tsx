@@ -109,7 +109,7 @@ export const StyledButton = styled(Clickable)`
   }
 
   @media (prefers-color-scheme: dark) {
-    background: ${colors.extraDarkGray()};
+    background: ${colors.extraExtraExtraDarkGray()};
   }
 
   &[data-icon-only="true"] {

@@ -60,7 +60,7 @@ export const StyledToggleButton = styled.button`
   background: ${colors.lightGray()};
 
   @media (prefers-color-scheme: dark) {
-    background: ${colors.extraDarkGray()};
+    background: ${colors.extraExtraExtraDarkGray()};
   }
 
   > .content {

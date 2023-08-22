@@ -15,9 +15,9 @@ export {
 /** A set of neutral-toned colors used by shared components. */
 const neutrals = {
   black: hexColor("#000000"),
-  extraExtraExtraDarkGray: hexColor("#0A100F"),
-  extraExtraDarkGray: hexColor("#161D1C"),
-  extraDarkGray: hexColor("#020403"),
+  extraExtraExtraDarkGray: hexColor("#020403"),
+  extraExtraDarkGray: hexColor("#0A100F"),
+  extraDarkGray: hexColor("#161D1C"),
   darkerGray: hexColor("#828C8B"),
   darkGray: hexColor("#919998"),
   mediumGray: hexColor("#B5BFBE"),
@@ -69,19 +69,19 @@ const responsive = {
   }),
   textBackground: varColor({
     light: neutrals.white.rgb,
-    dark: neutrals.extraExtraDarkGray.rgb,
+    dark: neutrals.extraDarkGray.rgb,
     var: "--text-background-color",
   }),
   /** Suitable for panels that appear further from the viewer than the page background. */
   textBackgroundPanel: varColor({
     light: neutrals.extraLightGray.rgb,
-    dark: neutrals.extraExtraExtraDarkGray.rgb,
+    dark: neutrals.extraExtraDarkGray.rgb,
     var: "--text-background-panel-color",
   }),
   /** Different flavor of textBackground, suitable for alternating table rows. */
   textBackgroundAlt: varColor({
     light: neutrals.extraLightGray.rgb,
-    dark: neutrals.extraExtraExtraDarkGray.rgb,
+    dark: neutrals.extraExtraDarkGray.rgb,
     var: "--text-background-alt-color",
   }),
   /** Suitable for borders around controls, like <ButtonGroup>. */

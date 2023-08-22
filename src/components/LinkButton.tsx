@@ -75,7 +75,7 @@ export const StyledLinkButton = styled(Link)`
   transition: opacity 0.2s ease-in-out;
 
   @media (prefers-color-scheme: dark) {
-    background: ${colors.extraDarkGray()};
+    background: ${colors.extraExtraExtraDarkGray()};
   }
 
   > * {

@@ -96,7 +96,7 @@ export const ToolbarLinkButton = styled(LinkButton)`
   font: ${fonts.display({ size: 15, line: "1.5" })};
 
   @media (prefers-color-scheme: dark) {
-    background: ${colors.extraDarkGray()};
+    background: ${colors.extraExtraExtraDarkGray()};
     color: ${colors.lightGray()};
   }
 `;
@@ -111,7 +111,7 @@ export const ToolbarButton = styled(Button)`
   font: ${fonts.display({ size: 15, line: "1.5" })};
 
   @media (prefers-color-scheme: dark) {
-    background: ${colors.extraDarkGray()};
+    background: ${colors.extraExtraExtraDarkGray()};
     color: ${colors.lightGray()};
   }
 
@@ -202,7 +202,7 @@ export const ToolbarSelect = styled(Select)`
     font: ${fonts.display({ size: 15, line: "1.5" })};
 
     @media (prefers-color-scheme: dark) {
-      background: ${colors.extraDarkGray()};
+      background: ${colors.extraExtraExtraDarkGray()};
       color: ${colors.lightGray()};
     }
   }

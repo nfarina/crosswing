@@ -167,7 +167,7 @@ export const PopupMenuSelect = styled(Select)`
   > select {
     @media (prefers-color-scheme: dark) {
       /* Bump up contrast since the popup has a slightly lighter background than the page. */
-      background: ${colors.extraDarkGray()};
+      background: ${colors.extraExtraExtraDarkGray()};
     }
     font: ${fonts.displayBold({ size: 14 })};
   }

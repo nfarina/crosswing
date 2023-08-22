@@ -17,7 +17,7 @@ export const Badge = styled.div`
   justify-content: center;
 
   @media (prefers-color-scheme: dark) {
-    background: ${colors.extraDarkGray()};
+    background: ${colors.extraExtraExtraDarkGray()};
     color: ${colors.extraLightGray()};
   }
 `;
