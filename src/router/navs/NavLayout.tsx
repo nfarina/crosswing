@@ -165,7 +165,7 @@ export const StyledNavHeader = styled.div`
   }
 `;
 
-const StyledNavLayout = styled.div`
+export const StyledNavLayout = styled.div`
   display: flex;
   flex-flow: column;
   background: ${colors.textBackground()};

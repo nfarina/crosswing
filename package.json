@@ -46,7 +46,8 @@
     "./host/console": "./src/host/util/attachConsole.ts",
     "./host/features/*": "./src/host/features/*.ts",
     "./host/util/smoothScroll": "./src/host/util/smoothScroll.ts",
-    "./host/util/openExternalLink": "./src/host/util/openExternalLink.ts"
+    "./host/util/openExternalLink": "./src/host/util/openExternalLink.ts",
+    "./host/util/useClipboard": "./src/host/util/useClipboard.ts"
   },
   "scripts": {
     "dev": "vite-node src/manager/server/server.ts",
