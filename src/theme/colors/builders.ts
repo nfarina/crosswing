@@ -3,7 +3,9 @@ import { formatOklch, parseHex, parseOklch } from "./oklch";
 // Check if this browser supports the `color()` function, specifically with
 // the `display-p3` color space.
 const SUPPORTS_P3_COLOR =
-  typeof CSS !== "undefined" && CSS.supports("color: color(display-p3 1 1 1)");
+  typeof CSS !== "undefined" &&
+  CSS.supports("color: color(display-p3 1 1 1)") &&
+  !isOlderIOS();
 
 export type ColorBuilder = HexColorBuilder | VarColorBuilder | GradientBuilder;
 
@@ -250,4 +252,32 @@ export function getBuilderVarCss(builders: ColorBuilder[]): string {
       ${darkCss}
     }
   `.trim();
+}
+
+/**
+ * Test if we are running on an iOS version less than v16 (we haven't tested
+ * versions between 13–16) because if so, we can't use P3 colors because of a
+ * bug in <input type="text">.
+ */
+function isOlderIOS(): boolean {
+  if (typeof navigator === "undefined") return false;
+
+  // Test strings like:
+  //   5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1
+  const match = navigator.userAgent.match(/OS (\d+)_(\d+)/);
+  if (match) {
+    const major = parseInt(match[1], 10);
+    return major < 16;
+  }
+
+  // Test strings on iPad like:
+  //   5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Safari/605.1.15
+  // Look for the "X_X Safari" part.
+  const match2 = navigator.userAgent.match(/\/(\d+)_(\d+) Safari/);
+  if (match2) {
+    const major = parseInt(match2[1], 10);
+    return major < 16;
+  }
+
+  return false;
 }

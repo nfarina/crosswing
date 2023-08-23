@@ -79,6 +79,7 @@ export const StyledFileInput = styled.div`
 
   > input[type="file"] {
     appearance: none;
+    opacity: 0; /* Necessary for older iOS versions. */
     position: absolute;
     top: 0px;
     right: 0px;
