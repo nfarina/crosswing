@@ -2,9 +2,10 @@
 
 .DS_Store
 
-## pnpm
+## Yarn
 
 node_modules
+.yarn/
 
 ## TypeScript
 

@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { smoothScroll } from "./smoothScroll";
+import { HostContainer } from "./types";
 
 export type ScrollToTop = () => void;
 
-export function useScrollToTop(container): ScrollToTop {
+export function useScrollToTop(container: HostContainer): ScrollToTop {
   function scrollToTop() {
     const root = document.documentElement;
     const scrolled = root && findSomethingScrolled(root);
@@ -29,7 +30,7 @@ export function useScrollToTop(container): ScrollToTop {
     };
   }, []);
 
-  if (container === "wkwebview") return scrollToTop;
+  if (container === "ios") return scrollToTop;
 
   // Not on a supported platform.
   return () => {};

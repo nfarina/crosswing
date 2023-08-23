@@ -38,7 +38,7 @@ export async function getFeatures(): Promise<HostFeatures> {
   }
 }
 
-export const supportsLog = () => ["wkwebview", "electron"].includes(container);
+export const supportsLog = () => ["ios", "electron"].includes(container);
 
 export async function log(prefix: string, ...args: any) {
   const message = args
@@ -194,7 +194,7 @@ if (typeof window !== "undefined") {
   window["HOST_CALLBACKS"] = {};
 }
 
-const canPost = () => ["wkwebview", "android", "electron"].includes(container);
+const canPost = () => ["ios", "android", "electron"].includes(container);
 
 /**
  * Posts a message without waiting for a response.
@@ -225,8 +225,8 @@ export function post(name: string, args?: object) {
 }
 
 export function canSend() {
-  // Only WKWebView and Android currently support callbacks.
-  return ["wkwebview", "android"].includes(container);
+  // Only iOS and Android currently support callbacks.
+  return ["ios", "android"].includes(container);
 }
 
 /**
