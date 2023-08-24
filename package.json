@@ -69,7 +69,7 @@
     "client:dev": "vite --config vite.config.ts --host 0.0.0.0 --port 2701 src/client",
     "client:build": "cd src/client; vite --config ../../vite.config.ts build",
     "client:analyze": "cd src/client; vite-bundle-visualizer",
-    "postinstall": "npm run manager:build"
+    "prepublish": "npm run manager:build"
   },
   "bin": {
     "manager": "bin/manager"
@@ -126,9 +126,7 @@
     "src",
     "icons",
     "fonts",
-    "vite.config.ts",
     "!src/**/*.test.ts",
-    "!src/**/*.stories.ts",
-    "!src/**/dist"
+    "!src/**/*.stories.ts"
   ]
 }
