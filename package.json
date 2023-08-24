@@ -68,7 +68,11 @@
     "manager:analyze": "cd src/manager/client; vite-bundle-visualizer",
     "client:dev": "vite --config vite.config.ts --host 0.0.0.0 --port 2701 src/client",
     "client:build": "cd src/client; vite --config ../../vite.config.ts build",
-    "client:analyze": "cd src/client; vite-bundle-visualizer"
+    "client:analyze": "cd src/client; vite-bundle-visualizer",
+    "postinstall": "npm run manager:build"
+  },
+  "bin": {
+    "manager": "bin/manager"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^7.3.2",
@@ -120,6 +124,8 @@
   },
   "files": [
     "src",
+    "icons",
+    "fonts",
     "!src/**/*.test.ts",
     "!src/**/*.stories.ts",
     "!src/**/dist"
