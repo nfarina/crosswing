@@ -1,4 +1,4 @@
 #!/bin/sh
 
 # This script is used to start the manager service.
-vite-node $(dirname "$0")/../src/manager/server/server.ts
+vite-node $(dirname "$0")/../cyber/src/manager/server/server.ts
