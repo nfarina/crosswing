@@ -126,6 +126,7 @@
     "src",
     "icons",
     "fonts",
+    "vite.config.ts",
     "!src/**/*.test.ts",
     "!src/**/*.stories.ts",
     "!src/**/dist"
