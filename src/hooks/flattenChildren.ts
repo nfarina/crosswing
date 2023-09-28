@@ -1,11 +1,11 @@
-import { Children, cloneElement, isValidElement, ReactNode } from "react";
+import { Children, cloneElement, isValidElement, Key, ReactNode } from "react";
 import { isFragment } from "react-is";
 
 /* Returns React children into an array, flattening fragments. */
 export function flattenChildren(
   children: ReactNode,
   depth: number = 0,
-  keys: (string | number)[] = [],
+  keys: Key[] = [],
 ): ReactNode[] {
   return Children.toArray(children).reduce(
     (acc: ReactNode[], node, nodeIndex) => {

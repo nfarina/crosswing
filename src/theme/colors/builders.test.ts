@@ -1,4 +1,4 @@
-import { expect, test } from "vitest";
+import { expect, test } from "bun:test";
 import { colors } from "./colors";
 
 test("transforms colors", () => {
@@ -11,7 +11,7 @@ test("transforms colors", () => {
   });
 
   // Using OKLCH.
-  expect(rendered).toMatchInlineSnapshot('"rgba(102, 176, 212, 0.5)"');
+  expect(rendered).toEqual("rgba(102, 176, 212, 0.5)");
 
   const rendered2 = colors.mediumBlue({
     darken: 0.5,
@@ -20,5 +20,5 @@ test("transforms colors", () => {
   });
 
   // Using OKLCH.
-  expect(rendered2).toMatchInlineSnapshot('"rgba(0, 72, 99, 1)"');
+  expect(rendered2).toEqual("rgba(0, 72, 99, 1)");
 });

@@ -14,13 +14,5 @@
       "script": "storybook"
     },
     "link": "http://localhost:2702"
-  },
-  "vitest": {
-    "title": "Test Runner",
-    "description": "Vitest UI",
-    "run": {
-      "script": "test-ui"
-    },
-    "link": "http://localhost:2703/__vitest__/"
   }
 }

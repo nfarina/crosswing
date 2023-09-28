@@ -1,4 +1,4 @@
-import { expect, test } from "vitest";
+import { expect, test } from "bun:test";
 import { formatOklch, parseOklch } from "./oklch";
 
 test("transforms colors in oklch space", () => {
@@ -9,7 +9,7 @@ test("transforms colors in oklch space", () => {
   oklch.h += 0.2;
   const hex = formatOklch(oklch);
 
-  expect(hex).toMatchInlineSnapshot('"#66b0d4"');
+  expect(hex).toEqual("#66b0d4");
 
   const oklch2 = parseOklch("#7CB8D6");
   oklch2.l *= 1 - 0.5;
@@ -17,5 +17,5 @@ test("transforms colors in oklch space", () => {
   oklch2.h += 0;
   const hex2 = formatOklch(oklch2);
 
-  expect(hex2).toMatchInlineSnapshot('"#004863"');
+  expect(hex2).toEqual("#004863");
 });
