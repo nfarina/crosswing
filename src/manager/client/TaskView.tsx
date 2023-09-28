@@ -10,6 +10,7 @@ import { wait } from "../../shared/wait";
 import { colors, shadows } from "../../theme/colors/colors";
 import { fonts } from "../../theme/fonts";
 import { ClientTask } from "../shared/types";
+import { api } from "./api";
 
 export function TaskView({
   task,
@@ -23,7 +24,7 @@ export function TaskView({
   const running = usePersistedState({
     persistedValue: task.running,
     updateFunc: async (running) => {
-      const result = await fetch("/api/tasks/running", {
+      await api("tasks/running", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -31,11 +32,6 @@ export function TaskView({
         },
         body: JSON.stringify({ name: task.name, running }),
       });
-
-      if (!result.ok) {
-        const error = await result.json();
-        throw new Error(error.message);
-      }
 
       await wait(1000);
     },

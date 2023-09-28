@@ -13,6 +13,7 @@ import { CyberApp } from "../../theme/app";
 import { colors } from "../../theme/colors/colors";
 import { ServerStatus } from "../shared/types";
 import { TaskView } from "./TaskView";
+import { api } from "./api";
 import { useDocumentVisible } from "./useDocumentVisible";
 
 export function Manager() {
@@ -33,9 +34,7 @@ export function ManagerContent() {
 
   const updateStatusTask = useAsyncTask({
     async func() {
-      const response = await fetch("/api/status");
-      const json = await response.json();
-      setStatus(json);
+      setStatus(await api("status"));
     },
     onError: setError,
     onComplete: () => setError(null),

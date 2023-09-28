@@ -56,7 +56,7 @@ const other = {
  * the CSS for light/dark mode, but you can adjust their alpha when using them.
  */
 const responsive = {
-  primary: varColor({ light: other.orange.rgb, var: "--primary-color" }),
+  primary: varColor({ light: other.turquoise.rgb, var: "--primary-color" }),
   text: varColor({
     light: other.darkGreen.rgb,
     dark: neutrals.extraLightGray.rgb,
@@ -102,7 +102,7 @@ const responsive = {
 /** Gradients that go well with the default colors. */
 const gradients = {
   primaryGradient: varColor({
-    light: other.orangeGradient(),
+    light: other.turquoiseGradient(),
     var: "--primary-gradient",
     static: true,
   }),
