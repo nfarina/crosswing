@@ -1,4 +1,4 @@
-import React, { SyntheticEvent } from "react";
+import { SyntheticEvent } from "react";
 import { styled } from "styled-components";
 import { StyledButton } from "../../components/Button";
 import { Badge } from "../../components/badges/Badge";

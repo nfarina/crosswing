@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { DateRange, isSameDay } from "../forms/DateRange";
 import { Timestamp, TimestampFormatter } from "./Timestamp";
 

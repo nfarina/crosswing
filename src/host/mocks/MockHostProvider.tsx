@@ -1,4 +1,4 @@
-import React, { ReactNode, useMemo } from "react";
+import { ReactNode, useMemo } from "react";
 import { HostContext, defaultHostContext } from "../context/HostContext";
 import { StyledHostProvider } from "../context/HostProvider";
 import { HostContextValue } from "../util/types";

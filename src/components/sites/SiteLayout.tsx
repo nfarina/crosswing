@@ -1,4 +1,4 @@
-import React, {
+import {
   Fragment,
   ReactElement,
   ReactNode,
@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import { styled } from "styled-components";
-import MenuIcon from "../../../icons/Menu.svg";
+import MenuIcon from "../../../icons/Menu.svg?react";
 import { flattenChildren } from "../../hooks/flattenChildren";
 import { useMatchMedia } from "../../hooks/useMatchMedia";
 import { Redirect } from "../../router/redirect/Redirect";

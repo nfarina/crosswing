@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { styled } from "styled-components";
 import { LoadingCurtain } from "../../components/LoadingCurtain";
 import { Scrollable, StyledScrollable } from "../../components/Scrollable";

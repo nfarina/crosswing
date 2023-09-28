@@ -1,9 +1,9 @@
 import { Meta } from "@storybook/react";
-import React from "react";
 import { MockHostProvider } from "../../../host/mocks/MockHostProvider";
 import { ModalRootProvider } from "../../../modals/context/ModalRootProvider";
 import { BrowserSimulator } from "../../../router/storybook/BrowserSimulator";
 import { CyberAppDecorator } from "../../../theme/storybook";
+import { PageTitleProvider } from "../../sites/SitePageTitle";
 import { SuspenseApp, SuspenseNavs, SuspenseSwitch } from "./SuspenseApp";
 
 export default {
@@ -17,7 +17,9 @@ export default {
       <MockHostProvider container="ios">
         <BrowserSimulator>
           <ModalRootProvider>
-            <Story />
+            <PageTitleProvider>
+              <Story />
+            </PageTitleProvider>
           </ModalRootProvider>
         </BrowserSimulator>
       </MockHostProvider>

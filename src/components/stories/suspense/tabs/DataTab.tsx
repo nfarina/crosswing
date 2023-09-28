@@ -1,4 +1,3 @@
-import React from "react";
 import { wait } from "../../../../shared/wait";
 import { NoContent } from "../../../NoContent";
 

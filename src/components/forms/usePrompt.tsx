@@ -1,4 +1,4 @@
-import React, { FormEvent, ReactNode, useState } from "react";
+import { FormEvent, ReactNode, useState } from "react";
 import { styled } from "styled-components";
 import { AlertButton, AlertView } from "../../modals/alert/AlertView";
 import { Modal } from "../../modals/context/useModal";

@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, MouseEvent, ReactNode } from "react";
+import { HTMLAttributes, MouseEvent, ReactNode } from "react";
 import { styled } from "styled-components";
 import { UnreadBadge } from "../../router/tabs/UnreadBadge";
 import { colors } from "../../theme/colors/colors";

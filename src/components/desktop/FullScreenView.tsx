@@ -1,4 +1,4 @@
-import React, {
+import {
   createContext,
   ReactElement,
   ReactNode,
@@ -9,8 +9,8 @@ import React, {
 } from "react";
 import { createPortal } from "react-dom";
 import { styled } from "styled-components";
-import Close from "../../../icons/Close.svg";
-import FullScreen from "../../../icons/FullScreen.svg";
+import Close from "../../../icons/Close.svg?react";
+import FullScreen from "../../../icons/FullScreen.svg?react";
 import { useHotkey } from "../../hooks/useHotkey";
 import { useSessionStorage } from "../../hooks/useSessionStorage";
 import { ModalContext } from "../../modals/context/ModalContext";

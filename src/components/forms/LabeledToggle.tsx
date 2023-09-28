@@ -1,14 +1,14 @@
-import React, { HTMLAttributes, MouseEvent, ReactNode } from "react";
+import { HTMLAttributes, MouseEvent, ReactNode } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../theme/colors/colors";
 import { fonts } from "../../theme/fonts";
-import { Toggle } from "./Toggle";
+import { Toggle, ToggleSize } from "./Toggle";
 
 export function LabeledToggle({
   label,
   detail,
   on,
-  smaller,
+  size,
   onClick,
   disabled,
   working,
@@ -17,7 +17,7 @@ export function LabeledToggle({
   label: ReactNode;
   detail?: ReactNode;
   on?: boolean;
-  smaller?: boolean;
+  size?: ToggleSize;
   onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
   working?: boolean;
@@ -35,12 +35,7 @@ export function LabeledToggle({
         <div className="label" children={label} />
         <div className="detail" children={detail} />
       </div>
-      <Toggle
-        as="div"
-        on={on}
-        smaller={smaller}
-        disabled={!!disabled || !!working}
-      />
+      <Toggle as="div" on={on} size={size} disabled={!!disabled || !!working} />
     </StyledLabeledToggle>
   );
 }

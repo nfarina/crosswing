@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { AlertButton, AlertView } from "../alert/AlertView";
 import { Modal } from "../context/useModal";
 import { useDialog } from "../dialog/useDialog";

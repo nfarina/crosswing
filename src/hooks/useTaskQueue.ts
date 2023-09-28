@@ -1,6 +1,7 @@
-import React, {
+import {
   ReactNode,
   createContext,
+  createElement,
   useCallback,
   useContext,
   useMemo,
@@ -123,7 +124,7 @@ export function TaskQueueProvider({ children }: { children: ReactNode }) {
     [tasks, tasksOfType, queueTask, lastError],
   );
 
-  return React.createElement(TaskQueueContext.Provider, {
+  return createElement(TaskQueueContext.Provider, {
     value: contextValue,
     children,
   });

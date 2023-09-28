@@ -84,3 +84,71 @@ export function getAlgoliaFilter(
 ): string {
   return `${field}:${start} TO ${end}`;
 }
+
+//
+// Presets for ranges, for date pickers.
+//
+
+export interface DateRangePreset {
+  title: string;
+  range: () => DateRange;
+}
+
+export const AllDateRangePresets: DateRangePreset[] = [
+  {
+    title: "Today",
+    range: () => ({
+      start: dayjs().startOf("day").valueOf(),
+      end: dayjs().endOf("day").valueOf(),
+    }),
+  },
+  {
+    title: "Yesterday",
+    range: () => ({
+      start: dayjs().subtract(1, "day").startOf("day").valueOf(),
+      end: dayjs().subtract(1, "day").endOf("day").valueOf(),
+    }),
+  },
+  {
+    title: "This Week",
+    range: () => ({
+      start: dayjs().startOf("week").valueOf(),
+      end: dayjs().endOf("week").valueOf(),
+    }),
+  },
+  {
+    title: "Last Week",
+    range: () => ({
+      start: dayjs().subtract(1, "week").startOf("week").valueOf(),
+      end: dayjs().subtract(1, "week").endOf("week").valueOf(),
+    }),
+  },
+  {
+    title: "This Month",
+    range: () => ({
+      start: dayjs().startOf("month").valueOf(),
+      end: dayjs().endOf("month").valueOf(),
+    }),
+  },
+  {
+    title: "Last Month",
+    range: () => ({
+      start: dayjs().subtract(1, "month").startOf("month").valueOf(),
+      end: dayjs().subtract(1, "month").endOf("month").valueOf(),
+    }),
+  },
+  {
+    title: "This Year",
+    range: () => ({
+      start: dayjs().startOf("year").valueOf(),
+      end: dayjs().endOf("year").valueOf(),
+    }),
+  },
+  {
+    title: "Last Year",
+    range: () => ({
+      start: dayjs().subtract(1, "year").startOf("year").valueOf(),
+      end: dayjs().subtract(1, "year").endOf("year").valueOf(),
+    }),
+  },
+];

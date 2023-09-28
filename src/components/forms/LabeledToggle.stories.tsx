@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { CyberAppDecorator } from "../../theme/storybook";
 import { SeparatorDecorator } from "../SeparatorLayout";
 import { LabeledToggle } from "./LabeledToggle";
@@ -28,7 +28,7 @@ export const Smaller = () => {
     <LabeledToggle
       label="Ludicrous Mode"
       on={ludicrous}
-      smaller
+      size="smaller"
       onClick={() => setLudicrous(!ludicrous)}
     />
   );

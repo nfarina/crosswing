@@ -1,7 +1,9 @@
-import React, {
+import {
   MouseEvent,
   MutableRefObject,
   ReactNode,
+  cloneElement,
+  isValidElement,
   useCallback,
   useLayoutEffect,
   useRef,
@@ -244,8 +246,8 @@ export const PopupContainer = ({
       ref={containerRef}
     >
       <div className="popup-area">
-        {React.isValidElement(children)
-          ? React.cloneElement(children, childProps)
+        {isValidElement(children)
+          ? cloneElement(children, childProps)
           : children}
       </div>
     </StyledPopupContainer>

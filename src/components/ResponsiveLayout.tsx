@@ -1,5 +1,5 @@
 import Debug from "debug";
-import React, { ReactElement, ReactNode, useRef, useState } from "react";
+import { Children, ReactElement, ReactNode, useRef, useState } from "react";
 import { styled } from "styled-components";
 import { ElementSize, useElementSize } from "../hooks/useElementSize";
 
@@ -48,7 +48,7 @@ export function ResponsiveLayout({
     let bestSpecificity = -1;
     let bestChild: ReactElement<ResponsiveChildProps> | null = null;
 
-    React.Children.forEach(children, (child) => {
+    Children.forEach(children, (child) => {
       const { minWidth, minHeight } = child.props;
       if (minWidth != null && width != null && width < minWidth) {
         return;

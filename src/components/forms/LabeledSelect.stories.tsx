@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { CyberAppDecorator } from "../../theme/storybook";
 import { SeparatorDecorator } from "../SeparatorLayout";
 import { LabeledSelect } from "./LabeledSelect";

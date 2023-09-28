@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { styled } from "styled-components";
 import { fonts } from "../../theme/fonts";
 import { Button } from "../Button";

@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { styled } from "styled-components";
-import Copy from "../../../icons/Copy.svg";
+import Copy from "../../../icons/Copy.svg?react";
 import { useElementSize } from "../../hooks/useElementSize";
 import { useBanner } from "../../modals/banner/useBanner";
 import { colors } from "../../theme/colors/colors";

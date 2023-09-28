@@ -1,6 +1,6 @@
-import React, { ButtonHTMLAttributes, CSSProperties } from "react";
+import { ButtonHTMLAttributes, CSSProperties } from "react";
 import { styled } from "styled-components";
-import DisclosureArrow from "../../icons/DisclosureArrow.svg";
+import DisclosureArrow from "../../icons/DisclosureArrow.svg?react";
 import { colors } from "../theme/colors/colors";
 import { Clickable } from "./Clickable";
 

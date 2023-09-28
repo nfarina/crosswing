@@ -1,6 +1,6 @@
 import { action } from "@storybook/addon-actions";
 import { Meta } from "@storybook/react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useAsyncTask } from "../../hooks/useAsyncTask";
 import { wait } from "../../shared/wait";
 import { CyberAppDecorator } from "../../theme/storybook";
@@ -37,7 +37,7 @@ export const Smaller = () => {
   const [on, setOn] = useState(false);
   return (
     <Toggle
-      smaller
+      size="smaller"
       on={on}
       onClick={() =>
         setOn((prevOn) => {

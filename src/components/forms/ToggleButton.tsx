@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../theme/colors/colors";
 import { fonts } from "../../theme/fonts";
@@ -12,7 +12,7 @@ export function ToggleButton({
   working,
   on,
   onClick,
-  smaller,
+  size: smaller,
   disabled,
   ...rest
 }: Parameters<typeof Toggle>[0] & {
@@ -35,7 +35,7 @@ export function ToggleButton({
       <Toggle
         as="div"
         on={on}
-        smaller={smaller}
+        size={smaller}
         disabled={!!disabled || !!working}
       />
     </StyledToggleButton>

@@ -1,6 +1,6 @@
-import React, { HTMLAttributes, KeyboardEvent, ReactNode } from "react";
+import { HTMLAttributes, KeyboardEvent, ReactNode } from "react";
 import { styled } from "styled-components";
-import DisclosureArrow from "../../../icons/DisclosureArrow.svg";
+import DisclosureArrow from "../../../icons/DisclosureArrow.svg?react";
 import { Link } from "../../router/Link";
 import { colors } from "../../theme/colors/colors";
 import { fonts } from "../../theme/fonts";

@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, MouseEvent, ReactNode } from "react";
+import { HTMLAttributes, MouseEvent, ReactNode } from "react";
 import { styled } from "styled-components";
 import { colors } from "../theme/colors/colors";
 import { fonts } from "../theme/fonts";

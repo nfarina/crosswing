@@ -1,5 +1,4 @@
 import { action } from "@storybook/addon-actions";
-import React from "react";
 import { styled } from "styled-components";
 import { MockHostProvider } from "../host/mocks/MockHostProvider";
 import { colors } from "../theme/colors/colors";

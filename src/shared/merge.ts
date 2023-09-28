@@ -46,5 +46,10 @@ export type DeepPartial<T> = {
 merge.delete = Symbol("merge.delete") as any;
 
 function isObject(val: any): val is Record<string, any> {
-  return typeof val === "object" && !Array.isArray(val) && val !== null;
+  // This returns true for things like classes (for instance, new URL()), which
+  // can't be "merged".
+  // return typeof val === "object" && !Array.isArray(val) && val !== null;
+
+  // From https://stackoverflow.com/questions/65787971/ways-to-determine-if-something-is-a-plain-object-in-javascript#comment135220631_69745650
+  return val && [undefined, Object].includes(val.constructor);
 }

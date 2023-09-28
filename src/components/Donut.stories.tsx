@@ -1,5 +1,4 @@
 import { Meta } from "@storybook/react";
-import React from "react";
 import { colors } from "../theme/colors/colors";
 import { CyberAppDecorator } from "../theme/storybook";
 import { Donut } from "./Donut";

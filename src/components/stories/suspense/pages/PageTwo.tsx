@@ -1,4 +1,4 @@
-import React, { lazy } from "react";
+import { lazy } from "react";
 import { styled } from "styled-components";
 import { useRouter } from "../../../../router/context/RouterContext";
 import { NavLayout } from "../../../../router/navs/NavLayout";

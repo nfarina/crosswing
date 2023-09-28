@@ -1,5 +1,5 @@
 import Debug from "debug";
-import React, { HTMLAttributes, ReactNode, useRef } from "react";
+import { HTMLAttributes, ReactNode, useRef } from "react";
 import { styled } from "styled-components";
 import { useElementSize } from "../hooks/useElementSize";
 

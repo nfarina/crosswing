@@ -1,4 +1,4 @@
-import React, {
+import {
   CSSProperties,
   ReactElement,
   ReactNode,
@@ -174,6 +174,7 @@ export function TabbedButtonLayout({
   // React might be concurrently rendering us.
   if (
     searchParam &&
+    !!paramValue &&
     !paramChild &&
     buttons.length > 1 &&
     buttons[0].props.value

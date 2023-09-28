@@ -1,4 +1,4 @@
-import React, { ReactElement, RefObject } from "react";
+import { ReactElement, RefObject } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { styled } from "styled-components";
 import { useGesture } from "../../hooks/useGesture";

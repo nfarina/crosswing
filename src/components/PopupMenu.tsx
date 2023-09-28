@@ -1,4 +1,4 @@
-import React, {
+import {
   HTMLAttributes,
   ReactNode,
   SyntheticEvent,
@@ -156,7 +156,7 @@ const StyledPopupMenuLink = styled(Link)`
     pointer-events: none;
   }
 
-  &[data-selected="true"] {
+  &[data-prefix-active="true"] {
     font: ${fonts.displayBold({ size: 15, line: "22px" })};
   }
 `;
@@ -192,7 +192,7 @@ export function PopupMenuToggle({
         {children && <div className="children">{children}</div>}
         {detail && <div className="detail">{detail}</div>}
       </div>
-      <Toggle on={on} smaller disabled={disabled} />
+      <Toggle on={on} size="smaller" disabled={disabled} />
     </StyledPopupMenuToggle>
   );
 }

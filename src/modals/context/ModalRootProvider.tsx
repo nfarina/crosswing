@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, useMemo, useRef } from "react";
+import { HTMLAttributes, useMemo, useRef } from "react";
 import { styled } from "styled-components";
 import { ModalContext, invariantViolation } from "./ModalContext";
 import { ModalContextProvider } from "./ModalContextProvider";

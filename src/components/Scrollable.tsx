@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, ReactElement } from "react";
+import { HTMLAttributes, ReactElement } from "react";
 import { styled } from "styled-components";
 import { useHost } from "../host/context/HostContext";
 

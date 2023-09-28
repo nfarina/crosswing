@@ -1,4 +1,3 @@
-import React from "react";
 import { CyberAppDecorator } from "../theme/storybook";
 import { Button } from "./Button";
 import { SetupLayout } from "./SetupLayout";

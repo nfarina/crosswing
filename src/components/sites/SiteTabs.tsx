@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode, isValidElement } from "react";
+import { ReactElement, ReactNode, isValidElement } from "react";
 import { flattenChildren } from "../../hooks/flattenChildren";
 import { Redirect } from "../../router/redirect/Redirect";
 import { Route, Switch } from "../../router/switch/Switch";

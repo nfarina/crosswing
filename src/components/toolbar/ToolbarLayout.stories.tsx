@@ -1,6 +1,6 @@
 import { action } from "@storybook/addon-actions";
 import { Meta } from "@storybook/react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { createPortal } from "react-dom";
 import { styled } from "styled-components";
 import { useAsyncTask } from "../../hooks/useAsyncTask";

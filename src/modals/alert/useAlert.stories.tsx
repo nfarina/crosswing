@@ -1,5 +1,4 @@
 import { action } from "@storybook/addon-actions";
-import React from "react";
 import { CyberAppDecorator } from "../../theme/storybook";
 import { useAlert } from "../alert/useAlert";
 import { ModalDecorator } from "../storybook/ModalDecorator";

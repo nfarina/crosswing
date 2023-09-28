@@ -117,7 +117,7 @@ export class ProcessRunner {
     });
   }
 
-  stop() {
+  async stop() {
     if (this.exited) return;
 
     const { name, child } = this;
@@ -132,6 +132,20 @@ export class ProcessRunner {
 
     this.stopWasCalled = true;
 
-    process.kill(-child.pid, "SIGTERM");
+    // Send a SIGTERM to any and all children of the main process. We can't
+    // use the negative trick (kill(-pid, "SIGTERM")) because the Bun runtime
+    // doesn't support it.
+    const childPids = await this.getChildPids();
+
+    for (const pid of childPids) {
+      if (name) {
+        console.log(`[${name}]   - and child`, pid);
+      }
+
+      process.kill(pid, "SIGTERM");
+    }
+
+    // Send a SIGTERM to the main process.
+    process.kill(child.pid, "SIGTERM");
   }
 }

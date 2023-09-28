@@ -1,4 +1,4 @@
-import React, { ReactElement, useCallback, useRef } from "react";
+import { ReactElement, useCallback, useRef } from "react";
 import { keyframes, styled } from "styled-components";
 import { HotKeyContextDataAttributes, useHotkey } from "../../hooks/useHotkey";
 import { safeArea } from "../../host/features/safeArea";

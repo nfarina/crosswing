@@ -1,5 +1,5 @@
 import { Meta } from "@storybook/react";
-import React, { CSSProperties, ReactNode } from "react";
+import { CSSProperties, ReactNode } from "react";
 import { styled } from "styled-components";
 import { fonts } from "../fonts";
 import { CyberAppDecorator } from "../storybook";

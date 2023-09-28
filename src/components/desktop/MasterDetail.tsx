@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactNode } from "react";
+import { CSSProperties, ReactNode } from "react";
 import { styled } from "styled-components";
 import { useRouter } from "../../router/context/RouterContext";
 import { colors } from "../../theme/colors/colors";

@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes, ReactNode } from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
 import { colors } from "../theme/colors/colors";
 import { fonts } from "../theme/fonts";
@@ -83,7 +83,7 @@ export const StyledButton = styled(Clickable)`
     display: flex;
     flex-flow: column;
 
-    > .text {
+    > .title {
       font: ${fonts.displayBold({ size: 15 })};
       color: ${colors.text()};
       overflow: hidden;
@@ -91,7 +91,7 @@ export const StyledButton = styled(Clickable)`
       white-space: nowrap;
     }
 
-    > .subtext {
+    > .subtitle {
       font: ${fonts.displayMedium({ size: 12 })};
       color: ${colors.text()};
       overflow: hidden;
@@ -128,10 +128,10 @@ export const StyledButton = styled(Clickable)`
     color: ${colors.white()};
 
     > .content {
-      > .text {
+      > .title {
         color: ${colors.white()};
       }
-      > .subtext {
+      > .subtitle {
         color: ${colors.white()};
       }
     }
@@ -150,11 +150,11 @@ export const StyledButton = styled(Clickable)`
     min-height: 30px;
 
     > .content {
-      > .text {
+      > .title {
         font: ${fonts.displayBold({ size: 14 })};
       }
 
-      > .subtext {
+      > .subtitle {
         font: ${fonts.displayMedium({ size: 11 })};
       }
     }
@@ -166,11 +166,11 @@ export const StyledButton = styled(Clickable)`
     min-height: 40px;
 
     > .content {
-      > .text {
+      > .title {
         font: ${fonts.displayBold({ size: 16 })};
       }
 
-      > .subtext {
+      > .subtitle {
         margin-top: 3px;
         font: ${fonts.displayMedium({ size: 13 })};
       }
@@ -182,11 +182,11 @@ export const StyledButton = styled(Clickable)`
     min-height: 50px;
 
     > .content {
-      > .text {
+      > .title {
         font: ${fonts.displayBold({ size: 16 })};
       }
 
-      > .subtext {
+      > .subtitle {
         margin-top: 3px;
         font: ${fonts.displayMedium({ size: 13 })};
       }

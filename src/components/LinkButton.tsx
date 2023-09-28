@@ -1,4 +1,5 @@
-import React, { KeyboardEvent, ReactNode } from "react";
+import DisclosureIcon from "cyber/icons/DisclosureArrow.svg?react";
+import { KeyboardEvent, ReactNode } from "react";
 import { styled } from "styled-components";
 import { Link } from "../router/Link";
 import { colors } from "../theme/colors/colors";
@@ -12,6 +13,7 @@ export function LinkButton({
   title,
   subtitle,
   children,
+  showDisclosure,
   disabled,
   onKeyDown,
   ...rest
@@ -21,6 +23,7 @@ export function LinkButton({
   icon?: ReactNode;
   title?: ReactNode;
   subtitle?: ReactNode;
+  showDisclosure?: boolean;
   disabled?: boolean;
 }) {
   // Allow activating LinkButtons with "space" since it behaves like a button.
@@ -42,6 +45,7 @@ export function LinkButton({
       data-disabled={disabled}
       data-icon-only={!children}
       data-icon-and-children={!!children && !!icon}
+      data-disclosure={!!showDisclosure}
       role="button"
       onKeyDown={onLinkKeyDown}
       {...rest}
@@ -54,6 +58,7 @@ export function LinkButton({
         </div>
       )}
       {children}
+      {!!showDisclosure && <DisclosureIcon className="disclosure" />}
     </StyledLinkButton>
   );
 }
@@ -101,6 +106,10 @@ export const StyledLinkButton = styled(Link)`
       margin-top: 1px;
       font: ${fonts.displayMedium({ size: 12 })};
     }
+  }
+
+  > .disclosure {
+    margin: -5px -7px -5px 0;
   }
 
   &[data-icon-only="true"] {

@@ -1,5 +1,5 @@
 import { Meta } from "@storybook/react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { ModalDecorator } from "../../modals/storybook/ModalDecorator";
 import { CyberAppDecorator } from "../../theme/storybook";
 import { SeparatorDecorator } from "../SeparatorLayout";

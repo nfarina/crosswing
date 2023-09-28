@@ -1,4 +1,4 @@
-import React, { AnchorHTMLAttributes, MouseEvent, ReactNode } from "react";
+import { AnchorHTMLAttributes, MouseEvent, ReactNode } from "react";
 import { styled } from "styled-components";
 import { useRouter } from "./context/RouterContext";
 import { BrowserHistory } from "./history/BrowserHistory";

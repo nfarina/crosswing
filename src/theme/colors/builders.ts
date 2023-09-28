@@ -2,10 +2,10 @@ import { formatOklch, parseHex, parseOklch } from "./oklch";
 
 // Check if this browser supports the `color()` function, specifically with
 // the `display-p3` color space.
-const SUPPORTS_P3_COLOR =
+export const SUPPORTS_P3_COLOR =
   typeof CSS !== "undefined" &&
   CSS.supports("color: color(display-p3 1 1 1)") &&
-  !isOlderIOS();
+  browserHasKnownP3Support();
 
 export type ColorBuilder = HexColorBuilder | VarColorBuilder | GradientBuilder;
 
@@ -255,28 +255,34 @@ export function getBuilderVarCss(builders: ColorBuilder[]): string {
 }
 
 /**
- * Test if we are running on an iOS version less than v16 (we haven't tested
- * versions between 13–16) because if so, we can't use P3 colors because of a
+ * Returns true if we know for sure this browser supports P3 colors in all
+ * places.
+ *
+ * For instance, if are running on an iOS version less than v16 (we haven't
+ * tested versions between 13–16) we can't use P3 colors because of a
  * bug in <input type="text">.
  */
-function isOlderIOS(): boolean {
+function browserHasKnownP3Support(): boolean {
   if (typeof navigator === "undefined") return false;
 
-  // Test strings like:
-  //   5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1
-  const match = navigator.userAgent.match(/OS (\d+)_(\d+)/);
-  if (match) {
-    const major = parseInt(match[1], 10);
-    return major < 16;
+  // Test strings for Android/Chrome like:
+  //   Navigator: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36
+  // Look for the Chrome/x.x.x.x part.
+  const chromeMatch = navigator.userAgent.match(/Chrome\/(\d+)/);
+  if (chromeMatch) {
+    // We've validated it works on Chrome 114.x.
+    const version = parseInt(chromeMatch[1], 10);
+    return version >= 114;
   }
 
-  // Test strings on iPad like:
-  //   5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Safari/605.1.15
-  // Look for the "X_X Safari" part.
-  const match2 = navigator.userAgent.match(/\/(\d+)_(\d+) Safari/);
-  if (match2) {
-    const major = parseInt(match2[1], 10);
-    return major < 16;
+  // Test strings for Apple webkit (iPhone, iPad, macOS) like:
+  //   5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1
+  // Look for the Safari/x.x.x.x part.
+  const safariMatch = navigator.userAgent.match(/Safari\/(\d+)/);
+  if (safariMatch) {
+    // We've validated it works on Safari 604.x.
+    const version = parseInt(safariMatch[1], 10);
+    return version >= 604;
   }
 
   return false;

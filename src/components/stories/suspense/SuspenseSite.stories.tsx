@@ -1,5 +1,4 @@
 import { Meta } from "@storybook/react";
-import React from "react";
 import { MockHostProvider } from "../../../host/mocks/MockHostProvider";
 import { ModalRootProvider } from "../../../modals/context/ModalRootProvider";
 import { BrowserSimulator } from "../../../router/storybook/BrowserSimulator";

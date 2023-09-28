@@ -1,5 +1,4 @@
 import { action } from "@storybook/addon-actions";
-import React from "react";
 import { RouterLocation } from "../RouterLocation";
 import { RouterContext } from "../context/RouterContext";
 import { TabBarContext } from "../tabs/TabBar";

@@ -1,4 +1,4 @@
-import React, { MouseEvent, ReactNode } from "react";
+import { MouseEvent, ReactNode } from "react";
 import { styled } from "styled-components";
 import { AndroidBackButtonClassName } from "../../host/context/HostContext";
 import { colors } from "../../theme/colors/colors";
@@ -37,13 +37,19 @@ export function NavAccessoryView({ accessory, align }: NavAccessoryViewProps) {
   };
 
   if (to) {
-    return <StyledLink to={to} {...sharedProps} />;
+    return <StyledNavAccessoryView as={Link} to={to} {...sharedProps} />;
   } else {
-    return <StyledButton onClick={onClick} {...sharedProps} />;
+    return (
+      <StyledNavAccessoryView
+        as={StyledButton}
+        onClick={onClick}
+        {...sharedProps}
+      />
+    );
   }
 }
 
-const StyledLink = styled(Link)`
+export const StyledNavAccessoryView = styled.div`
   color: ${colors.text()};
   transition: opacity 0.2s ease-in-out;
   text-decoration: none;

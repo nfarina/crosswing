@@ -26,11 +26,17 @@
     // Allow importing non-TS files as "any".
     "noImplicitAny": false,
     // Allow JSX syntax.
-    "jsx": "react",
+    "jsx": "react-jsx",
     // Don't actually output code to the filesystem, just typecheck it.
     "noEmit": true,
     // Dramatically speed up successive compilations.
     "incremental": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "assets.d.ts"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "assets.d.ts",
+    // Include types for SVGs processed by vite-plugin-svgr.
+    "node_modules/vite-plugin-svgr/client.d.ts"
+  ]
 }

@@ -31,7 +31,7 @@ if (!tasksJsonPath) {
 
   if (!fs.existsSync(tasksJsonPath)) {
     console.error(
-      "Usage: vite-node server.js <path to tasks.json>\n\n" +
+      "Usage: bun server.ts <path to tasks.json>\n\n" +
         "You can also run this script from the root of the project, " +
         "in which case it will look for tasks.json in the current directory.",
     );
@@ -110,6 +110,7 @@ app.use(async (ctx, next) => {
   try {
     await next();
   } catch (error: any) {
+    console.error(error);
     // Respond with JSON.
     ctx.status = error.statusCode || error.status || 500;
     ctx.body = { message: error.message };

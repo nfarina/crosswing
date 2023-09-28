@@ -1,6 +1,8 @@
-import React, {
+import {
   ReactElement,
   ReactNode,
+  cloneElement,
+  isValidElement,
   useCallback,
   useContext,
   useEffect,
@@ -107,8 +109,8 @@ function TransitionComponent({
   component: ReactElement;
   element: HTMLElement;
 } & any) {
-  const child = React.isValidElement(component) ? (
-    React.cloneElement(component, rest)
+  const child = isValidElement(component) ? (
+    cloneElement(component, rest)
   ) : (
     <div children={component} />
   );

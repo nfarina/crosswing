@@ -1,4 +1,4 @@
-import React, {
+import {
   ChangeEvent,
   ReactElement,
   ReactNode,
@@ -6,7 +6,7 @@ import React, {
   isValidElement,
 } from "react";
 import { styled } from "styled-components";
-import DownArrow from "../../../icons/DownArrow.svg";
+import DownArrow from "../../../icons/DownArrow.svg?react";
 import { flattenChildren } from "../../hooks/flattenChildren";
 import { colors } from "../../theme/colors/colors";
 import { fonts } from "../../theme/fonts";

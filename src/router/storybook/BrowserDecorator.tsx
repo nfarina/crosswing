@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserSimulator } from "./BrowserSimulator";
 
 // Useful for hosting Storybook components designed to be presented

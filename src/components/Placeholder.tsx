@@ -1,4 +1,3 @@
-import React from "react";
 import { styled } from "styled-components";
 import { Link } from "../router/Link";
 import { colors, shadows } from "../theme/colors/colors";

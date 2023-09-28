@@ -1,4 +1,3 @@
-import React from "react";
 import { useAsyncTask } from "../hooks/useAsyncTask";
 import { wait } from "../shared/wait";
 import { CyberAppDecorator } from "../theme/storybook";

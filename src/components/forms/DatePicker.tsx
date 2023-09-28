@@ -1,4 +1,3 @@
-import React from "react";
 import { styled } from "styled-components";
 import { safeArea } from "../../host/features/safeArea";
 import { NavLayout } from "../../router/navs/NavLayout";

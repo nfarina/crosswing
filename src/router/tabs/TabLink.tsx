@@ -1,6 +1,6 @@
-import React, { MouseEvent, ReactElement, ReactNode } from "react";
+import { MouseEvent, ReactElement, ReactNode } from "react";
 import { styled } from "styled-components";
-import PlaceholderIcon from "../../../icons/Placeholder.svg";
+import PlaceholderIcon from "../../../icons/Placeholder.svg?react";
 import { useHost } from "../../host/context/HostContext";
 import { colors } from "../../theme/colors/colors";
 import { fonts } from "../../theme/fonts";

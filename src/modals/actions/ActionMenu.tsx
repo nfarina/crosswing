@@ -1,4 +1,4 @@
-import React, { HTMLAttributeAnchorTarget, ReactNode } from "react";
+import { HTMLAttributeAnchorTarget, ReactNode } from "react";
 import { styled } from "styled-components";
 import { Link } from "../../router/Link";
 import { colors } from "../../theme/colors/colors";

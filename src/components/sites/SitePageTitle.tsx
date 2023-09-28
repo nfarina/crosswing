@@ -1,5 +1,6 @@
-import React, {
+import {
   CSSProperties,
+  Fragment,
   ReactNode,
   createContext,
   useContext,
@@ -9,7 +10,7 @@ import React, {
   useState,
 } from "react";
 import { styled } from "styled-components";
-import BackIcon from "../../../icons/Back.svg";
+import BackIcon from "../../../icons/Back.svg?react";
 import { Link } from "../../router/Link";
 import { useRouter } from "../../router/context/RouterContext";
 import { NavAccessoryView } from "../../router/navs/NavAccessoryView";
@@ -53,10 +54,10 @@ export function SitePageTitle({
     <StyledPageTitle>
       <DesktopPageTitle>
         {sorted.map((crumb) => (
-          <React.Fragment key={crumb.link}>
+          <Fragment key={crumb.link}>
             <Link to={crumb.link}>{crumb.title}</Link>
             <div className="separator" children="/" />
-          </React.Fragment>
+          </Fragment>
         ))}
       </DesktopPageTitle>
       <MobilePageTitle

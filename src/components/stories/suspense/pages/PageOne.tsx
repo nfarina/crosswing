@@ -1,4 +1,3 @@
-import React from "react";
 import { styled } from "styled-components";
 import { NavLayout } from "../../../../router/navs/NavLayout";
 import { LinkButton } from "../../../LinkButton";

@@ -1,6 +1,6 @@
-import React, { HTMLAttributes, ReactNode } from "react";
+import { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
-import Back from "../../../icons/Back.svg";
+import Back from "../../../icons/Back.svg?react";
 import { useHost } from "../../host/context/HostContext";
 import { useHostStatusBar } from "../../host/features/HostStatusBar";
 import { safeArea } from "../../host/features/safeArea";

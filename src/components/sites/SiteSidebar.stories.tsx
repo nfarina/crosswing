@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { styled } from "styled-components";
-import Globe from "../../../icons/Globe.svg";
+import Globe from "../../../icons/Globe.svg?react";
 import { Router } from "../../router/Router";
 import { MemoryHistory } from "../../router/history/MemoryHistory";
 import { colors } from "../../theme/colors/colors";

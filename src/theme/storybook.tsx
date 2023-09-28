@@ -1,4 +1,3 @@
-import React from "react";
 import { createGlobalStyle, styled } from "styled-components";
 import { getBuilderVarCss } from "./colors/builders";
 import { ColorBuilder, colors, shadows } from "./colors/colors";
@@ -64,6 +63,11 @@ const CenteredLayoutGlobalStyle = createGlobalStyle<{
       font: ${fonts.display({ size: 14 })};
     }
   }
+
+  b, strong {
+    /* Otherwise browsers may select the "Fira Sans Black" font which is too heavy. */
+    font-weight: 600;
+  }
 `;
 
 const MobileLayoutGlobalStyle = createGlobalStyle<{
@@ -109,6 +113,11 @@ const MobileLayoutGlobalStyle = createGlobalStyle<{
       }
     }
   }
+
+  b, strong {
+    /* Otherwise browsers may select the "Fira Sans Black" font which is too heavy. */
+    font-weight: 600;
+  }
 `;
 
 const FullScreenLayoutGlobalStyle = createGlobalStyle<{
@@ -138,6 +147,11 @@ const FullScreenLayoutGlobalStyle = createGlobalStyle<{
         flex-grow: 1;
       }
     }
+  }
+
+  b, strong {
+    /* Otherwise browsers may select the "Fira Sans Black" font which is too heavy. */
+    font-weight: 600;
   }
 `;
 

@@ -1,4 +1,4 @@
-import React, { lazy } from "react";
+import { lazy } from "react";
 import { Tab, Tabs } from "../../../router/tabs/Tabs";
 
 const NavsTab = lazy(() => import("./tabs/NavsTab.js"));

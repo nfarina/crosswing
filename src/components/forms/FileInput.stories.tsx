@@ -1,6 +1,5 @@
 import { action } from "@storybook/addon-actions";
 import { Meta, StoryFn } from "@storybook/react";
-import React from "react";
 import { styled } from "styled-components";
 import { colors } from "../../theme/colors/colors";
 import { CyberAppDecorator } from "../../theme/storybook";

@@ -1,4 +1,3 @@
-import React from "react";
 import { RouterDecorator } from "../router/storybook/RouterDecorator";
 import { CyberAppDecorator } from "../theme/storybook";
 import { Notice } from "./Notice";

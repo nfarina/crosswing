@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import calendar from "dayjs/plugin/calendar.js";
 import timezone from "dayjs/plugin/timezone.js";
 import utc from "dayjs/plugin/utc.js";
-import React, { HTMLAttributes, useEffect, useRef } from "react";
+import { HTMLAttributes, useEffect, useRef } from "react";
 import { styled } from "styled-components";
 import { capitalize } from "../../shared/strings";
 
@@ -32,7 +32,7 @@ export function formatTimestamp(
   } else {
     // Default format.
     return capitalize(
-      dayjs(date).calendar(undefined, {
+      dayjs.tz(date, timezone).calendar(undefined, {
         sameDay: "[today] [at] h:mm a",
         nextDay: "[tomorrow at] h:mm a",
         nextWeek: "M/D/YYYY [at] h:mm a",

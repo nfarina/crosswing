@@ -1,6 +1,5 @@
 import { action } from "@storybook/addon-actions";
-import React from "react";
-import Attachment from "../../../icons/Attachment.svg";
+import Attachment from "../../../icons/Attachment.svg?react";
 import { RouterDecorator } from "../../router/storybook/RouterDecorator";
 import { CyberAppDecorator } from "../../theme/storybook";
 import { SeparatorDecorator } from "../SeparatorLayout";

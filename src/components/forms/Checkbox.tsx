@@ -1,6 +1,6 @@
-import React, { HTMLAttributes, SyntheticEvent } from "react";
+import { HTMLAttributes, SyntheticEvent } from "react";
 import { styled } from "styled-components";
-import Checkmark from "../../../icons/Checkmark.svg";
+import Checkmark from "../../../icons/Checkmark.svg?react";
 import { colors } from "../../theme/colors/colors";
 import { Clickable } from "../Clickable";
 

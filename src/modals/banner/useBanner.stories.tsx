@@ -1,4 +1,3 @@
-import React from "react";
 import { colors } from "../../theme/colors/colors";
 import { CyberAppDecorator } from "../../theme/storybook";
 import { ModalDecorator } from "../storybook/ModalDecorator";

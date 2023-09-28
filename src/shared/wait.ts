@@ -1,8 +1,7 @@
+import { isRunningUnderTest } from "./env";
+
 // Declare a cross-platform version of this.
 declare function setTimeout(callback: () => void, ms: number): number;
-
-// We cache calling process.env because it's surprisingly expensive.
-const isTest = process.env.NODE_ENV === "test";
 
 /*
  * Returns a Promise that waits for the given number of milliseconds
@@ -10,7 +9,7 @@ const isTest = process.env.NODE_ENV === "test";
  */
 export async function wait(ms: number = 0): Promise<void> {
   // Don't wait when running tests!
-  if (isTest) return;
+  if (isRunningUnderTest()) return;
 
   return new Promise((resolve) => {
     setTimeout(resolve, ms);

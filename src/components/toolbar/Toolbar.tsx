@@ -1,4 +1,4 @@
-import React, {
+import {
   CSSProperties,
   HTMLAttributes,
   ReactNode,
@@ -6,8 +6,8 @@ import React, {
   useRef,
 } from "react";
 import { styled } from "styled-components";
-import AddSmall from "../../../icons/AddSmall.svg";
-import DotDotDot from "../../../icons/DotDotDot.svg";
+import AddSmall from "../../../icons/AddSmall.svg?react";
+import DotDotDot from "../../../icons/DotDotDot.svg?react";
 import { colors } from "../../theme/colors/colors";
 import { fonts } from "../../theme/fonts";
 import { Button } from "../Button";

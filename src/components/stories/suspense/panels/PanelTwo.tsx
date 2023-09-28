@@ -1,4 +1,3 @@
-import React from "react";
 import { colors } from "../../../../theme/colors/colors";
 import { StyledPanel } from "./PanelOne";
 

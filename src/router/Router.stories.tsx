@@ -1,6 +1,6 @@
 import { action } from "@storybook/addon-actions";
 import { Meta } from "@storybook/react";
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { styled } from "styled-components";
 import { colors } from "../theme/colors/colors";
 import { fonts } from "../theme/fonts";

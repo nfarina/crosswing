@@ -1,5 +1,4 @@
 import { Meta } from "@storybook/react";
-import React from "react";
 import { CyberApp } from "./app";
 import { ColorView } from "./colors/ColorView";
 import { colors } from "./colors/colors";

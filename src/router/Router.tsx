@@ -1,5 +1,5 @@
 import Debug from "debug";
-import React, {
+import {
   ReactNode,
   Suspense,
   useDeferredValue,

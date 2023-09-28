@@ -1,8 +1,8 @@
 import { action } from "@storybook/addon-actions";
 import { Meta, StoryFn } from "@storybook/react";
-import React, { useState } from "react";
-import Close from "../../icons/Close.svg";
-import Warning from "../../icons/Warning.svg";
+import { useState } from "react";
+import Close from "../../icons/Close.svg?react";
+import Warning from "../../icons/Warning.svg?react";
 import { CyberAppDecorator } from "../theme/storybook";
 import { Button } from "./Button";
 
@@ -61,7 +61,7 @@ export const PrimaryLargest: Story = () => (
   <Button size="largest" primary title="Hello!" onClick={action("onClick")} />
 );
 
-export const WithSubtext: Story = () => (
+export const WithSubtitle: Story = () => (
   <Button
     primary
     title="Buy Now"
@@ -70,7 +70,7 @@ export const WithSubtext: Story = () => (
   />
 );
 
-export const WithSubtextSmaller: Story = () => (
+export const WithSubtitleSmaller: Story = () => (
   <Button
     primary
     size="smaller"
@@ -80,7 +80,7 @@ export const WithSubtextSmaller: Story = () => (
   />
 );
 
-export const WithSubtextLarger: Story = () => (
+export const WithSubtitleLarger: Story = () => (
   <Button
     primary
     size="larger"

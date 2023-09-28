@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from "react";
+import { HTMLAttributes } from "react";
 import { keyframes, styled } from "styled-components";
 import { ColorBuilder, colors } from "../theme/colors/colors";
 import { easing } from "../theme/easing";

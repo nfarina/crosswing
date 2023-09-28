@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, useMemo } from "react";
+import { HTMLAttributes, useMemo } from "react";
 import { styled } from "styled-components";
 import {
   badgeAppIcon,

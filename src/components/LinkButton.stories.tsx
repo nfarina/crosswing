@@ -1,5 +1,4 @@
 import { Meta } from "@storybook/react";
-import React from "react";
 import { RouterDecorator } from "../router/storybook/RouterDecorator";
 import { CyberAppDecorator } from "../theme/storybook";
 import { LinkButton } from "./LinkButton";

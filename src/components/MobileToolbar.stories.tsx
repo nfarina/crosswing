@@ -1,7 +1,6 @@
 import { action } from "@storybook/addon-actions";
-import React from "react";
-import Browser from "../../icons/Browser.svg";
-import Trash from "../../icons/Trash.svg";
+import Browser from "../../icons/Browser.svg?react";
+import Trash from "../../icons/Trash.svg?react";
 import { CyberAppDecorator } from "../theme/storybook";
 import {
   MobileToolbar,

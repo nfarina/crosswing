@@ -1,4 +1,4 @@
-import React, { ReactNode, useCallback, useRef } from "react";
+import { ReactNode, useCallback, useRef } from "react";
 import { keyframes, styled } from "styled-components";
 import { useHotkey } from "../../hooks/useHotkey";
 import { useInterval } from "../../hooks/useInterval";

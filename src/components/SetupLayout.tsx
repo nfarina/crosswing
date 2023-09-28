@@ -1,9 +1,4 @@
-import React, {
-  FormEvent,
-  FormHTMLAttributes,
-  ReactElement,
-  ReactNode,
-} from "react";
+import { FormEvent, FormHTMLAttributes, ReactElement, ReactNode } from "react";
 import { styled } from "styled-components";
 import { safeArea } from "../host/features/safeArea";
 import { colors } from "../theme/colors/colors";

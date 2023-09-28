@@ -1,6 +1,6 @@
-import React, { HTMLAttributes, ReactNode } from "react";
+import { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
-import DisclosureArrow from "../../../icons/DisclosureArrow.svg";
+import DisclosureArrow from "../../../icons/DisclosureArrow.svg?react";
 import { colors } from "../../theme/colors/colors";
 import { fonts } from "../../theme/fonts";
 

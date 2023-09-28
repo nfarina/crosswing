@@ -1,6 +1,5 @@
 import { action } from "@storybook/addon-actions";
 import { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { styled } from "styled-components";
 import { usePopup } from "../modals/popup/usePopup";
 import { ModalDecorator } from "../modals/storybook/ModalDecorator";

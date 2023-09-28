@@ -1,4 +1,4 @@
-import React, { CSSProperties, HTMLAttributes } from "react";
+import { CSSProperties, HTMLAttributes } from "react";
 import { styled } from "styled-components";
 import { colors } from "../theme/colors/colors";
 

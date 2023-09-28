@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { CyberAppDecorator } from "../../theme/storybook";
 import { ToggleButton } from "./ToggleButton";
 
@@ -27,7 +27,7 @@ export const Smaller = () => {
     <ToggleButton
       title="Newsletter"
       on={newsletter}
-      smaller
+      size="smaller"
       onClick={() => setNewsletter(!newsletter)}
     />
   );

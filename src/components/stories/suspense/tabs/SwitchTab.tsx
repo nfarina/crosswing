@@ -1,4 +1,4 @@
-import React, { lazy } from "react";
+import { lazy } from "react";
 import { styled } from "styled-components";
 import { Redirect } from "../../../../router/redirect/Redirect";
 import { Route, Switch } from "../../../../router/switch/Switch";

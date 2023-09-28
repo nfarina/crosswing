@@ -1,4 +1,3 @@
-import React from "react";
 import { styled } from "styled-components";
 import { BrowserSimulator } from "../../router/storybook/RouterDecorator";
 import { capitalize } from "../../shared/strings";

@@ -1,12 +1,7 @@
 import dayjs from "dayjs";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter.js";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore.js";
-import React, {
-  HTMLAttributes,
-  ReactNode,
-  useLayoutEffect,
-  useRef,
-} from "react";
+import { HTMLAttributes, ReactNode, useLayoutEffect, useRef } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../theme/colors/colors";
 import { fonts } from "../../theme/fonts";

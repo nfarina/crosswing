@@ -1,5 +1,4 @@
 import { action } from "@storybook/addon-actions";
-import React from "react";
 import { styled } from "styled-components";
 import { ModalDecorator } from "../../modals/storybook/ModalDecorator";
 import { colors } from "../../theme/colors/colors";

@@ -1,4 +1,4 @@
-import React, {
+import {
   CSSProperties,
   HTMLAttributes,
   MouseEvent,
@@ -9,9 +9,11 @@ import React, {
 import { styled } from "styled-components";
 import { ColorBuilder, colors } from "../../theme/colors/colors";
 
+export type ToggleSize = "normal" | "smaller" | "smallest";
+
 export function Toggle({
   on,
-  smaller,
+  size = "normal",
   onClick,
   disabled,
   as,
@@ -20,7 +22,7 @@ export function Toggle({
   ...rest
 }: {
   on?: boolean;
-  smaller?: boolean;
+  size?: ToggleSize;
   onClick?: (e: SyntheticEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
   as?: string | React.ComponentType<any>;
@@ -55,7 +57,7 @@ export function Toggle({
   return (
     <StyledToggle
       data-on={!!on}
-      data-smaller={!!smaller}
+      data-size={size}
       disabled={!!disabled}
       data-disabled={!!disabled}
       onMouseDown={onMouseDown}
@@ -136,12 +138,21 @@ export const StyledToggle = styled.button`
     }
   }
 
-  &[data-smaller="true"] {
+  &[data-size="smaller"] {
     width: calc(50px * 0.75);
     height: calc(30px * 0.75);
 
     > .container {
       transform: scale(calc(0.5 * 0.75));
+    }
+  }
+
+  &[data-size="smallest"] {
+    width: calc(50px * 0.5);
+    height: calc(30px * 0.5);
+
+    > .container {
+      transform: scale(calc(0.5 * 0.5));
     }
   }
 

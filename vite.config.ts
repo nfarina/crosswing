@@ -9,7 +9,7 @@ export default defineConfig({
         plugins: [["babel-plugin-styled-components", { fileName: false }]],
       },
     }),
-    svgr({ exportAsDefault: true }),
+    svgr(),
   ],
   // Don't clear the screen when logging certain things; it makes the
   // manager server harder to read (since multiple Vite servers can be running).

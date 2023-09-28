@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from "react";
+import { HTMLAttributes } from "react";
 import { styled } from "styled-components";
 import { getBuilderVarCss } from "./colors/builders";
 import { ColorBuilder, colors, shadows } from "./colors/colors";

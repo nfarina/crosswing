@@ -1,7 +1,7 @@
-import React, { HTMLAttributes, ReactNode } from "react";
+import { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
-import InfoCircleIcon from "../../../icons/InfoCircle.svg";
-import WarningIcon from "../../../icons/Warning.svg";
+import InfoCircleIcon from "../../../icons/InfoCircle.svg?react";
+import WarningIcon from "../../../icons/Warning.svg?react";
 import { colors } from "../../theme/colors/colors";
 import { fonts } from "../../theme/fonts";
 

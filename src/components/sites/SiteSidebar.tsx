@@ -1,4 +1,4 @@
-import React, {
+import {
   CSSProperties,
   Fragment,
   HTMLAttributes,
@@ -7,8 +7,8 @@ import React, {
   ReactNode,
 } from "react";
 import { styled } from "styled-components";
-import CyberLogoIcon from "../../../icons/CyberLogo.svg";
-import PlaceholderIcon from "../../../icons/Placeholder.svg";
+import CyberLogoIcon from "../../../icons/CyberLogo.svg?react";
+import PlaceholderIcon from "../../../icons/Placeholder.svg?react";
 import { flattenChildren } from "../../hooks/flattenChildren";
 import { useRouter } from "../../router/context/RouterContext";
 import { Link } from "../../router/Link";

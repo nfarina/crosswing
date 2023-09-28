@@ -1,4 +1,4 @@
-import React, {
+import {
   isValidElement,
   MouseEvent,
   ReactElement,
@@ -8,7 +8,7 @@ import React, {
   useState,
 } from "react";
 import { styled } from "styled-components";
-import DownArrow from "../../../icons/DownArrow.svg";
+import DownArrow from "../../../icons/DownArrow.svg?react";
 import { flattenChildren } from "../../hooks/flattenChildren";
 import { usePopup } from "../../modals/popup/usePopup";
 import { useRouter } from "../../router/context/RouterContext";

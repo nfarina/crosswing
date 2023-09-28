@@ -1,17 +1,22 @@
 import dayjs from "dayjs";
-import React from "react";
+import { lazy } from "react";
 import { styled } from "styled-components";
-import DisclosureArrow from "../../../icons/DisclosureArrow.svg";
-import DownArrow from "../../../icons/DownArrow.svg";
+import DisclosureArrow from "../../../icons/DisclosureArrow.svg?react";
+import DownArrow from "../../../icons/DownArrow.svg?react";
 import { useMatchMedia } from "../../hooks/useMatchMedia";
 import { PopupView } from "../../modals/popup/PopupView";
 import { usePopup } from "../../modals/popup/usePopup";
 import { useSheet } from "../../modals/sheet/useSheet";
 import { fonts } from "../../theme/fonts";
 import { Button } from "../Button";
-import { DateRange, areDateRangesEqual } from "./DateRange";
-import { AllDateRangePresets, DateRangeControl } from "./DateRangeControl";
-import { DateRangePicker } from "./DateRangePicker";
+import {
+  AllDateRangePresets,
+  DateRange,
+  areDateRangesEqual,
+} from "./DateRange";
+
+const DateRangeControl = lazy(() => import("./DateRangeControl"));
+const DateRangePicker = lazy(() => import("./DateRangePicker"));
 
 export function DateRangeInput({
   value,

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { styled } from "styled-components";
 import { ModalDecorator } from "../../modals/storybook/ModalDecorator";
 import { RouterDecorator } from "../../router/storybook/RouterDecorator";

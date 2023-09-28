@@ -1,14 +1,12 @@
 import Debug from "debug";
+import { isRunningUnderTest } from "./env";
 
 const debug = Debug("util:pool");
 
-// Do we think we're running under a test environment?
-const RUNNING_UNDER_TEST =
-  typeof process !== "undefined" && process.env.NODE_ENV === "test";
-
 // Log stats after running by default if we're in the browser, or if we're
 // running in Node (but not during tests).
-const DEFAULT_LOG_STATS = typeof process === "undefined" || !RUNNING_UNDER_TEST;
+const DEFAULT_LOG_STATS =
+  typeof process === "undefined" || !isRunningUnderTest();
 
 /**
  * Utility method that creates a AsyncPool and uses it to call the given
@@ -157,7 +155,7 @@ export class AsyncPool {
   }: AsyncPoolOptions) {
     this.rate = rate;
     this.interval = interval;
-    this.concurrency = RUNNING_UNDER_TEST ? 1 : concurrency;
+    this.concurrency = isRunningUnderTest() ? 1 : concurrency;
     this.logStats = logStats;
     this.stats.interval = interval;
   }

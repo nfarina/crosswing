@@ -92,4 +92,9 @@ export const CyberDesktopRootStyle = createGlobalStyle`
       flex-grow: 1;
     }
   }
+
+  b, strong {
+    /* Otherwise browsers may select the "Fira Sans Black" font which is too heavy. */
+    font-weight: 600;
+  }
 `;

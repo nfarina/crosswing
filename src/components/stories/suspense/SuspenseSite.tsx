@@ -1,4 +1,4 @@
-import React, { lazy } from "react";
+import { lazy } from "react";
 import { SiteArea, SiteLayout, SiteLink } from "../../sites/SiteLayout";
 import { NormalTab } from "./tabs/NormalTab";
 

@@ -1,6 +1,6 @@
-import React, { HTMLAttributes, ReactNode } from "react";
+import { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
-import Close from "../../../icons/Close.svg";
+import Close from "../../../icons/Close.svg?react";
 import { useGesture } from "../../hooks/useGesture";
 import { colors, shadows } from "../../theme/colors/colors";
 import { fonts } from "../../theme/fonts";

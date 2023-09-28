@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, ReactNode } from "react";
+import { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
 import { safeArea } from "../host/features/safeArea";
 import { colors } from "../theme/colors/colors";

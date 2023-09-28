@@ -1,5 +1,4 @@
 import { action } from "@storybook/addon-actions";
-import React from "react";
 import { CyberAppDecorator } from "../../theme/storybook";
 import { SeparatorDecorator } from "../SeparatorLayout";
 import { LabeledCheckmark } from "./LabeledCheckmark";

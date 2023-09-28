@@ -1,4 +1,4 @@
-import React, {
+import {
   ChangeEvent,
   InputHTMLAttributes,
   KeyboardEvent,
@@ -6,8 +6,8 @@ import React, {
   useRef,
 } from "react";
 import { styled } from "styled-components";
-import CloseCircle from "../../../icons/CloseCircle.svg";
-import Search from "../../../icons/Search.svg";
+import CloseCircle from "../../../icons/CloseCircle.svg?react";
+import Search from "../../../icons/Search.svg?react";
 import { useHotkey } from "../../hooks/useHotkey";
 import { useHost } from "../../host/context/HostContext";
 import { colors } from "../../theme/colors/colors";

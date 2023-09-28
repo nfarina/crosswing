@@ -1,5 +1,5 @@
 import { action } from "@storybook/addon-actions";
-import React, { Suspense, useState } from "react";
+import { Suspense, lazy, useState } from "react";
 import { useRouter } from "../router/context/RouterContext";
 import {
   BrowserSimulator,
@@ -84,7 +84,7 @@ export const SomeValues = () => (
 );
 
 export const LazyChild = () => {
-  const DynamicContent = React.lazy(async () => {
+  const DynamicContent = lazy(async () => {
     await wait(2000);
     return { default: () => <NoContent title="Loaded" /> };
   });

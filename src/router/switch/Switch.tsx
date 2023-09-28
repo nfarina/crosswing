@@ -1,5 +1,5 @@
 import Debug from "debug";
-import React, { isValidElement, ReactElement, ReactNode } from "react";
+import { isValidElement, ReactElement, ReactNode } from "react";
 import { flattenChildren } from "../../hooks/flattenChildren";
 import { RouterContext, useRouter } from "../context/RouterContext";
 import { Redirect } from "../redirect/Redirect";

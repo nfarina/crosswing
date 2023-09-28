@@ -1,7 +1,7 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { styled } from "styled-components";
-import Checkmark from "../../../icons/Checkmark.svg";
-import Close from "../../../icons/Close.svg";
+import Checkmark from "../../../icons/Checkmark.svg?react";
+import Close from "../../../icons/Close.svg?react";
 import { Link } from "../../router/Link";
 import { useRouter } from "../../router/context/RouterContext";
 import { formatCurrency } from "../../shared/numeric";
@@ -98,6 +98,21 @@ export const LinkListIconSucceeded = styled.div.attrs({
   background: ${colors.darkGreen()};
 `;
 
+/** A component you can drop in to LinkListCell.badge. */
+export const LinkListCellBadge = styled.div`
+  align-self: flex-start;
+  box-sizing: border-box;
+  color: ${colors.textBackground()};
+  font: ${fonts.displayBold({ size: 12 })};
+  border-radius: 3px;
+  background: ${colors.mediumGray()};
+  padding: 2px 5px;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
 export const StyledLinkListCell = styled(Link)`
   display: flex;
   flex-flow: row;
@@ -166,6 +181,10 @@ export const StyledLinkListCell = styled(Link)`
     > .badge {
       display: flex;
       flex-flow: row;
+
+      > ${LinkListCellBadge} + ${LinkListCellBadge} {
+        margin-left: 5px;
+      }
     }
 
     > .detail {
@@ -218,19 +237,4 @@ export const StyledLinkListCell = styled(Link)`
       }
     }
   }
-`;
-
-/** A component you can drop in to LinkListCell.badge. */
-export const LinkListCellBadge = styled.div`
-  align-self: flex-start;
-  box-sizing: border-box;
-  color: ${colors.textBackground()};
-  font: ${fonts.displayBold({ size: 12 })};
-  border-radius: 3px;
-  background: ${colors.mediumGray()};
-  padding: 2px 5px;
-  max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 `;

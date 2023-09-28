@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { RouterLocation } from "../RouterLocation";
 import { RouterContext } from "../context/RouterContext";
 
