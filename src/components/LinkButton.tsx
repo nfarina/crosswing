@@ -1,6 +1,6 @@
-import DisclosureIcon from "cyber/icons/DisclosureArrow.svg?react";
 import { KeyboardEvent, ReactNode } from "react";
 import { styled } from "styled-components";
+import DisclosureIcon from "../../icons/DisclosureArrow.svg?react";
 import { Link } from "../router/Link";
 import { colors } from "../theme/colors/colors";
 import { fonts } from "../theme/fonts";
