@@ -36,7 +36,8 @@ if (tasksJsonPath) {
     console.error(
       "Usage: bun server.ts <path to tasks.json>\n\n" +
         "You can also run this script from the root of the project, " +
-        "in which case it will look for tasks.json in the current directory.",
+        "in which case it will look for tasks.json in the current directory " +
+        `(which is ${process.cwd()})`,
     );
     process.exit(1);
   }

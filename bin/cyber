@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# This script is used to start the manager service.
+bun $(dirname "$0")/../cyber/src/manager/server/server.ts $@
