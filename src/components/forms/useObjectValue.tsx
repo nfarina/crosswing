@@ -11,6 +11,8 @@ export interface ObjectValue<T> {
   error: Error | null;
   /** Whether the value has changed from initialValue, using deepEqual(). */
   hasChanged: boolean;
+  /** Whether the value is required; mirrors argument sent to useObjectValue(). */
+  required: boolean;
   /** Can be spread onto to a component that accepts `value` and `onValueChange`. */
   props: {
     value: T;
@@ -76,6 +78,7 @@ export function useObjectValue<T>({
     set,
     error,
     hasChanged,
+    required,
     props: {
       value,
       onValueChange: set,

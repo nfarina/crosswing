@@ -4,15 +4,25 @@ import { NavLayout } from "../../router/navs/NavLayout";
 import { Button, StyledButton } from "../Button";
 import { CalendarView, StyledCalendarInput } from "./CalendarView";
 import { dateRange } from "./DateRange";
+import { ReactNode } from "react";
+import { Notice } from "../Notice";
 
 export function DatePicker({
   defaultDate,
   onClose,
   onDateSelected,
+  requireSelection = false,
+  title = "Select Date",
+  subtitle,
+  notice,
 }: {
   defaultDate?: number | null;
   onClose: () => void;
   onDateSelected?: (date: number | null) => void;
+  requireSelection?: boolean;
+  title?: string;
+  subtitle?: string;
+  notice?: ReactNode;
 }) {
   function onDateClick(date: number | null) {
     const range = date ? dateRange(date)?.start : null;
@@ -27,11 +37,15 @@ export function DatePicker({
 
   return (
     <NavLayout
-      title="Select Date"
+      title={title}
+      subtitle={subtitle}
       left={{ title: "Cancel", back: true, onClick: onClose }}
     >
       <PageLayout>
-        <Button children="Clear" onClick={onClearClick} />
+        {notice && <Notice children={notice} size="smaller" />}
+        {!requireSelection && (
+          <Button children="Clear" onClick={onClearClick} />
+        )}
         <CalendarView
           selectedRange={defaultDate ? dateRange(defaultDate) : null}
           onDateClick={onDateClick}

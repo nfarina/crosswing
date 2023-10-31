@@ -12,6 +12,8 @@ export interface InputValue<T> {
   error: Error | null;
   /** Whether the value has changed from initialValue. */
   hasChanged: boolean;
+  /** Whether the value is required; mirrors argument sent to useObjectValue(). */
+  required: boolean;
   /** Should be spread onto to `TextInput`. */
   props: Pick<
     Parameters<typeof TextInput>[0] & Parameters<typeof TextArea>[0],
@@ -48,7 +50,7 @@ export function useInputValue<T = string>({
   initialValue = null,
   initialStringValue = null,
   onValueChange,
-  required,
+  required = false,
   transformer,
   validate,
   disabled,
@@ -196,6 +198,7 @@ export function useInputValue<T = string>({
     set,
     error,
     hasChanged: stringValue !== resolvedInitialStringValue,
+    required,
     props: {
       value: renderInputValue(),
       onValueChange: onInputValueChange,
