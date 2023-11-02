@@ -18,8 +18,8 @@ test("doesn't merge arrays", () => {
 test("adds new deep property", () => {
   expect(
     merge(
-      { friends: { friend1: { name: "Bob" } } },
-      { friends: { friend2: { name: "Alice" } } as any },
+      { friends: { friend1: { name: "Bob" } } as Record<string, object> },
+      { friends: { friend2: { name: "Alice" } } },
     ),
   ).toEqual({
     friends: {
@@ -43,13 +43,15 @@ test("changes deep property", () => {
 });
 
 test("merges into null object", () => {
-  expect(merge(null, { hello: "world" } as any)).toEqual({ hello: "world" });
+  expect(merge(null, { hello: "world" } as any)).toEqual({
+    hello: "world",
+  } as any);
 });
 
 test("merges into undefined object", () => {
   expect(merge(undefined, { hello: "world" } as any)).toEqual({
     hello: "world",
-  });
+  } as any);
 });
 
 test("merges undefined object", () => {
@@ -109,5 +111,5 @@ test("performs a deep clone as a side-effect", () => {
 test("deletes properties", () => {
   expect(
     merge({ color: "blue", hex: "#0000FF" }, { hex: merge.delete }),
-  ).toEqual({ color: "blue" });
+  ).toEqual({ color: "blue" } as any);
 });
