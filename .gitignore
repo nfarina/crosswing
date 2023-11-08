@@ -2,10 +2,9 @@
 
 .DS_Store
 
-## Yarn
+## Bun
 
 node_modules
-.yarn/
 
 ## TypeScript
 
