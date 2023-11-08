@@ -1,0 +1,34 @@
+import Browser from "@cyber/icons/Browser.svg?react";
+import Trash from "@cyber/icons/Trash.svg?react";
+import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { action } from "@storybook/addon-actions";
+import {
+  MobileToolbar,
+  MobileToolbarButton,
+  MobileToolbarLayout,
+  MobileToolbarSpace,
+} from "./MobileToolbar";
+import { NoContent } from "./NoContent";
+
+export default {
+  component: MobileToolbar,
+  decorators: [CyberAppDecorator({ layout: "mobile" })],
+  parameters: { layout: "centered" },
+};
+
+export const Default = () => (
+  <MobileToolbarLayout>
+    <NoContent title="Content Area" />
+    <MobileToolbar>
+      <MobileToolbarButton
+        children={<Browser />}
+        onClick={action("onBrowserClick")}
+      />
+      <MobileToolbarSpace />
+      <MobileToolbarButton
+        children={<Trash />}
+        onClick={action("onTrashClick")}
+      />
+    </MobileToolbar>
+  </MobileToolbarLayout>
+);

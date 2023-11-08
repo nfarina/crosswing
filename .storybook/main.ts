@@ -1,7 +1,7 @@
 import { StorybookConfig } from "@storybook/react-vite";
 
 export default {
-  stories: ["../src/**/*.stories.@(ts|tsx)"],
+  stories: ["../packages/*/**/*.stories.@(ts|tsx)"],
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",

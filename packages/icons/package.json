@@ -1,0 +1,10 @@
+{
+  "name": "@cyber/icons",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "Cyber icon set.",
+  "author": "nfarina@gmail.com",
+  "exports": {
+    "./*": "./*"
+  }
+}

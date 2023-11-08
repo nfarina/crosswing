@@ -1,0 +1,13 @@
+{
+  "name": "@cyber/shared",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "Isomorphic utility functions used by Cyber.",
+  "author": "nfarina@gmail.com",
+  "exports": {
+    "./*": "./*.ts"
+  },
+  "dependencies": {
+    "debug": "^4.3.4"
+  }
+}

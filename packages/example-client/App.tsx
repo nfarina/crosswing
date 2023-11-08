@@ -1,0 +1,47 @@
+import { Button } from "@cyber/components/Button";
+import { MobileAppFrame } from "@cyber/components/desktop/MobileAppFrame";
+import { MockHostProvider } from "@cyber/host/mocks";
+import { useAlert } from "@cyber/modals/alert";
+import { ModalRootProvider } from "@cyber/modals/context";
+import { CyberApp } from "@cyber/theme/app";
+import { styled } from "styled-components";
+import Favicon from "./Favicon.svg?react";
+
+export function App() {
+  return (
+    <MockHostProvider container="ios">
+      <CyberApp>
+        <ModalRootProvider>
+          <MobileAppFrame restorationKey={App}>
+            <AppContent />
+          </MobileAppFrame>
+        </ModalRootProvider>
+      </CyberApp>
+    </MockHostProvider>
+  );
+}
+
+function AppContent() {
+  const alert = useAlert(() => ({
+    title: "Hello World!",
+    message: "You clicked a button.",
+  }));
+
+  return (
+    <StyledApp>
+      <Button
+        primary
+        title="Hello World"
+        icon={<Favicon />}
+        onClick={alert.show}
+      />
+    </StyledApp>
+  );
+}
+
+const StyledApp = styled.div`
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+`;

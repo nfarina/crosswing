@@ -1,0 +1,20 @@
+{
+  "name": "@cyber/theme",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "Cyber colors and fonts.",
+  "author": "nfarina@gmail.com",
+  "exports": {
+    "./colors": "./colors/colors.ts",
+    "./app": "./app.tsx",
+    "./containers": "./containers.ts",
+    "./easing": "./easing.ts",
+    "./fonts": "./fonts/fonts.ts",
+    "./storybook": "./storybook.tsx"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-is": "^18.2.0",
+    "styled-components": "^6.0.8"
+  }
+}

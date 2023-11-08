@@ -37,8 +37,8 @@
     "incremental": true
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
+    "packages/*/**/*.ts",
+    "packages/*/**/*.tsx",
     "types.d.ts",
     // Include types for SVGs processed by vite-plugin-svgr.
     "node_modules/vite-plugin-svgr/client.d.ts"

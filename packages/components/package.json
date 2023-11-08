@@ -1,0 +1,25 @@
+{
+  "name": "@cyber/components",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "Cyber component library.",
+  "author": "nfarina@gmail.com",
+  "exports": {
+    "./*": "./*.tsx"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.10",
+    "react-transition-group": "^4.4.5"
+  },
+  "peerDependencies": {
+    "@cyber/hooks": "workspace:*",
+    "@cyber/host": "workspace:*",
+    "@cyber/icons": "workspace:*",
+    "@cyber/modals": "workspace:*",
+    "@cyber/router": "workspace:*",
+    "@cyber/theme": "workspace:*",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "styled-components": "^6.0.8"
+  }
+}

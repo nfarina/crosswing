@@ -1,0 +1,28 @@
+{
+  "name": "@cyber/example-client",
+  "type": "module",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Cyber example client app.",
+  "author": "nfarina@gmail.com",
+  "scripts": {
+    "dev": "vite --port 2701",
+    "build": "vite build",
+    "analyze": "vite-bundle-visualizer"
+  },
+  "devDependencies": {
+    "@cyber/hooks": "workspace:*",
+    "@cyber/host": "workspace:*",
+    "@cyber/icons": "workspace:*",
+    "@cyber/modals": "workspace:*",
+    "@cyber/router": "workspace:*",
+    "@cyber/theme": "workspace:*",
+    "@vitejs/plugin-react": "^4.1.0",
+    "babel-plugin-styled-components": "^2.1.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "styled-components": "^6.0.8",
+    "vite": "^4.4.9",
+    "vite-plugin-svgr": "^4.0.0"
+  }
+}

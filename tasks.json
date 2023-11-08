@@ -3,7 +3,8 @@
     "title": "Client",
     "description": "Vite development server for the Cyber example app",
     "run": {
-      "script": "client:dev"
+      "script": "dev",
+      "workspace": "example-client"
     },
     "link": "http://localhost:2701"
   },

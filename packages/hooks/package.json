@@ -1,0 +1,20 @@
+{
+  "name": "@cyber/hooks",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "Useful React Hooks, many used internally by Cyber.",
+  "author": "nfarina@gmail.com",
+  "exports": {
+    "./*": "./*.ts"
+  },
+  "dependencies": {
+    "debug": "^4.3.4"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-is": "^18.2.0"
+  },
+  "devDependencies": {
+    "styled-components": "^6.0.8"
+  }
+}

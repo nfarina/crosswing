@@ -1,0 +1,35 @@
+{
+  "name": "@cyber/router",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "Cyber router.",
+  "author": "nfarina@gmail.com",
+  "exports": {
+    ".": "./Router.tsx",
+    "./context": "./context/RouterContext.ts",
+    "./location": "./RouterLocation.ts",
+    "./history/browser": "./history/BrowserHistory.ts",
+    "./history/memory": "./history/MemoryHistory.ts",
+    "./link": "./Link.tsx",
+    "./mocks": "./mocks/MockRouter.tsx",
+    "./navs": "./navs/Navs.tsx",
+    "./navs/useAutoStatusBar": "./navs/useAutoStatusBar.tsx",
+    "./switch": "./switch/Switch.tsx",
+    "./redirect": "./redirect/Redirect.tsx",
+    "./tabs": "./tabs/Tabs.tsx",
+    "./storybook": "./storybook/RouterDecorator.tsx",
+    "./listener": "./util/useLocationChangeListener.tsx"
+  },
+  "dependencies": {
+    "debug": "^4.3.4",
+    "react-transition-group": "^4.4.5"
+  },
+  "peerDependencies": {
+    "@cyber/hooks": "workspace:*",
+    "@cyber/host": "workspace:*",
+    "@cyber/icons": "workspace:*",
+    "@cyber/theme": "workspace:*",
+    "react": "^18.2.0",
+    "styled-components": "^6.0.8"
+  }
+}

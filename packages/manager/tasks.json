@@ -1,0 +1,10 @@
+{
+  "client": {
+    "title": "Manager Client",
+    "description": "Vite development server for the Cyber manager itself.",
+    "run": {
+      "script": "dev"
+    },
+    "link": "http://localhost:2750"
+  }
+}

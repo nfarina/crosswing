@@ -1,0 +1,32 @@
+{
+  "name": "@cyber/modals",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "Cyber modal UI.",
+  "author": "nfarina@gmail.com",
+  "exports": {
+    "./actions": "./actions/useActions.tsx",
+    "./alert": "./alert/useAlert.tsx",
+    "./alert/error": "./alert/useErrorAlert.tsx",
+    "./banner": "./banner/useBanner.tsx",
+    "./confirm": "./confirm/useConfirm.tsx",
+    "./context": "./context/ModalRootProvider.tsx",
+    "./dialog": "./dialog/useDialog.tsx",
+    "./popup": "./popup/PopupView.tsx",
+    "./sheet": "./sheet/useSheet.tsx",
+    "./storybook": "./storybook/ModalDecorator.tsx"
+  },
+  "dependencies": {
+    "react-transition-group": "^4.4.5"
+  },
+  "peerDependencies": {
+    "@cyber/hooks": "workspace:*",
+    "@cyber/host": "workspace:*",
+    "@cyber/icons": "workspace:*",
+    "@cyber/router": "workspace:*",
+    "@cyber/theme": "workspace:*",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "styled-components": "^6.0.8"
+  }
+}
