@@ -1,5 +1,5 @@
-import { RouterDecorator } from "@cyber/router/storybook";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { RouterDecorator } from "@crosswing/router/storybook";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import { ModalDecorator } from "../storybook/ModalDecorator";
 import {
@@ -11,7 +11,7 @@ import { useActions } from "./useActions";
 export default {
   component: useActions,
   decorators: [
-    CyberAppDecorator({ layout: "fullscreen" }),
+    CrosswingAppDecorator({ layout: "fullscreen" }),
     ModalDecorator,
     RouterDecorator,
   ],

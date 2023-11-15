@@ -1,8 +1,8 @@
 {
-  "name": "@cyber/shared",
+  "name": "@crosswing/shared",
   "type": "module",
   "version": "0.0.0",
-  "description": "Isomorphic utility functions used by Cyber.",
+  "description": "Isomorphic utility functions used by Crosswing.",
   "author": "nfarina@gmail.com",
   "exports": {
     "./*": "./*.ts"

@@ -1,6 +1,6 @@
-import { useHotkey } from "@cyber/hooks/useHotkey";
-import { useHost } from "@cyber/host/context";
-import { easing } from "@cyber/theme/easing";
+import { useHotkey } from "@crosswing/hooks/useHotkey";
+import { useHost } from "@crosswing/host/context";
+import { easing } from "@crosswing/theme/easing";
 import {
   MouseEvent,
   MutableRefObject,

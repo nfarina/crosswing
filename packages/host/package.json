@@ -1,8 +1,8 @@
 {
-  "name": "@cyber/host",
+  "name": "@crosswing/host",
   "type": "module",
   "version": "0.0.0",
-  "description": "Integration with the Cyber native app host.",
+  "description": "Integration with the Crosswing native app host.",
   "author": "nfarina@gmail.com",
   "exports": {
     "./context": "./context/HostProvider.tsx",
@@ -15,7 +15,7 @@
     "./util/useClipboard": "./util/useClipboard.ts"
   },
   "peerDependencies": {
-    "@cyber/hooks": "workspace:*",
+    "@crosswing/hooks": "workspace:*",
     "react": "^18.2.0",
     "styled-components": "^6.0.8"
   }

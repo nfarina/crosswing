@@ -1,4 +1,4 @@
-import { NavLayout } from "@cyber/router/navs";
+import { NavLayout } from "@crosswing/router/navs";
 import { styled } from "styled-components";
 import { LinkButton } from "../../../LinkButton";
 import { NoContent } from "../../../NoContent";

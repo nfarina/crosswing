@@ -1,4 +1,4 @@
-import { useHostStatusBar } from "@cyber/host/features/HostStatusBar";
+import { useHostStatusBar } from "@crosswing/host/features/HostStatusBar";
 import { useEffect } from "react";
 
 export const StatusBarStyleAttribute = (style: "light" | "default") => ({

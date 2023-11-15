@@ -1,5 +1,5 @@
-import { colors } from "@cyber/theme/colors";
-import { fonts } from "@cyber/theme/fonts";
+import { colors } from "@crosswing/theme/colors";
+import { fonts } from "@crosswing/theme/fonts";
 import { styled } from "styled-components";
 
 // We don't want to introduce a circular dependency between `components`

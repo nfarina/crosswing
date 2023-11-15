@@ -1,7 +1,7 @@
-import { useRouter } from "@cyber/router/context";
-import { Link } from "@cyber/router/link";
-import { colors } from "@cyber/theme/colors";
-import { fonts } from "@cyber/theme/fonts";
+import { useRouter } from "@crosswing/router/context";
+import { Link } from "@crosswing/router/link";
+import { colors } from "@crosswing/theme/colors";
+import { fonts } from "@crosswing/theme/fonts";
 import { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
 import { Clickable } from "../Clickable";

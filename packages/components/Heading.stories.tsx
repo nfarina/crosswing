@@ -1,4 +1,4 @@
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import { Meta, StoryFn } from "@storybook/react";
 import { Button } from "./Button";
@@ -6,7 +6,7 @@ import { Heading } from "./Heading";
 
 export default {
   component: Heading,
-  decorators: [CyberAppDecorator({ width: "wide" })],
+  decorators: [CrosswingAppDecorator({ width: "wide" })],
   parameters: { layout: "centered" },
 } satisfies Meta<typeof Heading>;
 

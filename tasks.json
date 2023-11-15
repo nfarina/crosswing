@@ -1,7 +1,7 @@
 {
   "example-client": {
     "title": "Client",
-    "description": "Vite development server for the Cyber example app",
+    "description": "Vite development server for the Crosswing example app",
     "run": {
       "script": "dev",
       "workspace": "example-client"

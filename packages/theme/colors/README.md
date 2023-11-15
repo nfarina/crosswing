@@ -1,10 +1,10 @@
-# Cyber Colors
+# Crosswing Colors
 
-This explains our thought process behind the unique way Cyber manages colors at runtime in the browser.
+This explains our thought process behind the unique way Crosswing manages colors at runtime in the browser.
 
 ## Color Spaces
 
-Color spaces can be brain-melting. We are making a few assumptions for Cyber that attempt to help designers and developers fall into the pit of success.
+Color spaces can be brain-melting. We are making a few assumptions for Crosswing that attempt to help designers and developers fall into the pit of success.
 
 Color spaces are all about defining what colors - perceptually, to your eye - are possible on a given display. It's always a subset of what your eyes can actually see.
 
@@ -32,7 +32,7 @@ But Figma, and most design tools, are _not_ respecting this. They default to an 
 
 You could of course tell Figma (and most design tools) to render colors using the "sRGB" managed color space, such that #FF0000 renders that "safe", dull red just like the browser, but most people don't bother - or more likely, have no idea what it all means and just want all the colors they can get.
 
-In Cyber, we assume, unlike the browser, that hex codes are in the P3 color space. Our goal is to get your colors to show up in the browser the same way they do in Figma "unmanaged" mode.
+In Crosswing, we assume, unlike the browser, that hex codes are in the P3 color space. Our goal is to get your colors to show up in the browser the same way they do in Figma "unmanaged" mode.
 
 Fortunately, most recent browsers now support the `color()` function, which lets you specify a color in a different color space. So we can use that to get the browser to render the color the same way Figma does.
 

@@ -1,4 +1,4 @@
-import { formatPercentage } from "@cyber/shared/numeric";
+import { formatPercentage } from "@crosswing/shared/numeric";
 import { styled } from "styled-components";
 import { NumberLabel } from "./NumberLabel";
 

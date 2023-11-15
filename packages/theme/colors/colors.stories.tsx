@@ -2,14 +2,14 @@ import { Meta } from "@storybook/react";
 import { CSSProperties, ReactNode } from "react";
 import { styled } from "styled-components";
 import { fonts } from "../fonts/fonts";
-import { CyberAppDecorator } from "../storybook";
+import { CrosswingAppDecorator } from "../storybook";
 import { ColorView } from "./ColorView";
 import { colors } from "./colors";
 
 export default {
   component: colors as any, // Just for the auto-title.
   parameters: { layout: "centered" },
-  decorators: [CyberAppDecorator({ layout: "centered" })],
+  decorators: [CrosswingAppDecorator({ layout: "centered" })],
 } satisfies Meta;
 
 export const Palette = () => {

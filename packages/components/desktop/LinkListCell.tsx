@@ -1,10 +1,10 @@
-import Checkmark from "@cyber/icons/Checkmark.svg?react";
-import Close from "@cyber/icons/Close.svg?react";
-import { useRouter } from "@cyber/router/context";
-import { Link } from "@cyber/router/link";
-import { formatCurrency } from "@cyber/shared/numeric";
-import { colors } from "@cyber/theme/colors";
-import { fonts } from "@cyber/theme/fonts";
+import Checkmark from "@crosswing/icons/Checkmark.svg?react";
+import Close from "@crosswing/icons/Close.svg?react";
+import { useRouter } from "@crosswing/router/context";
+import { Link } from "@crosswing/router/link";
+import { formatCurrency } from "@crosswing/shared/numeric";
+import { colors } from "@crosswing/theme/colors";
+import { fonts } from "@crosswing/theme/fonts";
 import { ReactNode } from "react";
 import { styled } from "styled-components";
 

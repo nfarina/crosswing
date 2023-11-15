@@ -1,4 +1,4 @@
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { Meta } from "@storybook/react";
 import { useState } from "react";
 import { styled } from "styled-components";
@@ -10,7 +10,7 @@ import {
 
 export default {
   component: ResponsiveLayout,
-  decorators: [CyberAppDecorator()],
+  decorators: [CrosswingAppDecorator()],
   parameters: { layout: "centered" },
 } satisfies Meta<typeof ResponsiveLayout>;
 

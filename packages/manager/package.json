@@ -1,9 +1,9 @@
 {
-  "name": "@cyber/manager",
+  "name": "@crosswing/manager",
   "type": "module",
   "private": true,
   "version": "0.0.0",
-  "description": "Cyber example client app.",
+  "description": "Crosswing example client app.",
   "author": "nfarina@gmail.com",
   "scripts": {
     "dev": "cd client; vite --port 2750",
@@ -18,12 +18,12 @@
     "ps-tree": "^1.2.0"
   },
   "devDependencies": {
-    "@cyber/hooks": "workspace:*",
-    "@cyber/host": "workspace:*",
-    "@cyber/icons": "workspace:*",
-    "@cyber/modals": "workspace:*",
-    "@cyber/router": "workspace:*",
-    "@cyber/theme": "workspace:*",
+    "@crosswing/hooks": "workspace:*",
+    "@crosswing/host": "workspace:*",
+    "@crosswing/icons": "workspace:*",
+    "@crosswing/modals": "workspace:*",
+    "@crosswing/router": "workspace:*",
+    "@crosswing/theme": "workspace:*",
     "@vitejs/plugin-react": "^4.1.0",
     "babel-plugin-styled-components": "^2.1.4",
     "react": "^18.2.0",

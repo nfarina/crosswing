@@ -1,11 +1,11 @@
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { useState } from "react";
 import { SeparatorDecorator } from "../SeparatorLayout";
 import { LabeledTextInput } from "./LabeledTextInput";
 
 export default {
   component: LabeledTextInput,
-  decorators: [SeparatorDecorator, CyberAppDecorator({ width: "wide" })],
+  decorators: [SeparatorDecorator, CrosswingAppDecorator({ width: "wide" })],
   parameters: { layout: "centered" },
 };
 

@@ -1,4 +1,4 @@
-import { NavAccessory } from "@cyber/router/navs";
+import { NavAccessory } from "@crosswing/router/navs";
 import { ButtonHTMLAttributes, FormHTMLAttributes } from "react";
 import { InputValue } from "./useInputValue";
 import { ObjectValue } from "./useObjectValue";

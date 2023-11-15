@@ -1,7 +1,7 @@
-import { flattenChildren } from "@cyber/hooks/flattenChildren";
-import DownArrow from "@cyber/icons/DownArrow.svg?react";
-import { colors } from "@cyber/theme/colors";
-import { fonts } from "@cyber/theme/fonts";
+import { flattenChildren } from "@crosswing/hooks/flattenChildren";
+import DownArrow from "@crosswing/icons/DownArrow.svg?react";
+import { colors } from "@crosswing/theme/colors";
+import { fonts } from "@crosswing/theme/fonts";
 import {
   ChangeEvent,
   ReactElement,

@@ -1,4 +1,4 @@
-import { formatCurrency } from "@cyber/shared/numeric";
+import { formatCurrency } from "@crosswing/shared/numeric";
 import { styled } from "styled-components";
 import { NumberLabel } from "./NumberLabel";
 

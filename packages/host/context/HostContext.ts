@@ -3,9 +3,8 @@ import { detectContainer } from "../util/ipc";
 import { openExternalLink } from "../util/openExternalLink";
 import { DeepLink, HostContextValue } from "../util/types";
 
-export const HostContext = createContext<HostContextValue>(
-  defaultHostContext(),
-);
+export const HostContext =
+  createContext<HostContextValue>(defaultHostContext());
 HostContext.displayName = "HostContext";
 
 export function useHost(): HostContextValue {

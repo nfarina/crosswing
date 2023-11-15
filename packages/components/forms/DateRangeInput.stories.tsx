@@ -1,6 +1,6 @@
-import { ModalDecorator } from "@cyber/modals/storybook";
-import { RouterDecorator } from "@cyber/router/storybook";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { ModalDecorator } from "@crosswing/modals/storybook";
+import { RouterDecorator } from "@crosswing/router/storybook";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { useState } from "react";
 import { styled } from "styled-components";
 import { DateRange } from "./DateRange";
@@ -10,7 +10,7 @@ export default {
   component: DateRangeInput,
   decorators: [
     ModalDecorator,
-    CyberAppDecorator({ layout: "fullscreen" }),
+    CrosswingAppDecorator({ layout: "fullscreen" }),
     RouterDecorator,
   ],
   // Need a stretched layout for our modal to show.

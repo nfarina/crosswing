@@ -1,8 +1,8 @@
 {
-  "name": "@cyber/icons",
+  "name": "@crosswing/icons",
   "type": "module",
   "version": "0.0.0",
-  "description": "Cyber icon set.",
+  "description": "Crosswing icon set.",
   "author": "nfarina@gmail.com",
   "exports": {
     "./*": "./*"

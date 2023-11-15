@@ -1,6 +1,6 @@
-import Attachment from "@cyber/icons/Attachment.svg?react";
-import { RouterDecorator } from "@cyber/router/storybook";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import Attachment from "@crosswing/icons/Attachment.svg?react";
+import { RouterDecorator } from "@crosswing/router/storybook";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import { SeparatorDecorator } from "../SeparatorLayout";
 import { LinkCell } from "./LinkCell";
@@ -9,7 +9,7 @@ export default {
   component: LinkCell,
   decorators: [
     SeparatorDecorator,
-    CyberAppDecorator({ width: "wide" }),
+    CrosswingAppDecorator({ width: "wide" }),
     RouterDecorator,
   ],
   parameters: { layout: "centered" },

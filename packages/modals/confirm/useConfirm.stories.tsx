@@ -1,4 +1,4 @@
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import { ModalDecorator } from "../storybook/ModalDecorator";
 import {
@@ -9,7 +9,7 @@ import { useConfirm } from "./useConfirm";
 
 export default {
   component: useConfirm,
-  decorators: [CyberAppDecorator({ layout: "fullscreen" }), ModalDecorator],
+  decorators: [CrosswingAppDecorator({ layout: "fullscreen" }), ModalDecorator],
   parameters: { layout: "fullscreen" },
 };
 

@@ -1,4 +1,4 @@
-import { NavLayout } from "@cyber/router/navs";
+import { NavLayout } from "@crosswing/router/navs";
 import { useState } from "react";
 import { DateRange } from "./DateRange";
 

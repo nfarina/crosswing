@@ -1,7 +1,7 @@
-import { PopupChildProps, PopupView } from "@cyber/modals/popup";
-import { Link } from "@cyber/router/link";
-import { colors } from "@cyber/theme/colors";
-import { fonts } from "@cyber/theme/fonts";
+import { PopupChildProps, PopupView } from "@crosswing/modals/popup";
+import { Link } from "@crosswing/router/link";
+import { colors } from "@crosswing/theme/colors";
+import { fonts } from "@crosswing/theme/fonts";
 import {
   HTMLAttributes,
   ReactNode,

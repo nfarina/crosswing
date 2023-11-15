@@ -1,8 +1,8 @@
-import { AlertButton, AlertView } from "@cyber/modals/alert";
-import { Modal } from "@cyber/modals/context";
-import { useDialog } from "@cyber/modals/dialog";
-import { colors } from "@cyber/theme/colors";
-import { fonts } from "@cyber/theme/fonts";
+import { AlertButton, AlertView } from "@crosswing/modals/alert";
+import { Modal } from "@crosswing/modals/context";
+import { useDialog } from "@crosswing/modals/dialog";
+import { colors } from "@crosswing/theme/colors";
+import { fonts } from "@crosswing/theme/fonts";
 import { FormEvent, ReactNode, useState } from "react";
 import { styled } from "styled-components";
 import { StyledTextInput, TextInput } from "./TextInput";

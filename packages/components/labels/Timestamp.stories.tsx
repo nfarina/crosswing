@@ -1,6 +1,6 @@
-import { colors } from "@cyber/theme/colors";
-import { fonts } from "@cyber/theme/fonts";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { colors } from "@crosswing/theme/colors";
+import { fonts } from "@crosswing/theme/fonts";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { Meta } from "@storybook/react";
 import dayjs from "dayjs";
 import { styled } from "styled-components";
@@ -10,7 +10,7 @@ setTimestampUpdateInterval(500);
 
 export default {
   component: Timestamp,
-  decorators: [ContainerDecorator, CyberAppDecorator()],
+  decorators: [ContainerDecorator, CrosswingAppDecorator()],
   parameters: { layout: "centered" },
 } satisfies Meta<typeof Timestamp>;
 

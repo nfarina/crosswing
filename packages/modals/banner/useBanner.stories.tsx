@@ -1,5 +1,5 @@
-import { colors } from "@cyber/theme/colors";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { colors } from "@crosswing/theme/colors";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { ModalDecorator } from "../storybook/ModalDecorator";
 import {
   ModalStoryButton,
@@ -9,7 +9,7 @@ import { useBanner } from "./useBanner";
 
 export default {
   component: useBanner,
-  decorators: [CyberAppDecorator({ layout: "fullscreen" }), ModalDecorator],
+  decorators: [CrosswingAppDecorator({ layout: "fullscreen" }), ModalDecorator],
   parameters: { layout: "fullscreen" },
 };
 
@@ -22,7 +22,7 @@ export function Normal() {
 
   const sticky = useBanner(() => ({
     title: "New Version Available",
-    message: "Click to update to the latest version of Cyber.",
+    message: "Click to update to the latest version of Crosswing.",
     sticky: true,
     onClick: () => console.log("click"),
     onClose: () => console.log("close"),

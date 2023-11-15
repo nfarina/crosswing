@@ -1,10 +1,10 @@
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { useState } from "react";
 import { ToggleButton } from "./ToggleButton";
 
 export default {
   component: ToggleButton,
-  decorators: [CyberAppDecorator()],
+  decorators: [CrosswingAppDecorator()],
   parameters: { layout: "centered" },
 };
 

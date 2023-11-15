@@ -1,6 +1,6 @@
-import Attachment from "@cyber/icons/Attachment.svg?react";
-import { RouterDecorator } from "@cyber/router/storybook";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import Attachment from "@crosswing/icons/Attachment.svg?react";
+import { RouterDecorator } from "@crosswing/router/storybook";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { SeparatorDecorator } from "../SeparatorLayout";
 import { TextCell } from "./TextCell";
 
@@ -8,7 +8,7 @@ export default {
   component: TextCell,
   decorators: [
     SeparatorDecorator,
-    CyberAppDecorator({ width: "wide" }),
+    CrosswingAppDecorator({ width: "wide" }),
     RouterDecorator,
   ],
   parameters: { layout: "centered" },

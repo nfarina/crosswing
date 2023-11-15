@@ -1,5 +1,5 @@
-import { RouterDecorator } from "@cyber/router/storybook";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { RouterDecorator } from "@crosswing/router/storybook";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import { Meta } from "@storybook/react";
 import { Button } from "./Button";
@@ -8,7 +8,7 @@ import { LinkButton } from "./LinkButton";
 
 export default {
   component: ButtonGroup,
-  decorators: [CyberAppDecorator(), RouterDecorator],
+  decorators: [CrosswingAppDecorator(), RouterDecorator],
   parameters: { layout: "centered" },
 } satisfies Meta<typeof ButtonGroup>;
 

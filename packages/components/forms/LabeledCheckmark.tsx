@@ -1,6 +1,6 @@
-import Checkmark from "@cyber/icons/Checkmark.svg?react";
-import { colors } from "@cyber/theme/colors";
-import { fonts } from "@cyber/theme/fonts";
+import Checkmark from "@crosswing/icons/Checkmark.svg?react";
+import { colors } from "@crosswing/theme/colors";
+import { fonts } from "@crosswing/theme/fonts";
 import { HTMLAttributes, MouseEvent, ReactNode } from "react";
 import { styled } from "styled-components";
 

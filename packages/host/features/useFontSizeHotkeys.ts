@@ -1,5 +1,5 @@
-import { useHotkey } from "@cyber/hooks/useHotkey";
-import { useLocalStorage } from "@cyber/hooks/useLocalStorage";
+import { useHotkey } from "@crosswing/hooks/useHotkey";
+import { useLocalStorage } from "@crosswing/hooks/useLocalStorage";
 import { useLayoutEffect } from "react";
 
 interface FontSizePreset {

@@ -1,4 +1,4 @@
-import { useSheet } from "@cyber/modals/sheet";
+import { useSheet } from "@crosswing/modals/sheet";
 import { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
 import { Timestamp } from "../labels/Timestamp";

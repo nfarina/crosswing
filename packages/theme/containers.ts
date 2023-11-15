@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
-/** Top-level styles for a mobile app rendered with Cyber. */
-export const CyberRootStyle = createGlobalStyle`
+/** Top-level styles for a mobile app rendered with Crosswing. */
+export const CrosswingRootStyle = createGlobalStyle`
   html {
     height: 100%;
 
@@ -17,8 +17,8 @@ export const CyberRootStyle = createGlobalStyle`
     display: flex;
     flex-flow: column;
 
-    /* The main <div> you're rendering your Cyber app into. */
-    > #cyber-root {
+    /* The main <div> you're rendering your Crosswing app into. */
+    > #crosswing-root {
       flex-grow: 1;
       display: flex;
       flex-flow: column;
@@ -40,9 +40,9 @@ export const CyberRootStyle = createGlobalStyle`
  * When viewing the mobile app on a desktop browser, this will
  * "frame" it so the UI doesn't appear stretched.
  */
-export const CyberAppDesktopFrame = createGlobalStyle`
+export const CrosswingAppDesktopFrame = createGlobalStyle`
   @media (min-width: 500px) {
-    body > #cyber-root {
+    body > #crosswing-root {
       display: flex;
       flex-flow: column;
       align-items: center;
@@ -63,8 +63,8 @@ export const CyberAppDesktopFrame = createGlobalStyle`
   }
 `;
 
-/** Top-level styles for a desktop website rendered with Cyber. */
-export const CyberDesktopRootStyle = createGlobalStyle`
+/** Top-level styles for a desktop website rendered with Crosswing. */
+export const CrosswingDesktopRootStyle = createGlobalStyle`
   html {
     height: 100%;
 
@@ -81,8 +81,8 @@ export const CyberDesktopRootStyle = createGlobalStyle`
     flex-flow: column;
   }
 
-  /* The main <div> you're rendering your Cyber app into. */
-  body > #cyber-root {
+  /* The main <div> you're rendering your Crosswing app into. */
+  body > #crosswing-root {
     flex-grow: 1;
     display: flex;
     flex-flow: column;

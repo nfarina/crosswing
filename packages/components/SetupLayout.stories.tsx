@@ -1,10 +1,10 @@
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { Button } from "./Button";
 import { SetupLayout } from "./SetupLayout";
 
 export default {
   component: SetupLayout,
-  decorators: [CyberAppDecorator({ layout: "mobile" })],
+  decorators: [CrosswingAppDecorator({ layout: "mobile" })],
   parameters: { layout: "centered" },
 };
 

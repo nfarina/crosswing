@@ -1,6 +1,6 @@
-import { Link } from "@cyber/router/link";
-import { colors } from "@cyber/theme/colors";
-import { fonts } from "@cyber/theme/fonts";
+import { Link } from "@crosswing/router/link";
+import { colors } from "@crosswing/theme/colors";
+import { fonts } from "@crosswing/theme/fonts";
 import { HTMLAttributeAnchorTarget, ReactNode } from "react";
 import { styled } from "styled-components";
 

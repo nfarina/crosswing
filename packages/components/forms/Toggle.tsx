@@ -1,4 +1,4 @@
-import { ColorBuilder, colors } from "@cyber/theme/colors";
+import { ColorBuilder, colors } from "@crosswing/theme/colors";
 import {
   CSSProperties,
   HTMLAttributes,

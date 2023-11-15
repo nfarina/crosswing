@@ -1,6 +1,6 @@
-import { useHotkey } from "@cyber/hooks/useHotkey";
-import { useInterval } from "@cyber/hooks/useInterval";
-import { safeArea } from "@cyber/host/features/safeArea";
+import { useHotkey } from "@crosswing/hooks/useHotkey";
+import { useInterval } from "@crosswing/hooks/useInterval";
+import { safeArea } from "@crosswing/host/features/safeArea";
 import { ReactNode, useCallback, useRef } from "react";
 import { keyframes, styled } from "styled-components";
 import { Modal, useModal } from "../context/useModal";

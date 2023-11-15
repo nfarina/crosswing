@@ -1,5 +1,5 @@
-import { useHost } from "@cyber/host/context";
-import { Minutes } from "@cyber/shared/timespan";
+import { useHost } from "@crosswing/host/context";
+import { Minutes } from "@crosswing/shared/timespan";
 import {
   ReactElement,
   ReactNode,

@@ -1,8 +1,8 @@
-import { MockHostProvider } from "@cyber/host/mocks";
-import { NavLayout } from "@cyber/router/navs";
-import { RouterDecorator } from "@cyber/router/storybook";
-import { colors } from "@cyber/theme/colors";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { MockHostProvider } from "@crosswing/host/mocks";
+import { NavLayout } from "@crosswing/router/navs";
+import { RouterDecorator } from "@crosswing/router/storybook";
+import { colors } from "@crosswing/theme/colors";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { StoryObj } from "@storybook/react";
 import { ModalContextProvider } from "../context/ModalContextProvider";
 import { ModalDecorator } from "../storybook/ModalDecorator";
@@ -19,7 +19,7 @@ export default {
 export const Normal: StoryObj = {
   render: () => <SheetPresenter />,
   decorators: [
-    CyberAppDecorator({ layout: "mobile" }),
+    CrosswingAppDecorator({ layout: "mobile" }),
     ModalDecorator,
     RouterDecorator,
   ],
@@ -37,7 +37,7 @@ export const Sliding: StoryObj = {
     </MockHostProvider>
   ),
   decorators: [
-    CyberAppDecorator({ layout: "mobile" }),
+    CrosswingAppDecorator({ layout: "mobile" }),
     ModalDecorator,
     RouterDecorator,
   ],
@@ -54,7 +54,7 @@ export const Desktop: StoryObj = {
     layout: "fullscreen",
   },
   decorators: [
-    CyberAppDecorator({ layout: "fullscreen" }),
+    CrosswingAppDecorator({ layout: "fullscreen" }),
     ModalDecorator,
     RouterDecorator,
   ],

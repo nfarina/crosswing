@@ -1,8 +1,8 @@
 {
-  "name": "@cyber/router",
+  "name": "@crosswing/router",
   "type": "module",
   "version": "0.0.0",
-  "description": "Cyber router.",
+  "description": "Crosswing router.",
   "author": "nfarina@gmail.com",
   "exports": {
     ".": "./Router.tsx",
@@ -25,10 +25,10 @@
     "react-transition-group": "^4.4.5"
   },
   "peerDependencies": {
-    "@cyber/hooks": "workspace:*",
-    "@cyber/host": "workspace:*",
-    "@cyber/icons": "workspace:*",
-    "@cyber/theme": "workspace:*",
+    "@crosswing/hooks": "workspace:*",
+    "@crosswing/host": "workspace:*",
+    "@crosswing/icons": "workspace:*",
+    "@crosswing/theme": "workspace:*",
     "react": "^18.2.0",
     "styled-components": "^6.0.8"
   }

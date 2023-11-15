@@ -1,6 +1,6 @@
-import { useAsyncTask } from "@cyber/hooks/useAsyncTask";
-import { wait } from "@cyber/shared/wait";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { useAsyncTask } from "@crosswing/hooks/useAsyncTask";
+import { wait } from "@crosswing/shared/wait";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import { Meta } from "@storybook/react";
 import { useState } from "react";
@@ -8,7 +8,7 @@ import { Toggle } from "./Toggle";
 
 export default {
   component: Toggle,
-  decorators: [CyberAppDecorator()],
+  decorators: [CrosswingAppDecorator()],
   parameters: { layout: "centered" },
 } satisfies Meta<typeof Toggle>;
 

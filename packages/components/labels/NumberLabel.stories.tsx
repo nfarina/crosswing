@@ -1,10 +1,10 @@
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { Meta } from "@storybook/react";
 import { NumberLabel } from "./NumberLabel";
 
 export default {
   component: NumberLabel,
-  decorators: [CyberAppDecorator()],
+  decorators: [CrosswingAppDecorator()],
   parameters: { layout: "centered" },
 } satisfies Meta<typeof NumberLabel>;
 

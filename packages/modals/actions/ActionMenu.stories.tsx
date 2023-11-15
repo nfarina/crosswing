@@ -1,4 +1,4 @@
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import { Meta } from "@storybook/react";
 import { ActionMenu, ActionSeparator } from "./ActionMenu";
@@ -7,7 +7,7 @@ import { ActionContainer } from "./useActions";
 export default {
   component: ActionMenu,
   decorators: [
-    CyberAppDecorator({ layout: "mobile" }),
+    CrosswingAppDecorator({ layout: "mobile" }),
     ActionContainerDecorator,
   ],
   parameters: { layout: "centered" },

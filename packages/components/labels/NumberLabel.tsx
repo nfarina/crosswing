@@ -1,5 +1,5 @@
-import { FormatNumberOptions, formatNumber } from "@cyber/shared/numeric";
-import { fonts } from "@cyber/theme/fonts";
+import { FormatNumberOptions, formatNumber } from "@crosswing/shared/numeric";
+import { fonts } from "@crosswing/theme/fonts";
 import { HTMLAttributes } from "react";
 import { styled } from "styled-components";
 

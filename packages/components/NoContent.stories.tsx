@@ -1,11 +1,11 @@
-import { Link } from "@cyber/router/link";
-import { RouterDecorator } from "@cyber/router/storybook";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { Link } from "@crosswing/router/link";
+import { RouterDecorator } from "@crosswing/router/storybook";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { NoContent } from "./NoContent";
 
 export default {
   component: NoContent,
-  decorators: [CyberAppDecorator({ layout: "mobile" }), RouterDecorator],
+  decorators: [CrosswingAppDecorator({ layout: "mobile" }), RouterDecorator],
   parameters: { layout: "centered" },
 };
 

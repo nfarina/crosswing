@@ -1,6 +1,6 @@
-import { AlertButton, AlertView } from "@cyber/modals/alert";
-import { Modal } from "@cyber/modals/context";
-import { useDialog } from "@cyber/modals/dialog";
+import { AlertButton, AlertView } from "@crosswing/modals/alert";
+import { Modal } from "@crosswing/modals/context";
+import { useDialog } from "@crosswing/modals/dialog";
 import { ReactNode, useState } from "react";
 import { styled } from "styled-components";
 import { ProgressView } from "./ProgressView";

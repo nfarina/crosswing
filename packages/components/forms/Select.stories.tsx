@@ -1,10 +1,10 @@
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { Meta } from "@storybook/react";
 import { Select, SelectOption } from "./Select";
 
 export default {
   component: Select,
-  decorators: [CyberAppDecorator({ width: 200 })],
+  decorators: [CrosswingAppDecorator({ width: 200 })],
   parameters: { layout: "centered" },
 } satisfies Meta<typeof Select>;
 

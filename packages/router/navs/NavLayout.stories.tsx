@@ -1,7 +1,7 @@
-import { MockHostProvider } from "@cyber/host/mocks";
-import { colors } from "@cyber/theme/colors";
-import { fonts } from "@cyber/theme/fonts";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { MockHostProvider } from "@crosswing/host/mocks";
+import { colors } from "@crosswing/theme/colors";
+import { fonts } from "@crosswing/theme/fonts";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { styled } from "styled-components";
 import { RouterDecorator } from "../storybook/RouterDecorator";
 import { NavLayout } from "./NavLayout";
@@ -9,7 +9,7 @@ import { StyledNavTitleView } from "./NavTitleView";
 
 export default {
   component: NavLayout,
-  decorators: [RouterDecorator, CyberAppDecorator({ layout: "mobile" })],
+  decorators: [RouterDecorator, CrosswingAppDecorator({ layout: "mobile" })],
   parameters: { layout: "centered" },
 };
 

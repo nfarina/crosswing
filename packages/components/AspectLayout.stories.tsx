@@ -1,5 +1,5 @@
-import { colors } from "@cyber/theme/colors";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { colors } from "@crosswing/theme/colors";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { Meta } from "@storybook/react";
 import { useState } from "react";
 import { styled } from "styled-components";
@@ -7,7 +7,7 @@ import { AspectLayout, StyledAspectLayout } from "./AspectLayout";
 
 export default {
   component: AspectLayout,
-  decorators: [CyberAppDecorator()],
+  decorators: [CrosswingAppDecorator()],
   parameters: { layout: "centered" },
 } satisfies Meta<typeof AspectLayout>;
 

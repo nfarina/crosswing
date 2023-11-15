@@ -1,7 +1,7 @@
-import { useHost } from "@cyber/host/context";
-import PlaceholderIcon from "@cyber/icons/Placeholder.svg?react";
-import { colors } from "@cyber/theme/colors";
-import { fonts } from "@cyber/theme/fonts";
+import { useHost } from "@crosswing/host/context";
+import PlaceholderIcon from "@crosswing/icons/Placeholder.svg?react";
+import { colors } from "@crosswing/theme/colors";
+import { fonts } from "@crosswing/theme/fonts";
 import { MouseEvent, ReactElement, ReactNode } from "react";
 import { styled } from "styled-components";
 import { Link } from "../Link";

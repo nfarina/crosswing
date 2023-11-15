@@ -1,6 +1,6 @@
-import { useHotkey } from "@cyber/hooks/useHotkey";
-import { useSessionStorage } from "@cyber/hooks/useSessionStorage";
-import { colors } from "@cyber/theme/colors";
+import { useHotkey } from "@crosswing/hooks/useHotkey";
+import { useSessionStorage } from "@crosswing/hooks/useSessionStorage";
+import { colors } from "@crosswing/theme/colors";
 import { ReactElement, useLayoutEffect, useRef } from "react";
 import { styled } from "styled-components";
 

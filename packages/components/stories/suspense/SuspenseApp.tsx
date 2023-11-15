@@ -1,4 +1,4 @@
-import { Tab, Tabs } from "@cyber/router/tabs";
+import { Tab, Tabs } from "@crosswing/router/tabs";
 import { lazy } from "react";
 
 const NavsTab = lazy(() => import("./tabs/NavsTab.js"));

@@ -1,11 +1,11 @@
-import { RouterDecorator } from "@cyber/router/storybook";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { RouterDecorator } from "@crosswing/router/storybook";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { Meta } from "@storybook/react";
 import { LinkButton } from "./LinkButton";
 
 export default {
   component: LinkButton,
-  decorators: [CyberAppDecorator(), RouterDecorator],
+  decorators: [CrosswingAppDecorator(), RouterDecorator],
   parameters: { layout: "centered" },
 } satisfies Meta<typeof LinkButton>;
 

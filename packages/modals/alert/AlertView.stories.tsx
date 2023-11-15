@@ -1,8 +1,8 @@
-import { useAsyncTask } from "@cyber/hooks/useAsyncTask";
-import { wait } from "@cyber/shared/wait";
-import { colors } from "@cyber/theme/colors";
-import { fonts } from "@cyber/theme/fonts";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { useAsyncTask } from "@crosswing/hooks/useAsyncTask";
+import { wait } from "@crosswing/shared/wait";
+import { colors } from "@crosswing/theme/colors";
+import { fonts } from "@crosswing/theme/fonts";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import { Meta } from "@storybook/react";
 import { styled } from "styled-components";
@@ -12,7 +12,7 @@ import { AlertView } from "./AlertView";
 export default {
   component: AlertView,
   decorators: [
-    CyberAppDecorator({ layout: "fullscreen" }),
+    CrosswingAppDecorator({ layout: "fullscreen" }),
     DialogContainerDecorator,
   ],
   parameters: { layout: "fullscreen" },

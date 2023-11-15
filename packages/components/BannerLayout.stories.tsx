@@ -1,12 +1,12 @@
-import { useAsyncTask } from "@cyber/hooks/useAsyncTask";
-import { wait } from "@cyber/shared/wait";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { useAsyncTask } from "@crosswing/hooks/useAsyncTask";
+import { wait } from "@crosswing/shared/wait";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { BannerLayout } from "./BannerLayout";
 import { NoContent } from "./NoContent";
 
 export default {
   component: BannerLayout,
-  decorators: [CyberAppDecorator({ layout: "mobile" })],
+  decorators: [CrosswingAppDecorator({ layout: "mobile" })],
   parameters: { layout: "centered" },
 };
 

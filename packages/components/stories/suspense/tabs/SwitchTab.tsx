@@ -1,6 +1,6 @@
-import { Redirect } from "@cyber/router/redirect";
-import { Route, Switch } from "@cyber/router/switch";
-import { colors } from "@cyber/theme/colors";
+import { Redirect } from "@crosswing/router/redirect";
+import { Route, Switch } from "@crosswing/router/switch";
+import { colors } from "@crosswing/theme/colors";
 import { lazy } from "react";
 import { styled } from "styled-components";
 import { usePageTitle } from "../../../sites/SitePageTitle";

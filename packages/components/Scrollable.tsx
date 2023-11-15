@@ -1,4 +1,4 @@
-import { useHost } from "@cyber/host/context";
+import { useHost } from "@crosswing/host/context";
 import { HTMLAttributes, ReactElement } from "react";
 import { styled } from "styled-components";
 

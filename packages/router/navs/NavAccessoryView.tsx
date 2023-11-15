@@ -1,6 +1,6 @@
-import { AndroidBackButtonClassName } from "@cyber/host/context";
-import { colors } from "@cyber/theme/colors";
-import { fonts } from "@cyber/theme/fonts";
+import { AndroidBackButtonClassName } from "@crosswing/host/context";
+import { colors } from "@crosswing/theme/colors";
+import { fonts } from "@crosswing/theme/fonts";
 import { MouseEvent, ReactNode } from "react";
 import { styled } from "styled-components";
 import { Link } from "../Link";

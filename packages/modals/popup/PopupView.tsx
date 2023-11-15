@@ -1,4 +1,4 @@
-import { colors, shadows } from "@cyber/theme/colors";
+import { colors, shadows } from "@crosswing/theme/colors";
 import { CSSProperties, HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
 import { PopupChildProps } from "./usePopup";

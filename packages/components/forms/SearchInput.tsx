@@ -1,9 +1,9 @@
-import { useHotkey } from "@cyber/hooks/useHotkey";
-import { useHost } from "@cyber/host/context";
-import CloseCircle from "@cyber/icons/CloseCircle.svg?react";
-import Search from "@cyber/icons/Search.svg?react";
-import { colors } from "@cyber/theme/colors";
-import { fonts } from "@cyber/theme/fonts";
+import { useHotkey } from "@crosswing/hooks/useHotkey";
+import { useHost } from "@crosswing/host/context";
+import CloseCircle from "@crosswing/icons/CloseCircle.svg?react";
+import Search from "@crosswing/icons/Search.svg?react";
+import { colors } from "@crosswing/theme/colors";
+import { fonts } from "@crosswing/theme/fonts";
 import {
   ChangeEvent,
   InputHTMLAttributes,

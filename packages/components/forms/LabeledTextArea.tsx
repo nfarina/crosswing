@@ -1,5 +1,5 @@
-import { colors } from "@cyber/theme/colors";
-import { fonts } from "@cyber/theme/fonts";
+import { colors } from "@crosswing/theme/colors";
+import { fonts } from "@crosswing/theme/fonts";
 import { FocusEvent, useState } from "react";
 import { styled } from "styled-components";
 import { StyledTextArea, TextArea } from "./TextArea";

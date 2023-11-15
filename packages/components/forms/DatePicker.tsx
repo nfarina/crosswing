@@ -1,5 +1,5 @@
-import { safeArea } from "@cyber/host/features/safeArea";
-import { NavLayout } from "@cyber/router/navs";
+import { safeArea } from "@crosswing/host/features/safeArea";
+import { NavLayout } from "@crosswing/router/navs";
 import { ReactNode } from "react";
 import { styled } from "styled-components";
 import { Button, StyledButton } from "../Button";

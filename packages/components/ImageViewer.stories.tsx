@@ -1,10 +1,10 @@
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { ImageViewer } from "./ImageViewer";
 import SampleImage from "./SampleImage.jpg";
 
 export default {
   component: ImageViewer,
-  decorators: [CyberAppDecorator({ layout: "mobile" })],
+  decorators: [CrosswingAppDecorator({ layout: "mobile" })],
   parameters: { layout: "centered" },
 };
 

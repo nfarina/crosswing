@@ -1,4 +1,4 @@
-import { NavRoute, Navs } from "@cyber/router/navs";
+import { NavRoute, Navs } from "@crosswing/router/navs";
 import { lazy } from "react";
 
 const PageOne = lazy(() => import("../pages/PageOne.js"));

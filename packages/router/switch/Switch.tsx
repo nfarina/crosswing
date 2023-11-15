@@ -1,4 +1,4 @@
-import { flattenChildren } from "@cyber/hooks/flattenChildren";
+import { flattenChildren } from "@crosswing/hooks/flattenChildren";
 import Debug from "debug";
 import { isValidElement, ReactElement, ReactNode } from "react";
 import { RouterContext, useRouter } from "../context/RouterContext";

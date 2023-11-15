@@ -1,6 +1,6 @@
-import { colors } from "@cyber/theme/colors";
-import { fonts } from "@cyber/theme/fonts";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { colors } from "@crosswing/theme/colors";
+import { fonts } from "@crosswing/theme/fonts";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { useState } from "react";
 import { styled } from "styled-components";
 import { Router } from "../Router";
@@ -9,7 +9,7 @@ import { Tab, Tabs } from "./Tabs";
 
 export default {
   component: Tabs,
-  decorators: [CyberAppDecorator({ layout: "mobile" })],
+  decorators: [CrosswingAppDecorator({ layout: "mobile" })],
   parameters: { layout: "centered" },
 };
 

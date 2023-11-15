@@ -1,6 +1,6 @@
-import { ModalDecorator } from "@cyber/modals/storybook";
-import { Days } from "@cyber/shared/timespan";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { ModalDecorator } from "@crosswing/modals/storybook";
+import { Days } from "@crosswing/shared/timespan";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { Meta } from "@storybook/react";
 import { useState } from "react";
 import { SeparatorDecorator } from "../SeparatorLayout";
@@ -12,7 +12,7 @@ export default {
   decorators: [
     SeparatorDecorator,
     ModalDecorator,
-    CyberAppDecorator({ layout: "mobile" }),
+    CrosswingAppDecorator({ layout: "mobile" }),
   ],
   parameters: { layout: "centered" },
 } satisfies Meta<typeof LabeledDateRangeInput>;

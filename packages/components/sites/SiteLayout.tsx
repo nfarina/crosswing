@@ -1,9 +1,9 @@
-import { flattenChildren } from "@cyber/hooks/flattenChildren";
-import { useMatchMedia } from "@cyber/hooks/useMatchMedia";
-import MenuIcon from "@cyber/icons/Menu.svg?react";
-import { Redirect } from "@cyber/router/redirect";
-import { Route, Switch } from "@cyber/router/switch";
-import { colors } from "@cyber/theme/colors";
+import { flattenChildren } from "@crosswing/hooks/flattenChildren";
+import { useMatchMedia } from "@crosswing/hooks/useMatchMedia";
+import MenuIcon from "@crosswing/icons/Menu.svg?react";
+import { Redirect } from "@crosswing/router/redirect";
+import { Route, Switch } from "@crosswing/router/switch";
+import { colors } from "@crosswing/theme/colors";
 import {
   Fragment,
   ReactElement,

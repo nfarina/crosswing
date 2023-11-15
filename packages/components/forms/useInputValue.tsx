@@ -1,4 +1,4 @@
-import { useResettableState } from "@cyber/hooks/useResettableState";
+import { useResettableState } from "@crosswing/hooks/useResettableState";
 import { DependencyList, useState } from "react";
 import { TextArea } from "./TextArea";
 import { TextInput } from "./TextInput";

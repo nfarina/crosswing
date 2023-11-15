@@ -1,4 +1,4 @@
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import dayjs from "dayjs";
 import { useState } from "react";
 import { styled } from "styled-components";
@@ -12,7 +12,7 @@ import {
 
 export default {
   component: CalendarView,
-  decorators: [CyberAppDecorator({ layout: "mobile" })],
+  decorators: [CrosswingAppDecorator({ layout: "mobile" })],
   parameters: { layout: "centered" },
 };
 

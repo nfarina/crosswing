@@ -1,22 +1,22 @@
-import { Button } from "@cyber/components/Button";
-import { MobileAppFrame } from "@cyber/components/desktop/MobileAppFrame";
-import { MockHostProvider } from "@cyber/host/mocks";
-import { useAlert } from "@cyber/modals/alert";
-import { ModalRootProvider } from "@cyber/modals/context";
-import { CyberApp } from "@cyber/theme/app";
+import { Button } from "@crosswing/components/Button";
+import { MobileAppFrame } from "@crosswing/components/desktop/MobileAppFrame";
+import { MockHostProvider } from "@crosswing/host/mocks";
+import { useAlert } from "@crosswing/modals/alert";
+import { ModalRootProvider } from "@crosswing/modals/context";
+import { CrosswingApp } from "@crosswing/theme/app";
 import { styled } from "styled-components";
 import Favicon from "./Favicon.svg?react";
 
 export function App() {
   return (
     <MockHostProvider container="ios">
-      <CyberApp>
+      <CrosswingApp>
         <ModalRootProvider>
           <MobileAppFrame restorationKey={App}>
             <AppContent />
           </MobileAppFrame>
         </ModalRootProvider>
-      </CyberApp>
+      </CrosswingApp>
     </MockHostProvider>
   );
 }

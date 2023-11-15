@@ -1,5 +1,5 @@
-import { useResettableState } from "@cyber/hooks/useResettableState";
-import { deepEqual } from "@cyber/shared/compare";
+import { useResettableState } from "@crosswing/hooks/useResettableState";
+import { deepEqual } from "@crosswing/shared/compare";
 import { DependencyList } from "react";
 
 export interface ObjectValue<T> {

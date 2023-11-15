@@ -1,4 +1,4 @@
-import { colors } from "@cyber/theme/colors";
+import { colors } from "@crosswing/theme/colors";
 import { CSSProperties, HTMLAttributes, useRef, useState } from "react";
 import { styled } from "styled-components";
 

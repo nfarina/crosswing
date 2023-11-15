@@ -1,7 +1,7 @@
-import AddSmall from "@cyber/icons/AddSmall.svg?react";
-import DotDotDot from "@cyber/icons/DotDotDot.svg?react";
-import { colors } from "@cyber/theme/colors";
-import { fonts } from "@cyber/theme/fonts";
+import AddSmall from "@crosswing/icons/AddSmall.svg?react";
+import DotDotDot from "@crosswing/icons/DotDotDot.svg?react";
+import { colors } from "@crosswing/theme/colors";
+import { fonts } from "@crosswing/theme/fonts";
 import {
   CSSProperties,
   HTMLAttributes,

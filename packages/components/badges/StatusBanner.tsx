@@ -1,4 +1,4 @@
-import { fonts } from "@cyber/theme/fonts";
+import { fonts } from "@crosswing/theme/fonts";
 import { ReactNode } from "react";
 import { styled } from "styled-components";
 import { Button } from "../Button";

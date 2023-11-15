@@ -1,5 +1,5 @@
-import { UnreadBadge } from "@cyber/router/tabs";
-import { colors } from "@cyber/theme/colors";
+import { UnreadBadge } from "@crosswing/router/tabs";
+import { colors } from "@crosswing/theme/colors";
 import { HTMLAttributes, MouseEvent, ReactNode } from "react";
 import { styled } from "styled-components";
 import { Clickable } from "../Clickable";

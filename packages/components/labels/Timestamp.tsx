@@ -1,4 +1,4 @@
-import { capitalize } from "@cyber/shared/strings";
+import { capitalize } from "@crosswing/shared/strings";
 import dayjs from "dayjs";
 import calendar from "dayjs/plugin/calendar.js";
 import timezone from "dayjs/plugin/timezone.js";

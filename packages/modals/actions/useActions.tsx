@@ -1,6 +1,9 @@
-import { HotKeyContextDataAttributes, useHotkey } from "@cyber/hooks/useHotkey";
-import { safeArea } from "@cyber/host/features/safeArea";
-import { easing } from "@cyber/theme/easing";
+import {
+  HotKeyContextDataAttributes,
+  useHotkey,
+} from "@crosswing/hooks/useHotkey";
+import { safeArea } from "@crosswing/host/features/safeArea";
+import { easing } from "@crosswing/theme/easing";
 import { ReactElement, useCallback, useRef } from "react";
 import { keyframes, styled } from "styled-components";
 import { Modal, useModal } from "../context/useModal";

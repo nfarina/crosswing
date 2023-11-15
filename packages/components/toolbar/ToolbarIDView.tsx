@@ -1,8 +1,8 @@
-import { useElementSize } from "@cyber/hooks/useElementSize";
-import Copy from "@cyber/icons/Copy.svg?react";
-import { useBanner } from "@cyber/modals/banner";
-import { colors } from "@cyber/theme/colors";
-import { fonts } from "@cyber/theme/fonts";
+import { useElementSize } from "@crosswing/hooks/useElementSize";
+import Copy from "@crosswing/icons/Copy.svg?react";
+import { useBanner } from "@crosswing/modals/banner";
+import { colors } from "@crosswing/theme/colors";
+import { fonts } from "@crosswing/theme/fonts";
 import { useRef } from "react";
 import { styled } from "styled-components";
 import { Clickable } from "../Clickable";

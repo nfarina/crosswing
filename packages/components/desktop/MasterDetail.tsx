@@ -1,5 +1,5 @@
-import { useRouter } from "@cyber/router/context";
-import { colors } from "@cyber/theme/colors";
+import { useRouter } from "@crosswing/router/context";
+import { colors } from "@crosswing/theme/colors";
 import { CSSProperties, ReactNode } from "react";
 import { styled } from "styled-components";
 

@@ -1,11 +1,11 @@
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import { Meta } from "@storybook/react";
 import { BannerView } from "../banner/BannerView";
 
 export default {
   component: BannerView,
-  decorators: [CyberAppDecorator({ layout: "centered" })],
+  decorators: [CrosswingAppDecorator({ layout: "centered" })],
   parameters: { layout: "centered" },
 } satisfies Meta<typeof BannerView>;
 

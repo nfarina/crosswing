@@ -1,8 +1,8 @@
-import Globe from "@cyber/icons/Globe.svg?react";
-import { Router } from "@cyber/router";
-import { MemoryHistory } from "@cyber/router/history/memory";
-import { colors } from "@cyber/theme/colors";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import Globe from "@crosswing/icons/Globe.svg?react";
+import { Router } from "@crosswing/router";
+import { MemoryHistory } from "@crosswing/router/history/memory";
+import { colors } from "@crosswing/theme/colors";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { Meta } from "@storybook/react";
 import { useState } from "react";
 import { styled } from "styled-components";
@@ -10,7 +10,7 @@ import { SiteSidebar, SiteSidebarArea, SiteSidebarLink } from "./SiteSidebar";
 
 export default {
   component: SiteSidebar,
-  decorators: [CyberAppDecorator()],
+  decorators: [CrosswingAppDecorator()],
   parameters: { layout: "centered" },
 } satisfies Meta<typeof SiteSidebar>;
 

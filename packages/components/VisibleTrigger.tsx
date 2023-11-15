@@ -1,4 +1,4 @@
-import { useVisibleOnScreen } from "@cyber/hooks/useVisibleOnScreen";
+import { useVisibleOnScreen } from "@crosswing/hooks/useVisibleOnScreen";
 import { useEffect, useRef } from "react";
 
 /**

@@ -1,6 +1,6 @@
-import { useRouter } from "@cyber/router/context";
-import { colors } from "@cyber/theme/colors";
-import { fonts } from "@cyber/theme/fonts";
+import { useRouter } from "@crosswing/router/context";
+import { colors } from "@crosswing/theme/colors";
+import { fonts } from "@crosswing/theme/fonts";
 import {
   cloneElement,
   HTMLAttributes,

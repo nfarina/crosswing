@@ -1,11 +1,11 @@
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import { SeparatorDecorator } from "../SeparatorLayout";
 import { LabeledCheckmark } from "./LabeledCheckmark";
 
 export default {
   component: LabeledCheckmark,
-  decorators: [SeparatorDecorator, CyberAppDecorator({ width: "wide" })],
+  decorators: [SeparatorDecorator, CrosswingAppDecorator({ width: "wide" })],
   parameters: { layout: "centered" },
 };
 

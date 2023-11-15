@@ -1,5 +1,5 @@
-import { colors } from "@cyber/theme/colors";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { colors } from "@crosswing/theme/colors";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import { Meta, StoryFn } from "@storybook/react";
 import { styled } from "styled-components";
@@ -9,7 +9,7 @@ import { TextCell } from "./TextCell";
 
 export default {
   component: FileInput,
-  decorators: [SeparatorDecorator, CyberAppDecorator({ width: "wide" })],
+  decorators: [SeparatorDecorator, CrosswingAppDecorator({ width: "wide" })],
   parameters: { layout: "centered" },
 } satisfies Meta<typeof FileInput>;
 

@@ -12,7 +12,7 @@ export function SiteHeader({
 }: {
   /**
    * Used for the DOM document title, prepending with the current page if using
-   * usePageTitle(). Example: "Cyber Admin" or "Users | Cyber Admin"
+   * usePageTitle(). Example: "Crosswing Admin" or "Users | Crosswing Admin"
    */
   siteTitle: string;
   accessories?: SiteHeaderAccessory[] | null;

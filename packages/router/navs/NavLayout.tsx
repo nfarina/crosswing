@@ -1,8 +1,8 @@
-import { useHost } from "@cyber/host/context";
-import { useHostStatusBar } from "@cyber/host/features/HostStatusBar";
-import { safeArea } from "@cyber/host/features/safeArea";
-import Back from "@cyber/icons/Back.svg?react";
-import { colors } from "@cyber/theme/colors";
+import { useHost } from "@crosswing/host/context";
+import { useHostStatusBar } from "@crosswing/host/features/HostStatusBar";
+import { safeArea } from "@crosswing/host/features/safeArea";
+import Back from "@crosswing/icons/Back.svg?react";
+import { colors } from "@crosswing/theme/colors";
 import { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
 import { useRouter } from "../context/RouterContext";

@@ -1,8 +1,8 @@
 {
-  "name": "@cyber/hooks",
+  "name": "@crosswing/hooks",
   "type": "module",
   "version": "0.0.0",
-  "description": "Useful React Hooks, many used internally by Cyber.",
+  "description": "Useful React Hooks, many used internally by Crosswing.",
   "author": "nfarina@gmail.com",
   "exports": {
     "./*": "./*.ts"

@@ -1,6 +1,6 @@
-import { useHost } from "@cyber/host/context";
-import { safeArea } from "@cyber/host/features/safeArea";
-import { colors } from "@cyber/theme/colors";
+import { useHost } from "@crosswing/host/context";
+import { safeArea } from "@crosswing/host/features/safeArea";
+import { colors } from "@crosswing/theme/colors";
 import {
   ReactElement,
   ReactNode,

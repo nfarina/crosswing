@@ -1,7 +1,7 @@
-import { useGesture } from "@cyber/hooks/useGesture";
-import { useHost } from "@cyber/host/context";
-import { colors } from "@cyber/theme/colors";
-import { easing } from "@cyber/theme/easing";
+import { useGesture } from "@crosswing/hooks/useGesture";
+import { useHost } from "@crosswing/host/context";
+import { colors } from "@crosswing/theme/colors";
+import { easing } from "@crosswing/theme/easing";
 import { ReactElement, RefObject } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { styled } from "styled-components";

@@ -1,11 +1,11 @@
-import { useResettableState } from "@cyber/hooks/useResettableState";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { useResettableState } from "@crosswing/hooks/useResettableState";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import { Slider } from "./Slider";
 
 export default {
   component: Slider,
-  decorators: [CyberAppDecorator()],
+  decorators: [CrosswingAppDecorator()],
   parameters: { layout: "centered" },
   argTypes: {
     value: {

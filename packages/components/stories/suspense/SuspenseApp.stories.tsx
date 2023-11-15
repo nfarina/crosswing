@@ -1,7 +1,7 @@
-import { MockHostProvider } from "@cyber/host/mocks";
-import { ModalRootProvider } from "@cyber/modals/context";
-import { BrowserSimulator } from "@cyber/router/storybook";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { MockHostProvider } from "@crosswing/host/mocks";
+import { ModalRootProvider } from "@crosswing/modals/context";
+import { BrowserSimulator } from "@crosswing/router/storybook";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { Meta } from "@storybook/react";
 import { PageTitleProvider } from "../../sites/SitePageTitle";
 import { SuspenseApp, SuspenseNavs, SuspenseSwitch } from "./SuspenseApp";
@@ -9,7 +9,7 @@ import { SuspenseApp, SuspenseNavs, SuspenseSwitch } from "./SuspenseApp";
 export default {
   component: SuspenseApp,
   decorators: [
-    CyberAppDecorator({ layout: "mobile" }),
+    CrosswingAppDecorator({ layout: "mobile" }),
     (
       Story, // Simulate an ios container for nice transitions that help visualize the
     ) => (

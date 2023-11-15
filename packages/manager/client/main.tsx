@@ -1,12 +1,12 @@
-import { CyberRootStyle } from "@cyber/theme/containers";
+import { CrosswingRootStyle } from "@crosswing/theme/containers";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { Manager } from "./Manager";
 
-const root = createRoot(document.getElementById("cyber-root")!);
+const root = createRoot(document.getElementById("crosswing-root")!);
 root.render(
   <StrictMode>
-    <CyberRootStyle />
+    <CrosswingRootStyle />
     <Manager />
   </StrictMode>,
 );

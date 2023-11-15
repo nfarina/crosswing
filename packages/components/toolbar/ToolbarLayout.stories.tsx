@@ -1,8 +1,8 @@
-import { useAsyncTask } from "@cyber/hooks/useAsyncTask";
-import { RouterDecorator } from "@cyber/router/storybook";
-import { wait } from "@cyber/shared/wait";
-import { colors } from "@cyber/theme/colors";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { useAsyncTask } from "@crosswing/hooks/useAsyncTask";
+import { RouterDecorator } from "@crosswing/router/storybook";
+import { wait } from "@crosswing/shared/wait";
+import { colors } from "@crosswing/theme/colors";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import { Meta } from "@storybook/react";
 import { useState } from "react";
@@ -27,7 +27,7 @@ export default {
   component: ToolbarLayout,
   decorators: [
     (Story) => <Container children={<Story />} />,
-    CyberAppDecorator({ width: 500, height: 400 }),
+    CrosswingAppDecorator({ width: 500, height: 400 }),
     RouterDecorator,
   ],
   parameters: { layout: "centered" },

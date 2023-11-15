@@ -1,6 +1,6 @@
-import { useRouter } from "@cyber/router/context";
-import { NavLayout } from "@cyber/router/navs";
-import { colors } from "@cyber/theme/colors";
+import { useRouter } from "@crosswing/router/context";
+import { NavLayout } from "@crosswing/router/navs";
+import { colors } from "@crosswing/theme/colors";
 import { lazy } from "react";
 import { styled } from "styled-components";
 import { TabbedButton, TabbedButtonLayout } from "../../../TabbedButtonLayout";

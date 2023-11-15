@@ -1,11 +1,11 @@
-import { RouterDecorator } from "@cyber/router/storybook";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { RouterDecorator } from "@crosswing/router/storybook";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { Notice } from "./Notice";
 import { SeparatorLayout } from "./SeparatorLayout";
 
 export default {
   component: Notice,
-  decorators: [CyberAppDecorator({ layout: "mobile" }), RouterDecorator],
+  decorators: [CrosswingAppDecorator({ layout: "mobile" }), RouterDecorator],
   parameters: { layout: "centered" },
 };
 

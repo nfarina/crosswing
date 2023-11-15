@@ -1,5 +1,5 @@
-import { safeArea } from "@cyber/host/features/safeArea";
-import { colors } from "@cyber/theme/colors";
+import { safeArea } from "@crosswing/host/features/safeArea";
+import { colors } from "@crosswing/theme/colors";
 import { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
 import { MobileLayout, StyledMobileLayout } from "./MobileLayout";

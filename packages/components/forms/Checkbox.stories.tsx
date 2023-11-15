@@ -1,11 +1,11 @@
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { Meta, StoryFn } from "@storybook/react";
 import { useState } from "react";
 import { Checkbox } from "./Checkbox";
 
 export default {
   component: Checkbox,
-  decorators: [CyberAppDecorator()],
+  decorators: [CrosswingAppDecorator()],
   parameters: { layout: "centered" },
   argTypes: {
     checked: { control: "boolean" },

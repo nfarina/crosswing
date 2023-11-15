@@ -1,7 +1,7 @@
-import { usePopup } from "@cyber/modals/popup";
-import { ModalDecorator } from "@cyber/modals/storybook";
-import { RouterDecorator } from "@cyber/router/storybook";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { usePopup } from "@crosswing/modals/popup";
+import { ModalDecorator } from "@crosswing/modals/storybook";
+import { RouterDecorator } from "@crosswing/router/storybook";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import { Meta, StoryObj } from "@storybook/react";
 import { styled } from "styled-components";
@@ -18,7 +18,7 @@ import { SelectOption } from "./forms/Select";
 
 export default {
   component: PopupMenu,
-  decorators: [CyberAppDecorator(), RouterDecorator, ModalDecorator],
+  decorators: [CrosswingAppDecorator(), RouterDecorator, ModalDecorator],
   parameters: { layout: "centered" },
 } satisfies Meta<typeof PopupMenu>;
 
@@ -117,7 +117,7 @@ export const Dynamic: StoryObj = {
     );
   },
   decorators: [
-    CyberAppDecorator({ layout: "fullscreen" }),
+    CrosswingAppDecorator({ layout: "fullscreen" }),
     RouterDecorator,
     ModalDecorator,
   ],

@@ -1,21 +1,21 @@
 import { Meta } from "@storybook/react";
-import { CyberApp } from "./app";
+import { CrosswingApp } from "./app";
 import { ColorView } from "./colors/ColorView";
 import { colors } from "./colors/colors";
-import { CyberAppDecorator } from "./storybook";
+import { CrosswingAppDecorator } from "./storybook";
 
 export default {
-  component: CyberApp,
+  component: CrosswingApp,
   parameters: { layout: "centered" },
-  decorators: [CyberAppDecorator({ layout: "centered" })],
-} satisfies Meta<typeof CyberApp>;
+  decorators: [CrosswingAppDecorator({ layout: "centered" })],
+} satisfies Meta<typeof CrosswingApp>;
 
 export const DefaultTheme = () => (
   <ColorView name="primary" color={colors.primaryGradient} />
 );
 
 export const CustomTheme = () => (
-  <CyberApp
+  <CrosswingApp
     colors={{
       primaryGradient: colors.primaryGradient.override({
         light: colors.orangeGradient(),
@@ -23,11 +23,11 @@ export const CustomTheme = () => (
     }}
   >
     <ColorView name="primary" color={colors.primaryGradient} />
-  </CyberApp>
+  </CrosswingApp>
 );
 
 export const NestedThemes = () => (
-  <CyberApp
+  <CrosswingApp
     colors={{
       primaryGradient: colors.primaryGradient.override({
         light: colors.purple(),
@@ -39,7 +39,7 @@ export const NestedThemes = () => (
       style={{ width: "80px", height: "80px" }}
       color={colors.primaryGradient}
     >
-      <CyberApp
+      <CrosswingApp
         transparent
         colors={{
           primaryGradient: colors.primaryGradient.override({
@@ -52,7 +52,7 @@ export const NestedThemes = () => (
           style={{ width: "30px", height: "30px" }}
           color={colors.primaryGradient}
         />
-      </CyberApp>
+      </CrosswingApp>
     </ColorView>
-  </CyberApp>
+  </CrosswingApp>
 );

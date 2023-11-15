@@ -1,5 +1,5 @@
-import DisclosureArrow from "@cyber/icons/DisclosureArrow.svg?react";
-import { colors } from "@cyber/theme/colors";
+import DisclosureArrow from "@crosswing/icons/DisclosureArrow.svg?react";
+import { colors } from "@crosswing/theme/colors";
 import { ButtonHTMLAttributes, CSSProperties } from "react";
 import { styled } from "styled-components";
 import { Clickable } from "./Clickable";

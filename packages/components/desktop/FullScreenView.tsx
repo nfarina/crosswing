@@ -1,10 +1,10 @@
-import { useHotkey } from "@cyber/hooks/useHotkey";
-import { useSessionStorage } from "@cyber/hooks/useSessionStorage";
-import Close from "@cyber/icons/Close.svg?react";
-import FullScreen from "@cyber/icons/FullScreen.svg?react";
-import { ModalContext } from "@cyber/modals/context";
-import { colors } from "@cyber/theme/colors";
-import { fonts } from "@cyber/theme/fonts";
+import { useHotkey } from "@crosswing/hooks/useHotkey";
+import { useSessionStorage } from "@crosswing/hooks/useSessionStorage";
+import Close from "@crosswing/icons/Close.svg?react";
+import FullScreen from "@crosswing/icons/FullScreen.svg?react";
+import { ModalContext } from "@crosswing/modals/context";
+import { colors } from "@crosswing/theme/colors";
+import { fonts } from "@crosswing/theme/fonts";
 import {
   createContext,
   ReactElement,

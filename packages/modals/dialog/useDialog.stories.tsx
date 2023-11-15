@@ -1,6 +1,6 @@
-import { colors } from "@cyber/theme/colors";
-import { fonts } from "@cyber/theme/fonts";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { colors } from "@crosswing/theme/colors";
+import { fonts } from "@crosswing/theme/fonts";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { useCallback, useState } from "react";
 import { styled } from "styled-components";
 import { ModalDecorator } from "../storybook/ModalDecorator";
@@ -12,7 +12,7 @@ import { useDialog } from "./useDialog";
 
 export default {
   component: useDialog,
-  decorators: [CyberAppDecorator({ layout: "fullscreen" }), ModalDecorator],
+  decorators: [CrosswingAppDecorator({ layout: "fullscreen" }), ModalDecorator],
   parameters: { layout: "fullscreen" },
 };
 

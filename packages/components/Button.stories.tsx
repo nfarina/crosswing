@@ -1,6 +1,6 @@
-import Close from "@cyber/icons/Close.svg?react";
-import Warning from "@cyber/icons/Warning.svg?react";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import Close from "@crosswing/icons/Close.svg?react";
+import Warning from "@crosswing/icons/Warning.svg?react";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import { Meta, StoryFn } from "@storybook/react";
 import { useState } from "react";
@@ -8,7 +8,7 @@ import { Button } from "./Button";
 
 export default {
   component: Button,
-  decorators: [CyberAppDecorator()],
+  decorators: [CrosswingAppDecorator()],
   parameters: { layout: "centered" },
 } satisfies Meta<typeof Button>;
 

@@ -9,7 +9,7 @@ export {
   type ColorBuilder,
 } from "./builders";
 
-// Default Cyber colors.
+// Default Crosswing colors.
 // Isomorphic.
 
 /** A set of neutral-toned colors used by shared components. */

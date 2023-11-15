@@ -1,6 +1,6 @@
-import { colors } from "@cyber/theme/colors";
-import { easing } from "@cyber/theme/easing";
-import { fonts } from "@cyber/theme/fonts";
+import { colors } from "@crosswing/theme/colors";
+import { easing } from "@crosswing/theme/easing";
+import { fonts } from "@crosswing/theme/fonts";
 import { keyframes, styled } from "styled-components";
 
 /**

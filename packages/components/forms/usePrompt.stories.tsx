@@ -1,6 +1,6 @@
-import { ModalDecorator } from "@cyber/modals/storybook";
-import { colors } from "@cyber/theme/colors";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { ModalDecorator } from "@crosswing/modals/storybook";
+import { colors } from "@crosswing/theme/colors";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import { styled } from "styled-components";
 import { Button } from "../Button";
@@ -9,7 +9,7 @@ import { usePrompt } from "./usePrompt";
 
 export default {
   component: usePrompt,
-  decorators: [CyberAppDecorator({ layout: "fullscreen" }), ModalDecorator],
+  decorators: [CrosswingAppDecorator({ layout: "fullscreen" }), ModalDecorator],
   parameters: { layout: "fullscreen" },
 };
 

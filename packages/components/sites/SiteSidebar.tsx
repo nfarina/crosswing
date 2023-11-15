@@ -1,11 +1,11 @@
-import { flattenChildren } from "@cyber/hooks/flattenChildren";
-import CyberLogoIcon from "@cyber/icons/CyberLogo.svg?react";
-import PlaceholderIcon from "@cyber/icons/Placeholder.svg?react";
-import { useRouter } from "@cyber/router/context";
-import { Link } from "@cyber/router/link";
-import { UnreadBadge } from "@cyber/router/tabs";
-import { colors, HexColorBuilder } from "@cyber/theme/colors";
-import { fonts } from "@cyber/theme/fonts";
+import { flattenChildren } from "@crosswing/hooks/flattenChildren";
+import CrosswingLogoIcon from "@crosswing/icons/CrosswingLogo.svg?react";
+import PlaceholderIcon from "@crosswing/icons/Placeholder.svg?react";
+import { useRouter } from "@crosswing/router/context";
+import { Link } from "@crosswing/router/link";
+import { UnreadBadge } from "@crosswing/router/tabs";
+import { colors, HexColorBuilder } from "@crosswing/theme/colors";
+import { fonts } from "@crosswing/theme/fonts";
 import {
   CSSProperties,
   Fragment,
@@ -37,7 +37,7 @@ export type SiteSidebarLinkProps = {
 };
 
 export function SiteSidebar({
-  logo = <CyberLogoIcon style={{ width: "50px", height: "50px" }} />,
+  logo = <CrosswingLogoIcon style={{ width: "50px", height: "50px" }} />,
   tint = colors.orange,
   accessories,
   children,

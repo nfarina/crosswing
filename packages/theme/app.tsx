@@ -2,9 +2,9 @@ import { HTMLAttributes } from "react";
 import { styled } from "styled-components";
 import { getBuilderVarCss } from "./colors/builders";
 import { ColorBuilder, colors, shadows } from "./colors/colors";
-import { CyberFontStyle, fonts } from "./fonts/fonts";
+import { CrosswingFontStyle, fonts } from "./fonts/fonts";
 
-export function CyberApp({
+export function CrosswingApp({
   colors: overriddenColors,
   children,
   transparent,
@@ -20,18 +20,18 @@ export function CyberApp({
   ];
 
   return (
-    <StyledCyberApp
+    <StyledCrosswingApp
       $colors={resolvedColors}
       data-transparent={!!transparent}
       {...rest}
     >
-      <CyberFontStyle />
+      <CrosswingFontStyle />
       {children}
-    </StyledCyberApp>
+    </StyledCrosswingApp>
   );
 }
 
-export const StyledCyberApp = styled.div<{
+export const StyledCrosswingApp = styled.div<{
   $colors: ColorBuilder[];
 }>`
   /* I try hard to avoid props in styled-components but this is the only

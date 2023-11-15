@@ -1,4 +1,4 @@
-import { ColorBuilder } from "@cyber/theme/colors";
+import { ColorBuilder } from "@crosswing/theme/colors";
 import { CSSProperties, ReactElement, SVGAttributes } from "react";
 import { styled } from "styled-components";
 

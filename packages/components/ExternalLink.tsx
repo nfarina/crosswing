@@ -1,5 +1,5 @@
-import { useHost } from "@cyber/host/context";
-import { colors } from "@cyber/theme/colors";
+import { useHost } from "@crosswing/host/context";
+import { colors } from "@crosswing/theme/colors";
 import { HTMLAttributes, MouseEvent, ReactNode } from "react";
 import { styled } from "styled-components";
 

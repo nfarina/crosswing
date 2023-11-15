@@ -1,11 +1,11 @@
-import { usePropSequence } from "@cyber/hooks/usePropSequence";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { usePropSequence } from "@crosswing/hooks/usePropSequence";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { Meta } from "@storybook/react";
 import { ProgressView } from "./ProgressView";
 
 export default {
   component: ProgressView,
-  decorators: [CyberAppDecorator()],
+  decorators: [CrosswingAppDecorator()],
   parameters: { layout: "centered" },
 } satisfies Meta<typeof ProgressView>;
 

@@ -1,4 +1,4 @@
-import { deepEqual } from "@cyber/shared/compare";
+import { deepEqual } from "@crosswing/shared/compare";
 import {
   ChangeEvent,
   Reducer,

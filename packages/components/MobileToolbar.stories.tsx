@@ -1,6 +1,6 @@
-import Browser from "@cyber/icons/Browser.svg?react";
-import Trash from "@cyber/icons/Trash.svg?react";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import Browser from "@crosswing/icons/Browser.svg?react";
+import Trash from "@crosswing/icons/Trash.svg?react";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import {
   MobileToolbar,
@@ -12,7 +12,7 @@ import { NoContent } from "./NoContent";
 
 export default {
   component: MobileToolbar,
-  decorators: [CyberAppDecorator({ layout: "mobile" })],
+  decorators: [CrosswingAppDecorator({ layout: "mobile" })],
   parameters: { layout: "centered" },
 };
 

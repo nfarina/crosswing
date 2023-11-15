@@ -1,4 +1,4 @@
-import { wait } from "@cyber/shared/wait";
+import { wait } from "@crosswing/shared/wait";
 import { NoContent } from "../../../NoContent";
 
 export default function DataTab() {

@@ -1,6 +1,6 @@
-import { BrowserSimulator } from "@cyber/router/storybook";
-import { capitalize } from "@cyber/shared/strings";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { BrowserSimulator } from "@crosswing/router/storybook";
+import { capitalize } from "@crosswing/shared/strings";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { styled } from "styled-components";
 import { LinkButton } from "../LinkButton";
 import CSSColors from "./CSSColors.json";
@@ -9,7 +9,7 @@ import { LinkListCell } from "./LinkListCell";
 
 export default {
   component: LinkList,
-  decorators: [CyberAppDecorator({ layout: "mobile" })],
+  decorators: [CrosswingAppDecorator({ layout: "mobile" })],
   parameters: { layout: "centered" },
 };
 

@@ -1,5 +1,5 @@
-import { ColorBuilder, colors } from "@cyber/theme/colors";
-import { easing } from "@cyber/theme/easing";
+import { ColorBuilder, colors } from "@crosswing/theme/colors";
+import { easing } from "@crosswing/theme/easing";
 import { HTMLAttributes } from "react";
 import { keyframes, styled } from "styled-components";
 import { Donut, StyledDonut } from "./Donut";

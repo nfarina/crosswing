@@ -9,7 +9,7 @@ import LatoBlack from "../fonts/lato/Lato-Black.ttf";
 import LatoBold from "../fonts/lato/Lato-Bold.ttf";
 import LatoRegular from "../fonts/lato/Lato-Regular.ttf";
 
-// TODO: make this overridable and defined at the CyberApp element level; not
+// TODO: make this overridable and defined at the CrosswingApp element level; not
 // the document level.
 
 export type FontBuilders = Record<string, FontBuilder>;
@@ -82,8 +82,8 @@ export function useFonts(fonts: FontBuilders) {
   }, []);
 }
 
-/** A React component that installs Cyber fonts automatically. */
-export function CyberFontStyle() {
+/** A React component that installs Crosswing fonts automatically. */
+export function CrosswingFontStyle() {
   useFonts(fonts);
   return null;
 }

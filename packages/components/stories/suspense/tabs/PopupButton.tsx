@@ -1,4 +1,4 @@
-import { usePopup } from "@cyber/modals/popup";
+import { usePopup } from "@crosswing/modals/popup";
 import { Button } from "../../../Button";
 import { PopupMenu, PopupMenuHeader, PopupMenuText } from "../../../PopupMenu";
 

@@ -1,4 +1,4 @@
-import { wait } from "@cyber/shared/wait";
+import { wait } from "@crosswing/shared/wait";
 import { BunFile, readableStreamToJSON } from "bun";
 import parseArgs from "minimist";
 import { dirname, resolve } from "path";
@@ -147,7 +147,7 @@ async function stopTask(name: string) {
 console.log(
   `
 =========================
-=== Cyber Dev Manager ===
+=== Crosswing Dev Manager ===
 =========================
 
 Visit http://localhost:${port} to start local development services.

@@ -1,13 +1,13 @@
-import { useAsyncTask } from "@cyber/hooks/useAsyncTask";
-import { useDebounced } from "@cyber/hooks/useDebounced";
-import { wait } from "@cyber/shared/wait";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { useAsyncTask } from "@crosswing/hooks/useAsyncTask";
+import { useDebounced } from "@crosswing/hooks/useDebounced";
+import { wait } from "@crosswing/shared/wait";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { useEffect, useState } from "react";
 import { SearchInput } from "./SearchInput";
 
 export default {
   component: SearchInput,
-  decorators: [CyberAppDecorator({ width: "wide" })],
+  decorators: [CrosswingAppDecorator({ width: "wide" })],
   parameters: { layout: "centered" },
 };
 

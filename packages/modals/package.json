@@ -1,8 +1,8 @@
 {
-  "name": "@cyber/modals",
+  "name": "@crosswing/modals",
   "type": "module",
   "version": "0.0.0",
-  "description": "Cyber modal UI.",
+  "description": "Crosswing modal UI.",
   "author": "nfarina@gmail.com",
   "exports": {
     "./actions": "./actions/useActions.tsx",
@@ -20,11 +20,11 @@
     "react-transition-group": "^4.4.5"
   },
   "peerDependencies": {
-    "@cyber/hooks": "workspace:*",
-    "@cyber/host": "workspace:*",
-    "@cyber/icons": "workspace:*",
-    "@cyber/router": "workspace:*",
-    "@cyber/theme": "workspace:*",
+    "@crosswing/hooks": "workspace:*",
+    "@crosswing/host": "workspace:*",
+    "@crosswing/icons": "workspace:*",
+    "@crosswing/router": "workspace:*",
+    "@crosswing/theme": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "styled-components": "^6.0.8"

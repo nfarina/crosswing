@@ -1,7 +1,7 @@
 {
   "client": {
     "title": "Manager Client",
-    "description": "Vite development server for the Cyber manager itself.",
+    "description": "Vite development server for the Crosswing manager itself.",
     "run": {
       "script": "dev"
     },

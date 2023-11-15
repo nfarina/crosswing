@@ -1,4 +1,4 @@
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import { useAlert } from "../alert/useAlert";
 import { ModalDecorator } from "../storybook/ModalDecorator";
@@ -9,7 +9,7 @@ import {
 
 export default {
   component: useAlert,
-  decorators: [CyberAppDecorator({ layout: "fullscreen" }), ModalDecorator],
+  decorators: [CrosswingAppDecorator({ layout: "fullscreen" }), ModalDecorator],
   parameters: { layout: "fullscreen" },
 };
 

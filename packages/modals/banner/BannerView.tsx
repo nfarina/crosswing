@@ -1,7 +1,7 @@
-import { useGesture } from "@cyber/hooks/useGesture";
-import Close from "@cyber/icons/Close.svg?react";
-import { colors, shadows } from "@cyber/theme/colors";
-import { fonts } from "@cyber/theme/fonts";
+import { useGesture } from "@crosswing/hooks/useGesture";
+import Close from "@crosswing/icons/Close.svg?react";
+import { colors, shadows } from "@crosswing/theme/colors";
+import { fonts } from "@crosswing/theme/fonts";
 import { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
 

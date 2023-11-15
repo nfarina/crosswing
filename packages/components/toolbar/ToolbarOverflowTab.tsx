@@ -1,8 +1,8 @@
-import { flattenChildren } from "@cyber/hooks/flattenChildren";
-import DownArrow from "@cyber/icons/DownArrow.svg?react";
-import { usePopup } from "@cyber/modals/popup";
-import { useRouter } from "@cyber/router/context";
-import { colors } from "@cyber/theme/colors";
+import { flattenChildren } from "@crosswing/hooks/flattenChildren";
+import DownArrow from "@crosswing/icons/DownArrow.svg?react";
+import { usePopup } from "@crosswing/modals/popup";
+import { useRouter } from "@crosswing/router/context";
+import { colors } from "@crosswing/theme/colors";
 import {
   isValidElement,
   MouseEvent,

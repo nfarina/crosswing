@@ -1,4 +1,4 @@
-import { Route, Switch } from "@cyber/router/switch";
+import { Route, Switch } from "@crosswing/router/switch";
 import { lazy } from "react";
 import { NoContent } from "../../../NoContent";
 import { usePageTitle } from "../../../sites/SitePageTitle";

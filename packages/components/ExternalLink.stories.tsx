@@ -1,14 +1,14 @@
-import { MockHostProvider } from "@cyber/host/mocks";
-import { colors } from "@cyber/theme/colors";
-import { fonts } from "@cyber/theme/fonts";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { MockHostProvider } from "@crosswing/host/mocks";
+import { colors } from "@crosswing/theme/colors";
+import { fonts } from "@crosswing/theme/fonts";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import { styled } from "styled-components";
 import { ExternalLink } from "./ExternalLink";
 
 export default {
   component: ExternalLink,
-  decorators: [CyberAppDecorator()],
+  decorators: [CrosswingAppDecorator()],
   parameters: { layout: "centered" },
 };
 

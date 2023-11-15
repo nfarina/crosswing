@@ -1,7 +1,7 @@
-import { useRouter } from "@cyber/router/context";
-import { BrowserSimulator, RouterDecorator } from "@cyber/router/storybook";
-import { wait } from "@cyber/shared/wait";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { useRouter } from "@crosswing/router/context";
+import { BrowserSimulator, RouterDecorator } from "@crosswing/router/storybook";
+import { wait } from "@crosswing/shared/wait";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import { Suspense, lazy, useState } from "react";
 import { LoadingCurtain } from "./LoadingCurtain";
@@ -10,7 +10,7 @@ import { TabbedButton, TabbedButtonLayout } from "./TabbedButtonLayout";
 
 export default {
   component: TabbedButtonLayout,
-  decorators: [CyberAppDecorator({ layout: "mobile" }), RouterDecorator],
+  decorators: [CrosswingAppDecorator({ layout: "mobile" }), RouterDecorator],
   parameters: { layout: "centered" },
 };
 

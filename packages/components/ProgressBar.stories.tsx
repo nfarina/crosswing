@@ -1,10 +1,10 @@
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { Meta, StoryObj } from "@storybook/react";
 import { ProgressBar } from "./ProgressBar";
 
 export default {
   component: ProgressBar,
-  decorators: [CyberAppDecorator({ width: "wide" })],
+  decorators: [CrosswingAppDecorator({ width: "wide" })],
   parameters: { layout: "centered" },
   argTypes: {
     value: {

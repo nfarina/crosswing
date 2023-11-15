@@ -1,8 +1,8 @@
 {
-  "name": "@cyber/theme",
+  "name": "@crosswing/theme",
   "type": "module",
   "version": "0.0.0",
-  "description": "Cyber colors and fonts.",
+  "description": "Crosswing colors and fonts.",
   "author": "nfarina@gmail.com",
   "exports": {
     "./colors": "./colors/colors.ts",

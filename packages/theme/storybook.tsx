@@ -1,13 +1,13 @@
 import { createGlobalStyle, styled } from "styled-components";
 import { getBuilderVarCss } from "./colors/builders";
 import { ColorBuilder, colors, shadows } from "./colors/colors";
-import { CyberFontStyle, fonts } from "./fonts/fonts";
+import { CrosswingFontStyle, fonts } from "./fonts/fonts";
 
 /**
- * Decorator that injects Cyber global styles into the storybook environment.
+ * Decorator that injects Crosswing global styles into the storybook environment.
  * Accepts optional parameters controlling the rendering behavior.
  */
-export function CyberAppDecorator({
+export function CrosswingAppDecorator({
   layout = "centered",
   width = undefined,
   height = undefined,
@@ -22,10 +22,10 @@ export function CyberAppDecorator({
   const builders = [...Object.values(colors), ...Object.values(shadows)];
 
   // Actual decorator function.
-  function CyberAppInnerDecorator(Story: () => any) {
+  function CrosswingAppInnerDecorator(Story: () => any) {
     return (
       <>
-        <CyberFontStyle />
+        <CrosswingFontStyle />
         {layout === "centered" && (
           <CenteredLayoutGlobalStyle $builders={builders} />
         )}
@@ -44,7 +44,7 @@ export function CyberAppDecorator({
     );
   }
 
-  return CyberAppInnerDecorator;
+  return CrosswingAppInnerDecorator;
 }
 
 const CenteredLayoutGlobalStyle = createGlobalStyle<{
@@ -184,7 +184,7 @@ const DefinedHeightGlobalStyle = createGlobalStyle<{ height: number }>`
 /**
  * A convenience decorator that centers your story inside a container with
  * some optional padding. Designed to be used with
- * CyberAppDecorator({layout: "mobile"}).
+ * CrosswingAppDecorator({layout: "mobile"}).
  */
 export function MobileComponentDecorator({
   padding = 0,

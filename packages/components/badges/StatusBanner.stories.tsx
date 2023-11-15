@@ -1,11 +1,11 @@
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import { Meta, StoryFn } from "@storybook/react";
 import { StatusBanner } from "./StatusBanner";
 
 export default {
   component: StatusBanner,
-  decorators: [Decorator, CyberAppDecorator()],
+  decorators: [Decorator, CrosswingAppDecorator()],
   parameters: { layout: "centered" },
 } satisfies Meta<typeof StatusBanner>;
 

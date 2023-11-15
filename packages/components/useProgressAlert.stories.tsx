@@ -1,14 +1,14 @@
-import { useAsyncTask } from "@cyber/hooks/useAsyncTask";
-import { useErrorAlert } from "@cyber/modals/alert/error";
-import { ModalDecorator } from "@cyber/modals/storybook";
-import { wait } from "@cyber/shared/wait";
-import { CyberAppDecorator } from "@cyber/theme/storybook";
+import { useAsyncTask } from "@crosswing/hooks/useAsyncTask";
+import { useErrorAlert } from "@crosswing/modals/alert/error";
+import { ModalDecorator } from "@crosswing/modals/storybook";
+import { wait } from "@crosswing/shared/wait";
+import { CrosswingAppDecorator } from "@crosswing/theme/storybook";
 import { action } from "@storybook/addon-actions";
 import { useProgressAlert } from "./useProgressAlert";
 
 export default {
   component: useProgressAlert,
-  decorators: [CyberAppDecorator({ layout: "mobile" }), ModalDecorator],
+  decorators: [CrosswingAppDecorator({ layout: "mobile" }), ModalDecorator],
   parameters: { layout: "centered" },
 };
 
