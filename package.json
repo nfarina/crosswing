@@ -11,7 +11,7 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "bun packages/manager/server/server.ts",
+    "dev": "packages/manager/bin/crosswing",
     "test-all": "bun prettier && bun circular && bun typecheck && bun test",
     "check-imports": "bunx npm-check",
     "prettier": "prettier --check 'packages/**/*.ts?(x)'",

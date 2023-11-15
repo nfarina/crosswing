@@ -1,7 +1,6 @@
 {
   "name": "@crosswing/manager",
   "type": "module",
-  "private": true,
   "version": "0.0.0",
   "description": "Crosswing example client app.",
   "author": "nfarina@gmail.com",
