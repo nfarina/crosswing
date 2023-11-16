@@ -1,4 +1,3 @@
-import { wait } from "@crosswing/shared/wait";
 import { BunFile, readableStreamToJSON } from "bun";
 import parseArgs from "minimist";
 import { dirname, resolve } from "path";
@@ -34,7 +33,7 @@ if (tasksJsonPath) {
 
   if (!(await tasksJsonFile.exists())) {
     console.error(
-      "Usage: bun server.ts <path to tasks.json>\n\n" +
+      "Usage: crosswing <path to tasks.json>\n\n" +
         "You can also run this script from the root of the project, " +
         "in which case it will look for tasks.json in the current directory " +
         `(which is ${process.cwd()})`,
@@ -179,3 +178,10 @@ process.once("SIGINT", async function (code: number) {
 
   process.exit();
 });
+
+// Copied from @crosswing/shared to avoid a dependency just for this.
+async function wait(ms: number = 0): Promise<void> {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}

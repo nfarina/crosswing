@@ -4,9 +4,6 @@
   "private": true,
   "version": "0.0.0",
   "author": "nfarina@gmail.com",
-  "bin": {
-    "crosswing": "./bin/crosswing"
-  },
   "workspaces": [
     "packages/*"
   ],

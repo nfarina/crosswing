@@ -1,15 +1,18 @@
 {
   "name": "@crosswing/manager",
   "type": "module",
-  "version": "0.0.0",
-  "description": "Crosswing example client app.",
+  "version": "0.0.3",
+  "description": "Crosswing development process manager.",
   "author": "nfarina@gmail.com",
+  "bin": {
+    "crosswing": "./bin/crosswing"
+  },
   "scripts": {
     "dev": "cd client; vite --port 2750",
     "serve": "bun server/server.ts",
     "build": "cd client; vite build",
-    "analyze": "cd client; vite-bundle-visualizer",
-    "prepublish": "cd client; vite build"
+    "analyze": "cd client; bunx vite-bundle-visualizer",
+    "prepack": "cd client; vite build"
   },
   "dependencies": {
     "minimist": "^1.2.8",
@@ -30,5 +33,11 @@
     "styled-components": "^6.0.8",
     "vite": "^4.4.9",
     "vite-plugin-svgr": "^4.0.0"
-  }
+  },
+  "files": [
+    "**/*.ts?(x)",
+    "bin/",
+    "!client/",
+    "client/dist"
+  ]
 }
