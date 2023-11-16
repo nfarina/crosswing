@@ -20,12 +20,12 @@
     "ps-tree": "^1.2.0"
   },
   "devDependencies": {
-    "@crosswing/hooks": "workspace:*",
-    "@crosswing/host": "workspace:*",
-    "@crosswing/icons": "workspace:*",
-    "@crosswing/modals": "workspace:*",
-    "@crosswing/router": "workspace:*",
-    "@crosswing/theme": "workspace:*",
+    "@crosswing/hooks": "^0.0.0",
+    "@crosswing/host": "^0.0.0",
+    "@crosswing/icons": "^0.0.0",
+    "@crosswing/modals": "^0.0.0",
+    "@crosswing/router": "^0.0.0",
+    "@crosswing/theme": "^0.0.0",
     "@vitejs/plugin-react": "^4.1.0",
     "babel-plugin-styled-components": "^2.1.4",
     "react": "^18.2.0",

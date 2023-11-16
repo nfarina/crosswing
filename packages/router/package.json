@@ -25,10 +25,10 @@
     "react-transition-group": "^4.4.5"
   },
   "peerDependencies": {
-    "@crosswing/hooks": "workspace:*",
-    "@crosswing/host": "workspace:*",
-    "@crosswing/icons": "workspace:*",
-    "@crosswing/theme": "workspace:*",
+    "@crosswing/hooks": "^0.0.0",
+    "@crosswing/host": "^0.0.0",
+    "@crosswing/icons": "^0.0.0",
+    "@crosswing/theme": "^0.0.0",
     "react": "^18.2.0",
     "styled-components": "^6.0.8"
   }

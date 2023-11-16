@@ -15,7 +15,7 @@
     "./util/useClipboard": "./util/useClipboard.ts"
   },
   "peerDependencies": {
-    "@crosswing/hooks": "workspace:*",
+    "@crosswing/hooks": "^0.0.0",
     "react": "^18.2.0",
     "styled-components": "^6.0.8"
   }
