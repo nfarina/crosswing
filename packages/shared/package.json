@@ -9,5 +9,9 @@
   },
   "dependencies": {
     "debug": "^4.3.4"
-  }
+  },
+  "files": [
+    "**/*.ts",
+    "!**/*.test.ts"
+  ]
 }
