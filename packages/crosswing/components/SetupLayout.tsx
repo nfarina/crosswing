@@ -1,8 +1,8 @@
 import { FormEvent, FormHTMLAttributes, ReactElement, ReactNode } from "react";
 import { styled } from "styled-components";
+import { colors } from "../colors/colors";
+import { fonts } from "../fonts/fonts";
 import { safeArea } from "../host/features/safeArea";
-import { colors } from "../theme/colors/colors";
-import { fonts } from "../theme/fonts/fonts";
 import { Scrollable, StyledScrollable } from "./Scrollable";
 import { StyledSeparatorLayout } from "./SeparatorLayout";
 import { FormValues } from "./forms/useFormValues";

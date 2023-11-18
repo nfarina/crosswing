@@ -1,4 +1,4 @@
-import { CrosswingAppDecorator } from "../theme/storybook";
+import { CrosswingAppDecorator } from "../storybook";
 import { ImageViewer } from "./ImageViewer";
 import SampleImage from "./SampleImage.jpg";
 

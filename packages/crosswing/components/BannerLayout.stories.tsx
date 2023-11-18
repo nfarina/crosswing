@@ -1,6 +1,6 @@
 import { useAsyncTask } from "../hooks/useAsyncTask";
 import { wait } from "../shared/wait";
-import { CrosswingAppDecorator } from "../theme/storybook";
+import { CrosswingAppDecorator } from "../storybook";
 import { BannerLayout } from "./BannerLayout";
 import { NoContent } from "./NoContent";
 

@@ -3,21 +3,21 @@ import { Meta } from "@storybook/react";
 import { useState } from "react";
 import { createPortal } from "react-dom";
 import { styled } from "styled-components";
+import { colors } from "../../colors/colors";
 import { useAsyncTask } from "../../hooks/useAsyncTask";
 import { RouterDecorator } from "../../router/storybook/RouterDecorator";
 import { wait } from "../../shared/wait";
-import { colors } from "../../theme/colors/colors";
-import { CrosswingAppDecorator } from "../../theme/storybook";
+import { CrosswingAppDecorator } from "../../storybook";
 import { NoContent } from "../NoContent";
 import { SelectOption } from "../forms/Select";
 import {
-  Toolbar,
-  ToolbarButton,
-  ToolbarInsertionPoint,
-  ToolbarMoreButton,
-  ToolbarSelect,
-  ToolbarSidebarButton,
-  ToolbarSpace,
+    Toolbar,
+    ToolbarButton,
+    ToolbarInsertionPoint,
+    ToolbarMoreButton,
+    ToolbarSelect,
+    ToolbarSidebarButton,
+    ToolbarSpace,
 } from "../toolbar/Toolbar";
 import { useToolbar } from "./ToolbarContext";
 import { ToolbarLayout } from "./ToolbarLayout";

@@ -1,8 +1,8 @@
 import { action } from "@storybook/addon-actions";
 import { Meta, StoryFn } from "@storybook/react";
 import { styled } from "styled-components";
-import { colors } from "../../theme/colors/colors";
-import { CrosswingAppDecorator } from "../../theme/storybook";
+import { colors } from "../../colors/colors";
+import { CrosswingAppDecorator } from "../../storybook";
 import { SeparatorDecorator } from "../SeparatorLayout";
 import { FileInput } from "./FileInput";
 import { TextCell } from "./TextCell";

@@ -1,5 +1,5 @@
 import { Meta } from "@storybook/react";
-import { CrosswingAppDecorator } from "../theme/storybook";
+import { CrosswingAppDecorator } from "../storybook";
 import { LoadingCurtain } from "./LoadingCurtain";
 
 export default {

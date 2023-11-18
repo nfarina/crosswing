@@ -1,4 +1,4 @@
-import { CrosswingRootStyle } from "crosswing/theme/containers";
+import { CrosswingRootStyle } from "crosswing/containers";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { Manager } from "./Manager";

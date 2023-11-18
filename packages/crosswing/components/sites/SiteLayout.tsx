@@ -6,12 +6,12 @@ import {
   useState,
 } from "react";
 import { styled } from "styled-components";
+import { colors } from "../../colors/colors";
 import { flattenChildren } from "../../hooks/flattenChildren";
 import { useMatchMedia } from "../../hooks/useMatchMedia";
 import MenuIcon from "../../icons/Menu.svg?react";
 import { Redirect } from "../../router/redirect/Redirect";
 import { Route, Switch } from "../../router/switch/Switch";
-import { colors } from "../../theme/colors/colors";
 import { NoContent } from "../NoContent";
 import { SiteHeader, StyledSiteHeader } from "./SiteHeader";
 import { SiteHeaderAccessory } from "./SiteHeaderAccessory";

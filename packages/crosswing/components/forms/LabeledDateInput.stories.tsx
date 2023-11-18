@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/react";
 import { useState } from "react";
 import { ModalDecorator } from "../../modals/storybook/ModalDecorator";
-import { CrosswingAppDecorator } from "../../theme/storybook";
+import { CrosswingAppDecorator } from "../../storybook";
 import { SeparatorDecorator } from "../SeparatorLayout";
 import { LabeledDateInput } from "./LabeledDateInput";
 

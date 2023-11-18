@@ -1,7 +1,7 @@
 import { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
-import { colors } from "../theme/colors/colors";
-import { fonts } from "../theme/fonts/fonts";
+import { colors } from "../colors/colors";
+import { fonts } from "../fonts/fonts";
 import { StyledButton } from "./Button";
 import { StyledLinkButton } from "./LinkButton";
 import { StyledSpinner } from "./Spinner";

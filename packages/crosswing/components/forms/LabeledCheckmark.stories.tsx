@@ -1,5 +1,5 @@
 import { action } from "@storybook/addon-actions";
-import { CrosswingAppDecorator } from "../../theme/storybook";
+import { CrosswingAppDecorator } from "../../storybook";
 import { SeparatorDecorator } from "../SeparatorLayout";
 import { LabeledCheckmark } from "./LabeledCheckmark";
 

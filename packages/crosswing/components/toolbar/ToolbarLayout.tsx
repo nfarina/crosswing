@@ -1,17 +1,17 @@
 import {
-  HTMLAttributes,
-  ReactElement,
-  useLayoutEffect,
-  useRef,
-  useState,
+    HTMLAttributes,
+    ReactElement,
+    useLayoutEffect,
+    useRef,
+    useState,
 } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../theme/colors/colors";
+import { colors } from "../../colors/colors";
 import { StyledToolbar } from "./Toolbar";
 import {
-  ToolbarContext,
-  ToolbarContextValue,
-  ToolbarInsertionRef,
+    ToolbarContext,
+    ToolbarContextValue,
+    ToolbarInsertionRef,
 } from "./ToolbarContext";
 
 export function ToolbarLayout({

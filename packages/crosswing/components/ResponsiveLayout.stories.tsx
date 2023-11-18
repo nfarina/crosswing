@@ -1,11 +1,11 @@
 import { Meta } from "@storybook/react";
 import { useState } from "react";
 import { styled } from "styled-components";
-import { CrosswingAppDecorator } from "../theme/storybook";
+import { CrosswingAppDecorator } from "../storybook";
 import {
-  ResponsiveChild,
-  ResponsiveLayout,
-  StyledResponsiveLayout,
+    ResponsiveChild,
+    ResponsiveLayout,
+    StyledResponsiveLayout,
 } from "./ResponsiveLayout";
 
 export default {

@@ -3,8 +3,8 @@ import isSameOrAfter from "dayjs/plugin/isSameOrAfter.js";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore.js";
 import { HTMLAttributes, ReactNode, useLayoutEffect, useRef } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../theme/colors/colors";
-import { fonts } from "../../theme/fonts/fonts";
+import { colors } from "../../colors/colors";
+import { fonts } from "../../fonts/fonts";
 import { DateRange, isDateInRange, isSameDay } from "./DateRange";
 
 dayjs.extend(isSameOrAfter);

@@ -40,12 +40,11 @@
     "./host/util/useClipboard": "./host/util/useClipboard.ts",
     "./icons/*": "./icons/*",
     "./hooks/*": "./hooks/*.ts",
-    "./theme/colors": "./theme/colors/colors.ts",
-    "./theme/app": "./theme/app.tsx",
-    "./theme/containers": "./theme/containers.ts",
-    "./theme/easing": "./theme/easing.ts",
-    "./theme/fonts": "./theme/fonts/fonts.ts",
-    "./theme/storybook": "./theme/storybook.tsx",
+    "./colors": "./colors/colors.ts",
+    "./app": "./app.tsx",
+    "./containers": "./containers.ts",
+    "./fonts": "./fonts/fonts.ts",
+    "./storybook": "./storybook.tsx",
     "./shared/*": "./shared/*.ts"
   },
   "dependencies": {

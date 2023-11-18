@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../theme/colors/colors";
-import { fonts } from "../../theme/fonts/fonts";
-import { CrosswingAppDecorator } from "../../theme/storybook";
+import { colors } from "../../colors/colors";
+import { fonts } from "../../fonts/fonts";
+import { CrosswingAppDecorator } from "../../storybook";
 import { ModalRootProvider } from "../context/ModalRootProvider";
 import { ModalDecorator } from "../storybook/ModalDecorator";
 import { ModalStoryButton } from "../storybook/ModalStoryButtons";

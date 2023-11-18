@@ -1,7 +1,7 @@
 import { HTMLAttributes, MouseEvent, ReactNode } from "react";
 import { styled } from "styled-components";
-import { colors } from "../theme/colors/colors";
-import { fonts } from "../theme/fonts/fonts";
+import { colors } from "../colors/colors";
+import { fonts } from "../fonts/fonts";
 import { Button } from "./Button";
 import { Clickable } from "./Clickable";
 import { LinkButton } from "./LinkButton";

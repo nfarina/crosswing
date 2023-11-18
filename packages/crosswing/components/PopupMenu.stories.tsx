@@ -4,7 +4,7 @@ import { styled } from "styled-components";
 import { usePopup } from "../modals/popup/usePopup";
 import { ModalDecorator } from "../modals/storybook/ModalDecorator";
 import { RouterDecorator } from "../router/storybook/RouterDecorator";
-import { CrosswingAppDecorator } from "../theme/storybook";
+import { CrosswingAppDecorator } from "../storybook";
 import { Button } from "./Button";
 import {
   PopupMenu,

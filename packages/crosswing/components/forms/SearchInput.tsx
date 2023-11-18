@@ -1,17 +1,17 @@
 import {
-  ChangeEvent,
-  InputHTMLAttributes,
-  KeyboardEvent,
-  useEffect,
-  useRef,
+    ChangeEvent,
+    InputHTMLAttributes,
+    KeyboardEvent,
+    useEffect,
+    useRef,
 } from "react";
 import { styled } from "styled-components";
+import { colors } from "../../colors/colors";
+import { fonts } from "../../fonts/fonts";
 import { useHotkey } from "../../hooks/useHotkey";
 import { useHost } from "../../host/context/HostContext";
 import CloseCircle from "../../icons/CloseCircle.svg?react";
 import Search from "../../icons/Search.svg?react";
-import { colors } from "../../theme/colors/colors";
-import { fonts } from "../../theme/fonts/fonts";
 import { Spinner } from "../Spinner";
 
 export function SearchInput({

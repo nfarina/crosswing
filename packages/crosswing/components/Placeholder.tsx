@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
+import { colors, shadows } from "../colors/colors";
+import { fonts } from "../fonts/fonts";
 import { Link } from "../router/Link";
-import { colors, shadows } from "../theme/colors/colors";
-import { fonts } from "../theme/fonts/fonts";
 
 /**
  * Just a useful component to use during development, to put something on the

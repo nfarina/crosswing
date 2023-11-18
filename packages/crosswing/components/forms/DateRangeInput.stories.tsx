@@ -2,7 +2,7 @@ import { useState } from "react";
 import { styled } from "styled-components";
 import { ModalDecorator } from "../../modals/storybook/ModalDecorator";
 import { RouterDecorator } from "../../router/storybook/RouterDecorator";
-import { CrosswingAppDecorator } from "../../theme/storybook";
+import { CrosswingAppDecorator } from "../../storybook";
 import { DateRange } from "./DateRange";
 import { DateRangeInput, StyledDateRangeInput } from "./DateRangeInput";
 

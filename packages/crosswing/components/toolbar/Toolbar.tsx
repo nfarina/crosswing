@@ -6,10 +6,10 @@ import {
   useRef,
 } from "react";
 import { styled } from "styled-components";
+import { colors } from "../../colors/colors";
+import { fonts } from "../../fonts/fonts";
 import AddSmall from "../../icons/AddSmall.svg?react";
 import DotDotDot from "../../icons/DotDotDot.svg?react";
-import { colors } from "../../theme/colors/colors";
-import { fonts } from "../../theme/fonts/fonts";
 import { Button } from "../Button";
 import { LinkButton } from "../LinkButton";
 import { StyledDateRangeInput } from "../forms/DateRangeInput";

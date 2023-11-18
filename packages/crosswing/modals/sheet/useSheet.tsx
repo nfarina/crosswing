@@ -1,18 +1,18 @@
 import {
-  CSSProperties,
-  ReactNode,
-  useCallback,
-  useContext,
-  useLayoutEffect,
-  useRef,
-  useState,
+    CSSProperties,
+    ReactNode,
+    useCallback,
+    useContext,
+    useLayoutEffect,
+    useRef,
+    useState,
 } from "react";
 import { keyframes, styled } from "styled-components";
+import { colors } from "../../colors/colors";
 import { HotKeyContextDataAttributes, useHotkey } from "../../hooks/useHotkey";
 import { useHost } from "../../host/context/HostContext";
 import { safeArea } from "../../host/features/safeArea";
-import { colors } from "../../theme/colors/colors";
-import { easing } from "../../theme/easing";
+import { easing } from "../../shared/easing";
 import { ModalContext } from "../context/ModalContext";
 import { Modal, useModal } from "../context/useModal";
 

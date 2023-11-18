@@ -1,12 +1,12 @@
 import { ReactNode } from "react";
 import { styled } from "styled-components";
+import { colors } from "../../colors/colors";
+import { fonts } from "../../fonts/fonts";
 import Checkmark from "../../icons/Checkmark.svg?react";
 import Close from "../../icons/Close.svg?react";
 import { Link } from "../../router/Link";
 import { useRouter } from "../../router/context/RouterContext";
 import { formatCurrency } from "../../shared/numeric";
-import { colors } from "../../theme/colors/colors";
-import { fonts } from "../../theme/fonts/fonts";
 
 /**
  * A versatile way to display list items on the desktop.

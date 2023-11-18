@@ -1,12 +1,12 @@
 import { useCallback, useState } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../theme/colors/colors";
-import { fonts } from "../../theme/fonts/fonts";
-import { CrosswingAppDecorator } from "../../theme/storybook";
+import { colors } from "../../colors/colors";
+import { fonts } from "../../fonts/fonts";
+import { CrosswingAppDecorator } from "../../storybook";
 import { ModalDecorator } from "../storybook/ModalDecorator";
 import {
-  ModalStoryButton,
-  ModalStoryButtons,
+    ModalStoryButton,
+    ModalStoryButtons,
 } from "../storybook/ModalStoryButtons";
 import { useDialog } from "./useDialog";
 

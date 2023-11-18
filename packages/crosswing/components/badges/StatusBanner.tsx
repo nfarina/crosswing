@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { styled } from "styled-components";
-import { fonts } from "../../theme/fonts/fonts";
+import { fonts } from "../../fonts/fonts";
 import { Button } from "../Button";
 import { StatusBadge } from "./StatusBadge";
 

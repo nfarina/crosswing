@@ -1,10 +1,10 @@
 import { FormEvent, ReactNode, useState } from "react";
 import { styled } from "styled-components";
+import { colors } from "../../colors/colors";
+import { fonts } from "../../fonts/fonts";
 import { AlertButton, AlertView } from "../../modals/alert/AlertView";
 import { Modal } from "../../modals/context/useModal";
 import { useDialog } from "../../modals/dialog/useDialog";
-import { colors } from "../../theme/colors/colors";
-import { fonts } from "../../theme/fonts/fonts";
 import { StyledTextInput, TextInput } from "./TextInput";
 import { InputTransformer, useInputValue } from "./useInputValue";
 

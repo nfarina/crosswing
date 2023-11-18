@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from "@storybook/react";
-import { CrosswingAppDecorator } from "../../theme/storybook";
+import { CrosswingAppDecorator } from "../../storybook";
 import { Badge } from "./Badge";
 
 export default {

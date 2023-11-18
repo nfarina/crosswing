@@ -1,12 +1,12 @@
 import { action } from "@storybook/addon-actions";
 import Browser from "../icons/Browser.svg?react";
 import Trash from "../icons/Trash.svg?react";
-import { CrosswingAppDecorator } from "../theme/storybook";
+import { CrosswingAppDecorator } from "../storybook";
 import {
-  MobileToolbar,
-  MobileToolbarButton,
-  MobileToolbarLayout,
-  MobileToolbarSpace,
+    MobileToolbar,
+    MobileToolbarButton,
+    MobileToolbarLayout,
+    MobileToolbarSpace,
 } from "./MobileToolbar";
 import { NoContent } from "./NoContent";
 

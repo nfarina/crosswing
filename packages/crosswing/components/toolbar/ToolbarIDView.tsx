@@ -1,10 +1,10 @@
 import { useRef } from "react";
 import { styled } from "styled-components";
+import { colors } from "../../colors/colors";
+import { fonts } from "../../fonts/fonts";
 import { useElementSize } from "../../hooks/useElementSize";
 import Copy from "../../icons/Copy.svg?react";
 import { useBanner } from "../../modals/banner/useBanner";
-import { colors } from "../../theme/colors/colors";
-import { fonts } from "../../theme/fonts/fonts";
 import { Clickable } from "../Clickable";
 
 export function ToolbarIDView({ name, id }: { name: string; id: string }) {

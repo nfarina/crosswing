@@ -3,7 +3,7 @@ import { useAsyncTask } from "../hooks/useAsyncTask";
 import { useErrorAlert } from "../modals/alert/useErrorAlert";
 import { ModalDecorator } from "../modals/storybook/ModalDecorator";
 import { wait } from "../shared/wait";
-import { CrosswingAppDecorator } from "../theme/storybook";
+import { CrosswingAppDecorator } from "../storybook";
 import { useProgressAlert } from "./useProgressAlert";
 
 export default {

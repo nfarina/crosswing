@@ -2,7 +2,7 @@ import { ReactElement, useCallback, useRef } from "react";
 import { keyframes, styled } from "styled-components";
 import { HotKeyContextDataAttributes, useHotkey } from "../../hooks/useHotkey";
 import { safeArea } from "../../host/features/safeArea";
-import { easing } from "../../theme/easing";
+import { easing } from "../../shared/easing";
 import { Modal, useModal } from "../context/useModal";
 import { ActionItem, ActionMenu } from "./ActionMenu";
 

@@ -2,7 +2,7 @@ import { Meta } from "@storybook/react";
 import { useState } from "react";
 import { ModalDecorator } from "../../modals/storybook/ModalDecorator";
 import { Days } from "../../shared/timespan";
-import { CrosswingAppDecorator } from "../../theme/storybook";
+import { CrosswingAppDecorator } from "../../storybook";
 import { SeparatorDecorator } from "../SeparatorLayout";
 import { DateRange, dateRange } from "./DateRange";
 import { LabeledDateRangeInput } from "./LabeledDateRangeInput";

@@ -1,7 +1,7 @@
 import { action } from "@storybook/addon-actions";
 import { Meta } from "@storybook/react";
 import { RouterDecorator } from "../router/storybook/RouterDecorator";
-import { CrosswingAppDecorator } from "../theme/storybook";
+import { CrosswingAppDecorator } from "../storybook";
 import { Button } from "./Button";
 import { ButtonGroup } from "./ButtonGroup";
 import { LinkButton } from "./LinkButton";

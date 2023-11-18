@@ -1,11 +1,11 @@
 import { Meta } from "@storybook/react";
 import { useState } from "react";
 import { styled } from "styled-components";
+import { colors } from "../../colors/colors";
 import Globe from "../../icons/Globe.svg?react";
 import { Router } from "../../router/Router";
 import { MemoryHistory } from "../../router/history/MemoryHistory";
-import { colors } from "../../theme/colors/colors";
-import { CrosswingAppDecorator } from "../../theme/storybook";
+import { CrosswingAppDecorator } from "../../storybook";
 import { SiteSidebar, SiteSidebarArea, SiteSidebarLink } from "./SiteSidebar";
 
 export default {

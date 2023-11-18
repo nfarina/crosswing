@@ -1,15 +1,15 @@
 import {
-  ChangeEvent,
-  ReactElement,
-  ReactNode,
-  SelectHTMLAttributes,
-  isValidElement,
+    ChangeEvent,
+    ReactElement,
+    ReactNode,
+    SelectHTMLAttributes,
+    isValidElement,
 } from "react";
 import { styled } from "styled-components";
+import { colors } from "../../colors/colors";
+import { fonts } from "../../fonts/fonts";
 import { flattenChildren } from "../../hooks/flattenChildren";
 import DownArrow from "../../icons/DownArrow.svg?react";
-import { colors } from "../../theme/colors/colors";
-import { fonts } from "../../theme/fonts/fonts";
 
 export interface SelectOptionProps {
   title?: string;

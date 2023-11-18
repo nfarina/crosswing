@@ -6,10 +6,10 @@ import {
   useContext,
 } from "react";
 import { styled } from "styled-components";
+import { colors } from "../colors/colors";
+import { fonts } from "../fonts/fonts";
 import { PopupChildProps, PopupView } from "../modals/popup/PopupView";
 import { Link } from "../router/Link";
-import { colors } from "../theme/colors/colors";
-import { fonts } from "../theme/fonts/fonts";
 import { Select } from "./forms/Select";
 import { StyledToggle, Toggle } from "./forms/Toggle";
 

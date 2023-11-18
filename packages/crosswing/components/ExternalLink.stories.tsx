@@ -1,9 +1,9 @@
 import { action } from "@storybook/addon-actions";
 import { styled } from "styled-components";
+import { colors } from "../colors/colors";
+import { fonts } from "../fonts/fonts";
 import { MockHostProvider } from "../host/mocks/MockHostProvider";
-import { colors } from "../theme/colors/colors";
-import { fonts } from "../theme/fonts/fonts";
-import { CrosswingAppDecorator } from "../theme/storybook";
+import { CrosswingAppDecorator } from "../storybook";
 import { ExternalLink } from "./ExternalLink";
 
 export default {

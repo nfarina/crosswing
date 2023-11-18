@@ -1,9 +1,9 @@
+import { CrosswingApp } from "crosswing/app";
 import { Button } from "crosswing/components/Button";
 import { MobileAppFrame } from "crosswing/components/desktop/MobileAppFrame";
 import { MockHostProvider } from "crosswing/host/mocks";
 import { useAlert } from "crosswing/modals/alert";
 import { ModalRootProvider } from "crosswing/modals/context";
-import { CrosswingApp } from "crosswing/theme/app";
 import { styled } from "styled-components";
 import Favicon from "./Favicon.svg?react";
 

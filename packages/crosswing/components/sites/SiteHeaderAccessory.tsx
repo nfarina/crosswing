@@ -1,7 +1,7 @@
 import { HTMLAttributes, MouseEvent, ReactNode } from "react";
 import { styled } from "styled-components";
+import { colors } from "../../colors/colors";
 import { UnreadBadge } from "../../router/tabs/UnreadBadge";
-import { colors } from "../../theme/colors/colors";
 import { Clickable } from "../Clickable";
 
 export type SiteHeaderAccessory = {

@@ -1,17 +1,17 @@
 import Debug from "debug";
 import {
-  ReactElement,
-  ReactNode,
-  isValidElement,
-  useEffect,
-  useRef,
-  useState,
+    ReactElement,
+    ReactNode,
+    isValidElement,
+    useEffect,
+    useRef,
+    useState,
 } from "react";
 import { styled } from "styled-components";
+import { colors } from "../../colors/colors";
 import { flattenChildren } from "../../hooks/flattenChildren";
 import { useHost } from "../../host/context/HostContext";
 import { safeArea } from "../../host/features/safeArea";
-import { colors } from "../../theme/colors/colors";
 import { RouterLocation } from "../RouterLocation";
 import { RouterContext, useRouter } from "../context/RouterContext";
 import { Redirect } from "../redirect/Redirect";

@@ -1,16 +1,16 @@
 import {
-  ChangeEvent,
-  FocusEvent,
-  InputHTMLAttributes,
-  useLayoutEffect,
-  useRef,
-  useState,
+    ChangeEvent,
+    FocusEvent,
+    InputHTMLAttributes,
+    useLayoutEffect,
+    useRef,
+    useState,
 } from "react";
 import { styled } from "styled-components";
+import { colors } from "../../colors/colors";
+import { fonts } from "../../fonts/fonts";
 import { useHost } from "../../host/context/HostContext";
 import { useScrollAboveKeyboard } from "../../host/features/useScrollAboveKeyboard";
-import { colors } from "../../theme/colors/colors";
-import { fonts } from "../../theme/fonts/fonts";
 import { StatusBadge, StyledStatusBadge } from "../badges/StatusBadge";
 
 /** How to render errors when given via the `TextInput.error` property. */

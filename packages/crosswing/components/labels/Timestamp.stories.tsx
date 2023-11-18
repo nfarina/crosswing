@@ -1,9 +1,9 @@
 import { Meta } from "@storybook/react";
 import dayjs from "dayjs";
 import { styled } from "styled-components";
-import { colors } from "../../theme/colors/colors";
-import { fonts } from "../../theme/fonts/fonts";
-import { CrosswingAppDecorator } from "../../theme/storybook";
+import { colors } from "../../colors/colors";
+import { fonts } from "../../fonts/fonts";
+import { CrosswingAppDecorator } from "../../storybook";
 import { Timestamp, setTimestampUpdateInterval } from "./Timestamp";
 
 setTimestampUpdateInterval(500);

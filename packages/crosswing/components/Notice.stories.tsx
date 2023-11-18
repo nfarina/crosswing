@@ -1,5 +1,5 @@
 import { RouterDecorator } from "../router/storybook/RouterDecorator";
-import { CrosswingAppDecorator } from "../theme/storybook";
+import { CrosswingAppDecorator } from "../storybook";
 import { Notice } from "./Notice";
 import { SeparatorLayout } from "./SeparatorLayout";
 

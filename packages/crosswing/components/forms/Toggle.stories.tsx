@@ -3,7 +3,7 @@ import { Meta } from "@storybook/react";
 import { useState } from "react";
 import { useAsyncTask } from "../../hooks/useAsyncTask";
 import { wait } from "../../shared/wait";
-import { CrosswingAppDecorator } from "../../theme/storybook";
+import { CrosswingAppDecorator } from "../../storybook";
 import { Toggle } from "./Toggle";
 
 export default {

@@ -1,9 +1,9 @@
 import { action } from "@storybook/addon-actions";
-import { CrosswingAppDecorator } from "../../theme/storybook";
+import { CrosswingAppDecorator } from "../../storybook";
 import { ModalDecorator } from "../storybook/ModalDecorator";
 import {
-  ModalStoryButton,
-  ModalStoryButtons,
+    ModalStoryButton,
+    ModalStoryButtons,
 } from "../storybook/ModalStoryButtons";
 import { useConfirm } from "./useConfirm";
 

@@ -1,12 +1,12 @@
+import { colors, shadows } from "crosswing/colors";
 import { StyledButton } from "crosswing/components/Button";
 import { Badge } from "crosswing/components/badges/Badge";
 import { StyledToggle, Toggle } from "crosswing/components/forms/Toggle";
+import { fonts } from "crosswing/fonts";
 import { useHotkey } from "crosswing/hooks/useHotkey";
 import { usePersistedState } from "crosswing/hooks/usePersistedState";
 import { useErrorAlert } from "crosswing/modals/alert/error";
 import { wait } from "crosswing/shared/wait";
-import { colors, shadows } from "crosswing/theme/colors";
-import { fonts } from "crosswing/theme/fonts";
 import { SyntheticEvent } from "react";
 import { styled } from "styled-components";
 import { ClientTask } from "../shared/types";

@@ -9,13 +9,13 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 import { styled } from "styled-components";
+import { colors } from "../../colors/colors";
+import { fonts } from "../../fonts/fonts";
 import { useHotkey } from "../../hooks/useHotkey";
 import { useSessionStorage } from "../../hooks/useSessionStorage";
 import Close from "../../icons/Close.svg?react";
 import FullScreen from "../../icons/FullScreen.svg?react";
 import { ModalContext } from "../../modals/context/ModalContext";
-import { colors } from "../../theme/colors/colors";
-import { fonts } from "../../theme/fonts/fonts";
 import { Button, StyledButton } from "../Button";
 
 export function FullScreenView({

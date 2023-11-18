@@ -1,13 +1,13 @@
 import dayjs from "dayjs";
 import { lazy } from "react";
 import { styled } from "styled-components";
+import { fonts } from "../../fonts/fonts";
 import { useMatchMedia } from "../../hooks/useMatchMedia";
 import DisclosureArrow from "../../icons/DisclosureArrow.svg?react";
 import DownArrow from "../../icons/DownArrow.svg?react";
 import { PopupView } from "../../modals/popup/PopupView";
 import { usePopup } from "../../modals/popup/usePopup";
 import { useSheet } from "../../modals/sheet/useSheet";
-import { fonts } from "../../theme/fonts/fonts";
 import { Button } from "../Button";
 import {
   AllDateRangePresets,

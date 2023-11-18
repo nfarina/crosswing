@@ -1,8 +1,8 @@
 import { HTMLAttributes, MouseEvent, ReactNode } from "react";
 import { styled } from "styled-components";
+import { colors } from "../../colors/colors";
+import { fonts } from "../../fonts/fonts";
 import Checkmark from "../../icons/Checkmark.svg?react";
-import { colors } from "../../theme/colors/colors";
-import { fonts } from "../../theme/fonts/fonts";
 
 export function LabeledCheckmark({
   label,

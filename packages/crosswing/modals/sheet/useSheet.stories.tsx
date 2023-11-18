@@ -1,9 +1,9 @@
 import { StoryObj } from "@storybook/react";
+import { colors } from "../../colors/colors";
 import { MockHostProvider } from "../../host/mocks/MockHostProvider";
 import { NavLayout } from "../../router/navs/NavLayout";
 import { RouterDecorator } from "../../router/storybook/RouterDecorator";
-import { colors } from "../../theme/colors/colors";
-import { CrosswingAppDecorator } from "../../theme/storybook";
+import { CrosswingAppDecorator } from "../../storybook";
 import { ModalContextProvider } from "../context/ModalContextProvider";
 import { ModalDecorator } from "../storybook/ModalDecorator";
 import {

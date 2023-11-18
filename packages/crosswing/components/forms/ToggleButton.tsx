@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../theme/colors/colors";
-import { fonts } from "../../theme/fonts/fonts";
+import { colors } from "../../colors/colors";
+import { fonts } from "../../fonts/fonts";
 import { StyledToggle, Toggle } from "./Toggle";
 
 /**

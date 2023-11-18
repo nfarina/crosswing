@@ -6,7 +6,7 @@ import {
   RouterDecorator,
 } from "../router/storybook/RouterDecorator";
 import { wait } from "../shared/wait";
-import { CrosswingAppDecorator } from "../theme/storybook";
+import { CrosswingAppDecorator } from "../storybook";
 import { LoadingCurtain } from "./LoadingCurtain";
 import { NoContent } from "./NoContent";
 import { TabbedButton, TabbedButtonLayout } from "./TabbedButtonLayout";

@@ -11,7 +11,7 @@ import {
 import { keyframes, styled } from "styled-components";
 import { useHotkey } from "../../hooks/useHotkey";
 import { useHost } from "../../host/context/HostContext";
-import { easing } from "../../theme/easing";
+import { easing } from "../../shared/easing";
 import { useModal } from "../context/useModal";
 import { useClickOutsideToClose } from "./useClickOutsideToClose";
 

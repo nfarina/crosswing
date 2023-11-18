@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAsyncTask } from "../../hooks/useAsyncTask";
 import { useDebounced } from "../../hooks/useDebounced";
 import { wait } from "../../shared/wait";
-import { CrosswingAppDecorator } from "../../theme/storybook";
+import { CrosswingAppDecorator } from "../../storybook";
 import { SearchInput } from "./SearchInput";
 
 export default {

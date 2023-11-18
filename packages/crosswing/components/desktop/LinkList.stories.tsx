@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import { BrowserSimulator } from "../../router/storybook/RouterDecorator";
 import { capitalize } from "../../shared/strings";
-import { CrosswingAppDecorator } from "../../theme/storybook";
+import { CrosswingAppDecorator } from "../../storybook";
 import { LinkButton } from "../LinkButton";
 import CSSColors from "./CSSColors.json";
 import { LinkList, StyledLinkList } from "./LinkList";

@@ -6,6 +6,8 @@ import {
   useState,
 } from "react";
 import { styled } from "styled-components";
+import { colors, shadows } from "../colors/colors";
+import { fonts } from "../fonts/fonts";
 import { flattenChildren } from "../hooks/flattenChildren";
 import { useDebounced } from "../hooks/useDebounced";
 import { useResettableState } from "../hooks/useResettableState";
@@ -13,9 +15,7 @@ import { useHost } from "../host/context/HostContext";
 import { useRouter } from "../router/context/RouterContext";
 import { Redirect } from "../router/redirect/Redirect";
 import { UnreadBadge } from "../router/tabs/UnreadBadge";
-import { colors, shadows } from "../theme/colors/colors";
-import { easing } from "../theme/easing";
-import { fonts } from "../theme/fonts/fonts";
+import { easing } from "../shared/easing";
 import { Button } from "./Button";
 
 export interface TabbedButtonProps {

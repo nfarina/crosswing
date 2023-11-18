@@ -1,9 +1,9 @@
 import { MouseEvent, ReactElement, ReactNode } from "react";
 import { styled } from "styled-components";
+import { colors } from "../../colors/colors";
+import { fonts } from "../../fonts/fonts";
 import { useHost } from "../../host/context/HostContext";
 import PlaceholderIcon from "../../icons/Placeholder.svg?react";
-import { colors } from "../../theme/colors/colors";
-import { fonts } from "../../theme/fonts/fonts";
 import { Link } from "../Link";
 import { useRouter } from "../context/RouterContext";
 import { UnreadBadge } from "./UnreadBadge";

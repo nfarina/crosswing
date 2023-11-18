@@ -1,10 +1,10 @@
 import { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
+import { colors } from "../../colors/colors";
 import { useHost } from "../../host/context/HostContext";
 import { useHostStatusBar } from "../../host/features/HostStatusBar";
 import { safeArea } from "../../host/features/safeArea";
 import Back from "../../icons/Back.svg?react";
-import { colors } from "../../theme/colors/colors";
 import { useRouter } from "../context/RouterContext";
 import { NavAccessory, NavAccessoryView } from "./NavAccessoryView";
 import { NavTitleView } from "./NavTitleView";

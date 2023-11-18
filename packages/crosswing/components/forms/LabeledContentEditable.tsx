@@ -1,14 +1,14 @@
 import {
-  ClipboardEvent,
-  FormEvent,
-  HTMLAttributes,
-  ReactNode,
-  useLayoutEffect,
-  useRef,
+    ClipboardEvent,
+    FormEvent,
+    HTMLAttributes,
+    ReactNode,
+    useLayoutEffect,
+    useRef,
 } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../theme/colors/colors";
-import { fonts } from "../../theme/fonts/fonts";
+import { colors } from "../../colors/colors";
+import { fonts } from "../../fonts/fonts";
 
 /**
  * Like LabeledTextArea, but using a <div> with the contentEditable flag, so

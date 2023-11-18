@@ -1,3 +1,5 @@
+import { CrosswingApp } from "crosswing/app";
+import { colors } from "crosswing/colors";
 import { LoadingCurtain } from "crosswing/components/LoadingCurtain";
 import { Scrollable, StyledScrollable } from "crosswing/components/Scrollable";
 import {
@@ -7,8 +9,6 @@ import {
 import { useAsyncTask } from "crosswing/hooks/useAsyncTask";
 import { useInterval } from "crosswing/hooks/useInterval";
 import { ModalRootProvider } from "crosswing/modals/context";
-import { CrosswingApp } from "crosswing/theme/app";
-import { colors } from "crosswing/theme/colors";
 import { useRef, useState } from "react";
 import { styled } from "styled-components";
 import { ServerStatus } from "../shared/types";

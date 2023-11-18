@@ -1,6 +1,6 @@
 import { Link } from "../router/Link";
 import { RouterDecorator } from "../router/storybook/RouterDecorator";
-import { CrosswingAppDecorator } from "../theme/storybook";
+import { CrosswingAppDecorator } from "../storybook";
 import { NoContent } from "./NoContent";
 
 export default {

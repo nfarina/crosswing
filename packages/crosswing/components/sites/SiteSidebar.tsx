@@ -7,14 +7,14 @@ import {
   ReactNode,
 } from "react";
 import { styled } from "styled-components";
+import { colors, HexColorBuilder } from "../../colors/colors";
+import { fonts } from "../../fonts/fonts";
 import { flattenChildren } from "../../hooks/flattenChildren";
 import CrosswingLogoIcon from "../../icons/CrosswingLogo.svg?react";
 import PlaceholderIcon from "../../icons/Placeholder.svg?react";
 import { useRouter } from "../../router/context/RouterContext";
 import { Link } from "../../router/Link";
 import { UnreadBadge } from "../../router/tabs/UnreadBadge";
-import { colors, HexColorBuilder } from "../../theme/colors/colors";
-import { fonts } from "../../theme/fonts/fonts";
 import {
   SiteHeaderAccessory,
   SiteHeaderAccessoryView,

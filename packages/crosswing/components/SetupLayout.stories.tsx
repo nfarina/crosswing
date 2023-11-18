@@ -1,4 +1,4 @@
-import { CrosswingAppDecorator } from "../theme/storybook";
+import { CrosswingAppDecorator } from "../storybook";
 import { Button } from "./Button";
 import { SetupLayout } from "./SetupLayout";
 

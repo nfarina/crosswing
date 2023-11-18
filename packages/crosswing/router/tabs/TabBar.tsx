@@ -1,15 +1,15 @@
 import {
-  ReactElement,
-  ReactNode,
-  createContext,
-  useContext,
-  useEffect,
-  useState,
+    ReactElement,
+    ReactNode,
+    createContext,
+    useContext,
+    useEffect,
+    useState,
 } from "react";
 import { styled } from "styled-components";
+import { colors } from "../../colors/colors";
 import { useHost } from "../../host/context/HostContext";
 import { safeArea } from "../../host/features/safeArea";
-import { colors } from "../../theme/colors/colors";
 import { useRouter } from "../context/RouterContext";
 import { StyledTabLink, TabLink, TabProps } from "./TabLink";
 

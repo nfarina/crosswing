@@ -1,8 +1,8 @@
 import { ReactNode, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 import { styled } from "styled-components";
-import { colors } from "../theme/colors/colors";
-import { fonts } from "../theme/fonts/fonts";
+import { colors } from "../colors/colors";
+import { fonts } from "../fonts/fonts";
 import { Spinner, StyledSpinner } from "./Spinner";
 
 export function BannerLayout({

@@ -1,9 +1,9 @@
 import { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
+import { colors } from "../../colors/colors";
+import { fonts } from "../../fonts/fonts";
 import { Link } from "../../router/Link";
 import { useRouter } from "../../router/context/RouterContext";
-import { colors } from "../../theme/colors/colors";
-import { fonts } from "../../theme/fonts/fonts";
 import { Clickable } from "../Clickable";
 
 export interface ToolbarTabProps {

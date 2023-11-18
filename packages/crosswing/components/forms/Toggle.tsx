@@ -1,13 +1,13 @@
 import {
-  CSSProperties,
-  HTMLAttributes,
-  MouseEvent,
-  SyntheticEvent,
-  TouchEvent,
-  useRef,
+    CSSProperties,
+    HTMLAttributes,
+    MouseEvent,
+    SyntheticEvent,
+    TouchEvent,
+    useRef,
 } from "react";
 import { styled } from "styled-components";
-import { ColorBuilder, colors } from "../../theme/colors/colors";
+import { ColorBuilder, colors } from "../../colors/colors";
 
 export type ToggleSize = "normal" | "smaller" | "smallest";
 

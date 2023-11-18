@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CrosswingAppDecorator } from "../../theme/storybook";
+import { CrosswingAppDecorator } from "../../storybook";
 import { SeparatorDecorator } from "../SeparatorLayout";
 import { LabeledTextArea } from "./LabeledTextArea";
 

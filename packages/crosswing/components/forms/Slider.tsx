@@ -1,6 +1,6 @@
 import { CSSProperties, HTMLAttributes, useRef, useState } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../theme/colors/colors";
+import { colors } from "../../colors/colors";
 
 export function Slider({
   value = 0,

@@ -2,7 +2,7 @@ import { Meta } from "@storybook/react";
 import { MockHostProvider } from "../../../host/mocks/MockHostProvider";
 import { ModalRootProvider } from "../../../modals/context/ModalRootProvider";
 import { BrowserSimulator } from "../../../router/storybook/RouterDecorator";
-import { CrosswingAppDecorator } from "../../../theme/storybook";
+import { CrosswingAppDecorator } from "../../../storybook";
 import { PageTitleProvider } from "../../sites/SitePageTitle";
 import { SuspenseApp, SuspenseNavs, SuspenseSwitch } from "./SuspenseApp";
 

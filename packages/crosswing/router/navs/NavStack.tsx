@@ -1,15 +1,15 @@
 import { ReactElement, RefObject } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { styled } from "styled-components";
+import { colors } from "../../colors/colors";
 import { useGesture } from "../../hooks/useGesture";
 import { useHost } from "../../host/context/HostContext";
-import { colors } from "../../theme/colors/colors";
-import { easing } from "../../theme/easing";
+import { easing } from "../../shared/easing";
 import { RouterLocation } from "../RouterLocation";
 import {
-  RouterContext,
-  RouterContextValue,
-  useRouter,
+    RouterContext,
+    RouterContextValue,
+    useRouter,
 } from "../context/RouterContext";
 
 export type NavStackItem = {

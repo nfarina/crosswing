@@ -1,14 +1,14 @@
 import {
-  ChangeEvent,
-  HTMLAttributes,
-  KeyboardEvent,
-  ReactNode,
-  useContext,
-  useState,
+    ChangeEvent,
+    HTMLAttributes,
+    KeyboardEvent,
+    ReactNode,
+    useContext,
+    useState,
 } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../theme/colors/colors";
-import { fonts } from "../../theme/fonts/fonts";
+import { colors } from "../../colors/colors";
+import { fonts } from "../../fonts/fonts";
 import { Router } from "../Router";
 import { RouterContext } from "../context/RouterContext";
 import { MemoryHistory } from "../history/MemoryHistory";
