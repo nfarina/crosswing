@@ -8,7 +8,7 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "packages/manager/bin/crosswing",
+    "dev": "crosswing",
     "test-all": "bun prettier && bun circular && bun typecheck && bun test",
     "check-imports": "bunx npm-check",
     "prettier": "prettier --check 'packages/**/*.ts?(x)'",
@@ -20,6 +20,8 @@
     "clean:node_modules": "rm -rf node_modules packages/*/node_modules"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^7.5.3",
+    "@storybook/addon-essentials": "^7.5.3",
     "@storybook/react": "^7.5.3",
     "@storybook/react-vite": "^7.5.3",
     "@types/debug": "^4.1.12",

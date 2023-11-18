@@ -1,5 +1,5 @@
 {
-  "name": "@crosswing/example-client",
+  "name": "example-client",
   "type": "module",
   "private": true,
   "version": "0.0.0",
@@ -11,12 +11,7 @@
     "analyze": "vite-bundle-visualizer"
   },
   "devDependencies": {
-    "@crosswing/hooks": "^0.0.0",
-    "@crosswing/host": "^0.0.0",
-    "@crosswing/icons": "^0.0.0",
-    "@crosswing/modals": "^0.0.0",
-    "@crosswing/router": "^0.0.0",
-    "@crosswing/theme": "^0.0.0",
+    "crosswing": "^0.0.0",
     "@vitejs/plugin-react": "^4.1.0",
     "babel-plugin-styled-components": "^2.1.4",
     "react": "^18.2.0",
