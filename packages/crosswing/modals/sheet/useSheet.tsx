@@ -1,17 +1,14 @@
 import {
-    CSSProperties,
-    ReactNode,
-    useCallback,
-    useContext,
-    useLayoutEffect,
-    useRef,
-    useState,
+  CSSProperties,
+  ReactNode,
+  useCallback,
+  useContext,
+  useLayoutEffect,
+  useRef,
+  useState,
 } from "react";
 import { keyframes, styled } from "styled-components";
-import {
-    HotKeyContextDataAttributes,
-    useHotkey,
-} from "../../hooks/useHotkey";
+import { HotKeyContextDataAttributes, useHotkey } from "../../hooks/useHotkey";
 import { useHost } from "../../host/context/HostContext";
 import { safeArea } from "../../host/features/safeArea";
 import { colors } from "../../theme/colors/colors";

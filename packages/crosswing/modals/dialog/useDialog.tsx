@@ -1,9 +1,6 @@
 import { CSSProperties, ReactNode, useCallback, useRef } from "react";
 import { keyframes, styled } from "styled-components";
-import {
-    HotKeyContextDataAttributes,
-    useHotkey,
-} from "../../hooks/useHotkey";
+import { HotKeyContextDataAttributes, useHotkey } from "../../hooks/useHotkey";
 import { AndroidBackButtonClassName } from "../../host/context/HostContext";
 import { safeArea } from "../../host/features/safeArea";
 import { easing } from "../../theme/easing";

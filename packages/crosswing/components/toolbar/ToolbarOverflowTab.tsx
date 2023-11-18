@@ -1,11 +1,11 @@
 import {
-    isValidElement,
-    MouseEvent,
-    ReactElement,
-    ReactNode,
-    useEffect,
-    useRef,
-    useState,
+  isValidElement,
+  MouseEvent,
+  ReactElement,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
 } from "react";
 import { styled } from "styled-components";
 import { flattenChildren } from "../../hooks/flattenChildren";

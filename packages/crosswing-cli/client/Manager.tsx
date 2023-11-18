@@ -1,8 +1,8 @@
 import { LoadingCurtain } from "crosswing/components/LoadingCurtain";
 import { Scrollable, StyledScrollable } from "crosswing/components/Scrollable";
 import {
-    StatusBanner,
-    StyledStatusBanner,
+  StatusBanner,
+  StyledStatusBanner,
 } from "crosswing/components/badges/StatusBanner";
 import { useAsyncTask } from "crosswing/hooks/useAsyncTask";
 import { useInterval } from "crosswing/hooks/useInterval";

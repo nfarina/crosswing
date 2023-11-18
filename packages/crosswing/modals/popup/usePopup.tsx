@@ -1,12 +1,12 @@
 import {
-    MouseEvent,
-    MutableRefObject,
-    ReactNode,
-    cloneElement,
-    isValidElement,
-    useCallback,
-    useLayoutEffect,
-    useRef,
+  MouseEvent,
+  MutableRefObject,
+  ReactNode,
+  cloneElement,
+  isValidElement,
+  useCallback,
+  useLayoutEffect,
+  useRef,
 } from "react";
 import { keyframes, styled } from "styled-components";
 import { useHotkey } from "../../hooks/useHotkey";

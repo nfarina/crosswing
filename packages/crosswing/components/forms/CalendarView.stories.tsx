@@ -4,10 +4,10 @@ import { styled } from "styled-components";
 import { CrosswingAppDecorator } from "../../theme/storybook";
 import { CalendarView } from "./CalendarView";
 import {
-    areDateRangesEqual,
-    DateRange,
-    dateRange,
-    isSameDay,
+  areDateRangesEqual,
+  DateRange,
+  dateRange,
+  isSameDay,
 } from "./DateRange";
 
 export default {

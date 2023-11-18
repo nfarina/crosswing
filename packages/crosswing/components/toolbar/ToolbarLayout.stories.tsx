@@ -11,13 +11,13 @@ import { CrosswingAppDecorator } from "../../theme/storybook";
 import { NoContent } from "../NoContent";
 import { SelectOption } from "../forms/Select";
 import {
-    Toolbar,
-    ToolbarButton,
-    ToolbarInsertionPoint,
-    ToolbarMoreButton,
-    ToolbarSelect,
-    ToolbarSidebarButton,
-    ToolbarSpace,
+  Toolbar,
+  ToolbarButton,
+  ToolbarInsertionPoint,
+  ToolbarMoreButton,
+  ToolbarSelect,
+  ToolbarSidebarButton,
+  ToolbarSpace,
 } from "../toolbar/Toolbar";
 import { useToolbar } from "./ToolbarContext";
 import { ToolbarLayout } from "./ToolbarLayout";

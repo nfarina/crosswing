@@ -1,9 +1,9 @@
 import {
-    CSSProperties,
-    HTMLAttributes,
-    ReactNode,
-    useLayoutEffect,
-    useRef,
+  CSSProperties,
+  HTMLAttributes,
+  ReactNode,
+  useLayoutEffect,
+  useRef,
 } from "react";
 import { styled } from "styled-components";
 import AddSmall from "../../icons/AddSmall.svg?react";

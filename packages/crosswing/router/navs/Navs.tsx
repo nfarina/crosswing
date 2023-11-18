@@ -1,11 +1,11 @@
 import Debug from "debug";
 import {
-    createRef,
-    isValidElement,
-    ReactElement,
-    ReactNode,
-    useEffect,
-    useRef,
+  createRef,
+  isValidElement,
+  ReactElement,
+  ReactNode,
+  useEffect,
+  useRef,
 } from "react";
 import { flattenChildren } from "../../hooks/flattenChildren";
 import { RouterContextValue, useRouter } from "../context/RouterContext";

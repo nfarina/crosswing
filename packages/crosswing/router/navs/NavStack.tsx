@@ -7,9 +7,9 @@ import { colors } from "../../theme/colors/colors";
 import { easing } from "../../theme/easing";
 import { RouterLocation } from "../RouterLocation";
 import {
-    RouterContext,
-    RouterContextValue,
-    useRouter,
+  RouterContext,
+  RouterContextValue,
+  useRouter,
 } from "../context/RouterContext";
 
 export type NavStackItem = {

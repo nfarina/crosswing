@@ -2,8 +2,8 @@ import { colors } from "../../theme/colors/colors";
 import { CrosswingAppDecorator } from "../../theme/storybook";
 import { ModalDecorator } from "../storybook/ModalDecorator";
 import {
-    ModalStoryButton,
-    ModalStoryButtons,
+  ModalStoryButton,
+  ModalStoryButtons,
 } from "../storybook/ModalStoryButtons";
 import { useBanner } from "./useBanner";
 

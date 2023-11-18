@@ -5,8 +5,8 @@ import { fonts } from "../../theme/fonts/fonts";
 import { CrosswingAppDecorator } from "../../theme/storybook";
 import { ModalDecorator } from "../storybook/ModalDecorator";
 import {
-    ModalStoryButton,
-    ModalStoryButtons,
+  ModalStoryButton,
+  ModalStoryButtons,
 } from "../storybook/ModalStoryButtons";
 import { useDialog } from "./useDialog";
 

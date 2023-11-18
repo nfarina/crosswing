@@ -1,7 +1,10 @@
 import { action } from "@storybook/addon-actions";
 import { Suspense, lazy, useState } from "react";
 import { useRouter } from "../router/context/RouterContext";
-import { BrowserSimulator, RouterDecorator } from "../router/storybook/RouterDecorator";
+import {
+  BrowserSimulator,
+  RouterDecorator,
+} from "../router/storybook/RouterDecorator";
 import { wait } from "../shared/wait";
 import { CrosswingAppDecorator } from "../theme/storybook";
 import { LoadingCurtain } from "./LoadingCurtain";

@@ -1,10 +1,10 @@
 import {
-    ReactElement,
-    ReactNode,
-    createContext,
-    useContext,
-    useEffect,
-    useState,
+  ReactElement,
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
 } from "react";
 import { styled } from "styled-components";
 import { useHost } from "../../host/context/HostContext";

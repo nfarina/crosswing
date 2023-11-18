@@ -3,8 +3,8 @@ import { RouterDecorator } from "../../router/storybook/RouterDecorator";
 import { CrosswingAppDecorator } from "../../theme/storybook";
 import { ModalDecorator } from "../storybook/ModalDecorator";
 import {
-    ModalStoryButton,
-    ModalStoryButtons,
+  ModalStoryButton,
+  ModalStoryButtons,
 } from "../storybook/ModalStoryButtons";
 import { useActions } from "./useActions";
 

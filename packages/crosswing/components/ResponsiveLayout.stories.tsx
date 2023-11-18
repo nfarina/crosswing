@@ -3,9 +3,9 @@ import { useState } from "react";
 import { styled } from "styled-components";
 import { CrosswingAppDecorator } from "../theme/storybook";
 import {
-    ResponsiveChild,
-    ResponsiveLayout,
-    StyledResponsiveLayout,
+  ResponsiveChild,
+  ResponsiveLayout,
+  StyledResponsiveLayout,
 } from "./ResponsiveLayout";
 
 export default {
