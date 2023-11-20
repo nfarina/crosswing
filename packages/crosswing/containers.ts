@@ -18,7 +18,7 @@ export const CrosswingRootStyle = createGlobalStyle`
     flex-flow: column;
 
     /* The main <div> you're rendering your Crosswing app into. */
-    > #crosswing-root {
+    > #root {
       flex-grow: 1;
       display: flex;
       flex-flow: column;
@@ -42,7 +42,7 @@ export const CrosswingRootStyle = createGlobalStyle`
  */
 export const CrosswingAppDesktopFrame = createGlobalStyle`
   @media (min-width: 500px) {
-    body > #crosswing-root {
+    body > #root {
       display: flex;
       flex-flow: column;
       align-items: center;
@@ -82,7 +82,7 @@ export const CrosswingDesktopRootStyle = createGlobalStyle`
   }
 
   /* The main <div> you're rendering your Crosswing app into. */
-  body > #crosswing-root {
+  body > #root {
     flex-grow: 1;
     display: flex;
     flex-flow: column;
