@@ -1,7 +1,7 @@
 {
   "name": "crosswing",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Crosswing UI framework.",
   "author": "nfarina@gmail.com",
   "exports": {
