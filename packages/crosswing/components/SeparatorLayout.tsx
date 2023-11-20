@@ -1,9 +1,9 @@
 import {
-    CSSProperties,
-    ForwardedRef,
-    forwardRef,
-    HTMLAttributes,
-    ReactNode,
+  CSSProperties,
+  ForwardedRef,
+  forwardRef,
+  HTMLAttributes,
+  ReactNode,
 } from "react";
 import { styled } from "styled-components";
 import { colors } from "../colors/colors";

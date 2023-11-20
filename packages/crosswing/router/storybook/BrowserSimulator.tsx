@@ -1,10 +1,10 @@
 import {
-    ChangeEvent,
-    HTMLAttributes,
-    KeyboardEvent,
-    ReactNode,
-    useContext,
-    useState,
+  ChangeEvent,
+  HTMLAttributes,
+  KeyboardEvent,
+  ReactNode,
+  useContext,
+  useState,
 } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors";

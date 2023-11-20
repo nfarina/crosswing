@@ -7,9 +7,9 @@ import { useHost } from "../../host/context/HostContext";
 import { easing } from "../../shared/easing";
 import { RouterLocation } from "../RouterLocation";
 import {
-    RouterContext,
-    RouterContextValue,
-    useRouter,
+  RouterContext,
+  RouterContextValue,
+  useRouter,
 } from "../context/RouterContext";
 
 export type NavStackItem = {

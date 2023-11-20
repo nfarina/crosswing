@@ -1,10 +1,10 @@
 import {
-    ClipboardEvent,
-    FormEvent,
-    HTMLAttributes,
-    ReactNode,
-    useLayoutEffect,
-    useRef,
+  ClipboardEvent,
+  FormEvent,
+  HTMLAttributes,
+  ReactNode,
+  useLayoutEffect,
+  useRef,
 } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors";

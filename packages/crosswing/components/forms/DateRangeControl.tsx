@@ -7,11 +7,11 @@ import { useResponsiveLayout } from "../../hooks/useResponsiveLayout";
 import { Button, StyledButton } from "../Button";
 import { CalendarView, StyledCalendarInput } from "./CalendarView";
 import {
-    AllDateRangePresets,
-    DateRange,
-    areDateRangesEqual,
-    dateRange,
-    isSameDay,
+  AllDateRangePresets,
+  DateRange,
+  areDateRangesEqual,
+  dateRange,
+  isSameDay,
 } from "./DateRange";
 
 export default function DateRangeControl({

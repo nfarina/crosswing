@@ -1,10 +1,10 @@
 import {
-    ChangeEvent,
-    FocusEvent,
-    TextareaHTMLAttributes,
-    useLayoutEffect,
-    useRef,
-    useState,
+  ChangeEvent,
+  FocusEvent,
+  TextareaHTMLAttributes,
+  useLayoutEffect,
+  useRef,
+  useState,
 } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors";

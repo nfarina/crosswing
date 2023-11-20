@@ -1,11 +1,11 @@
 import {
-    CSSProperties,
-    ReactNode,
-    useCallback,
-    useContext,
-    useLayoutEffect,
-    useRef,
-    useState,
+  CSSProperties,
+  ReactNode,
+  useCallback,
+  useContext,
+  useLayoutEffect,
+  useRef,
+  useState,
 } from "react";
 import { keyframes, styled } from "styled-components";
 import { colors } from "../../colors/colors";

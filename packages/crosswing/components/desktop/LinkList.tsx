@@ -1,19 +1,19 @@
 import {
-    cloneElement,
-    HTMLAttributes,
-    ReactElement,
-    ReactNode,
-    useEffect,
-    useRef,
+  cloneElement,
+  HTMLAttributes,
+  ReactElement,
+  ReactNode,
+  useEffect,
+  useRef,
 } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors";
 import { fonts } from "../../fonts/fonts";
 import { useRouter } from "../../router/context/RouterContext";
 import {
-    SeparatorEdges,
-    SeparatorLayout,
-    StyledSeparatorLayout,
+  SeparatorEdges,
+  SeparatorLayout,
+  StyledSeparatorLayout,
 } from "../SeparatorLayout";
 import { LinkListCell } from "./LinkListCell";
 

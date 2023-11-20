@@ -1,11 +1,11 @@
 import Debug from "debug";
 import {
-    ReactElement,
-    ReactNode,
-    isValidElement,
-    useEffect,
-    useRef,
-    useState,
+  ReactElement,
+  ReactNode,
+  isValidElement,
+  useEffect,
+  useRef,
+  useState,
 } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors";

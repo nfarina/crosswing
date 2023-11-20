@@ -1,10 +1,10 @@
 import {
-    ChangeEvent,
-    FocusEvent,
-    InputHTMLAttributes,
-    useLayoutEffect,
-    useRef,
-    useState,
+  ChangeEvent,
+  FocusEvent,
+  InputHTMLAttributes,
+  useLayoutEffect,
+  useRef,
+  useState,
 } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors";

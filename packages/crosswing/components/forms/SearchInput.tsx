@@ -1,9 +1,9 @@
 import {
-    ChangeEvent,
-    InputHTMLAttributes,
-    KeyboardEvent,
-    useEffect,
-    useRef,
+  ChangeEvent,
+  InputHTMLAttributes,
+  KeyboardEvent,
+  useEffect,
+  useRef,
 } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors";

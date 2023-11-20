@@ -1,9 +1,9 @@
 import {
-    ChangeEvent,
-    ReactElement,
-    ReactNode,
-    SelectHTMLAttributes,
-    isValidElement,
+  ChangeEvent,
+  ReactElement,
+  ReactNode,
+  SelectHTMLAttributes,
+  isValidElement,
 } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors";

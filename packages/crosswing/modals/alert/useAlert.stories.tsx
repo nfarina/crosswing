@@ -3,8 +3,8 @@ import { CrosswingAppDecorator } from "../../storybook";
 import { useAlert } from "../alert/useAlert";
 import { ModalDecorator } from "../storybook/ModalDecorator";
 import {
-    ModalStoryButton,
-    ModalStoryButtons,
+  ModalStoryButton,
+  ModalStoryButtons,
 } from "../storybook/ModalStoryButtons";
 
 export default {
