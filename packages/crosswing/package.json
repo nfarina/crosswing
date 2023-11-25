@@ -1,6 +1,7 @@
 {
   "name": "crosswing",
   "type": "module",
+  "private": true,
   "version": "0.0.3",
   "description": "Crosswing UI framework.",
   "author": "nfarina@gmail.com",

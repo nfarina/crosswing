@@ -16,5 +16,8 @@ rsync -av \
   . \
   dist
 
+# Remove the "private" field from package.json.
+sed -i '' '/"private": true,/d' dist/package.json
+
 # Now build the TypeScript into JS.
 bun run tsc -p tsconfig.dist.json
