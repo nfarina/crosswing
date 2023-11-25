@@ -18,11 +18,6 @@
     // true for our project: our code is only ever run through Vite or Rollup.
     // Further reading here: https://stackoverflow.com/a/71473145/66673
     "moduleResolution": "Bundler",
-    // Allow importing .ts files with or without specifying the extension.
-    // Normally under ESM we must import .js only, but we don't actually
-    // have any JS files on disk. Again, this assumes all code is run through
-    // tooling and not emitted to JS and run through Node.
-    "allowImportingTsExtensions": true,
     // Enable strictest settings like strictNullChecks & noImplicitAny.
     "strict": true,
     // Speed up compilation by assuming .d.ts files are valid.
@@ -35,16 +30,17 @@
     "noImplicitAny": false,
     // Allow JSX syntax.
     "jsx": "react-jsx",
-    // Don't actually output code to the filesystem, just typecheck it.
+    // Don't emit during normal type-checking, only during build script.
     "noEmit": true,
+    // Remove comments from output.
+    "removeComments": true,
     // Dramatically speed up successive compilations.
     "incremental": true
   },
   "include": [
     "packages/**/*.ts",
     "packages/**/*.tsx",
-    "types.d.ts",
-    "vite.config.ts",
+    "*.ts",
     // Include types for SVGs processed by vite-plugin-svgr.
     "node_modules/vite-plugin-svgr/client.d.ts"
   ]

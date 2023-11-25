@@ -145,9 +145,9 @@ async function stopTask(name: string) {
 
 console.log(
   `
-=========================
+=============================
 === Crosswing Dev Manager ===
-=========================
+=============================
 
 Visit http://localhost:${port} to start local development services.
 `,

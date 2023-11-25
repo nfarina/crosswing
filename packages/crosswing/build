@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Builds all packages in Crosswing to prepare for distribution on NPM.
+
+# First, clone the `packages` folder into `dist/packages`.
+rm -rf dist
+mkdir -p dist
+rsync -av \
+  --exclude="node_modules" \
+  --exclude="dist" \
+  --exclude="build" \
+  --exclude="tsconfig.dist.json" \
+  --exclude=".DS_Store" \
+  --exclude="*.stories.tsx" \
+  --exclude="*.test.ts" \
+  . \
+  dist
+
+# Now build the TypeScript into JS.
+bun run tsc -p tsconfig.dist.json

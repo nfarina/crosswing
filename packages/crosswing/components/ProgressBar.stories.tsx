@@ -11,7 +11,7 @@ export default {
       control: { type: "range", min: 0, max: 1, step: 0.1 },
     },
   },
-} as Meta<typeof ProgressBar>;
+} satisfies Meta<typeof ProgressBar>;
 
 type Story = StoryObj<typeof ProgressBar>;
 

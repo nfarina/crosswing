@@ -26,7 +26,7 @@ import { ToolbarTab } from "./ToolbarTab";
 export default {
   component: ToolbarLayout,
   decorators: [
-    (Story) => <Container children={<Story />} />,
+    (Story: () => any) => <Container children={<Story />} />,
     CrosswingAppDecorator({ width: 500, height: 400 }),
     RouterDecorator,
   ],

@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "sourceMap": true,
+    "noEmit": false,
+    "incremental": false
+  },
+  "buildOptions": {
+    "outDir": "dist"
+  },
+  "include": [
+    "dist/**/*.ts",
+    "dist/**/*.tsx",
+    // Include types for SVGs processed by vite-plugin-svgr.
+    "../../node_modules/vite-plugin-svgr/client.d.ts"
+  ]
+}

@@ -16,7 +16,7 @@ export default {
   args: {
     style: { minWidth: "200px" },
   },
-} as Meta<typeof Slider>;
+} satisfies Meta<typeof Slider>;
 
 const Template: StoryFn<typeof Slider> = ({
   value: initialValue,

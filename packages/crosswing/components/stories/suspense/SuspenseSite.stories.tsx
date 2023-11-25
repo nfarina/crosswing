@@ -9,9 +9,8 @@ export default {
   component: SuspenseSite,
   decorators: [
     CrosswingAppDecorator({ layout: "fullscreen" }),
-    (
-      Story, // Simulate an ios container for nice transitions that help visualize the
-    ) => (
+    (Story: () => any) => (
+      // Simulate an ios container for nice transitions that help visualize the
       // UX with suspense.
       <MockHostProvider container="ios">
         <BrowserSimulator>

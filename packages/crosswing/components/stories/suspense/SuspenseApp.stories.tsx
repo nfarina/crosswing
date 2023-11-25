@@ -10,9 +10,8 @@ export default {
   component: SuspenseApp,
   decorators: [
     CrosswingAppDecorator({ layout: "mobile" }),
-    (
-      Story, // Simulate an ios container for nice transitions that help visualize the
-    ) => (
+    (Story: () => any) => (
+      // Simulate an ios container for nice transitions that help visualize the
       // UX with suspense.
       <MockHostProvider container="ios">
         <BrowserSimulator>
@@ -26,7 +25,7 @@ export default {
     ),
   ],
   parameters: { layout: "centered" },
-} satisfies Meta;
+} satisfies Meta<typeof SuspenseApp>;
 
 export const App = () => <SuspenseApp />;
 
