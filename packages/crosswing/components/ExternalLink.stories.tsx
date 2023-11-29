@@ -4,7 +4,7 @@ import { colors } from "../colors/colors";
 import { fonts } from "../fonts/fonts";
 import { MockHostProvider } from "../host/mocks/MockHostProvider";
 import { CrosswingAppDecorator } from "../storybook";
-import { ExternalLink } from "./ExternalLink";
+import { ExternalLink } from "./ExternalLink.js";
 
 export default {
   component: ExternalLink,

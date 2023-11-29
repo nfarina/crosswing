@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useAsyncTask } from "../../hooks/useAsyncTask";
 import { wait } from "../../shared/wait";
 import { CrosswingAppDecorator } from "../../storybook";
-import { Toggle } from "./Toggle";
+import { Toggle } from "./Toggle.js";
 
 export default {
   component: Toggle,

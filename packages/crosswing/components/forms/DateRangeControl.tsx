@@ -5,14 +5,14 @@ import { colors } from "../../colors/colors";
 import { fonts } from "../../fonts/fonts";
 import { useResponsiveLayout } from "../../hooks/useResponsiveLayout";
 import { Button, StyledButton } from "../Button";
-import { CalendarView, StyledCalendarInput } from "./CalendarView";
+import { CalendarView, StyledCalendarInput } from "./CalendarView.js";
 import {
   AllDateRangePresets,
   DateRange,
   areDateRangesEqual,
   dateRange,
   isSameDay,
-} from "./DateRange";
+} from "./DateRange.js";
 
 export default function DateRangeControl({
   value,

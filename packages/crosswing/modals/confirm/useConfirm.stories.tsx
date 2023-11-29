@@ -5,7 +5,7 @@ import {
   ModalStoryButton,
   ModalStoryButtons,
 } from "../storybook/ModalStoryButtons";
-import { useConfirm } from "./useConfirm";
+import { useConfirm } from "./useConfirm.js";
 
 export default {
   component: useConfirm,

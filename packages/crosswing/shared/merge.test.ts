@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test";
-import { merge } from "./merge";
+import { merge } from "./merge.js";
 
 test("merges into empty object", () => {
   expect(merge({}, { color: "blue" })).toEqual({ color: "blue" });

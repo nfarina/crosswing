@@ -5,7 +5,7 @@ import {
   ModalStoryButton,
   ModalStoryButtons,
 } from "../storybook/ModalStoryButtons";
-import { useBanner } from "./useBanner";
+import { useBanner } from "./useBanner.js";
 
 export default {
   component: useBanner,

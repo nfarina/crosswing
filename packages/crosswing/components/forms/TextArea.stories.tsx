@@ -5,7 +5,7 @@ import { colors } from "../../colors/colors";
 import { fonts } from "../../fonts/fonts";
 import { CrosswingAppDecorator } from "../../storybook";
 import { Button } from "../Button";
-import { StyledTextArea, TextArea } from "./TextArea";
+import { StyledTextArea, TextArea } from "./TextArea.js";
 
 export default {
   component: TextArea,

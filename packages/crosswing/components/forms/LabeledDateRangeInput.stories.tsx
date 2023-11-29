@@ -4,8 +4,8 @@ import { ModalDecorator } from "../../modals/storybook/ModalDecorator";
 import { Days } from "../../shared/timespan";
 import { CrosswingAppDecorator } from "../../storybook";
 import { SeparatorDecorator } from "../SeparatorLayout";
-import { DateRange, dateRange } from "./DateRange";
-import { LabeledDateRangeInput } from "./LabeledDateRangeInput";
+import { DateRange, dateRange } from "./DateRange.js";
+import { LabeledDateRangeInput } from "./LabeledDateRangeInput.js";
 
 export default {
   component: LabeledDateRangeInput,

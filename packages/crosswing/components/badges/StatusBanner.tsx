@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { styled } from "styled-components";
 import { fonts } from "../../fonts/fonts";
 import { Button } from "../Button";
-import { StatusBadge } from "./StatusBadge";
+import { StatusBadge } from "./StatusBadge.js";
 
 export function StatusBanner({
   action,

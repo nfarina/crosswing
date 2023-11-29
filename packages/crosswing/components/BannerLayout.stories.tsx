@@ -1,8 +1,8 @@
 import { useAsyncTask } from "../hooks/useAsyncTask";
 import { wait } from "../shared/wait";
 import { CrosswingAppDecorator } from "../storybook";
-import { BannerLayout } from "./BannerLayout";
-import { NoContent } from "./NoContent";
+import { BannerLayout } from "./BannerLayout.js";
+import { NoContent } from "./NoContent.js";
 
 export default {
   component: BannerLayout,

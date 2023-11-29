@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CrosswingAppDecorator } from "../../storybook";
-import { ToggleButton } from "./ToggleButton";
+import { ToggleButton } from "./ToggleButton.js";
 
 export default {
   component: ToggleButton,

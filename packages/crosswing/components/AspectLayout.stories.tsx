@@ -3,7 +3,7 @@ import { useState } from "react";
 import { styled } from "styled-components";
 import { colors } from "../colors/colors";
 import { CrosswingAppDecorator } from "../storybook";
-import { AspectLayout, StyledAspectLayout } from "./AspectLayout";
+import { AspectLayout, StyledAspectLayout } from "./AspectLayout.js";
 
 export default {
   component: AspectLayout,

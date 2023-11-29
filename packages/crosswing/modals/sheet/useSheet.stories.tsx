@@ -10,7 +10,7 @@ import {
   ModalStoryButton,
   ModalStoryButtons,
 } from "../storybook/ModalStoryButtons";
-import { useSheet } from "./useSheet";
+import { useSheet } from "./useSheet.js";
 
 export default {
   component: useSheet,

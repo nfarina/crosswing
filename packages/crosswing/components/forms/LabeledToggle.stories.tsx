@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { CrosswingAppDecorator } from "../../storybook";
 import { SeparatorDecorator } from "../SeparatorLayout";
-import { LabeledToggle } from "./LabeledToggle";
+import { LabeledToggle } from "./LabeledToggle.js";
 
 export default {
   component: LabeledToggle,

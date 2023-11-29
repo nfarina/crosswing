@@ -4,9 +4,9 @@ import { HotKeyContextDataAttributes, useHotkey } from "../../hooks/useHotkey";
 import { safeArea } from "../../host/features/safeArea";
 import { easing } from "../../shared/easing";
 import { Modal, useModal } from "../context/useModal";
-import { ActionItem, ActionMenu } from "./ActionMenu";
+import { ActionItem, ActionMenu } from "./ActionMenu.js";
 
-export * from "./ActionMenu";
+export * from "./ActionMenu.js";
 
 export function useActions<T extends any[]>(
   actions: (...args: T) => ActionItem[],

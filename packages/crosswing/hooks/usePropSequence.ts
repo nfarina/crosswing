@@ -1,5 +1,5 @@
 import { FunctionComponent, useState } from "react";
-import { useInterval } from "./useInterval";
+import { useInterval } from "./useInterval.js";
 
 // Helpful type for Storybook - allows you to pass an array of prop updates
 // that will be applied on regular intervals, so you can easily visualize

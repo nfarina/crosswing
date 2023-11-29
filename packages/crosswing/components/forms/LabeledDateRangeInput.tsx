@@ -2,8 +2,8 @@ import { HTMLAttributes, ReactNode, lazy } from "react";
 import { styled } from "styled-components";
 import { useSheet } from "../../modals/sheet/useSheet";
 import { DateRangeLabel } from "../labels/DateRangeLabel";
-import { DateRange } from "./DateRange";
-import { TextCell } from "./TextCell";
+import { DateRange } from "./DateRange.js";
+import { TextCell } from "./TextCell.js";
 
 const DateRangePicker = lazy(() => import("./DateRangePicker"));
 

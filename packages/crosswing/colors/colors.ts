@@ -1,13 +1,13 @@
-import { gradientColor, hexColor, varColor } from "./builders";
+import { gradientColor, hexColor, varColor } from "./builders.js";
 
-export * from "./builders";
+export * from "./builders.js";
 
 export {
   gradientColor,
   hexColor,
   varColor,
   type ColorBuilder,
-} from "./builders";
+} from "./builders.js";
 
 // Default Crosswing colors.
 // Isomorphic.

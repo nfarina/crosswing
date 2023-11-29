@@ -7,8 +7,8 @@ import {
   MobileToolbarButton,
   MobileToolbarLayout,
   MobileToolbarSpace,
-} from "./MobileToolbar";
-import { NoContent } from "./NoContent";
+} from "./MobileToolbar.js";
+import { NoContent } from "./NoContent.js";
 
 export default {
   component: MobileToolbar,

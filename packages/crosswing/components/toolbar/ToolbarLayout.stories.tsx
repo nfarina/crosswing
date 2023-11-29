@@ -19,9 +19,9 @@ import {
   ToolbarSidebarButton,
   ToolbarSpace,
 } from "../toolbar/Toolbar";
-import { useToolbar } from "./ToolbarContext";
-import { ToolbarLayout } from "./ToolbarLayout";
-import { ToolbarTab } from "./ToolbarTab";
+import { useToolbar } from "./ToolbarContext.js";
+import { ToolbarLayout } from "./ToolbarLayout.js";
+import { ToolbarTab } from "./ToolbarTab.js";
 
 export default {
   component: ToolbarLayout,

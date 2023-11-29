@@ -2,9 +2,9 @@ import { HTMLAttributes, MouseEvent, ReactNode } from "react";
 import { styled } from "styled-components";
 import { colors } from "../colors/colors";
 import { fonts } from "../fonts/fonts";
-import { Button } from "./Button";
-import { Clickable } from "./Clickable";
-import { LinkButton } from "./LinkButton";
+import { Button } from "./Button.js";
+import { Clickable } from "./Clickable.js";
+import { LinkButton } from "./LinkButton.js";
 
 export function NoContent({
   title,

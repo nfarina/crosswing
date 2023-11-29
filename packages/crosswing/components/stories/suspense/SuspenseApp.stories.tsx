@@ -4,7 +4,7 @@ import { ModalRootProvider } from "../../../modals/context/ModalRootProvider";
 import { BrowserSimulator } from "../../../router/storybook/RouterDecorator";
 import { CrosswingAppDecorator } from "../../../storybook";
 import { PageTitleProvider } from "../../sites/SitePageTitle";
-import { SuspenseApp, SuspenseNavs, SuspenseSwitch } from "./SuspenseApp";
+import { SuspenseApp, SuspenseNavs, SuspenseSwitch } from "./SuspenseApp.js";
 
 export default {
   component: SuspenseApp,

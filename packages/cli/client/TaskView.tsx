@@ -10,7 +10,7 @@ import { wait } from "crosswing/shared/wait";
 import { SyntheticEvent } from "react";
 import { styled } from "styled-components";
 import { ClientTask } from "../shared/types";
-import { api } from "./api";
+import { api } from "./api.js";
 
 export function TaskView({
   task,

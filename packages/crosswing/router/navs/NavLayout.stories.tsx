@@ -4,8 +4,8 @@ import { fonts } from "../../fonts/fonts";
 import { MockHostProvider } from "../../host/mocks/MockHostProvider";
 import { CrosswingAppDecorator } from "../../storybook";
 import { RouterDecorator } from "../storybook/RouterDecorator";
-import { NavLayout } from "./NavLayout";
-import { StyledNavTitleView } from "./NavTitleView";
+import { NavLayout } from "./NavLayout.js";
+import { StyledNavTitleView } from "./NavTitleView.js";
 
 export default {
   component: NavLayout,

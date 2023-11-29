@@ -6,7 +6,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { ModalContext } from "./ModalContext";
+import { ModalContext } from "./ModalContext.js";
 
 /**
  * Callback types provided for descriptive type-hints.

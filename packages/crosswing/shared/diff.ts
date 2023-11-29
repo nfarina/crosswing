@@ -1,4 +1,4 @@
-import { deepEqual } from "./compare";
+import { deepEqual } from "./compare.js";
 
 /**
  * Returns the difference between two objects. If they are equal, returns

@@ -3,9 +3,9 @@ import { styled } from "styled-components";
 import { colors } from "../colors/colors";
 import { fonts } from "../fonts/fonts";
 import { safeArea } from "../host/features/safeArea";
-import { Scrollable, StyledScrollable } from "./Scrollable";
-import { StyledSeparatorLayout } from "./SeparatorLayout";
-import { FormValues } from "./forms/useFormValues";
+import { Scrollable, StyledScrollable } from "./Scrollable.js";
+import { StyledSeparatorLayout } from "./SeparatorLayout.js";
+import { FormValues } from "./forms/useFormValues.js";
 
 /**
  * A common "wizard" like layout for going through a step by step process.

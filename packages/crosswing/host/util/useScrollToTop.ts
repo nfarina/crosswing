@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { smoothScroll } from "./smoothScroll";
-import { HostContainer } from "./types";
+import { smoothScroll } from "./smoothScroll.js";
+import { HostContainer } from "./types.js";
 
 export type ScrollToTop = () => void;
 

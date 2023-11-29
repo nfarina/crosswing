@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/react";
 import { CrosswingAppDecorator } from "../../storybook";
-import { Select, SelectOption } from "./Select";
+import { Select, SelectOption } from "./Select.js";
 
 export default {
   component: Select,

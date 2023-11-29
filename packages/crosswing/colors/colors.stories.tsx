@@ -3,8 +3,8 @@ import { CSSProperties, ReactNode } from "react";
 import { styled } from "styled-components";
 import { fonts } from "../fonts/fonts";
 import { CrosswingAppDecorator } from "../storybook";
-import { ColorView } from "./ColorView";
-import { colors } from "./colors";
+import { ColorView } from "./ColorView.js";
+import { colors } from "./colors.js";
 
 export default {
   component: colors as any, // Just for the auto-title.

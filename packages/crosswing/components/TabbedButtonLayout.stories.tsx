@@ -7,9 +7,9 @@ import {
 } from "../router/storybook/RouterDecorator";
 import { wait } from "../shared/wait";
 import { CrosswingAppDecorator } from "../storybook";
-import { LoadingCurtain } from "./LoadingCurtain";
-import { NoContent } from "./NoContent";
-import { TabbedButton, TabbedButtonLayout } from "./TabbedButtonLayout";
+import { LoadingCurtain } from "./LoadingCurtain.js";
+import { NoContent } from "./NoContent.js";
+import { TabbedButton, TabbedButtonLayout } from "./TabbedButtonLayout.js";
 
 export default {
   component: TabbedButtonLayout,

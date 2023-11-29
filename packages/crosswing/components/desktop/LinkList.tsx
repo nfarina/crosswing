@@ -15,7 +15,7 @@ import {
   SeparatorLayout,
   StyledSeparatorLayout,
 } from "../SeparatorLayout";
-import { LinkListCell } from "./LinkListCell";
+import { LinkListCell } from "./LinkListCell.js";
 
 export function LinkList<T extends { id: string }>({
   items = [],

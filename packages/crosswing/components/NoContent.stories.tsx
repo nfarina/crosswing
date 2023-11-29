@@ -1,7 +1,7 @@
 import { Link } from "../router/Link";
 import { RouterDecorator } from "../router/storybook/RouterDecorator";
 import { CrosswingAppDecorator } from "../storybook";
-import { NoContent } from "./NoContent";
+import { NoContent } from "./NoContent.js";
 
 export default {
   component: NoContent,

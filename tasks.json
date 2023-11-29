@@ -1,10 +1,10 @@
 {
   "example-client": {
-    "title": "Client",
+    "title": "Example Client",
     "description": "Vite development server for the Crosswing example app",
     "run": {
       "script": "dev",
-      "workspace": "example-client"
+      "workspace": "example"
     },
     "link": "http://localhost:2701"
   },

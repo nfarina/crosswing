@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test";
-import { colors } from "./colors";
+import { colors } from "./colors.js";
 
 test("transforms colors", () => {
   const rendered = colors.mediumBlue({

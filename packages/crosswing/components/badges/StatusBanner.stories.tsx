@@ -1,7 +1,7 @@
 import { action } from "@storybook/addon-actions";
 import { Meta, StoryFn } from "@storybook/react";
 import { CrosswingAppDecorator } from "../../storybook";
-import { StatusBanner } from "./StatusBanner";
+import { StatusBanner } from "./StatusBanner.js";
 
 export default {
   component: StatusBanner,

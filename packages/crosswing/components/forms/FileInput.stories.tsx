@@ -4,8 +4,8 @@ import { styled } from "styled-components";
 import { colors } from "../../colors/colors";
 import { CrosswingAppDecorator } from "../../storybook";
 import { SeparatorDecorator } from "../SeparatorLayout";
-import { FileInput } from "./FileInput";
-import { TextCell } from "./TextCell";
+import { FileInput } from "./FileInput.js";
+import { TextCell } from "./TextCell.js";
 
 export default {
   component: FileInput,

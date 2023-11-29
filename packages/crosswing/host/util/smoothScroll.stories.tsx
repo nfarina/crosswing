@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { styled } from "styled-components";
-import { smoothScroll } from "./smoothScroll";
+import { smoothScroll } from "./smoothScroll.js";
 
 export default {
   component: smoothScroll,

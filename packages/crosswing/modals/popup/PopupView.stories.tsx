@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import { colors } from "../../colors/colors";
 import { fonts } from "../../fonts/fonts";
 import { CrosswingAppDecorator } from "../../storybook";
-import { PopupView } from "./PopupView";
+import { PopupView } from "./PopupView.js";
 
 export default {
   component: PopupView,

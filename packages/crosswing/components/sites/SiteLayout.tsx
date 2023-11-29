@@ -13,9 +13,9 @@ import MenuIcon from "../../icons/Menu.svg?react";
 import { Redirect } from "../../router/redirect/Redirect";
 import { Route, Switch } from "../../router/switch/Switch";
 import { NoContent } from "../NoContent";
-import { SiteHeader, StyledSiteHeader } from "./SiteHeader";
-import { SiteHeaderAccessory } from "./SiteHeaderAccessory";
-import { PageTitleProvider } from "./SitePageTitle";
+import { SiteHeader, StyledSiteHeader } from "./SiteHeader.js";
+import { SiteHeaderAccessory } from "./SiteHeaderAccessory.js";
+import { PageTitleProvider } from "./SitePageTitle.js";
 import {
   SiteSidebar,
   SiteSidebarArea,
@@ -23,7 +23,7 @@ import {
   SiteSidebarLink,
   SiteSidebarLinkProps,
   StyledSiteSidebar,
-} from "./SiteSidebar";
+} from "./SiteSidebar.js";
 
 export interface SiteAreaProps extends SiteSidebarAreaProps {
   render?: () => ReactElement<any>;

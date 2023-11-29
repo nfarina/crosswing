@@ -3,7 +3,7 @@ import { CSSTransition } from "react-transition-group";
 import { styled } from "styled-components";
 import { colors } from "../colors/colors";
 import { fonts } from "../fonts/fonts";
-import { Spinner, StyledSpinner } from "./Spinner";
+import { Spinner, StyledSpinner } from "./Spinner.js";
 
 export function BannerLayout({
   title = "Look at Banner, Michael!",

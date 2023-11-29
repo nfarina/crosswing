@@ -42,9 +42,9 @@ import { usePreferredFontSize } from "../util/usePreferredFontSize";
 import { useSafeArea } from "../util/useSafeArea";
 import { useScrollToTop } from "../util/useScrollToTop";
 import { useWindowListener } from "../util/useWindowListener";
-import { HostContext } from "./HostContext";
+import { HostContext } from "./HostContext.js";
 
-export * from "./HostContext";
+export * from "./HostContext.js";
 
 export function HostProvider({
   container = detectContainer(),

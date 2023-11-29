@@ -6,9 +6,9 @@ import { useHostStatusBar } from "../../host/features/HostStatusBar";
 import { safeArea } from "../../host/features/safeArea";
 import Back from "../../icons/Back.svg?react";
 import { useRouter } from "../context/RouterContext";
-import { NavAccessory, NavAccessoryView } from "./NavAccessoryView";
-import { NavTitleView } from "./NavTitleView";
-import { StatusBarStyleAttribute } from "./useAutoStatusBar";
+import { NavAccessory, NavAccessoryView } from "./NavAccessoryView.js";
+import { NavTitleView } from "./NavTitleView.js";
+import { StatusBarStyleAttribute } from "./useAutoStatusBar.js";
 
 export interface NavProps {
   title?: ReactNode;

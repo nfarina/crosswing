@@ -4,7 +4,7 @@ import { useState } from "react";
 import Close from "../icons/Close.svg?react";
 import Warning from "../icons/Warning.svg?react";
 import { CrosswingAppDecorator } from "../storybook";
-import { Button } from "./Button";
+import { Button } from "./Button.js";
 
 export default {
   component: Button,

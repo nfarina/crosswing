@@ -1,6 +1,6 @@
 import { CrosswingAppDecorator } from "../storybook";
-import { Button } from "./Button";
-import { SetupLayout } from "./SetupLayout";
+import { Button } from "./Button.js";
+import { SetupLayout } from "./SetupLayout.js";
 
 export default {
   component: SetupLayout,

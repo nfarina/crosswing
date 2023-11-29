@@ -5,14 +5,14 @@ import { styled } from "styled-components";
 import { colors } from "../colors/colors";
 import { fonts } from "../fonts/fonts";
 import { CrosswingAppDecorator } from "../storybook";
-import { Link } from "./Link";
-import { Router } from "./Router";
-import { RouterContext } from "./context/RouterContext";
-import { NavLayout } from "./navs/NavLayout";
-import { NavRoute, Navs } from "./navs/Navs";
-import { BrowserSimulator } from "./storybook/BrowserSimulator";
-import { Route, Switch } from "./switch/Switch";
-import { Tab, Tabs } from "./tabs/Tabs";
+import { Link } from "./Link.js";
+import { Router } from "./Router.js";
+import { RouterContext } from "./context/RouterContext.js";
+import { NavLayout } from "./navs/NavLayout.js";
+import { NavRoute, Navs } from "./navs/Navs.js";
+import { BrowserSimulator } from "./storybook/BrowserSimulator.js";
+import { Route, Switch } from "./switch/Switch.js";
+import { Tab, Tabs } from "./tabs/Tabs.js";
 
 export default {
   component: Router,

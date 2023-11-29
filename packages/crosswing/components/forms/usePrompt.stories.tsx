@@ -4,8 +4,8 @@ import { colors } from "../../colors/colors";
 import { ModalDecorator } from "../../modals/storybook/ModalDecorator";
 import { CrosswingAppDecorator } from "../../storybook";
 import { Button } from "../Button";
-import { urlTransformer } from "./urlTransformer";
-import { usePrompt } from "./usePrompt";
+import { urlTransformer } from "./urlTransformer.js";
+import { usePrompt } from "./usePrompt.js";
 
 export default {
   component: usePrompt,

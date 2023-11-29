@@ -2,13 +2,13 @@ import dayjs from "dayjs";
 import { useState } from "react";
 import { styled } from "styled-components";
 import { CrosswingAppDecorator } from "../../storybook";
-import { CalendarView } from "./CalendarView";
+import { CalendarView } from "./CalendarView.js";
 import {
   areDateRangesEqual,
   DateRange,
   dateRange,
   isSameDay,
-} from "./DateRange";
+} from "./DateRange.js";
 
 export default {
   component: CalendarView,

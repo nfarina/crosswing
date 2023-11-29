@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { RouterLocation } from "./RouterLocation";
+import { RouterLocation } from "./RouterLocation.js";
 
 describe("linkTo", () => {
   const location = RouterLocation.fromHref("/customers/cus1").claimAll();

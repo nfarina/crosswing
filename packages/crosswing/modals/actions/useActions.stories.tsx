@@ -6,7 +6,7 @@ import {
   ModalStoryButton,
   ModalStoryButtons,
 } from "../storybook/ModalStoryButtons";
-import { useActions } from "./useActions";
+import { useActions } from "./useActions.js";
 
 export default {
   component: useActions,

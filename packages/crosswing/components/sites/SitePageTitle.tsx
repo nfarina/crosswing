@@ -17,7 +17,7 @@ import { Link } from "../../router/Link";
 import { useRouter } from "../../router/context/RouterContext";
 import { NavAccessoryView } from "../../router/navs/NavAccessoryView";
 import { NavTitleView } from "../../router/navs/NavTitleView";
-import { SiteHeaderAccessory } from "./SiteHeaderAccessory";
+import { SiteHeaderAccessory } from "./SiteHeaderAccessory.js";
 
 // This is pretty fancy for a breadcrumbs system.
 

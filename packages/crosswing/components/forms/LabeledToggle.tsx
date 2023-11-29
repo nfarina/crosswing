@@ -2,7 +2,7 @@ import { HTMLAttributes, MouseEvent, ReactNode } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors";
 import { fonts } from "../../fonts/fonts";
-import { Toggle, ToggleSize } from "./Toggle";
+import { Toggle, ToggleSize } from "./Toggle.js";
 
 export function LabeledToggle({
   label,

@@ -4,8 +4,8 @@ import { safeArea } from "../../host/features/safeArea";
 import { NavLayout } from "../../router/navs/NavLayout";
 import { Button, StyledButton } from "../Button";
 import { Notice } from "../Notice";
-import { CalendarView, StyledCalendarInput } from "./CalendarView";
-import { dateRange } from "./DateRange";
+import { CalendarView, StyledCalendarInput } from "./CalendarView.js";
+import { dateRange } from "./DateRange.js";
 
 export function DatePicker({
   defaultDate,

@@ -1,7 +1,7 @@
 import { RouterDecorator } from "../router/storybook/RouterDecorator";
 import { CrosswingAppDecorator } from "../storybook";
-import { Notice } from "./Notice";
-import { SeparatorLayout } from "./SeparatorLayout";
+import { Notice } from "./Notice.js";
+import { SeparatorLayout } from "./SeparatorLayout.js";
 
 export default {
   component: Notice,

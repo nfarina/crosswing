@@ -3,8 +3,8 @@ import { RouterLocation } from "../RouterLocation";
 import { RouterContext } from "../context/RouterContext";
 import { TabBarContext } from "../tabs/TabBar";
 
-export * from "./BrowserDecorator";
-export * from "./BrowserSimulator";
+export * from "./BrowserDecorator.js";
+export * from "./BrowserSimulator.js";
 
 // Useful for hosting Storybook components designed to be presented
 // in a mobile-app setting.

@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test";
-import { capitalize } from "./strings";
+import { capitalize } from "./strings.js";
 
 test('capitalizes "hello" to "Hello"', () => {
   expect(capitalize("hello")).toBe("Hello");

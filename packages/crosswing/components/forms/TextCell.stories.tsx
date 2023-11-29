@@ -2,7 +2,7 @@ import Attachment from "../../icons/Attachment.svg?react";
 import { RouterDecorator } from "../../router/storybook/RouterDecorator";
 import { CrosswingAppDecorator } from "../../storybook";
 import { SeparatorDecorator } from "../SeparatorLayout";
-import { TextCell } from "./TextCell";
+import { TextCell } from "./TextCell.js";
 
 export default {
   component: TextCell,

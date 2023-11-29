@@ -4,7 +4,7 @@ import { styled } from "styled-components";
 import { colors } from "../../colors/colors";
 import { fonts } from "../../fonts/fonts";
 import { CrosswingAppDecorator } from "../../storybook";
-import { Timestamp, setTimestampUpdateInterval } from "./Timestamp";
+import { Timestamp, setTimestampUpdateInterval } from "./Timestamp.js";
 
 setTimestampUpdateInterval(500);
 

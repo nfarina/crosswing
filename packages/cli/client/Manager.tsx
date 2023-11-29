@@ -12,9 +12,9 @@ import { ModalRootProvider } from "crosswing/modals/context";
 import { useRef, useState } from "react";
 import { styled } from "styled-components";
 import { ServerStatus } from "../shared/types";
-import { TaskView } from "./TaskView";
-import { api } from "./api";
-import { useDocumentVisible } from "./useDocumentVisible";
+import { TaskView } from "./TaskView.js";
+import { api } from "./api.js";
+import { useDocumentVisible } from "./useDocumentVisible.js";
 
 export function Manager() {
   return (

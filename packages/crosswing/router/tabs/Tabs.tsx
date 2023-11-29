@@ -15,12 +15,12 @@ import { safeArea } from "../../host/features/safeArea";
 import { RouterLocation } from "../RouterLocation";
 import { RouterContext, useRouter } from "../context/RouterContext";
 import { Redirect } from "../redirect/Redirect";
-import { StyledTabBar, TabBar, TabBarContext } from "./TabBar";
-import { TabProps } from "./TabLink";
+import { StyledTabBar, TabBar, TabBarContext } from "./TabBar.js";
+import { TabProps } from "./TabLink.js";
 
-export * from "./TabBar";
-export * from "./TabLink";
-export * from "./UnreadBadge";
+export * from "./TabBar.js";
+export * from "./TabLink.js";
+export * from "./UnreadBadge.js";
 
 const debug = Debug("router:Tabs");
 

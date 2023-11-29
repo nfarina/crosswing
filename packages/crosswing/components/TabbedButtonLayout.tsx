@@ -16,7 +16,7 @@ import { useRouter } from "../router/context/RouterContext";
 import { Redirect } from "../router/redirect/Redirect";
 import { UnreadBadge } from "../router/tabs/UnreadBadge";
 import { easing } from "../shared/easing";
-import { Button } from "./Button";
+import { Button } from "./Button.js";
 
 export interface TabbedButtonProps {
   title: ReactNode;

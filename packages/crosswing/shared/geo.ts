@@ -3,7 +3,7 @@ import {
   geohashForLocation,
   geohashQueryBounds,
   GeohashRange,
-} from "./geohash";
+} from "./geohash.js";
 
 // Google Maps.
 interface LatLng {

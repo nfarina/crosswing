@@ -6,8 +6,8 @@ import { CrosswingAppDecorator } from "../../storybook";
 import { ModalRootProvider } from "../context/ModalRootProvider";
 import { ModalDecorator } from "../storybook/ModalDecorator";
 import { ModalStoryButton } from "../storybook/ModalStoryButtons";
-import { PopupView } from "./PopupView";
-import { usePopup } from "./usePopup";
+import { PopupView } from "./PopupView.js";
+import { usePopup } from "./usePopup.js";
 
 export default {
   component: usePopup,

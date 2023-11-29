@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useResettableState } from "../../hooks/useResettableState";
-import { HostFeatures } from "./types";
+import { HostFeatures } from "./types.js";
 
 export function usePreferredFontSize(features?: HostFeatures): number {
   // Initialize with what the host gave us in getFeatures(), or the iOS default

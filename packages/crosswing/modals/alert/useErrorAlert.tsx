@@ -1,5 +1,5 @@
 import { Modal } from "../context/useModal";
-import { useAlert } from "./useAlert";
+import { useAlert } from "./useAlert.js";
 
 export type ErrorHandler = (error: Error | string) => void;
 

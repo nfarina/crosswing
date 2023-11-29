@@ -8,7 +8,7 @@ import {
   ModalStoryButton,
   ModalStoryButtons,
 } from "../storybook/ModalStoryButtons";
-import { useDialog } from "./useDialog";
+import { useDialog } from "./useDialog.js";
 
 export default {
   component: useDialog,

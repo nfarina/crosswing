@@ -1,5 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
-import { HostContainer, HostFeatures, HostViewport, SafeArea } from "./types";
+import {
+  HostContainer,
+  HostFeatures,
+  HostViewport,
+  SafeArea,
+} from "./types.js";
 
 // Returns the SafeArea for the current host, or undefined if not yet
 // determined.

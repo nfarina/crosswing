@@ -2,7 +2,7 @@ import { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
 import { colors } from "../colors/colors";
 import { fonts } from "../fonts/fonts";
-import { Button } from "./Button";
+import { Button } from "./Button.js";
 
 export function Heading({
   children,

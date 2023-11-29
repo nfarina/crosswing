@@ -7,7 +7,7 @@ import { useAsyncTask } from "../../hooks/useAsyncTask";
 import { wait } from "../../shared/wait";
 import { CrosswingAppDecorator } from "../../storybook";
 import { DialogContainer } from "../dialog/useDialog";
-import { AlertView } from "./AlertView";
+import { AlertView } from "./AlertView.js";
 
 export default {
   component: AlertView,

@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 import { colors } from "../../colors/colors";
 import { fonts } from "../../fonts/fonts";
 import { CrosswingAppDecorator } from "../../storybook";
-import { MasterDetail } from "./MasterDetail";
+import { MasterDetail } from "./MasterDetail.js";
 
 export default {
   component: MasterDetail,

@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/react";
 import { colors } from "../colors/colors";
 import { CrosswingAppDecorator } from "../storybook";
-import { Donut } from "./Donut";
+import { Donut } from "./Donut.js";
 
 export default {
   component: Donut,

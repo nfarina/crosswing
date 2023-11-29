@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes, CSSProperties } from "react";
 import { styled } from "styled-components";
 import { colors } from "../colors/colors";
 import DisclosureArrow from "../icons/DisclosureArrow.svg?react";
-import { Clickable } from "./Clickable";
+import { Clickable } from "./Clickable.js";
 
 export function ExpandButton({
   rotate = 0,

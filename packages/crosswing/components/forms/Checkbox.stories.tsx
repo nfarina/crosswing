@@ -1,7 +1,7 @@
 import { Meta, StoryFn } from "@storybook/react";
 import { useState } from "react";
 import { CrosswingAppDecorator } from "../../storybook";
-import { Checkbox } from "./Checkbox";
+import { Checkbox } from "./Checkbox.js";
 
 export default {
   component: Checkbox,

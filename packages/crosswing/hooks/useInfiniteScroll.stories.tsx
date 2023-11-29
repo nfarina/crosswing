@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { styled } from "styled-components";
-import { useInfiniteScroll } from "./useInfiniteScroll";
+import { useInfiniteScroll } from "./useInfiniteScroll.js";
 
 export default {
   component: useInfiniteScroll,

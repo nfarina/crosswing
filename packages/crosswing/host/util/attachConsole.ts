@@ -1,5 +1,5 @@
 import Debug from "debug";
-import { detectContainer, log } from "./ipc";
+import { detectContainer, log } from "./ipc.js";
 
 export type DetachHandler = () => void;
 

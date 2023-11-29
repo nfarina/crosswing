@@ -1,4 +1,4 @@
-import { isRunningUnderTest } from "./env";
+import { isRunningUnderTest } from "./env.js";
 
 // Declare a cross-platform version of this.
 declare function setTimeout(callback: () => void, ms: number): number;

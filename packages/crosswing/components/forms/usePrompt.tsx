@@ -5,8 +5,8 @@ import { fonts } from "../../fonts/fonts";
 import { AlertButton, AlertView } from "../../modals/alert/AlertView";
 import { Modal } from "../../modals/context/useModal";
 import { useDialog } from "../../modals/dialog/useDialog";
-import { StyledTextInput, TextInput } from "./TextInput";
-import { InputTransformer, useInputValue } from "./useInputValue";
+import { StyledTextInput, TextInput } from "./TextInput.js";
+import { InputTransformer, useInputValue } from "./useInputValue.js";
 
 // Automagically adjusts the type given to onSubmit() to be nullable, based on
 // whether you've provided nullable = true.

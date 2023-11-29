@@ -4,7 +4,7 @@ import { useErrorAlert } from "../modals/alert/useErrorAlert";
 import { ModalDecorator } from "../modals/storybook/ModalDecorator";
 import { wait } from "../shared/wait";
 import { CrosswingAppDecorator } from "../storybook";
-import { useProgressAlert } from "./useProgressAlert";
+import { useProgressAlert } from "./useProgressAlert.js";
 
 export default {
   component: useProgressAlert,

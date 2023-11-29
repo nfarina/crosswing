@@ -1,5 +1,5 @@
-import { copyToClipboard } from "./ipc";
-import { HostFeatures } from "./types";
+import { copyToClipboard } from "./ipc.js";
+import { HostFeatures } from "./types.js";
 
 export interface HostClipboard {
   copy: (text: string) => void;

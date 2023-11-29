@@ -4,7 +4,7 @@ import { colors } from "../colors/colors";
 import { fonts } from "../fonts/fonts";
 import DisclosureIcon from "../icons/DisclosureArrow.svg?react";
 import { Link } from "../router/Link";
-import { ButtonSize } from "./Button";
+import { ButtonSize } from "./Button.js";
 
 export function LinkButton({
   primary,

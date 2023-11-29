@@ -3,8 +3,8 @@ import { styled } from "styled-components";
 import { ModalDecorator } from "../../modals/storybook/ModalDecorator";
 import { RouterDecorator } from "../../router/storybook/RouterDecorator";
 import { CrosswingAppDecorator } from "../../storybook";
-import { DateRange } from "./DateRange";
-import { DateRangeInput, StyledDateRangeInput } from "./DateRangeInput";
+import { DateRange } from "./DateRange.js";
+import { DateRangeInput, StyledDateRangeInput } from "./DateRangeInput.js";
 
 export default {
   component: DateRangeInput,

@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/react";
 import { CrosswingAppDecorator } from "../../storybook";
-import { NumberLabel } from "./NumberLabel";
+import { NumberLabel } from "./NumberLabel.js";
 
 export default {
   component: NumberLabel,

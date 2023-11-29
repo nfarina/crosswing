@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { CrosswingAppDecorator } from "../../storybook";
 import { SeparatorDecorator } from "../SeparatorLayout";
-import { LabeledContentEditable } from "./LabeledContentEditable";
+import { LabeledContentEditable } from "./LabeledContentEditable.js";
 
 export default {
   component: LabeledContentEditable,

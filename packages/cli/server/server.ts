@@ -8,8 +8,8 @@ import {
   deleteRunner,
   getRunner,
   setRunner,
-} from "./ProcessRunner";
-import { ServerTasks } from "./ServerTasks";
+} from "./ProcessRunner.js";
+import { ServerTasks } from "./ServerTasks.js";
 
 // This script accepts a single argument, the path to tasks.json.
 // It then reads the file and parses it as JSON.

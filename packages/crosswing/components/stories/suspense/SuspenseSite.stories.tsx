@@ -3,7 +3,7 @@ import { MockHostProvider } from "../../../host/mocks/MockHostProvider";
 import { ModalRootProvider } from "../../../modals/context/ModalRootProvider";
 import { BrowserSimulator } from "../../../router/storybook/RouterDecorator";
 import { CrosswingAppDecorator } from "../../../storybook";
-import { SuspenseSite } from "./SuspenseSite";
+import { SuspenseSite } from "./SuspenseSite.js";
 
 export default {
   component: SuspenseSite,

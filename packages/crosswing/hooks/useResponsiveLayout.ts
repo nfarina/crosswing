@@ -1,6 +1,6 @@
 import Debug from "debug";
 import { MutableRefObject, useState } from "react";
-import { ElementSize, useElementSize } from "./useElementSize";
+import { ElementSize, useElementSize } from "./useElementSize.js";
 
 const debug = Debug("components:ResponsiveLayout");
 

@@ -1,4 +1,4 @@
-import { InputTransformer } from "./useInputValue";
+import { InputTransformer } from "./useInputValue.js";
 
 // Validate url using a basic regex. (Thanks Copilot!)
 const regex = /^(https?:\/\/)([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;

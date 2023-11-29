@@ -2,7 +2,7 @@ import { FocusEvent, useState } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors";
 import { fonts } from "../../fonts/fonts";
-import { StyledTextInput, TextInput } from "./TextInput";
+import { StyledTextInput, TextInput } from "./TextInput.js";
 
 export function LabeledTextInput({
   title,

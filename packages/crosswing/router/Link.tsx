@@ -1,8 +1,8 @@
 import { AnchorHTMLAttributes, MouseEvent, ReactNode } from "react";
 import { styled } from "styled-components";
-import { useRouter } from "./context/RouterContext";
-import { BrowserHistory } from "./history/BrowserHistory";
-import { MemoryHistory } from "./history/MemoryHistory";
+import { useRouter } from "./context/RouterContext.js";
+import { BrowserHistory } from "./history/BrowserHistory.js";
+import { MemoryHistory } from "./history/MemoryHistory.js";
 
 export function Link({
   to,

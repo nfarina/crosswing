@@ -7,12 +7,12 @@ import {
 } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors";
-import { StyledToolbar } from "./Toolbar";
+import { StyledToolbar } from "./Toolbar.js";
 import {
   ToolbarContext,
   ToolbarContextValue,
   ToolbarInsertionRef,
-} from "./ToolbarContext";
+} from "./ToolbarContext.js";
 
 export function ToolbarLayout({
   children,

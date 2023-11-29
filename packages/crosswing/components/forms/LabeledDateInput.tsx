@@ -2,8 +2,8 @@ import { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
 import { useSheet } from "../../modals/sheet/useSheet";
 import { Timestamp } from "../labels/Timestamp";
-import { DatePicker } from "./DatePicker";
-import { TextCell } from "./TextCell";
+import { DatePicker } from "./DatePicker.js";
+import { TextCell } from "./TextCell.js";
 
 /**
  * Renders a date that the user can change, with a label.

@@ -15,8 +15,12 @@ import { LinkButton } from "../LinkButton";
 import { StyledDateRangeInput } from "../forms/DateRangeInput";
 import { SearchInput } from "../forms/SearchInput";
 import { Select } from "../forms/Select";
-import { ToolbarInsertionRef, ToolbarRef, useToolbar } from "./ToolbarContext";
-import { StyledToolbarIDView } from "./ToolbarIDView";
+import {
+  ToolbarInsertionRef,
+  ToolbarRef,
+  useToolbar,
+} from "./ToolbarContext.js";
+import { StyledToolbarIDView } from "./ToolbarIDView.js";
 
 export function Toolbar({
   expandTabs,

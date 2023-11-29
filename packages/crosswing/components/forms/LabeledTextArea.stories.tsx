@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { CrosswingAppDecorator } from "../../storybook";
 import { SeparatorDecorator } from "../SeparatorLayout";
-import { LabeledTextArea } from "./LabeledTextArea";
+import { LabeledTextArea } from "./LabeledTextArea.js";
 
 export default {
   component: LabeledTextArea,

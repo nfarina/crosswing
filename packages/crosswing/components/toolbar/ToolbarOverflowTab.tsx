@@ -14,7 +14,7 @@ import DownArrow from "../../icons/DownArrow.svg?react";
 import { usePopup } from "../../modals/popup/usePopup";
 import { useRouter } from "../../router/context/RouterContext";
 import { PopupMenu, PopupMenuText } from "../PopupMenu";
-import { ToolbarTab, ToolbarTabProps } from "./ToolbarTab";
+import { ToolbarTab, ToolbarTabProps } from "./ToolbarTab.js";
 
 /**
  * Like a <ToolbarTab> but with a built-in "overflow" menu to contain the actual

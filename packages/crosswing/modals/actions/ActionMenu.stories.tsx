@@ -1,8 +1,8 @@
 import { action } from "@storybook/addon-actions";
 import { Meta } from "@storybook/react";
 import { CrosswingAppDecorator } from "../../storybook";
-import { ActionMenu, ActionSeparator } from "./ActionMenu";
-import { ActionContainer } from "./useActions";
+import { ActionMenu, ActionSeparator } from "./ActionMenu.js";
+import { ActionContainer } from "./useActions.js";
 
 export default {
   component: ActionMenu,

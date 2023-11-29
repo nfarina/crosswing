@@ -10,7 +10,7 @@ import {
 } from "../toolbar/Toolbar";
 import { ToolbarLayout } from "../toolbar/ToolbarLayout";
 import { ToolbarTab } from "../toolbar/ToolbarTab";
-import { usePageTitle } from "./SitePageTitle";
+import { usePageTitle } from "./SitePageTitle.js";
 
 export interface SiteTabProps {
   path: string;

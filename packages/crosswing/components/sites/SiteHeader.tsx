@@ -3,8 +3,8 @@ import {
   SiteHeaderAccessory,
   SiteHeaderAccessoryView,
   StyledSiteHeaderAccessoryView,
-} from "./SiteHeaderAccessory";
-import { SitePageTitle, StyledPageTitle } from "./SitePageTitle";
+} from "./SiteHeaderAccessory.js";
+import { SitePageTitle, StyledPageTitle } from "./SitePageTitle.js";
 
 export function SiteHeader({
   siteTitle,

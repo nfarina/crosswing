@@ -1,8 +1,8 @@
 import { Meta } from "@storybook/react";
-import { CrosswingApp } from "./app";
-import { ColorView } from "./colors/ColorView";
-import { colors } from "./colors/colors";
-import { CrosswingAppDecorator } from "./storybook";
+import { CrosswingApp } from "./app.js";
+import { ColorView } from "./colors/ColorView.js";
+import { colors } from "./colors/colors.js";
+import { CrosswingAppDecorator } from "./storybook.js";
 
 export default {
   component: CrosswingApp,

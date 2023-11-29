@@ -1,5 +1,5 @@
 import { CSSProperties, useState } from "react";
-import { useResettableState } from "./useResettableState";
+import { useResettableState } from "./useResettableState.js";
 
 export default {
   component: useResettableState,

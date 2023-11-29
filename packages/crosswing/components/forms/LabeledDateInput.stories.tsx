@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ModalDecorator } from "../../modals/storybook/ModalDecorator";
 import { CrosswingAppDecorator } from "../../storybook";
 import { SeparatorDecorator } from "../SeparatorLayout";
-import { LabeledDateInput } from "./LabeledDateInput";
+import { LabeledDateInput } from "./LabeledDateInput.js";
 
 export default {
   component: LabeledDateInput,

@@ -4,9 +4,9 @@ import { useHotkey } from "../../hooks/useHotkey";
 import { useInterval } from "../../hooks/useInterval";
 import { safeArea } from "../../host/features/safeArea";
 import { Modal, useModal } from "../context/useModal";
-import { BannerView } from "./BannerView";
+import { BannerView } from "./BannerView.js";
 
-export * from "./BannerView";
+export * from "./BannerView.js";
 
 const AUTO_DISMISS_TIME = 2000;
 

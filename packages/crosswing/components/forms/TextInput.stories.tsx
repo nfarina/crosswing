@@ -5,7 +5,7 @@ import { colors } from "../../colors/colors";
 import { fonts } from "../../fonts/fonts";
 import { CrosswingAppDecorator } from "../../storybook";
 import { Button } from "../Button";
-import { StyledTextInput, TextInput } from "./TextInput";
+import { StyledTextInput, TextInput } from "./TextInput.js";
 
 export default {
   component: TextInput,

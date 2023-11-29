@@ -1,5 +1,5 @@
 import { CrosswingAppDecorator } from "../storybook";
-import { ImageViewer } from "./ImageViewer";
+import { ImageViewer } from "./ImageViewer.js";
 import SampleImage from "./SampleImage.jpg";
 
 export default {

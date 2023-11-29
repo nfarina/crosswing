@@ -5,7 +5,7 @@ import { HTMLAttributes, ReactNode, useLayoutEffect, useRef } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors";
 import { fonts } from "../../fonts/fonts";
-import { DateRange, isDateInRange, isSameDay } from "./DateRange";
+import { DateRange, isDateInRange, isSameDay } from "./DateRange.js";
 
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);

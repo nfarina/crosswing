@@ -1,8 +1,8 @@
 import { action } from "@storybook/addon-actions";
 import { Meta, StoryFn } from "@storybook/react";
 import { CrosswingAppDecorator } from "../storybook";
-import { Button } from "./Button";
-import { Heading } from "./Heading";
+import { Button } from "./Button.js";
+import { Heading } from "./Heading.js";
 
 export default {
   component: Heading,

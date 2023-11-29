@@ -6,7 +6,7 @@ import { useHost } from "../../host/context/HostContext";
 import PlaceholderIcon from "../../icons/Placeholder.svg?react";
 import { Link } from "../Link";
 import { useRouter } from "../context/RouterContext";
-import { UnreadBadge } from "./UnreadBadge";
+import { UnreadBadge } from "./UnreadBadge.js";
 
 export interface TabProps {
   path: string;

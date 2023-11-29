@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { deepEqual, shallowEqualArrays } from "./compare";
+import { deepEqual, shallowEqualArrays } from "./compare.js";
 
 describe("deepEqual", () => {
   test("returns true for equal primitives", () => {

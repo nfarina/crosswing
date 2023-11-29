@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { styled } from "styled-components";
-import { useElementSize } from "./useElementSize";
+import { useElementSize } from "./useElementSize.js";
 
 export default {
   component: useElementSize,

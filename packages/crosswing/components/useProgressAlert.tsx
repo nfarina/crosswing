@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import { AlertButton, AlertView } from "../modals/alert/AlertView";
 import { Modal } from "../modals/context/useModal";
 import { useDialog } from "../modals/dialog/useDialog";
-import { ProgressView } from "./ProgressView";
+import { ProgressView } from "./ProgressView.js";
 
 export type ProgressHandler = (message?: ReactNode) => void;
 

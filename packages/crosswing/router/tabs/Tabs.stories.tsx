@@ -5,7 +5,7 @@ import { fonts } from "../../fonts/fonts";
 import { CrosswingAppDecorator } from "../../storybook";
 import { Router } from "../Router";
 import { MemoryHistory } from "../history/MemoryHistory";
-import { Tab, Tabs } from "./Tabs";
+import { Tab, Tabs } from "./Tabs.js";
 
 export default {
   component: Tabs,

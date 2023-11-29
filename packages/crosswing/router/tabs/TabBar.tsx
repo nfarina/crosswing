@@ -11,7 +11,7 @@ import { colors } from "../../colors/colors";
 import { useHost } from "../../host/context/HostContext";
 import { safeArea } from "../../host/features/safeArea";
 import { useRouter } from "../context/RouterContext";
-import { StyledTabLink, TabLink, TabProps } from "./TabLink";
+import { StyledTabLink, TabLink, TabProps } from "./TabLink.js";
 
 export function TabBar({
   tabs,

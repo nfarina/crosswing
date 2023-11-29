@@ -5,7 +5,7 @@ import { usePopup } from "../modals/popup/usePopup";
 import { ModalDecorator } from "../modals/storybook/ModalDecorator";
 import { RouterDecorator } from "../router/storybook/RouterDecorator";
 import { CrosswingAppDecorator } from "../storybook";
-import { Button } from "./Button";
+import { Button } from "./Button.js";
 import {
   PopupMenu,
   PopupMenuHeader,
@@ -13,8 +13,8 @@ import {
   PopupMenuSeparator,
   PopupMenuText,
   PopupMenuToggle,
-} from "./PopupMenu";
-import { SelectOption } from "./forms/Select";
+} from "./PopupMenu.js";
+import { SelectOption } from "./forms/Select.js";
 
 export default {
   component: PopupMenu,

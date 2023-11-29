@@ -1,4 +1,4 @@
-import { useMatchMedia } from "./useMatchMedia";
+import { useMatchMedia } from "./useMatchMedia.js";
 
 /**
  * Returns true if the user prefers a dark UI.

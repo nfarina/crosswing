@@ -1,6 +1,6 @@
 import { Meta, StoryFn } from "@storybook/react";
 import { CrosswingAppDecorator } from "../../storybook";
-import { Badge } from "./Badge";
+import { Badge } from "./Badge.js";
 
 export default {
   component: Badge,

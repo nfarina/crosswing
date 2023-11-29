@@ -6,7 +6,7 @@ import {
   ResponsiveChild,
   ResponsiveLayout,
   StyledResponsiveLayout,
-} from "./ResponsiveLayout";
+} from "./ResponsiveLayout.js";
 
 export default {
   component: ResponsiveLayout,

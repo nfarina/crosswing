@@ -4,8 +4,8 @@ import { capitalize } from "../../shared/strings";
 import { CrosswingAppDecorator } from "../../storybook";
 import { LinkButton } from "../LinkButton";
 import CSSColors from "./CSSColors.json";
-import { LinkList, StyledLinkList } from "./LinkList";
-import { LinkListCell } from "./LinkListCell";
+import { LinkList, StyledLinkList } from "./LinkList.js";
+import { LinkListCell } from "./LinkListCell.js";
 
 export default {
   component: LinkList,

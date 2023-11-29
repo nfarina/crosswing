@@ -6,7 +6,11 @@ import Globe from "../../icons/Globe.svg?react";
 import { Router } from "../../router/Router";
 import { MemoryHistory } from "../../router/history/MemoryHistory";
 import { CrosswingAppDecorator } from "../../storybook";
-import { SiteSidebar, SiteSidebarArea, SiteSidebarLink } from "./SiteSidebar";
+import {
+  SiteSidebar,
+  SiteSidebarArea,
+  SiteSidebarLink,
+} from "./SiteSidebar.js";
 
 export default {
   component: SiteSidebar,

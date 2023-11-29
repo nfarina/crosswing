@@ -1,7 +1,7 @@
 import { DependencyList, useState } from "react";
 import { useResettableState } from "../../hooks/useResettableState";
-import { TextArea } from "./TextArea";
-import { TextInput } from "./TextInput";
+import { TextArea } from "./TextArea.js";
+import { TextInput } from "./TextInput.js";
 
 export interface InputValue<T> {
   /** Current raw value; null if empty or invalid. */

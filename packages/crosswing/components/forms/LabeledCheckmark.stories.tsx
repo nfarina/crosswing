@@ -1,7 +1,7 @@
 import { action } from "@storybook/addon-actions";
 import { CrosswingAppDecorator } from "../../storybook";
 import { SeparatorDecorator } from "../SeparatorLayout";
-import { LabeledCheckmark } from "./LabeledCheckmark";
+import { LabeledCheckmark } from "./LabeledCheckmark.js";
 
 export default {
   component: LabeledCheckmark,

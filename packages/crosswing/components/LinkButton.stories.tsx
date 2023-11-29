@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/react";
 import { RouterDecorator } from "../router/storybook/RouterDecorator";
 import { CrosswingAppDecorator } from "../storybook";
-import { LinkButton } from "./LinkButton";
+import { LinkButton } from "./LinkButton.js";
 
 export default {
   component: LinkButton,

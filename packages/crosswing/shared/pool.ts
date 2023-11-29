@@ -1,5 +1,5 @@
 import Debug from "debug";
-import { isRunningUnderTest } from "./env";
+import { isRunningUnderTest } from "./env.js";
 
 const debug = Debug("util:pool");
 

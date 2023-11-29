@@ -10,8 +10,8 @@ import { colors } from "../colors/colors";
 import { fonts } from "../fonts/fonts";
 import { PopupChildProps, PopupView } from "../modals/popup/PopupView";
 import { Link } from "../router/Link";
-import { Select } from "./forms/Select";
-import { StyledToggle, Toggle } from "./forms/Toggle";
+import { Select } from "./forms/Select.js";
+import { StyledToggle, Toggle } from "./forms/Toggle.js";
 
 // Used to drill the onClose prop down to the PopupMenu children without
 // having to clone elements and deal with "keys".

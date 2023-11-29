@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors";
 import { fonts } from "../../fonts/fonts";
-import { StyledToggle, Toggle } from "./Toggle";
+import { StyledToggle, Toggle } from "./Toggle.js";
 
 /**
  * A control shaped like a button with a title and a toggle.

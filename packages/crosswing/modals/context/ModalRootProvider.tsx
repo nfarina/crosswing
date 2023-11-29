@@ -1,11 +1,11 @@
 import { HTMLAttributes, useMemo, useRef } from "react";
 import { styled } from "styled-components";
-import { ModalContext, invariantViolation } from "./ModalContext";
-import { ModalContextProvider } from "./ModalContextProvider";
+import { ModalContext, invariantViolation } from "./ModalContext.js";
+import { ModalContextProvider } from "./ModalContextProvider.js";
 
-export * from "./ModalContext";
-export * from "./ModalContextProvider";
-export * from "./useModal";
+export * from "./ModalContext.js";
+export * from "./ModalContextProvider.js";
+export * from "./useModal.js";
 
 /**
  * Provides a surface for modals to be rendered inside. The result is an element

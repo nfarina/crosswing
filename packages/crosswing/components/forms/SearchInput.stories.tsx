@@ -3,7 +3,7 @@ import { useAsyncTask } from "../../hooks/useAsyncTask";
 import { useDebounced } from "../../hooks/useDebounced";
 import { wait } from "../../shared/wait";
 import { CrosswingAppDecorator } from "../../storybook";
-import { SearchInput } from "./SearchInput";
+import { SearchInput } from "./SearchInput.js";
 
 export default {
   component: SearchInput,

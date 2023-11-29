@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test";
-import { formatOklch, parseOklch } from "./oklch";
+import { formatOklch, parseOklch } from "./oklch.js";
 
 test("transforms colors in oklch space", () => {
   const oklch = parseOklch("#7CB8D6");

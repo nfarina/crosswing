@@ -19,7 +19,7 @@ import {
   SiteHeaderAccessory,
   SiteHeaderAccessoryView,
   StyledSiteHeaderAccessoryView,
-} from "./SiteHeaderAccessory";
+} from "./SiteHeaderAccessory.js";
 
 export type SiteSidebarAreaProps = {
   path: string;

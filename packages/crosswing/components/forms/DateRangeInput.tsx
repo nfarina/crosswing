@@ -13,7 +13,7 @@ import {
   AllDateRangePresets,
   DateRange,
   areDateRangesEqual,
-} from "./DateRange";
+} from "./DateRange.js";
 
 const DateRangeControl = lazy(() => import("./DateRangeControl"));
 const DateRangePicker = lazy(() => import("./DateRangePicker"));
