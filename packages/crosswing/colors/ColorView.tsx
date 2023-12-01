@@ -15,7 +15,7 @@ export function ColorView({
 }) {
   const cssProps = {
     ...style,
-    "--color": color(),
+    background: color(),
   } as CSSProperties;
 
   return (
@@ -34,7 +34,6 @@ const StyledColorView = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--color);
 
   > .name {
     position: absolute;

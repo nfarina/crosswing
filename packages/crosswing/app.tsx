@@ -5,18 +5,18 @@ import { ColorBuilder, colors, shadows } from "./colors/colors.js";
 import { CrosswingFontStyle, fonts } from "./fonts/fonts.js";
 
 export function CrosswingApp({
-  colors: overriddenColors,
+  colors: overriddenColors = [],
   children,
   transparent,
   ...rest
 }: {
-  colors?: Record<string, ColorBuilder>;
+  colors?: ColorBuilder[];
   transparent?: boolean;
 } & HTMLAttributes<HTMLDivElement>) {
   const resolvedColors = [
     ...Object.values(colors),
     ...Object.values(shadows),
-    ...Object.values(overriddenColors ?? []),
+    ...overriddenColors,
   ];
 
   return (

@@ -160,8 +160,8 @@ export type VarColorBuilder = {
     light,
     dark,
   }: {
-    light: string | ColorBuilder;
-    dark?: string | ColorBuilder | null;
+    light: ColorBuilder;
+    dark?: ColorBuilder | null;
   }): VarColorBuilder;
 };
 
@@ -231,15 +231,23 @@ export function getBuilderVarCss(builders: ColorBuilder[]): string {
   let css = "";
   let darkCss = "";
 
+  function renderBuilder(builder: ColorBuilder | string): string {
+    if (typeof builder === "string") {
+      return builder;
+    } else if (builder.type === "hex") {
+      return SUPPORTS_P3_COLOR ? builder.rgb : builder.hex;
+    } else {
+      return builder();
+    }
+  }
+
   for (const builder of builders) {
     if (builder.type === "var") {
-      const rendered =
-        typeof builder.light === "string" ? builder.light : builder.light();
+      const rendered = renderBuilder(builder.light);
       css += `${builder.var}: ${rendered};\n`;
 
       if (builder.dark) {
-        const rendered =
-          typeof builder.dark === "string" ? builder.dark : builder.dark();
+        const rendered = renderBuilder(builder.dark);
         darkCss += `${builder.var}: ${rendered};\n`;
       }
     }

@@ -11,15 +11,21 @@ export function CrosswingAppDecorator({
   layout = "centered",
   width = undefined,
   height = undefined,
+  colors: overriddenColors = [],
 }: {
   layout?: "fullscreen" | "centered" | "mobile";
   width?: number | "wide";
   height?: number;
+  colors?: ColorBuilder[];
 } = {}) {
   // "Wide" is just a convenient way to get a phone-sized width for a component.
   const resolvedWidth = width === "wide" ? 380 : width;
 
-  const builders = [...Object.values(colors), ...Object.values(shadows)];
+  const builders = [
+    ...Object.values(colors),
+    ...Object.values(shadows),
+    ...overriddenColors,
+  ];
 
   // Actual decorator function.
   function CrosswingAppInnerDecorator(Story: () => any) {

@@ -1,4 +1,5 @@
 import { CrosswingApp } from "crosswing/app";
+import { colors } from "crosswing/colors";
 import { Button } from "crosswing/components/Button";
 import { MobileAppFrame } from "crosswing/components/desktop/MobileAppFrame";
 import { MockHostProvider } from "crosswing/host/mocks";
@@ -10,7 +11,13 @@ import Favicon from "./Favicon.svg?react";
 export function App() {
   return (
     <MockHostProvider container="ios">
-      <CrosswingApp>
+      <CrosswingApp
+        colors={[
+          colors.primaryGradient.override({
+            light: colors.blueGradient,
+          }),
+        ]}
+      >
         <ModalRootProvider>
           <MobileAppFrame restorationKey={App}>
             <AppContent />

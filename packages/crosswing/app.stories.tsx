@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/react";
 import { CrosswingApp } from "./app.js";
 import { ColorView } from "./colors/ColorView.js";
-import { colors } from "./colors/colors.js";
+import { colors, hexColor } from "./colors/colors.js";
 import { CrosswingAppDecorator } from "./storybook.js";
 
 export default {
@@ -16,43 +16,47 @@ export const DefaultTheme = () => (
 
 export const CustomTheme = () => (
   <CrosswingApp
-    colors={{
-      primaryGradient: colors.primaryGradient.override({
-        light: colors.orangeGradient(),
+    colors={[
+      colors.primaryGradient.override({
+        light: colors.orangeGradient,
       }),
-    }}
+    ]}
   >
     <ColorView name="primary" color={colors.primaryGradient} />
   </CrosswingApp>
 );
 
 export const NestedThemes = () => (
-  <CrosswingApp
-    colors={{
-      primaryGradient: colors.primaryGradient.override({
-        light: colors.purple(),
-      }),
-    }}
-  >
+  <CrosswingApp colors={[colors.primary.override({ light: colors.darkGreen })]}>
     <ColorView
       name="primary"
       style={{ width: "80px", height: "80px" }}
-      color={colors.primaryGradient}
+      color={colors.primary}
     >
       <CrosswingApp
         transparent
-        colors={{
-          primaryGradient: colors.primaryGradient.override({
-            light: colors.gold(),
-          }),
-        }}
+        colors={[colors.primary.override({ light: hexColor("#ff0000") })]}
       >
         <ColorView
           name="primary"
           style={{ width: "30px", height: "30px" }}
-          color={colors.primaryGradient}
+          color={colors.primary}
         />
       </CrosswingApp>
     </ColorView>
   </CrosswingApp>
 );
+
+export const DecoratorTheme = () => (
+  <ColorView name="primary" color={colors.primaryGradient} />
+);
+
+DecoratorTheme.decorators = [
+  CrosswingAppDecorator({
+    colors: [
+      colors.primaryGradient.override({
+        light: colors.blueGradient,
+      }),
+    ],
+  }),
+];
