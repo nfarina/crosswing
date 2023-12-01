@@ -8,6 +8,7 @@ export interface ServerTask extends Task {
     args?: string;
   };
 }
+export type ServerTasksFile = Record<string, Omit<ServerTask, "name">>;
 
 export class ServerTasks {
   constructor(private tasks: ServerTask[]) {}
@@ -16,9 +17,7 @@ export class ServerTasks {
     return this.tasks;
   }
 
-  public static fromJson(
-    json: Record<string, Omit<ServerTask, "name">>,
-  ): ServerTasks {
+  public static fromJson(json: ServerTasksFile): ServerTasks {
     const tasks: ServerTask[] = [];
 
     for (const [name, task] of Object.entries(json)) {

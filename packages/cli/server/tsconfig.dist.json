@@ -1,0 +1,10 @@
+{
+  "extends": "../../../tsconfig.json",
+  "compilerOptions": {
+    "sourceMap": true,
+    "noEmit": false,
+    "incremental": false,
+    "outDir": "./dist"
+  },
+  "include": ["*.ts", "../../types.d.ts"]
+}

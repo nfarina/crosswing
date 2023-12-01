@@ -1,7 +1,8 @@
-import { BunFile, readableStreamToJSON } from "bun";
+import { readFile } from "fs/promises";
+import { IncomingMessage, ServerResponse, createServer } from "http";
 import parseArgs from "minimist";
 import { dirname, resolve } from "path";
-import { fileURLToPath } from "url";
+import { URL, fileURLToPath } from "url";
 import { ServerStatus } from "../shared/types";
 import {
   ProcessRunner,
@@ -9,7 +10,7 @@ import {
   getRunner,
   setRunner,
 } from "./ProcessRunner.js";
-import { ServerTasks } from "./ServerTasks.js";
+import { ServerTasks, ServerTasksFile } from "./ServerTasks.js";
 
 // This script accepts a single argument, the path to tasks.json.
 // It then reads the file and parses it as JSON.
@@ -18,20 +19,25 @@ const {
   _: [tasksJsonPath],
 } = parseArgs(process.argv.slice(2));
 
-let tasksJsonFile: BunFile;
+let tasksJson: ServerTasksFile;
+let tasksJsonFullPath: string;
 
 if (tasksJsonPath) {
-  tasksJsonFile = Bun.file(resolve(tasksJsonPath));
+  tasksJsonFullPath = resolve(tasksJsonPath);
 
-  if (!(await tasksJsonFile.exists())) {
+  try {
+    tasksJson = JSON.parse(await readFile(tasksJsonFullPath, "utf-8"));
+  } catch (error) {
     console.error(`File not found: ${tasksJsonPath}`);
     process.exit(1);
   }
 } else {
   // Maybe it's in the current directory?
-  tasksJsonFile = Bun.file(resolve(process.cwd(), "tasks.json"));
+  tasksJsonFullPath = resolve(process.cwd(), "tasks.json");
 
-  if (!(await tasksJsonFile.exists())) {
+  try {
+    tasksJson = JSON.parse(await readFile(tasksJsonFullPath, "utf-8"));
+  } catch (error) {
     console.error(
       "Usage: crosswing <path to tasks.json>\n\n" +
         "You can also run this script from the root of the project, " +
@@ -42,63 +48,91 @@ if (tasksJsonPath) {
   }
 }
 
-const tasksJson = await tasksJsonFile.json();
-const baseDir = dirname(tasksJsonFile.name!);
+const baseDir = dirname(tasksJsonFullPath);
 const tasks = ServerTasks.fromJson(tasksJson);
 
 const thisDir = dirname(fileURLToPath(import.meta.url));
 
 const DIST_DIR = resolve(thisDir, "../client/dist");
 
-Bun.serve({
-  port,
-  async fetch(req) {
-    const url = new URL(req.url);
-
-    if (req.method === "OPTIONS") {
-      // Implement basic CORS for the manager running in dev mode.
-      return new Response(null, {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "POST",
-          "Access-Control-Allow-Headers": "content-type",
-        },
-      });
+const server = createServer(async (req, res) => {
+  try {
+    await handleRequest(req, res);
+  } catch (error: any) {
+    if (res.headersSent) {
+      console.error("Error after headers sent:", error);
+      return;
     }
 
-    let response: Response = new Response();
+    res.writeHead(500, {
+      "Access-Control-Allow-Origin": "*",
+    });
+    res.end(JSON.stringify({ message: error.message }));
+  }
+});
 
-    if (url.pathname === "/api/status") {
-      const status = await getStatus();
-      response = Response.json(status);
-    } else if (url.pathname === "/api/tasks/running" && req.method === "POST") {
-      if (!req.body) throw new Error("Expected a request body.");
-      const body = await readableStreamToJSON(req.body);
+async function handleRequest(req: IncomingMessage, res: ServerResponse) {
+  const url = new URL(req.url!, `http://${req.headers.host}`);
 
-      const { name, running } = body;
-      if (running) {
-        await startTask(name);
-      } else if (!running) {
-        await stopTask(name);
-      }
+  if (req.method === "OPTIONS") {
+    // Implement basic CORS for the manager running in dev mode.
+    res.writeHead(200, {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "POST",
+      "Access-Control-Allow-Headers": "content-type",
+    });
+    res.end();
+    return;
+  }
 
-      response = Response.json({});
-    } else {
-      const path = url.pathname === "/" ? "/index.html" : url.pathname;
-      const fullPath = DIST_DIR + path;
-      response = new Response(Bun.file(fullPath));
+  let response: any = null;
+
+  if (url.pathname === "/api/status") {
+    const status = await getStatus();
+    response = JSON.stringify(status);
+  } else if (url.pathname === "/api/tasks/running" && req.method === "POST") {
+    const body = await readJSONRequestBody(req);
+
+    const { name, running } = body;
+    if (running) {
+      await startTask(name);
+    } else if (!running) {
+      await stopTask(name);
     }
 
-    response.headers.set("Access-Control-Allow-Origin", "*");
-    return response;
-  },
-  error(error) {
-    // Respond with JSON.
-    return Response.json(
-      { message: error.message },
-      { status: 500, headers: { "Access-Control-Allow-Origin": "*" } },
-    );
-  },
+    response = JSON.stringify({});
+  } else {
+    const path = url.pathname === "/" ? "/index.html" : url.pathname;
+
+    // Prevent accessing files outside the dist directory.
+    if (path.includes("..")) {
+      res.writeHead(403);
+      res.end();
+      return;
+    }
+
+    const fullPath = DIST_DIR + path;
+    response = await readFile(fullPath);
+  }
+
+  res.writeHead(200, {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": getContentType(url.pathname),
+  });
+
+  res.end(response);
+}
+
+server.listen(port, () => {
+  console.log(
+    `
+=============================
+=== Crosswing Dev Manager ===
+=============================
+
+Visit http://localhost:${port} to start local development services.
+`,
+  );
 });
 
 async function getStatus(): Promise<ServerStatus> {
@@ -143,16 +177,6 @@ async function stopTask(name: string) {
   deleteRunner(task);
 }
 
-console.log(
-  `
-=============================
-=== Crosswing Dev Manager ===
-=============================
-
-Visit http://localhost:${port} to start local development services.
-`,
-);
-
 process.once("SIGINT", async function (code: number) {
   const allTasks = tasks.all();
 
@@ -184,4 +208,40 @@ async function wait(ms: number = 0): Promise<void> {
   return new Promise((resolve) => {
     setTimeout(resolve, ms);
   });
+}
+
+// Who needs Express anyway!
+function readJSONRequestBody(req: IncomingMessage): any {
+  return new Promise((resolve, reject) => {
+    let body = "";
+    req.on("data", (chunk) => {
+      body += chunk.toString(); // convert Buffer to string
+    });
+    req.on("end", () => {
+      try {
+        resolve(JSON.parse(body));
+      } catch (e) {
+        reject(e);
+      }
+    });
+    req.on("error", (err) => {
+      reject(err);
+    });
+  });
+}
+
+function getContentType(path: string): string {
+  if (path.endsWith(".css")) {
+    return "text/css";
+  } else if (path.endsWith(".js")) {
+    return "application/javascript";
+  } else if (path.endsWith(".json")) {
+    return "application/json";
+  } else if (path.endsWith(".png")) {
+    return "image/png";
+  } else if (path.endsWith(".svg")) {
+    return "image/svg+xml";
+  } else {
+    return "text/html";
+  }
 }

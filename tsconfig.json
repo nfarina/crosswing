@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
-    "types": [
-      // Allow importing Bun built-ins (assumes relevant code is run inside Bun and not Node).
-      "bun-types",
-      // Allow using Vite built-ins.
-      "vite/client"
-    ],
+    // Assume all ESNext features are available at runtime.
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     // Do as little "transformation" as possible.
     "target": "ESNext",
     // Leave "import" statements alone since we are using ESM.

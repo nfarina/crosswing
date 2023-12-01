@@ -49,7 +49,7 @@
     "./shared/*": "./shared/*.js"
   },
   "scripts": {
-    "build": "./build"
+    "build": "./build.sh"
   },
   "dependencies": {
     "dayjs": "^1.11.10",
@@ -58,8 +58,8 @@
   },
   "peerDependencies": {
     "react": "^18.2.0",
-    "react-is": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-is": "^18.2.0",
     "styled-components": "^6.0.8"
   }
 }

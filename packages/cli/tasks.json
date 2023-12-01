@@ -5,6 +5,6 @@
     "run": {
       "script": "dev"
     },
-    "link": "http://localhost:2750"
+    "link": "http://localhost:2750/?port=2700"
   }
 }

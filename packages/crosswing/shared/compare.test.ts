@@ -1,4 +1,4 @@
-import { describe, expect, test } from "bun:test";
+import { describe, expect, test } from "vitest";
 import { deepEqual, shallowEqualArrays } from "./compare.js";
 
 describe("deepEqual", () => {

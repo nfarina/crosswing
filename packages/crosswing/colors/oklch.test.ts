@@ -1,4 +1,4 @@
-import { expect, test } from "bun:test";
+import { expect, test } from "vitest";
 import { formatOklch, parseOklch } from "./oklch.js";
 
 test("transforms colors in oklch space", () => {

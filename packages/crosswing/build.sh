@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Builds all packages in Crosswing to prepare for distribution on NPM.
 
@@ -8,7 +8,7 @@ mkdir -p dist
 rsync -av \
   --exclude="node_modules" \
   --exclude="dist" \
-  --exclude="build" \
+  --exclude="build.sh" \
   --exclude="tsconfig.dist.json" \
   --exclude=".DS_Store" \
   --exclude="*.stories.tsx" \
@@ -20,4 +20,4 @@ rsync -av \
 sed -i '' '/"private": true,/d' dist/package.json
 
 # Now build the TypeScript into JS.
-bun run tsc -p tsconfig.dist.json
+../../node_modules/.bin/tsc -p tsconfig.dist.json

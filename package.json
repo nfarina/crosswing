@@ -1,5 +1,5 @@
 {
-  "name": "crosswing",
+  "name": "crosswing-monorepo",
   "type": "module",
   "private": true,
   "version": "0.0.0",
@@ -9,21 +9,22 @@
   ],
   "scripts": {
     "dev": "packages/cli/bin/crosswing",
-    "test-all": "bun prettier && bun circular && bun typecheck && bun test",
-    "check-imports": "bunx npm-check",
+    "test": "npm run prettier && npm run circular && npm run typecheck && npm run vitest",
+    "vitest": "vitest --run",
+    "check-imports": "npx npm-check",
     "prettier": "prettier --check 'packages/**/*.ts?(x)'",
-    "prettier:fix": "bun prettier -- --write",
-    "circular": "bunx madge --extensions ts,tsx --circular packages",
+    "prettier:fix": "npm run prettier -- --write",
+    "circular": "npx madge --extensions ts,tsx --circular packages",
     "typecheck": "tsc",
     "storybook": "storybook dev --ci -p 2702",
     "build-storybook": "storybook build",
     "clean:node_modules": "rm -rf node_modules packages/*/node_modules"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^7.6.1",
-    "@storybook/addon-essentials": "^7.6.1",
-    "@storybook/react": "^7.6.1",
-    "@storybook/react-vite": "^7.6.1",
+    "@storybook/addon-actions": "^7.6.2",
+    "@storybook/addon-essentials": "^7.6.2",
+    "@storybook/react": "^7.6.2",
+    "@storybook/react-vite": "^7.6.2",
     "@types/debug": "^4.1.12",
     "@types/minimist": "^1.2.5",
     "@types/react": "^18.2.39",
@@ -31,12 +32,16 @@
     "@types/react-is": "^18.2.4",
     "@types/react-transition-group": "^4.4.9",
     "@vitejs/plugin-react": "^4.2.0",
-    "bun-types": "^1.0.14",
     "prettier": "^3.1.0",
-    "storybook": "^7.6.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "storybook": "^7.6.2",
     "timemachine": "^0.3.2",
     "typescript": "^5.3.2",
     "vite": "^5.0.4",
-    "vite-plugin-svgr": "^4.2.0"
-  }
+    "vite-node": "0.34.6",
+    "vite-plugin-svgr": "^4.2.0",
+    "vitest": "^0.34.6"
+  },
+  "packageManager": "yarn@4.0.2"
 }

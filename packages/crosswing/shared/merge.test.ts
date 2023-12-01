@@ -1,4 +1,4 @@
-import { expect, test } from "bun:test";
+import { expect, test } from "vitest";
 import { merge } from "./merge.js";
 
 test("merges into empty object", () => {

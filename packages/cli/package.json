@@ -1,17 +1,19 @@
 {
   "name": "@crosswing/cli",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Crosswing development process manager.",
   "author": "nfarina@gmail.com",
   "bin": {
-    "crosswing": "./bin/crosswing"
+    "crosswing": "./bin/crosswing.js"
   },
   "scripts": {
-    "dev": "cd client; vite --port 2750",
-    "serve": "bun server/server.ts",
-    "build": "cd client; vite build",
-    "analyze": "cd client; bunx vite-bundle-visualizer",
+    "dev": "cd client; npm run vite --port 2750",
+    "serve": "vite-node server/server.ts",
+    "build:client": "cd client; vite build",
+    "build:server": "cd server; tsc -p tsconfig.dist.json",
+    "build": "npm run build:client && npm run build:server",
+    "analyze": "cd client; npx vite-bundle-visualizer",
     "prepack": "cd client; vite build"
   },
   "dependencies": {
@@ -20,11 +22,12 @@
     "ps-tree": "^1.2.0"
   },
   "devDependencies": {
-    "crosswing": "^0.0.0",
     "@vitejs/plugin-react": "^4.2.0",
     "babel-plugin-styled-components": "^2.1.4",
+    "crosswing": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-is": "^18.2.0",
     "styled-components": "^6.1.1",
     "vite": "^5.0.4",
     "vite-plugin-svgr": "^4.2.0"
@@ -33,6 +36,7 @@
     "**/*.ts?(x)",
     "bin/",
     "!client/",
-    "client/dist"
+    "client/dist",
+    "server/dist"
   ]
 }
