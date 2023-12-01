@@ -51,9 +51,12 @@ if (tasksJsonPath) {
 const baseDir = dirname(tasksJsonFullPath);
 const tasks = ServerTasks.fromJson(tasksJson);
 
-const thisDir = dirname(fileURLToPath(import.meta.url));
+const thisFile = fileURLToPath(import.meta.url);
+const thisDir = dirname(thisFile);
 
-const DIST_DIR = resolve(thisDir, "../client/dist");
+const DIST_DIR = thisFile.endsWith(".ts")
+  ? resolve(thisDir, "../client/dist")
+  : resolve(thisDir, "../../../client/dist"); // When we are running out of dist, we'll be a .js file, and we'll also be nested two levels deeper.
 
 const server = createServer(async (req, res) => {
   try {

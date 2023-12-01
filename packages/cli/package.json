@@ -1,7 +1,7 @@
 {
   "name": "@crosswing/cli",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Crosswing development process manager.",
   "author": "nfarina@gmail.com",
   "bin": {
@@ -14,7 +14,7 @@
     "build:server": "cd server; tsc -p tsconfig.dist.json",
     "build": "npm run build:client && npm run build:server",
     "analyze": "cd client; npx vite-bundle-visualizer",
-    "prepack": "cd client; vite build"
+    "prepack": "npm run build"
   },
   "dependencies": {
     "minimist": "^1.2.8",
