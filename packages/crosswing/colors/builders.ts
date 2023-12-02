@@ -156,13 +156,12 @@ export type VarColorBuilder = {
   var: string;
   light: string | ColorBuilder;
   dark: string | ColorBuilder | null;
-  override({
-    light,
-    dark,
-  }: {
-    light: ColorBuilder;
-    dark?: ColorBuilder | null;
-  }): VarColorBuilder;
+  override(
+    light: ColorBuilder,
+    options?: {
+      dark?: ColorBuilder | null;
+    },
+  ): VarColorBuilder;
 };
 
 export function varColor({
@@ -182,7 +181,7 @@ export function varColor({
   builder.var = cssVar;
   builder.light = light;
   builder.dark = dark ?? null;
-  builder.override = ({ light, dark }) => {
+  builder.override = (light, { dark } = {}) => {
     return varColor({ var: cssVar, light, dark, static: staticOnly });
   };
   return builder;

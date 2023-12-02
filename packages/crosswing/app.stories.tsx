@@ -16,18 +16,14 @@ export const DefaultTheme = () => (
 
 export const CustomTheme = () => (
   <CrosswingApp
-    colors={[
-      colors.primaryGradient.override({
-        light: colors.orangeGradient,
-      }),
-    ]}
+    colors={[colors.primaryGradient.override(colors.orangeGradient)]}
   >
     <ColorView name="primary" color={colors.primaryGradient} />
   </CrosswingApp>
 );
 
 export const NestedThemes = () => (
-  <CrosswingApp colors={[colors.primary.override({ light: colors.darkGreen })]}>
+  <CrosswingApp colors={[colors.primary.override(colors.darkGreen)]}>
     <ColorView
       name="primary"
       style={{ width: "80px", height: "80px" }}
@@ -35,7 +31,7 @@ export const NestedThemes = () => (
     >
       <CrosswingApp
         transparent
-        colors={[colors.primary.override({ light: hexColor("#ff0000") })]}
+        colors={[colors.primary.override(hexColor("#ff0000"))]}
       >
         <ColorView
           name="primary"
@@ -53,10 +49,6 @@ export const DecoratorTheme = () => (
 
 DecoratorTheme.decorators = [
   CrosswingAppDecorator({
-    colors: [
-      colors.primaryGradient.override({
-        light: colors.blueGradient,
-      }),
-    ],
+    colors: [colors.primaryGradient.override(colors.blueGradient)],
   }),
 ];

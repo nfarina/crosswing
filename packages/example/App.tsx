@@ -12,11 +12,7 @@ export function App() {
   return (
     <MockHostProvider container="ios">
       <CrosswingApp
-        colors={[
-          colors.primaryGradient.override({
-            light: colors.blueGradient,
-          }),
-        ]}
+        colors={[colors.primaryGradient.override(colors.blueGradient)]}
       >
         <ModalRootProvider>
           <MobileAppFrame restorationKey={App}>
