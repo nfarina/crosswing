@@ -38,7 +38,7 @@ export type SiteSidebarLinkProps = {
 
 export function SiteSidebar({
   logo = <CrosswingLogoIcon style={{ width: "50px", height: "50px" }} />,
-  tint = colors.orange,
+  tint = colors.turquoise,
   accessories,
   children,
   onLinkClick,

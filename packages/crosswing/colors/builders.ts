@@ -158,9 +158,7 @@ export type VarColorBuilder = {
   dark: string | ColorBuilder | null;
   override(
     light: ColorBuilder,
-    options?: {
-      dark?: ColorBuilder | null;
-    },
+    options?: { dark?: ColorBuilder | null },
   ): VarColorBuilder;
 };
 

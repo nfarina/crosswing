@@ -6,7 +6,7 @@ import {
   useState,
 } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../colors/colors";
+import { HexColorBuilder, colors } from "../../colors/colors";
 import { flattenChildren } from "../../hooks/flattenChildren";
 import { useMatchMedia } from "../../hooks/useMatchMedia";
 import MenuIcon from "../../icons/Menu.svg?react";
@@ -37,12 +37,14 @@ export function SiteLayout({
   children,
   title,
   logo,
+  tint = colors.turquoise,
   accessories,
 }: {
   /** Expects <SiteAreaProps> */
   children?: ReactNode;
   title: string;
   logo?: ReactNode;
+  tint?: HexColorBuilder;
   accessories?: SiteHeaderAccessory[] | null;
 }) {
   // The sidebar defaults to hidden in a mobile layout but can be shown with
@@ -146,6 +148,7 @@ export function SiteLayout({
         <SiteHeader siteTitle={title} accessories={headerAccessories} />
         <SiteSidebar
           logo={logo}
+          tint={tint}
           accessories={sidebarAccessories}
           onLinkClick={onLinkClick}
         >

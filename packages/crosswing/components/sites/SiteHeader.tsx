@@ -8,7 +8,7 @@ import { SitePageTitle, StyledPageTitle } from "./SitePageTitle.js";
 
 export function SiteHeader({
   siteTitle,
-  accessories,
+  accessories: allAccessories,
 }: {
   /**
    * Used for the DOM document title, prepending with the current page if using
@@ -17,6 +17,9 @@ export function SiteHeader({
   siteTitle: string;
   accessories?: SiteHeaderAccessory[] | null;
 }) {
+  // Filer out hidden accessories.
+  const accessories = allAccessories?.filter((a) => !a.hidden) ?? null;
+
   return (
     <StyledSiteHeader data-num-accessories={accessories?.length ?? 0}>
       <SitePageTitle siteTitle={siteTitle} accessories={accessories} />
