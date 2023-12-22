@@ -290,5 +290,15 @@ function browserHasKnownP3Support(): boolean {
     return version >= 604;
   }
 
+  // Test strings for Apple WKWebView (iOS apps) like:
+  //   Mozilla/5.0 (iPhone; CPU iPhone OS 17_2_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148
+  // Look for the AppleWebKit/x.x.x part.
+  const webkitMatch = navigator.userAgent.match(/AppleWebKit\/(\d+)/);
+  if (webkitMatch) {
+    // We've validated it works on WebKit 604.x.
+    const version = parseInt(webkitMatch[1], 10);
+    return version >= 604;
+  }
+
   return false;
 }
