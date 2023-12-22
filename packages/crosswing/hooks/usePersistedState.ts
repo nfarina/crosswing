@@ -27,6 +27,8 @@ export interface PersistedState<S> {
   isUpdating: boolean;
   /** Timestamp of last successful update, or 0 if no successful updates yet. */
   lastUpdated: number;
+  /** Call this to force an update to the persisted value if one is pending. */
+  flush: () => void;
 }
 
 type OnChangeElements =
@@ -197,6 +199,13 @@ export function usePersistedState<S>({
     setValue(!draftValue as any);
   }
 
+  function flush() {
+    if (updateTimeoutId !== null) {
+      clearTimeout(updateTimeoutId);
+      savedUpdateFunc.current();
+    }
+  }
+
   return {
     value: draftValue,
     set: setValue,
@@ -206,6 +215,7 @@ export function usePersistedState<S>({
     errorMessage: updateError && updateError.message,
     isUpdating,
     lastUpdated,
+    flush,
   };
 }
 
