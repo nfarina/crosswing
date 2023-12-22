@@ -156,6 +156,7 @@ export const StyledTextInput = styled.div`
     /* Remove intrinsic size and allow it to fit whatever container you put it in. */
     width: 0;
     flex-grow: 1;
+    padding: 0;
 
     appearance: none;
     display: block;
