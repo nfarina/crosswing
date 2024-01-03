@@ -19,6 +19,8 @@ export interface NavProps {
   disabled?: boolean;
   /** Pass true to hide the hairline shadow under the nav bar. */
   hideSeparator?: boolean;
+  /** Pass true to hide the auto-generated back button (if displayed). */
+  hideBackButton?: boolean;
   /** Pass true to render a transparent header. */
   transparentHeader?: boolean;
   /** Pass true to lay out any children below the nav bar area. */
@@ -41,6 +43,7 @@ export function NavLayout({
   right,
   disabled,
   hideSeparator,
+  hideBackButton,
   transparentHeader,
   fullBleed,
   darkenUnderStatusBar,
@@ -59,7 +62,7 @@ export function NavLayout({
   function getLeftAccessory() {
     if (left) return <NavAccessoryView accessory={left} align="left" />;
 
-    if (back)
+    if (back && !hideBackButton)
       return (
         <NavAccessoryView
           accessory={{ icon: <Back />, to: back, back: true }}
