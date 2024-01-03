@@ -10,11 +10,11 @@ const debug = Debug("router:Switch");
 // Like a traditional router, it picks the best of its <Route> children to
 // render, and only renders that single child.
 
-export interface RouteProps {
+export interface RouteProps<Path extends string = any> {
   /** Pass falsy to indicate this is the "root" (or catch-all) Route. */
-  path?: string;
+  path?: Path;
   /** What to render when the path matches. */
-  render: (params: MatchParams) => ReactElement<any>;
+  render: (params: MatchParams<Path>) => ReactElement;
   /** For the default Route (where `path` is empty), you can pass true to redirect the browser to the root location when nothing else matches. */
   redirect?: boolean;
 }
@@ -132,7 +132,7 @@ function selectRoute(
   return root ?? null;
 }
 
-export function Route({}: RouteProps) {
+export function Route<Path extends string>({}: RouteProps<Path>) {
   // Our own render method is never called.
   return null;
 }

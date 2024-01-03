@@ -11,7 +11,6 @@ import { flattenChildren } from "../../hooks/flattenChildren";
 import { RouterContextValue, useRouter } from "../context/RouterContext";
 import { Redirect } from "../redirect/Redirect";
 import { MatchParams, RouterLocation } from "../RouterLocation";
-import { NavProps } from "./NavLayout.js";
 import { NavStack, NavStackItem } from "./NavStack.js";
 
 export * from "./NavAccessoryView.js";
@@ -21,9 +20,9 @@ export * from "./NavTitleView.js";
 
 const debug = Debug("router:Navs");
 
-export interface NavRouteProps {
-  path?: string;
-  render: (params: MatchParams) => ReactElement<NavProps>;
+export interface NavRouteProps<Path extends string = any> {
+  path?: Path;
+  render: (params: MatchParams<Path>) => ReactElement;
 }
 
 export function Navs({ children }: { children: ReactNode }) {
@@ -172,7 +171,7 @@ function pushLocation(
   return [...previous, current];
 }
 
-export function NavRoute({}: NavRouteProps) {
+export function NavRoute<Path extends string>({}: NavRouteProps<Path>) {
   // Our own render method is never called.
   return null;
 }

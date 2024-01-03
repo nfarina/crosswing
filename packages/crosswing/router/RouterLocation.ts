@@ -1,6 +1,18 @@
-export type MatchParams = Record<string, string>;
+// A type to extract the parameter names from a path.
+type ExtractParams<Path extends string> =
+  Path extends `${infer _Start}:${infer Param}/${infer Rest}`
+    ? Param | ExtractParams<`/${Rest}`>
+    : Path extends `${infer _Start}:${infer Param}`
+      ? Param
+      : never;
 
-export class RouterLocation {
+// Maps extracted parameter names to string types.
+export type MatchParams<Path extends string> = Record<
+  ExtractParams<Path>,
+  string
+>;
+
+export class RouterLocation<Path extends string = any> {
   public static fromHref(href: string): RouterLocation {
     const [pathname, search = ""] = href.split("?");
     return new RouterLocation({
@@ -21,7 +33,7 @@ export class RouterLocation {
   }
 
   public search: string = "";
-  public params: MatchParams = {};
+  public params: MatchParams<Path> = {} as any;
   public segments: string[] = [];
   public claimIndex: number = 0;
 
