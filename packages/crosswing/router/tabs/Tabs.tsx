@@ -88,8 +88,8 @@ export function Tabs({ children }: { children: ReactNode }) {
     // "deep" content they had navigated to previously.
     if (tabLocation && tab !== selected.tab) return tabLocation.href();
 
-    // Link to the root path.
-    return location.linkTo(tab.props.path);
+    // Link to the root path, unless the user wants a specific path here.
+    return location.linkTo(tab.props.topPath ?? tab.props.path);
   }
 
   function renderTabContents(tab: ReactElement<TabProps>): ReactNode {
