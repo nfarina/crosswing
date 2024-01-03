@@ -10,6 +10,8 @@ import { UnreadBadge } from "./UnreadBadge.js";
 
 export interface TabProps {
   path: string;
+  /** Optional path to send the user to when clicking the tab if it's already selected. Default is `path`. */
+  topPath?: string;
   title: ReactNode;
   icon?: ReactNode;
   badge?: number | null | "any";

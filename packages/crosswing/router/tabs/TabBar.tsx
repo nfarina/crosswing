@@ -34,7 +34,7 @@ export function TabBar({
     <StyledTabBar data-container={container}>
       {tabs.map((tab) => (
         <TabLink
-          key={tab.props.path}
+          key={tab.props.topPath ?? tab.props.path}
           to={getTabLink(tab)}
           active={tab === selectedTab}
           tab={tab}
