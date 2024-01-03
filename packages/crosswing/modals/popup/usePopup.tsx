@@ -15,7 +15,7 @@ import { easing } from "../../shared/easing";
 import { useModal } from "../context/useModal";
 import { useClickOutsideToClose } from "./useClickOutsideToClose.js";
 
-export interface Popup<T extends any[]> {
+export interface Popup<T extends any[] = []> {
   /** Shows the popup around the given target. */
   show: (target: PopupTarget, ...args: T) => void;
   /** Hides the popup. */
