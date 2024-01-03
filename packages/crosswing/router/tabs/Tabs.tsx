@@ -1,5 +1,6 @@
 import Debug from "debug";
 import {
+  HTMLAttributes,
   ReactElement,
   ReactNode,
   isValidElement,
@@ -24,7 +25,10 @@ export * from "./UnreadBadge.js";
 
 const debug = Debug("router:Tabs");
 
-export function Tabs({ children }: { children: ReactNode }) {
+export function Tabs({
+  children,
+  ...rest
+}: { children: ReactNode } & HTMLAttributes<HTMLDivElement>) {
   // Coerce children to array, flattening fragments and falsy conditionals.
   const tabs = flattenChildren(children).filter(isTab);
 
@@ -89,7 +93,7 @@ export function Tabs({ children }: { children: ReactNode }) {
     if (tabLocation && tab !== selected.tab) return tabLocation.href();
 
     // Link to the root path, unless the user wants a specific path here.
-    return location.linkTo(tab.props.topPath ?? tab.props.path);
+    return location.linkTo(tab.props.path);
   }
 
   function renderTabContents(tab: ReactElement<TabProps>): ReactNode {
@@ -143,6 +147,7 @@ export function Tabs({ children }: { children: ReactNode }) {
       data-container={container}
       data-collapsed={collapsed}
       data-tab-bar-hidden={isTabBarHidden}
+      {...rest}
     >
       <TabBarContext.Provider value={{ isTabBarHidden, setTabBarHidden }}>
         {tabs.map(renderTabContents)}
