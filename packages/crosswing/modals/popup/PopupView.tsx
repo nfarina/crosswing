@@ -8,6 +8,7 @@ export * from "./usePopup.js";
 export function PopupView({
   placement = "below",
   background,
+  backgroundDark,
   arrowBackground,
   arrowBackgroundDark,
   style,
@@ -15,6 +16,7 @@ export function PopupView({
   ...rest
 }: {
   background?: string;
+  backgroundDark?: string;
   arrowBackground?: string;
   arrowBackgroundDark?: string;
   children?: ReactNode;
@@ -23,6 +25,7 @@ export function PopupView({
   const cssProps = {
     ...style,
     "--background": background ?? colors.textBackground(),
+    "--background-dark": background ?? colors.textBackground(),
     "--arrow-background": arrowBackground ?? colors.textBackground(),
     "--arrow-background-dark": arrowBackgroundDark ?? colors.textBackground(),
   } as CSSProperties;
@@ -92,6 +95,10 @@ export const StyledPopupView = styled.div`
       0 0 100px ${colors.black({ alpha: 0.2 })};
     display: flex;
     flex-flow: column;
+
+    @media (prefers-color-scheme: dark) {
+      background: var(--background-dark);
+    }
 
     > * {
       box-sizing: border-box;
