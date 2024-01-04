@@ -25,7 +25,7 @@ export function PopupView({
   const cssProps = {
     ...style,
     "--background": background ?? colors.textBackground(),
-    "--background-dark": background ?? colors.textBackground(),
+    "--background-dark": backgroundDark ?? colors.textBackground(),
     "--arrow-background": arrowBackground ?? colors.textBackground(),
     "--arrow-background-dark": arrowBackgroundDark ?? colors.textBackground(),
   } as CSSProperties;
