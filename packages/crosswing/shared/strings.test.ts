@@ -20,10 +20,12 @@ test("dedents single and multiline strings", () => {
   `;
 
   expect(dedent(test1)).toBe("hello\nworld");
+  expect(dedent(dedent(test1))).toBe("hello\nworld");
 
   const test2 = ` Hello World  `;
 
   expect(dedent(test2)).toBe("Hello World");
+  expect(dedent(dedent(test2))).toBe("Hello World");
 
   const test3 = `
     Hello
@@ -31,4 +33,5 @@ test("dedents single and multiline strings", () => {
   `;
 
   expect(dedent(test3)).toBe("Hello\n  World");
+  expect(dedent(dedent(test3))).toBe("Hello\n  World");
 });
