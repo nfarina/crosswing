@@ -94,3 +94,33 @@ export function camelCaseToSentence(str: string): string {
     .replace(/([A-Z])/g, " $1")
     .trim();
 }
+
+/**
+ * Given a string, typically one with multiple lines, returns a "dedented"
+ * trimmed string. The number of spaces of indentation removed is the minimum
+ * number of spaces found at the beginning of any line. For example:
+ *
+ * ```
+ * dedent(`
+ *  Hello
+ *   World
+ * `)
+ * ```
+ *
+ * returns:
+ *
+ * ```Hello
+ *  World```
+ */
+export function dedent(str: string): string {
+  const lines = str.split("\n");
+  const minIndent = Math.min(
+    ...lines
+      .filter((line) => line.trim().length > 0)
+      .map((line) => line.match(/^ */)?.[0]?.length ?? 0),
+  );
+  return lines
+    .map((line) => line.substring(minIndent))
+    .join("\n")
+    .trim();
+}
