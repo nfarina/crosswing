@@ -4,7 +4,7 @@ import { safeArea } from "../../host/features/safeArea";
 import { NavLayout } from "../../router/navs/NavLayout";
 import { Button, StyledButton } from "../Button";
 import { Notice } from "../Notice";
-import { CalendarView, StyledCalendarInput } from "./CalendarView.js";
+import { CalendarView, StyledCalendarView } from "./CalendarView.js";
 import { dateRange } from "./DateRange.js";
 
 export function DatePicker({
@@ -63,7 +63,7 @@ const PageLayout = styled.div`
     margin: 10px 10px 0;
   }
 
-  > ${StyledCalendarInput} {
+  > ${StyledCalendarView} {
     flex-grow: 1;
     padding: 0 10px;
     padding-bottom: calc(20px + ${safeArea.bottom()});

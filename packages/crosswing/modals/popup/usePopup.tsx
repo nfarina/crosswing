@@ -199,8 +199,9 @@ export const PopupContainer = ({
     const popupRect = popup.getBoundingClientRect();
 
     // Here's where we *want* to point, right in the middle of the target.
-    let offset =
-      targetRect.x - containerRect.x + Math.round(targetRect.width / 2) - 10;
+    let offset = Math.round(
+      targetRect.x - containerRect.x + targetRect.width / 2 - 10,
+    );
 
     let popupOffset = offset;
 

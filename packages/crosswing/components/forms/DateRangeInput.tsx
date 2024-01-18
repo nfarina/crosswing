@@ -21,14 +21,21 @@ const DateRangePicker = lazy(() => import("./DateRangePicker"));
 export function DateRangeInput({
   value,
   onValueChange,
+  popupAlignment = "left",
   ...rest
 }: Omit<Parameters<typeof Button>[0], "value"> & {
   value: DateRange | null;
   onValueChange: (newValue: DateRange | null) => void;
+  /**
+   * Where to align the popup relative to the button. Defaults to "left".
+   * Since the button can change size as the user selects dates, this allows
+   * you to keep the popup in a consistent location.
+   */
+  popupAlignment?: "left" | "center" | "right";
 }) {
   // Use a Popup for desktop layouts with lots of space.
   const popup = usePopup(() => (
-    <PopupView>
+    <StyledPopupView>
       <DateRangeControl
         value={value}
         onValueChange={(newValue, isPreset) => {
@@ -38,7 +45,7 @@ export function DateRangeInput({
           }
         }}
       />
-    </PopupView>
+    </StyledPopupView>
   ));
 
   // Use a sheet for mobile layouts.
@@ -93,15 +100,17 @@ export function DateRangeInput({
   return (
     <StyledDateRangeInput
       data-is-open={!!popup.visible}
-      children={
+      title={
         <>
-          {/* We use a special class to cause our popup to position itself at a
-              consistent location, since our button changes in size as you
-              interact with the popup. Otherwise the popup would shift around,
-              constantly trying to be in the middle of the button. */}
-          <span className="popup-target" />
           {renderTitle()} {mobileLayout ? <DisclosureArrow /> : <DownArrow />}
         </>
+      }
+      children={
+        /* We use a special class to cause our popup to position itself at a
+              consistent location, since our button changes in size as you
+              interact with the popup. Otherwise the popup would shift around,
+              constantly trying to be in the middle of the button. */
+        <span className="popup-target" data-alignment={popupAlignment} />
       }
       onClick={mobileLayout ? sheet.show : popup.onClick}
       {...rest}
@@ -115,17 +124,49 @@ export const StyledDateRangeInput = styled(Button)`
 
   > .popup-target {
     position: absolute;
-    left: 58px;
     bottom: 0;
+
+    &[data-alignment="left"] {
+      left: 25px;
+    }
+
+    &[data-alignment="center"] {
+      left: 50%;
+    }
+
+    &[data-alignment="right"] {
+      right: 25px;
+    }
   }
 
-  > svg {
-    transform: translateX(6px);
-    /* Turns out this animation is just distracting. */
-    /* transition: transform 0.2s; */
+  > .content {
+    > .title {
+      > svg {
+        width: 24px;
+        height: 24px;
+        margin: -8px -3px;
+        transform: translateX(3px);
+        /* Turns out this animation is just distracting. */
+        /* transition: transform 0.2s; */
+
+        path {
+          fill: currentColor;
+        }
+      }
+    }
   }
 
-  &[data-is-open="true"] > svg {
-    transform: translate(6px, -1px) rotate(-180deg);
+  &[data-is-open="true"] > .content > .title > svg {
+    transform: translate(3px, -1px) rotate(-180deg);
+  }
+`;
+
+const StyledPopupView = styled(PopupView)`
+  width: 100%;
+  max-width: 500px;
+
+  > .container {
+    height: 100%;
+    max-height: 600px;
   }
 `;

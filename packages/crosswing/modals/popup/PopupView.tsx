@@ -8,9 +8,9 @@ export * from "./usePopup.js";
 export function PopupView({
   placement = "below",
   background,
-  backgroundDark,
+  backgroundDark = background,
   arrowBackground,
-  arrowBackgroundDark,
+  arrowBackgroundDark = arrowBackground,
   style,
   className,
   ...rest
@@ -101,6 +101,7 @@ export const StyledPopupView = styled.div`
     }
 
     > * {
+      flex-grow: 1;
       box-sizing: border-box;
       max-height: 100%;
     }

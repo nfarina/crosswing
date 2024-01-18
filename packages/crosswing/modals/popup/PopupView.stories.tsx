@@ -43,7 +43,6 @@ export const CustomBackground: Story = (args) => {
 CustomBackground.args = {
   background: colors.primary(),
   arrowBackground: colors.primary(),
-  arrowBackgroundDark: colors.primary(),
 };
 
 const WhiteContentView = styled(ContentView)`

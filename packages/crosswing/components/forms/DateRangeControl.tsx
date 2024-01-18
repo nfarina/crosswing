@@ -1,11 +1,11 @@
 import dayjs from "dayjs";
-import { useRef } from "react";
+import { HTMLAttributes, useRef } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors";
 import { fonts } from "../../fonts/fonts";
 import { useResponsiveLayout } from "../../hooks/useResponsiveLayout";
 import { Button, StyledButton } from "../Button";
-import { CalendarView, StyledCalendarInput } from "./CalendarView.js";
+import { CalendarView, StyledCalendarView } from "./CalendarView.js";
 import {
   AllDateRangePresets,
   DateRange,
@@ -18,7 +18,8 @@ export default function DateRangeControl({
   value,
   onValueChange,
   hidePresets,
-}: {
+  ...rest
+}: HTMLAttributes<HTMLDivElement> & {
   value: DateRange | null;
   onValueChange: (newValue: DateRange | null, isPreset?: boolean) => void;
   hidePresets?: boolean;
@@ -54,7 +55,7 @@ export default function DateRangeControl({
 
   const layout = useResponsiveLayout(ref, {
     mobile: {},
-    desktop: { minWidth: 500 },
+    desktop: { minWidth: 475 },
   });
 
   return (
@@ -62,6 +63,7 @@ export default function DateRangeControl({
       ref={ref}
       data-layout={layout}
       data-hide-presets={!!hidePresets}
+      {...rest}
     >
       <CalendarView
         selectedRange={value}
@@ -88,8 +90,9 @@ export const StyledDateRangeControl = styled.div`
   display: flex;
   flex-flow: row;
 
-  > ${StyledCalendarInput} {
+  > ${StyledCalendarView} {
     padding: 0 10px;
+    flex-grow: 1;
   }
 
   > .separator {

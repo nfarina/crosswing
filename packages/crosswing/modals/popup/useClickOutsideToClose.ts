@@ -26,14 +26,14 @@ export function useClickOutsideToClose(
           !!sibling;
           sibling = sibling.nextElementSibling
         ) {
-          if (containsElement(sibling, clicked)) return;
+          if (isOrContainsElement(sibling, clicked)) return;
         }
       }
 
       // Check if you clicked the target element itself. We don't want to close
       // automatically in this case because usually the target element will do
       // that automatically.
-      if (creator && containsElement(creator, clicked)) return;
+      if (creator && isOrContainsElement(creator, clicked)) return;
 
       onClose();
     }
@@ -47,8 +47,12 @@ export function useClickOutsideToClose(
   }, []);
 }
 
-function containsElement(parent: Element, child: Element): boolean {
-  return !!(
-    parent.compareDocumentPosition(child) & Node.DOCUMENT_POSITION_CONTAINED_BY
+function isOrContainsElement(parent: Element, child: Element): boolean {
+  return (
+    parent === child ||
+    !!(
+      parent.compareDocumentPosition(child) &
+      Node.DOCUMENT_POSITION_CONTAINED_BY
+    )
   );
 }

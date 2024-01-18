@@ -22,7 +22,11 @@ export const Default = () => {
 
   return (
     <Container>
-      <DateRangeInput value={range} onValueChange={setRange} />
+      <DateRangeInput
+        value={range}
+        onValueChange={setRange}
+        popupAlignment="center"
+      />
     </Container>
   );
 };
