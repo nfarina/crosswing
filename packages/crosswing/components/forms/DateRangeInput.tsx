@@ -38,9 +38,11 @@ export function DateRangeInput({
     <StyledPopupView>
       <DateRangeControl
         value={value}
-        onValueChange={(newValue, isPreset) => {
+        onValueChange={(newValue, type) => {
           onValueChange(newValue);
-          if (isPreset) {
+          if (type === "preset" || type === "custom") {
+            // Hide the popup if you entered a custom value or clicked a preset
+            // date range button.
             popup.hide();
           }
         }}
