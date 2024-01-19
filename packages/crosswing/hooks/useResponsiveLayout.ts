@@ -13,7 +13,7 @@ export interface ResponsiveLayouts {
 
 export function useResponsiveLayout<L extends ResponsiveLayouts>(
   ref: MutableRefObject<HTMLElement | null>,
-  layouts: ResponsiveLayouts,
+  layouts: L,
 ): keyof L {
   const [bestLayout, setBestLayout] = useState<keyof L | null>(null);
 
