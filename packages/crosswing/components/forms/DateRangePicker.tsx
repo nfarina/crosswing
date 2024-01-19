@@ -2,7 +2,7 @@ import { useState } from "react";
 import { NavLayout } from "../../router/navs/NavLayout";
 import { DateRange } from "./DateRange.js";
 
-import DateRangeControl from "./DateRangeControl.js";
+import DateRangeControl, { DateRangeValueType } from "./DateRangeControl.js";
 
 export default function DateRangePicker({
   defaultRange,
@@ -20,10 +20,13 @@ export default function DateRangePicker({
     onClose();
   }
 
-  function onInnerValueChange(newValue: DateRange | null, isPreset?: boolean) {
+  function onInnerValueChange(
+    newValue: DateRange | null,
+    type?: DateRangeValueType,
+  ) {
     setDraftRange(newValue);
 
-    if (isPreset) {
+    if (type === "preset" || type === "custom") {
       onDateSelected?.(newValue);
       onClose();
     }

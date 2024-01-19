@@ -1,6 +1,7 @@
 import { Meta } from "@storybook/react";
 import { useState } from "react";
 import { ModalDecorator } from "../../modals/storybook/ModalDecorator";
+import { RouterDecorator } from "../../router/storybook/RouterDecorator";
 import { CrosswingAppDecorator } from "../../storybook";
 import { SeparatorDecorator } from "../SeparatorLayout";
 import { LabeledDateInput } from "./LabeledDateInput.js";
@@ -10,6 +11,7 @@ export default {
   decorators: [
     SeparatorDecorator,
     ModalDecorator,
+    RouterDecorator,
     CrosswingAppDecorator({ layout: "mobile" }),
   ],
   parameters: { layout: "centered" },
@@ -21,7 +23,7 @@ export const Empty = () => {
   return (
     <LabeledDateInput
       style={{ marginTop: "50px" }}
-      label="Name"
+      label="Date"
       value={date}
       onValueChange={setDate}
     />
@@ -34,7 +36,7 @@ export const DefaultValue = () => {
   return (
     <LabeledDateInput
       style={{ marginTop: "50px" }}
-      label="Name"
+      label="Date"
       value={date}
       onValueChange={setDate}
     />

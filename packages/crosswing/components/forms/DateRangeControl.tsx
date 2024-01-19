@@ -5,6 +5,7 @@ import { colors } from "../../colors/colors";
 import { fonts } from "../../fonts/fonts";
 import { useResponsiveLayout } from "../../hooks/useResponsiveLayout";
 import { Button, StyledButton } from "../Button";
+import { dateRangeTransformer } from "../transformers/dateRangeTransformer";
 import { CalendarView, StyledCalendarView } from "./CalendarView.js";
 import {
   AllDateRangePresets,
@@ -13,6 +14,9 @@ import {
   dateRange,
   isSameDay,
 } from "./DateRange.js";
+import { usePrompt } from "./usePrompt";
+
+export type DateRangeValueType = "selected" | "preset" | "custom";
 
 export default function DateRangeControl({
   value,
@@ -21,10 +25,22 @@ export default function DateRangeControl({
   ...rest
 }: HTMLAttributes<HTMLDivElement> & {
   value: DateRange | null;
-  onValueChange: (newValue: DateRange | null, isPreset?: boolean) => void;
+  onValueChange: (
+    newValue: DateRange | null,
+    type?: DateRangeValueType,
+  ) => void;
   hidePresets?: boolean;
 }) {
   const ref = useRef<HTMLDivElement | null>(null);
+
+  const customPrompt = usePrompt(() => ({
+    title: "Enter Date Range",
+    placeholder: "Ex: 1/1/2020 - 1/15/2020",
+    transformer: dateRangeTransformer(),
+    onSubmit: (date: DateRange) => {
+      onValueChange(date, "custom");
+    },
+  }));
 
   function onCalendarDateClick(date: number) {
     const clickedRange = dateRange(date);
@@ -39,24 +55,29 @@ export default function DateRangeControl({
     else if (value && isSameDay(value) && clickedRange.start > value.end) {
       const start = dayjs(value.start).startOf("day").valueOf(); // Important to also extend the start date, because it could be in the middle of the day, but visually we're telling you that whole days are selected.
       const end = dayjs(clickedRange.start).endOf("day").valueOf();
-      onValueChange(dateRange(start, end));
+      onValueChange(dateRange(start, end), "selected");
     }
     // Just select the exact range you selected.
     else {
-      onValueChange(clickedRange);
+      onValueChange(clickedRange, "selected");
     }
   }
 
   function onCalendarMonthClick(date: number) {
     const start = dayjs(date).startOf("month").valueOf();
     const end = dayjs(date).endOf("month").valueOf();
-    onValueChange(dateRange(start, end));
+    onValueChange(dateRange(start, end), "selected");
   }
 
   const layout = useResponsiveLayout(ref, {
     mobile: {},
     desktop: { minWidth: 475 },
   });
+
+  // On mobile layouts, we don't have enough space for "Last Year".
+  const filteredPresets = AllDateRangePresets.filter(
+    (preset) => layout === "desktop" || preset.title !== "Last Year",
+  );
 
   return (
     <StyledDateRangeControl
@@ -72,15 +93,21 @@ export default function DateRangeControl({
       />
       <div className="separator" />
       <div className="presets">
-        <Button children="Clear" onClick={() => onValueChange(null, true)} />
+        <Button
+          size="smaller"
+          title="Clear"
+          onClick={() => onValueChange(null, "preset")}
+        />
         {!hidePresets &&
-          AllDateRangePresets.map((preset) => (
+          filteredPresets.map((preset) => (
             <Button
               key={preset.title}
-              children={preset.title}
-              onClick={() => onValueChange(preset.range(), true)}
+              size="smaller"
+              title={preset.title}
+              onClick={() => onValueChange(preset.range(), "preset")}
             />
           ))}
+        <Button size="smaller" title="Custom" onClick={customPrompt.show} />
       </div>
     </StyledDateRangeControl>
   );

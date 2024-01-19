@@ -34,6 +34,30 @@ export function dateRange(
   }
 }
 
+/** Meant for debugging only. */
+export function formatDateRange(
+  range: OpenDateRange | DateRange | null,
+): string {
+  const start = range?.start
+    ? dayjs(range.start).format("MMM D, YYYY h:mm a")
+    : "<none>";
+  const end = range?.end
+    ? dayjs(range.end).format("MMM D, YYYY h:mm a")
+    : "<none>";
+
+  if (start === "<none>" && end === "<none>") {
+    return "<empty range>";
+  } else if (start === end) {
+    return start;
+  } else if (start === "<none>") {
+    return `Until ${end}`;
+  } else if (end === "<none>") {
+    return `Since ${start}`;
+  } else {
+    return `${start} – ${end}`;
+  }
+}
+
 export function isDateInRange(date: number, range: DateRange): boolean {
   return date >= range.start && date <= range.end;
 }

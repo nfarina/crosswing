@@ -23,7 +23,7 @@ export const Empty = () => {
   return (
     <LabeledDateRangeInput
       style={{ marginTop: "50px" }}
-      label="Name"
+      label="Date Range"
       value={date}
       onValueChange={setDate}
     />
@@ -38,7 +38,7 @@ export const DefaultValue = () => {
   return (
     <LabeledDateRangeInput
       style={{ marginTop: "50px" }}
-      label="Name"
+      label="Date Range"
       value={date}
       onValueChange={setDate}
     />

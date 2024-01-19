@@ -4,8 +4,10 @@ import { safeArea } from "../../host/features/safeArea";
 import { NavLayout } from "../../router/navs/NavLayout";
 import { Button, StyledButton } from "../Button";
 import { Notice } from "../Notice";
+import { dateTransformer } from "../transformers/dateTransformer";
 import { CalendarView, StyledCalendarView } from "./CalendarView.js";
 import { dateRange } from "./DateRange.js";
+import { usePrompt } from "./usePrompt";
 
 export function DatePicker({
   defaultDate,
@@ -24,9 +26,20 @@ export function DatePicker({
   subtitle?: string;
   notice?: ReactNode;
 }) {
+  const customPrompt = usePrompt(() => ({
+    title: "Enter Date",
+    placeholder: "Ex: 1/1/2020",
+    transformer: dateTransformer(),
+    onSubmit: (date: number) => {
+      onDateSelected?.(date);
+      onClose();
+    },
+  }));
+
   function onDateClick(date: number | null) {
-    const range = date ? dateRange(date)?.start : null;
-    onDateSelected?.(range);
+    // Use dateRange() helper to get a full 24-hour day.
+    const day = date ? dateRange(date)?.start : null;
+    onDateSelected?.(day);
     onClose();
   }
 
@@ -43,9 +56,10 @@ export function DatePicker({
     >
       <PageLayout>
         {notice && <Notice children={notice} size="smaller" />}
-        {!requireSelection && (
-          <Button children="Clear" onClick={onClearClick} />
-        )}
+        <div className="buttons">
+          {!requireSelection && <Button title="Clear" onClick={onClearClick} />}
+          <Button title="Custom" onClick={customPrompt.show} />
+        </div>
         <CalendarView
           selectedRange={defaultDate ? dateRange(defaultDate) : null}
           onDateClick={onDateClick}
@@ -59,8 +73,19 @@ const PageLayout = styled.div`
   display: flex;
   flex-flow: column;
 
-  > ${StyledButton} {
+  > .buttons {
     margin: 10px 10px 0;
+    display: flex;
+    flex-flow: row;
+
+    > ${StyledButton} {
+      width: 0;
+      flex-grow: 1;
+    }
+
+    > * + * {
+      margin-left: 10px;
+    }
   }
 
   > ${StyledCalendarView} {
