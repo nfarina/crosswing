@@ -43,6 +43,15 @@ export function dateRangeTransformer({
         }
       }
 
+      if (!start && !end) {
+        // Maybe you typed in a single day?
+        const maybeStart = parseDate(text);
+        if (maybeStart) {
+          start = maybeStart;
+          end = maybeStart;
+        }
+      }
+
       function parseDate(text: string): number | null {
         for (const format of formats) {
           const maybeDate = utc ? dayjs.utc(text, format) : dayjs(text, format);
@@ -60,6 +69,11 @@ export function dateRangeTransformer({
         throw new Error("Invalid date range");
       }
 
+      // End dates are inclusive, so if you type in `1/1/2020 - 1/2/2020`, that
+      // means you want to include the whole day of the 2nd, so we need to
+      // extend the end date to the end of the day.
+      end = dayjs(end).endOf("day").valueOf();
+
       if (start > end) {
         throw new Error("Start is after end");
       }
@@ -72,14 +86,21 @@ export function dateRangeTransformer({
       // Use the first format in the list, or a fallback.
       const format = formats[0] ?? "M/D/YYYY";
 
+      let start: string;
+      let end: string;
+
       if (utc) {
-        return `${dayjs.utc(value.start).format(format)} - ${dayjs
-          .utc(value.end)
-          .format(format)}`;
+        start = dayjs.utc(value.start).format(format);
+        end = dayjs.utc(value.end).format(format);
       } else {
-        return `${dayjs(value.start).format(format)} - ${dayjs
-          .utc(value.end)
-          .format(format)}`;
+        start = dayjs(value.start).format(format);
+        end = dayjs(value.end).format(format);
+      }
+
+      if (start === end) {
+        return start;
+      } else {
+        return `${start} – ${end}`;
       }
     },
   };
