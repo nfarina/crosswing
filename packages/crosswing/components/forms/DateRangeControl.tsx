@@ -37,6 +37,7 @@ export default function DateRangeControl({
     title: "Enter Date Range",
     placeholder: "Ex: 1/1/2020 - 1/15/2020",
     transformer: dateRangeTransformer(),
+    initialValue: value ?? undefined,
     onSubmit: (date: DateRange) => {
       onValueChange(date, "custom");
     },

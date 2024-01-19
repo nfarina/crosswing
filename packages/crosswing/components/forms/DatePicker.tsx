@@ -30,6 +30,7 @@ export function DatePicker({
     title: "Enter Date",
     placeholder: "Ex: 1/1/2020",
     transformer: dateTransformer(),
+    initialValue: defaultDate ?? undefined,
     onSubmit: (date: number) => {
       onDateSelected?.(date);
       onClose();
