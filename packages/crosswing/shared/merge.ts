@@ -3,13 +3,12 @@
  * non-leaf arrays.
  */
 export function merge<T>(...objects: [T?, ...DeepPartial<T>[]]): T {
-  let merged: T = {} as any;
+  let merged: T = undefined as any;
 
-  for (const objectOrNull of objects) {
-    // Allow merging into null/undefined.
-    const object = objectOrNull ?? {};
-
+  for (let object of objects) {
     if (isObject(object)) {
+      if (!isObject(merged)) merged = {} as T; // Needs to be an object now!
+
       for (const [key, value] of Object.entries(object)) {
         const existing = merged[key];
         if (isObject(existing) && isObject(value)) {
@@ -20,12 +19,12 @@ export function merge<T>(...objects: [T?, ...DeepPartial<T>[]]): T {
           merged[key] = merge(value); // Deep copy.
         } else if (Array.isArray(value)) {
           // Clone all elements; we don't merge arrays.
-          merged[key] = JSON.parse(JSON.stringify(value));
+          merged[key] = value.map((v) => merge(v));
         } else {
           merged[key] = value; // Primitive.
         }
       }
-    } else {
+    } else if (object != null || merged == null) {
       // We can't merge non-objects, so just overwrite them.
       merged = object as T;
     }

@@ -64,6 +64,37 @@ test("merges null object", () => {
   expect(merge({ hello: "world" }, null as any)).toEqual({ hello: "world" });
 });
 
+test("merges undefined properties", () => {
+  expect(merge({ hello: "world" }, { hello: undefined })).toEqual({
+    hello: undefined,
+  });
+});
+
+test("merges null properties", () => {
+  expect(
+    merge({ hello: "world" } as { hello: string | null }, { hello: null }),
+  ).toEqual({
+    hello: null,
+  });
+});
+
+test("merges primitives", () => {
+  expect(merge("hello" as string, "world")).toEqual("world");
+});
+
+test("clones primitives", () => {
+  expect(merge("hello")).toEqual("hello");
+  expect(merge(undefined)).toEqual(undefined);
+  expect(merge(null)).toEqual(null);
+});
+
+test("clones objects", () => {
+  const obj = { hello: "world" };
+  const merged = merge(obj);
+  obj.hello = "gotcha!";
+  expect(merged).toEqual({ hello: "world" });
+});
+
 test("replaces strings", () => {
   expect(merge("hello", "world" as any)).toEqual("world");
 });
