@@ -30,6 +30,7 @@ import {
   HostContainer,
   HostContextValue,
   HostFeatures,
+  HostPlatform,
   HostPlugin,
   SafeArea,
 } from "../util/types";
@@ -76,6 +77,7 @@ export function HostProvider({
     if (features && viewport && safeArea && deepLink) {
       return {
         container,
+        platform: (features.platform as HostPlatform) ?? "unknown",
         safeArea,
         viewport,
         preferredFontSize,

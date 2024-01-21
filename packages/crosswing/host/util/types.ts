@@ -1,5 +1,6 @@
 export interface HostContextValue {
   container: HostContainer;
+  platform: HostPlatform;
   /**
    * If hosted by a device, the device's unique ID (to match up with the
    * corresponding device record in Firestore).
@@ -97,7 +98,11 @@ export interface HostContextValue {
 
 export type HostContainer = "ios" | "android" | "electron" | "web";
 
+export type HostPlatform = "visionOS" | "unknown";
+
 export interface HostFeatures {
+  /** Platform specifier. */
+  platform?: string;
   /** Unique identifier for this host. */
   identifier?: string;
   /** The URL that the host is loading this web application from. */

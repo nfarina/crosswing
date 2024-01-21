@@ -16,6 +16,7 @@ export function defaultHostContext(
 ): HostContextValue {
   return {
     container: detectContainer(),
+    platform: "unknown",
     viewport: {},
     safeArea: {
       top: "0px",
