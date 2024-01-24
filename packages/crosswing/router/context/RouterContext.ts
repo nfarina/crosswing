@@ -54,7 +54,7 @@ export function useRouter({
 
   if (!ignoreDefaultWarning && context.flags?.isDefault) {
     console.warn(
-      "You are attempting to use a RouterContext without an <Router> ancestor. Things like links may not work.",
+      "You are attempting to use a RouterContext without an <Router> ancestor. Things like links may not work. Note that modals may be rendered outside of the router, so if you are getting this message from a modal window, you may need to wrap your component in a <ModalContextProvider> to propagate the router context to displayed modals.",
     );
   }
 

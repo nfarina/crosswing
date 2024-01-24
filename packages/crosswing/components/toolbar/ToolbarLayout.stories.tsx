@@ -5,7 +5,12 @@ import { createPortal } from "react-dom";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors";
 import { useAsyncTask } from "../../hooks/useAsyncTask";
-import { RouterDecorator } from "../../router/storybook/RouterDecorator";
+import { ModalContextProvider } from "../../modals/context/ModalContextProvider";
+import { ModalDecorator } from "../../modals/storybook/ModalDecorator";
+import {
+  BrowserSimulator,
+  RouterDecorator,
+} from "../../router/storybook/RouterDecorator";
 import { wait } from "../../shared/wait";
 import { CrosswingAppDecorator } from "../../storybook";
 import { NoContent } from "../NoContent";
@@ -21,6 +26,7 @@ import {
 } from "../toolbar/Toolbar";
 import { useToolbar } from "./ToolbarContext.js";
 import { ToolbarLayout } from "./ToolbarLayout.js";
+import { ToolbarOverflowTab } from "./ToolbarOverflowTab";
 import { ToolbarTab } from "./ToolbarTab.js";
 
 export default {
@@ -28,6 +34,7 @@ export default {
   decorators: [
     (Story: () => any) => <Container children={<Story />} />,
     CrosswingAppDecorator({ width: 500, height: 400 }),
+    ModalDecorator,
     RouterDecorator,
   ],
   parameters: { layout: "centered" },
@@ -124,13 +131,24 @@ export const Select = () => {
 
 export const Tabs = () => {
   return (
-    <ToolbarLayout>
-      <Toolbar>
-        <ToolbarTab children="Tab Button" onClick={action("tabButtonClick")} />
-        <ToolbarTab children="Tab Link" to="somewhere" />
-      </Toolbar>
-      <NoContent title="Content" />
-    </ToolbarLayout>
+    <BrowserSimulator initialPath="one">
+      <ModalContextProvider>
+        <ToolbarLayout>
+          <Toolbar>
+            <ToolbarOverflowTab>
+              <ToolbarTab children="Sub Item One" to="one" />
+              <ToolbarTab children="Sub Item Two" to="two" />
+            </ToolbarOverflowTab>
+            <ToolbarTab
+              children="Tab Button"
+              onClick={action("tabButtonClick")}
+            />
+            <ToolbarTab children="Tab Link" to="somewhere" />
+          </Toolbar>
+          <NoContent title="Content" />
+        </ToolbarLayout>
+      </ModalContextProvider>
+    </BrowserSimulator>
   );
 };
 

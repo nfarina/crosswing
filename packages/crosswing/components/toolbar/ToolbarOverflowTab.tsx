@@ -14,7 +14,12 @@ import DownArrow from "../../icons/DownArrow.svg?react";
 import { usePopup } from "../../modals/popup/usePopup";
 import { useRouter } from "../../router/context/RouterContext";
 import { PopupMenu, PopupMenuText } from "../PopupMenu";
-import { ToolbarTab, ToolbarTabProps } from "./ToolbarTab.js";
+import {
+  StyledToolbarTabButton,
+  StyledToolbarTabLink,
+  ToolbarTab,
+  ToolbarTabProps,
+} from "./ToolbarTab.js";
 
 /**
  * Like a <ToolbarTab> but with a built-in "overflow" menu to contain the actual
@@ -27,7 +32,7 @@ export function ToolbarOverflowTab({ children }: { children: ReactNode }) {
     null,
   );
 
-  const arrowRef = useRef<HTMLDivElement | null>(null);
+  const ref = useRef<HTMLDivElement | null>(null);
 
   // Coerce children to array, flattening fragments and falsy conditionals.
   const items = flattenChildren(children);
@@ -67,9 +72,15 @@ export function ToolbarOverflowTab({ children }: { children: ReactNode }) {
     if (selectedTab) {
       setLastTab(selectedTab ?? null);
     }
+
+    popup.hide();
   }, [selectedTab?.props.to]);
 
   const tab = selectedTab ?? lastTab ?? tabs[0] ?? null;
+
+  function togglePopup() {
+    popup.toggle(ref);
+  }
 
   function onArrowClick(e: MouseEvent<HTMLDivElement>) {
     // Don't let the click bubble up.
@@ -78,29 +89,26 @@ export function ToolbarOverflowTab({ children }: { children: ReactNode }) {
     // Also don't let the <a> link be followed.
     e.preventDefault();
 
-    popup.toggle(arrowRef);
-  }
-
-  function onSelectedTabClick() {
-    // If you clicked the tab while it's active, then pop the menu up.
-    popup.toggle(arrowRef);
+    togglePopup();
   }
 
   return (
-    <StyledToolbarOverflowTab
-      to={selectedTab ? undefined : tab?.props.to}
-      onClick={selectedTab ? onSelectedTabClick : undefined}
-      children={
-        <>
-          <div className="text">{tab?.props.children ?? "More"}</div>
-          <div className="separator" />
-          <div className="arrow" onClick={onArrowClick} ref={arrowRef}>
-            <DownArrow />
-          </div>
-        </>
-      }
-      selected={!!selectedTab}
-    />
+    <StyledToolbarOverflowTab data-is-toolbar-tab ref={ref}>
+      <ToolbarTab
+        to={selectedTab ? undefined : tab?.props.to}
+        onClick={selectedTab ? togglePopup : undefined}
+        selected={!!selectedTab}
+      >
+        <div className="text">{tab?.props.children ?? "More"}</div>
+        <div className="separator" />
+        <div
+          className="arrow popup-target"
+          onClick={selectedTab ? undefined : onArrowClick}
+        >
+          <DownArrow />
+        </div>
+      </ToolbarTab>
+    </StyledToolbarOverflowTab>
   );
 }
 
@@ -108,36 +116,42 @@ function isToolbarTab(item: ReactNode): item is ReactElement<ToolbarTabProps> {
   return isValidElement(item) && !!item.type?.["isToolbarTab"];
 }
 
-export const StyledToolbarOverflowTab = styled(ToolbarTab)`
-  /* "Undo" the padding set by ToolbarTab. */
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-right: 0;
+export const StyledToolbarOverflowTab = styled.div`
+  display: flex;
 
-  > .separator {
-    align-self: stretch;
-    margin: 7px 0 7px 10px;
-    width: 1px;
-    background: ${colors.separator()};
-  }
+  > ${StyledToolbarTabLink}, > ${StyledToolbarTabButton} {
+    flex-grow: 1;
 
-  &[data-selected="true"] {
+    /* "Undo" the padding set by ToolbarTab. */
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 0;
+
     > .separator {
-      display: none;
+      align-self: stretch;
+      margin: 7px 0 7px 10px;
+      width: 1px;
+      background: ${colors.separator()};
     }
-  }
 
-  > .arrow {
-    padding: 0 5px 0 3px;
-    align-self: stretch;
-    display: flex;
-    flex-flow: row;
-    align-items: center;
-    justify-content: center;
+    &[data-selected="true"] {
+      > .separator {
+        display: none;
+      }
+    }
 
-    > svg {
-      path {
-        fill: currentColor;
+    > .arrow {
+      padding: 0 5px 0 3px;
+      align-self: stretch;
+      display: flex;
+      flex-flow: row;
+      align-items: center;
+      justify-content: center;
+
+      > svg {
+        path {
+          fill: currentColor;
+        }
       }
     }
   }

@@ -169,6 +169,13 @@ export function SiteLayout({
             />
           </Switch>
         </div>
+        {/* We render a border on the bottom *outside* the rect of the layout,
+         * because iOS safe areas will cause our layout to be inset, and we
+         * want a strongly defined border at the bottom, but only in this
+         * situation. So we use a box-shadow, which won't be considered
+         * "content" by browers (which would cause them to allow it to be
+         * scrolled into view).
+         */}
         <div className="bottom-border" />
         <div
           className="sidebar-overlay"
@@ -240,9 +247,9 @@ export const StyledSiteLayout = styled.div`
     position: absolute;
     left: 0px;
     right: 0px;
-    bottom: calc(env(safe-area-inset-bottom) - 1px);
+    bottom: calc(env(safe-area-inset-bottom));
     height: 1px;
-    background: ${colors.separator()};
+    box-shadow: 0 1px ${colors.separator()};
   }
 
   > .sidebar-overlay {
