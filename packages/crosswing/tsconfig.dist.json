@@ -11,5 +11,8 @@
     "../../types.d.ts",
     // Include types for SVGs processed by vite-plugin-svgr.
     "../../node_modules/vite-plugin-svgr/client.d.ts"
-  ]
+  ],
+  // Remove the "dist" exclusion from the root tsconfig.json since that's
+  // exactly what we DO want to compile here!
+  "exclude": []
 }
