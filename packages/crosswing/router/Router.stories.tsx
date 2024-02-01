@@ -177,6 +177,7 @@ function TestAppTabs({ path }: { path: string }) {
       />
       <Tab
         path="activity"
+        initialPath="visits/visit1"
         title="Activity"
         badge={2}
         render={() => (

@@ -94,7 +94,11 @@ export function Tabs({
     if (tabLocation && tab !== selected.tab) return tabLocation.href();
 
     // Link to the root path, unless the user wants a specific path here.
-    return location.linkTo(tab.props.path);
+    const parts: string[] = [];
+    if (tab.props.path) parts.push(tab.props.path);
+    if (tab.props.initialPath) parts.push(tab.props.initialPath);
+
+    return location.linkTo(parts.join("/"));
   }
 
   function renderTabContents(tab: ReactElement<TabProps>): ReactNode {

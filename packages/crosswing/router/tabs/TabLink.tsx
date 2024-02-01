@@ -9,9 +9,15 @@ import { useRouter } from "../context/RouterContext";
 import { UnreadBadge } from "./UnreadBadge.js";
 
 export interface TabProps {
+  /** All tab routes will render under this path. */
   path: string;
+  /** Optional initial path, relative to `path`, if you want the user to land on "deeper" content than `path` when first switching to this tab. */
+  initialPath?: string;
+  /** Title of the tab, rendered below the icon. */
   title: ReactNode;
+  /** Tab icon. */
   icon?: ReactNode;
+  /** Optional numeric badge that appears to the upper-right and slightly overlapping the icon. */
   badge?: number | null | "any";
   render: () => ReactNode;
 }
