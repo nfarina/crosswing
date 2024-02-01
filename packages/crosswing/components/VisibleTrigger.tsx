@@ -17,5 +17,6 @@ export function VisibleTrigger({ onVisible }: { onVisible?: () => void }) {
     }
   }, [isVisible]);
 
-  return <div ref={ref} />;
+  // Add data tag for debugging.
+  return <div data-visible-trigger ref={ref} />;
 }
