@@ -15,6 +15,7 @@ import { useHost } from "../../host/context/HostContext";
 import { safeArea } from "../../host/features/safeArea";
 import { RouterLocation } from "../RouterLocation";
 import { RouterContext, useRouter } from "../context/RouterContext";
+import { StyledNavStack } from "../navs/NavStack";
 import { Redirect } from "../redirect/Redirect";
 import { StyledTabBar, TabBar } from "./TabBar.js";
 import { TabProps } from "./TabLink.js";
@@ -208,6 +209,7 @@ const TabContent = styled.div``;
 export const StyledTabs = styled.div`
   position: relative; /* Reset z-index. */
   background: ${colors.textBackground()};
+  overflow: hidden;
   --tab-bar-height: 49px;
 
   &[data-container="android"] {
@@ -237,6 +239,11 @@ export const StyledTabs = styled.div`
   > ${TabContent}.active {
     /* In case any children want to render above the tab bar. */
     z-index: 2;
+
+    /* Spooky action at a distance. We need to allow NavStack to overflow so it can render above the tabs if desired, but then there's a chance you can see the next NavLayout animating in from the right. So we disable NavStack's overflow:hidden in favor of our own. */
+    ${StyledNavStack} {
+      overflow: visible;
+    }
 
     /* Special data attribute added by <NavLayout>. Our approach to hiding the tab bar used to be complex, but is now simple, we just stretch the content of any <NavLayout> to cover up the tabs. */
     *[data-hide-tab-bar="true"] {
