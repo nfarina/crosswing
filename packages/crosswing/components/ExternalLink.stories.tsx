@@ -12,7 +12,14 @@ export default {
   parameters: { layout: "centered" },
 };
 
-export const Normal = () => (
+export const Desktop = () => (
+  <Container>
+    This is a link to{" "}
+    <ExternalLink href="https://x.com">somewhere else</ExternalLink>.
+  </Container>
+);
+
+export const Mobile = () => (
   // This is a mock host provider that provides the `openUrl` function.
   <MockHostProvider openUrl={action("openUrl")}>
     <Container>

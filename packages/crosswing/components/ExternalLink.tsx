@@ -8,14 +8,18 @@ export interface Props {
   children?: ReactNode;
 }
 
-// A special kind of component that renders a tag that appears like
-// an <a> tag, but is just a <span> (this allows for the component to
-// appear inside a parent <a> tag like <Link>).
+/**
+ * A special kind of component that renders a link that could potentially open
+ * outside the "app" (when rendered in a native host). Default to rendering as
+ * a <a> for desktop, but can be rendered as a <span> if you want to embed it
+ * inside a parent <a> tag like <Link>.
+ */
 export function ExternalLink({
+  as = "a",
   href,
   children,
   ...rest
-}: { href?: string } & HTMLAttributes<HTMLSpanElement>) {
+}: { as?: "a" | "span"; href?: string } & HTMLAttributes<HTMLSpanElement>) {
   const { openUrl } = useHost();
 
   function onClick(e: MouseEvent<HTMLDivElement>) {
@@ -26,6 +30,8 @@ export function ExternalLink({
 
   return (
     <StyledExternalLink
+      as={as}
+      {...(as === "a" ? { href } : null)}
       data-is-link // For <StatusBadge>
       onClick={onClick}
       children={children ?? href}
