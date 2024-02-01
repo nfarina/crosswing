@@ -1,7 +1,6 @@
 import { action } from "@storybook/addon-actions";
 import { RouterLocation } from "../RouterLocation";
 import { RouterContext } from "../context/RouterContext";
-import { TabBarContext } from "../tabs/TabBar";
 
 export * from "./BrowserDecorator.js";
 export * from "./BrowserSimulator.js";
@@ -26,11 +25,7 @@ export function RouterDecorator(Story: () => any) {
     <RouterContext.Provider
       value={{ location, nextLocation, history, flags: { isMock: true } }}
     >
-      <TabBarContext.Provider
-        value={{ isTabBarHidden: false, setTabBarHidden: () => {} }}
-      >
-        <Story />
-      </TabBarContext.Provider>
+      <Story />
     </RouterContext.Provider>
   );
 }

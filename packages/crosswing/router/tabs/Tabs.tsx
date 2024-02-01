@@ -16,7 +16,7 @@ import { safeArea } from "../../host/features/safeArea";
 import { RouterLocation } from "../RouterLocation";
 import { RouterContext, useRouter } from "../context/RouterContext";
 import { Redirect } from "../redirect/Redirect";
-import { StyledTabBar, TabBar, TabBarContext } from "./TabBar.js";
+import { StyledTabBar, TabBar } from "./TabBar.js";
 import { TabProps } from "./TabLink.js";
 
 export * from "./TabBar.js";
@@ -149,15 +149,13 @@ export function Tabs({
       data-tab-bar-hidden={isTabBarHidden}
       {...rest}
     >
-      <TabBarContext.Provider value={{ isTabBarHidden, setTabBarHidden }}>
-        {tabs.map(renderTabContents)}
-        <TabBar
-          tabs={tabs}
-          selectedTab={nextSelected.tab}
-          getTabLink={getTabLink}
-          collapsed={collapsed}
-        />
-      </TabBarContext.Provider>
+      {tabs.map(renderTabContents)}
+      <TabBar
+        tabs={tabs}
+        selectedTab={nextSelected.tab}
+        getTabLink={getTabLink}
+        collapsed={collapsed}
+      />
     </StyledTabs>
   );
 }
@@ -210,7 +208,11 @@ const TabContent = styled.div``;
 export const StyledTabs = styled.div`
   position: relative; /* Reset z-index. */
   background: ${colors.textBackground()};
-  overflow: hidden; /* For tab bars that are hidden, so they don't expand the browser's rendering area. */
+  --tab-bar-height: 49px;
+
+  &[data-container="android"] {
+    --tab-bar-height: 58px;
+  }
 
   > ${TabContent}.inactive, > ${TabContent}.active {
     z-index: 0;
@@ -218,7 +220,7 @@ export const StyledTabs = styled.div`
     top: 0;
     left: 0;
     right: 0;
-    bottom: calc(49px + ${safeArea.bottom()});
+    bottom: calc(var(--tab-bar-height) + ${safeArea.bottom()});
     display: flex;
 
     > * {
@@ -232,14 +234,14 @@ export const StyledTabs = styled.div`
     }
   }
 
-  &[data-container="android"] {
-    > ${TabContent}.inactive, > ${TabContent}.active {
-      bottom: calc(58px + ${safeArea.bottom()});
-    }
-  }
-
   > ${TabContent}.active {
-    z-index: 1;
+    /* In case any children want to render above the tab bar. */
+    z-index: 2;
+
+    /* Special data attribute added by <NavLayout>. Our approach to hiding the tab bar used to be complex, but is now simple, we just stretch the content of any <NavLayout> to cover up the tabs. */
+    *[data-hide-tab-bar="true"] {
+      bottom: calc(0px - var(--tab-bar-height) - ${safeArea.bottom()});
+    }
   }
 
   > ${TabContent}.inactive {
@@ -248,7 +250,7 @@ export const StyledTabs = styled.div`
   }
 
   > ${StyledTabBar} {
-    z-index: 2;
+    z-index: 1;
     position: absolute;
     bottom: 0;
     width: 100%;

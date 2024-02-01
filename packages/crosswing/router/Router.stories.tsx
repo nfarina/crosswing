@@ -3,7 +3,9 @@ import { Meta } from "@storybook/react";
 import { useContext } from "react";
 import { styled } from "styled-components";
 import { colors } from "../colors/colors";
+import { NoContent } from "../components/NoContent";
 import { fonts } from "../fonts/fonts";
+import { MockHostProvider } from "../host/mocks/MockHostProvider";
 import { CrosswingAppDecorator } from "../storybook";
 import { Link } from "./Link.js";
 import { Router } from "./Router.js";
@@ -102,20 +104,31 @@ export const DynamicSwitch = () => (
 );
 
 export const App = () => (
-  <StyledBrowserSimulator rootPath="app">
-    <Switch>
-      <Route
-        path="outside"
-        render={() => (
-          <div className="content">
-            <h1>Outside the tabs!</h1>
-            <Link to="/app/">Back to tabs</Link>
-          </div>
-        )}
-      />
-      <Route render={() => <TestAppTabs path="app" />} />
-    </Switch>
-  </StyledBrowserSimulator>
+  <MockHostProvider
+    // Simulate an iOS container so we can test animations and safe areas.
+    container="ios"
+    safeArea={{
+      top: "20px",
+      left: "0",
+      right: "0",
+      bottom: "40px",
+    }}
+  >
+    <StyledBrowserSimulator rootPath="app">
+      <Switch>
+        <Route
+          path="outside"
+          render={() => (
+            <div className="content">
+              <h1>Outside the tabs!</h1>
+              <Link to="/app/">Back to tabs</Link>
+            </div>
+          )}
+        />
+        <Route render={() => <TestAppTabs path="app" />} />
+      </Switch>
+    </StyledBrowserSimulator>
+  </MockHostProvider>
 );
 
 function TestAppTabs({ path }: { path: string }) {
@@ -125,23 +138,41 @@ function TestAppTabs({ path }: { path: string }) {
         path="home"
         title="Home"
         render={() => (
-          <NavLayout
-            isApplicationRoot
-            title="Activity"
-            left={{
-              to: `/${path}/activity/visits/visit1`,
-              title: "…",
-            }}
-            right={{
-              title: "Log out",
-              onClick: action("Log out"),
-            }}
-          >
-            <div className="content">
-              <h1>Home</h1>
-              <Link to={`/${path}/outside`}>Go outside the tabs</Link>
-            </div>
-          </NavLayout>
+          <Navs>
+            <NavRoute
+              render={() => (
+                <NavLayout
+                  isApplicationRoot
+                  title="Activity"
+                  left={{
+                    to: `/${path}/activity/visits/visit1`,
+                    title: "…",
+                  }}
+                  right={{
+                    title: "Log out",
+                    onClick: action("Log out"),
+                  }}
+                >
+                  <div className="content">
+                    <h1>Home</h1>
+                    <Link to={`/${path}/outside`}>Go outside the tabs</Link>
+                    <Link to={`/${path}/home/full`}>Show full page</Link>
+                  </div>
+                </NavLayout>
+              )}
+            />
+            <NavRoute
+              path="full"
+              render={() => (
+                <NavLayout title="Full Page Layout" hideTabBar>
+                  <NoContent
+                    title="Hides Tab Bar"
+                    subtitle={<Link to={`/${path}/activity`}>Switch tabs</Link>}
+                  />
+                </NavLayout>
+              )}
+            />
+          </Navs>
         )}
       />
       <Tab

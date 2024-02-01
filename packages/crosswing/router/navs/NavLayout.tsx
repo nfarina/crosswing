@@ -21,6 +21,8 @@ export interface NavProps {
   hideSeparator?: boolean;
   /** Pass true to hide the auto-generated back button (if displayed). */
   hideBackButton?: boolean;
+  /** Pass true to hide the tab bar, if presented inside <Tabs>. */
+  hideTabBar?: boolean;
   /** Pass true to render a transparent header. */
   transparentHeader?: boolean;
   /** Pass true to lay out any children below the nav bar area. */
@@ -44,6 +46,7 @@ export function NavLayout({
   disabled,
   hideSeparator,
   hideBackButton,
+  hideTabBar,
   transparentHeader,
   fullBleed,
   darkenUnderStatusBar,
@@ -105,6 +108,7 @@ export function NavLayout({
       data-full-bleed={!!fullBleed}
       data-disabled={!!disabled}
       data-hidden={!!hidden}
+      data-hide-tab-bar={!!hideTabBar}
       {...StatusBarStyleAttribute(lightStatusBar ? "light" : "default")} // Picked up on by useAutoStatusBar.
       {...rest}
     >
@@ -128,9 +132,9 @@ export function NavLayout({
 export const StyledNavHeader = styled.div`
   display: flex;
   flex-flow: row;
-  box-sizing: content-box;
-  height: 50px;
-  box-shadow: 0 1px 0 ${colors.separator()};
+  box-sizing: border-box;
+  height: calc(50px + ${safeArea.top()});
+  border-bottom: 1px solid ${colors.separator()};
   padding-top: ${safeArea.top()};
   padding-left: ${safeArea.left()};
   padding-right: ${safeArea.right()};
@@ -143,11 +147,11 @@ export const StyledNavHeader = styled.div`
   }
 
   &[data-container="ios"] {
-    height: 44px;
+    height: calc(44px + ${safeArea.top()});
   }
 
   &[data-hide-separator="true"] {
-    box-shadow: none;
+    border-bottom: none;
   }
 
   > *:nth-child(1) {

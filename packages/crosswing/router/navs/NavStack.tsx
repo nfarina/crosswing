@@ -98,7 +98,6 @@ export function NavStack({
 
 export const StyledNavStack = styled.div`
   position: relative;
-  overflow: hidden;
 
   > .item {
     position: absolute;
