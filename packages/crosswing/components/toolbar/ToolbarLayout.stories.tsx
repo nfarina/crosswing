@@ -25,6 +25,7 @@ import {
   ToolbarSpace,
 } from "../toolbar/Toolbar";
 import { useToolbar } from "./ToolbarContext.js";
+import { ToolbarIDView } from "./ToolbarIDView";
 import { ToolbarLayout } from "./ToolbarLayout.js";
 import { ToolbarOverflowTab } from "./ToolbarOverflowTab";
 import { ToolbarTab } from "./ToolbarTab.js";
@@ -158,6 +159,18 @@ export const ExpandedTabs = () => {
       <Toolbar expandTabs>
         <ToolbarTab children="Tab Button" onClick={action("tabButtonClick")} />
         <ToolbarTab children="Tab Link" to="somewhere" />
+      </Toolbar>
+      <NoContent title="Content" />
+    </ToolbarLayout>
+  );
+};
+
+export const IDView = () => {
+  return (
+    <ToolbarLayout>
+      <Toolbar>
+        <ToolbarSpace />
+        <ToolbarIDView name="Some Object" id="abc123" />
       </Toolbar>
       <NoContent title="Content" />
     </ToolbarLayout>

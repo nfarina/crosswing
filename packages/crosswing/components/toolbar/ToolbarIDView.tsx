@@ -1,15 +1,9 @@
 import { useRef } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../colors/colors";
-import { fonts } from "../../fonts/fonts";
 import { useElementSize } from "../../hooks/useElementSize";
-import Copy from "../../icons/Copy.svg?react";
-import { useBanner } from "../../modals/banner/useBanner";
-import { Clickable } from "../Clickable";
+import { IDView } from "../IDView";
 
-export function ToolbarIDView({ name, id }: { name: string; id: string }) {
-  const copiedBanner = useBanner(() => `${name} ID copied to clipboard.`);
-
+export function ToolbarIDView(props: Parameters<typeof IDView>[0]) {
   const ref = useRef<HTMLDivElement | null>(null);
 
   // Cleverly construct a fake "ref" to the parent so we can monitor its size,
@@ -26,50 +20,9 @@ export function ToolbarIDView({ name, id }: { name: string; id: string }) {
     }
   });
 
-  function onClick() {
-    navigator.clipboard.writeText(id);
-    copiedBanner.show();
-  }
-
-  return (
-    <StyledToolbarIDView onClick={onClick}>
-      <Copy />
-      <span className="text" ref={ref}>
-        {id}
-      </span>
-    </StyledToolbarIDView>
-  );
+  return <StyledToolbarIDView {...props} />;
 }
 
-export const StyledToolbarIDView = styled(Clickable)`
-  box-sizing: border-box;
-  display: flex;
-  flex-flow: row;
-  align-items: center;
-  justify-content: flex-end;
+export const StyledToolbarIDView = styled(IDView)`
   min-width: 16px;
-  color: ${colors.textSecondary({ alpha: 0.5 })};
-  transition: color 0.2s ease-in-out;
-
-  > svg {
-    flex-shrink: 0;
-    margin-right: 2px;
-    width: 16px;
-    height: 16px;
-
-    path {
-      fill: currentColor;
-    }
-  }
-
-  > .text {
-    font: ${fonts.displayMono({ size: 13 })};
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  &:hover {
-    color: ${colors.text()};
-  }
 `;
