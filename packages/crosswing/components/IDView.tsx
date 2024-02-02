@@ -1,3 +1,4 @@
+import { MouseEvent } from "react";
 import { styled } from "styled-components";
 import { colors } from "../colors/colors";
 import { fonts } from "../fonts/fonts";
@@ -9,20 +10,23 @@ export function IDView({
   name,
   id,
   truncate = 6,
-}: {
+  onClick,
+  ...rest
+}: Parameters<typeof Clickable>[0] & {
   name: string;
   id: string;
   truncate?: number | false;
 }) {
   const copiedBanner = useBanner(() => `${name} ID copied to clipboard.`);
 
-  function onClick() {
+  function onViewClick(e: MouseEvent<HTMLButtonElement>) {
     navigator.clipboard.writeText(id);
     copiedBanner.show();
+    onClick?.(e);
   }
 
   return (
-    <StyledIDView onClick={onClick}>
+    <StyledIDView onClick={onViewClick} {...rest}>
       <Copy />
       <span className="text">{truncate ? id.slice(0, truncate) : id}</span>
     </StyledIDView>

@@ -1,28 +1,43 @@
-import { useRef } from "react";
+import { HTMLAttributes, useRef } from "react";
 import { styled } from "styled-components";
 import { useElementSize } from "../../hooks/useElementSize";
-import { IDView } from "../IDView";
+import { IDView, StyledIDView } from "../IDView";
 
-export function ToolbarIDView(props: Parameters<typeof IDView>[0]) {
+export function ToolbarIDView({
+  name,
+  id,
+  truncate,
+  ...rest
+}: HTMLAttributes<HTMLDivElement> &
+  Pick<Parameters<typeof IDView>[0], "name" | "id" | "truncate">) {
   const ref = useRef<HTMLDivElement | null>(null);
 
-  // Cleverly construct a fake "ref" to the parent so we can monitor its size,
-  // since our <Clickable> doesn't support ref forwarding.
-  const parentRef = { current: ref.current?.parentElement ?? null };
+  useElementSize(ref, (size) => {
+    const el = ref.current?.children[0] as HTMLElement | undefined;
+    if (!el) return;
 
-  useElementSize(parentRef, (size) => {
-    if (!ref.current) return;
-
-    if (size.width < 50) {
-      ref.current.style.display = "none";
+    if (size.width < el.clientWidth) {
+      el.style.opacity = "0";
     } else {
-      ref.current.style.display = "";
+      el.style.opacity = "1";
     }
   });
 
-  return <StyledToolbarIDView {...props} />;
+  return (
+    <StyledToolbarIDView ref={ref} {...rest}>
+      <IDView name={name} id={id} truncate={truncate} />
+    </StyledToolbarIDView>
+  );
 }
 
-export const StyledToolbarIDView = styled(IDView)`
+export const StyledToolbarIDView = styled.div`
+  display: flex;
+  flex-flow: row;
+  justify-content: flex-end;
   min-width: 16px;
+  overflow: hidden;
+
+  > ${StyledIDView} {
+    transition: opacity 0.1s ease-in-out;
+  }
 `;

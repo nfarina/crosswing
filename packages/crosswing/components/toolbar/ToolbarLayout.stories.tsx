@@ -169,7 +169,11 @@ export const IDView = () => {
   return (
     <ToolbarLayout>
       <Toolbar>
-        <ToolbarSpace />
+        <ToolbarButton children="Here" />
+        <ToolbarButton children="To" />
+        <ToolbarButton children="Take" />
+        <ToolbarButton children="Up" />
+        <ToolbarButton children="Space" />
         <ToolbarIDView name="Some Object" id="abc123shouldbetruncated" />
       </Toolbar>
       <NoContent title="Content" />

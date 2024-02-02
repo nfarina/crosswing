@@ -297,6 +297,9 @@ export const StyledToolbar = styled.div`
     /* We want the ID view to only take up as much space as is available, never make the toolbar overflow. */
     width: 0;
     flex-grow: 1;
+    /* Undo the top/bottom margin that a typical child of a <Toolbar> would have. */
+    margin-top: 0;
+    margin-bottom: 0;
   }
 
   &[data-inner-toolbar="true"] {
