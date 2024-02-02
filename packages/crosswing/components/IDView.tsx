@@ -5,7 +5,15 @@ import Copy from "../icons/Copy.svg?react";
 import { useBanner } from "../modals/banner/useBanner";
 import { Clickable } from "./Clickable";
 
-export function IDView({ name, id }: { name: string; id: string }) {
+export function IDView({
+  name,
+  id,
+  truncate = 6,
+}: {
+  name: string;
+  id: string;
+  truncate?: number | false;
+}) {
   const copiedBanner = useBanner(() => `${name} ID copied to clipboard.`);
 
   function onClick() {
@@ -16,7 +24,7 @@ export function IDView({ name, id }: { name: string; id: string }) {
   return (
     <StyledIDView onClick={onClick}>
       <Copy />
-      <span className="text">{id}</span>
+      <span className="text">{truncate ? id.slice(0, truncate) : id}</span>
     </StyledIDView>
   );
 }

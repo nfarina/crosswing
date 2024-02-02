@@ -170,7 +170,7 @@ export const IDView = () => {
     <ToolbarLayout>
       <Toolbar>
         <ToolbarSpace />
-        <ToolbarIDView name="Some Object" id="abc123" />
+        <ToolbarIDView name="Some Object" id="abc123shouldbetruncated" />
       </Toolbar>
       <NoContent title="Content" />
     </ToolbarLayout>
