@@ -184,7 +184,8 @@ async function stopTask(name: string) {
 // Thanks to https://stackoverflow.com/questions/49457565/sigint-handler-in-nodejs-app-not-called-for-ctrl-c-mac#comment134858261_49458139
 process.stdin.resume();
 
-process.once("SIGINT", async function (code: number) {
+// Tried .once() but it didn't work in npx.
+process.on("SIGINT", async function (code: number) {
   const allTasks = tasks.all();
 
   if (allTasks.some((task) => getRunner(task))) {
