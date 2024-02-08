@@ -3,7 +3,7 @@
     "title": "Manager Client",
     "description": "Vite development server for the Crosswing manager itself.",
     "run": {
-      "script": "dev"
+      "script": "dev:client"
     },
     "link": "http://localhost:2750/?port=2700"
   }

@@ -1,15 +1,15 @@
 {
   "name": "@crosswing/cli",
   "type": "module",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Crosswing development process manager.",
   "author": "nfarina@gmail.com",
   "bin": {
     "crosswing": "./bin/crosswing.js"
   },
   "scripts": {
-    "dev": "cd client; npm run vite --port 2750",
-    "serve": "vite-node server/server.ts",
+    "dev": "vite-node server/server.ts",
+    "dev:client": "cd client; vite --port 2750",
     "build:client": "cd client; vite build",
     "build:server": "cd server; tsc -p tsconfig.dist.json",
     "build": "npm run build:client && npm run build:server",
@@ -29,7 +29,7 @@
     "react-dom": "^18.2.0",
     "react-is": "^18.2.0",
     "styled-components": "^6.1.8",
-    "vite": "^5.0.12",
+    "vite": "^5.1.0",
     "vite-plugin-svgr": "^4.2.0"
   },
   "files": [

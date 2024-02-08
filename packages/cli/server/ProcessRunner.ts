@@ -135,17 +135,21 @@ export class ProcessRunner {
     // Send a SIGTERM to any and all children of the main process. We can't
     // use the negative trick (kill(-pid, "SIGTERM")) because the Bun runtime
     // doesn't support it.
-    const childPids = await this.getChildPids();
+    // const childPids = await this.getChildPids();
 
-    for (const pid of childPids) {
-      if (name) {
-        console.log(`[${name}]   - and child`, pid);
-      }
+    // for (const pid of childPids) {
+    //   if (name) {
+    //     console.log(`[${name}]   - and child`, pid);
+    //   }
 
-      process.kill(pid, "SIGTERM");
-    }
+    //   process.kill(pid, "SIGTERM");
+    // }
 
     // Send a SIGTERM to the main process.
-    process.kill(child.pid, "SIGTERM");
+    // process.kill(child.pid, "SIGTERM");
+
+    // Ignoring the Bun compatibility attempt above, which made everything
+    // worse.
+    process.kill(-child.pid, "SIGINT");
   }
 }
