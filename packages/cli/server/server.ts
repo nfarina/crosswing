@@ -180,6 +180,10 @@ async function stopTask(name: string) {
   deleteRunner(task);
 }
 
+// Begin reading from stdin so the process does not exit.
+// Thanks to https://stackoverflow.com/questions/49457565/sigint-handler-in-nodejs-app-not-called-for-ctrl-c-mac#comment134858261_49458139
+process.stdin.resume();
+
 process.once("SIGINT", async function (code: number) {
   const allTasks = tasks.all();
 

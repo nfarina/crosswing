@@ -1,7 +1,7 @@
 {
   "name": "@crosswing/cli",
   "type": "module",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Crosswing development process manager.",
   "author": "nfarina@gmail.com",
   "bin": {
