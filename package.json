@@ -1,4 +1,7 @@
 {
+  "//": [
+    "vite is pinned because yarn can't resolve vitest's vite dependency in a way that allows upgrades. Also it's in peerDeps to silence Yarn's incessant warnings about mismatched versions."
+  ],
   "name": "crosswing-monorepo",
   "type": "module",
   "private": true,
@@ -21,10 +24,10 @@
     "clean:node_modules": "rm -rf node_modules packages/*/node_modules"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^7.6.13",
-    "@storybook/addon-essentials": "^7.6.13",
-    "@storybook/react": "^7.6.13",
-    "@storybook/react-vite": "^7.6.13",
+    "@storybook/addon-actions": "^7.6.14",
+    "@storybook/addon-essentials": "^7.6.14",
+    "@storybook/react": "^7.6.14",
+    "@storybook/react-vite": "^7.6.14",
     "@types/debug": "^4.1.12",
     "@types/minimist": "^1.2.5",
     "@types/react": "^18.2.55",
@@ -35,13 +38,19 @@
     "prettier": "^3.2.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "storybook": "^7.6.13",
+    "storybook": "^7.6.14",
     "timemachine": "^0.3.2",
     "typescript": "^5.3.3",
-    "vite": "^5.1.0",
+    "vite": "^5.1.1",
     "vite-node": "1.2.2",
     "vite-plugin-svgr": "^4.2.0",
     "vitest": "^1.2.2"
   },
-  "packageManager": "yarn@4.0.2"
+  "peerDependencies": {
+    "vite": "^5.1.1"
+  },
+  "resolutions": {
+    "vite": "5.1.1"
+  },
+  "packageManager": "yarn@4.1.0"
 }
