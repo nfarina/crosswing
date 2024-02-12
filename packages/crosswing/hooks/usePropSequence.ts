@@ -6,9 +6,8 @@ import { useInterval } from "./useInterval.js";
 // alternating between states (good for testing CSS animations).
 
 // https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-8.html
-type PropsOf<Type> = Type extends FunctionComponent<infer Props>
-  ? Props
-  : never;
+type PropsOf<Type> =
+  Type extends FunctionComponent<infer Props> ? Props : never;
 
 export function usePropSequence<T extends FunctionComponent>(
   sequence: Partial<PropsOf<T>>[],
