@@ -7,11 +7,11 @@ import {
   useState,
 } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../colors/colors";
-import { fonts } from "../../fonts/fonts";
-import { Router } from "../Router";
-import { RouterContext } from "../context/RouterContext";
-import { MemoryHistory } from "../history/MemoryHistory";
+import { colors } from "../../colors/colors.js";
+import { fonts } from "../../fonts/fonts.js";
+import { Router } from "../Router.js";
+import { RouterContext } from "../context/RouterContext.js";
+import { MemoryHistory } from "../history/MemoryHistory.js";
 
 export function BrowserSimulator({
   rootPath,

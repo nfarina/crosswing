@@ -1,5 +1,5 @@
 import { UIEvent, useRef, useState } from "react";
-import { Seconds } from "../shared/timespan";
+import { Seconds } from "../shared/timespan.js";
 
 export function useScrollSpeed(): {
   onScroll: (e: UIEvent<any>) => void;

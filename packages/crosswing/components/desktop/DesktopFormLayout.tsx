@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { colors } from "../../colors/colors";
+import { colors } from "../../colors/colors.js";
 
 /**
  * Useful for hosting a form using mobile components in a desktop setting.

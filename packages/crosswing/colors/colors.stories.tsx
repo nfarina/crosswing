@@ -1,8 +1,8 @@
 import { Meta } from "@storybook/react";
 import { CSSProperties, ReactNode } from "react";
 import { styled } from "styled-components";
-import { fonts } from "../fonts/fonts";
-import { CrosswingAppDecorator } from "../storybook";
+import { fonts } from "../fonts/fonts.js";
+import { CrosswingAppDecorator } from "../storybook.js";
 import { ColorView } from "./ColorView.js";
 import { colors } from "./colors.js";
 

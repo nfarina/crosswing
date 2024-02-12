@@ -1,8 +1,8 @@
 import { HTMLAttributes, MouseEvent, ReactNode } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../colors/colors";
-import { UnreadBadge } from "../../router/tabs/UnreadBadge";
-import { Clickable } from "../Clickable";
+import { colors } from "../../colors/colors.js";
+import { UnreadBadge } from "../../router/tabs/UnreadBadge.js";
+import { Clickable } from "../Clickable.js";
 
 export type SiteHeaderAccessory = {
   icon: ReactNode;

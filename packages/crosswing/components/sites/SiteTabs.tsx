@@ -1,15 +1,15 @@
 import { ReactElement, ReactNode, isValidElement } from "react";
-import { flattenChildren } from "../../hooks/flattenChildren";
-import { Redirect } from "../../router/redirect/Redirect";
-import { Route, Switch } from "../../router/switch/Switch";
-import { NoContent } from "../NoContent";
+import { flattenChildren } from "../../hooks/flattenChildren.js";
+import { Redirect } from "../../router/redirect/Redirect.js";
+import { Route, Switch } from "../../router/switch/Switch.js";
+import { NoContent } from "../NoContent.js";
 import {
   Toolbar,
   ToolbarInsertionPoint,
   ToolbarSpace,
-} from "../toolbar/Toolbar";
-import { ToolbarLayout } from "../toolbar/ToolbarLayout";
-import { ToolbarTab } from "../toolbar/ToolbarTab";
+} from "../toolbar/Toolbar.js";
+import { ToolbarLayout } from "../toolbar/ToolbarLayout.js";
+import { ToolbarTab } from "../toolbar/ToolbarTab.js";
 import { usePageTitle } from "./SitePageTitle.js";
 
 export interface SiteTabProps {

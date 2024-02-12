@@ -1,6 +1,6 @@
 import { HTMLAttributes, ReactElement } from "react";
 import { styled } from "styled-components";
-import { useHost } from "../host/context/HostContext";
+import { useHost } from "../host/context/HostContext.js";
 
 export type ScrollBounce = "none" | "horizontal" | "vertical" | "both";
 

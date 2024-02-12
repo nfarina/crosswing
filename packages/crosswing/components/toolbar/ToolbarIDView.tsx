@@ -1,7 +1,7 @@
 import { HTMLAttributes, useRef } from "react";
 import { styled } from "styled-components";
-import { useElementSize } from "../../hooks/useElementSize";
-import { IDView, StyledIDView } from "../IDView";
+import { useElementSize } from "../../hooks/useElementSize.js";
+import { IDView, StyledIDView } from "../IDView.js";
 
 export function ToolbarIDView({
   name,

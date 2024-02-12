@@ -1,6 +1,6 @@
 import { HTMLAttributes } from "react";
 import { keyframes, styled } from "styled-components";
-import { colors } from "../colors/colors";
+import { colors } from "../colors/colors.js";
 
 export function Spinner({
   hidden,

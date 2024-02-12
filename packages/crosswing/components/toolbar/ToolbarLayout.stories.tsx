@@ -3,18 +3,18 @@ import { Meta } from "@storybook/react";
 import { useState } from "react";
 import { createPortal } from "react-dom";
 import { styled } from "styled-components";
-import { colors } from "../../colors/colors";
-import { useAsyncTask } from "../../hooks/useAsyncTask";
-import { ModalContextProvider } from "../../modals/context/ModalContextProvider";
-import { ModalDecorator } from "../../modals/storybook/ModalDecorator";
+import { colors } from "../../colors/colors.js";
+import { useAsyncTask } from "../../hooks/useAsyncTask.js";
+import { ModalContextProvider } from "../../modals/context/ModalContextProvider.js";
+import { ModalDecorator } from "../../modals/storybook/ModalDecorator.js";
 import {
   BrowserSimulator,
   RouterDecorator,
-} from "../../router/storybook/RouterDecorator";
-import { wait } from "../../shared/wait";
-import { CrosswingAppDecorator } from "../../storybook";
-import { NoContent } from "../NoContent";
-import { SelectOption } from "../forms/Select";
+} from "../../router/storybook/RouterDecorator.js";
+import { wait } from "../../shared/wait.js";
+import { CrosswingAppDecorator } from "../../storybook.js";
+import { NoContent } from "../NoContent.js";
+import { SelectOption } from "../forms/Select.js";
 import {
   Toolbar,
   ToolbarButton,
@@ -23,11 +23,11 @@ import {
   ToolbarSelect,
   ToolbarSidebarButton,
   ToolbarSpace,
-} from "../toolbar/Toolbar";
+} from "../toolbar/Toolbar.js";
 import { useToolbar } from "./ToolbarContext.js";
-import { ToolbarIDView } from "./ToolbarIDView";
+import { ToolbarIDView } from "./ToolbarIDView.js";
 import { ToolbarLayout } from "./ToolbarLayout.js";
-import { ToolbarOverflowTab } from "./ToolbarOverflowTab";
+import { ToolbarOverflowTab } from "./ToolbarOverflowTab.js";
 import { ToolbarTab } from "./ToolbarTab.js";
 
 export default {

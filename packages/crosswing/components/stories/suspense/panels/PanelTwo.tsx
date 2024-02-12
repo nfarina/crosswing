@@ -1,4 +1,4 @@
-import { colors } from "../../../../colors/colors";
+import { colors } from "../../../../colors/colors.js";
 import { StyledPanel } from "./PanelOne.js";
 
 export default function PanelTwo({}: any) {

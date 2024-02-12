@@ -1,12 +1,12 @@
 import { action } from "@storybook/addon-actions";
 import { Suspense, lazy, useState } from "react";
-import { useRouter } from "../router/context/RouterContext";
+import { useRouter } from "../router/context/RouterContext.js";
 import {
   BrowserSimulator,
   RouterDecorator,
-} from "../router/storybook/RouterDecorator";
-import { wait } from "../shared/wait";
-import { CrosswingAppDecorator } from "../storybook";
+} from "../router/storybook/RouterDecorator.js";
+import { wait } from "../shared/wait.js";
+import { CrosswingAppDecorator } from "../storybook.js";
 import { LoadingCurtain } from "./LoadingCurtain.js";
 import { NoContent } from "./NoContent.js";
 import { TabbedButton, TabbedButtonLayout } from "./TabbedButtonLayout.js";

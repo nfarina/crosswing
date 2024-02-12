@@ -1,6 +1,6 @@
-import { Link } from "../router/Link";
-import { RouterDecorator } from "../router/storybook/RouterDecorator";
-import { CrosswingAppDecorator } from "../storybook";
+import { Link } from "../router/Link.js";
+import { RouterDecorator } from "../router/storybook/RouterDecorator.js";
+import { CrosswingAppDecorator } from "../storybook.js";
 import { NoContent } from "./NoContent.js";
 
 export default {

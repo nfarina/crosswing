@@ -9,7 +9,7 @@ import { useErrorAlert } from "crosswing/modals/alert/error";
 import { wait } from "crosswing/shared/wait";
 import { SyntheticEvent } from "react";
 import { styled } from "styled-components";
-import { ClientTask } from "../shared/types";
+import { ClientTask } from "../shared/types.js";
 import { api } from "./api.js";
 
 export function TaskView({

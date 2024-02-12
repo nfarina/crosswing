@@ -1,10 +1,10 @@
 import dayjs from "dayjs";
-import { CrosswingAppDecorator } from "../../storybook";
-import { Button } from "../Button";
-import { TextInput } from "../forms/TextInput";
-import { useInputValue } from "../forms/useInputValue";
-import { dateTransformer } from "./dateTransformer";
-import { TransformerDecorator } from "./storybook";
+import { CrosswingAppDecorator } from "../../storybook.js";
+import { Button } from "../Button.js";
+import { TextInput } from "../forms/TextInput.js";
+import { useInputValue } from "../forms/useInputValue.js";
+import { dateTransformer } from "./dateTransformer.js";
+import { TransformerDecorator } from "./storybook.js";
 
 export default {
   component: dateTransformer, // Just for the title.

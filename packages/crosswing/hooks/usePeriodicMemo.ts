@@ -1,5 +1,5 @@
 import { DependencyList, useEffect } from "react";
-import { deepEqual } from "../shared/compare";
+import { deepEqual } from "../shared/compare.js";
 import { useResettableState } from "./useResettableState.js";
 
 /**

@@ -1,10 +1,10 @@
 import { action } from "@storybook/addon-actions";
-import { CrosswingAppDecorator } from "../../storybook";
-import { ModalDecorator } from "../storybook/ModalDecorator";
+import { CrosswingAppDecorator } from "../../storybook.js";
+import { ModalDecorator } from "../storybook/ModalDecorator.js";
 import {
   ModalStoryButton,
   ModalStoryButtons,
-} from "../storybook/ModalStoryButtons";
+} from "../storybook/ModalStoryButtons.js";
 import { useConfirm } from "./useConfirm.js";
 
 export default {

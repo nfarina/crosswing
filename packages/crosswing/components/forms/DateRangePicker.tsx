@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLayout } from "../../router/navs/NavLayout";
+import { NavLayout } from "../../router/navs/NavLayout.js";
 import { DateRange } from "./DateRange.js";
 
 import DateRangeControl, { DateRangeValueType } from "./DateRangeControl.js";

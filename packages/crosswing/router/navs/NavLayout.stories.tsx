@@ -1,9 +1,9 @@
 import { styled } from "styled-components";
-import { colors } from "../../colors/colors";
-import { fonts } from "../../fonts/fonts";
-import { MockHostProvider } from "../../host/mocks/MockHostProvider";
-import { CrosswingAppDecorator } from "../../storybook";
-import { RouterDecorator } from "../storybook/RouterDecorator";
+import { colors } from "../../colors/colors.js";
+import { fonts } from "../../fonts/fonts.js";
+import { MockHostProvider } from "../../host/mocks/MockHostProvider.js";
+import { CrosswingAppDecorator } from "../../storybook.js";
+import { RouterDecorator } from "../storybook/RouterDecorator.js";
 import { NavLayout } from "./NavLayout.js";
 import { StyledNavTitleView } from "./NavTitleView.js";
 

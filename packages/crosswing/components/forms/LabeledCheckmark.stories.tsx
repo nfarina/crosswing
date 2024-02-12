@@ -1,6 +1,6 @@
 import { action } from "@storybook/addon-actions";
-import { CrosswingAppDecorator } from "../../storybook";
-import { SeparatorDecorator } from "../SeparatorLayout";
+import { CrosswingAppDecorator } from "../../storybook.js";
+import { SeparatorDecorator } from "../SeparatorLayout.js";
 import { LabeledCheckmark } from "./LabeledCheckmark.js";
 
 export default {

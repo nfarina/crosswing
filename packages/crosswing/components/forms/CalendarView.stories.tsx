@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import { useState } from "react";
 import { styled } from "styled-components";
-import { CrosswingAppDecorator } from "../../storybook";
+import { CrosswingAppDecorator } from "../../storybook.js";
 import { CalendarView } from "./CalendarView.js";
 import {
   areDateRangesEqual,

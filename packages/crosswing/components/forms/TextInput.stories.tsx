@@ -1,10 +1,10 @@
 import { Meta } from "@storybook/react";
 import { useState } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../colors/colors";
-import { fonts } from "../../fonts/fonts";
-import { CrosswingAppDecorator } from "../../storybook";
-import { Button } from "../Button";
+import { colors } from "../../colors/colors.js";
+import { fonts } from "../../fonts/fonts.js";
+import { CrosswingAppDecorator } from "../../storybook.js";
+import { Button } from "../Button.js";
 import { StyledTextInput, TextInput } from "./TextInput.js";
 
 export default {

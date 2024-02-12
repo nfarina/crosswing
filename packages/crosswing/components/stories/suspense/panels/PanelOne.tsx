@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
-import { colors } from "../../../../colors/colors";
-import { fonts } from "../../../../fonts/fonts";
-import { Placeholder } from "../../../Placeholder";
+import { colors } from "../../../../colors/colors.js";
+import { fonts } from "../../../../fonts/fonts.js";
+import { Placeholder } from "../../../Placeholder.js";
 
 export default function PanelOne({}: any) {
   return (

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { useAsyncTask } from "../../hooks/useAsyncTask";
-import { useDebounced } from "../../hooks/useDebounced";
-import { wait } from "../../shared/wait";
-import { CrosswingAppDecorator } from "../../storybook";
+import { useAsyncTask } from "../../hooks/useAsyncTask.js";
+import { useDebounced } from "../../hooks/useDebounced.js";
+import { wait } from "../../shared/wait.js";
+import { CrosswingAppDecorator } from "../../storybook.js";
 import { SearchInput } from "./SearchInput.js";
 
 export default {

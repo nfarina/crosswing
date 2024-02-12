@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { CrosswingAppDecorator } from "../../storybook";
-import { SeparatorDecorator } from "../SeparatorLayout";
+import { CrosswingAppDecorator } from "../../storybook.js";
+import { SeparatorDecorator } from "../SeparatorLayout.js";
 import { LabeledSelect } from "./LabeledSelect.js";
 import { SelectOption } from "./Select.js";
 

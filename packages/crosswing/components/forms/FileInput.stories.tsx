@@ -1,9 +1,9 @@
 import { action } from "@storybook/addon-actions";
 import { Meta, StoryFn } from "@storybook/react";
 import { styled } from "styled-components";
-import { colors } from "../../colors/colors";
-import { CrosswingAppDecorator } from "../../storybook";
-import { SeparatorDecorator } from "../SeparatorLayout";
+import { colors } from "../../colors/colors.js";
+import { CrosswingAppDecorator } from "../../storybook.js";
+import { SeparatorDecorator } from "../SeparatorLayout.js";
 import { FileInput } from "./FileInput.js";
 import { TextCell } from "./TextCell.js";
 

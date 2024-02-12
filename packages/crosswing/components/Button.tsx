@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
-import { colors } from "../colors/colors";
-import { fonts } from "../fonts/fonts";
+import { colors } from "../colors/colors.js";
+import { fonts } from "../fonts/fonts.js";
 import { Clickable } from "./Clickable.js";
 import { Spinner, StyledSpinner } from "./Spinner.js";
 

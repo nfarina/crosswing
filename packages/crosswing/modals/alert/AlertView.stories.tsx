@@ -1,12 +1,12 @@
 import { action } from "@storybook/addon-actions";
 import { Meta } from "@storybook/react";
 import { styled } from "styled-components";
-import { colors } from "../../colors/colors";
-import { fonts } from "../../fonts/fonts";
-import { useAsyncTask } from "../../hooks/useAsyncTask";
-import { wait } from "../../shared/wait";
-import { CrosswingAppDecorator } from "../../storybook";
-import { DialogContainer } from "../dialog/useDialog";
+import { colors } from "../../colors/colors.js";
+import { fonts } from "../../fonts/fonts.js";
+import { useAsyncTask } from "../../hooks/useAsyncTask.js";
+import { wait } from "../../shared/wait.js";
+import { CrosswingAppDecorator } from "../../storybook.js";
+import { DialogContainer } from "../dialog/useDialog.js";
 import { AlertView } from "./AlertView.js";
 
 export default {

@@ -1,5 +1,5 @@
-import { wait } from "../../../../shared/wait";
-import { NoContent } from "../../../NoContent";
+import { wait } from "../../../../shared/wait.js";
+import { NoContent } from "../../../NoContent.js";
 
 export default function DataTab() {
   const result = use(fetchData());

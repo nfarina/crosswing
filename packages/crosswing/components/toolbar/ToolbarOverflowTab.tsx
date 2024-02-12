@@ -8,12 +8,12 @@ import {
   useState,
 } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../colors/colors";
-import { flattenChildren } from "../../hooks/flattenChildren";
+import { colors } from "../../colors/colors.js";
+import { flattenChildren } from "../../hooks/flattenChildren.js";
 import DownArrow from "../../icons/DownArrow.svg?react";
-import { usePopup } from "../../modals/popup/usePopup";
-import { useRouter } from "../../router/context/RouterContext";
-import { PopupMenu, PopupMenuText } from "../PopupMenu";
+import { usePopup } from "../../modals/popup/usePopup.js";
+import { useRouter } from "../../router/context/RouterContext.js";
+import { PopupMenu, PopupMenuText } from "../PopupMenu.js";
 import {
   StyledToolbarTabButton,
   StyledToolbarTabLink,

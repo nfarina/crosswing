@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../colors/colors";
-import { fonts } from "../../fonts/fonts";
-import { CrosswingAppDecorator } from "../../storybook";
-import { Router } from "../Router";
-import { MemoryHistory } from "../history/MemoryHistory";
+import { colors } from "../../colors/colors.js";
+import { fonts } from "../../fonts/fonts.js";
+import { CrosswingAppDecorator } from "../../storybook.js";
+import { Router } from "../Router.js";
+import { MemoryHistory } from "../history/MemoryHistory.js";
 import { Tab, Tabs } from "./Tabs.js";
 
 export default {

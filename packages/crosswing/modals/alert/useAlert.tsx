@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
-import { Modal } from "../context/useModal";
-import { UseDialogOptions, useDialog } from "../dialog/useDialog";
+import { Modal } from "../context/useModal.js";
+import { UseDialogOptions, useDialog } from "../dialog/useDialog.js";
 import { AlertButton, AlertView } from "./AlertView.js";
 
 export * from "./AlertView.js";

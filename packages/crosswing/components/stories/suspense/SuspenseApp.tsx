@@ -1,5 +1,5 @@
 import { lazy } from "react";
-import { Tab, Tabs } from "../../../router/tabs/Tabs";
+import { Tab, Tabs } from "../../../router/tabs/Tabs.js";
 
 const NavsTab = lazy(() => import("./tabs/NavsTab"));
 const SwitchTab = lazy(() => import("./tabs/SwitchTab"));

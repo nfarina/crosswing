@@ -1,7 +1,7 @@
 import { HTMLAttributes } from "react";
 import { keyframes, styled } from "styled-components";
-import { ColorBuilder, colors } from "../colors/colors";
-import { easing } from "../shared/easing";
+import { ColorBuilder, colors } from "../colors/colors.js";
+import { easing } from "../shared/easing.js";
 import { Donut, StyledDonut } from "./Donut.js";
 
 export function ProgressView({

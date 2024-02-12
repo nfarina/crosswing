@@ -1,9 +1,9 @@
 import { KeyboardEvent, ReactNode } from "react";
 import { styled } from "styled-components";
-import { colors } from "../colors/colors";
-import { fonts } from "../fonts/fonts";
+import { colors } from "../colors/colors.js";
+import { fonts } from "../fonts/fonts.js";
 import DisclosureIcon from "../icons/DisclosureArrow.svg?react";
-import { Link } from "../router/Link";
+import { Link } from "../router/Link.js";
 import { ButtonSize } from "./Button.js";
 
 export function LinkButton({

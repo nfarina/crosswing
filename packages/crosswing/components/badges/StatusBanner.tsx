@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { styled } from "styled-components";
-import { fonts } from "../../fonts/fonts";
-import { Button } from "../Button";
+import { fonts } from "../../fonts/fonts.js";
+import { Button } from "../Button.js";
 import { StatusBadge } from "./StatusBadge.js";
 
 export function StatusBanner({

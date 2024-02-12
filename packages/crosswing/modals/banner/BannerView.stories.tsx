@@ -1,7 +1,7 @@
 import { action } from "@storybook/addon-actions";
 import { Meta } from "@storybook/react";
-import { CrosswingAppDecorator } from "../../storybook";
-import { BannerView } from "../banner/BannerView";
+import { CrosswingAppDecorator } from "../../storybook.js";
+import { BannerView } from "../banner/BannerView.js";
 
 export default {
   component: BannerView,

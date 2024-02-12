@@ -6,13 +6,13 @@ import {
   useRef,
 } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../colors/colors";
-import { fonts } from "../../fonts/fonts";
-import { useHotkey } from "../../hooks/useHotkey";
-import { useHost } from "../../host/context/HostContext";
+import { colors } from "../../colors/colors.js";
+import { fonts } from "../../fonts/fonts.js";
+import { useHotkey } from "../../hooks/useHotkey.js";
+import { useHost } from "../../host/context/HostContext.js";
 import CloseCircle from "../../icons/CloseCircle.svg?react";
 import Search from "../../icons/Search.svg?react";
-import { Spinner } from "../Spinner";
+import { Spinner } from "../Spinner.js";
 
 export function SearchInput({
   placeholder = "Search",

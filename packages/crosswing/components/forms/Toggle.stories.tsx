@@ -1,9 +1,9 @@
 import { action } from "@storybook/addon-actions";
 import { Meta } from "@storybook/react";
 import { useState } from "react";
-import { useAsyncTask } from "../../hooks/useAsyncTask";
-import { wait } from "../../shared/wait";
-import { CrosswingAppDecorator } from "../../storybook";
+import { useAsyncTask } from "../../hooks/useAsyncTask.js";
+import { wait } from "../../shared/wait.js";
+import { CrosswingAppDecorator } from "../../storybook.js";
 import { Toggle } from "./Toggle.js";
 
 export default {

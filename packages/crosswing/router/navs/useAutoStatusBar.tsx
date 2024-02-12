@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useHostStatusBar } from "../../host/features/HostStatusBar";
+import { useHostStatusBar } from "../../host/features/HostStatusBar.js";
 
 export const StatusBarStyleAttribute = (style: "light" | "default") => ({
   "data-status-bar-style": style,

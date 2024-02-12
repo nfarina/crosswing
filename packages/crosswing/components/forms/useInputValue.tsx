@@ -1,5 +1,5 @@
 import { DependencyList, useState } from "react";
-import { useResettableState } from "../../hooks/useResettableState";
+import { useResettableState } from "../../hooks/useResettableState.js";
 import { TextArea } from "./TextArea.js";
 import { TextInput } from "./TextInput.js";
 

@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
-import { AlertButton, AlertView } from "../alert/AlertView";
-import { Modal } from "../context/useModal";
-import { useDialog } from "../dialog/useDialog";
+import { AlertButton, AlertView } from "../alert/AlertView.js";
+import { Modal } from "../context/useModal.js";
+import { useDialog } from "../dialog/useDialog.js";
 
 export interface Confirm {
   title?: ReactNode;

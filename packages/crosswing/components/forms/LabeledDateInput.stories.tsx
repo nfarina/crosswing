@@ -1,9 +1,9 @@
 import { Meta } from "@storybook/react";
 import { useState } from "react";
-import { ModalDecorator } from "../../modals/storybook/ModalDecorator";
-import { RouterDecorator } from "../../router/storybook/RouterDecorator";
-import { CrosswingAppDecorator } from "../../storybook";
-import { SeparatorDecorator } from "../SeparatorLayout";
+import { ModalDecorator } from "../../modals/storybook/ModalDecorator.js";
+import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
+import { CrosswingAppDecorator } from "../../storybook.js";
+import { SeparatorDecorator } from "../SeparatorLayout.js";
 import { LabeledDateInput } from "./LabeledDateInput.js";
 
 export default {

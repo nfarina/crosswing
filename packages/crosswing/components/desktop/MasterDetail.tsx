@@ -1,7 +1,7 @@
 import { CSSProperties, ReactNode } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../colors/colors";
-import { useRouter } from "../../router/context/RouterContext";
+import { colors } from "../../colors/colors.js";
+import { useRouter } from "../../router/context/RouterContext.js";
 
 export function MasterDetail({
   fixedWidth = 200,

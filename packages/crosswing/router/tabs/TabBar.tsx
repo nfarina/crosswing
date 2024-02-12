@@ -1,8 +1,8 @@
 import { ReactElement } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../colors/colors";
-import { useHost } from "../../host/context/HostContext";
-import { safeArea } from "../../host/features/safeArea";
+import { colors } from "../../colors/colors.js";
+import { useHost } from "../../host/context/HostContext.js";
+import { safeArea } from "../../host/features/safeArea.js";
 import { StyledTabLink, TabLink, TabProps } from "./TabLink.js";
 
 export function TabBar({

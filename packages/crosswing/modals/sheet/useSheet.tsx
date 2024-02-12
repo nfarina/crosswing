@@ -8,13 +8,16 @@ import {
   useState,
 } from "react";
 import { keyframes, styled } from "styled-components";
-import { colors } from "../../colors/colors";
-import { HotKeyContextDataAttributes, useHotkey } from "../../hooks/useHotkey";
-import { useHost } from "../../host/context/HostContext";
-import { safeArea } from "../../host/features/safeArea";
-import { easing } from "../../shared/easing";
-import { ModalContext } from "../context/ModalContext";
-import { Modal, useModal } from "../context/useModal";
+import { colors } from "../../colors/colors.js";
+import {
+  HotKeyContextDataAttributes,
+  useHotkey,
+} from "../../hooks/useHotkey.js";
+import { useHost } from "../../host/context/HostContext.js";
+import { safeArea } from "../../host/features/safeArea.js";
+import { easing } from "../../shared/easing.js";
+import { ModalContext } from "../context/ModalContext.js";
+import { Modal, useModal } from "../context/useModal.js";
 
 export type SheetAnimation = "slide" | "pop";
 

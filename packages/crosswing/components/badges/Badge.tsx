@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
-import { colors } from "../../colors/colors";
-import { fonts } from "../../fonts/fonts";
+import { colors } from "../../colors/colors.js";
+import { fonts } from "../../fonts/fonts.js";
 
 /**
  * A basic sort of badge that looks nice on <TextCell> and friends.

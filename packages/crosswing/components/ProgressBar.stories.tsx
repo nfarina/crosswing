@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { CrosswingAppDecorator } from "../storybook";
+import { CrosswingAppDecorator } from "../storybook.js";
 import { ProgressBar } from "./ProgressBar.js";
 
 export default {

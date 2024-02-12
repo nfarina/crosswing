@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { formatPercentage } from "../../shared/numeric";
+import { formatPercentage } from "../../shared/numeric.js";
 import { NumberLabel } from "./NumberLabel.js";
 
 export function PercentageLabel({

@@ -1,11 +1,11 @@
 import { lazy } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../../../colors/colors";
-import { Redirect } from "../../../../router/redirect/Redirect";
-import { Route, Switch } from "../../../../router/switch/Switch";
-import { usePageTitle } from "../../../sites/SitePageTitle";
-import { StyledToolbar, Toolbar } from "../../../toolbar/Toolbar";
-import { ToolbarTab } from "../../../toolbar/ToolbarTab";
+import { colors } from "../../../../colors/colors.js";
+import { Redirect } from "../../../../router/redirect/Redirect.js";
+import { Route, Switch } from "../../../../router/switch/Switch.js";
+import { usePageTitle } from "../../../sites/SitePageTitle.js";
+import { StyledToolbar, Toolbar } from "../../../toolbar/Toolbar.js";
+import { ToolbarTab } from "../../../toolbar/ToolbarTab.js";
 
 const PanelOne = lazy(() => import("../panels/PanelOne"));
 

@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { sort } from "./sort";
+import { sort } from "./sort.js";
 
 test("sorts objects by named key", () => {
   type Item = { name: string };

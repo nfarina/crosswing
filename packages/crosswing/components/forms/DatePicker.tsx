@@ -1,13 +1,13 @@
 import { ReactNode } from "react";
 import { styled } from "styled-components";
-import { safeArea } from "../../host/features/safeArea";
-import { NavLayout } from "../../router/navs/NavLayout";
-import { Button, StyledButton } from "../Button";
-import { Notice } from "../Notice";
-import { dateTransformer } from "../transformers/dateTransformer";
+import { safeArea } from "../../host/features/safeArea.js";
+import { NavLayout } from "../../router/navs/NavLayout.js";
+import { Button, StyledButton } from "../Button.js";
+import { Notice } from "../Notice.js";
+import { dateTransformer } from "../transformers/dateTransformer.js";
 import { CalendarView, StyledCalendarView } from "./CalendarView.js";
 import { dateRange } from "./DateRange.js";
-import { usePrompt } from "./usePrompt";
+import { usePrompt } from "./usePrompt.js";
 
 export function DatePicker({
   defaultDate,

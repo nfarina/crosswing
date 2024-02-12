@@ -1,9 +1,9 @@
 import { ReactNode, useCallback, useRef } from "react";
 import { keyframes, styled } from "styled-components";
-import { useHotkey } from "../../hooks/useHotkey";
-import { useInterval } from "../../hooks/useInterval";
-import { safeArea } from "../../host/features/safeArea";
-import { Modal, useModal } from "../context/useModal";
+import { useHotkey } from "../../hooks/useHotkey.js";
+import { useInterval } from "../../hooks/useInterval.js";
+import { safeArea } from "../../host/features/safeArea.js";
+import { Modal, useModal } from "../context/useModal.js";
 import { BannerView } from "./BannerView.js";
 
 export * from "./BannerView.js";

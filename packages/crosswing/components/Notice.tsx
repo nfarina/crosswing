@@ -1,7 +1,7 @@
 import { HTMLAttributes } from "react";
 import { styled } from "styled-components";
-import { colors } from "../colors/colors";
-import { fonts } from "../fonts/fonts";
+import { colors } from "../colors/colors.js";
+import { fonts } from "../fonts/fonts.js";
 
 export function Notice({
   size = "normal",

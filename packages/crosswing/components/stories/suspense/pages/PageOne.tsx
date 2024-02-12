@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
-import { NavLayout } from "../../../../router/navs/NavLayout";
-import { LinkButton } from "../../../LinkButton";
-import { NoContent } from "../../../NoContent";
+import { NavLayout } from "../../../../router/navs/NavLayout.js";
+import { LinkButton } from "../../../LinkButton.js";
+import { NoContent } from "../../../NoContent.js";
 
 export default function PageOne() {
   return (

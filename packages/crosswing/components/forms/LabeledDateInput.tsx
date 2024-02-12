@@ -1,7 +1,7 @@
 import { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
-import { useSheet } from "../../modals/sheet/useSheet";
-import { Timestamp } from "../labels/Timestamp";
+import { useSheet } from "../../modals/sheet/useSheet.js";
+import { Timestamp } from "../labels/Timestamp.js";
 import { DatePicker } from "./DatePicker.js";
 import { TextCell } from "./TextCell.js";
 

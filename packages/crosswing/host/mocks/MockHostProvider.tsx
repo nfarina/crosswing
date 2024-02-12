@@ -1,7 +1,7 @@
 import { ReactNode, useMemo } from "react";
-import { HostContext, defaultHostContext } from "../context/HostContext";
-import { StyledHostProvider } from "../context/HostProvider";
-import { HostContextValue } from "../util/types";
+import { HostContext, defaultHostContext } from "../context/HostContext.js";
+import { StyledHostProvider } from "../context/HostProvider.js";
+import { HostContextValue } from "../util/types.js";
 
 /**
  * Useful for hosting Storybook stories that use Host from context.

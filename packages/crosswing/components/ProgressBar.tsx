@@ -1,6 +1,6 @@
 import { CSSProperties, HTMLAttributes } from "react";
 import { styled } from "styled-components";
-import { colors } from "../colors/colors";
+import { colors } from "../colors/colors.js";
 
 export type ProgressBarSize = "normal" | "larger" | "largest" | "smaller";
 

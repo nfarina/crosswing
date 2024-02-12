@@ -7,14 +7,14 @@ import {
   useRef,
 } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../colors/colors";
-import { fonts } from "../../fonts/fonts";
-import { useRouter } from "../../router/context/RouterContext";
+import { colors } from "../../colors/colors.js";
+import { fonts } from "../../fonts/fonts.js";
+import { useRouter } from "../../router/context/RouterContext.js";
 import {
   SeparatorEdges,
   SeparatorLayout,
   StyledSeparatorLayout,
-} from "../SeparatorLayout";
+} from "../SeparatorLayout.js";
 import { LinkListCell } from "./LinkListCell.js";
 
 export function LinkList<T extends { id: string }>({

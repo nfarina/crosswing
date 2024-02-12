@@ -1,9 +1,9 @@
 import { Meta } from "@storybook/react";
-import { MockHostProvider } from "../../../host/mocks/MockHostProvider";
-import { ModalRootProvider } from "../../../modals/context/ModalRootProvider";
-import { BrowserSimulator } from "../../../router/storybook/RouterDecorator";
-import { CrosswingAppDecorator } from "../../../storybook";
-import { PageTitleProvider } from "../../sites/SitePageTitle";
+import { MockHostProvider } from "../../../host/mocks/MockHostProvider.js";
+import { ModalRootProvider } from "../../../modals/context/ModalRootProvider.js";
+import { BrowserSimulator } from "../../../router/storybook/RouterDecorator.js";
+import { CrosswingAppDecorator } from "../../../storybook.js";
+import { PageTitleProvider } from "../../sites/SitePageTitle.js";
 import { SuspenseApp, SuspenseNavs, SuspenseSwitch } from "./SuspenseApp.js";
 
 export default {

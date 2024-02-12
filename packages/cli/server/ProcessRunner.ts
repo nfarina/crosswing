@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 import pidusage from "pidusage";
 import psTree from "ps-tree";
-import { ProcessStats } from "../shared/types";
+import { ProcessStats } from "../shared/types.js";
 import { ServerTask } from "./ServerTasks.js";
 
 // Running processes.

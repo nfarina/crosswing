@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useVisibleOnScreen } from "../hooks/useVisibleOnScreen";
+import { useVisibleOnScreen } from "../hooks/useVisibleOnScreen.js";
 
 /**
  * A simple component that renders an empty <div> and uses the

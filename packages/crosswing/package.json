@@ -50,7 +50,8 @@
   },
   "scripts": {
     "build": "./build.sh",
-    "deploy": "npm run build && cd dist && npm publish"
+    "deploy": "npm run build && cd dist && npm publish",
+    "deploy:yalc": "npm run build && cd dist && yalc publish"
   },
   "dependencies": {
     "dayjs": "^1.11.10",

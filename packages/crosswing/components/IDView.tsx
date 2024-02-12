@@ -1,10 +1,10 @@
 import { MouseEvent } from "react";
 import { styled } from "styled-components";
-import { colors } from "../colors/colors";
-import { fonts } from "../fonts/fonts";
+import { colors } from "../colors/colors.js";
+import { fonts } from "../fonts/fonts.js";
 import Copy from "../icons/Copy.svg?react";
-import { useBanner } from "../modals/banner/useBanner";
-import { Clickable } from "./Clickable";
+import { useBanner } from "../modals/banner/useBanner.js";
+import { Clickable } from "./Clickable.js";
 
 export function IDView({
   name,

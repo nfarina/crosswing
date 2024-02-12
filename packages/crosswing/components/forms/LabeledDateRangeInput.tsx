@@ -1,7 +1,7 @@
 import { HTMLAttributes, ReactNode, lazy } from "react";
 import { styled } from "styled-components";
-import { useSheet } from "../../modals/sheet/useSheet";
-import { DateRangeLabel } from "../labels/DateRangeLabel";
+import { useSheet } from "../../modals/sheet/useSheet.js";
+import { DateRangeLabel } from "../labels/DateRangeLabel.js";
 import { DateRange } from "./DateRange.js";
 import { TextCell } from "./TextCell.js";
 

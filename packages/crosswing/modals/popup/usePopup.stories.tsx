@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../colors/colors";
-import { fonts } from "../../fonts/fonts";
-import { CrosswingAppDecorator } from "../../storybook";
-import { ModalRootProvider } from "../context/ModalRootProvider";
-import { ModalDecorator } from "../storybook/ModalDecorator";
-import { ModalStoryButton } from "../storybook/ModalStoryButtons";
+import { colors } from "../../colors/colors.js";
+import { fonts } from "../../fonts/fonts.js";
+import { CrosswingAppDecorator } from "../../storybook.js";
+import { ModalRootProvider } from "../context/ModalRootProvider.js";
+import { ModalDecorator } from "../storybook/ModalDecorator.js";
+import { ModalStoryButton } from "../storybook/ModalStoryButtons.js";
 import { PopupView } from "./PopupView.js";
 import { usePopup } from "./usePopup.js";
 

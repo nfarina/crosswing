@@ -1,7 +1,7 @@
 import Attachment from "../../icons/Attachment.svg?react";
-import { RouterDecorator } from "../../router/storybook/RouterDecorator";
-import { CrosswingAppDecorator } from "../../storybook";
-import { SeparatorDecorator } from "../SeparatorLayout";
+import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
+import { CrosswingAppDecorator } from "../../storybook.js";
+import { SeparatorDecorator } from "../SeparatorLayout.js";
 import { TextCell } from "./TextCell.js";
 
 export default {

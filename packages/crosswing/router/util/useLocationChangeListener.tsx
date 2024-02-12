@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { RouterLocation } from "../RouterLocation";
-import { useRouter } from "../context/RouterContext";
+import { RouterLocation } from "../RouterLocation.js";
+import { useRouter } from "../context/RouterContext.js";
 
 export type LocationChangeListener = ({
   from,

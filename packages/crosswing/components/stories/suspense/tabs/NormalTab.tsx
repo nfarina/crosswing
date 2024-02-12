@@ -1,7 +1,7 @@
 import { lazy } from "react";
-import { Route, Switch } from "../../../../router/switch/Switch";
-import { NoContent } from "../../../NoContent";
-import { usePageTitle } from "../../../sites/SitePageTitle";
+import { Route, Switch } from "../../../../router/switch/Switch.js";
+import { NoContent } from "../../../NoContent.js";
+import { usePageTitle } from "../../../sites/SitePageTitle.js";
 
 const ImportTab = lazy(() => import("./ImportTab"));
 

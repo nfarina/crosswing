@@ -1,4 +1,4 @@
-import { ModalRootProvider } from "../context/ModalRootProvider";
+import { ModalRootProvider } from "../context/ModalRootProvider.js";
 
 /**
  * For Storybook; renders your story inside a <ModalRootProvider>.

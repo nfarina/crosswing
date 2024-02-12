@@ -1,5 +1,5 @@
 import { DependencyList } from "react";
-import { useResettableState } from "../../hooks/useResettableState";
+import { useResettableState } from "../../hooks/useResettableState.js";
 import { Toggle } from "./Toggle.js";
 
 export interface ToggleValue {

@@ -1,9 +1,9 @@
 import Debug from "debug";
 import { isValidElement, ReactElement, ReactNode } from "react";
-import { flattenChildren } from "../../hooks/flattenChildren";
-import { RouterContext, useRouter } from "../context/RouterContext";
-import { Redirect } from "../redirect/Redirect";
-import { MatchParams, RouterLocation } from "../RouterLocation";
+import { flattenChildren } from "../../hooks/flattenChildren.js";
+import { RouterContext, useRouter } from "../context/RouterContext.js";
+import { Redirect } from "../redirect/Redirect.js";
+import { MatchParams, RouterLocation } from "../RouterLocation.js";
 
 const debug = Debug("router:Switch");
 

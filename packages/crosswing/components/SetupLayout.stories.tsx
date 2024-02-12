@@ -1,4 +1,4 @@
-import { CrosswingAppDecorator } from "../storybook";
+import { CrosswingAppDecorator } from "../storybook.js";
 import { Button } from "./Button.js";
 import { SetupLayout } from "./SetupLayout.js";
 

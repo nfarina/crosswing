@@ -1,7 +1,7 @@
 import { HTMLAttributes, MouseEvent, ReactNode } from "react";
 import { styled } from "styled-components";
-import { colors } from "../colors/colors";
-import { useHost } from "../host/context/HostContext";
+import { colors } from "../colors/colors.js";
+import { useHost } from "../host/context/HostContext.js";
 
 export interface Props {
   href: string;

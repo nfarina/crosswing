@@ -1,6 +1,6 @@
 import { action } from "@storybook/addon-actions";
 import { Meta, StoryFn } from "@storybook/react";
-import { CrosswingAppDecorator } from "../storybook";
+import { CrosswingAppDecorator } from "../storybook.js";
 import { Button } from "./Button.js";
 import { Heading } from "./Heading.js";
 

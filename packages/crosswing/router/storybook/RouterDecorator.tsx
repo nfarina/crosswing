@@ -1,6 +1,6 @@
 import { action } from "@storybook/addon-actions";
-import { RouterLocation } from "../RouterLocation";
-import { RouterContext } from "../context/RouterContext";
+import { RouterLocation } from "../RouterLocation.js";
+import { RouterContext } from "../context/RouterContext.js";
 
 export * from "./BrowserDecorator.js";
 export * from "./BrowserSimulator.js";

@@ -6,7 +6,7 @@ import {
   useReducer,
   useRef,
 } from "react";
-import { deepEqual } from "../shared/compare";
+import { deepEqual } from "../shared/compare.js";
 import { Falsy } from "./useAsyncTask.js";
 import { useIsMounted } from "./useIsMounted.js";
 

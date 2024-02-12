@@ -1,6 +1,6 @@
-import { useAsyncTask } from "../hooks/useAsyncTask";
-import { wait } from "../shared/wait";
-import { CrosswingAppDecorator } from "../storybook";
+import { useAsyncTask } from "../hooks/useAsyncTask.js";
+import { wait } from "../shared/wait.js";
+import { CrosswingAppDecorator } from "../storybook.js";
 import { BannerLayout } from "./BannerLayout.js";
 import { NoContent } from "./NoContent.js";
 

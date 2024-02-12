@@ -1,7 +1,7 @@
 import { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
-import { colors } from "../colors/colors";
-import { safeArea } from "../host/features/safeArea";
+import { colors } from "../colors/colors.js";
+import { safeArea } from "../host/features/safeArea.js";
 import { MobileLayout, StyledMobileLayout } from "./MobileLayout.js";
 import { Scrollable, StyledScrollable } from "./Scrollable.js";
 

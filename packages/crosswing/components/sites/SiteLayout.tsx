@@ -6,13 +6,13 @@ import {
   useState,
 } from "react";
 import { styled } from "styled-components";
-import { HexColorBuilder, colors } from "../../colors/colors";
-import { flattenChildren } from "../../hooks/flattenChildren";
-import { useMatchMedia } from "../../hooks/useMatchMedia";
+import { HexColorBuilder, colors } from "../../colors/colors.js";
+import { flattenChildren } from "../../hooks/flattenChildren.js";
+import { useMatchMedia } from "../../hooks/useMatchMedia.js";
 import MenuIcon from "../../icons/Menu.svg?react";
-import { Redirect } from "../../router/redirect/Redirect";
-import { Route, Switch } from "../../router/switch/Switch";
-import { NoContent } from "../NoContent";
+import { Redirect } from "../../router/redirect/Redirect.js";
+import { Route, Switch } from "../../router/switch/Switch.js";
+import { NoContent } from "../NoContent.js";
 import { SiteHeader, StyledSiteHeader } from "./SiteHeader.js";
 import { SiteHeaderAccessory } from "./SiteHeaderAccessory.js";
 import { PageTitleProvider } from "./SitePageTitle.js";

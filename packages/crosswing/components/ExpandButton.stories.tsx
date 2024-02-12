@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CrosswingAppDecorator } from "../storybook";
+import { CrosswingAppDecorator } from "../storybook.js";
 import { ExpandButton } from "./ExpandButton.js";
 
 export default {

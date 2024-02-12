@@ -1,11 +1,11 @@
 import { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../colors/colors";
-import { useHost } from "../../host/context/HostContext";
-import { useHostStatusBar } from "../../host/features/HostStatusBar";
-import { safeArea } from "../../host/features/safeArea";
+import { colors } from "../../colors/colors.js";
+import { useHost } from "../../host/context/HostContext.js";
+import { useHostStatusBar } from "../../host/features/HostStatusBar.js";
+import { safeArea } from "../../host/features/safeArea.js";
 import Back from "../../icons/Back.svg?react";
-import { useRouter } from "../context/RouterContext";
+import { useRouter } from "../context/RouterContext.js";
 import { NavAccessory, NavAccessoryView } from "./NavAccessoryView.js";
 import { NavTitleView } from "./NavTitleView.js";
 import { StatusBarStyleAttribute } from "./useAutoStatusBar.js";

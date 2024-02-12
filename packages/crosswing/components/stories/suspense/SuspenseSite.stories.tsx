@@ -1,8 +1,8 @@
 import { Meta } from "@storybook/react";
-import { MockHostProvider } from "../../../host/mocks/MockHostProvider";
-import { ModalRootProvider } from "../../../modals/context/ModalRootProvider";
-import { BrowserSimulator } from "../../../router/storybook/RouterDecorator";
-import { CrosswingAppDecorator } from "../../../storybook";
+import { MockHostProvider } from "../../../host/mocks/MockHostProvider.js";
+import { ModalRootProvider } from "../../../modals/context/ModalRootProvider.js";
+import { BrowserSimulator } from "../../../router/storybook/RouterDecorator.js";
+import { CrosswingAppDecorator } from "../../../storybook.js";
 import { SuspenseSite } from "./SuspenseSite.js";
 
 export default {

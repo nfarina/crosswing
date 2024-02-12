@@ -1,9 +1,12 @@
 import { ReactElement, useCallback, useRef } from "react";
 import { keyframes, styled } from "styled-components";
-import { HotKeyContextDataAttributes, useHotkey } from "../../hooks/useHotkey";
-import { safeArea } from "../../host/features/safeArea";
-import { easing } from "../../shared/easing";
-import { Modal, useModal } from "../context/useModal";
+import {
+  HotKeyContextDataAttributes,
+  useHotkey,
+} from "../../hooks/useHotkey.js";
+import { safeArea } from "../../host/features/safeArea.js";
+import { easing } from "../../shared/easing.js";
+import { Modal, useModal } from "../context/useModal.js";
 import { ActionItem, ActionMenu } from "./ActionMenu.js";
 
 export * from "./ActionMenu.js";

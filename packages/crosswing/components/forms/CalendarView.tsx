@@ -12,9 +12,9 @@ import {
   useState,
 } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../colors/colors";
-import { fonts } from "../../fonts/fonts";
-import { useScrollSpeed } from "../../hooks/useScrollSpeed";
+import { colors } from "../../colors/colors.js";
+import { fonts } from "../../fonts/fonts.js";
+import { useScrollSpeed } from "../../hooks/useScrollSpeed.js";
 import { DateRange, isDateInRange, isSameDay } from "./DateRange.js";
 
 dayjs.extend(isSameOrAfter);

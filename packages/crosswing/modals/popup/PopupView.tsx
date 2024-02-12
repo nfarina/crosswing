@@ -1,6 +1,6 @@
 import { CSSProperties, HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
-import { colors, shadows } from "../../colors/colors";
+import { colors, shadows } from "../../colors/colors.js";
 import { PopupChildProps } from "./usePopup.js";
 
 export * from "./usePopup.js";

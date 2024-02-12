@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
-import { RouterLocation } from "../RouterLocation";
-import { RouterContext } from "../context/RouterContext";
+import { RouterLocation } from "../RouterLocation.js";
+import { RouterContext } from "../context/RouterContext.js";
 
 // Useful for hosting components that expect a Router parent, but without
 // needing to actually provide routing. Also silences warnings about this

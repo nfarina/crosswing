@@ -11,7 +11,7 @@ import { useInterval } from "crosswing/hooks/useInterval";
 import { ModalRootProvider } from "crosswing/modals/context";
 import { useRef, useState } from "react";
 import { styled } from "styled-components";
-import { ServerStatus } from "../shared/types";
+import { ServerStatus } from "../shared/types.js";
 import { TaskView } from "./TaskView.js";
 import { api } from "./api.js";
 import { useDocumentVisible } from "./useDocumentVisible.js";

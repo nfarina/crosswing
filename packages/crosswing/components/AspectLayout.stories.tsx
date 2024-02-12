@@ -1,8 +1,8 @@
 import { Meta } from "@storybook/react";
 import { useState } from "react";
 import { styled } from "styled-components";
-import { colors } from "../colors/colors";
-import { CrosswingAppDecorator } from "../storybook";
+import { colors } from "../colors/colors.js";
+import { CrosswingAppDecorator } from "../storybook.js";
 import { AspectLayout, StyledAspectLayout } from "./AspectLayout.js";
 
 export default {

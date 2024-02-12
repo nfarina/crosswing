@@ -1,6 +1,10 @@
-import { usePopup } from "../../../../modals/popup/usePopup";
-import { Button } from "../../../Button";
-import { PopupMenu, PopupMenuHeader, PopupMenuText } from "../../../PopupMenu";
+import { usePopup } from "../../../../modals/popup/usePopup.js";
+import { Button } from "../../../Button.js";
+import {
+  PopupMenu,
+  PopupMenuHeader,
+  PopupMenuText,
+} from "../../../PopupMenu.js";
 
 export default function PopupButton() {
   const popup = usePopup(() => (

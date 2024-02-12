@@ -1,6 +1,6 @@
 import { useLayoutEffect } from "react";
-import { useHotkey } from "../../hooks/useHotkey";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { useHotkey } from "../../hooks/useHotkey.js";
+import { useLocalStorage } from "../../hooks/useLocalStorage.js";
 
 interface FontSizePreset {
   name: string;

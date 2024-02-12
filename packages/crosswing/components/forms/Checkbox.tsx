@@ -1,8 +1,8 @@
 import { HTMLAttributes, SyntheticEvent } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../colors/colors";
+import { colors } from "../../colors/colors.js";
 import Checkmark from "../../icons/Checkmark.svg?react";
-import { Clickable } from "../Clickable";
+import { Clickable } from "../Clickable.js";
 
 export function Checkbox({
   checked,

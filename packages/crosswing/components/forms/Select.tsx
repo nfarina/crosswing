@@ -6,9 +6,9 @@ import {
   isValidElement,
 } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../colors/colors";
-import { fonts } from "../../fonts/fonts";
-import { flattenChildren } from "../../hooks/flattenChildren";
+import { colors } from "../../colors/colors.js";
+import { fonts } from "../../fonts/fonts.js";
+import { flattenChildren } from "../../hooks/flattenChildren.js";
 import DownArrow from "../../icons/DownArrow.svg?react";
 
 export interface SelectOptionProps {

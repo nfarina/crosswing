@@ -1,5 +1,5 @@
-import { RouterDecorator } from "../router/storybook/RouterDecorator";
-import { CrosswingAppDecorator } from "../storybook";
+import { RouterDecorator } from "../router/storybook/RouterDecorator.js";
+import { CrosswingAppDecorator } from "../storybook.js";
 import { Notice } from "./Notice.js";
 import { SeparatorLayout } from "./SeparatorLayout.js";
 

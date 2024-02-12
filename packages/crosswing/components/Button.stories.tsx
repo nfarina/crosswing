@@ -3,7 +3,7 @@ import { Meta, StoryFn } from "@storybook/react";
 import { useState } from "react";
 import Close from "../icons/Close.svg?react";
 import Warning from "../icons/Warning.svg?react";
-import { CrosswingAppDecorator } from "../storybook";
+import { CrosswingAppDecorator } from "../storybook.js";
 import { Button } from "./Button.js";
 
 export default {

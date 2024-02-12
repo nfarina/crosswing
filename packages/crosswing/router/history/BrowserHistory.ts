@@ -1,5 +1,5 @@
 import Debug from "debug";
-import { RouterLocation } from "../RouterLocation";
+import { RouterLocation } from "../RouterLocation.js";
 
 const debug = Debug("router:BrowserHistory");
 

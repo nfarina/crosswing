@@ -1,11 +1,11 @@
 import dayjs from "dayjs";
 import { HTMLAttributes, useRef } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../colors/colors";
-import { fonts } from "../../fonts/fonts";
-import { useResponsiveLayout } from "../../hooks/useResponsiveLayout";
-import { Button, StyledButton } from "../Button";
-import { dateRangeTransformer } from "../transformers/dateRangeTransformer";
+import { colors } from "../../colors/colors.js";
+import { fonts } from "../../fonts/fonts.js";
+import { useResponsiveLayout } from "../../hooks/useResponsiveLayout.js";
+import { Button, StyledButton } from "../Button.js";
+import { dateRangeTransformer } from "../transformers/dateRangeTransformer.js";
 import { CalendarView, StyledCalendarView } from "./CalendarView.js";
 import {
   AllDateRangePresets,
@@ -14,7 +14,7 @@ import {
   dateRange,
   isSameDay,
 } from "./DateRange.js";
-import { usePrompt } from "./usePrompt";
+import { usePrompt } from "./usePrompt.js";
 
 export type DateRangeValueType = "selected" | "preset" | "custom";
 

@@ -1,6 +1,6 @@
 import { DependencyList } from "react";
-import { useResettableState } from "../../hooks/useResettableState";
-import { deepEqual } from "../../shared/compare";
+import { useResettableState } from "../../hooks/useResettableState.js";
+import { deepEqual } from "../../shared/compare.js";
 
 export interface ObjectValue<T> {
   /** Current value. */

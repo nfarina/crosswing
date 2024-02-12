@@ -3,7 +3,7 @@ import { IncomingMessage, ServerResponse, createServer } from "http";
 import parseArgs from "minimist";
 import { dirname, resolve } from "path";
 import { URL, fileURLToPath } from "url";
-import { ServerStatus } from "../shared/types";
+import { ServerStatus } from "../shared/types.js";
 import {
   ProcessRunner,
   deleteRunner,

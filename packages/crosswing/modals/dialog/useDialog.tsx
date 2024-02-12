@@ -1,10 +1,13 @@
 import { CSSProperties, ReactNode, useCallback, useRef } from "react";
 import { keyframes, styled } from "styled-components";
-import { HotKeyContextDataAttributes, useHotkey } from "../../hooks/useHotkey";
-import { AndroidBackButtonClassName } from "../../host/context/HostContext";
-import { safeArea } from "../../host/features/safeArea";
-import { easing } from "../../shared/easing";
-import { Modal, useModal } from "../context/useModal";
+import {
+  HotKeyContextDataAttributes,
+  useHotkey,
+} from "../../hooks/useHotkey.js";
+import { AndroidBackButtonClassName } from "../../host/context/HostContext.js";
+import { safeArea } from "../../host/features/safeArea.js";
+import { easing } from "../../shared/easing.js";
+import { Modal, useModal } from "../context/useModal.js";
 
 export interface UseDialogOptions {
   /**

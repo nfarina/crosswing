@@ -1,5 +1,5 @@
 import { lazy } from "react";
-import { SiteArea, SiteLayout, SiteLink } from "../../sites/SiteLayout";
+import { SiteArea, SiteLayout, SiteLink } from "../../sites/SiteLayout.js";
 import { NormalTab } from "./tabs/NormalTab.js";
 
 const SwitchTab = lazy(() => import("./tabs/SwitchTab"));

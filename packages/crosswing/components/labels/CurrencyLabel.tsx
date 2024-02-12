@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { formatCurrency } from "../../shared/numeric";
+import { formatCurrency } from "../../shared/numeric.js";
 import { NumberLabel } from "./NumberLabel.js";
 
 export function CurrencyLabel({ ...rest }: Parameters<typeof NumberLabel>[0]) {

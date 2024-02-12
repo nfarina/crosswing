@@ -7,11 +7,11 @@ import {
   useState,
 } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../colors/colors";
-import { fonts } from "../../fonts/fonts";
-import { useHost } from "../../host/context/HostContext";
-import { useScrollAboveKeyboard } from "../../host/features/useScrollAboveKeyboard";
-import { StatusBadge, StyledStatusBadge } from "../badges/StatusBadge";
+import { colors } from "../../colors/colors.js";
+import { fonts } from "../../fonts/fonts.js";
+import { useHost } from "../../host/context/HostContext.js";
+import { useScrollAboveKeyboard } from "../../host/features/useScrollAboveKeyboard.js";
+import { StatusBadge, StyledStatusBadge } from "../badges/StatusBadge.js";
 
 /** How to render errors when given via the `TextInput.error` property. */
 export type TextInputErrorStyle = "color" | "message";

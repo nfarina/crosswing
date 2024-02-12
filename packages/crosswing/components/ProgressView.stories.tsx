@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/react";
-import { usePropSequence } from "../hooks/usePropSequence";
-import { CrosswingAppDecorator } from "../storybook";
+import { usePropSequence } from "../hooks/usePropSequence.js";
+import { CrosswingAppDecorator } from "../storybook.js";
 import { ProgressView } from "./ProgressView.js";
 
 export default {

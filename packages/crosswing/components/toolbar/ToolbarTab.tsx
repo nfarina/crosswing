@@ -1,10 +1,10 @@
 import { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../colors/colors";
-import { fonts } from "../../fonts/fonts";
-import { Link } from "../../router/Link";
-import { useRouter } from "../../router/context/RouterContext";
-import { Clickable } from "../Clickable";
+import { colors } from "../../colors/colors.js";
+import { fonts } from "../../fonts/fonts.js";
+import { Link } from "../../router/Link.js";
+import { useRouter } from "../../router/context/RouterContext.js";
+import { Clickable } from "../Clickable.js";
 
 export interface ToolbarTabProps {
   to?: string;

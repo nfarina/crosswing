@@ -1,8 +1,8 @@
 import { HTMLAttributeAnchorTarget, ReactNode } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../colors/colors";
-import { fonts } from "../../fonts/fonts";
-import { Link } from "../../router/Link";
+import { colors } from "../../colors/colors.js";
+import { fonts } from "../../fonts/fonts.js";
+import { Link } from "../../router/Link.js";
 
 export type ActionButton = {
   title: ReactNode;

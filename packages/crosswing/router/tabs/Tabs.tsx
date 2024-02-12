@@ -9,14 +9,14 @@ import {
   useState,
 } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../colors/colors";
-import { flattenChildren } from "../../hooks/flattenChildren";
-import { useHost } from "../../host/context/HostContext";
-import { safeArea } from "../../host/features/safeArea";
-import { RouterLocation } from "../RouterLocation";
-import { RouterContext, useRouter } from "../context/RouterContext";
-import { StyledNavStack } from "../navs/NavStack";
-import { Redirect } from "../redirect/Redirect";
+import { colors } from "../../colors/colors.js";
+import { flattenChildren } from "../../hooks/flattenChildren.js";
+import { useHost } from "../../host/context/HostContext.js";
+import { safeArea } from "../../host/features/safeArea.js";
+import { RouterLocation } from "../RouterLocation.js";
+import { RouterContext, useRouter } from "../context/RouterContext.js";
+import { StyledNavStack } from "../navs/NavStack.js";
+import { Redirect } from "../redirect/Redirect.js";
 import { StyledTabBar, TabBar } from "./TabBar.js";
 import { TabProps } from "./TabLink.js";
 

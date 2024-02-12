@@ -7,7 +7,7 @@ import {
   useRef,
 } from "react";
 import { styled } from "styled-components";
-import { ColorBuilder, colors } from "../../colors/colors";
+import { ColorBuilder, colors } from "../../colors/colors.js";
 
 export type ToggleSize = "normal" | "smaller" | "smallest";
 

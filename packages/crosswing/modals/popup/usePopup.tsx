@@ -9,10 +9,10 @@ import {
   useRef,
 } from "react";
 import { keyframes, styled } from "styled-components";
-import { useHotkey } from "../../hooks/useHotkey";
-import { useHost } from "../../host/context/HostContext";
-import { easing } from "../../shared/easing";
-import { useModal } from "../context/useModal";
+import { useHotkey } from "../../hooks/useHotkey.js";
+import { useHost } from "../../host/context/HostContext.js";
+import { easing } from "../../shared/easing.js";
+import { useModal } from "../context/useModal.js";
 import { useClickOutsideToClose } from "./useClickOutsideToClose.js";
 
 export interface Popup<T extends any[] = []> {

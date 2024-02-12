@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useResettableState } from "../../hooks/useResettableState";
+import { useResettableState } from "../../hooks/useResettableState.js";
 import { HostFeatures } from "./types.js";
 
 export function usePreferredFontSize(features?: HostFeatures): number {

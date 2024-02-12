@@ -1,10 +1,13 @@
 import { lazy } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../../../colors/colors";
-import { useRouter } from "../../../../router/context/RouterContext";
-import { NavLayout } from "../../../../router/navs/NavLayout";
-import { TabbedButton, TabbedButtonLayout } from "../../../TabbedButtonLayout";
-import { StyledToolbar } from "../../../toolbar/Toolbar";
+import { colors } from "../../../../colors/colors.js";
+import { useRouter } from "../../../../router/context/RouterContext.js";
+import { NavLayout } from "../../../../router/navs/NavLayout.js";
+import {
+  TabbedButton,
+  TabbedButtonLayout,
+} from "../../../TabbedButtonLayout.js";
+import { StyledToolbar } from "../../../toolbar/Toolbar.js";
 
 const PanelOne = lazy(() => import("../panels/PanelOne"));
 

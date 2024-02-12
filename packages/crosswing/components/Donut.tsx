@@ -1,6 +1,6 @@
 import { CSSProperties, ReactElement, SVGAttributes } from "react";
 import { styled } from "styled-components";
-import { ColorBuilder } from "../colors/colors";
+import { ColorBuilder } from "../colors/colors.js";
 
 export interface DonutSection {
   amount: number;

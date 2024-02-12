@@ -1,10 +1,10 @@
-import { colors } from "../../colors/colors";
-import { CrosswingAppDecorator } from "../../storybook";
-import { ModalDecorator } from "../storybook/ModalDecorator";
+import { colors } from "../../colors/colors.js";
+import { CrosswingAppDecorator } from "../../storybook.js";
+import { ModalDecorator } from "../storybook/ModalDecorator.js";
 import {
   ModalStoryButton,
   ModalStoryButtons,
-} from "../storybook/ModalStoryButtons";
+} from "../storybook/ModalStoryButtons.js";
 import { useBanner } from "./useBanner.js";
 
 export default {

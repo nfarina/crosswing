@@ -1,6 +1,6 @@
 import { Meta, StoryFn, StoryObj } from "@storybook/react";
-import { useResettableState } from "../../hooks/useResettableState";
-import { CrosswingAppDecorator } from "../../storybook";
+import { useResettableState } from "../../hooks/useResettableState.js";
+import { CrosswingAppDecorator } from "../../storybook.js";
 import { Slider } from "./Slider.js";
 
 export default {

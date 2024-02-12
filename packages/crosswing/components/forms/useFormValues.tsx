@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes, FormHTMLAttributes } from "react";
-import { NavAccessory } from "../../router/navs/NavAccessoryView";
+import { NavAccessory } from "../../router/navs/NavAccessoryView.js";
 import { InputValue } from "./useInputValue.js";
 import { ObjectValue } from "./useObjectValue.js";
 import { ToggleValue } from "./useToggleValue.js";

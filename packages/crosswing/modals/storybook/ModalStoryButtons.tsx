@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
-import { colors } from "../../colors/colors";
-import { fonts } from "../../fonts/fonts";
+import { colors } from "../../colors/colors.js";
+import { fonts } from "../../fonts/fonts.js";
 
 // We don't want to introduce a circular dependency between `components`
 // and `modals`, so we can't use our standard Button.

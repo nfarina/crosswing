@@ -4,7 +4,7 @@ import timezone from "dayjs/plugin/timezone.js";
 import utc from "dayjs/plugin/utc.js";
 import { HTMLAttributes, useEffect, useRef } from "react";
 import { styled } from "styled-components";
-import { capitalize } from "../../shared/strings";
+import { capitalize } from "../../shared/strings.js";
 
 dayjs.extend(calendar);
 dayjs.extend(utc);

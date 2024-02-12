@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/react";
-import { colors } from "../colors/colors";
-import { CrosswingAppDecorator } from "../storybook";
+import { colors } from "../colors/colors.js";
+import { CrosswingAppDecorator } from "../storybook.js";
 import { Donut } from "./Donut.js";
 
 export default {
