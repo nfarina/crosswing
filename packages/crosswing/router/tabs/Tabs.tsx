@@ -6,7 +6,6 @@ import {
   isValidElement,
   useEffect,
   useRef,
-  useState,
 } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
@@ -56,23 +55,10 @@ export function Tabs({
 
   // Update the path of our currently selected tab.
   useEffect(() => {
-    if (!selected.redirect) tabLocations.set(path, selected.location);
-  });
-
-  // Request IDs from children that desire the tab bar to be hidden.
-  const [hideRequests, setHideRequests] = useState<Set<string>>(new Set());
-
-  const isTabBarHidden = hideRequests.size > 0;
-
-  const setTabBarHidden = (requestId: string, hidden: boolean) => {
-    const newRequests = new Set(hideRequests);
-    if (hidden) {
-      newRequests.add(requestId);
-    } else {
-      newRequests.delete(requestId);
+    if (!selected.redirect) {
+      tabLocations.set(path, selected.location);
     }
-    setHideRequests(newRequests);
-  };
+  });
 
   //
   // Render
@@ -95,8 +81,15 @@ export function Tabs({
 
     // Link to the root path, unless the user wants a specific path here.
     const parts: string[] = [];
-    if (tab.props.path) parts.push(tab.props.path);
-    if (tab.props.initialPath) parts.push(tab.props.initialPath);
+    if (tab.props.path) {
+      parts.push(tab.props.path);
+    }
+
+    // Only include the initial path if we're not already on this tab.
+    // Otherwise we always want tapping the tab to go back to the root.
+    if (tab.props.initialPath && tab !== selected.tab) {
+      parts.push(tab.props.initialPath);
+    }
 
     return location.linkTo(parts.join("/"));
   }
@@ -148,12 +141,7 @@ export function Tabs({
   const collapsed = container !== "android" && viewport.keyboardVisible;
 
   return (
-    <StyledTabs
-      data-container={container}
-      data-collapsed={collapsed}
-      data-tab-bar-hidden={isTabBarHidden}
-      {...rest}
-    >
+    <StyledTabs data-container={container} data-collapsed={collapsed} {...rest}>
       {tabs.map(renderTabContents)}
       <TabBar
         tabs={tabs}
@@ -266,15 +254,5 @@ export const StyledTabs = styled.div`
     bottom: 0;
     width: 100%;
     transition: transform 0.2s ease-in-out;
-  }
-
-  &[data-tab-bar-hidden="true"] {
-    > ${TabContent}.inactive, > ${TabContent}.active {
-      bottom: 0;
-    }
-
-    > ${StyledTabBar} {
-      transform: translateY(calc(100% + 1px)); /* Add 1px for top border. */
-    }
   }
 `;
