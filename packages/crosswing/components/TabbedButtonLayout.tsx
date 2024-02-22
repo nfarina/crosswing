@@ -1,5 +1,6 @@
 import {
   CSSProperties,
+  HTMLAttributes,
   ReactElement,
   ReactNode,
   isValidElement,
@@ -37,7 +38,9 @@ export function TabbedButtonLayout({
   searchParam,
   disabled,
   children,
-}: {
+  style,
+  ...rest
+}: HTMLAttributes<HTMLDivElement> & {
   value?: any;
   defaultValue?: any;
   onValueChange?: (value: any) => any;
@@ -164,6 +167,7 @@ export function TabbedButtonLayout({
   }
 
   const cssProps = {
+    ...style,
     "--selected-index": selectedIndex,
     "--child-count": buttons.length,
   } as CSSProperties;
@@ -193,6 +197,7 @@ export function TabbedButtonLayout({
       data-hide-tabs={buttons.length === 1}
       data-disabled={!!disabled}
       style={cssProps}
+      {...rest}
     >
       <div className="tabs" role="tablist">
         <div className="track">
