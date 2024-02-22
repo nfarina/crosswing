@@ -65,6 +65,18 @@ export const FixedSize = () => {
   return <TextArea value={name} onValueChange={setName} />;
 };
 
+export const AutosizingAndScrolling = () => {
+  const [name, setName] = useState(
+    "If you type in here, it should not fiddle with the scroll position. Here are some more words to make it scroll. And some more. And yet it continues! On it goes, inexorably. It's like a never-ending story. But it will end eventually. I promise.",
+  );
+
+  return (
+    <ScrollingContainer>
+      <TextArea value={name} onValueChange={setName} autoSizing />
+    </ScrollingContainer>
+  );
+};
+
 const Container = styled.div`
   display: flex;
   flex-flow: column;
@@ -82,5 +94,19 @@ const Container = styled.div`
 
   > * + * {
     margin-top: 20px;
+  }
+`;
+
+const ScrollingContainer = styled.div`
+  height: 100px;
+  box-sizing: border-box;
+  overflow: auto;
+  padding: 10px;
+  border: 1px solid ${colors.red()};
+
+  > ${StyledTextArea} {
+    border: 1px solid ${colors.separator()};
+    border-radius: 6px;
+    padding: 10px;
   }
 `;

@@ -106,16 +106,28 @@ export function TextArea({
   useLayoutEffect(() => {
     if (!autoSizing) return;
 
-    const element = ref.current!;
+    const textarea = ref.current!;
+    const container = textarea.parentElement!;
 
     // When mounted in Storybook, our rects will be 0,0,0,0, so we need to wait a tic.
     requestAnimationFrame(() => {
-      element.style.height = minHeight + "px";
+      // To compute the "desired" height of the <textarea>, we do a little trick
+      // where we set the height to 0, then set the scrollHeight as the height.
+      // But! We need to make sure the overall component's size doesn't change
+      // unless necessary, otherwise it will cause a reflow and make the
+      // component jump around if it's in a scrolling container.
+      const oldHeight = container.style.height;
+      container.style.height = container.offsetHeight + "px";
+
+      textarea.style.height = minHeight + "px";
       const newHeight = Math.max(
-        Math.min(element.scrollHeight, maxHeight),
+        Math.min(textarea.scrollHeight, maxHeight),
         minHeight,
       );
-      element.style.height = `${newHeight}px`;
+      textarea.style.height = `${newHeight}px`;
+
+      // Restore the old height to avoid reflows.
+      container.style.height = oldHeight;
     });
   });
 
