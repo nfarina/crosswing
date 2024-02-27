@@ -138,7 +138,8 @@ export function Tabs({
   // const collapsed = viewport.keyboardVisible; //|| (container === "android" && !atTabRoot);
 
   // Keyboard detection isn't working well on some Android devices.
-  const collapsed = container !== "android" && viewport.keyboardVisible;
+  // (Outdated comment - we're trying it again anyway!)
+  const collapsed = /*container !== "android" &&*/ viewport.keyboardVisible;
 
   return (
     <StyledTabs data-container={container} data-collapsed={collapsed} {...rest}>
