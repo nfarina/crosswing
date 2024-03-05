@@ -16,6 +16,8 @@ export function usePeriodicMemo<T>(
 ): T {
   const [lastValue, setLastValue] = useResettableState(factory(), deps);
 
+  // We run this effect on every render so we can keep the factory closure
+  // up to date.
   useEffect(() => {
     function checkForChange() {
       const nextValue = factory();
@@ -33,7 +35,7 @@ export function usePeriodicMemo<T>(
     const intervalId = setInterval(checkForChange, interval);
 
     return () => clearInterval(intervalId);
-  }, [interval, lastValue]);
+  });
 
   return lastValue;
 }
