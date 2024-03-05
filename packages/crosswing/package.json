@@ -2,7 +2,7 @@
   "name": "crosswing",
   "type": "module",
   "private": true,
-  "version": "1.0.31",
+  "version": "1.0.32",
   "description": "Crosswing UI framework.",
   "author": "nfarina@gmail.com",
   "exports": {
@@ -39,6 +39,7 @@
     "./host/util/smoothScroll": "./host/util/smoothScroll.js",
     "./host/util/openExternalLink": "./host/util/openExternalLink.js",
     "./host/util/useClipboard": "./host/util/useClipboard.js",
+    "./host/util/useAutoStatusBar": "./host/util/useAutoStatusBar.js",
     "./icons/*": "./icons/*",
     "./hooks/*": "./hooks/*.js",
     "./colors": "./colors/colors.js",
