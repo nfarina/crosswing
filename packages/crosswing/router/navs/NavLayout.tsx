@@ -4,11 +4,11 @@ import { colors } from "../../colors/colors.js";
 import { useHost } from "../../host/context/HostContext.js";
 import { useHostStatusBar } from "../../host/features/HostStatusBar.js";
 import { safeArea } from "../../host/features/safeArea.js";
+import { StatusBarStyleAttribute } from "../../host/util/useAutoStatusBar.js";
 import Back from "../../icons/Back.svg?react";
 import { useRouter } from "../context/RouterContext.js";
 import { NavAccessory, NavAccessoryView } from "./NavAccessoryView.js";
 import { NavTitleView } from "./NavTitleView.js";
-import { StatusBarStyleAttribute } from "./useAutoStatusBar.js";
 
 export interface NavProps {
   title?: ReactNode;
