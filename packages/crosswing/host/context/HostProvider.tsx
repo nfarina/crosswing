@@ -97,8 +97,6 @@ export function HostProvider({
         supportsBrightness: !!features.brightness,
         supportsPlaid: !!features.plaid,
         supportsLightStatusBar: container === "ios", // All iOS versions support this.
-        supportsInputAutoFocus:
-          container === "ios" ? !!features.inputAutoFocus : true,
         requiresNotificationAuthorization: !!features.notificationAuthorization,
         smsAutoVerificationToken: features.smsAutoVerificationToken,
         getPlugin: (plugin: string) => buildPlugin(features, plugin),

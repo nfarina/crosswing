@@ -25,7 +25,6 @@ export type TextAreaErrorStyle = "color" | "message";
  */
 export function TextArea({
   value = "",
-  autoFocus,
   autoFocusOnDesktop,
   autoSelect,
   onValueChange,
@@ -60,7 +59,7 @@ export function TextArea({
   // Auto-trimming copied from TextInput
   //
 
-  const { container, supportsInputAutoFocus } = useHost();
+  const { container } = useHost();
 
   // Track whether you've ever focused the input so we don't open up a new
   // blank form with lots of "Required" errors right away.
@@ -82,20 +81,11 @@ export function TextArea({
     }
   }, [autoTrim, value.trim() !== value]);
 
-  const shouldAutoFocus = (() => {
-    if (autoFocus === false) return false;
-
-    // OK, you want to auto focus! But can we?
-
-    // Only want auto focusing on desktop?
-    if (autoFocusOnDesktop) return container === "web";
-
-    // Fall back to the host's support for input auto focus.
-    return supportsInputAutoFocus;
-  })();
+  const autoFocus =
+    rest.autoFocus ?? (autoFocusOnDesktop && container === "web");
 
   useLayoutEffect(() => {
-    if (shouldAutoFocus && autoSelect && ref.current) {
+    if (autoFocus && autoSelect && ref.current) {
       ref.current.focus();
       ref.current.select();
     }
@@ -183,7 +173,7 @@ export function TextArea({
         onChange={onInputChange}
         onFocus={onInputFocus}
         onBlur={onInputBlur}
-        autoFocus={shouldAutoFocus}
+        autoFocus={autoFocus}
         data-auto-sizing={!!autoSizing}
         ref={ref}
         {...restAttrs}

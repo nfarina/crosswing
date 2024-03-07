@@ -3,7 +3,6 @@ import {
   InputHTMLAttributes,
   KeyboardEvent,
   useEffect,
-  useLayoutEffect,
   useRef,
 } from "react";
 import { styled } from "styled-components";
@@ -22,9 +21,7 @@ export function SearchInput({
   working,
   style,
   className,
-  autoFocus,
   autoFocusOnDesktop,
-  autoSelect,
   onValueChange,
   clearOnEscape = true,
   ...rest
@@ -34,8 +31,6 @@ export function SearchInput({
   disabled?: boolean;
   working?: boolean;
   autoFocusOnDesktop?: boolean;
-  /** When the input is auto-focused initially, any existing value will be selected. */
-  autoSelect?: boolean;
   onValueChange?: (newValue: string, selectionStart: number | null) => void;
   clearOnEscape?: boolean;
 } & InputHTMLAttributes<HTMLInputElement>) {
@@ -43,7 +38,7 @@ export function SearchInput({
   // Hooks
   //
 
-  const { container, supportsInputAutoFocus } = useHost();
+  const { container } = useHost();
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -79,25 +74,6 @@ export function SearchInput({
     return () => window.removeEventListener("scroll", onScroll, true);
   }, []);
 
-  const shouldAutoFocus = (() => {
-    if (autoFocus === false) return false;
-
-    // OK, you want to auto focus! But can we?
-
-    // Only want auto focusing on desktop?
-    if (autoFocusOnDesktop) return container === "web";
-
-    // Fall back to the host's support for input auto focus.
-    return supportsInputAutoFocus;
-  })();
-
-  useLayoutEffect(() => {
-    if (shouldAutoFocus && autoSelect && inputRef.current) {
-      inputRef.current.focus();
-      inputRef.current.select();
-    }
-  }, []);
-
   //
   // Handlers
   //
@@ -131,6 +107,9 @@ export function SearchInput({
   // Render
   //
 
+  const autoFocus =
+    rest.autoFocus ?? (autoFocusOnDesktop && container === "web");
+
   return (
     <StyledSearchInput
       style={style}
@@ -142,7 +121,7 @@ export function SearchInput({
       <input
         ref={inputRef}
         type="text"
-        autoFocus={shouldAutoFocus}
+        autoFocus={autoFocus}
         placeholder={placeholder}
         onChange={onInputChange}
         onKeyUp={onKeyUp}
