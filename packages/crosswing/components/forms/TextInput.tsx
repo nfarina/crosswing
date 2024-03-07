@@ -32,6 +32,7 @@ export function TextInput({
   /** If true, uses a more number-friendly font. */
   numeric,
   autoTrim = true,
+  autoFocus,
   style,
   className,
   onFocus,
@@ -49,7 +50,7 @@ export function TextInput({
   error?: Error | null;
   errorStyle?: TextInputErrorStyle;
 }) {
-  const { container } = useHost();
+  const { container, supportsInputAutoFocus } = useHost();
 
   // Track whether you've ever focused the input so we don't open up a new
   // blank form with lots of "Required" errors right away.
@@ -73,11 +74,20 @@ export function TextInput({
     }
   }, [autoTrim, value.trim() !== value]);
 
-  const autoFocus =
-    rest.autoFocus ?? (autoFocusOnDesktop && container === "web");
+  const shouldAutoFocus = (() => {
+    if (autoFocus === false) return false;
+
+    // OK, you want to auto focus! But can we?
+
+    // Only want auto focusing on desktop?
+    if (autoFocusOnDesktop) return container === "web";
+
+    // Fall back to the host's support for input auto focus.
+    return supportsInputAutoFocus;
+  })();
 
   useLayoutEffect(() => {
-    if (autoFocus && autoSelect && inputRef.current) {
+    if (shouldAutoFocus && autoSelect && inputRef.current) {
       inputRef.current.focus();
       inputRef.current.select();
     }
@@ -130,7 +140,7 @@ export function TextInput({
         onChange={onInputChange}
         data-numeric={!!numeric}
         {...(numeric ? { inputMode: "decimal" } : null)}
-        autoFocus={autoFocus}
+        autoFocus={shouldAutoFocus}
         onFocus={onInputFocus}
         onBlur={onInputBlur}
         {...restAttrs}

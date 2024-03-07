@@ -23,6 +23,7 @@ export interface HostContextValue {
   supportsBrightness?: boolean;
   supportsLightStatusBar?: boolean;
   supportsPlaid?: boolean;
+  supportsInputAutoFocus?: boolean;
   requiresNotificationAuthorization: boolean;
   smsAutoVerificationToken?: string;
   getPlugin(plugin: string): null | HostPlugin;
@@ -148,6 +149,8 @@ export interface HostFeatures {
   wakeLock?: boolean;
   /** Whether this host supports getting/setting screen brightness. */
   brightness?: boolean;
+  /** If iOS, whether the host supports the special swizzling required for WKWebView to support programmatic input focus. */
+  inputAutoFocus?: boolean;
   /**
    * Might be present if this host supports SMS auto verification.
    *

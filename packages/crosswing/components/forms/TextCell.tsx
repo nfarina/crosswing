@@ -68,6 +68,7 @@ export const StyledTextCell = styled.div`
   min-height: 60px;
   align-items: center;
   padding: 0 0 0 10px;
+  box-sizing: border-box;
 
   /* Re-enable text selection in a mobile setting. */
   user-select: text;

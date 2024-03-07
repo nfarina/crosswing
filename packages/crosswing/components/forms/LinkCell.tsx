@@ -85,6 +85,7 @@ export const StyledLinkCell = styled(Link)`
   align-items: center;
   text-decoration: none;
   padding-left: 10px;
+  box-sizing: border-box;
 
   &[data-clickable="false"] {
     cursor: default;
