@@ -62,13 +62,22 @@ export function useSafeArea(
           left: "0px",
         };
       }
-    } else {
-      // Android devices and the web don't have safe areas.
+    } else if (container === "android") {
+      // Android web views don't have safe areas.
       return {
         top: "0px",
         right: "0px",
         bottom: "0px",
         left: "0px",
+      };
+    } else {
+      // We're on the web, use the CSS environment variables provided by the
+      // browser you're using.
+      return {
+        top: "env(safe-area-inset-top, 0px)",
+        right: "env(safe-area-inset-right, 0px)",
+        bottom: "env(safe-area-inset-bottom, 0px)",
+        left: "env(safe-area-inset-left, 0px)",
       };
     }
   }, [features, customSafeArea, !!viewport.keyboardVisible]);
