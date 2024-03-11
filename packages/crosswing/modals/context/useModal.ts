@@ -69,7 +69,10 @@ export function useModal<T extends any[]>(
       // Restore the previous active element.
       if (previousActiveElement.current instanceof HTMLElement) {
         // console.log("restore active element", previousActiveElement.current);
-        previousActiveElement.current.focus();
+        // Disabled for now, doesn't handle the case where a modal beneath the
+        // current one is closed and the previous active element is restored
+        // (which is not what we want in that case).
+        // previousActiveElement.current.focus();
       }
     }
   }, [visible]);
