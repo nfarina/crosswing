@@ -4,11 +4,13 @@ import { colors, shadows } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
 import { useGesture } from "../../hooks/useGesture.js";
 import Close from "../../icons/Close.svg?react";
+import { Link } from "../../router/Link.js";
 
 export function BannerView({
   title,
   message,
   wrap,
+  to,
   onClick,
   onClose,
   ...rest
@@ -16,6 +18,7 @@ export function BannerView({
   title?: ReactNode;
   message?: ReactNode;
   wrap?: boolean;
+  to?: string;
   onClick?: () => void;
   onClose?: () => void;
 }) {
@@ -31,10 +34,17 @@ export function BannerView({
       onTouchStart={onTouchStart}
       data-wrap-text={!!wrap}
     >
-      <div className="content" onClick={() => onClick?.()}>
-        <div className="title">{title}</div>
-        <div className="message">{message}</div>
-      </div>
+      {to ? (
+        <Link className="content" to={to} onClick={() => onClick?.()}>
+          <div className="title">{title}</div>
+          <div className="message">{message}</div>
+        </Link>
+      ) : (
+        <div className="content" onClick={() => onClick?.()}>
+          <div className="title">{title}</div>
+          <div className="message">{message}</div>
+        </div>
+      )}
       <div className="close" onClick={onClose}>
         <Close />
       </div>
@@ -67,6 +77,8 @@ const StyledBannerView = styled.div`
     display: flex;
     flex-flow: column;
     cursor: pointer;
+    color: ${colors.text()};
+    text-decoration: none;
 
     > .title {
       font: ${fonts.displayBold({ size: 15, line: "22px" })};

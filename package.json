@@ -1,6 +1,7 @@
 {
   "//": [
-    "vite is pinned because yarn can't resolve vitest's vite dependency in a way that allows upgrades. Also it's in peerDeps to silence Yarn's incessant warnings about mismatched versions."
+    "The debug package is pinned to prevent a million different versions getting installed.",
+    "TypeScript is pinned to 5.3.3 because folder watching is broken in 5.4.x. https://github.com/microsoft/TypeScript/issues/57792"
   ],
   "name": "crosswing-monorepo",
   "type": "module",
@@ -24,33 +25,34 @@
     "clean:node_modules": "rm -rf node_modules packages/*/node_modules"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^7.6.17",
-    "@storybook/addon-essentials": "^7.6.17",
-    "@storybook/react": "^7.6.17",
-    "@storybook/react-vite": "^7.6.17",
+    "@storybook/addon-actions": "^8.0.2",
+    "@storybook/addon-essentials": "^8.0.2",
+    "@storybook/react": "^8.0.2",
+    "@storybook/react-vite": "^8.0.2",
     "@types/debug": "^4.1.12",
     "@types/minimist": "^1.2.5",
-    "@types/react": "^18.2.57",
-    "@types/react-dom": "^18.2.19",
+    "@types/react": "^18.2.67",
+    "@types/react-dom": "^18.2.22",
     "@types/react-is": "^18.2.4",
     "@types/react-transition-group": "^4.4.10",
     "@vitejs/plugin-react": "^4.2.1",
     "prettier": "^3.2.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "storybook": "^7.6.17",
+    "storybook": "^8.0.2",
     "timemachine": "^0.3.2",
-    "typescript": "^5.3.3",
-    "vite": "^5.1.4",
-    "vite-node": "1.3.1",
+    "typescript": "^5.4.2",
+    "vite": "^5.1.6",
+    "vite-node": "1.4.0",
     "vite-plugin-svgr": "^4.2.0",
-    "vitest": "^1.3.1"
+    "vitest": "^1.4.0"
   },
   "peerDependencies": {
     "vite": "^5.1.4"
   },
   "resolutions": {
-    "vite": "5.1.4"
+    "debug": "4.3.4",
+    "typescript": "5.3.3"
   },
   "packageManager": "yarn@4.1.1"
 }

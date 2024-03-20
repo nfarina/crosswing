@@ -1,11 +1,12 @@
 import { action } from "@storybook/addon-actions";
 import { Meta } from "@storybook/react";
+import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import { BannerView } from "../banner/BannerView.js";
 
 export default {
   component: BannerView,
-  decorators: [CrosswingAppDecorator({ layout: "centered" })],
+  decorators: [CrosswingAppDecorator({ layout: "centered" }), RouterDecorator],
   parameters: { layout: "centered" },
 } satisfies Meta<typeof BannerView>;
 
@@ -14,6 +15,17 @@ export const TitleAndText = () => (
     style={{ width: "400px" }}
     title="New comment on Whole Foods"
     message="Bob: How's the Quinoa here? I heard it's tasty."
+    onClick={action("click")}
+    onClose={action("close")}
+  />
+);
+
+export const Link = () => (
+  <BannerView
+    style={{ width: "400px" }}
+    title="New comment on Whole Foods"
+    message="Bob: How's the Quinoa here? I heard it's tasty."
+    to="/somewhere"
     onClick={action("click")}
     onClose={action("close")}
   />

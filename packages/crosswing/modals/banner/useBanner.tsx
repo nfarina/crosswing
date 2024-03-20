@@ -3,18 +3,20 @@ import { keyframes, styled } from "styled-components";
 import { useHotkey } from "../../hooks/useHotkey.js";
 import { useInterval } from "../../hooks/useInterval.js";
 import { safeArea } from "../../host/features/safeArea.js";
+import { Seconds } from "../../shared/timespan.js";
 import { Modal, useModal } from "../context/useModal.js";
 import { BannerView } from "./BannerView.js";
 
 export * from "./BannerView.js";
 
-const AUTO_DISMISS_TIME = 2000;
+const AUTO_DISMISS_TIME = Seconds(3.5);
 
 export interface Banner {
   title?: ReactNode;
   message?: ReactNode;
   wrap?: boolean;
   sticky?: boolean;
+  to?: string;
   onClick?: () => void;
 }
 
@@ -46,7 +48,7 @@ export const BannerContainer = ({
   in?: boolean;
   onExited?: () => void;
 }) => {
-  const { title, message, wrap, sticky, onClick } = banner;
+  const { title, message, wrap, sticky, to, onClick } = banner;
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   // Listen for the escape key and call onClose if pressed.
@@ -82,6 +84,7 @@ export const BannerContainer = ({
         title={title}
         message={message}
         wrap={wrap}
+        to={to}
         onClick={onBannerClick}
         onClose={onClose}
       />
