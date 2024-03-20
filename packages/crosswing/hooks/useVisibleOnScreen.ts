@@ -1,10 +1,10 @@
 import Debug from "debug";
-import { MutableRefObject, useEffect, useState } from "react";
+import { RefObject, useEffect, useState } from "react";
 
 const debug = Debug("components:useVisibleOnScreen");
 
 export function useVisibleOnScreen(
-  ref: MutableRefObject<HTMLElement | null>,
+  ref: RefObject<HTMLElement | null | undefined>,
   { threshold = 0 }: { threshold?: number } = {},
 ): boolean {
   const [intersecting, setIntersecting] = useState(false);
