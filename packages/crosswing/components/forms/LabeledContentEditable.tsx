@@ -18,12 +18,16 @@ export function LabeledContentEditable({
   label,
   placeholder,
   disabled,
+  forceParagraphs,
+  pasteTextOnly,
   value,
   onValueChange,
 }: Omit<HTMLAttributes<HTMLDivElement>, "title" | "children"> & {
   label?: ReactNode;
   placeholder?: ReactNode;
   disabled?: boolean;
+  forceParagraphs?: boolean;
+  pasteTextOnly?: boolean;
   value?: string;
   onValueChange?: (value: string) => void;
 }) {
@@ -31,16 +35,24 @@ export function LabeledContentEditable({
 
   useLayoutEffect(() => {
     if (!editorRef.current) return;
-    // Make it so when you press Return in the contentEditable div, it inserts
-    // a new paragraph element instead of a <br/>.
-    document.execCommand("defaultParagraphSeparator", false, "p");
+    if (forceParagraphs) {
+      // Make it so when you press Return in the contentEditable div, it inserts
+      // a new paragraph element instead of a <br/>.
+      document.execCommand("defaultParagraphSeparator", false, "p");
+    } else {
+      // Make it so when you press Return in the contentEditable div, it inserts
+      // a <br/> element instead of a new paragraph.
+      document.execCommand("defaultParagraphSeparator", false, "div");
+    }
   }, [!!editorRef.current]);
+
+  const emptyValue = forceParagraphs ? "<p><br></p>" : "";
 
   useLayoutEffect(() => {
     if (!editorRef.current) return;
     // Check for equality, otherwise the cursor position gets reset as
     // you type.
-    const newValue = value || "<p><br></p>";
+    const newValue = value || emptyValue;
     if (editorRef.current.innerHTML !== newValue) {
       editorRef.current.innerHTML = newValue;
     }
@@ -57,6 +69,8 @@ export function LabeledContentEditable({
   // for example.
   // https://stackoverflow.com/a/12028136/66673
   function onPaste(e: ClipboardEvent<HTMLDivElement>) {
+    if (!pasteTextOnly) return;
+
     // Stop data actually being pasted into div.
     e.stopPropagation();
     e.preventDefault();
@@ -68,7 +82,7 @@ export function LabeledContentEditable({
     document.execCommand("insertHTML", false, text);
   }
 
-  const isEmpty = !value || value === "<p><br></p>";
+  const isEmpty = !value || value === emptyValue;
 
   return (
     <StyledLabeledContentEditable
@@ -100,6 +114,7 @@ export function LabeledContentEditable({
 
 export const StyledLabeledContentEditable = styled.div`
   min-height: 60px;
+  position: relative;
 
   /* Float the label so the input fills our control space with interactivity. */
   > .label {
