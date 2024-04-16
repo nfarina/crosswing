@@ -37,6 +37,8 @@ export function SiteLayout({
   children,
   title,
   logo,
+  logoTo,
+  onLogoClick,
   tint = colors.turquoise,
   accessories,
 }: {
@@ -44,6 +46,8 @@ export function SiteLayout({
   children?: ReactNode;
   title: string;
   logo?: ReactNode;
+  logoTo?: string;
+  onLogoClick?: () => void;
   tint?: HexColorBuilder;
   accessories?: SiteHeaderAccessory[] | null;
 }) {
@@ -148,6 +152,8 @@ export function SiteLayout({
         <SiteHeader siteTitle={title} accessories={headerAccessories} />
         <SiteSidebar
           logo={logo}
+          logoTo={logoTo}
+          onLogoClick={onLogoClick}
           tint={tint}
           accessories={sidebarAccessories}
           onLinkClick={onLinkClick}

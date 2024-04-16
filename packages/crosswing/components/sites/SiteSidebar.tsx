@@ -15,6 +15,7 @@ import PlaceholderIcon from "../../icons/Placeholder.svg?react";
 import { useRouter } from "../../router/context/RouterContext.js";
 import { Link } from "../../router/Link.js";
 import { UnreadBadge } from "../../router/tabs/UnreadBadge.js";
+import { Clickable } from "../Clickable.js";
 import {
   SiteHeaderAccessory,
   SiteHeaderAccessoryView,
@@ -38,6 +39,8 @@ export type SiteSidebarLinkProps = {
 
 export function SiteSidebar({
   logo = <CrosswingLogoIcon style={{ width: "50px", height: "50px" }} />,
+  logoTo = "/",
+  onLogoClick,
   tint = colors.turquoise,
   accessories,
   children,
@@ -46,6 +49,8 @@ export function SiteSidebar({
   ...rest
 }: {
   logo?: ReactNode;
+  logoTo?: string;
+  onLogoClick?: () => void;
   tint?: HexColorBuilder;
   accessories?: SiteHeaderAccessory[] | null;
   children?: ReactNode;
@@ -140,7 +145,16 @@ export function SiteSidebar({
       style={cssProperties}
       data-showing-accessories={!!accessories?.length}
     >
-      <Link className="home" to="/" children={logo} />
+      {logoTo ? (
+        <Link
+          className="home"
+          to={logoTo}
+          onClick={onLogoClick}
+          children={logo}
+        />
+      ) : (
+        <Clickable className="home" children={logo} onClick={onLogoClick} />
+      )}
       <div className="menu">{areas.map(renderArea)}</div>
       {accessories?.map((accessory, i) => (
         <SiteHeaderAccessoryView
