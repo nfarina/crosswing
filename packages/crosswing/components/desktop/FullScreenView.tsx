@@ -39,7 +39,7 @@ export function FullScreenView({
   // Fit our "full screen" rect to the nearest modal provider boundary.
   const { modalRoot } = useContext(ModalContext);
 
-  const [, forceRefresh] = useState(0);
+  const [forceRefresh, setForceRefresh] = useState(0);
 
   // This is our "natural" parent.
   const parentRef = useRef<HTMLDivElement | null>(null);
@@ -71,7 +71,7 @@ export function FullScreenView({
     divRef.current = div;
 
     // Make sure we render again now that divRef.current is defined.
-    forceRefresh(Date.now());
+    setForceRefresh(Date.now());
 
     return () => {
       divRef.current = null;

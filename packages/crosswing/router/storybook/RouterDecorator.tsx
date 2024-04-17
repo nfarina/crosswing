@@ -1,4 +1,5 @@
 import { action } from "@storybook/addon-actions";
+import { Suspense } from "react";
 import { RouterLocation } from "../RouterLocation.js";
 import { RouterContext } from "../context/RouterContext.js";
 
@@ -25,7 +26,9 @@ export function RouterDecorator(Story: () => any) {
     <RouterContext.Provider
       value={{ location, nextLocation, history, flags: { isMock: true } }}
     >
-      <Story />
+      <Suspense fallback={<div>Loading</div>}>
+        <Story />
+      </Suspense>
     </RouterContext.Provider>
   );
 }
