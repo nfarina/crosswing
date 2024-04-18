@@ -17,6 +17,7 @@ import Close from "../../icons/Close.svg?react";
 import FullScreen from "../../icons/FullScreen.svg?react";
 import { ModalContext } from "../../modals/context/ModalContext.js";
 import { Button, StyledButton } from "../Button.js";
+import { ToolbarSpace } from "../toolbar/Toolbar.js";
 
 export function FullScreenView({
   restorationKey,
@@ -272,3 +273,13 @@ const ContentLayout = styled.div`
     z-index: 1;
   }
 `;
+
+/**
+ * Creates a blank space for a <Toolbar>, sized to match the FullScreenView
+ * "expand" button, that only appears when the FullScreenView is not in full
+ * screen mode.
+ */
+export function FullScreenToolbarSpace() {
+  const { isFullScreen } = useFullScreen();
+  return !isFullScreen ? <ToolbarSpace width={40} /> : null;
+}
