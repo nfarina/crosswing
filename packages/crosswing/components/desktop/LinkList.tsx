@@ -7,8 +7,6 @@ import {
   useRef,
 } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../colors/colors.js";
-import { fonts } from "../../fonts/fonts.js";
 import { useRouter } from "../../router/context/RouterContext.js";
 import {
   SeparatorEdges,
@@ -16,10 +14,12 @@ import {
   StyledSeparatorLayout,
 } from "../SeparatorLayout.js";
 import { LinkListCell } from "./LinkListCell.js";
+import { LinkListHeading, StyledLinkListHeading } from "./LinkListHeading.js";
 
 export function LinkList<T extends { id: string }>({
   items = [],
   renderItem,
+  renderHeading,
   after,
   onScroll,
   /** True if this list should be a natural height instead of just filling up its container. */
@@ -29,6 +29,7 @@ export function LinkList<T extends { id: string }>({
 }: {
   items?: T[];
   renderItem?: (item: T) => ReactElement<any>;
+  renderHeading?: (group: string) => ReactElement<any>;
   after?: ReactNode;
   autoSize?: boolean;
   separators?: SeparatorEdges;
@@ -60,6 +61,17 @@ export function LinkList<T extends { id: string }>({
     });
   }
 
+  function renderHeadingWithProps(group: string) {
+    const rendered = renderHeading?.(group) ?? (
+      <LinkListHeading children={group} />
+    );
+
+    return cloneElement(rendered, {
+      ...(!rendered.key ? { key: group } : null),
+      "data-group": group,
+    });
+  }
+
   const renderItems = () => {
     const renderedItems: ReactNode[] = [];
 
@@ -71,7 +83,7 @@ export function LinkList<T extends { id: string }>({
       const group = rendered.props.group ?? "";
 
       if (group !== lastGroup) {
-        renderedItems.push(<LinkListHeading key={group} children={group} />);
+        renderedItems.push(renderHeadingWithProps(group));
       }
 
       renderedItems.push(rendered);
@@ -91,13 +103,6 @@ export function LinkList<T extends { id: string }>({
   );
 }
 
-export const LinkListHeading = styled.div`
-  background: ${colors.textBackgroundAlt()};
-  padding: 10px;
-  font: ${fonts.displayMedium({ size: 13, line: "1" })};
-  color: ${colors.text()};
-`;
-
 export const StyledLinkList = styled.div`
   display: flex;
   flex-flow: column;
@@ -112,7 +117,7 @@ export const StyledLinkList = styled.div`
       z-index: 1;
     }
 
-    > ${LinkListHeading} {
+    > ${StyledLinkListHeading} {
       position: sticky;
       inset-block-start: 0; /* "top" */
       z-index: 2;

@@ -6,6 +6,7 @@ import { LinkButton } from "../LinkButton.js";
 import CSSColors from "./CSSColors.json";
 import { LinkList, StyledLinkList } from "./LinkList.js";
 import { LinkListCell } from "./LinkListCell.js";
+import { LinkListHeading } from "./LinkListHeading.js";
 
 export default {
   component: LinkList,
@@ -42,12 +43,46 @@ export const AutoScroll = () => {
   );
 };
 
-const renderColor = ({ id, hex }: Color) => (
+export const Grouped = () => {
+  return (
+    <BrowserSimulator>
+      <StyledList>
+        <LinkButton to="/">Deselect</LinkButton>
+        <LinkList
+          items={Colors}
+          renderItem={(color) => renderColor(color, true)}
+          separators="both"
+        />
+      </StyledList>
+    </BrowserSimulator>
+  );
+};
+
+export const GroupedWithCustomHeading = () => {
+  return (
+    <BrowserSimulator>
+      <StyledList>
+        <LinkButton to="/">Deselect</LinkButton>
+        <LinkList
+          items={Colors}
+          renderItem={(color) => renderColor(color, true)}
+          renderHeading={(group) => (
+            <LinkListHeading children={"Letter " + group} />
+          )}
+          separators="both"
+        />
+      </StyledList>
+    </BrowserSimulator>
+  );
+};
+
+const renderColor = ({ id, hex }: Color, grouped?: boolean) => (
   <LinkListCell
     key={id}
     to={id}
     title={capitalize(id)}
     right={<ColorWell style={{ backgroundColor: hex }} />}
+    group={grouped ? id[0].toUpperCase() : null}
   />
 );
 
