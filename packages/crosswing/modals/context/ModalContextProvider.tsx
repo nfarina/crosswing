@@ -33,7 +33,7 @@ export function ModalContextProvider({
 }) {
   const { delayUpdates } = useHost();
   const modalContext = useContext(ModalContext);
-  const { modalRoot } = modalContext;
+  const { modalRoot, modalContextRoot } = modalContext;
 
   // All the modals currently being displayed with the current context.
   // Note that the order of items in this map is not necessarily the same
@@ -72,8 +72,20 @@ export function ModalContextProvider({
   // Make sure to keep this object reference stable across renders so we don't
   // cause any context children to re-render unnecessarily.
   const contextValue = useMemo(
-    () => ({ showModal, hideModal, modalRoot, allowDesktopPresentation }),
-    [showModal, hideModal, modalRoot, allowDesktopPresentation],
+    () => ({
+      showModal,
+      hideModal,
+      modalRoot,
+      modalContextRoot,
+      allowDesktopPresentation,
+    }),
+    [
+      showModal,
+      hideModal,
+      modalRoot,
+      modalContextRoot,
+      allowDesktopPresentation,
+    ],
   );
 
   return (

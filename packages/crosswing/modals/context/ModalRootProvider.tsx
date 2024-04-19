@@ -20,6 +20,7 @@ export function ModalRootProvider({
   allowDesktopPresentation?: boolean;
 }) {
   const modalRoot = useRef<HTMLDivElement | null>(null);
+  const modalContextRoot = useRef<HTMLDivElement | null>(null);
 
   // Make sure to keep this object reference stable across renders so we don't
   // cause any context children to re-render unnecessarily.
@@ -28,6 +29,7 @@ export function ModalRootProvider({
       showModal: invariantViolation,
       hideModal: invariantViolation,
       modalRoot,
+      modalContextRoot,
       allowDesktopPresentation,
     }),
     [modalRoot, allowDesktopPresentation],
@@ -35,7 +37,7 @@ export function ModalRootProvider({
 
   return (
     <ModalContext.Provider value={contextValue}>
-      <StyledModalOverlay {...rest}>
+      <StyledModalOverlay ref={modalContextRoot} {...rest}>
         <ModalContextProvider children={children} />
         <div className="modals" ref={modalRoot} />
       </StyledModalOverlay>

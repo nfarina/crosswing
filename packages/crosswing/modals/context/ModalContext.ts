@@ -10,7 +10,16 @@ export type ModalContextValue = {
     ...args: any
   ): void;
   hideModal(key: string): void;
+  /**
+   * The root of the element that holds the rendered modals themselves
+   * (adjacent to the normal render tree).
+   */
   modalRoot: MutableRefObject<HTMLDivElement | null>;
+  /**
+   * The root of the element that holds the normal render tree which is adjacent
+   * to the modalRoot render tree.
+   */
+  modalContextRoot: MutableRefObject<HTMLDivElement | null>;
   allowDesktopPresentation?: boolean;
 };
 
@@ -21,6 +30,7 @@ export const ModalContext = createContext<ModalContextValue>({
   showModal: invariantViolation,
   hideModal: invariantViolation,
   modalRoot: { current: null },
+  modalContextRoot: { current: null },
 });
 ModalContext.displayName = "ModalContext";
 
