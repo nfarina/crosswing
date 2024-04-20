@@ -2,9 +2,20 @@ import { colors } from "crosswing/colors";
 import { fonts } from "crosswing/fonts";
 import { styled } from "styled-components";
 
-export type ErrorLike = Error | string | ErrorProps;
+export type ErrorLike = Error | string | ErrorObj;
 
-export type ErrorProps = { name?: string; message?: string; stack?: string };
+export type ErrorObj = {
+  name?: string;
+  message?: string;
+  stack?: string;
+  /**
+   * Marks this error as fit to display to the user. Default is `true` if not
+   * defined. May be used by other components, for instance, if set to false,
+   * useErrorAlert() will show a generic message by default until the user
+   * clicks a Details button.
+   */
+  userFacing?: boolean;
+};
 
 /**
  * Renders an Error in a scrollable <pre> with syntax formatting.
@@ -58,7 +69,7 @@ export function ErrorView({ error }: { error: ErrorLike }) {
   );
 }
 
-export function getErrorProps(error: ErrorLike): ErrorProps {
+export function getErrorProps(error: ErrorLike): ErrorObj {
   return typeof error === "string" ? { message: error } : error;
 }
 

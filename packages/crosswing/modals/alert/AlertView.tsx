@@ -107,19 +107,20 @@ export const StyledAlertView = styled.div`
     flex-flow: column;
     padding: 25px;
     min-height: 55px;
-    align-items: center;
     justify-content: center;
 
     > .title {
       font: ${fonts.displayBold({ size: 18, line: "1.3" })};
       color: ${colors.text()};
       text-align: center;
+      word-wrap: break-word;
     }
 
     > .message {
       font: ${fonts.display({ size: 15, line: "1.5" })};
       color: ${colors.text()};
       text-align: center;
+      word-wrap: break-word;
     }
 
     > * + * {

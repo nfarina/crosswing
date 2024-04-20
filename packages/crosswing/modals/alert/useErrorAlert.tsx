@@ -6,6 +6,7 @@ import {
   StyledErrorView,
   getErrorProps,
 } from "../../components/ErrorView.js";
+import { truncate } from "../../shared/strings.js";
 import { Modal } from "../context/useModal.js";
 import { useDialog } from "../dialog/useDialog.js";
 import { AlertButton, AlertView } from "./useAlert.js";
@@ -21,11 +22,23 @@ export function useErrorAlert({
   const modal = useDialog(
     (error?: ErrorLike) => {
       const errorObj = getErrorProps(error ?? {});
-      const { message, stack } = errorObj;
+      let { message, stack, userFacing } = errorObj;
 
-      const niceMessage = message
-        ? ensurePeriod(message)
-        : "Something went wrong.";
+      let niceMessage =
+        message && userFacing !== false
+          ? ensurePeriod(message)
+          : "Something went wrong.";
+
+      // If the message is super long, truncate it.
+      if (niceMessage.length > 200) {
+        niceMessage = truncate(niceMessage, { length: 200 });
+
+        // If there's no stack put the full message in the stack so you can
+        // scroll around to read the whole thing.
+        if (!stack) {
+          stack = message;
+        }
+      }
 
       function onAlertClose() {
         onClose?.();
