@@ -2,12 +2,18 @@ import { colors } from "crosswing/colors";
 import { fonts } from "crosswing/fonts";
 import { styled } from "styled-components";
 
+export type ErrorLike = Error | string | ErrorProps;
+
+export type ErrorProps = { name?: string; message?: string; stack?: string };
+
 /**
  * Renders an Error in a scrollable <pre> with syntax formatting.
  */
-export function ErrorView({ error }: { error: any }) {
-  const stack: string[] = error?.stack.split("\n") ?? [];
-  stack.shift(); // First line is just name/message.
+export function ErrorView({ error }: { error: ErrorLike }) {
+  const { name, message, stack } = getErrorProps(error);
+
+  const stackLines: string[] = stack?.split("\n") ?? [];
+  stackLines.shift(); // First line is just name/message.
 
   function renderLine(line: string) {
     // line is something like "at filterColumns (http://localhost:8904/static/bundle.cb63e.js:63612:48)"
@@ -35,14 +41,14 @@ export function ErrorView({ error }: { error: any }) {
     <StyledErrorView>
       <pre>
         <span key="error-name" className="name">
-          {error.name}
+          {name || "Error"}
         </span>
         :{" "}
         <span key="error-message" className="message">
-          {error.message}
+          {message}
         </span>
         <br />
-        {stack.map((line, index) => (
+        {stackLines.map((line, index) => (
           <div key={index} className="line">
             {renderLine(line)}
           </div>
@@ -50,6 +56,10 @@ export function ErrorView({ error }: { error: any }) {
       </pre>
     </StyledErrorView>
   );
+}
+
+export function getErrorProps(error: ErrorLike): ErrorProps {
+  return typeof error === "string" ? { message: error } : error;
 }
 
 export const StyledErrorView = styled.div`
