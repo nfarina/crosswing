@@ -1,11 +1,11 @@
 import { action } from "@storybook/addon-actions";
 import { CrosswingAppDecorator } from "../../storybook.js";
-import { useAlert } from "../alert/useAlert.js";
 import { ModalDecorator } from "../storybook/ModalDecorator.js";
 import {
   ModalStoryButton,
   ModalStoryButtons,
 } from "../storybook/ModalStoryButtons.js";
+import { useAlert } from "./useAlert.js";
 
 export default {
   component: useAlert,
