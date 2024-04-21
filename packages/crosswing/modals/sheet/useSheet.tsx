@@ -28,6 +28,11 @@ export type UseSheetOptions = {
    */
   sticky?: boolean;
   forceFullScreen?: boolean;
+  /**
+   * If defined, the sheet will stretch horizontally to fill the screen up
+   * to an optional maximum width (in CSS units if supplied).
+   */
+  stretch?: boolean | string;
   animation?: SheetAnimation;
   /** Optional delay before the presenting animation begins. */
   delay?: string;
@@ -40,6 +45,7 @@ export function useSheet<T extends any[]>(
   {
     sticky,
     forceFullScreen = false,
+    stretch,
     animation,
     delay,
     pressEscapeToClose,
@@ -50,6 +56,7 @@ export function useSheet<T extends any[]>(
       onClose={modal.hide}
       sticky={sticky}
       forceFullScreen={forceFullScreen}
+      stretch={stretch}
       pressEscapeToClose={pressEscapeToClose}
       animation={animation}
       delay={delay}
@@ -65,6 +72,7 @@ export const SheetContainer = ({
   onClose,
   sticky,
   forceFullScreen,
+  stretch,
   pressEscapeToClose = true,
   // Provided by <TransitionGroup>.
   in: animatingIn,
@@ -76,6 +84,7 @@ export const SheetContainer = ({
   onClose: () => void;
   sticky?: boolean;
   forceFullScreen?: boolean;
+  stretch?: boolean | string;
   pressEscapeToClose?: boolean;
   in?: boolean;
   animation?: SheetAnimation;
@@ -135,12 +144,14 @@ export const SheetContainer = ({
 
   const cssProps = {
     "--animation-delay": delay || "0s",
+    "--stretch-max-width": typeof stretch === "string" ? stretch : "100%",
   } as CSSProperties;
 
   return (
     <StyledSheetContainer
       ref={containerRef}
       data-animation={getAnimation()}
+      data-stretch={!!stretch}
       data-keyboard-visible={keyboardVisible}
       data-allow-desktop-presentation={
         !forceFullScreen && !!allowDesktopPresentation
@@ -304,7 +315,7 @@ const StyledSheetContainer = styled.div`
   }
 
   /**
-   * Sheets aren't really designed for large viewports. So we'll put them in
+   * Sheets aren't typically designed for large viewports. So we'll put them in
    * a floating dialog like useDialog().
    */
   &[data-allow-desktop-presentation="true"] {
@@ -336,6 +347,15 @@ const StyledSheetContainer = styled.div`
         box-shadow: 0 5px 22px rgba(0, 0, 0, 0.5);
         border-radius: 6px;
         overflow: hidden;
+      }
+    }
+  }
+
+  &[data-allow-desktop-presentation="true"][data-stretch="true"] {
+    @media (min-width: 500px) {
+      > .sheet {
+        width: 100%;
+        max-width: var(--stretch-max-width);
       }
     }
   }

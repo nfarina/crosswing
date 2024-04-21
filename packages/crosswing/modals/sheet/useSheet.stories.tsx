@@ -60,19 +60,38 @@ export const Desktop: StoryObj = {
   ],
 };
 
+export const DesktopWide: StoryObj = {
+  render: () => (
+    <ModalContextProvider allowDesktopPresentation>
+      <SheetPresenter wide />
+    </ModalContextProvider>
+  ),
+  parameters: {
+    layout: "fullscreen",
+  },
+  decorators: [
+    CrosswingAppDecorator({ layout: "fullscreen" }),
+    ModalDecorator,
+    RouterDecorator,
+  ],
+};
+
 //
 // Actual Sheet
 //
 
-function SheetPresenter() {
-  const sheet = useSheet(() => (
-    <NavLayout
-      isApplicationRoot
-      title="Sheet Nav"
-      right={{ title: "Done", onClick: sheet.hide }}
-      style={{ background: colors.textBackground() }}
-    />
-  ));
+function SheetPresenter({ wide }: { wide?: boolean }) {
+  const sheet = useSheet(
+    () => (
+      <NavLayout
+        isApplicationRoot
+        title="Sheet Nav"
+        right={{ title: "Done", onClick: sheet.hide }}
+        style={{ background: colors.textBackground() }}
+      />
+    ),
+    { stretch: "700px" },
+  );
 
   return (
     <ModalStoryButtons>
