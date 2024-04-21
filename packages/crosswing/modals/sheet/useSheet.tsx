@@ -30,15 +30,17 @@ export type UseSheetOptions = {
   forceFullScreen?: boolean;
   /**
    * If defined, the sheet will stretch horizontally to fill the screen up
-   * to an optional maximum width (in CSS units if supplied).
+   * to the given maximum size (in CSS units if supplied).
    */
-  stretch?: boolean | string;
+  stretch?: SheetStretch;
   animation?: SheetAnimation;
   /** Optional delay before the presenting animation begins. */
   delay?: string;
   /** Listens for the ESC key and closes the dialog. Default is true. */
   pressEscapeToClose?: boolean;
 };
+
+export type SheetStretch = { maxWidth?: string; maxHeight?: string };
 
 export function useSheet<T extends any[]>(
   renderSheet: (...args: T) => ReactNode,
@@ -84,7 +86,7 @@ export const SheetContainer = ({
   onClose: () => void;
   sticky?: boolean;
   forceFullScreen?: boolean;
-  stretch?: boolean | string;
+  stretch?: SheetStretch;
   pressEscapeToClose?: boolean;
   in?: boolean;
   animation?: SheetAnimation;
@@ -144,14 +146,16 @@ export const SheetContainer = ({
 
   const cssProps = {
     "--animation-delay": delay || "0s",
-    "--stretch-max-width": typeof stretch === "string" ? stretch : "100%",
+    "--stretch-max-width": stretch?.maxWidth || "",
+    "--stretch-max-height": stretch?.maxHeight || "",
   } as CSSProperties;
 
   return (
     <StyledSheetContainer
       ref={containerRef}
       data-animation={getAnimation()}
-      data-stretch={!!stretch}
+      data-stretch-width={!!stretch?.maxWidth}
+      data-stretch-height={!!stretch?.maxHeight}
       data-keyboard-visible={keyboardVisible}
       data-allow-desktop-presentation={
         !forceFullScreen && !!allowDesktopPresentation
@@ -351,11 +355,19 @@ const StyledSheetContainer = styled.div`
     }
   }
 
-  &[data-allow-desktop-presentation="true"][data-stretch="true"] {
+  &[data-allow-desktop-presentation="true"][data-stretch-width="true"] {
     @media (min-width: 500px) {
       > .sheet {
         width: 100%;
         max-width: var(--stretch-max-width);
+      }
+    }
+  }
+
+  &[data-allow-desktop-presentation="true"][data-stretch-height="true"] {
+    @media (min-width: 500px) {
+      > .sheet {
+        max-height: var(--stretch-max-height);
       }
     }
   }
