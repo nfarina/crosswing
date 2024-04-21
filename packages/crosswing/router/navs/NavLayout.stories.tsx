@@ -1,7 +1,10 @@
+import { action } from "@storybook/addon-actions";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
+import { Button } from "../../components/Button.js";
 import { fonts } from "../../fonts/fonts.js";
 import { MockHostProvider } from "../../host/mocks/MockHostProvider.js";
+import DotDotDotIcon from "../../icons/DotDotDot.svg?react";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import { RouterDecorator } from "../storybook/RouterDecorator.js";
 import { NavLayout } from "./NavLayout.js";
@@ -15,6 +18,38 @@ export default {
 
 export const Normal = () => (
   <NavLayout title="Cupcakes" isApplicationRoot>
+    <SamplePage>Cupcakes are tasty.</SamplePage>
+  </NavLayout>
+);
+
+export const WithTitleAccessory = () => (
+  <NavLayout
+    title="Cupcakes"
+    isApplicationRoot
+    right={{ title: "Save", onClick: action("Save clicked") }}
+  >
+    <SamplePage>Cupcakes are tasty.</SamplePage>
+  </NavLayout>
+);
+
+export const WithIconAccessory = () => (
+  <NavLayout
+    title="Cupcakes"
+    isApplicationRoot
+    right={{ icon: <DotDotDotIcon />, onClick: action("Icon clicked") }}
+  >
+    <SamplePage>Cupcakes are tasty.</SamplePage>
+  </NavLayout>
+);
+
+export const WithCustomAccessory = () => (
+  <NavLayout
+    title="Cupcakes"
+    isApplicationRoot
+    right={{
+      title: <BlueSquareButton onClick={action("Blue square clicked")} />,
+    }}
+  >
     <SamplePage>Cupcakes are tasty.</SamplePage>
   </NavLayout>
 );
@@ -57,4 +92,8 @@ const CustomNavLayout = styled(NavLayout)`
     font: ${fonts.displayBold({ size: 14 })};
     color: ${colors.white()};
   }
+`;
+
+const BlueSquareButton = styled(Button)`
+  background: ${colors.mediumBlue()};
 `;
