@@ -1,4 +1,4 @@
-import { HTMLAttributes, MouseEvent, ReactNode } from "react";
+import { HTMLAttributes, MouseEvent, ReactNode, RefObject } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { UnreadBadge } from "../../router/tabs/UnreadBadge.js";
@@ -19,6 +19,12 @@ export type SiteHeaderAccessory = {
   mobilePlacement?: "nav" | "sidebar";
   /** True if you want to (temporarily?) hide this accessory. */
   hidden?: boolean;
+  /**
+   * An optional ref you can pass if you need access to the rendered element
+   * that serves as the popup target (if you need to programatically open a
+   * popup, for example).
+   */
+  popupTargetRef?: RefObject<HTMLDivElement>;
 };
 
 export function SiteHeaderAccessoryView({
@@ -27,13 +33,23 @@ export function SiteHeaderAccessoryView({
 }: HTMLAttributes<HTMLButtonElement> & {
   accessory: SiteHeaderAccessory;
 }) {
-  const { icon, iconSize = ["24px", "24px"], unread, onClick } = accessory;
+  const {
+    icon,
+    iconSize = ["24px", "24px"],
+    unread,
+    onClick,
+    popupTargetRef,
+  } = accessory;
 
   const [width, height] = iconSize;
 
   return (
     <StyledSiteHeaderAccessoryView onClick={onClick} {...rest}>
-      <div style={{ width, height }} className="popup-target">
+      <div
+        style={{ width, height }}
+        ref={popupTargetRef}
+        className="popup-target"
+      >
         {icon}
       </div>
       {!!unread && <UnreadBadge>{unread}</UnreadBadge>}
