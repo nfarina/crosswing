@@ -36,7 +36,7 @@ export const StyledHeading = styled.div`
   > .title,
   > .children {
     flex-grow: 1;
-    font: ${fonts.displayBold({ size: 18, line: "1" })};
+    font: ${fonts.displayBold({ size: 18, line: "24px" })};
     color: ${colors.text()};
   }
 
