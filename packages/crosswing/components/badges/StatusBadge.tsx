@@ -2,6 +2,7 @@ import { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
+import ErrorIcon from "../../icons/Error.svg?react";
 import InfoCircleIcon from "../../icons/InfoCircle.svg?react";
 import WarningIcon from "../../icons/Warning.svg?react";
 
@@ -29,7 +30,7 @@ export function StatusBadge({
     >
       {!hideIcon && type === "info" && <InfoCircleIcon className="icon" />}
       {!hideIcon && type === "warning" && <WarningIcon className="icon" />}
-      {!hideIcon && type === "error" && <WarningIcon className="icon" />}
+      {!hideIcon && type === "error" && <ErrorIcon className="icon" />}
       <div className="children">{children}</div>
       {right && <div className="right">{right}</div>}
     </StyledStatusBadge>
