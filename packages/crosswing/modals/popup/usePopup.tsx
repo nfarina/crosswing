@@ -50,6 +50,12 @@ export interface PopupOptions {
    * it.
    */
   clickOutsideToClose?: boolean;
+  /**
+   * Default false, will automatically reposition the popup every 100ms. This is
+   * useful if the target's size or position frequently changes after the popup
+   * is shown.
+   */
+  autoReposition?: boolean;
 }
 
 /** Props given to the element returned from usePopup(). */
@@ -60,7 +66,11 @@ export type PopupChildProps = {
 
 export function usePopup<T extends any[]>(
   popup: (...args: T) => ReactNode,
-  { placement = "auto", clickOutsideToClose = true }: PopupOptions = {},
+  {
+    placement = "auto",
+    clickOutsideToClose = true,
+    autoReposition = false,
+  }: PopupOptions = {},
 ): Popup<T> {
   // Ugly wrapping of a ref in a ref. But we don't need to use state because
   // changing this doesn't require a re-render.
@@ -73,6 +83,7 @@ export function usePopup<T extends any[]>(
       onClose={hide}
       children={popup(...args)}
       clickOutsideToClose={clickOutsideToClose}
+      autoReposition={autoReposition}
     />
   ));
 
@@ -116,6 +127,7 @@ export const PopupContainer = ({
   in: animatingIn,
   onExited,
   clickOutsideToClose = true,
+  autoReposition = false,
 }: {
   placement: PopupPlacement;
   target: PopupTarget;
@@ -129,6 +141,12 @@ export const PopupContainer = ({
    * it.
    */
   clickOutsideToClose?: boolean;
+  /**
+   * Default false, will automatically reposition the popup every 100ms. This is
+   * useful if the target's size or position frequently changes after the popup
+   * is shown.
+   */
+  autoReposition?: boolean;
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const { container } = useHost();
@@ -149,6 +167,12 @@ export const PopupContainer = ({
   useLayoutEffect(() => {
     // Update the callback pointer.
     positionPopupRef.current = positionPopup;
+
+    if (autoReposition) {
+      // Start a timer to position the popup every 100ms.
+      const intervalId = setInterval(positionPopup, 100);
+      return () => clearInterval(intervalId);
+    }
   }, [positionPopup]);
 
   const onAnimationEnd = useCallback(() => {
@@ -238,20 +262,47 @@ export const PopupContainer = ({
 
     // Inform the popup element about the desired place to point.
     const style = (popupArea as HTMLElement).style;
-    style.setProperty("--arrow-left", offset + "px");
-    style.setProperty("--popup-left", popupOffset + "px");
+    const arrowLeft = offset + "px";
+    const popupLeft = popupOffset + "px";
+
+    // Only apply the styles if they've changed, since this function is called
+    // every 100ms.
+
+    if (
+      style.getPropertyValue("--arrow-left") !== arrowLeft ||
+      style.getPropertyValue("--popup-left") !== popupLeft
+    ) {
+      style.setProperty("--arrow-left", offset + "px");
+      style.setProperty("--popup-left", popupOffset + "px");
+    }
 
     if (resolvedPlacement === "below") {
-      style.top = targetRect.bottom - containerRect.y + "px";
-      style.bottom = "0";
-      style.paddingTop = "0";
-      style.paddingBottom = "10px";
+      if (style.getPropertyValue("--popup-placement") !== "below") {
+        style.setProperty("--popup-placement", "below");
+        style.bottom = "0";
+        style.paddingTop = "0";
+        style.paddingBottom = "10px";
+      }
+
+      const top = targetRect.bottom - containerRect.y + "px";
+
+      if (style.top !== top) {
+        style.top = targetRect.bottom - containerRect.y + "px";
+      }
     } else {
-      style.top = "0";
-      style.paddingTop = "10px";
-      style.paddingBottom = "0";
-      style.bottom =
+      if (style.getPropertyValue("--popup-placement") !== "above") {
+        style.setProperty("--popup-placement", "above");
+        style.top = "0";
+        style.paddingTop = "10px";
+        style.paddingBottom = "0";
+      }
+
+      const bottom =
         containerRect.height - targetRect.top + containerRect.y + "px";
+
+      if (style.bottom !== bottom) {
+        style.bottom = bottom;
+      }
     }
   }
 

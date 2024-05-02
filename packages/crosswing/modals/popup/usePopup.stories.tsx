@@ -2,7 +2,6 @@ import { useRef, useState } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
-import { useIsMounted } from "../../hooks/useIsMounted.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import { ModalRootProvider } from "../context/ModalRootProvider.js";
 import { ModalDecorator } from "../storybook/ModalDecorator.js";
@@ -47,7 +46,7 @@ export function ManualControl() {
         <PopupMountCounter />
       </PopupView>
     ),
-    { clickOutsideToClose: false },
+    { clickOutsideToClose: false, autoReposition: true },
   );
   const ref1 = useRef<HTMLDivElement | null>(null);
   const ref2 = useRef<HTMLDivElement | null>(null);
@@ -66,10 +65,20 @@ export function ManualControl() {
           popup.show(ref1);
         }}
       >
-        Move Target 1
+        Move Target 1 (calls show())
       </ModalStoryButton>
       <ModalStoryButton onClick={() => popup.show(ref2)}>
         Show on Target 2
+      </ModalStoryButton>
+      <ModalStoryButton
+        onClick={() => {
+          ref2.current?.style.setProperty(
+            "transform",
+            `translateY(${Math.random() * 100}px)`,
+          );
+        }}
+      >
+        Move Target 2 (auto reposition)
       </ModalStoryButton>
       <ModalStoryButton onClick={popup.hide}>Hide Popup</ModalStoryButton>
       <div className="targets">
@@ -196,8 +205,6 @@ let mountCounter = 0;
 
 function PopupMountCounter() {
   const [mountTime] = useState(() => ++mountCounter);
-
-  useIsMounted({ logPrefix: "PopupMountCounter" });
 
   return <StyledPopupMountCounter>Mount #{mountTime}</StyledPopupMountCounter>;
 }
