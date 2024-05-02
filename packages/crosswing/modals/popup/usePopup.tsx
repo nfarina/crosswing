@@ -44,6 +44,12 @@ export type PopupPlacement = "auto" | "above" | "below";
 
 export interface PopupOptions {
   placement?: PopupPlacement;
+  /**
+   * Default true, listens for clicks on the nearest Modal root and validates
+   * them against the PopupTarget to auto-close the popup when clicking outside
+   * it.
+   */
+  clickOutsideToClose?: boolean;
 }
 
 /** Props given to the element returned from usePopup(). */
@@ -54,7 +60,7 @@ export type PopupChildProps = {
 
 export function usePopup<T extends any[]>(
   popup: (...args: T) => ReactNode,
-  { placement = "auto" }: PopupOptions = {},
+  { placement = "auto", clickOutsideToClose = true }: PopupOptions = {},
 ): Popup<T> {
   // Ugly wrapping of a ref in a ref. But we don't need to use state because
   // changing this doesn't require a re-render.
@@ -66,6 +72,7 @@ export function usePopup<T extends any[]>(
       target={activeTarget.current}
       onClose={hide}
       children={popup(...args)}
+      clickOutsideToClose={clickOutsideToClose}
     />
   ));
 
@@ -108,6 +115,7 @@ export const PopupContainer = ({
   // Provided by <TransitionGroup>.
   in: animatingIn,
   onExited,
+  clickOutsideToClose = true,
 }: {
   placement: PopupPlacement;
   target: PopupTarget;
@@ -115,10 +123,21 @@ export const PopupContainer = ({
   onClose: () => void;
   in?: boolean;
   onExited?: () => void;
+  /**
+   * Default true, listens for clicks on the nearest Modal root and validates
+   * them against the PopupTarget to auto-close the popup when clicking outside
+   * it.
+   */
+  clickOutsideToClose?: boolean;
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const { container } = useHost();
-  useClickOutsideToClose(onClose, containerRef, target);
+
+  useClickOutsideToClose(
+    () => clickOutsideToClose && onClose(),
+    containerRef,
+    target,
+  );
 
   // Listen for the escape key and call onClose if pressed.
   useHotkey("Escape", { target: containerRef, onPress: onClose });
@@ -163,6 +182,7 @@ export const PopupContainer = ({
     }
   }, [
     target.current,
+    JSON.stringify(target.current?.getBoundingClientRect() ?? {}),
     containerRef.current,
     containerRef.current?.children[0]?.children[0],
   ]);

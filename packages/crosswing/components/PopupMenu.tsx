@@ -72,6 +72,7 @@ export function PopupMenuText({
   disabled,
   selected,
   destructive,
+  leaveOpen,
   ...rest
 }: {
   children?: ReactNode;
@@ -81,13 +82,15 @@ export function PopupMenuText({
   disabled?: boolean;
   selected?: boolean;
   destructive?: boolean;
+  /** If true, clicking the text will not call onClose() automatically. */
+  leaveOpen?: boolean;
 } & Omit<HTMLAttributes<HTMLAnchorElement & HTMLDivElement>, "onClick">) {
   // We want to automatically close the menu when you click something.
   const onClose = useOnClose();
 
   function onButtonClick() {
     onClick?.();
-    onClose?.();
+    !leaveOpen && onClose?.();
   }
 
   if (to) {

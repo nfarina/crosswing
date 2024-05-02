@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
+import { useIsMounted } from "../../hooks/useIsMounted.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import { ModalRootProvider } from "../context/ModalRootProvider.js";
 import { ModalDecorator } from "../storybook/ModalDecorator.js";
@@ -36,6 +37,46 @@ export function Normal() {
       <ModalStoryButton onClick={popup4.onClick}>Show Popup</ModalStoryButton>
       <ModalStoryButton onClick={popup5.onClick}>Show Popup</ModalStoryButton>
     </FourCorners>
+  );
+}
+
+export function ManualControl() {
+  const popup = usePopup(
+    () => (
+      <PopupView>
+        <PopupMountCounter />
+      </PopupView>
+    ),
+    { clickOutsideToClose: false },
+  );
+  const ref1 = useRef<HTMLDivElement | null>(null);
+  const ref2 = useRef<HTMLDivElement | null>(null);
+
+  return (
+    <ManualControlView>
+      <ModalStoryButton onClick={() => popup.show(ref1)}>
+        Show on Target 1
+      </ModalStoryButton>
+      <ModalStoryButton
+        onClick={() => {
+          ref1.current?.style.setProperty(
+            "transform",
+            `translateY(${Math.random() * 100}px)`,
+          );
+          popup.show(ref1);
+        }}
+      >
+        Move Target 1
+      </ModalStoryButton>
+      <ModalStoryButton onClick={() => popup.show(ref2)}>
+        Show on Target 2
+      </ModalStoryButton>
+      <ModalStoryButton onClick={popup.hide}>Hide Popup</ModalStoryButton>
+      <div className="targets">
+        <div ref={ref1}>Target 1</div>
+        <div ref={ref2}>Target 2</div>
+      </div>
+    </ManualControlView>
   );
 }
 
@@ -121,4 +162,48 @@ const InsetForModal = styled.div`
     height: 0;
     flex-grow: 1;
   }
+`;
+
+const ManualControlView = styled.div`
+  display: flex;
+  flex-flow: column;
+
+  > * {
+    margin: 10px;
+  }
+
+  > .targets {
+    display: flex;
+    flex-flow: row;
+
+    > div {
+      flex-grow: 1;
+      padding: 10px;
+      border: 1px dashed ${colors.separator()};
+      border-radius: 6px;
+      color: ${colors.text()};
+      font: ${fonts.display({ size: 14 })};
+      text-align: center;
+    }
+
+    > div + div {
+      margin-left: 10px;
+    }
+  }
+`;
+
+let mountCounter = 0;
+
+function PopupMountCounter() {
+  const [mountTime] = useState(() => ++mountCounter);
+
+  useIsMounted({ logPrefix: "PopupMountCounter" });
+
+  return <StyledPopupMountCounter>Mount #{mountTime}</StyledPopupMountCounter>;
+}
+
+const StyledPopupMountCounter = styled.div`
+  padding: 10px;
+  font: ${fonts.display({ size: 14 })};
+  color: ${colors.text()};
 `;
