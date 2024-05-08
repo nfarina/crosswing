@@ -109,6 +109,9 @@ export function TextArea({
     const textarea = ref.current!;
     const container = textarea.parentElement!;
 
+    // If we are invisible, we can't measure anything, so bail.
+    if (container.offsetWidth === 0 || container.offsetHeight === 0) return;
+
     // When mounted in Storybook, our rects will be 0,0,0,0, so we need to wait a tic.
     requestAnimationFrame(() => {
       // To compute the "desired" height of the <textarea>, we do a little trick
