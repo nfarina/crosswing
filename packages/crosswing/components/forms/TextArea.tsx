@@ -107,8 +107,9 @@ export function TextArea({
   function autoSize() {
     if (!autoSizing) return;
 
-    const textarea = ref.current!;
-    const container = textarea.parentElement!;
+    const textarea = ref.current;
+    const container = textarea?.parentElement;
+    if (!textarea || !container) return;
 
     // If we are invisible, we can't measure anything, so bail.
     if (container.offsetWidth === 0 || container.offsetHeight === 0) return;
