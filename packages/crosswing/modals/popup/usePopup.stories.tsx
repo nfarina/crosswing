@@ -46,7 +46,7 @@ export function ManualControl() {
         <PopupMountCounter />
       </PopupView>
     ),
-    { clickOutsideToClose: false, autoReposition: true },
+    { clickOutsideToClose: false, autoReposition: true, hideBackdrop: true },
   );
   const ref1 = useRef<HTMLDivElement | null>(null);
   const ref2 = useRef<HTMLDivElement | null>(null);

@@ -56,6 +56,11 @@ export interface PopupOptions {
    * is shown.
    */
   autoReposition?: boolean;
+  /**
+   * By default, a subtle backdrop is rendered to visually highlight the popup.
+   * You can turn it off if desired.
+   */
+  hideBackdrop?: boolean;
 }
 
 /** Props given to the element returned from usePopup(). */
@@ -70,6 +75,7 @@ export function usePopup<T extends any[]>(
     placement = "auto",
     clickOutsideToClose = true,
     autoReposition = false,
+    hideBackdrop = false,
   }: PopupOptions = {},
 ): Popup<T> {
   // Ugly wrapping of a ref in a ref. But we don't need to use state because
@@ -84,6 +90,7 @@ export function usePopup<T extends any[]>(
       children={popup(...args)}
       clickOutsideToClose={clickOutsideToClose}
       autoReposition={autoReposition}
+      hideBackdrop={hideBackdrop}
     />
   ));
 
@@ -128,6 +135,7 @@ export const PopupContainer = ({
   onExited,
   clickOutsideToClose = true,
   autoReposition = false,
+  hideBackdrop = false,
 }: {
   placement: PopupPlacement;
   target: PopupTarget;
@@ -147,6 +155,11 @@ export const PopupContainer = ({
    * is shown.
    */
   autoReposition?: boolean;
+  /**
+   * By default, a subtle backdrop is rendered to visually highlight the popup.
+   * You can turn it off if desired.
+   */
+  hideBackdrop?: boolean;
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const { container } = useHost();
@@ -183,7 +196,7 @@ export const PopupContainer = ({
 
   useLayoutEffect(() => {
     const container = containerRef.current;
-    const popup = container?.children[0]?.children[0];
+    const popup = container?.children[1]?.children[0];
 
     // Position the popup right on mount and before it's shown to the user.
     if (target.current && container) {
@@ -208,7 +221,7 @@ export const PopupContainer = ({
     target.current,
     JSON.stringify(target.current?.getBoundingClientRect() ?? {}),
     containerRef.current,
-    containerRef.current?.children[0]?.children[0],
+    containerRef.current?.children[1]?.children[0],
   ]);
 
   const isWeb = container === "web";
@@ -223,7 +236,7 @@ export const PopupContainer = ({
   function positionPopup() {
     const container = containerRef.current;
     const doc = container?.ownerDocument;
-    const popupArea = container?.children[0];
+    const popupArea = container?.children[1];
     const popup = popupArea?.children[0];
 
     // If we don't have a target (or some other condition fails) then
@@ -313,10 +326,16 @@ export const PopupContainer = ({
 
   return (
     <StyledPopupContainer
+      data-hide-backdrop={hideBackdrop}
       data-animating-in={animatingIn}
       onAnimationEnd={onAnimationEnd}
       ref={containerRef}
     >
+      <div
+        className="backdrop"
+        data-animating-in={animatingIn}
+        onClick={onClose}
+      />
       <div className="popup-area">
         {isValidElement(children)
           ? cloneElement(children, childProps)
@@ -349,6 +368,17 @@ const StyledPopupContainer = styled.div`
   box-sizing: border-box;
   pointer-events: none;
 
+  > .backdrop {
+    z-index: 0;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background: rgba(0, 0, 0, 0.1);
+    pointer-events: none;
+  }
+
   > .popup-area {
     position: absolute;
     right: 0px;
@@ -365,13 +395,25 @@ const StyledPopupContainer = styled.div`
     }
   }
 
+  &[data-hide-backdrop="true"] > .backdrop {
+    display: none;
+  }
+
   &[data-animating-in="true"] {
+    > .backdrop {
+      animation: ${fadeIn} 0.2s ${easing.outQuart} backwards;
+    }
+
     > .popup-area {
       animation: ${fadeIn} 0.2s ${easing.outQuart};
     }
   }
 
   &[data-animating-in="false"] {
+    > .backdrop {
+      animation: ${fadeOut} 0.2s ${easing.outCubic} forwards;
+    }
+
     > .popup-area {
       animation: ${fadeOut} 0.2s ${easing.outCubic} forwards;
     }
