@@ -9,6 +9,7 @@ import {
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
+import { useElementSize } from "../../hooks/useElementSize.js";
 import { useHost } from "../../host/context/HostContext.js";
 import { useScrollAboveKeyboard } from "../../host/features/useScrollAboveKeyboard.js";
 import { StatusBadge, StyledStatusBadge } from "../badges/StatusBadge.js";
@@ -103,7 +104,7 @@ export function TextArea({
   // Auto-sizing
   //
 
-  useLayoutEffect(() => {
+  function autoSize() {
     if (!autoSizing) return;
 
     const textarea = ref.current!;
@@ -112,27 +113,33 @@ export function TextArea({
     // If we are invisible, we can't measure anything, so bail.
     if (container.offsetWidth === 0 || container.offsetHeight === 0) return;
 
+    // To compute the "desired" height of the <textarea>, we do a little trick
+    // where we set the height to 0, then set the scrollHeight as the height.
+    // But! We need to make sure the overall component's size doesn't change
+    // unless necessary, otherwise it will cause a reflow and make the
+    // component jump around if it's in a scrolling container.
+    const oldHeight = container.style.height;
+    container.style.height = container.offsetHeight + "px";
+
+    textarea.style.height = minHeight + "px";
+    const newHeight = Math.max(
+      Math.min(textarea.scrollHeight, maxHeight),
+      minHeight,
+    );
+    textarea.style.height = `${newHeight}px`;
+
+    // Restore the old height to avoid reflows.
+    container.style.height = oldHeight;
+  }
+
+  // Resize when we re-render (our contents may have changed).
+  useLayoutEffect(() => {
     // When mounted in Storybook, our rects will be 0,0,0,0, so we need to wait a tic.
-    requestAnimationFrame(() => {
-      // To compute the "desired" height of the <textarea>, we do a little trick
-      // where we set the height to 0, then set the scrollHeight as the height.
-      // But! We need to make sure the overall component's size doesn't change
-      // unless necessary, otherwise it will cause a reflow and make the
-      // component jump around if it's in a scrolling container.
-      const oldHeight = container.style.height;
-      container.style.height = container.offsetHeight + "px";
-
-      textarea.style.height = minHeight + "px";
-      const newHeight = Math.max(
-        Math.min(textarea.scrollHeight, maxHeight),
-        minHeight,
-      );
-      textarea.style.height = `${newHeight}px`;
-
-      // Restore the old height to avoid reflows.
-      container.style.height = oldHeight;
-    });
+    requestAnimationFrame(autoSize);
   });
+
+  // Resize when the element itself changes size.
+  useElementSize(ref, autoSize);
 
   //
   // Focus & Error Management

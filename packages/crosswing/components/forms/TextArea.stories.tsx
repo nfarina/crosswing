@@ -36,6 +36,35 @@ export const AutoTrimDemo = () => {
   );
 };
 
+export const AutoSizeDemo = () => {
+  const [value, setValue] = useState(
+    "This is a long value that should wrap and auto-grow the textarea depending on its actual width.",
+  );
+
+  return (
+    <>
+      <TextArea
+        placeholder="Display Name"
+        value={value}
+        onValueChange={setValue}
+        autoSizing
+      />
+      <Button
+        children="Adjust width"
+        onClick={(e) => {
+          const buttonRef = e.target as HTMLButtonElement;
+          const textAreaRef =
+            buttonRef.previousElementSibling as HTMLTextAreaElement;
+
+          // Set a random size between 200 and 500.
+          const width = Math.floor(Math.random() * 300) + 200;
+          textAreaRef.style.width = `${width}px`;
+        }}
+      />
+    </>
+  );
+};
+
 export const WithPlaceholder = () => {
   const [name, setName] = useState("");
 
