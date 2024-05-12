@@ -1,6 +1,7 @@
 import Debug from "debug";
 import {
   createRef,
+  HTMLAttributes,
   isValidElement,
   ReactElement,
   ReactNode,
@@ -25,7 +26,10 @@ export interface NavRouteProps<Path extends string = any> {
   render: (params: MatchParams<Path>) => ReactElement;
 }
 
-export function Navs({ children }: { children: ReactNode }) {
+export function Navs({
+  children,
+  ...rest
+}: HTMLAttributes<HTMLDivElement> & { children: ReactNode }) {
   // Coerce children to array, flattening fragments and falsy conditionals.
   const routes = flattenChildren(children).filter(isNavRoute);
 
@@ -97,7 +101,9 @@ export function Navs({ children }: { children: ReactNode }) {
   // Figure out where to go if you swipe right on the nav stack.
   const back = allLocations[allLocations.length - 2];
 
-  return <NavStack back={back} items={allLocations.map(getNavStackItem)} />;
+  return (
+    <NavStack back={back} items={allLocations.map(getNavStackItem)} {...rest} />
+  );
 }
 
 interface SelectedRoute {

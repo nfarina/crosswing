@@ -1,4 +1,4 @@
-import { ReactElement, RefObject } from "react";
+import { HTMLAttributes, ReactElement, RefObject } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
@@ -22,7 +22,8 @@ export type NavStackItem = {
 export function NavStack({
   back,
   items,
-}: {
+  ...rest
+}: HTMLAttributes<HTMLDivElement> & {
   back: RouterLocation | null;
   items: NavStackItem[];
 }) {
@@ -69,9 +70,10 @@ export function NavStack({
   });
 
   return (
-    <StyledNavStack
+    <StyledNavs
       onTouchStart={container === "ios" ? onTouchStart : undefined}
       data-container={container}
+      {...rest}
     >
       <TransitionGroup component={null}>
         {items.map((item) => (
@@ -92,11 +94,14 @@ export function NavStack({
           </CSSTransition>
         ))}
       </TransitionGroup>
-    </StyledNavStack>
+    </StyledNavs>
   );
 }
 
-export const StyledNavStack = styled.div`
+// We name this <StyledNavs> instead of <StyledNavStack> because <NavStack>
+// is internal and rendered only by <Navs>, so it feels more consistent to
+// expose <StyledNavs> as a means of styling the parent <Navs>.
+export const StyledNavs = styled.div`
   position: relative;
   overflow: hidden;
 

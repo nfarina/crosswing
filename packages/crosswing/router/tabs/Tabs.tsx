@@ -14,7 +14,7 @@ import { useHost } from "../../host/context/HostContext.js";
 import { safeArea } from "../../host/features/safeArea.js";
 import { RouterLocation } from "../RouterLocation.js";
 import { RouterContext, useRouter } from "../context/RouterContext.js";
-import { StyledNavStack } from "../navs/NavStack.js";
+import { StyledNavs } from "../navs/NavStack.js";
 import { Redirect } from "../redirect/Redirect.js";
 import { StyledTabBar, TabBar } from "./TabBar.js";
 import { TabProps } from "./TabLink.js";
@@ -234,7 +234,7 @@ export const StyledTabs = styled.div`
     z-index: 2;
 
     /* Spooky action at a distance. We need to allow NavStack to overflow so it can render above the tabs if desired, but then there's a chance you can see the next NavLayout animating in from the right. So we disable NavStack's overflow:hidden in favor of our own. */
-    ${StyledNavStack} {
+    ${StyledNavs} {
       overflow: visible;
     }
 
