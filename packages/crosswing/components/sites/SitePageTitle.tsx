@@ -153,6 +153,11 @@ export function PageTitleProvider({ children }: { children: ReactNode }) {
   return <PageTitleContext.Provider value={context} children={children} />;
 }
 
+/** For Storybook. */
+export function PageTitleDecorator(Story: () => any) {
+  return <PageTitleProvider children={<Story />} />;
+}
+
 export const DesktopPageTitle = styled.div`
   display: flex;
   flex-flow: row;
