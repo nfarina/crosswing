@@ -217,6 +217,9 @@ function TestAppTabs({ path }: { path: string }) {
                     <Link to={`/app/activity/visits/${visitId}?fromComments`}>
                       Back with querystring
                     </Link>
+                    <Link to={`/app/activity/visits/visit2?fromComments`}>
+                      Visit 2 Comments
+                    </Link>
                   </div>
                 </NavLayout>
               )}

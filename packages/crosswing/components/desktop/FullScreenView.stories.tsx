@@ -24,6 +24,18 @@ export const Default = () => (
   </Container>
 );
 
+export const DefaultFullScreen = () => (
+  <Container>
+    <FullScreenView
+      restorationKey={DefaultFullScreen}
+      title="Default"
+      defaultFullScreen
+    >
+      <Content />
+    </FullScreenView>
+  </Container>
+);
+
 const Container = styled.div`
   display: flex;
   align-items: center;

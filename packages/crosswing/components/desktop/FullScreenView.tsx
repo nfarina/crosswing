@@ -24,6 +24,7 @@ export function FullScreenView({
   title,
   hotkey = "cmd+shift+f",
   children,
+  defaultFullScreen = false,
 }: {
   /**
    * Prevents separate fullscreen views from colliding with each other in terms
@@ -36,6 +37,7 @@ export function FullScreenView({
   title: ReactNode;
   hotkey?: string;
   children: ReactElement;
+  defaultFullScreen?: boolean;
 }) {
   // Fit our "full screen" rect to the nearest modal provider boundary.
   const { modalRoot } = useContext(ModalContext);
@@ -52,8 +54,11 @@ export function FullScreenView({
   // localStorage because then other unrelated tabs would be affected).
   const [isFullScreen, setFullScreen] = useSessionStorage(
     `FullScreenView:${restorationKey.name}:isFullScreen`,
-    false,
+    defaultFullScreen,
   );
+
+  // We don't want to animate to full screen if we are *starting* full screen.
+  const skipAnimation = useRef(isFullScreen);
 
   // Toggle full screen status with a hotkey.
   useHotkey(hotkey, {
@@ -77,6 +82,7 @@ export function FullScreenView({
     return () => {
       divRef.current = null;
       div.remove();
+      skipAnimation.current = isFullScreen; // Reset because of <StrictMode> double-effects.
     };
   }, []);
 
@@ -113,16 +119,26 @@ export function FullScreenView({
         div.style.height = rect.height + "px";
         if (header) header.style.opacity = "0";
 
-        // Begin expanding it immediately.
-        requestAnimationFrame(() => {
-          div.style.transition =
-            "left 0.3s ease-in-out, top 0.3s ease-in-out, width 0.3s ease-in-out, height 0.3s ease-in-out";
+        const moveDivToTop = () => {
           div.style.top = "34px"; // Make space for header.
           div.style.left = "0";
           div.style.width = "100%";
           div.style.height = "calc(100% - 34px)";
           if (header) header.style.opacity = "";
-        });
+        };
+
+        if (skipAnimation.current) {
+          div.style.transition = "";
+          moveDivToTop();
+          skipAnimation.current = false;
+        } else {
+          // Begin expanding it immediately.
+          requestAnimationFrame(() => {
+            div.style.transition =
+              "left 0.3s ease-in-out, top 0.3s ease-in-out, width 0.3s ease-in-out, height 0.3s ease-in-out";
+            moveDivToTop();
+          });
+        }
       }
     } else {
       // Relocate the content to our parent element if needed.

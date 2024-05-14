@@ -47,12 +47,31 @@ export function Navs({
     `Render <Navs> with location "${location}" and next location "${nextLocation}" and previous locations: ${previousLocations.current}`,
   );
 
+  // What route is on top?
+  const locationRoute = selectRoute(routes, location);
+  console.log("pushing", locationRoute.route.props.path);
+  const cleanedPreviousLocations = previousLocations.current.filter(
+    (loc) =>
+      selectRoute(routes, loc).route.props.path !==
+      locationRoute.route.props.path,
+  );
+
   // Construct the new list of locations to render.
   // If we are displaying the default route, erase history (because there
   // shouldn't be any way to go back further, and also as a safety valve).
   const allLocations = isRootSelected
     ? [location]
-    : pushLocation(root.location, previousLocations.current, location);
+    : pushLocation(root.location, cleanedPreviousLocations, location);
+
+  console.log(
+    previousLocations.current.map(
+      (l) => selectRoute(routes, l).route.props.path,
+    ),
+    cleanedPreviousLocations.map(
+      (l) => selectRoute(routes, l).route.props.path,
+    ),
+    allLocations.map((l) => selectRoute(routes, l).route.props.path),
+  );
 
   // Store the list of locations we rendered.
   useEffect(() => {
