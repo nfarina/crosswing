@@ -231,7 +231,9 @@ function TestAppTabs({ path }: { path: string }) {
   );
 }
 
-const StyledBrowserSimulator = styled(BrowserSimulator)`
+const StyledBrowserSimulator = styled(BrowserSimulator).attrs({
+  navigateListener: action("navigate"),
+})`
   .content {
     padding: 10px;
     color: ${colors.text()};

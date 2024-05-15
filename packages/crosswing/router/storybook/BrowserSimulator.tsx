@@ -10,20 +10,36 @@ import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
 import { Router } from "../Router.js";
+import { RouterLocation } from "../RouterLocation.js";
 import { RouterContext } from "../context/RouterContext.js";
 import { MemoryHistory } from "../history/MemoryHistory.js";
+
+// For Storybook, when action()ing a navigation event, we mostly want to know
+// the path. The location object doesn't print well in the Storybook UI.
+export type BrowserNavigateListener = (
+  path: string,
+  location: RouterLocation,
+) => void;
 
 export function BrowserSimulator({
   rootPath,
   initialPath,
   children,
+  navigateListener,
   ...rest
 }: {
   rootPath?: string;
   initialPath?: string;
   children?: ReactNode;
+  navigateListener?: BrowserNavigateListener;
 } & HTMLAttributes<HTMLDivElement>) {
-  const [history] = useState(() => new MemoryHistory(initialPath));
+  const [history] = useState(() => {
+    const memory = new MemoryHistory(initialPath);
+    if (navigateListener) {
+      memory.listen((location) => navigateListener(location.href(), location));
+    }
+    return memory;
+  });
 
   return (
     <Router
