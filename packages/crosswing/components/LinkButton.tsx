@@ -26,6 +26,9 @@ export function LinkButton({
   showDisclosure?: boolean;
   disabled?: boolean;
 }) {
+  const hasText = !!children || !!title || !!subtitle;
+  const hasIcon = !!icon;
+
   // Allow activating LinkButtons with "space" since it behaves like a button.
   function onLinkKeyDown(event: KeyboardEvent<HTMLAnchorElement>) {
     if (event.key === " ") {
@@ -43,8 +46,8 @@ export function LinkButton({
       data-primary={primary}
       data-size={size}
       data-disabled={disabled}
-      data-icon-only={!children}
-      data-icon-and-children={!!children && !!icon}
+      data-icon-only={!hasText && hasIcon}
+      data-icon-and-children={hasText && hasIcon}
       data-disclosure={!!showDisclosure}
       role="button"
       onKeyDown={onLinkKeyDown}
@@ -78,6 +81,9 @@ export const StyledLinkButton = styled(Link)`
   font: ${fonts.displayBold({ size: 15, line: "1" })};
   text-decoration: none;
   transition: opacity 0.2s ease-in-out;
+  /* Match browser stylesheet for <button> elements. */
+  text-align: center;
+  cursor: pointer;
 
   @media (prefers-color-scheme: dark) {
     background: ${colors.extraExtraExtraDarkGray()};

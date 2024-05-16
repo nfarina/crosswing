@@ -1,7 +1,6 @@
 {
   "//": [
-    "The debug package is pinned to prevent a million different versions getting installed.",
-    "TypeScript is pinned to 5.3.3 because folder watching is broken in 5.4.x. https://github.com/microsoft/TypeScript/issues/57792"
+    "The debug package is pinned to prevent a million different versions getting installed."
   ],
   "name": "crosswing-monorepo",
   "type": "module",
@@ -25,13 +24,13 @@
     "clean:node_modules": "rm -rf node_modules packages/*/node_modules"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^8.0.10",
-    "@storybook/addon-essentials": "^8.0.10",
-    "@storybook/react": "^8.0.10",
-    "@storybook/react-vite": "^8.0.10",
+    "@storybook/addon-actions": "^8.1.1",
+    "@storybook/addon-essentials": "^8.1.1",
+    "@storybook/react": "^8.1.1",
+    "@storybook/react-vite": "^8.1.1",
     "@types/debug": "^4.1.12",
     "@types/minimist": "^1.2.5",
-    "@types/react": "^18.3.1",
+    "@types/react": "^18.3.2",
     "@types/react-dom": "^18.3.0",
     "@types/react-is": "^18.3.0",
     "@types/react-transition-group": "^4.4.10",
@@ -39,7 +38,7 @@
     "prettier": "^3.2.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "storybook": "^8.0.10",
+    "storybook": "^8.1.1",
     "timemachine": "^0.3.2",
     "typescript": "^5.4.5",
     "vite": "^5.2.11",
@@ -51,8 +50,7 @@
     "vite": "^5.2.10"
   },
   "resolutions": {
-    "debug": "4.3.4",
-    "typescript": "5.3.3"
+    "debug": "4.3.4"
   },
   "packageManager": "yarn@4.1.1"
 }
