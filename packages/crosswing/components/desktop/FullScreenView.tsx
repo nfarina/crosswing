@@ -1,6 +1,6 @@
 import {
   createContext,
-  ReactElement,
+  HTMLAttributes,
   ReactNode,
   useContext,
   useLayoutEffect,
@@ -11,6 +11,7 @@ import { createPortal } from "react-dom";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
+import { useElementSize } from "../../hooks/useElementSize.js";
 import { useHotkey } from "../../hooks/useHotkey.js";
 import { useSessionStorage } from "../../hooks/useSessionStorage.js";
 import Close from "../../icons/Close.svg?react";
@@ -25,7 +26,9 @@ export function FullScreenView({
   hotkey = "cmd+shift+f",
   children,
   defaultFullScreen = false,
-}: {
+  threshold = 0.8,
+  ...rest
+}: Omit<HTMLAttributes<HTMLDivElement>, "title"> & {
   /**
    * Prevents separate fullscreen views from colliding with each other in terms
    * of user preference for on/off. This could be a string but then it's easy to
@@ -36,8 +39,13 @@ export function FullScreenView({
   restorationKey: Function;
   title: ReactNode;
   hotkey?: string;
-  children: ReactElement;
   defaultFullScreen?: boolean;
+  /**
+   * How much smaller does the FullScreenView need to be relative to the
+   * viewport before it renders the full screen button? Default is 80%.
+   * This ensures that the buttons only appear when they're needed.
+   */
+  threshold?: number;
 }) {
   // Fit our "full screen" rect to the nearest modal provider boundary.
   const { modalRoot } = useContext(ModalContext);
@@ -52,10 +60,27 @@ export function FullScreenView({
 
   // Persist the fullscreen status across window reloads (don't use
   // localStorage because then other unrelated tabs would be affected).
-  const [isFullScreen, setFullScreen] = useSessionStorage(
+  let [isFullScreen, setFullScreen] = useSessionStorage(
     `FullScreenView:${restorationKey.name}:isFullScreen`,
     defaultFullScreen,
   );
+
+  const [disabled, setDisabled] = useState(false);
+  if (disabled) isFullScreen = false;
+
+  // The blue full screen buttons can proliferate and become annoying when they
+  // feel unnecessary. So we'll only show them when the parent would benefit
+  // significantly from full screen mode.
+  useElementSize(parentRef, (size) => {
+    // Check if the parent is significantly smaller (<=80%) than the viewport
+    // in either dimension.
+    const viewport = document.documentElement;
+    const isSmall =
+      size.width / viewport.clientWidth <= threshold ||
+      size.height / viewport.clientHeight <= threshold;
+    const shouldDisable = !isSmall;
+    if (shouldDisable !== disabled) setDisabled(shouldDisable);
+  });
 
   // We don't want to animate to full screen if we are *starting* full screen.
   const skipAnimation = useRef(isFullScreen);
@@ -179,7 +204,7 @@ export function FullScreenView({
         <Button icon={<Close />} onClick={() => setFullScreen(false)} />
       </FullScreenHeader>
       <div className="children">{children}</div>
-      {!isFullScreen && (
+      {!isFullScreen && !disabled && (
         <Button
           className="full-screen-button"
           icon={<FullScreen />}
@@ -190,8 +215,8 @@ export function FullScreenView({
   );
 
   return (
-    <StyledFullScreenView ref={parentRef}>
-      <FullScreenContext.Provider value={{ isFullScreen }}>
+    <StyledFullScreenView ref={parentRef} {...rest}>
+      <FullScreenContext.Provider value={{ isFullScreen, disabled }}>
         {divRef.current && createPortal(rendered, divRef.current)}
       </FullScreenContext.Provider>
     </StyledFullScreenView>
@@ -203,10 +228,12 @@ export function FullScreenView({
 
 export interface FullScreenContextValue {
   isFullScreen: boolean;
+  disabled: boolean;
 }
 
 export const FullScreenContext = createContext<FullScreenContextValue>({
   isFullScreen: false,
+  disabled: true,
 });
 FullScreenContext.displayName = "FullScreenContext";
 
@@ -296,6 +323,6 @@ const ContentLayout = styled.div`
  * screen mode.
  */
 export function FullScreenToolbarSpace() {
-  const { isFullScreen } = useFullScreen();
-  return !isFullScreen ? <ToolbarSpace width={40} /> : null;
+  const { isFullScreen, disabled } = useFullScreen();
+  return !isFullScreen && !disabled ? <ToolbarSpace width={40} /> : null;
 }

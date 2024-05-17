@@ -18,7 +18,7 @@ export default {
 
 export const Default = () => (
   <Container>
-    <FullScreenView restorationKey={Default} title="Default">
+    <FullScreenView restorationKey={Default} title="Default" threshold={1}>
       <Content />
     </FullScreenView>
   </Container>
@@ -30,10 +30,35 @@ export const DefaultFullScreen = () => (
       restorationKey={DefaultFullScreen}
       title="Default"
       defaultFullScreen
+      threshold={1}
     >
       <Content />
     </FullScreenView>
   </Container>
+);
+
+export const SmallerThanThreshold = () => (
+  <ResponsiveContainer>
+    <FullScreenView
+      restorationKey={SmallerThanThreshold}
+      title="Smaller than threshold"
+      style={{ width: "80%", height: "80%" }}
+    >
+      <Content />
+    </FullScreenView>
+  </ResponsiveContainer>
+);
+
+export const LargerThanThreshold = () => (
+  <ResponsiveContainer>
+    <FullScreenView
+      restorationKey={LargerThanThreshold}
+      title="Larger than threshold"
+      style={{ width: "81%", height: "81%" }}
+    >
+      <Content />
+    </FullScreenView>
+  </ResponsiveContainer>
 );
 
 const Container = styled.div`
@@ -45,6 +70,12 @@ const Container = styled.div`
     width: 400px;
     height: 400px;
   }
+`;
+
+const ResponsiveContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 function Content() {
