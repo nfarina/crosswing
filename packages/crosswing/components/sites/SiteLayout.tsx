@@ -1,5 +1,7 @@
 import {
+  CSSProperties,
   Fragment,
+  HTMLAttributes,
   ReactElement,
   ReactNode,
   isValidElement,
@@ -40,15 +42,17 @@ export function SiteLayout({
   logoTo,
   onLogoClick,
   tint = colors.turquoise,
+  sidebarWidth = 150,
   accessories,
-}: {
-  /** Expects <SiteAreaProps> */
-  children?: ReactNode;
+  style,
+  ...rest
+}: Omit<HTMLAttributes<HTMLDivElement>, "title"> & {
   title: string;
   logo?: ReactNode;
   logoTo?: string;
   onLogoClick?: () => void;
   tint?: HexColorBuilder;
+  sidebarWidth?: number;
   accessories?: SiteHeaderAccessory[] | null;
 }) {
   // The sidebar defaults to hidden in a mobile layout but can be shown with
@@ -146,9 +150,18 @@ export function SiteLayout({
     (accessory) => mobileLayout && accessory.mobilePlacement === "sidebar",
   );
 
+  const cssProps = {
+    "--sidebar-width": `${sidebarWidth}px`,
+    ...style,
+  } as CSSProperties;
+
   return (
     <PageTitleProvider>
-      <StyledSiteLayout data-sidebar-open={sidebarOpen}>
+      <StyledSiteLayout
+        data-sidebar-open={sidebarOpen}
+        style={cssProps}
+        {...rest}
+      >
         <SiteHeader siteTitle={title} accessories={headerAccessories} />
         <SiteSidebar
           logo={logo}
@@ -234,6 +247,7 @@ export const StyledSiteLayout = styled.div`
     grid-row: 1 / 3;
     z-index: 3;
     box-shadow: 1px 0 0 ${colors.separator()};
+    width: var(--sidebar-width);
   }
 
   > .content {

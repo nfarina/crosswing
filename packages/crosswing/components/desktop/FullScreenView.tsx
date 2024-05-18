@@ -71,16 +71,20 @@ export function FullScreenView({
   // The blue full screen buttons can proliferate and become annoying when they
   // feel unnecessary. So we'll only show them when the parent would benefit
   // significantly from full screen mode.
-  useElementSize(parentRef, (size) => {
-    // Check if the parent is significantly smaller (<=80%) than the viewport
-    // in either dimension.
-    const viewport = document.documentElement;
-    const isSmall =
-      size.width / viewport.clientWidth <= threshold ||
-      size.height / viewport.clientHeight <= threshold;
-    const shouldDisable = !isSmall;
-    if (shouldDisable !== disabled) setDisabled(shouldDisable);
-  });
+  useElementSize(
+    parentRef,
+    (size) => {
+      // Check if the parent is significantly smaller (<=80%) than the viewport
+      // in either dimension.
+      const viewport = document.documentElement;
+      const isSmall =
+        size.width / viewport.clientWidth <= threshold ||
+        size.height / viewport.clientHeight <= threshold;
+      const shouldDisable = !isSmall;
+      if (shouldDisable !== disabled) setDisabled(shouldDisable);
+    },
+    [threshold],
+  );
 
   // We don't want to animate to full screen if we are *starting* full screen.
   const skipAnimation = useRef(isFullScreen);
@@ -258,6 +262,9 @@ const FullScreenHeader = styled.div`
     flex-grow: 1;
     font: ${fonts.display({ size: 12 })};
     color: ${colors.white()};
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   > ${StyledButton} {

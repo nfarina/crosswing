@@ -47,7 +47,7 @@ export function SiteSidebar({
   onLinkClick,
   style,
   ...rest
-}: {
+}: HTMLAttributes<HTMLDivElement> & {
   logo?: ReactNode;
   logoTo?: string;
   onLogoClick?: () => void;
@@ -55,7 +55,7 @@ export function SiteSidebar({
   accessories?: SiteHeaderAccessory[] | null;
   children?: ReactNode;
   onLinkClick?: (path: string) => void;
-} & HTMLAttributes<HTMLDivElement>) {
+}) {
   // Coerce children to array, flattening fragments and falsy conditionals.
   const areas = flattenChildren(children).filter(isSidebarArea);
 

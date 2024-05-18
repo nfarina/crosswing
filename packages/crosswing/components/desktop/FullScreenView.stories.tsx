@@ -28,7 +28,7 @@ export const DefaultFullScreen = () => (
   <Container>
     <FullScreenView
       restorationKey={DefaultFullScreen}
-      title="Default"
+      title="This is a long title. This is a long title. This is a long title. This is a long title. This is a long title. This is a long title."
       defaultFullScreen
       threshold={1}
     >
