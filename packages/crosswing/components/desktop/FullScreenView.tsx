@@ -47,6 +47,8 @@ export function FullScreenView({
    */
   threshold?: number;
 }) {
+  const [buttonHovered, setButtonHovered] = useState(false);
+
   // Fit our "full screen" rect to the nearest modal provider boundary.
   const { modalRoot } = useContext(ModalContext);
 
@@ -202,7 +204,10 @@ export function FullScreenView({
   }, [forceRefresh, isFullScreen]);
 
   const rendered = (
-    <ContentLayout data-is-fullscreen={isFullScreen}>
+    <ContentLayout
+      data-is-fullscreen={isFullScreen}
+      data-is-button-hovered={!isFullScreen && !disabled && buttonHovered}
+    >
       <FullScreenHeader id="header">
         <div className="title" children={title} />
         <Button icon={<Close />} onClick={() => setFullScreen(false)} />
@@ -212,9 +217,15 @@ export function FullScreenView({
         <Button
           className="full-screen-button"
           icon={<FullScreen />}
-          onClick={() => setFullScreen(true)}
+          onClick={() => {
+            setFullScreen(true);
+            setButtonHovered(false);
+          }}
+          onMouseOver={() => setButtonHovered(true)}
+          onMouseOut={() => setButtonHovered(false)}
         />
       )}
+      <div className="hover-outline" />
     </ContentLayout>
   );
 
@@ -321,6 +332,22 @@ const ContentLayout = styled.div`
     background: ${colors.darkBlue()};
     color: ${colors.white()};
     z-index: 1;
+  }
+
+  > .hover-outline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid ${colors.darkBlue()};
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  &[data-is-button-hovered="true"] > .hover-outline {
+    opacity: 1;
   }
 `;
 

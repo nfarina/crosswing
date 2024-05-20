@@ -42,7 +42,7 @@ export const SmallerThanThreshold = () => (
     <FullScreenView
       restorationKey={SmallerThanThreshold}
       title="Smaller than threshold"
-      style={{ width: "80%", height: "80%" }}
+      style={{ width: "79%", height: "79%" }} // I used to test at 80% here but pixel rounding caused it to be larger than the threshold.
     >
       <Content />
     </FullScreenView>
