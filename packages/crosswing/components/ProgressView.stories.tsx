@@ -20,6 +20,19 @@ export const Progress = () => {
   return <ProgressView size="50px" {...props} />;
 };
 
+export const IndeterminateToProgress = () => {
+  const props = usePropSequence<typeof ProgressView>(
+    [{ progress: null, animated: false }, { progress: 0.5 }],
+    { interval: 1000 },
+  );
+
+  return <ProgressView size="50px" {...props} />;
+};
+
+export const ProgressFixed = () => {
+  return <ProgressView size="50px" progress={0.4} />;
+};
+
 export const IndeterminateTiny = () => (
   <ProgressView thickness={0.5} size="12px" />
 );

@@ -36,6 +36,7 @@ export function Donut({
     circles.push(
       <circle
         key={circles.length}
+        data-section-index={circles.length}
         cx="50"
         cy="50"
         r={radius}
