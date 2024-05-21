@@ -10,7 +10,7 @@ export type FormValues = {
   submit: () => void;
   canSubmit: boolean;
   /** Should be spread onto to `form`. */
-  props: Pick<FormHTMLAttributes<HTMLFormElement>, "onKeyDown">;
+  props: Pick<FormHTMLAttributes<HTMLFormElement>, "onKeyDown" | "onSubmit">;
   /** Props for form elements; simply propagates the `disabled` prop. */
   valueProps<T extends FormValue>(value: T): T["props"];
   /** Props for a NavAccessory that should submit the form. */
@@ -100,6 +100,14 @@ export function useFormValues({
     }
   }
 
+  function onFormSubmit(event: React.FormEvent) {
+    // If you triggered the submit event some other way (like "enter" in a text
+    // input) and the form isn't submittable, prevent the default action.
+    if (!canSubmit) {
+      event.preventDefault();
+    }
+  }
+
   function valueProps<T extends FormValue>(value: T) {
     return {
       ...value.props,
@@ -110,7 +118,7 @@ export function useFormValues({
   return {
     submit,
     canSubmit,
-    props: { onKeyDown },
+    props: { onKeyDown, onSubmit: onFormSubmit },
     valueProps,
     navProps: { onClick: submit, disabled: !canSubmit },
     buttonProps: { onClick: submit, disabled: !canSubmit },
