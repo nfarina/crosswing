@@ -42,30 +42,32 @@ export function ProgressView({
       data-animated={!!animated}
       {...rest}
     >
-      <Donut
-        className="bg"
-        size={size}
-        thickness={thickness}
-        sections={[
-          {
-            amount: 1,
-            color: backgroundColor,
-          },
-        ]}
-      />
-      <Donut
-        className="fg"
-        size={size}
-        thickness={thickness}
-        sections={renderSections()}
-      />
+      <div className="container">
+        <Donut
+          className="bg"
+          size={size}
+          thickness={thickness}
+          sections={[
+            {
+              amount: 1,
+              color: backgroundColor,
+            },
+          ]}
+        />
+        <Donut
+          className="fg"
+          size={size}
+          thickness={thickness}
+          sections={renderSections()}
+        />
+      </div>
     </StyledProgressView>
   );
 }
 
 const spin = keyframes`
   to {
-    transform: translate(-50%, -50%) rotate(360deg);
+    transform: rotate(360deg);
   }
 `;
 
@@ -73,26 +75,38 @@ export const StyledProgressView = styled.div`
   /* The proper way to size ProgressView is the "size" property.
      If you try to size this component directly anyway, we'll just
      center the progress view inside. */
-  position: relative;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
 
-  > ${StyledDonut} {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  > .container {
+    position: relative;
+
+    > ${StyledDonut}:nth-child(2) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
   }
 
   &[data-is-indeterminate="true"] {
-    > ${StyledDonut}.fg {
-      animation: ${spin} 1s ease-in-out infinite;
+    > .container {
+      > ${StyledDonut}.fg {
+        animation: ${spin} 1s ease-in-out infinite;
+      }
     }
   }
 
   &[data-is-indeterminate="false"][data-animated="true"] {
-    > ${StyledDonut}.fg circle {
-      transition:
-        stroke-dasharray 0.5s ${easing.inOutCubic},
-        stroke-dashoffset 0.5s ${easing.inOutCubic};
+    > .container {
+      > ${StyledDonut}.fg circle {
+        transition:
+          stroke-dasharray 0.5s ${easing.inOutCubic},
+          stroke-dashoffset 0.5s ${easing.inOutCubic};
+      }
     }
   }
 `;

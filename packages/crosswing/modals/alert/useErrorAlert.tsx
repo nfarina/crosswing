@@ -30,8 +30,8 @@ export function useErrorAlert({
           : "Something went wrong.";
 
       // If the message is super long, truncate it.
-      if (niceMessage.length > 200) {
-        niceMessage = truncate(niceMessage, { length: 200 });
+      if (niceMessage.length > 300) {
+        niceMessage = truncate(niceMessage, { length: 300 });
 
         // If there's no stack put the full message in the stack so you can
         // scroll around to read the whole thing.
