@@ -1,6 +1,0 @@
-<svg width="20" height="10" viewBox="0 0 20 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="PopupUpArrow">
-<path id="Shadow" fill-rule="evenodd" clip-rule="evenodd" d="M0.499959 9.49901H19.5L13.098 2.82813C11.381 1.04065 8.61296 1.04659 6.90196 2.82813L0.499959 9.5V9.49901ZM19.842 8.41821L13.822 2.14718C11.714 -0.0500509 8.28396 -0.0480713 6.17696 2.14718L0.157959 8.41821H19.842Z" fill="#8898AA" fill-opacity="0.1"/>
-<path id="Fill" fill-rule="evenodd" clip-rule="evenodd" d="M6.90195 2.82912C8.61295 1.04659 11.382 1.04065 13.098 2.82912L19.5 9.5H0.499954L6.90195 2.82912Z" fill="white"/>
-</g>
-</svg>

@@ -5,7 +5,7 @@ import { useHost } from "../../host/context/HostContext.js";
 import { useHostStatusBar } from "../../host/features/HostStatusBar.js";
 import { safeArea } from "../../host/features/safeArea.js";
 import { StatusBarStyleAttribute } from "../../host/util/useAutoStatusBar.js";
-import Back from "../../icons/Back.svg?react";
+import { BackIcon } from "../../icons/Back.js";
 import { useRouter } from "../context/RouterContext.js";
 import { NavAccessory, NavAccessoryView } from "./NavAccessoryView.js";
 import { NavTitleView } from "./NavTitleView.js";
@@ -68,7 +68,7 @@ export function NavLayout({
     if (back && !hideBackButton)
       return (
         <NavAccessoryView
-          accessory={{ icon: <Back />, to: back, back: true }}
+          accessory={{ icon: <BackIcon />, to: back, back: true }}
           align="left"
         />
       );

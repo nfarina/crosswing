@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
 import { useHost } from "../../host/context/HostContext.js";
-import PlaceholderIcon from "../../icons/Placeholder.svg?react";
+import { PlaceholderIcon } from "../../icons/Placeholder.js";
 import { Link } from "../Link.js";
 import { useRouter } from "../context/RouterContext.js";
 import { UnreadBadge } from "./UnreadBadge.js";

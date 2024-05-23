@@ -1,0 +1,19 @@
+import type { SVGProps } from "react";
+const BackIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    width={24}
+    height={24}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M23 11H10V7.14497C10 6.04397 9.257 5.65197 8.349 6.27197L1.401 11.017C0.493001 11.637 0.493001 12.652 1.401 13.272L8.349 18.017C9.257 18.637 10 18.244 10 17.145V13H23C23.55 13 24 12.55 24 12C24 11.45 23.55 11 23 11Z"
+      fill="currentColor"
+    />
+  </svg>
+);
+export { BackIcon };

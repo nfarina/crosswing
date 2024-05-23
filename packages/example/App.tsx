@@ -3,10 +3,10 @@ import { colors } from "crosswing/colors";
 import { Button } from "crosswing/components/Button";
 import { MobileAppFrame } from "crosswing/components/desktop/MobileAppFrame";
 import { MockHostProvider } from "crosswing/host/mocks";
+import { CrosswingLogoIcon } from "crosswing/icons/CrosswingLogo.js";
 import { useAlert } from "crosswing/modals/alert";
 import { ModalRootProvider } from "crosswing/modals/context";
 import { styled } from "styled-components";
-import Favicon from "./Favicon.svg?react";
 
 export function App() {
   return (
@@ -35,7 +35,7 @@ function AppContent() {
       <Button
         primary
         title="Hello World"
-        icon={<Favicon />}
+        icon={<CrosswingLogoIcon />}
         onClick={alert.show}
       />
     </StyledApp>

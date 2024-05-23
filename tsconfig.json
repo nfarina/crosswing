@@ -31,14 +31,8 @@
     // Remove comments from output.
     "removeComments": true,
     // Dramatically speed up successive compilations.
-    "incremental": true,
+    "incremental": true
   },
-  "include": [
-    "packages/**/*.ts",
-    "packages/**/*.tsx",
-    "*.ts",
-    // Include types for SVGs processed by vite-plugin-svgr.
-    "node_modules/vite-plugin-svgr/client.d.ts",
-  ],
-  "exclude": ["packages/**/dist/**"],
+  "include": ["packages/**/*.ts", "packages/**/*.tsx", "*.ts"],
+  "exclude": ["packages/**/dist/**"]
 }

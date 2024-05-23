@@ -11,7 +11,7 @@ import { styled } from "styled-components";
 import { HexColorBuilder, colors } from "../../colors/colors.js";
 import { flattenChildren } from "../../hooks/flattenChildren.js";
 import { useMatchMedia } from "../../hooks/useMatchMedia.js";
-import MenuIcon from "../../icons/Menu.svg?react";
+import { MenuIcon } from "../../icons/Menu.js";
 import { Redirect } from "../../router/redirect/Redirect.js";
 import { Route, Switch } from "../../router/switch/Switch.js";
 import { NoContent } from "../NoContent.js";

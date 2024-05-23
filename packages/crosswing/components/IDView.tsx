@@ -2,7 +2,7 @@ import { MouseEvent } from "react";
 import { styled } from "styled-components";
 import { colors } from "../colors/colors.js";
 import { fonts } from "../fonts/fonts.js";
-import Copy from "../icons/Copy.svg?react";
+import { CopyIcon } from "../icons/Copy.js";
 import { useBanner } from "../modals/banner/useBanner.js";
 import { Clickable } from "./Clickable.js";
 
@@ -27,7 +27,7 @@ export function IDView({
 
   return (
     <StyledIDView onClick={onViewClick} {...rest}>
-      <Copy />
+      <CopyIcon />
       <span className="text">{truncate ? id.slice(0, truncate) : id}</span>
     </StyledIDView>
   );

@@ -19,7 +19,8 @@
   // Customize file nesting patterns.
   "explorer.fileNesting.patterns": {
     "*.ts": "${capture}.js, ${capture}.js.map, ${capture}.test.js, ${capture}.test.ts, ${capture}.stories.tsx",
-    "*.tsx": "${capture}.js, ${capture}.js.map, ${capture}.stories.js.map, ${capture}.stories.js, ${capture}.test.ts, ${capture}.stories.tsx"
+    "*.tsx": "${capture}.js, ${capture}.js.map, ${capture}.stories.js.map, ${capture}.stories.js, ${capture}.test.ts, ${capture}.stories.tsx",
+    "*.svg": "${capture}.tsx"
   },
   // Customize icons when using the "Material Icon Theme".
   "material-icon-theme.folders.associations": {

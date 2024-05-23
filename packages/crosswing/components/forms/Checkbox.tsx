@@ -1,7 +1,7 @@
 import { HTMLAttributes, SyntheticEvent } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
-import Checkmark from "../../icons/Checkmark.svg?react";
+import { CheckmarkIcon } from "../../icons/Checkmark.js";
 import { Clickable } from "../Clickable.js";
 
 export function Checkbox({
@@ -28,7 +28,7 @@ export function Checkbox({
       {...rest}
     >
       <div className="box">
-        <Checkmark />
+        <CheckmarkIcon />
       </div>
     </StyledCheckbox>
   );
@@ -52,10 +52,11 @@ export const StyledCheckbox = styled(Clickable)`
 
     > svg {
       position: absolute;
-      top: -4px;
-      left: 1px;
-      transform: scale(1.8);
+      top: -5px;
+      left: 2px;
+      transform: scale(1.1);
       pointer-events: none;
+      color: ${colors.turquoise()};
     }
   }
 

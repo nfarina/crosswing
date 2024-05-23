@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes, CSSProperties } from "react";
 import { styled } from "styled-components";
 import { colors } from "../colors/colors.js";
-import DisclosureArrow from "../icons/DisclosureArrow.svg?react";
+import { DisclosureArrowIcon } from "../icons/DisclosureArrow.js";
 import { Clickable } from "./Clickable.js";
 
 export function ExpandButton({
@@ -23,7 +23,7 @@ export function ExpandButton({
   return (
     <StyledExpandButton style={cssProps} {...rest} as={as}>
       <div className="circle" data-transparent={!!transparent}>
-        <DisclosureArrow />
+        <DisclosureArrowIcon />
       </div>
     </StyledExpandButton>
   );

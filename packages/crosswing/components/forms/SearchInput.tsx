@@ -10,8 +10,8 @@ import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
 import { useHotkey } from "../../hooks/useHotkey.js";
 import { useHost } from "../../host/context/HostContext.js";
-import CloseCircle from "../../icons/CloseCircle.svg?react";
-import Search from "../../icons/Search.svg?react";
+import { CloseCircleIcon } from "../../icons/CloseCircle.js";
+import { SearchIcon } from "../../icons/Search.js";
 import { Spinner } from "../Spinner.js";
 
 export function SearchInput({
@@ -129,12 +129,12 @@ export function SearchInput({
         disabled={disabled}
         {...rest}
       />
-      <Search className="icon-search" />
+      <SearchIcon className="icon-search" />
       <div className="spinner">
         <Spinner smaller />
       </div>
       <div className="close" onClick={() => onValueChange?.("", null)}>
-        <CloseCircle />
+        <CloseCircleIcon />
       </div>
     </StyledSearchInput>
   );
@@ -173,17 +173,16 @@ export const StyledSearchInput = styled.div`
   }
 
   > .icon-search {
+    width: 20px;
+    height: 20px;
     position: absolute;
-    left: 5px;
-    top: calc(50% - 12px);
+    left: 7px;
+    top: calc(50% - 9px);
     pointer-events: none;
+    color: ${colors.mediumGray()};
 
-    path {
-      fill: ${colors.mediumGray()};
-
-      @media (prefers-color-scheme: dark) {
-        fill: ${colors.darkGray()};
-      }
+    @media (prefers-color-scheme: dark) {
+      color: ${colors.darkGray()};
     }
   }
 

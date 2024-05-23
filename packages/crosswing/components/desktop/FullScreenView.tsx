@@ -14,8 +14,8 @@ import { fonts } from "../../fonts/fonts.js";
 import { useElementSize } from "../../hooks/useElementSize.js";
 import { useHotkey } from "../../hooks/useHotkey.js";
 import { useSessionStorage } from "../../hooks/useSessionStorage.js";
-import Close from "../../icons/Close.svg?react";
-import FullScreen from "../../icons/FullScreen.svg?react";
+import { CloseIcon } from "../../icons/Close.js";
+import { FullScreenIcon } from "../../icons/FullScreen.js";
 import { ModalContext } from "../../modals/context/ModalContext.js";
 import { Button, StyledButton } from "../Button.js";
 import { ToolbarSpace } from "../toolbar/Toolbar.js";
@@ -210,13 +210,13 @@ export function FullScreenView({
     >
       <FullScreenHeader id="header">
         <div className="title" children={title} />
-        <Button icon={<Close />} onClick={() => setFullScreen(false)} />
+        <Button icon={<CloseIcon />} onClick={() => setFullScreen(false)} />
       </FullScreenHeader>
       <div className="children">{children}</div>
       {!isFullScreen && !disabled && (
         <Button
           className="full-screen-button"
-          icon={<FullScreen />}
+          icon={<FullScreenIcon />}
           onClick={() => {
             setFullScreen(true);
             setButtonHovered(false);

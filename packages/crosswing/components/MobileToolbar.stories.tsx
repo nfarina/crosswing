@@ -1,6 +1,6 @@
 import { action } from "@storybook/addon-actions";
-import Browser from "../icons/Browser.svg?react";
-import Trash from "../icons/Trash.svg?react";
+import { BrowserIcon } from "../icons/Browser.js";
+import { TrashIcon } from "../icons/Trash.js";
 import { CrosswingAppDecorator } from "../storybook.js";
 import {
   MobileToolbar,
@@ -21,12 +21,12 @@ export const Default = () => (
     <NoContent title="Content Area" />
     <MobileToolbar>
       <MobileToolbarButton
-        children={<Browser />}
+        children={<BrowserIcon />}
         onClick={action("onBrowserClick")}
       />
       <MobileToolbarSpace />
       <MobileToolbarButton
-        children={<Trash />}
+        children={<TrashIcon />}
         onClick={action("onTrashClick")}
       />
     </MobileToolbar>

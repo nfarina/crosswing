@@ -8,8 +8,7 @@ import {
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
-import AddSmall from "../../icons/AddSmall.svg?react";
-import DotDotDot from "../../icons/DotDotDot.svg?react";
+import { DotDotDotIcon } from "../../icons/DotDotDot.js";
 import { Button } from "../Button.js";
 import { LinkButton } from "../LinkButton.js";
 import { StyledDateRangeInput } from "../forms/DateRangeInput.js";
@@ -126,19 +125,10 @@ export const ToolbarButton = styled(Button)`
 `;
 
 export const ToolbarMoreButton = styled(ToolbarButton).attrs({
-  icon: <DotDotDot />,
+  icon: <DotDotDotIcon />,
 })`
   width: 36px;
   padding: 1px 0 0 0;
-`;
-
-/** Not currently used, the circular shape breaks the visual flow and the lack of ellipsis makes pressing it feel "scary". */
-export const ToolbarAddButton = styled(ToolbarButton).attrs({
-  icon: <AddSmall />,
-})`
-  width: 30px;
-  border-radius: 100%;
-  padding: 0;
 `;
 
 export const ToolbarSidebarButton = ({

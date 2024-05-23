@@ -1,5 +1,5 @@
 {
-  // See https://go.microsoft.com/fwlink/?LinkId=733558 
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
   // for the documentation about the tasks.json format
   "version": "2.0.0",
   "tasks": [
@@ -7,13 +7,25 @@
       "type": "typescript",
       "tsconfig": "tsconfig.json",
       "option": "watch",
-      "problemMatcher": [
-        "$tsc-watch"
-      ],
+      "problemMatcher": ["$tsc-watch"],
       "runOptions": {
         "runOn": "folderOpen"
       },
       "group": "build"
     },
+    {
+      "label": "generate icons and images",
+      "type": "shell",
+      "options": {
+        "cwd": "${workspaceFolder}/packages/crosswing"
+      },
+      "command": "npm run gen",
+      "group": "build",
+      "presentation": {
+        "reveal": "silent",
+        "panel": "dedicated"
+      },
+      "problemMatcher": []
+    }
   ]
 }

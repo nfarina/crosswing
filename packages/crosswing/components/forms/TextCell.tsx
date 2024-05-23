@@ -2,7 +2,7 @@ import { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
-import DisclosureArrow from "../../icons/DisclosureArrow.svg?react";
+import { DisclosureArrowIcon } from "../../icons/DisclosureArrow.js";
 
 /**
  * A versatile way to display data in a form setting.
@@ -56,7 +56,7 @@ export function TextCell({
       </div>
       {badge && <div className="badge">{badge}</div>}
       {isClickable && !hideDisclosure && (
-        <DisclosureArrow className="disclosure" />
+        <DisclosureArrowIcon className="disclosure" />
       )}
     </StyledTextCell>
   );

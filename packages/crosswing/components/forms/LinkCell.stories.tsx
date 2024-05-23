@@ -1,5 +1,5 @@
 import { action } from "@storybook/addon-actions";
-import Attachment from "../../icons/Attachment.svg?react";
+import { SearchIcon } from "../../icons/Search.js";
 import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import { SeparatorDecorator } from "../SeparatorLayout.js";
@@ -29,7 +29,7 @@ export const WithSubtitle = () => (
 
 export const WithIcon = () => (
   <LinkCell
-    icon={<Attachment />}
+    icon={<SearchIcon />}
     title="Attach a Receipt"
     onClick={action("click")}
   />

@@ -2,8 +2,8 @@ import { ReactNode } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
-import Checkmark from "../../icons/Checkmark.svg?react";
-import Close from "../../icons/Close.svg?react";
+import { CheckmarkIcon } from "../../icons/Checkmark.js";
+import { CloseIcon } from "../../icons/Close.js";
 import { Link } from "../../router/Link.js";
 import { useRouter } from "../../router/context/RouterContext.js";
 import { formatCurrency } from "../../shared/numeric.js";
@@ -74,7 +74,7 @@ export function LinkListCell({
 
 /** A component you can drop in to LinkListCell.right. */
 export const LinkListIconFailed = styled.div.attrs({
-  children: <Close />,
+  children: <CloseIcon />,
 })`
   font-size: 0;
   border-radius: 100%;
@@ -89,7 +89,7 @@ export const LinkListIconFailed = styled.div.attrs({
 
 /** A component you can drop in to LinkListCell.right. */
 export const LinkListIconSucceeded = styled.div.attrs({
-  children: <Checkmark />,
+  children: <CheckmarkIcon />,
 })`
   font-size: 0;
   border-radius: 100%;

@@ -9,7 +9,7 @@ import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
 import { flattenChildren } from "../../hooks/flattenChildren.js";
-import DownArrow from "../../icons/DownArrow.svg?react";
+import { DownArrowIcon } from "../../icons/DownArrow.js";
 
 export interface SelectOptionProps {
   title?: string;
@@ -50,7 +50,7 @@ export function Select({
           </option>
         ))}
       </InnerSelect>
-      {<DownArrow className="arrow-icon" />}
+      {<DownArrowIcon className="arrow-icon" />}
     </StyledSelect>
   );
 }

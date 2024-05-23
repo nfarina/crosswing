@@ -1,8 +1,8 @@
 import { action } from "@storybook/addon-actions";
 import { Meta, StoryFn } from "@storybook/react";
 import { useState } from "react";
-import Close from "../icons/Close.svg?react";
-import Warning from "../icons/Warning.svg?react";
+import { CloseIcon } from "../icons/Close.js";
+import { WarningIcon } from "../icons/Warning.js";
 import { CrosswingAppDecorator } from "../storybook.js";
 import { Button } from "./Button.js";
 
@@ -91,12 +91,12 @@ export const WithSubtitleLarger: Story = () => (
 );
 
 export const IconOnly: Story = () => (
-  <Button icon={<Close />} onClick={action("onClick")} />
+  <Button icon={<CloseIcon />} onClick={action("onClick")} />
 );
 
 export const IconAndText: Story = () => (
   <Button
-    icon={<Warning />}
+    icon={<WarningIcon />}
     title="Error Details"
     onClick={action("onClick")}
   />

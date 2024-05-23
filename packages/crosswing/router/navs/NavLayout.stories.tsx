@@ -4,7 +4,7 @@ import { colors } from "../../colors/colors.js";
 import { Button } from "../../components/Button.js";
 import { fonts } from "../../fonts/fonts.js";
 import { MockHostProvider } from "../../host/mocks/MockHostProvider.js";
-import DotDotDotIcon from "../../icons/DotDotDot.svg?react";
+import { DotDotDotIcon } from "../../icons/DotDotDot.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import { RouterDecorator } from "../storybook/RouterDecorator.js";
 import { NavLayout } from "./NavLayout.js";

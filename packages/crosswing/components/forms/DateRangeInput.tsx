@@ -3,8 +3,8 @@ import { lazy } from "react";
 import { styled } from "styled-components";
 import { fonts } from "../../fonts/fonts.js";
 import { useMatchMedia } from "../../hooks/useMatchMedia.js";
-import DisclosureArrow from "../../icons/DisclosureArrow.svg?react";
-import DownArrow from "../../icons/DownArrow.svg?react";
+import { DisclosureArrowIcon } from "../../icons/DisclosureArrow.js";
+import { DownArrowIcon } from "../../icons/DownArrow.js";
 import { PopupView } from "../../modals/popup/PopupView.js";
 import { usePopup } from "../../modals/popup/usePopup.js";
 import { useSheet } from "../../modals/sheet/useSheet.js";
@@ -104,7 +104,8 @@ export function DateRangeInput({
       data-is-open={!!popup.visible}
       title={
         <>
-          {renderTitle()} {mobileLayout ? <DisclosureArrow /> : <DownArrow />}
+          {renderTitle()}{" "}
+          {mobileLayout ? <DisclosureArrowIcon /> : <DownArrowIcon />}
         </>
       }
       children={

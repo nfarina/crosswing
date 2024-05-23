@@ -2,7 +2,7 @@ import { HTMLAttributes, KeyboardEvent, ReactNode } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
-import DisclosureArrow from "../../icons/DisclosureArrow.svg?react";
+import { DisclosureArrowIcon } from "../../icons/DisclosureArrow.js";
 import { Link } from "../../router/Link.js";
 
 /**
@@ -72,7 +72,7 @@ export function LinkCell({
       </div>
       {badge && <div className="badge">{badge}</div>}
       {isClickable && !hideDisclosure && (
-        <DisclosureArrow className="disclosure" />
+        <DisclosureArrowIcon className="disclosure" />
       )}
     </StyledLinkCell>
   );

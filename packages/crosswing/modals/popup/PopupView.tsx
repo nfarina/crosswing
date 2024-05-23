@@ -116,7 +116,6 @@ export const StyledPopupView = styled.div`
   }
 `;
 
-// Pasted from PopupUpArrow.svg so we can apply CSS styles.
 const PopupUpArrow = (
   <svg
     className="popup-arrow"

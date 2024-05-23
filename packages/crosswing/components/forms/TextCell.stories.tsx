@@ -1,4 +1,4 @@
-import Attachment from "../../icons/Attachment.svg?react";
+import { SearchIcon } from "../../icons/Search.js";
 import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import { SeparatorDecorator } from "../SeparatorLayout.js";
@@ -35,7 +35,7 @@ export const Disabled = () => (
 );
 
 export const WithIcon = () => (
-  <TextCell icon={<Attachment />} action="Attach a Receipt" />
+  <TextCell icon={<SearchIcon />} action="Attach a Receipt" />
 );
 
 export const WithLabel = () => <TextCell label="User" title="Nick Farina" />;

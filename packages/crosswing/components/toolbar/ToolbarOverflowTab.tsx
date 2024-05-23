@@ -10,7 +10,7 @@ import {
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { flattenChildren } from "../../hooks/flattenChildren.js";
-import DownArrow from "../../icons/DownArrow.svg?react";
+import { DownArrowIcon } from "../../icons/DownArrow.js";
 import { usePopup } from "../../modals/popup/usePopup.js";
 import { useRouter } from "../../router/context/RouterContext.js";
 import { PopupMenu, PopupMenuText } from "../PopupMenu.js";
@@ -105,7 +105,7 @@ export function ToolbarOverflowTab({ children }: { children: ReactNode }) {
           className="arrow popup-target"
           onClick={selectedTab ? undefined : onArrowClick}
         >
-          <DownArrow />
+          <DownArrowIcon />
         </div>
       </ToolbarTab>
     </StyledToolbarOverflowTab>

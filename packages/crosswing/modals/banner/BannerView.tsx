@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import { colors, shadows } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
 import { useGesture } from "../../hooks/useGesture.js";
-import Close from "../../icons/Close.svg?react";
+import { CloseIcon } from "../../icons/Close.js";
 import { Link } from "../../router/Link.js";
 
 export function BannerView({
@@ -46,7 +46,7 @@ export function BannerView({
         </div>
       )}
       <div className="close" onClick={onClose}>
-        <Close />
+        <CloseIcon />
       </div>
     </StyledBannerView>
   );
