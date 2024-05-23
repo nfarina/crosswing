@@ -72,10 +72,6 @@ export const StyledTabLink = styled(Link)`
 
   > .icon {
     display: flex;
-
-    > svg * {
-      fill: currentcolor;
-    }
   }
 
   > .text {

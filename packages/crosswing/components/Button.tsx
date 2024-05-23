@@ -71,12 +71,6 @@ export const StyledButton = styled(Clickable)`
     flex-shrink: 0;
   }
 
-  > svg {
-    path {
-      fill: currentColor;
-    }
-  }
-
   > .content {
     max-width: 100%;
     box-sizing: border-box;

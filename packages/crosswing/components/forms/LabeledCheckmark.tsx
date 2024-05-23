@@ -98,9 +98,7 @@ export const StyledLabeledCheckmark = styled.div`
     }
 
     > .checkmark {
-      path {
-        fill: ${colors.mediumGray()};
-      }
+      color: ${colors.mediumGray()};
       opacity: 0.5;
     }
   }

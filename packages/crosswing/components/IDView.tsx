@@ -46,10 +46,6 @@ export const StyledIDView = styled(Clickable)`
     margin-right: 2px;
     width: 16px;
     height: 16px;
-
-    path {
-      fill: currentColor;
-    }
   }
 
   > .text {

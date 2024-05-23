@@ -98,10 +98,7 @@ export const StyledLinkCell = styled(Link)`
   > .icon {
     margin-right: 6px;
     display: flex;
-
-    > svg path {
-      fill: ${colors.text()};
-    }
+    color: ${colors.text()};
   }
 
   > .content {

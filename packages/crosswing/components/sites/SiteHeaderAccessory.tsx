@@ -68,10 +68,7 @@ export const StyledSiteHeaderAccessoryView = styled(Clickable)`
     > svg {
       width: 100%;
       height: 100%;
-
-      * {
-        fill: ${colors.text()};
-      }
+      color: ${colors.text()};
     }
   }
 

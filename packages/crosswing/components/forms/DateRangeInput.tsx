@@ -151,10 +151,6 @@ export const StyledDateRangeInput = styled(Button)`
         transform: translateX(3px);
         /* Turns out this animation is just distracting. */
         /* transition: transform 0.2s; */
-
-        path {
-          fill: currentColor;
-        }
       }
     }
   }

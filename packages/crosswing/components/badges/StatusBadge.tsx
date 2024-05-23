@@ -83,10 +83,6 @@ export const StyledStatusBadge = styled.div`
     width: 20px;
     height: 20px;
     margin-right: 5px;
-
-    > path {
-      fill: currentColor;
-    }
   }
 
   > .children {

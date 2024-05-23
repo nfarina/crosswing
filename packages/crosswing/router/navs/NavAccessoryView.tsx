@@ -73,14 +73,6 @@ export const StyledNavAccessoryView = styled.div`
     padding-right: 10px;
   }
 
-  &[data-icon="true"] {
-    > svg {
-      path {
-        fill: currentcolor;
-      }
-    }
-  }
-
   &[data-disabled="true"] {
     opacity: 0.5;
     pointer-events: none;
@@ -112,14 +104,6 @@ const StyledButton = styled.button`
   &[data-align="right"] {
     justify-content: flex-end;
     padding-right: 10px;
-  }
-
-  &[data-icon="true"] {
-    > svg {
-      path {
-        fill: currentcolor;
-      }
-    }
   }
 
   &[data-disabled="true"] {

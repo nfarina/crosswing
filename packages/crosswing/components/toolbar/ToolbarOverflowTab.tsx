@@ -147,12 +147,6 @@ export const StyledToolbarOverflowTab = styled.div`
       flex-flow: row;
       align-items: center;
       justify-content: center;
-
-      > svg {
-        path {
-          fill: currentColor;
-        }
-      }
     }
   }
 `;

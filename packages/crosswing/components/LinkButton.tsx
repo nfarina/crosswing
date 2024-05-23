@@ -93,12 +93,6 @@ export const StyledLinkButton = styled(Link)`
     flex-shrink: 0;
   }
 
-  > svg {
-    path {
-      fill: currentColor;
-    }
-  }
-
   > .content {
     display: flex;
     flex-flow: column;

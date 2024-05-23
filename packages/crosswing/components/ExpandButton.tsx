@@ -55,9 +55,7 @@ export const StyledExpandButton = styled(Clickable)`
     }
 
     > svg {
-      path {
-        fill: ${colors.text()};
-      }
+      color: ${colors.text()};
     }
   }
 `;

@@ -84,10 +84,7 @@ export const StyledSelect = styled.div`
     top: calc(50%);
     right: 3px;
     transform: translateY(-50%);
-
-    > path {
-      fill: ${colors.text()};
-    }
+    color: ${colors.text()};
   }
 
   &[data-disabled="true"] {

@@ -80,10 +80,7 @@ export const StyledTextCell = styled.div`
   > .icon {
     margin-right: 6px;
     display: flex;
-
-    > svg path {
-      fill: ${colors.text()};
-    }
+    color: ${colors.text()};
   }
 
   > .content {

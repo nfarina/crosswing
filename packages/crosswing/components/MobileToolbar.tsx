@@ -32,10 +32,7 @@ export const MobileToolbarButton = styled(Clickable)`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  > svg path {
-    fill: ${colors.text()};
-  }
+  color: ${colors.text()};
 `;
 export const MobileToolbarSpace = styled.div``;
 

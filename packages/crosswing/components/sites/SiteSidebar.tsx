@@ -248,13 +248,10 @@ export const StyledSiteSidebar = styled.div`
         height: 20px;
         margin-left: -2.5px;
         margin-right: 6.5px;
+        color: ${colors.text({ alpha: 0.5 })};
 
-        * {
-          fill: ${colors.text({ alpha: 0.5 })};
-
-          @media (prefers-color-scheme: dark) {
-            fill: ${colors.text({ alpha: 0.35 })};
-          }
+        @media (prefers-color-scheme: dark) {
+          color: ${colors.text({ alpha: 0.35 })};
         }
       }
 
@@ -280,9 +277,7 @@ export const StyledSiteSidebar = styled.div`
 
       &[data-selected="true"] {
         > svg {
-          * {
-            fill: var(--tint-color-light);
-          }
+          color: var(--tint-color-light);
         }
 
         > .title {

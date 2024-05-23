@@ -69,8 +69,5 @@ const GlobeIcon = (props: SVGProps<SVGSVGElement>) => (
 const Logo = styled(GlobeIcon)`
   width: 50px;
   height: 50px;
-
-  path {
-    fill: ${colors.turquoise()};
-  }
+  color: ${colors.turquoise()};
 `;
