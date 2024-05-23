@@ -63,11 +63,12 @@ export const StyledLabeledCheckmark = styled.div`
   }
 
   > .checkmark {
-    width: 33px;
-    height: 33px;
+    width: 22px;
+    height: 22px;
     flex-shrink: 0;
     margin-right: 2px;
     visibility: hidden;
+    color: ${colors.turquoise()};
   }
 
   &[data-checked="true"] {

@@ -1,3 +1,4 @@
+import { ReactElement } from "react";
 import { styled } from "styled-components";
 import { BrowserSimulator } from "../../router/storybook/RouterDecorator.js";
 import { capitalize } from "../../shared/strings.js";
@@ -5,7 +6,12 @@ import { CrosswingAppDecorator } from "../../storybook.js";
 import { LinkButton } from "../LinkButton.js";
 import CSSColors from "./CSSColors.json";
 import { LinkList, StyledLinkList } from "./LinkList.js";
-import { LinkListCell } from "./LinkListCell.js";
+import {
+  LinkListCell,
+  LinkListCellBadge,
+  LinkListIconFailed,
+  LinkListIconSucceeded,
+} from "./LinkListCell.js";
 import { LinkListHeading } from "./LinkListHeading.js";
 
 export default {
@@ -27,6 +33,40 @@ export const Normal = () => {
       <StyledList>
         <LinkButton to="/">Deselect</LinkButton>
         <LinkList items={Colors} renderItem={renderColor} />
+      </StyledList>
+    </BrowserSimulator>
+  );
+};
+
+export const Ornaments = () => {
+  const elements: Record<string, ReactElement> = {
+    normal: <LinkListCell to="normal" title="Normal" />,
+    failed: (
+      <LinkListCell to="failed" title="Failed" right={<LinkListIconFailed />} />
+    ),
+    succeeded: (
+      <LinkListCell
+        to="succeeded"
+        title="Succeeded"
+        right={<LinkListIconSucceeded />}
+      />
+    ),
+    badged: (
+      <LinkListCell
+        to="badged"
+        title="Badged"
+        badge={<LinkListCellBadge children="Admin" />}
+      />
+    ),
+  };
+
+  const items = Object.keys(elements).map((id) => ({ id }));
+
+  return (
+    <BrowserSimulator>
+      <StyledList>
+        <LinkButton to="/">Deselect</LinkButton>
+        <LinkList items={items} renderItem={(item) => elements[item.id]} />
       </StyledList>
     </BrowserSimulator>
   );

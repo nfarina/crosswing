@@ -111,9 +111,6 @@ const StyledBannerView = styled.div`
     align-items: center;
     justify-content: center;
     cursor: pointer;
-
-    > svg > path {
-      fill: ${colors.text()};
-    }
+    color: ${colors.text()};
   }
 `;

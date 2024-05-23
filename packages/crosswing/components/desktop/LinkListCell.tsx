@@ -81,10 +81,7 @@ export const LinkListIconFailed = styled.div.attrs({
   width: 24px;
   height: 24px;
   background: ${colors.red()};
-
-  path {
-    fill: ${colors.red({ darken: 0.4 })};
-  }
+  color: ${colors.red({ darken: 0.4 })};
 `;
 
 /** A component you can drop in to LinkListCell.right. */
@@ -96,6 +93,11 @@ export const LinkListIconSucceeded = styled.div.attrs({
   width: 24px;
   height: 24px;
   background: ${colors.darkGreen()};
+
+  > svg {
+    transform: scale(0.62);
+    color: ${colors.turquoise()};
+  }
 `;
 
 /** A component you can drop in to LinkListCell.badge. */
