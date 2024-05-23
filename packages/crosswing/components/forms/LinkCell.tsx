@@ -148,7 +148,7 @@ export const StyledLinkCell = styled(Link)`
   > .disclosure {
     flex-shrink: 0;
     margin-right: 2px;
-    color: ${colors.text()};
+    color: ${colors.mediumGray()};
   }
 
   &[data-ellipsize="true"] {

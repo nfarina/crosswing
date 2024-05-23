@@ -141,6 +141,7 @@ export const StyledTextCell = styled.div`
   > .disclosure {
     flex-shrink: 0;
     margin-right: 2px;
+    color: ${colors.mediumGray()};
   }
 
   &[data-ellipsize="true"] {

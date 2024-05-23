@@ -177,7 +177,7 @@ export const StyledSearchInput = styled.div`
     height: 20px;
     position: absolute;
     left: 7px;
-    top: calc(50% - 9px);
+    top: calc(50% - 9.5px);
     pointer-events: none;
     color: ${colors.mediumGray()};
 
