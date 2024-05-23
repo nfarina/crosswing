@@ -21,6 +21,20 @@ export const Default: Story = () => (
   </StyledFileInput>
 );
 
+export const Multiple: Story = () => (
+  <StyledFileInput
+    multiple
+    onFileListSelect={(list) =>
+      action("onFileListSelect")(Array.from(list).map((f) => f.name))
+    }
+  >
+    <TextCell
+      title="Click to Upload (Multiple)"
+      subtitle="Drag & Drop Supported"
+    />
+  </StyledFileInput>
+);
+
 // Customize FileInput to change background color on hover.
 const StyledFileInput = styled(FileInput)`
   &[data-dragging-over="true"] {

@@ -11,6 +11,8 @@ export function FileInput({
   accept,
   onDragOverChange,
   onFileSelect,
+  onFileListSelect,
+  multiple,
   disabled,
   children,
   ...rest
@@ -18,6 +20,8 @@ export function FileInput({
   accept?: string;
   onDragOverChange?: (over: boolean) => void;
   onFileSelect?: (file: File) => void;
+  onFileListSelect?: (list: FileList) => void;
+  multiple?: boolean;
   disabled?: boolean;
   children?: ReactNode;
 } & HTMLAttributes<HTMLDivElement>) {
@@ -50,10 +54,18 @@ export function FileInput({
 
   function onFileChange(e: ChangeEvent<HTMLInputElement>) {
     const input = e.target;
-    const file = input.files?.[0];
-    if (!file) return;
 
-    onFileSelect?.(file);
+    if (multiple) {
+      const files = input.files;
+      if (!files) return;
+
+      onFileListSelect?.(files);
+    } else {
+      const file = input.files?.[0];
+      if (!file) return;
+
+      onFileSelect?.(file);
+    }
 
     // Clear the input in case you want to select the exact same file again.
     input.value = ""; // clears the "files" property.
@@ -69,7 +81,13 @@ export function FileInput({
       {...rest}
     >
       {children}
-      <input type="file" size={0} onChange={onFileChange} accept={accept} />
+      <input
+        type="file"
+        size={0}
+        onChange={onFileChange}
+        multiple={multiple}
+        accept={accept}
+      />
     </StyledFileInput>
   );
 }
