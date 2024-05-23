@@ -40,7 +40,7 @@
     "./host/util/openExternalLink": "./host/util/openExternalLink.js",
     "./host/util/useClipboard": "./host/util/useClipboard.js",
     "./host/util/useAutoStatusBar": "./host/util/useAutoStatusBar.js",
-    "./icons/*": "./icons/*",
+    "./icons/*": "./icons/*.js",
     "./hooks/*": "./hooks/*.js",
     "./colors": "./colors/colors.js",
     "./app": "./app.js",

@@ -9,7 +9,7 @@ import { useProgressAlert } from "./useProgressAlert.js";
 export default {
   component: useProgressAlert,
   decorators: [CrosswingAppDecorator({ layout: "mobile" }), ModalDecorator],
-  parameters: { layout: "centered" },
+  parameters: { layout: "centered", chromatic: { disableSnapshot: true } }, // Animations make it hard to snapshot.
 };
 
 export const Indeterminate = () => {
