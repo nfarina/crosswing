@@ -7,6 +7,7 @@ import {
   useCallback,
   useLayoutEffect,
   useRef,
+  useState,
 } from "react";
 import { keyframes, styled } from "styled-components";
 import { useHotkey } from "../../hooks/useHotkey.js";
@@ -37,10 +38,10 @@ export interface Popup<T extends any[] = []> {
 export type PopupTarget = MutableRefObject<HTMLElement | null>;
 
 /**
- * Desired placement of the Popup. Defaults to "auto" which places the popup
+ * Desired placement of the Popup. Defaults to "platform" which places the popup
  * below the target on the web, and above the target on mobile.
  */
-export type PopupPlacement = "auto" | "above" | "below";
+export type PopupPlacement = "platform" | "auto" | "above" | "below";
 
 export interface PopupOptions {
   placement?: PopupPlacement;
@@ -65,14 +66,14 @@ export interface PopupOptions {
 
 /** Props given to the element returned from usePopup(). */
 export type PopupChildProps = {
-  placement: Omit<PopupPlacement, "auto">;
+  placement: Omit<PopupPlacement, "auto" | "platform">;
   onClose: () => void;
 };
 
 export function usePopup<T extends any[]>(
   popup: (...args: T) => ReactNode,
   {
-    placement = "auto",
+    placement = "platform",
     clickOutsideToClose = true,
     autoReposition = false,
     hideBackdrop = false,
@@ -162,7 +163,9 @@ export const PopupContainer = ({
   hideBackdrop?: boolean;
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const { container } = useHost();
+  const [resolvedPlacement, setResolvedPlacement] =
+    useState<Omit<PopupPlacement, "platform" | "auto">>("below");
+  const { container: hostContainer } = useHost();
 
   useClickOutsideToClose(
     () => clickOutsideToClose && onClose(),
@@ -183,7 +186,7 @@ export const PopupContainer = ({
 
     if (autoReposition) {
       // Start a timer to position the popup every 100ms.
-      const intervalId = setInterval(positionPopup, 100);
+      const intervalId = setInterval(() => positionPopupRef.current(), 100);
       return () => clearInterval(intervalId);
     }
   }, [positionPopup]);
@@ -223,15 +226,6 @@ export const PopupContainer = ({
     containerRef.current,
     containerRef.current?.children[1]?.children[0],
   ]);
-
-  const isWeb = container === "web";
-
-  // Default is to pop up above your finger on mobile.
-  const autoPlacement: PopupPlacement = isWeb ? "below" : "above";
-
-  // Go with auto unless you told us otherwise.
-  const resolvedPlacement: Omit<PopupPlacement, "auto"> =
-    placement === "auto" ? autoPlacement : placement;
 
   function positionPopup() {
     const container = containerRef.current;
@@ -289,7 +283,26 @@ export const PopupContainer = ({
       style.setProperty("--popup-left", popupOffset + "px");
     }
 
-    if (resolvedPlacement === "below") {
+    const computedPlacement = (() => {
+      if (placement === "platform") {
+        // Default is to pop up above your finger on mobile.
+        return hostContainer === "web" ? "below" : "above";
+      } else if (placement === "auto") {
+        // Where do we have the most vertical space?
+        const upperSpace = targetRect.top - containerRect.y;
+        const lowerSpace = containerRect.height - targetRect.bottom;
+        return upperSpace > lowerSpace ? "above" : "below";
+      } else {
+        return placement;
+      }
+    })();
+
+    // If the placement has changed, update the state.
+    if (resolvedPlacement !== computedPlacement) {
+      setResolvedPlacement(computedPlacement);
+    }
+
+    if (computedPlacement === "below") {
       if (style.getPropertyValue("--popup-placement") !== "below") {
         style.setProperty("--popup-placement", "below");
         style.bottom = "0";
