@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { useRouter } from "../../router/context/RouterContext.js";
 
-export function MasterDetail({
+export function ListLayout({
   fixedWidth = 200,
   fixedSide = "left",
   children,
@@ -15,34 +15,34 @@ export function MasterDetail({
   const { location } = useRouter();
 
   // If the location at this point in the hierarchy is "fully claimed"
-  // then we assume that we should be showing the master list. Essentially,
-  // we are assuming that if you *had* selected something in the master list
-  // the resulted in showing a detail view, then the location *at this point
+  // then we assume that we should be showing the list. Essentially,
+  // we are assuming that if you *had* selected something in the list
+  // the resulted in showing a content view, then the location *at this point
   // in the hierarchy* would have more stuff after it to be "claimed" by the
-  // detail pane.
-  const showMasterOnly = !location.unclaimedHref();
+  // content pane.
+  const showListOnly = !location.unclaimedHref();
 
   const cssProps = {
     "--fixed-width": fixedWidth + "px",
   } as CSSProperties;
 
   return (
-    <StyledMasterDetail
+    <StyledListLayout
       style={cssProps}
       data-fixed-side={fixedSide}
-      data-show-master-only={!!showMasterOnly}
+      data-show-list-only={!!showListOnly}
       children={children}
     />
   );
 }
 
-export const StyledMasterDetail = styled.div`
+export const StyledListLayout = styled.div`
   display: flex;
   flex-flow: row;
   position: relative;
 
   &[data-fixed-side="left"] {
-    /* Master */
+    /* List */
     > *:nth-child(1) {
       flex-shrink: 0;
       width: var(--fixed-width);
@@ -50,7 +50,7 @@ export const StyledMasterDetail = styled.div`
       z-index: 1;
     }
 
-    /* Detail */
+    /* Content */
     > *:nth-child(2) {
       width: 0;
       flex-grow: 1;
@@ -59,14 +59,14 @@ export const StyledMasterDetail = styled.div`
   }
 
   &[data-fixed-side="right"] {
-    /* Master */
+    /* List */
     > *:nth-child(1) {
       width: 0;
       flex-grow: 1;
       z-index: 0;
     }
 
-    /* Detail */
+    /* Content */
     > *:nth-child(2) {
       flex-shrink: 0;
       width: var(--fixed-width);
@@ -80,29 +80,29 @@ export const StyledMasterDetail = styled.div`
   @media (max-width: 950px) {
     /* If we're short on horizontal space, then we want to only show one pane
        at a time. We use the current location to determine if we should be
-       showing the "master" or "detail" pane. Note that the detail pane may
-       itself be another <MasterDetail>! */
+       showing the "list" or "content" pane. Note that the content pane may
+       itself be another <ListLayout>! */
 
-    &[data-show-master-only="true"] {
-      /* Master */
+    &[data-show-list-only="true"] {
+      /* List */
       > *:nth-child(1) {
         width: 0;
         flex-grow: 1;
       }
 
-      /* Detail */
+      /* Content */
       > *:nth-child(2) {
         display: none;
       }
     }
 
-    &[data-show-master-only="false"] {
-      /* Master */
+    &[data-show-list-only="false"] {
+      /* List */
       > *:nth-child(1) {
         display: none;
       }
 
-      /* Detail */
+      /* Content */
       > *:nth-child(2) {
         /* Make it grow to fill the viewport even if fixedSide === "right" */
         flex-grow: 1;

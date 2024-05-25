@@ -22,7 +22,7 @@ export const DesktopFormLayout = styled.div`
     background: ${colors.textBackground()};
     box-shadow: 1px 0 0 ${colors.separator()};
 
-    /* If <MasterDetail> collapses, then don't clip our width. */
+    /* If <ListLayout> collapses, then don't clip our width. */
     @media (max-width: 950px) {
       max-width: unset;
     }

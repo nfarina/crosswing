@@ -86,36 +86,43 @@ export const StyledToolbarSpace = styled.div``;
 
 export const ToolbarText = styled.div`
   color: ${colors.text()};
-  font: ${fonts.display({ size: 15 })};
+  font: ${fonts.displayMedium({ size: 15 })};
 `;
+
+export const toolbarShadows = {
+  control: () => `inset 0 0 0 1px ${colors.darkGreen({ alpha: 0.2 })}`,
+  controlDark: () => `inset 0 0 0 1px ${colors.white({ alpha: 0.15 })}`,
+};
 
 export const ToolbarLinkButton = styled(LinkButton)`
   background: ${colors.extraExtraLightGray()};
-  box-shadow: inset 0 0 0 1px ${colors.mediumGray()};
+  box-shadow: ${toolbarShadows.control()};
   box-sizing: border-box;
   min-height: 30px;
   padding: 3px 9px;
   color: ${colors.text()};
-  font: ${fonts.display({ size: 15, line: "1.5" })};
+  font: ${fonts.displayMedium({ size: 15, line: "1.5" })};
 
   @media (prefers-color-scheme: dark) {
-    background: ${colors.extraExtraExtraDarkGray()};
+    background: ${colors.extraExtraDarkGray()};
     color: ${colors.lightGray()};
+    box-shadow: ${toolbarShadows.controlDark()};
   }
 `;
 
 export const ToolbarButton = styled(Button)`
   background: ${colors.extraExtraLightGray()};
-  box-shadow: inset 0 0 0 1px ${colors.mediumGray()};
+  box-shadow: ${toolbarShadows.control()};
   box-sizing: border-box;
   min-height: 30px;
   padding: 3px 9px;
   color: ${colors.text()};
-  font: ${fonts.display({ size: 15, line: "1.5" })};
+  font: ${fonts.displayMedium({ size: 15, line: "1.5" })};
 
   @media (prefers-color-scheme: dark) {
-    background: ${colors.extraExtraExtraDarkGray()};
+    background: ${colors.extraExtraDarkGray()};
     color: ${colors.lightGray()};
+    box-shadow: ${toolbarShadows.controlDark()};
   }
 
   &[data-primary="true"] {
@@ -176,8 +183,12 @@ export const ToolbarSearch = styled(SearchInput)`
 
   > input {
     border: none;
-    box-shadow: inset 0 0 0 1px ${colors.mediumGray()};
+    box-shadow: ${toolbarShadows.control()};
     border-radius: 6px;
+
+    @media (prefers-color-scheme: dark) {
+      box-shadow: ${toolbarShadows.controlDark()};
+    }
   }
 `;
 
@@ -188,16 +199,17 @@ export const ToolbarFlexSearch = styled(ToolbarSearch)`
 export const ToolbarSelect = styled(Select)`
   select {
     background: ${colors.extraExtraLightGray()};
-    box-shadow: inset 0 0 0 1px ${colors.mediumGray()};
+    box-shadow: ${toolbarShadows.control()};
     box-sizing: border-box;
     height: 30px;
     padding-top: 4px;
     padding-bottom: 4px;
-    font: ${fonts.display({ size: 15, line: "1.5" })};
+    font: ${fonts.displayMedium({ size: 15, line: "1.5" })};
 
     @media (prefers-color-scheme: dark) {
-      background: ${colors.extraExtraExtraDarkGray()};
+      background: ${colors.extraExtraDarkGray()};
       color: ${colors.lightGray()};
+      box-shadow: ${toolbarShadows.controlDark()};
     }
   }
 `;
@@ -278,8 +290,12 @@ export const StyledToolbar = styled.div`
     height: 30px;
     border: none;
     background: none;
-    box-shadow: inset 0 0 0 1px ${colors.mediumGray()};
+    box-shadow: ${toolbarShadows.control()};
     border-radius: 6px;
+
+    @media (prefers-color-scheme: dark) {
+      box-shadow: ${toolbarShadows.controlDark()};
+    }
   }
 
   > ${StyledToolbarIDView} {

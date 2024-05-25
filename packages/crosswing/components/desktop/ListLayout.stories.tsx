@@ -2,35 +2,35 @@ import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
-import { MasterDetail } from "./MasterDetail.js";
+import { ListLayout } from "./ListLayout.js";
 
 export default {
-  component: MasterDetail,
+  component: ListLayout,
   decorators: [CrosswingAppDecorator({ layout: "fullscreen" })],
   parameters: { layout: "fullscreen" },
 };
 
 export const Default = () => (
-  <MasterDetail>
-    <Master>List of Stuff</Master>
-    <Detail>Details of said stuff</Detail>
-  </MasterDetail>
+  <ListLayout>
+    <List>List of Stuff</List>
+    <Content>Contents of said stuff</Content>
+  </ListLayout>
 );
 
-const Master = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: ${colors.textBackgroundPanel()};
-  color: ${colors.text()};
-  font: ${fonts.display({ size: 15 })};
-`;
-
-const Detail = styled.div`
+const List = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   background: ${colors.textBackground()};
+  color: ${colors.text()};
+  font: ${fonts.display({ size: 15 })};
+`;
+
+const Content = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${colors.textBackgroundPanel()};
   color: ${colors.text()};
   font: ${fonts.display({ size: 15 })};
 `;

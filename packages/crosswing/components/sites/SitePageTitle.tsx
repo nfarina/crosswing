@@ -225,7 +225,7 @@ export const StyledPageTitle = styled.div`
     display: none;
   }
 
-  /* If <MasterDetail> has collapsed, we want to use a mobile breadcrumb
+  /* If <ListLayout> has collapsed, we want to use a mobile breadcrumb
      system that mimics <Navs>. */
   @media (max-width: 950px) {
     > ${DesktopPageTitle} {
