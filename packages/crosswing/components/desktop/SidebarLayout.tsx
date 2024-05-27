@@ -22,7 +22,7 @@ export function SidebarLayout({
   restorationKey,
   children,
   ...rest
-}: {
+}: HTMLAttributes<HTMLDivElement> & {
   /** The "natural" (and default) width of the sidebar. */
   sidebarDefaultWidth?: number;
   /** The minimum width of the sidebar. */
@@ -40,11 +40,11 @@ export function SidebarLayout({
    * component function, which we'll access the `name` property of.
    */
   restorationKey: Function;
-} & HTMLAttributes<HTMLDivElement>) {
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const { getInsertionRef } = useToolbar();
 
-  // Persist the fullscreen status across window reloads.
+  // Persist the sidebar width across window reloads.
   const [initialSidebarWidth] = useLocalStorage(
     `SidebarLayout:${restorationKey.name}:initialSidebarWidth`,
     sidebarDefaultWidth,

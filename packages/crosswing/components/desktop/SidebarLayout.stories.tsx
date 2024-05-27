@@ -30,7 +30,7 @@ export const Default = () => {
       contentMinWidth={400}
       sidebarVisible={sidebarVisible}
       onSidebarVisibleChange={setSidebarVisible}
-      restorationKey={() => "defaultSidebar"}
+      restorationKey={Default}
     >
       <Content>Contents of the main area</Content>
       <Sidebar>Sidebar content here</Sidebar>

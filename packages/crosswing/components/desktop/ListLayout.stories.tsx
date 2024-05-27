@@ -1,17 +1,21 @@
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
+import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import { ListLayout } from "./ListLayout.js";
 
 export default {
   component: ListLayout,
-  decorators: [CrosswingAppDecorator({ layout: "fullscreen" })],
+  decorators: [
+    RouterDecorator,
+    CrosswingAppDecorator({ layout: "fullscreen" }),
+  ],
   parameters: { layout: "fullscreen" },
 };
 
 export const Default = () => (
-  <ListLayout>
+  <ListLayout restorationKey={Default}>
     <List>List of Stuff</List>
     <Content>Contents of said stuff</Content>
   </ListLayout>
