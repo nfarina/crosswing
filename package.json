@@ -21,7 +21,8 @@
     "typecheck": "tsc",
     "storybook": "storybook dev --ci -p 2702",
     "build-storybook": "storybook build",
-    "clean:node_modules": "rm -rf node_modules packages/*/node_modules"
+    "clean:node_modules": "rm -rf node_modules packages/*/node_modules",
+    "chromatic": "npx chromatic --project-token chpt_432b79370525d1b --only-changed"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^8.1.1",
