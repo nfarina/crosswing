@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { colors } from "../../colors/colors";
 import { fonts } from "../../fonts/fonts";
-import { ModalDecorator } from "../../modals/storybook/ModalDecorator";
-import { RouterDecorator } from "../../router/storybook/RouterDecorator";
-import { CrosswingAppDecorator } from "../../storybook";
-import { FullScreenView, useFullScreen } from "./FullScreenView";
+import { ModalDecorator } from "../../modals/storybook/decorators.js";
+import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
+import { CrosswingAppDecorator } from "../../storybook.js";
+import { FullScreenView, useFullScreen } from "./FullScreenView.js";
 
 export default {
   component: FullScreenView,

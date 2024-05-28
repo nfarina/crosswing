@@ -1,7 +1,7 @@
 import { action } from "@storybook/addon-actions";
 import { useAsyncTask } from "../hooks/useAsyncTask.js";
 import { useErrorAlert } from "../modals/alert/useErrorAlert.js";
-import { ModalDecorator } from "../modals/storybook/ModalDecorator.js";
+import { ModalDecorator } from "../modals/storybook/decorators.js";
 import { wait } from "../shared/wait.js";
 import { CrosswingAppDecorator } from "../storybook.js";
 import { useProgressAlert } from "./useProgressAlert.js";

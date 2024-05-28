@@ -2,7 +2,7 @@ import { action } from "@storybook/addon-actions";
 import { Meta, StoryObj } from "@storybook/react";
 import { styled } from "styled-components";
 import { usePopup } from "../modals/popup/usePopup.js";
-import { ModalDecorator } from "../modals/storybook/ModalDecorator.js";
+import { ModalDecorator } from "../modals/storybook/decorators.js";
 import { RouterDecorator } from "../router/storybook/RouterDecorator.js";
 import { CrosswingAppDecorator } from "../storybook.js";
 import { Button } from "./Button.js";

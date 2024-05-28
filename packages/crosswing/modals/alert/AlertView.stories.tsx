@@ -6,25 +6,17 @@ import { fonts } from "../../fonts/fonts.js";
 import { useAsyncTask } from "../../hooks/useAsyncTask.js";
 import { wait } from "../../shared/wait.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
-import { DialogContainer } from "../dialog/useDialog.js";
+import { DialogDecorator } from "../storybook/decorators.js";
 import { AlertView } from "./AlertView.js";
 
 export default {
   component: AlertView,
   decorators: [
     CrosswingAppDecorator({ layout: "fullscreen" }),
-    DialogContainerDecorator,
+    DialogDecorator,
   ],
   parameters: { layout: "fullscreen" },
 } satisfies Meta<typeof AlertView>;
-
-function DialogContainerDecorator(Story: () => any) {
-  return (
-    <DialogContainer onClose={action("close")}>
-      <Story />
-    </DialogContainer>
-  );
-}
 
 export const ShortText = () => (
   <AlertView

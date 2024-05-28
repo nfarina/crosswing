@@ -3,11 +3,11 @@ import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
-import { ModalDecorator } from "../storybook/ModalDecorator.js";
 import {
   ModalStoryButton,
   ModalStoryButtons,
 } from "../storybook/ModalStoryButtons.js";
+import { ModalDecorator } from "../storybook/decorators.js";
 import { useDialog } from "./useDialog.js";
 
 export default {

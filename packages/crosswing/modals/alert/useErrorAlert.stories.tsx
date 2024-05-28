@@ -1,10 +1,10 @@
 import { ErrorObj } from "../../components/ErrorView.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
-import { ModalDecorator } from "../storybook/ModalDecorator.js";
 import {
   ModalStoryButton,
   ModalStoryButtons,
 } from "../storybook/ModalStoryButtons.js";
+import { ModalDecorator } from "../storybook/decorators.js";
 import { useErrorAlert } from "./useErrorAlert.js";
 
 export default {

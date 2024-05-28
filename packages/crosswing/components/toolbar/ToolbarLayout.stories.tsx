@@ -6,7 +6,7 @@ import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { useAsyncTask } from "../../hooks/useAsyncTask.js";
 import { ModalContextProvider } from "../../modals/context/ModalContextProvider.js";
-import { ModalDecorator } from "../../modals/storybook/ModalDecorator.js";
+import { ModalDecorator } from "../../modals/storybook/decorators.js";
 import {
   BrowserSimulator,
   RouterDecorator,

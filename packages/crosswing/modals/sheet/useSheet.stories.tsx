@@ -5,11 +5,11 @@ import { NavLayout } from "../../router/navs/NavLayout.js";
 import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import { ModalContextProvider } from "../context/ModalContextProvider.js";
-import { ModalDecorator } from "../storybook/ModalDecorator.js";
 import {
   ModalStoryButton,
   ModalStoryButtons,
 } from "../storybook/ModalStoryButtons.js";
+import { ModalDecorator } from "../storybook/decorators.js";
 import { useSheet } from "./useSheet.js";
 
 export default {

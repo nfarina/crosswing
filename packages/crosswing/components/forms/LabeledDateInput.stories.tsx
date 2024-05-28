@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/react";
 import { useState } from "react";
-import { ModalDecorator } from "../../modals/storybook/ModalDecorator.js";
+import { ModalDecorator } from "../../modals/storybook/decorators.js";
 import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import { SeparatorDecorator } from "../SeparatorLayout.js";

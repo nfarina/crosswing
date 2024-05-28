@@ -1,11 +1,11 @@
 import { action } from "@storybook/addon-actions";
 import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
-import { ModalDecorator } from "../storybook/ModalDecorator.js";
 import {
   ModalStoryButton,
   ModalStoryButtons,
 } from "../storybook/ModalStoryButtons.js";
+import { ModalDecorator } from "../storybook/decorators.js";
 import { useActions } from "./useActions.js";
 
 export default {

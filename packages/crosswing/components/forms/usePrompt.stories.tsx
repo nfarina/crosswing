@@ -1,7 +1,7 @@
 import { action } from "@storybook/addon-actions";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
-import { ModalDecorator } from "../../modals/storybook/ModalDecorator.js";
+import { ModalDecorator } from "../../modals/storybook/decorators.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import { Button } from "../Button.js";
 import { urlTransformer } from "../transformers/urlTransformer.js";

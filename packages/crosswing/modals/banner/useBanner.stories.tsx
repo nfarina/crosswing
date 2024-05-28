@@ -2,11 +2,11 @@ import { colors } from "../../colors/colors.js";
 import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import { useAlert } from "../alert/useAlert.js";
-import { ModalDecorator } from "../storybook/ModalDecorator.js";
 import {
   ModalStoryButton,
   ModalStoryButtons,
 } from "../storybook/ModalStoryButtons.js";
+import { ModalDecorator } from "../storybook/decorators.js";
 import { useBanner } from "./useBanner.js";
 
 export default {

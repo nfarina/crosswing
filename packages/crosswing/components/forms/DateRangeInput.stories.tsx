@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { styled } from "styled-components";
-import { ModalDecorator } from "../../modals/storybook/ModalDecorator.js";
+import { ModalDecorator } from "../../modals/storybook/decorators.js";
 import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import { DateRange } from "./DateRange.js";

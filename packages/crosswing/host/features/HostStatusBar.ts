@@ -1,4 +1,4 @@
-import { useHost } from "../context/HostContext";
+import { useHost } from "../context/HostContext.js";
 
 export function useHostStatusBar(): HostStatusBar | null {
   const { supportsLightStatusBar, setLightStatusBar } = useHost();
