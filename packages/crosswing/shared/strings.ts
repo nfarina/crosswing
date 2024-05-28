@@ -46,6 +46,21 @@ export function makePosessive(s: string): string {
   }
 }
 
+/**
+ * For when you want to show a number of items while using the singular
+ * form of the item when there is only one.
+ */
+export function pluralize(
+  num: number,
+  units: string | [singular: string, plural: string],
+) {
+  const rounded = Math.floor(num);
+  const [singular, plural] = Array.isArray(units)
+    ? units
+    : [units.replace(/s$/, ""), units];
+  return rounded === 1 ? `${rounded} ${singular}` : `${rounded} ${plural}`;
+}
+
 export function joinWith(
   items: string[],
   { trailing, quotes }: { trailing: string; quotes?: boolean | string },

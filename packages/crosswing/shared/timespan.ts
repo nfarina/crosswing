@@ -1,3 +1,5 @@
+import { pluralize } from "./strings.js";
+
 //
 // Just some functions to make working with time spans easier and more concise.
 //
@@ -76,11 +78,6 @@ export function Weeks(
  * duration, like "36 minutes", "2 hours", "1 day", "2 years".
  */
 export function formatTimeSpan(ms: number): string {
-  const pluralize = (num: number, unit: string) => {
-    const rounded = Math.floor(num);
-    return rounded === 1 ? `${rounded} ${unit}` : `${rounded} ${unit}s`;
-  };
-
   const seconds = ms / 1000;
   const minutes = seconds / 60;
   const hours = minutes / 60;
@@ -90,26 +87,26 @@ export function formatTimeSpan(ms: number): string {
   // We generally work with time spans that are a whole number of units.
 
   if (weeks >= 1 && weeks === Math.round(weeks)) {
-    return pluralize(weeks, "week");
+    return pluralize(weeks, "weeks");
   }
 
   if (days >= 1 && days === Math.round(days)) {
-    return pluralize(days, "day");
+    return pluralize(days, "days");
   }
 
   if (hours >= 1 && hours === Math.round(hours)) {
-    return pluralize(hours, "hour");
+    return pluralize(hours, "hours");
   }
 
   if (minutes >= 1 && minutes === Math.round(minutes)) {
-    return pluralize(minutes, "minute");
+    return pluralize(minutes, "minutes");
   }
 
   if (seconds >= 1 && seconds === Math.round(seconds)) {
-    return pluralize(seconds, "second");
+    return pluralize(seconds, "seconds");
   }
 
   // Maybe at this point we do an "about XYZ days" type thing?
 
-  return pluralize(ms, "millisecond");
+  return pluralize(ms, "milliseconds");
 }

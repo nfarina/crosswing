@@ -82,6 +82,7 @@ export const StyledProgressView = styled.div`
 
   > .container {
     position: relative;
+    display: flex; /* "block" will allow font size to introduce unwanted padding. */
 
     > ${StyledDonut}:nth-child(2) {
       position: absolute;
