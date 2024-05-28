@@ -221,7 +221,7 @@ export const StyledListLayout = styled.div`
   }
 
   /* Mobile layout */
-  @media (max-width: 95px) {
+  @media (max-width: 950px) {
     &[data-show-list-only="true"] {
       /* List */
       > *:nth-child(1) {
