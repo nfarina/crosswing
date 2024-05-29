@@ -13,6 +13,11 @@ import { useToolbar } from "../toolbar/ToolbarContext.js";
 
 export const SidebarToggleInsertionPoint = "SidebarToggle";
 
+// The maximum sidebar width is the width of the container minus a bit
+// (so you can still drag it smaller in case it buts up against a ListLayout
+// which is also draggable!).
+const GUTTER_WIDTH = 25;
+
 export function SidebarLayout({
   sidebarDefaultWidth = 275,
   sidebarMinWidth = 275,
@@ -72,6 +77,14 @@ export function SidebarLayout({
       container.style.setProperty("--sidebar-width", sidebarWidth + "px");
     }
 
+    // Enforce the maximum sidebar width.
+    const sidebarMaxWidth = Math.max(container.clientWidth - GUTTER_WIDTH, 0);
+
+    if (sidebarWidth > sidebarMaxWidth) {
+      sidebarWidth = sidebarMaxWidth;
+      container.style.setProperty("--sidebar-width", sidebarWidth + "px");
+    }
+
     // How much room do we have left for the content?
     const contentWidth = container.clientWidth - sidebarWidth;
 
@@ -109,8 +122,8 @@ export function SidebarLayout({
       container.style.getPropertyValue("--sidebar-width") || "-1",
     );
 
-    // The maximum sidebar width is the width of the container.
-    const sidebarMaxWidth = container.clientWidth;
+    // The maximum sidebar width is the width of the container minus the gutter.
+    const sidebarMaxWidth = Math.max(container.clientWidth - GUTTER_WIDTH, 0);
 
     const startX = e.clientX;
     const startWidth = sidebarWidth;
@@ -335,6 +348,9 @@ export const StyledSidebarLayout = styled.div`
   }
 
   &[data-dragging="true"] {
+    /* Disable scrolling while dragging. */
+    touch-action: none;
+
     /* Disable transitions. */
     > * {
       transition: none !important;
