@@ -1,6 +1,6 @@
-import { DateRange } from "crosswing/components/forms/DateRange";
-import { InputTransformer } from "crosswing/components/forms/useInputValue";
 import dayjs from "dayjs";
+import { DateRange } from "../forms/DateRange";
+import { InputTransformer } from "../forms/useInputValue";
 
 export function formatTimeRange(dateRange: DateRange | null): string | null {
   if (!dateRange) return "";

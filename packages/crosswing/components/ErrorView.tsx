@@ -1,6 +1,6 @@
-import { colors } from "crosswing/colors";
-import { fonts } from "crosswing/fonts";
 import { styled } from "styled-components";
+import { colors } from "../colors/colors";
+import { fonts } from "../fonts/fonts";
 
 export type ErrorLike = Error | string | ErrorObj;
 

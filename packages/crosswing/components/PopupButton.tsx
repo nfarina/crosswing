@@ -1,7 +1,7 @@
-import { Button } from "crosswing/components/Button";
-import { DownArrowIcon } from "crosswing/icons/DownArrow";
-import { Popup } from "crosswing/modals/popup";
 import { styled } from "styled-components";
+import { DownArrowIcon } from "../icons/DownArrow";
+import { Popup } from "../modals/popup/usePopup";
+import { Button } from "./Button";
 
 /**
  * A button that renders a down arrow icon to indicate that it opens a popup

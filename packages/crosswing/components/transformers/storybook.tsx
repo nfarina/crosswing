@@ -1,7 +1,7 @@
-import { colors } from "crosswing/colors";
-import { StyledTextInput } from "crosswing/components/forms/TextInput";
-import { fonts } from "crosswing/fonts";
 import { styled } from "styled-components";
+import { colors } from "../../colors/colors";
+import { fonts } from "../../fonts/fonts";
+import { StyledTextInput } from "../forms/TextInput";
 
 export const TransformerDecorator = (Story: () => any) => (
   <Container children={<Story />} />

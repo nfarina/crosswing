@@ -1,13 +1,13 @@
 import { useEffect } from "react";
-import FiraMonoMedium from "../fonts/fira-mono/FiraMono-Medium.ttf";
-import FiraMonoRegular from "../fonts/fira-mono/FiraMono-Regular.ttf";
-import FiraSansBlack from "../fonts/fira-sans/FiraSans-Black.ttf";
-import FiraSansBold from "../fonts/fira-sans/FiraSans-Bold.ttf";
-import FiraSansMedium from "../fonts/fira-sans/FiraSans-Medium.ttf";
-import FiraSansRegular from "../fonts/fira-sans/FiraSans-Regular.ttf";
-import LatoBlack from "../fonts/lato/Lato-Black.ttf";
-import LatoBold from "../fonts/lato/Lato-Bold.ttf";
-import LatoRegular from "../fonts/lato/Lato-Regular.ttf";
+import FiraMonoMedium from "./fira-mono/FiraMono-Medium.ttf";
+import FiraMonoRegular from "./fira-mono/FiraMono-Regular.ttf";
+import FiraSansBlack from "./fira-sans/FiraSans-Black.ttf";
+import FiraSansBold from "./fira-sans/FiraSans-Bold.ttf";
+import FiraSansMedium from "./fira-sans/FiraSans-Medium.ttf";
+import FiraSansRegular from "./fira-sans/FiraSans-Regular.ttf";
+import LatoBlack from "./lato/Lato-Black.ttf";
+import LatoBold from "./lato/Lato-Bold.ttf";
+import LatoRegular from "./lato/Lato-Regular.ttf";
 
 // TODO: make this overridable and defined at the CrosswingApp element level; not
 // the document level.

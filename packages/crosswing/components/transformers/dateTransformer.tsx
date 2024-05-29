@@ -1,7 +1,7 @@
-import { InputTransformer } from "crosswing/components/forms/useInputValue";
 import dayjs, { Dayjs } from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat.js";
 import utcPlugin from "dayjs/plugin/utc.js";
+import { InputTransformer } from "../forms/useInputValue";
 
 dayjs.extend(utcPlugin);
 dayjs.extend(customParseFormat);
