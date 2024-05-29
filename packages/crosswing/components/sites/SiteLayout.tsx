@@ -68,7 +68,7 @@ export function SiteLayout({
 
   const mobileLayout = useMatchMedia("(max-width: 500px)");
 
-  function onLinkClick(path: string) {
+  function onLinkClick() {
     setSidebarOpen(false);
   }
 
@@ -79,10 +79,11 @@ export function SiteLayout({
     const { path, title, icon, classicIcon, children, badge } = area.props;
 
     const links = flattenChildren(children).filter(isSiteLink);
+    const key = path ?? "area-" + links[0]?.props.path;
 
     return (
       <SiteSidebarArea
-        key={path}
+        key={key}
         path={path}
         title={title}
         icon={icon}
@@ -104,6 +105,7 @@ export function SiteLayout({
     const { path, children, render } = area.props;
 
     const links = flattenChildren(children).filter(isSiteLink);
+    const key = path ?? "area-" + links[0]?.props.path;
 
     const renderRedirect = () => {
       // Redirect to first link if area has child links.
@@ -115,7 +117,7 @@ export function SiteLayout({
     };
 
     return (
-      <Fragment key={path}>
+      <Fragment key={key}>
         {links.map((link) => renderLinkRoutes(area, link))}
         <Route path={path} render={render ?? renderRedirect} />
       </Fragment>
@@ -126,9 +128,10 @@ export function SiteLayout({
     area: ReactElement<SiteAreaProps>,
     link: ReactElement<SiteLinkProps>,
   ) {
+    const { path: areaPath } = area.props;
     const { path, render } = link.props;
 
-    const fullPath = `${area.props.path}/${path}`;
+    const fullPath = areaPath ? `${areaPath}/${path}` : path;
 
     return render && <Route key={path} path={fullPath} render={render} />;
   }
@@ -179,7 +182,7 @@ export function SiteLayout({
             {/* Site default redirect. */}
             <Route
               render={() =>
-                areas[0] ? (
+                areas[0].props.path ? (
                   <Redirect to={areas[0].props.path} />
                 ) : (
                   <NoContent title="Nothing Selected" />

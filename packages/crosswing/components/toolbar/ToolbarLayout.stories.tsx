@@ -1,11 +1,12 @@
 import { action } from "@storybook/addon-actions";
-import { Meta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { useState } from "react";
 import { createPortal } from "react-dom";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { useAsyncTask } from "../../hooks/useAsyncTask.js";
 import { ModalContextProvider } from "../../modals/context/ModalContextProvider.js";
+import { usePopup } from "../../modals/popup/usePopup.js";
 import { ModalDecorator } from "../../modals/storybook/decorators.js";
 import {
   BrowserSimulator,
@@ -14,12 +15,14 @@ import {
 import { wait } from "../../shared/wait.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import { NoContent } from "../NoContent.js";
+import { PopupMenu, PopupMenuText } from "../PopupMenu.js";
 import { SelectOption } from "../forms/Select.js";
 import {
   Toolbar,
   ToolbarButton,
   ToolbarInsertionPoint,
   ToolbarMoreButton,
+  ToolbarPopupButton,
   ToolbarSelect,
   ToolbarSidebarButton,
   ToolbarSpace,
@@ -41,8 +44,10 @@ export default {
   parameters: { layout: "centered" },
 } satisfies Meta<typeof ToolbarLayout>;
 
-export const InsertionPoints = () => (
-  <ToolbarLayout>
+type Story = StoryFn<typeof ToolbarLayout>;
+
+export const InsertionPoints: Story = (args) => (
+  <ToolbarLayout {...args}>
     <Toolbar>
       <ToolbarInsertionPoint name="beforeRefresh" />
       <ToolbarButton children="Refresh" />
@@ -92,11 +97,11 @@ function InsertionPointsContent() {
   );
 }
 
-export const Buttons = () => {
+export const Buttons: Story = (args) => {
   const task = useAsyncTask({ func: () => wait(2000), onError: null });
 
   return (
-    <ToolbarLayout>
+    <ToolbarLayout {...args}>
       <Toolbar>
         <ToolbarButton
           children="Enabled"
@@ -114,9 +119,15 @@ export const Buttons = () => {
   );
 };
 
-export const Select = () => {
+export const Select: Story = (args) => {
+  const menu = usePopup(() => (
+    <PopupMenu>
+      <PopupMenuText children="This is a menu." />
+    </PopupMenu>
+  ));
+
   return (
-    <ToolbarLayout>
+    <ToolbarLayout {...args}>
       <Toolbar>
         <ToolbarButton children="Button" />
         <ToolbarSelect defaultValue="green">
@@ -124,17 +135,18 @@ export const Select = () => {
           <SelectOption title="Green" value="green" />
           <SelectOption title="Blue" value="blue" />
         </ToolbarSelect>
+        <ToolbarPopupButton title="Popup" popup={menu} />
       </Toolbar>
       <NoContent title="Content" />
     </ToolbarLayout>
   );
 };
 
-export const Tabs = () => {
+export const Tabs: Story = (args) => {
   return (
     <BrowserSimulator initialPath="one">
       <ModalContextProvider>
-        <ToolbarLayout>
+        <ToolbarLayout {...args}>
           <Toolbar>
             <ToolbarOverflowTab>
               <ToolbarTab children="Sub Item One" to="one" />
@@ -153,9 +165,9 @@ export const Tabs = () => {
   );
 };
 
-export const ExpandedTabs = () => {
+export const ExpandedTabs: Story = (args) => {
   return (
-    <ToolbarLayout>
+    <ToolbarLayout {...args}>
       <Toolbar expandTabs>
         <ToolbarTab children="Tab Button" onClick={action("tabButtonClick")} />
         <ToolbarTab children="Tab Link" to="somewhere" />
@@ -165,9 +177,9 @@ export const ExpandedTabs = () => {
   );
 };
 
-export const IDView = () => {
+export const IDView: Story = (args) => {
   return (
-    <ToolbarLayout>
+    <ToolbarLayout {...args}>
       <Toolbar>
         <ToolbarButton children="Here" />
         <ToolbarButton children="To" />

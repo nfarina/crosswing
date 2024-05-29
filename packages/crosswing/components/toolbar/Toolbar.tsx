@@ -11,6 +11,7 @@ import { fonts } from "../../fonts/fonts.js";
 import { DotDotDotIcon } from "../../icons/DotDotDot.js";
 import { Button } from "../Button.js";
 import { LinkButton } from "../LinkButton.js";
+import { PopupButton } from "../PopupButton.js";
 import { StyledDateRangeInput } from "../forms/DateRangeInput.js";
 import { SearchInput } from "../forms/SearchInput.js";
 import { Select } from "../forms/Select.js";
@@ -111,6 +112,27 @@ export const ToolbarLinkButton = styled(LinkButton)`
 `;
 
 export const ToolbarButton = styled(Button)`
+  background: ${colors.extraExtraLightGray()};
+  box-shadow: ${toolbarShadows.control()};
+  box-sizing: border-box;
+  min-height: 30px;
+  padding: 3px 9px;
+  color: ${colors.text()};
+  font: ${fonts.displayMedium({ size: 15, line: "1.5" })};
+
+  @media (prefers-color-scheme: dark) {
+    background: ${colors.extraExtraDarkGray()};
+    color: ${colors.lightGray()};
+    box-shadow: ${toolbarShadows.controlDark()};
+  }
+
+  &[data-primary="true"] {
+    font: ${fonts.displayBold({ size: 15, line: "1.5" })};
+    box-shadow: none;
+  }
+`;
+
+export const ToolbarPopupButton = styled(PopupButton)`
   background: ${colors.extraExtraLightGray()};
   box-shadow: ${toolbarShadows.control()};
   box-sizing: border-box;

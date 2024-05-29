@@ -23,7 +23,7 @@ import {
 } from "./SiteHeaderAccessory.js";
 
 export type SiteSidebarAreaProps = {
-  path: string;
+  path?: string;
   title: ReactNode;
   classicIcon?: ReactNode;
   icon?: ReactNode;
@@ -54,7 +54,7 @@ export function SiteSidebar({
   tint?: HexColorBuilder;
   accessories?: SiteHeaderAccessory[] | null;
   children?: ReactNode;
-  onLinkClick?: (path: string) => void;
+  onLinkClick?: (path?: string) => void;
 }) {
   // Coerce children to array, flattening fragments and falsy conditionals.
   const areas = flattenChildren(children).filter(isSidebarArea);
@@ -76,15 +76,19 @@ export function SiteSidebar({
 
     const links = flattenChildren(children).filter(isSidebarLink);
 
-    const isSelected = !!nextLocation.tryClaim(path);
+    const key = path ?? "area-" + links[0]?.props.path;
+
+    const isSelected = path
+      ? !!nextLocation.tryClaim(path)
+      : links.some((link) => !!nextLocation.tryClaim(link.props.path));
 
     const onAreaClick = () => onLinkClick?.(path);
 
     return (
-      <Fragment key={path}>
+      <Fragment key={key}>
         <Link
           className="area-link"
-          to={path}
+          to={path ?? links[0]?.props.path}
           data-selected={isSelected}
           data-is-classic-icon={!!classicIcon}
           onClick={links.length === 0 ? onAreaClick : undefined}
@@ -95,25 +99,27 @@ export function SiteSidebar({
             <UnreadBadge children={badge === "any" ? <>&nbsp;</> : badge} />
           )}
         </Link>
-        {links.map((link) =>
-          renderLink(area, link, link === links[links.length - 1]),
-        )}
+        {links.map((link) => renderLink(area, links, link))}
       </Fragment>
     );
   }
 
   function renderLink(
     area: ReactElement<SiteSidebarAreaProps>,
+    areaLinks: ReactElement<SiteSidebarLinkProps>[],
     link: ReactElement<SiteSidebarLinkProps>,
-    isLast: boolean,
   ) {
     const { path: areaPath } = area.props;
     const { path, title } = link.props;
 
-    const fullPath = `${areaPath}/${path}`;
+    const fullPath = areaPath ? `${areaPath}/${path}` : path;
 
     const isSelected = !!nextLocation.tryClaim(fullPath);
-    const isAreaSelected = !!nextLocation.tryClaim(areaPath);
+    const isAreaSelected = areaPath
+      ? !!nextLocation.tryClaim(areaPath)
+      : areaLinks.some((link) => !!nextLocation.tryClaim(link.props.path));
+
+    const isLast = link === areaLinks[areaLinks.length - 1];
 
     return (
       <Link
