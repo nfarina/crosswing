@@ -84,7 +84,7 @@ export function WithTransformerAndValidation() {
   const prompt = usePrompt(() => ({
     title: "Enter URL",
     message: "What's your favorite website?",
-    placeholder: "https://example.com",
+    placeholder: "http://example.com",
     transformer: urlTransformer(),
     validate(value) {
       if (!value.startsWith("https://")) {

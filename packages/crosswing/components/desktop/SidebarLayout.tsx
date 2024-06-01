@@ -13,6 +13,8 @@ import { useToolbar } from "../toolbar/ToolbarContext.js";
 
 export const SidebarToggleInsertionPoint = "SidebarToggle";
 
+export type SidebarLayoutMode = "auto" | "overlay" | "shrink";
+
 // The maximum sidebar width is the width of the container minus a bit
 // (so you can still drag it smaller in case it buts up against a ListLayout
 // which is also draggable!).
@@ -25,6 +27,7 @@ export function SidebarLayout({
   sidebarVisible = false,
   onSidebarVisibleChange,
   restorationKey,
+  mode = "auto",
   children,
   ...rest
 }: HTMLAttributes<HTMLDivElement> & {
@@ -45,6 +48,8 @@ export function SidebarLayout({
    * component function, which we'll access the `name` property of.
    */
   restorationKey: Function;
+  /** The layout mode to use. */
+  mode?: SidebarLayoutMode;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const { getInsertionRef } = useToolbar();
@@ -88,11 +93,15 @@ export function SidebarLayout({
     // How much room do we have left for the content?
     const contentWidth = container.clientWidth - sidebarWidth;
 
-    // If the content width is less than the minimum, we need to use overlay
-    // mode and make the sidebar cover the content.
     container.setAttribute(
-      "data-layout",
-      contentWidth < contentMinWidth ? "overlay" : "shrink",
+      "data-mode",
+      mode === "auto"
+        ? // If the content width is less than the minimum, we need to use overlay
+          // mode and make the sidebar cover the content.
+          contentWidth < contentMinWidth
+          ? "overlay"
+          : "shrink"
+        : mode,
     );
 
     // Now that we've set the layout, we can enable transitions.
@@ -306,7 +315,7 @@ export const StyledSidebarLayout = styled.div`
     }
   }
 
-  &[data-layout="overlay"] {
+  &[data-mode="overlay"] {
     /* Content. */
     > *:nth-child(1) {
       margin-right: 0;
