@@ -1,3 +1,4 @@
+import { ElementSize } from "crosswing/hooks/useElementSize";
 import {
   HTMLAttributes,
   PointerEvent as ReactPointerEvent,
@@ -60,9 +61,15 @@ export function SidebarLayout({
     sidebarDefaultWidth,
   );
 
+  // Remember if the user made the sidebar as large as possible.
+  const [sidebarMaximized, setSidebarMaximized] = useLocalStorage(
+    `SidebarLayout:${restorationKey.name}:sidebarMaximized`,
+    false,
+  );
+
   useElementSize(ref, updateLayout);
 
-  function updateLayout() {
+  function updateLayout(newSize?: ElementSize) {
     const container = ref.current;
     if (!container) return;
 
@@ -85,7 +92,15 @@ export function SidebarLayout({
     // Enforce the maximum sidebar width.
     const sidebarMaxWidth = Math.max(container.clientWidth - GUTTER_WIDTH, 0);
 
-    if (sidebarWidth > sidebarMaxWidth) {
+    // If we are being updated because of a change in our size (that isn't
+    // because the user is dragging us), then we should snap to the max width
+    // if we were already at the max width.
+    const userIsResizing = !newSize;
+
+    if (
+      sidebarWidth > sidebarMaxWidth ||
+      (sidebarMaximized && !userIsResizing)
+    ) {
       sidebarWidth = sidebarMaxWidth;
       container.style.setProperty("--sidebar-width", sidebarWidth + "px");
     }
@@ -189,6 +204,9 @@ export function SidebarLayout({
         `SidebarLayout:${restorationKey.name}:initialSidebarWidth`,
         newWidth.toString(),
       );
+
+      // If the user dragged the sidebar to the max, remember that.
+      setSidebarMaximized(newWidth === sidebarMaxWidth);
     };
 
     // Set the data-dragging attribute to prevent animation.
