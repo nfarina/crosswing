@@ -8,12 +8,15 @@ import { WarningIcon } from "../../icons/Warning.js";
 
 export function StatusBadge({
   children,
+  icon,
   type = "info",
   size = "normal",
   hideIcon = false,
   right,
   ...rest
 }: HTMLAttributes<HTMLDivElement> & {
+  /** If provided, overrides the default icon associated with `type`. */
+  icon?: ReactNode;
   type: "error" | "warning" | "info";
   size?: "smallest" | "normal";
   /** True to hide the info/warning/error icon to the left of the children. */
@@ -28,9 +31,14 @@ export function StatusBadge({
       data-has-icon={!hideIcon}
       {...rest}
     >
-      {!hideIcon && type === "info" && <InfoCircleIcon className="icon" />}
-      {!hideIcon && type === "warning" && <WarningIcon className="icon" />}
-      {!hideIcon && type === "error" && <ErrorIcon className="icon" />}
+      {!hideIcon && icon}
+      {!icon && !hideIcon && (
+        <>
+          {type === "info" && <InfoCircleIcon />}
+          {type === "warning" && <WarningIcon />}
+          {type === "error" && <ErrorIcon />}
+        </>
+      )}
       <div className="children">{children}</div>
       {right && <div className="right">{right}</div>}
     </StyledStatusBadge>
@@ -78,7 +86,7 @@ export const StyledStatusBadge = styled.div`
     }
   }
 
-  > .icon {
+  > svg {
     flex-shrink: 0;
     width: 20px;
     height: 20px;
@@ -116,7 +124,7 @@ export const StyledStatusBadge = styled.div`
       padding-left: 6px;
     }
 
-    > .icon {
+    > svg {
       width: 13px;
       height: 13px;
       margin-right: 3px;
