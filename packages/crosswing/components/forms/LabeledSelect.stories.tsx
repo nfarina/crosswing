@@ -53,6 +53,24 @@ export const Working = () => (
   </LabeledSelect>
 );
 
+export const WithLongOption = () => {
+  const [ludicrous, setLudicrous] = useState(true);
+
+  return (
+    <LabeledSelect
+      label="Ludicrous Mode"
+      onClick={() => setLudicrous(!ludicrous)}
+    >
+      <SelectOption
+        title="On, and I have agreed to the terms and conditions"
+        value="1"
+      />
+      <SelectOption title="Off" value="2" />
+      <SelectOption title="N/A" value="3" />
+    </LabeledSelect>
+  );
+};
+
 export const WithDetail = () => (
   <LabeledSelect
     label="Ludicrous Mode"

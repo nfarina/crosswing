@@ -79,10 +79,12 @@ export const StyledSelect = styled.div`
   }
 
   > .arrow-icon {
+    width: 20px;
+    height: 20px;
     position: absolute;
     pointer-events: none;
     top: calc(50%);
-    right: 3px;
+    right: 4px;
     transform: translateY(-50%);
     color: ${colors.text()};
   }
@@ -107,7 +109,7 @@ const InnerSelect = styled.select`
   cursor: pointer;
 
   /* Account for arrow icon. */
-  padding-right: calc(3px + 24px + 10px);
+  padding-right: calc(5px + 24px);
 
   @media (prefers-color-scheme: dark) {
     background: ${colors.black()};

@@ -2,7 +2,7 @@ import { ReactNode, SelectHTMLAttributes } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
-import { Select } from "./Select.js";
+import { Select, StyledSelect } from "./Select.js";
 
 export function LabeledSelect({
   label,
@@ -44,15 +44,11 @@ export const StyledLabeledSelect = styled.div`
   padding: 0 10px;
   box-sizing: border-box;
 
-  > * {
-    flex-shrink: 0;
-  }
-
   > .content {
     width: 0;
+    flex-grow: 1;
     display: flex;
     flex-flow: column;
-    flex-grow: 1;
     margin: 7px 20px 7px 0;
 
     > .label {
@@ -63,6 +59,19 @@ export const StyledLabeledSelect = styled.div`
     > .detail {
       font: ${fonts.display({ size: 14, line: "18px" })};
       color: ${colors.textSecondary()};
+    }
+  }
+
+  > ${StyledSelect} {
+    flex-shrink: 0;
+    box-sizing: border-box;
+    max-width: 50%;
+
+    > select {
+      max-width: 100%;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
     }
   }
 
