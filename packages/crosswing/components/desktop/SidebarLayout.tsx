@@ -1,4 +1,3 @@
-import { ElementSize } from "crosswing/hooks/useElementSize";
 import {
   HTMLAttributes,
   PointerEvent as ReactPointerEvent,
@@ -7,7 +6,7 @@ import {
 import { createPortal } from "react-dom";
 import styled from "styled-components";
 import { colors } from "../../colors/colors";
-import { useElementSize } from "../../hooks/useElementSize.js";
+import { ElementSize, useElementSize } from "../../hooks/useElementSize.js";
 import { useLocalStorage } from "../../hooks/useLocalStorage.js";
 import { ToolbarSidebarButton } from "../toolbar/Toolbar.js";
 import { useToolbar } from "../toolbar/ToolbarContext.js";
