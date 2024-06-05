@@ -24,7 +24,7 @@ export function LinkList<T extends { id: string }>({
   onScroll,
   /** True if this list should be a natural height instead of just filling up its container. */
   autoSize,
-  separators = "bottom",
+  edges = "bottom",
   ...rest
 }: {
   items?: T[];
@@ -32,7 +32,7 @@ export function LinkList<T extends { id: string }>({
   renderHeading?: (group: string) => ReactElement<any>;
   after?: ReactNode;
   autoSize?: boolean;
-  separators?: SeparatorEdges;
+  edges?: SeparatorEdges;
 } & Omit<HTMLAttributes<HTMLDivElement>, "children">) {
   // const [scrolledToActive, setScrolledToActive] = useState(false);
   const listRef = useRef<HTMLDivElement | null>(null);
@@ -95,7 +95,7 @@ export function LinkList<T extends { id: string }>({
 
   return (
     <StyledLinkList ref={listRef} data-auto-size={!!autoSize} {...rest}>
-      <SeparatorLayout onScroll={onScroll} edges={separators}>
+      <SeparatorLayout onScroll={onScroll} edges={edges}>
         {renderItems()}
         {!!after && after}
       </SeparatorLayout>

@@ -91,7 +91,7 @@ export const Grouped = () => {
         <LinkList
           items={Colors}
           renderItem={(color) => renderColor(color, true)}
-          separators="both"
+          edges="both"
         />
       </StyledList>
     </BrowserSimulator>
@@ -109,7 +109,7 @@ export const GroupedWithCustomHeading = () => {
           renderHeading={(group) => (
             <LinkListHeading children={"Letter " + group} />
           )}
-          separators="both"
+          edges="both"
         />
       </StyledList>
     </BrowserSimulator>

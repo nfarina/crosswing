@@ -274,9 +274,13 @@ export const StyledSidebarLayout = styled.div`
     bottom: 0;
     left: 0;
     right: 0;
-    background: ${colors.black({ alpha: 0.5 })};
+    background: ${colors.black({ alpha: 0.2 })};
     opacity: 0;
     pointer-events: none;
+
+    @media (prefers-color-scheme: dark) {
+      background: ${colors.black({ alpha: 0.5 })};
+    }
   }
 
   /* Dragger. */
