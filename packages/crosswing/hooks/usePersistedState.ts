@@ -42,7 +42,6 @@ export function usePersistedState<S>({
   compareValues,
   updateFunc,
   updateDelay = Seconds(1),
-  alwaysDelay = false,
   onComplete,
   onError,
 }: {
@@ -58,12 +57,6 @@ export function usePersistedState<S>({
   updateFunc: (newValue: S) => Falsy | Promise<Falsy>;
   /** The minimum time to wait between calls to updateFunc(), in milliseconds. */
   updateDelay?: number;
-  /**
-   * If true, always wait for `updateDelay` milliseconds before updating.
-   * Otherwise, the update will be dispatched immediately if there are no
-   * other pending updates.
-   */
-  alwaysDelay?: boolean;
   onComplete?: (updatedValue: S) => void;
   onError: null | ((error: Error) => void);
 }): PersistedState<S> {
@@ -113,9 +106,7 @@ export function usePersistedState<S>({
       // progress. So kick one off!
 
       // Wait until at least `updateDelay` seconds have passed since the last update.
-      const delay = alwaysDelay
-        ? updateDelay
-        : Math.max(0, lastUpdated + updateDelay - Date.now());
+      const delay = Math.max(0, lastUpdated + updateDelay - Date.now());
 
       const timeoutId = setTimeout(
         () => savedUpdateFunc.current(),
