@@ -80,8 +80,13 @@ export const LinkListIconFailed = styled.div.attrs({
   border-radius: 100%;
   width: 24px;
   height: 24px;
-  background: ${colors.red()};
-  color: ${colors.red({ darken: 0.4 })};
+  color: ${colors.red({ darken: 0.2, saturate: 1 })};
+  background: ${colors.red({ lighten: 0.2 })};
+
+  @media (prefers-color-scheme: dark) {
+    background: ${colors.red({ darken: 0.4, desaturate: 0.2 })};
+    color: ${colors.red()};
+  }
 `;
 
 /** A component you can drop in to LinkListCell.right. */
@@ -92,10 +97,15 @@ export const LinkListIconSucceeded = styled.div.attrs({
   border-radius: 100%;
   width: 24px;
   height: 24px;
-  background: ${colors.darkGreen()};
+  background: ${colors.turquoise({ lighten: 0.3, desaturate: 0.5 })};
+  color: ${colors.turquoise()};
 
   > svg {
     transform: scale(0.62);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background: ${colors.darkGreen()};
     color: ${colors.turquoise()};
   }
 `;
