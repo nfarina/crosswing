@@ -8,7 +8,7 @@ import {
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
-import { useHotkey } from "../../hooks/useHotkey.js";
+import { useHotKey } from "../../hooks/useHotKey.js";
 import { useHost } from "../../host/context/HostContext.js";
 import { CloseCircleIcon } from "../../icons/CloseCircle.js";
 import { SearchIcon } from "../../icons/Search.js";
@@ -43,7 +43,7 @@ export function SearchInput({
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Allow you to use the hotkey "/" to focus the search bar.
-  useHotkey("/", {
+  useHotKey("/", {
     target: inputRef,
     onPress: () => inputRef.current?.select(),
   });

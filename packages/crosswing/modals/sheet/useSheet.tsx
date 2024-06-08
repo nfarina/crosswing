@@ -11,8 +11,8 @@ import { keyframes, styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import {
   HotKeyContextDataAttributes,
-  useHotkey,
-} from "../../hooks/useHotkey.js";
+  useHotKey,
+} from "../../hooks/useHotKey.js";
 import { useHost } from "../../host/context/HostContext.js";
 import { safeArea } from "../../host/features/safeArea.js";
 import { easing } from "../../shared/easing.js";
@@ -99,7 +99,7 @@ export const SheetContainer = ({
   const resolvedOnClose = sticky ? () => {} : onClose;
 
   // Listen for the escape key and call onClose if pressed.
-  useHotkey("Escape", {
+  useHotKey("Escape", {
     target: containerRef,
     onPress: resolvedOnClose,
     disabled: !pressEscapeToClose,

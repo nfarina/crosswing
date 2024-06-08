@@ -12,7 +12,7 @@ import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
 import { useElementSize } from "../../hooks/useElementSize.js";
-import { useHotkey } from "../../hooks/useHotkey.js";
+import { HotKey, useHotKey } from "../../hooks/useHotKey.js";
 import { useSessionStorage } from "../../hooks/useSessionStorage.js";
 import { CloseIcon } from "../../icons/Close.js";
 import { FullScreenIcon } from "../../icons/FullScreen.js";
@@ -38,7 +38,7 @@ export function FullScreenView({
    */
   restorationKey: Function;
   title: ReactNode;
-  hotkey?: string;
+  hotkey?: HotKey;
   defaultFullScreen?: boolean;
   /**
    * How much smaller does the FullScreenView need to be relative to the
@@ -92,7 +92,7 @@ export function FullScreenView({
   const skipAnimation = useRef(isFullScreen);
 
   // Toggle full screen status with a hotkey.
-  useHotkey(hotkey, {
+  useHotKey(hotkey, {
     target: parentRef,
     onPress: () => setFullScreen(!isFullScreen),
   });

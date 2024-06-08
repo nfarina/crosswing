@@ -10,7 +10,7 @@ import {
   useState,
 } from "react";
 import { keyframes, styled } from "styled-components";
-import { useHotkey } from "../../hooks/useHotkey.js";
+import { useHotKey } from "../../hooks/useHotKey.js";
 import { useHost } from "../../host/context/HostContext.js";
 import { easing } from "../../shared/easing.js";
 import { useModal } from "../context/useModal.js";
@@ -174,7 +174,7 @@ export const PopupContainer = ({
   );
 
   // Listen for the escape key and call onClose if pressed.
-  useHotkey("Escape", { target: containerRef, onPress: onClose });
+  useHotKey("Escape", { target: containerRef, onPress: onClose });
 
   // We need to keep the callback "fresh" because it's a closure that likely
   // encapsulates the state of the component it was defined in.

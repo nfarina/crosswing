@@ -1,10 +1,15 @@
 import { RefObject, useEffect, useRef } from "react";
 
+// TypeScript type that constrains String to a valid hotkey format. Valid hotkey
+// examples: "ctrl+shift+a", "cmd+Enter", "alt+1", etc.
+export type HotKey =
+  `${"" | "ctrl+" | "cmd+" | "alt+" | "shift+"}${"" | "cmd+" | "alt+" | "shift+"}${SingleHotKey}`;
+
 export const HotKeyContextDataAttributes = { "data-hotkey-context": true };
 
 export type HotKeyOnPressHandler = () => boolean | void;
 
-export type UseHotkeyOptions = {
+export type UseHotKeyOptions = {
   /**
    * The element on which this hotkey should be "bound". Used to control when
    * this hotkey triggers with respect to things like modals that may supercede
@@ -20,9 +25,9 @@ export type UseHotkeyOptions = {
   alwaysFire?: boolean;
 };
 
-export function useHotkey(
-  hotkey: string,
-  handlerOrOptions: UseHotkeyOptions | HotKeyOnPressHandler,
+export function useHotKey(
+  hotKey: HotKey | null,
+  handlerOrOptions: UseHotKeyOptions | HotKeyOnPressHandler,
 ) {
   const {
     target = null,
@@ -40,9 +45,9 @@ export function useHotkey(
   });
 
   useEffect(() => {
-    if (disabled) return;
+    if (disabled || hotKey === null) return;
 
-    const parsed = parseHotkey(hotkey);
+    const parsed = parseHotKey(hotKey);
 
     function onKeyDown(event: KeyboardEvent) {
       const { key, ctrlKey, altKey, shiftKey, metaKey } = event;
@@ -60,8 +65,8 @@ export function useHotkey(
         !!parsed.metaKey === !!metaKey;
 
       // console.log(
-      //   "Hotkey pressed:",
-      //   formatHotkey(event, { originalCase: true }),
+      //   "HotKey pressed:",
+      //   formatHotKey(event, { originalCase: true }),
       // );
 
       if (!isMatch) {
@@ -95,7 +100,7 @@ export function useHotkey(
         return;
       }
 
-      // console.log("Hotkey matched:", formatHotkey(event), "on", target);
+      // console.log("HotKey matched:", formatHotKey(event), "on", target);
 
       // If we handled a hotkey, it shouldn't do anything else!
       const result = onPressCallback.current?.();
@@ -112,13 +117,13 @@ export function useHotkey(
       // console.log("Remove listener for ", hotkey, "on", target);
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [hotkey, disabled, target, alwaysFire]);
+  }, [hotKey, disabled, target, alwaysFire]);
 }
 
 const IgnoredElements = ["INPUT", "TEXTAREA", "SELECT"];
 const AlwaysFireOnKeys = ["Enter", "Escape"];
 
-export type Hotkey = {
+export type ParsedHotKey = {
   key: string;
   ctrlKey?: boolean;
   altKey?: boolean;
@@ -127,13 +132,13 @@ export type Hotkey = {
 };
 
 /**
- * Parses a hotkey provided in the format "ctrl+shift+a" to a Hotkey object.
+ * Parses a hotkey provided in the format "ctrl+shift+a" to a HotKey object.
  */
-export function parseHotkey(hotkey: string): Hotkey {
-  const parts = hotkey.split("+");
+export function parseHotKey(hotKey: HotKey): ParsedHotKey {
+  const parts = hotKey.split("+");
 
   return {
-    key: parts.pop()!,
+    key: parts.pop()! as any,
     ctrlKey: parts.includes("ctrl"),
     altKey: parts.includes("alt"),
     shiftKey: parts.includes("shift"),
@@ -142,10 +147,10 @@ export function parseHotkey(hotkey: string): Hotkey {
 }
 
 /**
- * Formats a Hotkey to a display format using unicode characters, like "⇧⌘A".
+ * Formats a HotKey to a display format using unicode characters, like "⇧⌘A".
  */
-export function formatHotkey(
-  { key, ctrlKey, altKey, shiftKey, metaKey }: Hotkey,
+export function formatHotKey(
+  { key, ctrlKey, altKey, shiftKey, metaKey }: ParsedHotKey,
   { originalCase }: { originalCase?: boolean } = {},
 ): string {
   let formatted = "";
@@ -178,10 +183,69 @@ function isObscuredByContext(target: Element): boolean {
       Node.DOCUMENT_POSITION_FOLLOWING;
 
     if (isObscured) {
-      // console.log("Hotkey blocked by context:", context);
+      // console.log("HotKey blocked by context:", context);
       return true;
     }
   }
 
   return false;
 }
+
+export type SingleHotKey =
+  | "Enter"
+  | "Escape"
+  | "Backspace"
+  | "Delete"
+  | "ArrowUp"
+  | "ArrowDown"
+  | "ArrowLeft"
+  | "ArrowRight"
+  | "Tab"
+  | " "
+  | "a"
+  | "b"
+  | "c"
+  | "d"
+  | "e"
+  | "f"
+  | "g"
+  | "h"
+  | "i"
+  | "j"
+  | "k"
+  | "l"
+  | "m"
+  | "n"
+  | "o"
+  | "p"
+  | "q"
+  | "r"
+  | "s"
+  | "t"
+  | "u"
+  | "v"
+  | "w"
+  | "x"
+  | "y"
+  | "z"
+  | "0"
+  | "1"
+  | "2"
+  | "3"
+  | "4"
+  | "5"
+  | "6"
+  | "7"
+  | "8"
+  | "9"
+  | "="
+  | "-"
+  | "["
+  | "]"
+  | "\\"
+  | ";"
+  | "'"
+  | ","
+  | "."
+  | "/"
+  | "`";

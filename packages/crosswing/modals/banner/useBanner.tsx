@@ -1,6 +1,6 @@
 import { ReactNode, useCallback, useRef } from "react";
 import { keyframes, styled } from "styled-components";
-import { useHotkey } from "../../hooks/useHotkey.js";
+import { useHotKey } from "../../hooks/useHotKey.js";
 import { useInterval } from "../../hooks/useInterval.js";
 import { safeArea } from "../../host/features/safeArea.js";
 import { Seconds } from "../../shared/timespan.js";
@@ -52,7 +52,7 @@ export const BannerContainer = ({
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   // Listen for the escape key and call onClose if pressed.
-  useHotkey("Escape", { target: containerRef, onPress: onClose });
+  useHotKey("Escape", { target: containerRef, onPress: onClose });
 
   // For automatically closing the bubble.
   useInterval(

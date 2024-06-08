@@ -1,5 +1,5 @@
 import { useLayoutEffect } from "react";
-import { useHotkey } from "../../hooks/useHotkey.js";
+import { useHotKey } from "../../hooks/useHotKey.js";
 import { useLocalStorage } from "../../hooks/useLocalStorage.js";
 
 interface FontSizePreset {
@@ -30,11 +30,11 @@ export function useFontSizeHotkeys() {
     DEFAULT_PRESET_INDEX,
   );
 
-  useHotkey("]", () => setPresetIndex(Math.max(0, presetIndex - 1)));
-  useHotkey("[", () =>
+  useHotKey("]", () => setPresetIndex(Math.max(0, presetIndex - 1)));
+  useHotKey("[", () =>
     setPresetIndex(Math.min(presets.length - 1, presetIndex + 1)),
   );
-  useHotkey("=", () => setPresetIndex(DEFAULT_PRESET_INDEX));
+  useHotKey("=", () => setPresetIndex(DEFAULT_PRESET_INDEX));
 
   // Respond to changes in preferred font size.
   useLayoutEffect(() => {

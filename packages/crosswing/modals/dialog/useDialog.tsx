@@ -2,8 +2,8 @@ import { CSSProperties, ReactNode, useCallback, useRef } from "react";
 import { keyframes, styled } from "styled-components";
 import {
   HotKeyContextDataAttributes,
-  useHotkey,
-} from "../../hooks/useHotkey.js";
+  useHotKey,
+} from "../../hooks/useHotKey.js";
 import { AndroidBackButtonClassName } from "../../host/context/HostContext.js";
 import { safeArea } from "../../host/features/safeArea.js";
 import { easing } from "../../shared/easing.js";
@@ -81,7 +81,7 @@ export const DialogContainer = ({
   const resolvedOnClose = sticky ? () => {} : onClose;
 
   // Listen for the escape key and call onClose if pressed.
-  useHotkey("Escape", {
+  useHotKey("Escape", {
     target: containerRef,
     onPress: resolvedOnClose,
     disabled: !pressEscapeToClose,

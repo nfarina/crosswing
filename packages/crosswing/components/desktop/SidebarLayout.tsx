@@ -7,6 +7,7 @@ import { createPortal } from "react-dom";
 import styled from "styled-components";
 import { colors } from "../../colors/colors";
 import { ElementSize, useElementSize } from "../../hooks/useElementSize.js";
+import { HotKey, useHotKey } from "../../hooks/useHotKey.js";
 import { useLocalStorage } from "../../hooks/useLocalStorage.js";
 import { ToolbarSidebarButton } from "../toolbar/Toolbar.js";
 import { useToolbar } from "../toolbar/ToolbarContext.js";
@@ -28,6 +29,7 @@ export function SidebarLayout({
   onSidebarVisibleChange,
   restorationKey,
   mode = "auto",
+  hotKey = "ctrl+e",
   children,
   ...rest
 }: HTMLAttributes<HTMLDivElement> & {
@@ -50,6 +52,8 @@ export function SidebarLayout({
   restorationKey: Function;
   /** The layout mode to use. */
   mode?: SidebarLayoutMode;
+  /** The hotkey to toggle the sidebar. Set to null to disable hotkey. */
+  hotKey?: HotKey | null;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const { getInsertionRef } = useToolbar();
@@ -65,6 +69,8 @@ export function SidebarLayout({
     `SidebarLayout:${restorationKey.name}:sidebarMaximized`,
     false,
   );
+
+  useHotKey(hotKey, () => onSidebarVisibleChange?.(!sidebarVisible));
 
   useElementSize(ref, updateLayout);
 

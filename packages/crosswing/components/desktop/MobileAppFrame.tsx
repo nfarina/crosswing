@@ -1,7 +1,7 @@
 import { ReactElement, useLayoutEffect, useRef } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
-import { useHotkey } from "../../hooks/useHotkey.js";
+import { useHotKey } from "../../hooks/useHotKey.js";
 import { useSessionStorage } from "../../hooks/useSessionStorage.js";
 
 export function MobileAppFrame({
@@ -29,7 +29,7 @@ export function MobileAppFrame({
   );
 
   // Turn on/off the desktop "phone frame" to preview the UI in tablet form.
-  useHotkey("f", () => {
+  useHotKey("f", () => {
     const child = ref.current?.firstChild as HTMLElement;
     if (!child) return; // Shouldn't happen.
 
