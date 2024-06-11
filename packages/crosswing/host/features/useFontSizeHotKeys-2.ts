@@ -24,9 +24,9 @@ const DEFAULT_PRESET_INDEX = 3;
  * Allow you to tweak the font size globally for testing responsive
  * type in mobile apps.
  */
-export function useFontSizeHotkeys() {
+export function useFontSizeHotKeys() {
   const [presetIndex, setPresetIndex] = useLocalStorage<number>(
-    "useFontSizeHotkeys:presetIndex",
+    "useFontSizeHotKeys:presetIndex",
     DEFAULT_PRESET_INDEX,
   );
 

@@ -2,7 +2,7 @@ import { createGlobalStyle, styled } from "styled-components";
 import { getBuilderVarCss } from "./colors/builders.js";
 import { ColorBuilder, colors, shadows } from "./colors/colors.js";
 import { CrosswingFontStyle, fonts } from "./fonts/fonts.js";
-import { useFontSizeHotkeys } from "./host/features/useFontSizeHotkeys.js";
+import { useFontSizeHotKeys } from "./host/features/useFontSizeHotKeys.js";
 
 /**
  * Decorator that injects Crosswing global styles into the storybook environment.
@@ -32,7 +32,7 @@ export function CrosswingAppDecorator({
   function CrosswingAppInnerDecorator(Story: () => any) {
     // Allow the user to change the font size with hotkeys for testing
     // responsive layouts.
-    useFontSizeHotkeys();
+    useFontSizeHotKeys();
 
     return (
       <>
