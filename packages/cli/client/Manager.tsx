@@ -7,6 +7,7 @@ import {
   StyledStatusBanner,
 } from "crosswing/components/badges/StatusBanner";
 import { useAsyncTask } from "crosswing/hooks/useAsyncTask";
+import { HotKey } from "crosswing/hooks/useHotKey";
 import { useInterval } from "crosswing/hooks/useInterval";
 import { ModalRootProvider } from "crosswing/modals/context";
 import { useRef, useState } from "react";
@@ -63,7 +64,11 @@ export function ManagerContent() {
         <div className="tasks">
           {Object.entries(Object.entries(status.tasks)).map(
             ([i, [name, task]]) => (
-              <TaskView key={name} task={task} hotkey={String(Number(i) + 1)} />
+              <TaskView
+                key={name}
+                task={task}
+                hotkey={String(Number(i) + 1) as HotKey}
+              />
             ),
           )}
         </div>

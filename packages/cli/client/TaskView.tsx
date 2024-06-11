@@ -3,7 +3,7 @@ import { StyledButton } from "crosswing/components/Button";
 import { Badge } from "crosswing/components/badges/Badge";
 import { StyledToggle, Toggle } from "crosswing/components/forms/Toggle";
 import { fonts } from "crosswing/fonts";
-import { useHotKey } from "crosswing/hooks/useHotkey";
+import { HotKey, useHotKey } from "crosswing/hooks/useHotKey";
 import { usePersistedState } from "crosswing/hooks/usePersistedState";
 import { useErrorAlert } from "crosswing/modals/alert/error";
 import { wait } from "crosswing/shared/wait";
@@ -17,7 +17,7 @@ export function TaskView({
   hotkey,
 }: {
   task: ClientTask;
-  hotkey: string;
+  hotkey: HotKey;
 }) {
   const errorAlert = useErrorAlert();
 
