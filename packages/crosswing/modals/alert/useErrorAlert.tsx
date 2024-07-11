@@ -1,11 +1,11 @@
 import { useState } from "react";
 import styled from "styled-components";
 import {
-  ErrorLike,
   ErrorView,
   StyledErrorView,
   getErrorProps,
 } from "../../components/ErrorView.js";
+import { ErrorLike } from "../../shared/errors.js";
 import { truncate } from "../../shared/strings.js";
 import { Modal } from "../context/useModal.js";
 import { useDialog } from "../dialog/useDialog.js";

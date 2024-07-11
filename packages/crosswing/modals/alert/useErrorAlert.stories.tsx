@@ -1,4 +1,4 @@
-import { ErrorObj } from "../../components/ErrorView.js";
+import { ErrorObj } from "../../shared/errors.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import {
   ModalStoryButton,
