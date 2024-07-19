@@ -67,7 +67,13 @@ export function FullScreenView({
     defaultFullScreen,
   );
 
-  const [disabled, setDisabled] = useState(false);
+  // This needs to be persisted across reloads as well or else we'll get
+  // unwanted animation back to the original size if it is disabled at mount but
+  // previously was fullscreen.
+  const [disabled, setDisabled] = useSessionStorage(
+    `FullScreenView:${restorationKey.name}:disabled`,
+    false,
+  );
   if (disabled) isFullScreen = false;
 
   // The blue full screen buttons can proliferate and become annoying when they
