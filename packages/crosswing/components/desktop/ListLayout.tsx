@@ -222,6 +222,10 @@ export const StyledListLayout = styled.div`
 
   /* Mobile layout */
   @media (max-width: 950px) {
+    > .dragger {
+      display: none;
+    }
+
     &[data-show-list-only="true"] {
       /* List */
       > *:nth-child(1) {
