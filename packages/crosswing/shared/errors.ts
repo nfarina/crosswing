@@ -3,6 +3,8 @@ export type ErrorLike = Error | string | ErrorObj;
 export type ErrorObj = {
   name?: string;
   message?: string;
+  /** Additional details not shown to the user by default. */
+  details?: string;
   stack?: string;
   /**
    * Marks this error as fit to display to the user. Default is `true` if not

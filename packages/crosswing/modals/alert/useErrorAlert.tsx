@@ -22,21 +22,24 @@ export function useErrorAlert({
   const modal = useDialog(
     (error?: ErrorLike) => {
       const errorObj = getErrorProps(error ?? {});
-      let { message, stack, userFacing } = errorObj;
+      let { name, message, details, stack, userFacing } = errorObj;
 
-      let niceMessage =
-        message && userFacing !== false
-          ? ensurePeriod(message)
-          : "Something went wrong.";
+      if (!error?.["isErrorWithDetails"]) {
+        // Display arbitrary errors.
+        message =
+          message && userFacing !== false
+            ? ensurePeriod(message)
+            : "Something went wrong.";
 
-      // If the message is super long, truncate it.
-      if (niceMessage.length > 300) {
-        niceMessage = truncate(niceMessage, { length: 300 });
+        // If the message is super long, truncate it.
+        if (message.length > 300) {
+          // If there's no stack put the full message in the stack so you can
+          // scroll around to read the whole thing.
+          if (!stack) {
+            stack = message;
+          }
 
-        // If there's no stack put the full message in the stack so you can
-        // scroll around to read the whole thing.
-        if (!stack) {
-          stack = message;
+          message = truncate(message, { length: 300 });
         }
       }
 
@@ -59,8 +62,11 @@ export function useErrorAlert({
       return (
         <ErrorAlertView
           title="Error"
-          message={niceMessage}
-          children={expanded && stack && <ErrorView error={errorObj} />}
+          message={message}
+          children={
+            expanded &&
+            stack && <ErrorView error={{ name, message, details, stack }} />
+          }
           buttons={[...(stack ? [detailsButton] : []), okButton]}
           onClose={onAlertClose}
           data-expanded={expanded}

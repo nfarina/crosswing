@@ -4,10 +4,26 @@ import { fonts } from "../fonts/fonts";
 import { ErrorLike, ErrorObj } from "../shared/errors";
 
 /**
+ * An error that should is meant to be shown to the user via ErrorView.
+ * Supports the optional explicit `details` field.
+ */
+export class ErrorWithDetails extends Error {
+  public isErrorWithDetails: true;
+
+  constructor(
+    userMessage: string,
+    public details?: string,
+  ) {
+    super(userMessage);
+    this.isErrorWithDetails = true;
+  }
+}
+
+/**
  * Renders an Error in a scrollable <pre> with syntax formatting.
  */
 export function ErrorView({ error }: { error: ErrorLike }) {
-  const { name, message, stack } = getErrorProps(error);
+  const { name, message, details, stack } = getErrorProps(error);
 
   const stackLines: string[] = stack?.split("\n") ?? [];
   stackLines.shift(); // First line is just name/message.
@@ -37,6 +53,13 @@ export function ErrorView({ error }: { error: ErrorLike }) {
   return (
     <StyledErrorView>
       <pre>
+        {details && (
+          <span className="details">
+            {details}
+            <br />
+            <br />
+          </span>
+        )}
         <span key="error-name" className="name">
           {name || "Error"}
         </span>
