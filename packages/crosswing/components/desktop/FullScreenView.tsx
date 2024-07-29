@@ -16,7 +16,7 @@ import { HotKey, useHotKey } from "../../hooks/useHotKey.js";
 import { useSessionStorage } from "../../hooks/useSessionStorage.js";
 import { CloseIcon } from "../../icons/Close.js";
 import { FullScreenIcon } from "../../icons/FullScreen.js";
-import { ModalContext } from "../../modals/context/ModalContext.js";
+import { useModalContext } from "../../modals/context/ModalContext.js";
 import { Button, StyledButton } from "../Button.js";
 import { ToolbarSpace } from "../toolbar/Toolbar.js";
 
@@ -50,7 +50,7 @@ export function FullScreenView({
   const [buttonHovered, setButtonHovered] = useState(false);
 
   // Fit our "full screen" rect to the nearest modal provider boundary.
-  const { modalRoot } = useContext(ModalContext);
+  const { modalRoot } = useModalContext();
 
   const [forceRefresh, setForceRefresh] = useState(0);
 

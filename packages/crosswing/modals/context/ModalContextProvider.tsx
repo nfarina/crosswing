@@ -4,7 +4,6 @@ import {
   cloneElement,
   isValidElement,
   useCallback,
-  useContext,
   useEffect,
   useMemo,
   useState,
@@ -13,7 +12,7 @@ import { createPortal } from "react-dom";
 import { TransitionGroup } from "react-transition-group";
 import { useHost } from "../../host/context/HostContext.js";
 import { Minutes } from "../../shared/timespan.js";
-import { ModalContext } from "./ModalContext.js";
+import { ModalContext, useModalContext } from "./ModalContext.js";
 
 // When any modal is being displayed, we ask our native host (if present) to
 // delay updates for 30 minutes.
@@ -32,8 +31,8 @@ export function ModalContextProvider({
   children: ReactNode;
 }) {
   const { delayUpdates } = useHost();
-  const modalContext = useContext(ModalContext);
-  const { modalRoot, modalContextRoot } = modalContext;
+  const modalContext = useModalContext();
+  const { showToast, hideToast, modalRoot, modalContextRoot } = modalContext;
 
   // All the modals currently being displayed with the current context.
   // Note that the order of items in this map is not necessarily the same
@@ -75,6 +74,8 @@ export function ModalContextProvider({
     () => ({
       showModal,
       hideModal,
+      showToast,
+      hideToast,
       modalRoot,
       modalContextRoot,
       allowDesktopPresentation,
@@ -82,6 +83,8 @@ export function ModalContextProvider({
     [
       showModal,
       hideModal,
+      showToast,
+      hideToast,
       modalRoot,
       modalContextRoot,
       allowDesktopPresentation,

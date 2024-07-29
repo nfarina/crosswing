@@ -1,5 +1,5 @@
-import { MutableRefObject, useContext, useEffect } from "react";
-import { ModalContext } from "../context/ModalContext.js";
+import { MutableRefObject, useEffect } from "react";
+import { useModalContext } from "../context/ModalContext.js";
 
 /**
  * Listens for clicks outside the given container and calls onClose.
@@ -9,7 +9,7 @@ export function useClickOutsideToClose(
   containerRef: MutableRefObject<HTMLElement | null>,
   target: MutableRefObject<HTMLElement | null>,
 ) {
-  const { modalRoot } = useContext(ModalContext);
+  const { modalRoot } = useModalContext();
 
   useEffect(() => {
     function onClick(e: MouseEvent) {

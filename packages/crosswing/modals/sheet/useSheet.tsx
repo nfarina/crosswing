@@ -2,7 +2,6 @@ import {
   CSSProperties,
   ReactNode,
   useCallback,
-  useContext,
   useLayoutEffect,
   useRef,
   useState,
@@ -16,7 +15,7 @@ import {
 import { useHost } from "../../host/context/HostContext.js";
 import { safeArea } from "../../host/features/safeArea.js";
 import { easing } from "../../shared/easing.js";
-import { ModalContext } from "../context/ModalContext.js";
+import { useModalContext } from "../context/ModalContext.js";
 import { Modal, useModal } from "../context/useModal.js";
 
 export type SheetAnimation = "slide" | "pop";
@@ -94,7 +93,7 @@ export const SheetContainer = ({
   onExited?: () => void;
 }) => {
   const { container, viewport } = useHost();
-  const { allowDesktopPresentation } = useContext(ModalContext);
+  const { allowDesktopPresentation } = useModalContext();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const resolvedOnClose = sticky ? () => {} : onClose;
 

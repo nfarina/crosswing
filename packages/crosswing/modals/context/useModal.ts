@@ -1,12 +1,5 @@
-import {
-  ReactNode,
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import { ModalContext } from "./ModalContext.js";
+import { ReactNode, useCallback, useEffect, useRef, useState } from "react";
+import { useModalContext } from "./ModalContext.js";
 
 /**
  * Callback types provided for descriptive type-hints.
@@ -33,7 +26,7 @@ export function useModal<T extends any[]>(
   renderModal: (...args: T) => ReactNode,
 ): Modal<T> {
   const [key] = useState(generateModalKey);
-  const context = useContext(ModalContext);
+  const context = useModalContext();
 
   const previousActiveElement = useRef<Element | null>(null);
 

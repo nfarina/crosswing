@@ -17,6 +17,7 @@
     "./modals/popup": "./modals/popup/PopupView.tsx",
     "./modals/sheet": "./modals/sheet/useSheet.tsx",
     "./modals/storybook": "./modals/storybook/decorators.tsx",
+    "./modals/toast": "./modals/toast/ToastContainer.tsx",
     "./router": "./router/Router.tsx",
     "./router/context": "./router/context/RouterContext.ts",
     "./router/location": "./router/RouterLocation.ts",
