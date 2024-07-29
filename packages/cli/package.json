@@ -1,14 +1,14 @@
 {
   "name": "@crosswing/cli",
   "type": "module",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Crosswing development process manager.",
   "author": "nfarina@gmail.com",
   "bin": {
     "crosswing": "./bin/crosswing.js"
   },
   "scripts": {
-    "dev": "vite-node server/server.ts",
+    "dev": "vite-node server/server.ts --title='Crosswing CLI'",
     "dev:client": "cd client; vite --port 2750",
     "build:client": "cd client; vite build",
     "build:server": "cd server; tsc -p tsconfig.dist.json",

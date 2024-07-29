@@ -16,6 +16,7 @@ import { ServerTasks, ServerTasksFile } from "./ServerTasks.js";
 // It then reads the file and parses it as JSON.
 const {
   port = 2700,
+  title = "Crosswing Dev",
   _: [tasksJsonPath],
 } = parseArgs(process.argv.slice(2));
 
@@ -116,6 +117,14 @@ async function handleRequest(req: IncomingMessage, res: ServerResponse) {
 
     const fullPath = DIST_DIR + path;
     response = await readFile(fullPath);
+
+    // If we loaded index.html, replace "<title>Client Dev</title>" with
+    // our custom title, if any.
+    if (path === "/index.html") {
+      response = response
+        .toString()
+        .replace("<title>Client Dev</title>", `<title>${title}</title>`);
+    }
   }
 
   res.writeHead(200, {
