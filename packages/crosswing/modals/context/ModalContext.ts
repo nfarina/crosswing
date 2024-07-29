@@ -11,7 +11,7 @@ export type ModalContextValue = {
   ): void;
   hideModal(key: string): void;
   /** Show a temporary message in the frame of the modalRoot. */
-  showToast(toast: string | Omit<Toast, "key">): void;
+  showToast(toast: string | Toast | Omit<Toast, "key">): void;
   /** Hide a Toast. */
   hideToast(key: string): void;
   /**
@@ -67,4 +67,5 @@ export interface Toast {
   sticky?: boolean;
   to?: string;
   onClick?: () => void;
+  onClose?: () => void;
 }

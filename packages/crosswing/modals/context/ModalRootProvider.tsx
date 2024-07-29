@@ -65,9 +65,12 @@ export function ModalRootProvider({
   );
 
   const hideToast = useCallback(
-    (key: string) =>
-      setToasts((current) => current.filter((t) => t.key !== key)),
-    [setToasts],
+    (key: string) => {
+      const toast = toasts.find((t) => t.key === key);
+      toast?.onClose?.(); // Notify the Toast that it was hidden.
+      setToasts((current) => current.filter((t) => t.key !== key));
+    },
+    [toasts, setToasts],
   );
 
   // Make sure to keep this object reference stable across renders so we don't

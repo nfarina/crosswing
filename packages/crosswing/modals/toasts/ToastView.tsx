@@ -121,7 +121,7 @@ const StyledToastView = styled.div`
   }
 
   &[data-animating-in="true"] {
-    animation: ${slideLeft} 0.4s ${easing.outBack};
+    animation: ${slideLeft} 0.3s ${easing.outQuint};
   }
 
   &[data-animating-in="false"] {
