@@ -82,8 +82,9 @@ export function NavStack({
             nodeRef={item.ref}
             unmountOnExit
             timeout={{
-              enter: container !== "web" ? 400 + 250 : 0,
-              exit: container !== "web" ? 300 : 0,
+              enter:
+                container !== "web" && container !== "webapp" ? 400 + 250 : 0,
+              exit: container !== "web" && container !== "webapp" ? 300 : 0,
             }}
           >
             <div className="item" ref={item.ref}>

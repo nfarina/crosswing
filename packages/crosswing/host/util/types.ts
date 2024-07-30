@@ -96,7 +96,7 @@ export interface HostContextValue {
   unsafe_post(name: string, args?: object): void;
 }
 
-export type HostContainer = "ios" | "android" | "electron" | "web";
+export type HostContainer = "ios" | "android" | "electron" | "web" | "webapp";
 
 export type HostPlatform = "visionOS" | "unknown";
 
