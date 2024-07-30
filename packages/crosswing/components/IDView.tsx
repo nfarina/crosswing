@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import { colors } from "../colors/colors.js";
 import { fonts } from "../fonts/fonts.js";
 import { CopyIcon } from "../icons/Copy.js";
-import { useBanner } from "../modals/banner/useBanner.js";
+import { useModalContext } from "../modals/context/ModalContext.js";
 import { Clickable } from "./Clickable.js";
 
 export function IDView({
@@ -17,11 +17,11 @@ export function IDView({
   id: string;
   truncate?: number | false;
 }) {
-  const copiedBanner = useBanner(() => `${name} ID copied to clipboard.`);
+  const { showToast } = useModalContext();
 
   function onViewClick(e: MouseEvent<HTMLButtonElement>) {
     navigator.clipboard.writeText(id);
-    copiedBanner.show();
+    showToast(`${name} ID copied to clipboard.`);
     onClick?.(e);
   }
 
