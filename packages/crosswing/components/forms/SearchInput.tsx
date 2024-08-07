@@ -122,6 +122,9 @@ export function SearchInput({
         ref={inputRef}
         type="text"
         autoFocus={autoFocus}
+        autoCorrect="off"
+        autoCapitalize="off"
+        autoComplete="off"
         placeholder={placeholder}
         onChange={onInputChange}
         onKeyUp={onKeyUp}
