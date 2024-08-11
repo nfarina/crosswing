@@ -129,7 +129,7 @@ export function font({
     const scaledLine =
       !fixed && (line ?? "").endsWith("px")
         ? `calc(${line} * var(--font-scale, 1))`
-        : line ?? "normal";
+        : (line ?? "normal");
 
     return `${style} ${weight} ${scaledSize} / ${scaledLine} "${family}", sans-serif${
       monospace ? ", monospace" : ""
