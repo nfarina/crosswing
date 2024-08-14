@@ -135,6 +135,7 @@ const StyledToastView = styled.div`
   > .content {
     flex-grow: 1;
     padding: 10px;
+    padding-left: 13px;
     display: flex;
     flex-flow: column;
     cursor: pointer;

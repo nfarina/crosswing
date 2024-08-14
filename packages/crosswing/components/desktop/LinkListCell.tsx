@@ -24,7 +24,6 @@ export function LinkListCell({
   group,
   preserveTab = true,
   children,
-  style,
   ...rest
 }: Omit<Parameters<typeof Link>[0], "title"> & {
   label?: ReactNode;
