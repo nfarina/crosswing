@@ -1,15 +1,12 @@
 import { dedent } from "crosswing/shared/strings";
 import { useEffect } from "react";
-import FiraMonoMedium from "./fira-mono/FiraMono-Medium.ttf";
-import FiraMonoRegular from "./fira-mono/FiraMono-Regular.ttf";
-import FiraSansBlack from "./fira-sans/FiraSans-Black.ttf";
-import FiraSansBold from "./fira-sans/FiraSans-Bold.ttf";
-import FiraSansItalic from "./fira-sans/FiraSans-Italic.ttf";
-import FiraSansMedium from "./fira-sans/FiraSans-Medium.ttf";
-import FiraSansRegular from "./fira-sans/FiraSans-Regular.ttf";
-import LatoBlack from "./lato/Lato-Black.ttf";
-import LatoBold from "./lato/Lato-Bold.ttf";
-import LatoRegular from "./lato/Lato-Regular.ttf";
+import FiraMonoMedium from "./fira-mono/FiraMono-Medium.woff2";
+import FiraMonoRegular from "./fira-mono/FiraMono-Regular.woff2";
+import Firava from "./firava/Firava.woff2";
+import FiravaItalic from "./firava/FiravaItalic.woff2";
+import LatoBlack from "./lato/Lato-Black.woff2";
+import LatoBold from "./lato/Lato-Bold.woff2";
+import LatoRegular from "./lato/Lato-Regular.woff2";
 
 export type GlobalFontFace = {
   url: string;
@@ -21,39 +18,20 @@ export type GlobalFontFace = {
 };
 
 export const faces = {
-  firaSansRegular: {
-    url: FiraSansRegular,
+  firava: {
+    url: Firava,
+    variable: true,
     family: "Fira Sans",
-    weight: "400",
+    weight: "100 900",
     style: "normal",
     fallback: "sans-serif",
   },
-  firaSansItalic: {
-    url: FiraSansItalic,
+  firavaItalic: {
+    url: FiravaItalic,
+    variable: true,
     family: "Fira Sans Italic",
-    weight: "400",
+    weight: "100 900",
     style: "italic",
-    fallback: "sans-serif",
-  },
-  firaSansMedium: {
-    url: FiraSansMedium,
-    family: "Fira Sans",
-    weight: "500",
-    style: "normal",
-    fallback: "sans-serif",
-  },
-  firaSansBold: {
-    url: FiraSansBold,
-    family: "Fira Sans",
-    weight: "600",
-    style: "normal",
-    fallback: "sans-serif",
-  },
-  firaSansBlack: {
-    url: FiraSansBlack,
-    family: "Fira Sans",
-    weight: "800",
-    style: "normal",
     fallback: "sans-serif",
   },
   latoRegular: {
@@ -94,20 +72,27 @@ export const faces = {
 } satisfies Record<string, GlobalFontFace>;
 
 export const fonts = {
-  display: font({ face: faces.firaSansRegular, var: "--font-display" }),
+  display: font({ face: faces.firava, var: "--font-display", weight: "400" }),
   displayItalic: font({
-    face: faces.firaSansItalic,
+    face: faces.firavaItalic,
     var: "--font-display-italic",
+    weight: "400",
     style: "italic",
   }),
   displayMedium: font({
-    face: faces.firaSansMedium,
+    face: faces.firava,
     var: "--font-display-medium",
+    weight: "500",
   }),
-  displayBold: font({ face: faces.firaSansBold, var: "--font-display-bold" }),
+  displayBold: font({
+    face: faces.firava,
+    var: "--font-display-bold",
+    weight: "600",
+  }),
   displayBlack: font({
-    face: faces.firaSansBlack,
+    face: faces.firava,
     var: "--font-display-black",
+    weight: "800",
   }),
   numeric: font({ face: faces.latoRegular, var: "--font-numeric" }),
   numericBold: font({ face: faces.latoBold, var: "--font-numeric-bold" }),
