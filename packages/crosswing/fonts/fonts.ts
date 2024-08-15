@@ -233,7 +233,7 @@ export function font({
 export function getFontFaceCSS(faces: GlobalFontFace[]) {
   let css = "";
 
-  for (const { url, variable, family, weight } of faces) {
+  for (const { url, variable, family, weight, style } of faces) {
     if (variable) {
       css += dedent(`
         @font-face {
@@ -241,6 +241,7 @@ export function getFontFaceCSS(faces: GlobalFontFace[]) {
           src: url('${url}') format('woff2-variations');
           src: url('${url}') format('woff2') tech('variations');
           font-weight: ${weight};
+          font-style: ${style};
         }
       `);
     } else {
@@ -249,6 +250,7 @@ export function getFontFaceCSS(faces: GlobalFontFace[]) {
           font-family: '${family}';
           src: url('${url}') format('truetype');
           font-weight: ${weight};
+          font-style: ${style};
         }
       `);
     }
