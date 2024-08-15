@@ -14,7 +14,7 @@ export default {
 
 type Story = StoryFn<typeof Button>;
 
-export const WithText: Story = () => (
+export const WithTitle: Story = () => (
   <Button title="Hello!" onClick={action("onClick")} />
 );
 
@@ -94,7 +94,7 @@ export const IconOnly: Story = () => (
   <Button icon={<CloseIcon />} onClick={action("onClick")} />
 );
 
-export const IconAndText: Story = () => (
+export const IconAndTitle: Story = () => (
   <Button
     icon={<WarningIcon />}
     title="Error Details"

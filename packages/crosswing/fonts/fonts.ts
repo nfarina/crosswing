@@ -1,90 +1,148 @@
+import { dedent } from "crosswing/shared/strings";
 import { useEffect } from "react";
 import FiraMonoMedium from "./fira-mono/FiraMono-Medium.ttf";
 import FiraMonoRegular from "./fira-mono/FiraMono-Regular.ttf";
 import FiraSansBlack from "./fira-sans/FiraSans-Black.ttf";
 import FiraSansBold from "./fira-sans/FiraSans-Bold.ttf";
+import FiraSansItalic from "./fira-sans/FiraSans-Italic.ttf";
 import FiraSansMedium from "./fira-sans/FiraSans-Medium.ttf";
 import FiraSansRegular from "./fira-sans/FiraSans-Regular.ttf";
 import LatoBlack from "./lato/Lato-Black.ttf";
 import LatoBold from "./lato/Lato-Bold.ttf";
 import LatoRegular from "./lato/Lato-Regular.ttf";
 
-// TODO: make this overridable and defined at the CrosswingApp element level; not
-// the document level.
+export type GlobalFontFace = {
+  url: string;
+  variable?: boolean;
+  family: string;
+  weight: string;
+  style: string;
+  fallback: string;
+};
 
-export type FontBuilders = Record<string, FontBuilder>;
-
-export const fonts = {
-  display: font({
+export const faces = {
+  firaSansRegular: {
     url: FiraSansRegular,
     family: "Fira Sans",
     weight: "400",
-  }),
-  displayMedium: font({
+    style: "normal",
+    fallback: "sans-serif",
+  },
+  firaSansItalic: {
+    url: FiraSansItalic,
+    family: "Fira Sans Italic",
+    weight: "400",
+    style: "italic",
+    fallback: "sans-serif",
+  },
+  firaSansMedium: {
     url: FiraSansMedium,
     family: "Fira Sans",
     weight: "500",
-  }),
-  displayBold: font({
+    style: "normal",
+    fallback: "sans-serif",
+  },
+  firaSansBold: {
     url: FiraSansBold,
     family: "Fira Sans",
     weight: "600",
-  }),
-  displayBlack: font({
+    style: "normal",
+    fallback: "sans-serif",
+  },
+  firaSansBlack: {
     url: FiraSansBlack,
     family: "Fira Sans",
     weight: "800",
-  }),
-  numeric: font({
+    style: "normal",
+    fallback: "sans-serif",
+  },
+  latoRegular: {
     url: LatoRegular,
     family: "Lato",
     weight: "400",
-  }),
-  numericBold: font({
+    style: "normal",
+    fallback: "sans-serif",
+  },
+  latoBold: {
     url: LatoBold,
     family: "Lato",
     weight: "600",
-  }),
-  numericBlack: font({
+    style: "normal",
+    fallback: "sans-serif",
+  },
+  latoBlack: {
     url: LatoBlack,
     family: "Lato",
     weight: "800",
-  }),
-  displayMono: font({
+    style: "normal",
+    fallback: "sans-serif",
+  },
+  displayMono: {
     url: FiraMonoRegular,
     family: "Fira Mono",
     weight: "400",
-    monospace: true,
-  }),
-  displayMonoMedium: font({
+    style: "normal",
+    fallback: "monospace",
+  },
+  displayMonoMedium: {
     url: FiraMonoMedium,
     family: "Fira Mono",
     weight: "500",
-    monospace: true,
+    style: "normal",
+    fallback: "monospace",
+  },
+} satisfies Record<string, GlobalFontFace>;
+
+export const fonts = {
+  display: font({ face: faces.firaSansRegular, var: "--font-display" }),
+  displayItalic: font({
+    face: faces.firaSansItalic,
+    var: "--font-display-italic",
+    style: "italic",
   }),
-} satisfies FontBuilders;
+  displayMedium: font({
+    face: faces.firaSansMedium,
+    var: "--font-display-medium",
+  }),
+  displayBold: font({ face: faces.firaSansBold, var: "--font-display-bold" }),
+  displayBlack: font({
+    face: faces.firaSansBlack,
+    var: "--font-display-black",
+  }),
+  numeric: font({ face: faces.latoRegular, var: "--font-numeric" }),
+  numericBold: font({ face: faces.latoBold, var: "--font-numeric-bold" }),
+  numericBlack: font({ face: faces.latoBlack, var: "--font-numeric-black" }),
+  displayMono: font({ face: faces.displayMono, var: "--font-display-mono" }),
+  displayMonoMedium: font({
+    face: faces.displayMonoMedium,
+    var: "--font-display-mono-medium",
+  }),
+} satisfies Record<string, FontBuilder>;
 
-const installedFonts: Set<FontBuilders> = new Set();
-
-export function useFonts(fonts: FontBuilders) {
+/** A React component that installs Crosswing font faces automatically. */
+export function CrosswingFontFaceStyle({ faces }: { faces: GlobalFontFace[] }) {
   useEffect(() => {
-    // Did some other component calling this same hook already install these
-    // fonts? If so, we don't need to do it again.
-    if (installedFonts.has(fonts)) return;
+    // We want to render our fonts statically only once, to work around
+    // flickering during development: https://github.com/styled-components/styled-components/issues/1593#issuecomment-409011695
 
-    // Render our fonts statically only once, to work around flickering during
-    // development: https://github.com/styled-components/styled-components/issues/1593#issuecomment-409011695
-    const style = document.createElement("style");
-    style.innerHTML = getFontVarCSS(Object.values(fonts));
-    document.head.appendChild(style);
+    // Look for any existing style tag.
+    let style = document.head.querySelector("style#crosswing-font-faces");
 
-    installedFonts.add(fonts);
+    const css = getFontFaceCSS(Object.values(faces));
+
+    if (style) {
+      // Check if the CSS has changed.
+      if (style.innerHTML !== css) {
+        style.innerHTML = css;
+      }
+    } else {
+      style = document.createElement("style");
+      style.id = "crosswing-font-faces";
+      style.innerHTML = css;
+      document.head.appendChild(style);
+    }
   }, []);
-}
 
-/** A React component that installs Crosswing fonts automatically. */
-export function CrosswingFontStyle() {
-  useFonts(fonts);
   return null;
 }
 
@@ -97,25 +155,43 @@ export interface FontOptions {
 
 export type FontBuilder = {
   (options: FontOptions): string;
-  family: string;
-  weight: string;
-  style: string;
-  monospace: boolean;
-  url: string;
+  face: GlobalFontFace;
+  var: string;
+  family?: string;
+  weight?: string;
+  style?: string;
+  fallback?: string;
+  url?: string;
+  override({
+    face,
+    family,
+    weight,
+    style,
+    fallback,
+  }: {
+    face?: GlobalFontFace;
+    family?: string;
+    weight?: string;
+    style?: string;
+    fallback?: string;
+  }): FontBuilder;
 };
 
 export function font({
-  url,
+  var: cssVar,
+  face,
   family,
   weight,
-  style = "normal",
-  monospace = false,
+  style,
+  fallback,
 }: {
-  url: string;
-  family: string;
-  weight: string;
+  var: string;
+  face: GlobalFontFace;
+  // Overrides the values in the GlobalFontFace if provided.
+  family?: string;
+  weight?: string;
   style?: string;
-  monospace?: boolean;
+  fallback?: string;
 }): FontBuilder {
   const builder = ({ size, line, fixed }: FontOptions) => {
     // You can define the CSS var "--font-scale" to globally scale up or
@@ -131,31 +207,66 @@ export function font({
         ? `calc(${line} * var(--font-scale, 1))`
         : (line ?? "normal");
 
-    return `${style} ${weight} ${scaledSize} / ${scaledLine} "${family}", sans-serif${
-      monospace ? ", monospace" : ""
-    }`;
+    return `var(${cssVar}-style) var(${cssVar}-weight) ${scaledSize} / ${scaledLine} var(${cssVar}-family), var(${cssVar}-fallback)`;
   };
 
-  builder.url = url;
+  builder.face = face;
+  builder.var = cssVar;
   builder.family = family;
   builder.weight = weight;
   builder.style = style;
-  builder.monospace = monospace;
+  builder.fallback = fallback;
+  builder.override = ({ face, family, weight, style, fallback }) => {
+    return font({
+      var: cssVar,
+      face,
+      family,
+      weight,
+      style,
+      fallback,
+    });
+  };
 
   return builder;
 }
 
-export function getFontVarCSS(builders: FontBuilder[]) {
+export function getFontFaceCSS(faces: GlobalFontFace[]) {
   let css = "";
 
-  for (const { url, family, weight } of builders) {
-    css += `
-      @font-face {
-        font-family: '${family}';
-        src: url('${url}') format('truetype');
-        font-weight: ${weight};
-      }
-    `;
+  for (const { url, variable, family, weight } of faces) {
+    if (variable) {
+      css += dedent(`
+        @font-face {
+          font-family: '${family}';
+          src: url('${url}') format('woff2-variations');
+          src: url('${url}') format('woff2') tech('variations');
+          font-weight: ${weight};
+        }
+      `);
+    } else {
+      css += dedent(`
+        @font-face {
+          font-family: '${family}';
+          src: url('${url}') format('truetype');
+          font-weight: ${weight};
+        }
+      `);
+    }
+  }
+
+  return css;
+}
+
+export function getFontVarCSS(fonts: FontBuilder[]) {
+  let css = "";
+
+  for (const font of fonts) {
+    css += dedent(`
+      ${font.var}-family: ${font.family ?? font.face.family};
+      ${font.var}-weight: ${font.weight ?? font.face.weight};
+      ${font.var}-style: ${font.style ?? font.face.style};
+      ${font.var}-fallback: ${font.face.fallback};
+    `);
   }
 
   return css;

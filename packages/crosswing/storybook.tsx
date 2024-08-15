@@ -1,7 +1,14 @@
 import { createGlobalStyle, styled } from "styled-components";
 import { getBuilderVarCss } from "./colors/builders.js";
 import { ColorBuilder, colors, shadows } from "./colors/colors.js";
-import { CrosswingFontStyle, fonts } from "./fonts/fonts.js";
+import {
+  CrosswingFontFaceStyle,
+  faces,
+  FontBuilder,
+  fonts,
+  getFontVarCSS,
+  GlobalFontFace,
+} from "./fonts/fonts.js";
 import { useFontSizeHotKeys } from "./host/features/useFontSizeHotKeys.js";
 
 /**
@@ -13,20 +20,27 @@ export function CrosswingAppDecorator({
   width = undefined,
   height = undefined,
   colors: overriddenColors = [],
+  faces: overriddenFaces = [],
+  fonts: overriddenFonts = [],
 }: {
   layout?: "fullscreen" | "centered" | "mobile";
   width?: number | "wide";
   height?: number;
   colors?: ColorBuilder[];
+  faces?: GlobalFontFace[];
+  fonts?: FontBuilder[];
 } = {}) {
   // "Wide" is just a convenient way to get a phone-sized width for a component.
   const resolvedWidth = width === "wide" ? 380 : width;
 
-  const builders = [
+  const resolvedColors = [
     ...Object.values(colors),
     ...Object.values(shadows),
     ...overriddenColors,
   ];
+
+  const resolvedFaces = [...Object.values(faces), ...overriddenFaces];
+  const resolvedFonts = [...Object.values(fonts), ...overriddenFonts];
 
   // Actual decorator function.
   function CrosswingAppInnerDecorator(Story: () => any) {
@@ -36,15 +50,24 @@ export function CrosswingAppDecorator({
 
     return (
       <>
-        <CrosswingFontStyle />
+        <CrosswingFontFaceStyle faces={resolvedFaces} />
         {layout === "centered" && (
-          <CenteredLayoutGlobalStyle $builders={builders} />
+          <CenteredLayoutGlobalStyle
+            $colors={resolvedColors}
+            $fonts={resolvedFonts}
+          />
         )}
         {layout === "mobile" && (
-          <MobileLayoutGlobalStyle $builders={builders} />
+          <MobileLayoutGlobalStyle
+            $colors={resolvedColors}
+            $fonts={resolvedFonts}
+          />
         )}
         {layout === "fullscreen" && (
-          <FullScreenLayoutGlobalStyle $builders={builders} />
+          <FullScreenLayoutGlobalStyle
+            $colors={resolvedColors}
+            $fonts={resolvedFonts}
+          />
         )}
         {resolvedWidth != null && (
           <DefinedWidthGlobalStyle width={resolvedWidth} />
@@ -59,12 +82,14 @@ export function CrosswingAppDecorator({
 }
 
 const CenteredLayoutGlobalStyle = createGlobalStyle<{
-  $builders: ColorBuilder[];
+  $colors: ColorBuilder[];
+  $fonts: FontBuilder[];
 }>`
   html {
     > body {
-      /* Define our color vars so stories have access to the default theme. */
-      ${(p) => getBuilderVarCss(p.$builders)}
+    /* Define our color and font vars so stories have access to the default theme. */
+    ${(p) => getBuilderVarCss(p.$colors)}
+    ${(p) => getFontVarCSS(p.$fonts)}
 
       /* We should always set a default background color; Storybook doesn't do it automatically for dark mode. */
       background: ${colors.textBackground()};
@@ -82,7 +107,8 @@ const CenteredLayoutGlobalStyle = createGlobalStyle<{
 `;
 
 const MobileLayoutGlobalStyle = createGlobalStyle<{
-  $builders: ColorBuilder[];
+  $colors: ColorBuilder[];
+  $fonts: FontBuilder[];
 }>`
   html {
     height: 100%;
@@ -90,8 +116,9 @@ const MobileLayoutGlobalStyle = createGlobalStyle<{
     > body {
       height: 100%;
 
-      /* Define our color vars so stories have access to the default theme. */
-      ${(p) => getBuilderVarCss(p.$builders)}
+    /* Define our color and font vars so stories have access to the default theme. */
+    ${(p) => getBuilderVarCss(p.$colors)}
+    ${(p) => getFontVarCSS(p.$fonts)}
 
       /* Darken the canvas a bit so the default white background contrasts. */
       background: #E5E5E5;
@@ -132,7 +159,8 @@ const MobileLayoutGlobalStyle = createGlobalStyle<{
 `;
 
 const FullScreenLayoutGlobalStyle = createGlobalStyle<{
-  $builders: ColorBuilder[];
+  $colors: ColorBuilder[];
+  $fonts: FontBuilder[];
 }>`
   html {
     height: 100%;
@@ -141,8 +169,9 @@ const FullScreenLayoutGlobalStyle = createGlobalStyle<{
   body {
     height: 100%;
 
-    /* Define our color vars so stories have access to the default theme. */
-    ${(p) => getBuilderVarCss(p.$builders)}
+    /* Define our color and font vars so stories have access to the default theme. */
+    ${(p) => getBuilderVarCss(p.$colors)}
+    ${(p) => getFontVarCSS(p.$fonts)}
 
     /* We should always set a default background color; Storybook doesn't do it automatically for dark mode. */
     background: ${colors.textBackground()};

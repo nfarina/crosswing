@@ -1,3 +1,4 @@
+import { dedent } from "crosswing/shared/strings";
 import { formatOklch, parseHex, parseOklch } from "./oklch.js";
 
 // Check if this browser supports the `color()` function, specifically with
@@ -250,13 +251,13 @@ export function getBuilderVarCss(builders: ColorBuilder[]): string {
     }
   }
 
-  return `
+  return dedent(`
     ${css}
 
     @media (prefers-color-scheme: dark) {
       ${darkCss}
     }
-  `.trim();
+  `);
 }
 
 /**
