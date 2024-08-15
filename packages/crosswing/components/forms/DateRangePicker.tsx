@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { lazy, useState } from "react";
 import { NavLayout } from "../../router/navs/NavLayout.js";
 import { DateRange } from "./DateRange.js";
+import type { DateRangeValueType } from "./DateRangeControl.js";
 
-import DateRangeControl, { DateRangeValueType } from "./DateRangeControl.js";
+const DateRangeControl = lazy(() => import("./DateRangeControl"));
 
 export default function DateRangePicker({
   defaultRange,
