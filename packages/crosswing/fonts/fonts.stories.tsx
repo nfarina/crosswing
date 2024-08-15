@@ -66,6 +66,9 @@ const overriddenFonts = {
   displayMedium: fonts.displayMedium.override({ face: dmSans, weight: "500" }),
   displayBold: fonts.displayBold.override({ face: dmSans, weight: "600" }),
   displayBlack: fonts.displayBlack.override({ face: dmSans, weight: "700" }),
+  numeric: fonts.numeric.override({ face: dmSans, weight: "400" }),
+  numericBold: fonts.numericBold.override({ face: dmSans, weight: "600" }),
+  numericBlack: fonts.numericBlack.override({ face: dmSans, weight: "700" }),
   displayMono: fonts.displayMono.override({ face: dmMono, weight: "400" }),
   displayMonoMedium: fonts.displayMonoMedium.override({
     face: dmMonoMedium,
