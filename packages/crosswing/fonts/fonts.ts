@@ -9,7 +9,7 @@ import LatoBold from "./lato/Lato-Bold.woff2";
 import LatoRegular from "./lato/Lato-Regular.woff2";
 
 export type GlobalFontFace = {
-  url: string;
+  url?: string;
   variable?: boolean;
   family: string;
   weight: string;
@@ -219,6 +219,8 @@ export function getFontFaceCSS(faces: GlobalFontFace[]) {
   let css = "";
 
   for (const { url, variable, family, weight, style } of faces) {
+    if (!url) continue; // System font, no @font-face needed.
+
     if (variable) {
       css += dedent(`
         @font-face {
