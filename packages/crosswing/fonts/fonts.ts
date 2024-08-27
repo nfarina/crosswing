@@ -1,5 +1,5 @@
-import { dedent } from "crosswing/shared/strings";
 import { useEffect } from "react";
+import { dedent } from "../shared/strings";
 import FiraMonoMedium from "./fira-mono/FiraMono-Medium.woff2";
 import FiraMonoRegular from "./fira-mono/FiraMono-Regular.woff2";
 import Firava from "./firava/Firava.woff2";
