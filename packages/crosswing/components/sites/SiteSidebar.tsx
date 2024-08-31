@@ -1,5 +1,4 @@
 import {
-  CSSProperties,
   Fragment,
   HTMLAttributes,
   isValidElement,
@@ -7,7 +6,7 @@ import {
   ReactNode,
 } from "react";
 import { styled } from "styled-components";
-import { colors, HexColorBuilder } from "../../colors/colors.js";
+import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
 import { flattenChildren } from "../../hooks/flattenChildren.js";
 import { CrosswingLogoIcon } from "../../icons/CrosswingLogo.js";
@@ -41,17 +40,14 @@ export function SiteSidebar({
   logo = <CrosswingLogoIcon style={{ width: "50px", height: "50px" }} />,
   logoTo = "/",
   onLogoClick,
-  tint = colors.turquoise,
   accessories,
   children,
   onLinkClick,
-  style,
   ...rest
 }: HTMLAttributes<HTMLDivElement> & {
   logo?: ReactNode;
   logoTo?: string;
   onLogoClick?: () => void;
-  tint?: HexColorBuilder;
   accessories?: SiteHeaderAccessory[] | null;
   children?: ReactNode;
   onLinkClick?: (path?: string) => void;
@@ -138,17 +134,9 @@ export function SiteSidebar({
     );
   }
 
-  const cssProperties = {
-    ...style,
-    "--tint-color": tint(),
-    "--tint-color-light": tint({ lighten: 0.1 }),
-    "--tint-color-lighter": tint({ lighten: 0.18 }),
-  } as CSSProperties;
-
   return (
     <StyledSiteSidebar
       {...rest}
-      style={cssProperties}
       data-showing-accessories={!!accessories?.length}
     >
       {logoTo ? (
@@ -244,6 +232,7 @@ export const StyledSiteSidebar = styled.div`
       align-items: center;
       text-decoration: none;
       min-height: 29px;
+      color: ${colors.text({ alpha: 0.7 })};
 
       > * {
         flex-shrink: 0;
@@ -254,11 +243,6 @@ export const StyledSiteSidebar = styled.div`
         height: 20px;
         margin-left: -2.5px;
         margin-right: 6.5px;
-        color: ${colors.text({ alpha: 0.5 })};
-
-        @media (prefers-color-scheme: dark) {
-          color: ${colors.text({ alpha: 0.35 })};
-        }
       }
 
       &[data-is-classic-icon="true"] {
@@ -273,7 +257,6 @@ export const StyledSiteSidebar = styled.div`
 
       > .title {
         font: ${fonts.display({ size: 15 })};
-        color: ${colors.text()};
         white-space: nowrap;
       }
 
@@ -283,12 +266,12 @@ export const StyledSiteSidebar = styled.div`
 
       &[data-selected="true"] {
         > svg {
-          color: var(--tint-color-light);
+          color: ${colors.text()};
         }
 
         > .title {
           font: ${fonts.displayBold({ size: 15 })};
-          color: var(--tint-color);
+          color: ${colors.text()};
         }
       }
     }
@@ -301,7 +284,7 @@ export const StyledSiteSidebar = styled.div`
 
       > .title {
         font: ${fonts.display({ size: 15 })};
-        color: ${colors.text()};
+        color: ${colors.text({ alpha: 0.7 })};
         white-space: nowrap;
         margin-left: 24px;
         display: flex;
@@ -312,10 +295,10 @@ export const StyledSiteSidebar = styled.div`
       &[data-selected="true"] {
         > .title {
           font: ${fonts.displayMedium({ size: 15 })};
-          color: var(--tint-color-light);
+          color: ${colors.text()};
 
           @media (prefers-color-scheme: dark) {
-            color: var(--tint-color-lighter);
+            color: ${colors.text()};
           }
         }
       }

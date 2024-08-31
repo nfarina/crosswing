@@ -8,7 +8,7 @@ import {
   useState,
 } from "react";
 import { styled } from "styled-components";
-import { HexColorBuilder, colors } from "../../colors/colors.js";
+import { colors } from "../../colors/colors.js";
 import { flattenChildren } from "../../hooks/flattenChildren.js";
 import { useMatchMedia } from "../../hooks/useMatchMedia.js";
 import { MenuIcon } from "../../icons/Menu.js";
@@ -41,7 +41,6 @@ export function SiteLayout({
   logo,
   logoTo,
   onLogoClick,
-  tint = colors.turquoise,
   sidebarWidth = 150,
   accessories,
   style,
@@ -51,7 +50,6 @@ export function SiteLayout({
   logo?: ReactNode;
   logoTo?: string;
   onLogoClick?: () => void;
-  tint?: HexColorBuilder;
   sidebarWidth?: number;
   accessories?: SiteHeaderAccessory[] | null;
 }) {
@@ -170,7 +168,6 @@ export function SiteLayout({
           logo={logo}
           logoTo={logoTo}
           onLogoClick={onLogoClick}
-          tint={tint}
           accessories={sidebarAccessories}
           onLinkClick={onLinkClick}
         >
