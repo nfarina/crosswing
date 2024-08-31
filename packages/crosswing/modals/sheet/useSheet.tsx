@@ -28,8 +28,8 @@ export type UseSheetOptions = {
   sticky?: boolean;
   forceFullScreen?: boolean;
   /**
-   * If defined, the sheet will stretch horizontally to fill the screen up
-   * to the given maximum size (in CSS units if supplied).
+   * If defined, the sheet will stretch horizontally and/or vertically to fill
+   * the screen up to the given maximum size (in CSS units if supplied).
    */
   stretch?: SheetStretch;
   animation?: SheetAnimation;
