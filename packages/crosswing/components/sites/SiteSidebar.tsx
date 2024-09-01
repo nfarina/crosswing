@@ -232,7 +232,7 @@ export const StyledSiteSidebar = styled.div`
       align-items: center;
       text-decoration: none;
       min-height: 29px;
-      color: ${colors.text({ alpha: 0.7 })};
+      color: ${colors.text({ alpha: 0.6 })};
 
       > * {
         flex-shrink: 0;
@@ -284,7 +284,7 @@ export const StyledSiteSidebar = styled.div`
 
       > .title {
         font: ${fonts.display({ size: 15 })};
-        color: ${colors.text({ alpha: 0.7 })};
+        color: ${colors.text({ alpha: 0.6 })};
         white-space: nowrap;
         margin-left: 24px;
         display: flex;

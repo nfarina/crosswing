@@ -246,7 +246,7 @@ export const StyledToolbar = styled.div`
   align-items: center;
   box-sizing: border-box;
   min-height: 50px;
-  background: ${colors.textBackgroundAlt()};
+  background: ${colors.textBackground()};
   overflow: auto;
 
   &::-webkit-scrollbar {
