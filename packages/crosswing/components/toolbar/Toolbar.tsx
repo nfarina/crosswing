@@ -214,8 +214,12 @@ export const ToolbarSearch = styled(SearchInput)`
   }
 `;
 
+/** Expands the search input to fill the available space (on mobile only). */
 export const ToolbarFlexSearch = styled(ToolbarSearch)`
-  width: auto;
+  @media (max-width: 500px) {
+    width: auto;
+    flex-grow: 1;
+  }
 `;
 
 export const ToolbarSelect = styled(Select)`
@@ -302,10 +306,6 @@ export const StyledToolbar = styled.div`
 
   > ${ToolbarSearch} {
     margin: 0 10px;
-  }
-
-  > ${ToolbarFlexSearch} {
-    flex-grow: 1;
   }
 
   > ${StyledDateRangeInput} {
