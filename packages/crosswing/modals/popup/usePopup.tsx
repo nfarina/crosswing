@@ -39,7 +39,8 @@ export type PopupTarget = MutableRefObject<HTMLElement | null>;
 
 /**
  * Desired placement of the Popup. Defaults to "platform" which places the popup
- * below the target on the web, and above the target on mobile.
+ * below the target on the web, and above the target on mobile. Auto mode
+ * can be convenient but unexpected for users so we don't use it by default.
  */
 export type PopupPlacement = "platform" | "auto" | "above" | "below";
 
@@ -286,7 +287,11 @@ export const PopupContainer = ({
     const computedPlacement = (() => {
       if (placement === "platform") {
         // Default is to pop up above your finger on mobile.
-        return hostContainer === "web" ? "below" : "above";
+        return hostContainer === "web" ||
+          hostContainer === "webapp" ||
+          hostContainer === "electron"
+          ? "below"
+          : "above";
       } else if (placement === "auto") {
         // Where do we have the most vertical space?
         const upperSpace = targetRect.top - containerRect.y;
