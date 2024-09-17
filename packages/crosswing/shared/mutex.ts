@@ -39,7 +39,9 @@ export function runWithMutex<T>(
         if (waitList.size > 0) {
           debug(`Calling next on mutex ${mutex.toString()}`);
           const nextProcess = waitList.values().next().value;
-          nextProcess();
+          if (nextProcess) {
+            nextProcess();
+          }
         }
       }
     }
