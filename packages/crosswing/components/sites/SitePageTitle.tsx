@@ -52,19 +52,19 @@ export function SitePageTitle({
 
   return (
     <StyledPageTitle>
-      <DesktopPageTitle>
-        {!!sorted[0] && <Link to={sorted[0].link}>{sorted[0].title}</Link>}
-      </DesktopPageTitle>
       {!window && (
         <DesktopPageTitle>
-          {sorted.map((crumb) => (
-            <Fragment key={crumb.link}>
-              <Link to={crumb.link}>{crumb.title}</Link>
-              <div className="separator" children="/" />
-            </Fragment>
-          ))}
+          {!!sorted[0] && <Link to={sorted[0].link}>{sorted[0].title}</Link>}
         </DesktopPageTitle>
       )}
+      <DesktopPageTitle>
+        {sorted.map((crumb) => (
+          <Fragment key={crumb.link}>
+            <Link to={crumb.link}>{crumb.title}</Link>
+            <div className="separator" children="/" />
+          </Fragment>
+        ))}
+      </DesktopPageTitle>
       <MobilePageTitle
         style={
           { "--num-accessories": accessories?.length ?? 0 } as CSSProperties
@@ -195,7 +195,7 @@ export const DesktopPageTitle = styled.div`
   }
 
   > a:last-of-type {
-    font: ${fonts.displayBold({ size: 24 })};
+    font: ${fonts.displayBold({ size: 15 })};
   }
 `;
 

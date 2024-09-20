@@ -1,11 +1,11 @@
-import { FormEvent, ReactNode, useState } from "react";
+import { FormEvent, KeyboardEvent, ReactNode, useState } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
 import { AlertButton, AlertView } from "../../modals/alert/AlertView.js";
 import { Modal } from "../../modals/context/useModal.js";
 import { useDialog } from "../../modals/dialog/useDialog.js";
-import { StyledTextInput, TextInput } from "./TextInput.js";
+import { StyledTextArea, TextArea } from "./TextArea.js";
 import { InputTransformer, useInputValue } from "./useInputValue.js";
 
 // Automagically adjusts the type given to onSubmit() to be nullable, based on
@@ -139,6 +139,13 @@ export function PromptView<T = string>({
     trySubmit();
   }
 
+  function onKeyDown(e: KeyboardEvent<HTMLTextAreaElement>) {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      trySubmit();
+    }
+  }
+
   // We want to render our own errors instead of relying on TextInput's error
   // badges, because we're short on horizontal space in our AlertView.
   const { error: _, ...inputProps } = input.props;
@@ -151,13 +158,14 @@ export function PromptView<T = string>({
       buttons={[cancelButton, okButton]}
     >
       <StyledForm onSubmit={onFormSubmit}>
-        <TextInput
+        <TextArea
           placeholder={placeholder}
           autoFocus
           autoSelect
           spellCheck={!!spellCheck}
           disabled={!!working}
-          numeric={numeric}
+          autoSizing
+          onKeyDown={onKeyDown}
           {...inputProps}
         />
         {!!error && <div className="error">{error.message}</div>}
@@ -167,12 +175,12 @@ export function PromptView<T = string>({
 }
 
 const StyledForm = styled.form`
-  > ${StyledTextInput} {
+  > ${StyledTextArea} {
     width: 100%;
     box-shadow: 0 -1px 0 ${colors.controlBorder({ alpha: 0.5 })};
 
-    > input {
-      padding: 20px 10px;
+    > textarea {
+      padding: 18.5px 10px; /* For legacy compatibility with previous TextInput approach. */
     }
   }
 
