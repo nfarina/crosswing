@@ -88,7 +88,9 @@ export function TextArea({
   useLayoutEffect(() => {
     if (autoFocus && autoSelect && ref.current) {
       ref.current.focus();
-      ref.current.select();
+      setTimeout(() => {
+        ref.current?.select();
+      }, 0);
     }
   }, []);
 
