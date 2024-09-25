@@ -178,6 +178,8 @@ const StyledForm = styled.form`
   > ${StyledTextArea} {
     width: 100%;
     box-shadow: 0 -1px 0 ${colors.controlBorder({ alpha: 0.5 })};
+    max-height: 200px;
+    overflow-y: auto;
 
     > textarea {
       padding: 18.5px 10px; /* For legacy compatibility with previous TextInput approach. */
