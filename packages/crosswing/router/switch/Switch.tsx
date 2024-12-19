@@ -1,7 +1,7 @@
 import Debug from "debug";
-import { isValidElement, ReactElement, ReactNode } from "react";
+import { isValidElement, ReactElement, ReactNode, use } from "react";
 import { flattenChildren } from "../../hooks/flattenChildren.js";
-import { RouterContext, useRouter } from "../context/RouterContext.js";
+import { RouterContext } from "../context/RouterContext.js";
 import { Redirect } from "../redirect/Redirect.js";
 import { MatchParams, RouterLocation } from "../RouterLocation.js";
 
@@ -30,7 +30,7 @@ export function Switch({ children }: { children: ReactNode }) {
     history,
     parent,
     flags,
-  } = useRouter();
+  } = use(RouterContext);
 
   // The nextLocation could be _anywhere_. We only want to pre-render any
   // UI if the path matches our current location. Otherwise we might
@@ -68,9 +68,9 @@ export function Switch({ children }: { children: ReactNode }) {
   };
 
   return (
-    <RouterContext.Provider value={childContext}>
+    <RouterContext value={childContext}>
       {render(selected.location.params)}
-    </RouterContext.Provider>
+    </RouterContext>
   );
 }
 

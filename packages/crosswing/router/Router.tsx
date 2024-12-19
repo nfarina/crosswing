@@ -2,16 +2,13 @@ import Debug from "debug";
 import {
   ReactNode,
   Suspense,
+  use,
   useDeferredValue,
   useLayoutEffect,
   useState,
 } from "react";
 import { RouterLocation } from "./RouterLocation.js";
-import {
-  RouterContext,
-  RouterFlags,
-  useRouter,
-} from "./context/RouterContext.js";
+import { RouterContext, RouterFlags } from "./context/RouterContext.js";
 import { BrowserHistory } from "./history/BrowserHistory.js";
 import { MemoryHistory } from "./history/MemoryHistory.js";
 import { Redirect } from "./redirect/Redirect.js";
@@ -31,7 +28,7 @@ export function Router({
 }) {
   // Routers can be nested! You might need to talk to your parent router
   // in rare situations.
-  const parentRouter = useRouter({ ignoreDefaultWarning: true });
+  const parentRouter = use(RouterContext);
   const parent = parentRouter.flags?.isDefault ? undefined : parentRouter;
 
   const flags: RouterFlags = {
@@ -85,7 +82,7 @@ export function Router({
     debug(`Location matches; starts with "${path}"`);
 
     return (
-      <RouterContext.Provider
+      <RouterContext
         value={{
           location: childLocation,
           nextLocation: nextChildLocation,
@@ -95,7 +92,7 @@ export function Router({
         }}
       >
         <Suspense>{render()}</Suspense>
-      </RouterContext.Provider>
+      </RouterContext>
     );
   } else {
     debug(`Location does not match; redirecting to "${path}"`);
@@ -103,11 +100,9 @@ export function Router({
     // We'll need to wrap this <Redirect> in a context provider so it can
     // access history.
     return (
-      <RouterContext.Provider
-        value={{ location, nextLocation, history, flags }}
-      >
+      <RouterContext value={{ location, nextLocation, history, flags }}>
         <Redirect to={location.rewrite(path).href()} />
-      </RouterContext.Provider>
+      </RouterContext>
     );
   }
 }

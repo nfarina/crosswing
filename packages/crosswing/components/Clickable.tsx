@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, ReactNode } from "react";
+import { ButtonHTMLAttributes, ReactNode, RefObject } from "react";
 import { styled } from "styled-components";
 
 /**
@@ -10,11 +10,15 @@ import { styled } from "styled-components";
 export function Clickable({
   children,
   type = "button",
+  ref,
   ...rest
 }: ButtonHTMLAttributes<HTMLButtonElement> & {
   children?: ReactNode;
+  ref?: RefObject<HTMLButtonElement | null>;
 }) {
-  return <StyledClickable type={type} {...rest} children={children} />;
+  return (
+    <StyledClickable type={type} {...rest} children={children} ref={ref} />
+  );
 }
 
 export const StyledClickable = styled.button`

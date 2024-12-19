@@ -31,7 +31,7 @@ export function LabeledContentEditable({
   value?: string;
   onValueChange?: (value: string) => void;
 }) {
-  const editorRef = useRef<HTMLDivElement | null>(null);
+  const editorRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     if (!editorRef.current) return;
@@ -44,19 +44,19 @@ export function LabeledContentEditable({
       // a <br/> element instead of a new paragraph.
       document.execCommand("defaultParagraphSeparator", false, "div");
     }
-  }, [!!editorRef.current]);
+  }, []);
 
   const emptyValue = forceParagraphs ? "<p><br></p>" : "";
 
   useLayoutEffect(() => {
-    if (!editorRef.current) return;
+    if (!editorRef.current) return; // Shouldn't happen.
     // Check for equality, otherwise the cursor position gets reset as
     // you type.
     const newValue = value || emptyValue;
     if (editorRef.current.innerHTML !== newValue) {
       editorRef.current.innerHTML = newValue;
     }
-  }, [!!editorRef.current, value]);
+  }, [value]);
 
   function onDescriptionInput(e: FormEvent<HTMLDivElement>) {
     const editor = e.target as HTMLDivElement;
@@ -76,7 +76,7 @@ export function LabeledContentEditable({
     e.preventDefault();
 
     // Get text representation of clipboard.
-    var text = e.clipboardData.getData("text/plain");
+    const text = e.clipboardData.getData("text/plain");
 
     // Insert text manually
     document.execCommand("insertHTML", false, text);

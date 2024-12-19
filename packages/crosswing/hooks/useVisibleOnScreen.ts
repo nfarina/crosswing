@@ -5,14 +5,15 @@ const debug = Debug("components:useVisibleOnScreen");
 
 export function useVisibleOnScreen(
   ref: RefObject<HTMLElement | null | undefined>,
-  { threshold = 0 }: { threshold?: number } = {},
+  { threshold = 0, once = false }: { threshold?: number; once?: boolean } = {},
 ): boolean {
   const [intersecting, setIntersecting] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [hasBeenVisible, setHasBeenVisible] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el || (once && hasBeenVisible)) return;
 
     let observer: IntersectionObserver | null = null;
 
@@ -64,9 +65,15 @@ export function useVisibleOnScreen(
       clearInterval(intervalId);
       if (observer) observer.unobserve(el);
     };
-  }, [!!ref.current]);
+  }, [!!ref.current, once, hasBeenVisible]);
 
-  return visible && intersecting;
+  useEffect(() => {
+    if (visible && intersecting) {
+      setHasBeenVisible(true);
+    }
+  }, [visible, intersecting]);
+
+  return once ? hasBeenVisible : visible && intersecting;
 }
 
 function isInvisible(el: HTMLElement): boolean {

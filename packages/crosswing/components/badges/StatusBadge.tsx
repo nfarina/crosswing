@@ -51,6 +51,7 @@ export const StyledStatusBadge = styled.div`
   align-items: center;
   padding: 10px 15px;
   border-radius: 6px;
+  box-sizing: border-box;
 
   &[data-has-icon="true"] {
     padding-left: 10px;

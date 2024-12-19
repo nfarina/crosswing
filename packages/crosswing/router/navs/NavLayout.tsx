@@ -1,12 +1,12 @@
-import { HTMLAttributes, ReactNode } from "react";
+import { HTMLAttributes, ReactNode, use } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
-import { useHost } from "../../host/context/HostContext.js";
+import { HostContext } from "../../host/context/HostContext.js";
 import { useHostStatusBar } from "../../host/features/HostStatusBar.js";
-import { safeArea } from "../../host/features/safeArea.js";
 import { StatusBarStyleAttribute } from "../../host/util/useAutoStatusBar.js";
 import { BackIcon } from "../../icons/Back.js";
-import { useRouter } from "../context/RouterContext.js";
+import { safeArea } from "../../safearea/safeArea.js";
+import { RouterContext } from "../context/RouterContext.js";
 import { NavAccessory, NavAccessoryView } from "./NavAccessoryView.js";
 import { NavTitleView } from "./NavTitleView.js";
 
@@ -17,6 +17,8 @@ export interface NavProps {
   left?: NavAccessory | null;
   right?: NavAccessory | null;
   disabled?: boolean;
+  /** If provided, the back button will always go to this path instead of cycling back through history. */
+  backTo?: string | null;
   /** Pass true to hide the hairline shadow under the nav bar. */
   hideSeparator?: boolean;
   /** Pass true to hide the auto-generated back button (if displayed). */
@@ -35,6 +37,8 @@ export interface NavProps {
   hidden?: boolean;
   /** Marks this NavLayout as not having a way to go "back". Essential for good behavior on Android.  */
   isApplicationRoot?: boolean;
+  /** Pass true to make the nav content area determine the height of the layout. */
+  fitContent?: boolean;
 }
 
 export function NavLayout({
@@ -47,19 +51,25 @@ export function NavLayout({
   hideSeparator,
   hideBackButton,
   hideTabBar,
+  backTo,
   transparentHeader,
   fullBleed,
   darkenUnderStatusBar,
   lightStatusBar,
   hidden,
   isApplicationRoot,
+  fitContent,
   ...rest
 }: NavProps & Omit<HTMLAttributes<HTMLDivElement>, "title">) {
   // Pull our back link (if any) from context.
-  const { back, flags } = useRouter();
+  const { back, flags } = use(RouterContext);
+
+  // Use the provided backTo path if any, otherwise fall back to the normal
+  // back behavior.
+  const resolvedBack = backTo ?? back;
 
   // Pull host info for safe area.
-  const { container, viewport } = useHost();
+  const { container, viewport } = use(HostContext);
   const statusBar = useHostStatusBar();
 
   function getLeftAccessory() {
@@ -68,7 +78,7 @@ export function NavLayout({
     if (back && !hideBackButton)
       return (
         <NavAccessoryView
-          accessory={{ icon: <BackIcon />, to: back, back: true }}
+          accessory={{ icon: <BackIcon />, to: resolvedBack, back: true }}
           align="left"
         />
       );
@@ -109,6 +119,7 @@ export function NavLayout({
       data-disabled={!!disabled}
       data-hidden={!!hidden}
       data-hide-tab-bar={!!hideTabBar}
+      data-fit-content={!!fitContent}
       {...StatusBarStyleAttribute(lightStatusBar ? "light" : "default")} // Picked up on by useAutoStatusBar.
       {...rest}
     >
@@ -138,7 +149,9 @@ export const StyledNavHeader = styled.div`
   padding-top: ${safeArea.top()};
   padding-left: ${safeArea.left()};
   padding-right: ${safeArea.right()};
-  transition: background-color 0.2s ease-in-out;
+  transition:
+    background-color 0.2s ease-in-out,
+    border-bottom-color 0.2s ease-in-out;
   background-color: transparent;
   position: relative;
 
@@ -151,7 +164,12 @@ export const StyledNavHeader = styled.div`
   }
 
   &[data-hide-separator="true"] {
-    border-bottom: none;
+    /* We don't hide the border completely because it shifts the content. There are many places where we hide the border until you scroll the content for instance. */
+    border-bottom: 1px solid transparent;
+
+    &[data-transparent-header="false"] {
+      border-bottom: 1px solid ${colors.textBackground()};
+    }
   }
 
   > *:nth-child(1) {
@@ -209,6 +227,13 @@ export const StyledNavLayout = styled.div`
     flex-grow: 1;
     z-index: 0;
     transition: opacity 0.2s ease-in-out;
+  }
+
+  &[data-fit-content="true"] {
+    > *:nth-child(2) {
+      height: auto;
+      max-height: 100%;
+    }
   }
 
   &[data-disabled="true"] {

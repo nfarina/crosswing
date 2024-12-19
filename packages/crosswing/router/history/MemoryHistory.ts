@@ -5,7 +5,7 @@ import { NavigateListener } from "./BrowserHistory.js";
 const debug = Debug("router:MemoryHistory");
 
 export class MemoryHistory {
-  public type: "memory" = "memory";
+  public type = "memory" as const;
   public location: RouterLocation;
   public listeners: Set<NavigateListener> = new Set();
 

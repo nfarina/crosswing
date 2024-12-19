@@ -2,6 +2,7 @@ import {
   ChangeEvent,
   FocusEvent,
   TextareaHTMLAttributes,
+  use,
   useLayoutEffect,
   useRef,
   useState,
@@ -10,7 +11,7 @@ import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
 import { useElementSize } from "../../hooks/useElementSize.js";
-import { useHost } from "../../host/context/HostContext.js";
+import { HostContext } from "../../host/context/HostContext.js";
 import { useScrollAboveKeyboard } from "../../host/features/useScrollAboveKeyboard.js";
 import { StatusBadge, StyledStatusBadge } from "../badges/StatusBadge.js";
 
@@ -60,7 +61,7 @@ export function TextArea({
   // Auto-trimming copied from TextInput
   //
 
-  const { container } = useHost();
+  const { container } = use(HostContext);
 
   // Track whether you've ever focused the input so we don't open up a new
   // blank form with lots of "Required" errors right away.
@@ -122,14 +123,17 @@ export function TextArea({
     // unless necessary, otherwise it will cause a reflow and make the
     // component jump around if it's in a scrolling container.
     const oldHeight = container.style.height;
+    const oldMinHeight = textarea.style.minHeight;
     container.style.height = container.offsetHeight + "px";
 
     textarea.style.height = minHeight + "px";
+    textarea.style.minHeight = "unset";
     const newHeight = Math.max(
       Math.min(textarea.scrollHeight, maxHeight),
       minHeight,
     );
     textarea.style.height = `${newHeight}px`;
+    textarea.style.minHeight = oldMinHeight;
 
     // Restore the old height to avoid reflows.
     container.style.height = oldHeight;

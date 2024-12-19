@@ -49,7 +49,6 @@ export function ManualControl() {
     {
       clickOutsideToClose: false,
       autoReposition: true,
-      hideBackdrop: true,
       placement: "auto",
     },
   );
@@ -207,9 +206,10 @@ const ManualControlView = styled.div`
 `;
 
 let mountCounter = 0;
+const getNextMountCounter = () => ++mountCounter;
 
 function PopupMountCounter() {
-  const [mountTime] = useState(() => ++mountCounter);
+  const [mountTime] = useState(getNextMountCounter);
 
   return <StyledPopupMountCounter>Mount #{mountTime}</StyledPopupMountCounter>;
 }

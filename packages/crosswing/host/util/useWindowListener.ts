@@ -1,11 +1,11 @@
-import { useEffect } from "react";
-import { useNativeHost } from "./useNativeHost.js";
+import { use, useEffect } from "react";
+import { HostContext } from "../context/HostContext.js";
 
 export function useWindowListener(
   name: string,
   listener: Function | null | undefined,
 ) {
-  const { unsafe_post } = useNativeHost();
+  const { unsafe_post } = use(HostContext);
 
   // Capture for error message below.
   const stack = new Error().stack ?? "";

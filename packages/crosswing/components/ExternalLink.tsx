@@ -1,7 +1,7 @@
-import { HTMLAttributes, MouseEvent, ReactNode } from "react";
+import { HTMLAttributes, MouseEvent, ReactNode, use } from "react";
 import { styled } from "styled-components";
 import { colors } from "../colors/colors.js";
-import { useHost } from "../host/context/HostContext.js";
+import { HostContext } from "../host/context/HostContext.js";
 
 export interface Props {
   href: string;
@@ -20,7 +20,7 @@ export function ExternalLink({
   children,
   ...rest
 }: { as?: "a" | "span"; href?: string } & HTMLAttributes<HTMLSpanElement>) {
-  const { openUrl } = useHost();
+  const { openUrl } = use(HostContext);
 
   function onClick(e: MouseEvent<HTMLDivElement>) {
     e.preventDefault();

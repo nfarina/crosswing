@@ -4,6 +4,7 @@ import {
   ReactElement,
   ReactNode,
   isValidElement,
+  use,
   useState,
 } from "react";
 import { styled } from "styled-components";
@@ -12,8 +13,8 @@ import { fonts } from "../fonts/fonts.js";
 import { flattenChildren } from "../hooks/flattenChildren.js";
 import { useDebounced } from "../hooks/useDebounced.js";
 import { useResettableState } from "../hooks/useResettableState.js";
-import { useHost } from "../host/context/HostContext.js";
-import { useRouter } from "../router/context/RouterContext.js";
+import { HostContext } from "../host/context/HostContext.js";
+import { RouterContext } from "../router/context/RouterContext.js";
 import { Redirect } from "../router/redirect/Redirect.js";
 import { UnreadBadge } from "../router/tabs/UnreadBadge.js";
 import { easing } from "../shared/easing.js";
@@ -60,8 +61,12 @@ export function TabbedButtonLayout({
   // We always want to render using "nextLocation" instead of "location" because
   // content may be loading via <Suspense> and we want to highlight the tab that
   // will be selected next regardless of that loading state.
-  const { history, location, nextLocation: anyNextLocation } = useRouter();
-  const { container } = useHost();
+  const {
+    history,
+    location,
+    nextLocation: anyNextLocation,
+  } = use(RouterContext);
+  const { container } = use(HostContext);
 
   // The nextLocation could be _anywhere_. We only want to pre-render the
   // active button if the path matches our current location. Otherwise we might

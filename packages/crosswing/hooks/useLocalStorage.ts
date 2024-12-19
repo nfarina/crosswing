@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 // Adapted from:
 // https://github.com/rehooks/local-storage/blob/master/src/use-localstorage.ts
@@ -49,7 +49,7 @@ export function useLocalStorage<S>(
 
   // Create an event listener so we can be notified of changes to local state
   // (only works if the other person is using useLocalStorage() as well).
-  const onLocalStorageChange = useCallback((event: Event) => {
+  const onLocalStorageChange = (event: Event) => {
     if (event.type === LocalStorageChanged.eventName) {
       const { detail } = event as LocalStorageChanged;
       if (detail.key === key) {
@@ -62,11 +62,11 @@ export function useLocalStorage<S>(
         setInnerItem(newValue != null ? JSON.parse(newValue) : null);
       }
     }
-  }, []);
+  };
 
   // Return a wrapped version of useState's setter function that persists the
   // new value to localStorage.
-  const setItem: Setter<S> = useCallback((value) => {
+  const setItem: Setter<S> = (value) => {
     if (value instanceof Function) {
       setInnerItem((prevState) => {
         const newValue = value(prevState);
@@ -80,7 +80,7 @@ export function useLocalStorage<S>(
       setInnerItem(value);
       writeLocalStorage(key, value != null ? JSON.stringify(value) : null);
     }
-  }, []);
+  };
 
   useEffect(() => {
     // The custom storage event allows us to update our component

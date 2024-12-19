@@ -1,6 +1,6 @@
 import { HTMLAttributes } from "react";
 import { styled } from "styled-components";
-import { getBuilderVarCss } from "./colors/builders.js";
+import { getBuilderVarCSS } from "./colors/builders.js";
 import { ColorBuilder, colors, shadows } from "./colors/colors.js";
 import {
   CrosswingFontFaceStyle,
@@ -10,11 +10,17 @@ import {
   getFontVarCSS,
   GlobalFontFace,
 } from "./fonts/fonts.js";
+import {
+  BROWSER_SAFE_AREA,
+  getSafeAreaCSS,
+  SafeArea,
+} from "./safearea/safeArea.js";
 
 export function CrosswingApp({
   colors: overriddenColors = [],
   faces: overriddenFaces = [],
   fonts: overriddenFonts = [],
+  safeArea: overriddenSafeArea = BROWSER_SAFE_AREA,
   children,
   transparent,
   ...rest
@@ -22,6 +28,7 @@ export function CrosswingApp({
   colors?: ColorBuilder[];
   faces?: GlobalFontFace[];
   fonts?: FontBuilder[];
+  safeArea?: SafeArea;
   transparent?: boolean;
 } & HTMLAttributes<HTMLDivElement>) {
   const resolvedColors = [
@@ -37,6 +44,7 @@ export function CrosswingApp({
     <StyledCrosswingApp
       $colors={resolvedColors}
       $fonts={resolvedFonts}
+      $safeArea={overriddenSafeArea}
       data-transparent={!!transparent}
       {...rest}
     >
@@ -49,11 +57,13 @@ export function CrosswingApp({
 export const StyledCrosswingApp = styled.div<{
   $colors: ColorBuilder[];
   $fonts: FontBuilder[];
+  $safeArea: SafeArea;
 }>`
   /* I try hard to avoid props in styled-components but this is the only
      practical way to embed CSS at the element level. */
-  ${(p) => getBuilderVarCss(p.$colors)}
+  ${(p) => getBuilderVarCSS(p.$colors)}
   ${(p) => getFontVarCSS(p.$fonts)}
+  ${(p) => getSafeAreaCSS(p.$safeArea)}
 
   &[data-transparent="false"] {
     background: ${colors.textBackground()};

@@ -12,7 +12,7 @@ export interface Confirm {
   destructiveText?: ReactNode;
   /** Can the OK button be clicked? */
   canConfirm?: boolean;
-  onConfirm: () => void;
+  onConfirm?: () => void;
 }
 
 type Falsy = false | 0 | "" | null | undefined;

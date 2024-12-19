@@ -66,7 +66,7 @@ export const StyledLabeledCheckmark = styled.div`
     width: 22px;
     height: 22px;
     flex-shrink: 0;
-    margin-right: 2px;
+    margin-right: 8px;
     visibility: hidden;
     color: ${colors.turquoise()};
   }

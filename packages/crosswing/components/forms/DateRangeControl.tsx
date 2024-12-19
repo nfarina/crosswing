@@ -34,7 +34,7 @@ export default function DateRangeControl({
   const ref = useRef<HTMLDivElement | null>(null);
 
   const customPrompt = usePrompt(() => ({
-    title: "Enter Date Range",
+    title: "Enter date range",
     message: "Date ranges are inclusive.",
     placeholder: "Ex: 1/1/2020 - 1/31/2020",
     transformer: dateRangeTransformer(),

@@ -1,7 +1,7 @@
 import { HTMLAttributes, useRef } from "react";
 import { styled } from "styled-components";
 import { useElementSize } from "../../hooks/useElementSize.js";
-import { IDView, StyledIDView } from "../IDView.js";
+import { IDView } from "../IDView.js";
 
 export function ToolbarIDView({
   name,
@@ -21,6 +21,10 @@ export function ToolbarIDView({
     } else {
       el.style.opacity = "1";
     }
+
+    // Now that we've set the initial opacity, we can add a transition for future
+    // changes.
+    el.style.transition = "opacity 0.1s ease-in-out";
   });
 
   return (
@@ -36,8 +40,4 @@ export const StyledToolbarIDView = styled.div`
   justify-content: flex-end;
   min-width: 16px;
   overflow: hidden;
-
-  > ${StyledIDView} {
-    transition: opacity 0.1s ease-in-out;
-  }
 `;

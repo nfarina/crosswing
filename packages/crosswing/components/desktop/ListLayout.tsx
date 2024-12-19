@@ -1,13 +1,14 @@
 import {
   HTMLAttributes,
   PointerEvent as ReactPointerEvent,
+  use,
   useRef,
 } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { useElementSize } from "../../hooks/useElementSize.js";
 import { useLocalStorage } from "../../hooks/useLocalStorage.js";
-import { useRouter } from "../../router/context/RouterContext.js";
+import { RouterContext } from "../../router/context/RouterContext.js";
 
 export function ListLayout({
   defaultWidth = 275,
@@ -28,7 +29,7 @@ export function ListLayout({
    */
   restorationKey: Function;
 }) {
-  const { location } = useRouter();
+  const { location } = use(RouterContext);
   const ref = useRef<HTMLDivElement>(null);
 
   // Persist the list width across window reloads.

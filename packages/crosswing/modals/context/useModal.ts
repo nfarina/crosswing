@@ -1,5 +1,5 @@
-import { ReactNode, useCallback, useEffect, useRef, useState } from "react";
-import { useModalContext } from "./ModalContext.js";
+import { ReactNode, use, useEffect, useRef, useState } from "react";
+import { ModalContext } from "./ModalContext.js";
 
 /**
  * Callback types provided for descriptive type-hints.
@@ -26,7 +26,7 @@ export function useModal<T extends any[]>(
   renderModal: (...args: T) => ReactNode,
 ): Modal<T> {
   const [key] = useState(generateModalKey);
-  const context = useModalContext();
+  const context = use(ModalContext);
 
   const previousActiveElement = useRef<Element | null>(null);
 
@@ -37,13 +37,13 @@ export function useModal<T extends any[]>(
     lastArgs: [],
   });
 
-  const show = useCallback((...args: any) => {
+  function show(...args: any) {
     setVisibility({ visible: true, lastArgs: args });
-  }, []);
+  }
 
-  const hide = useCallback(() => {
+  function hide() {
     setVisibility({ visible: false, lastArgs: [] });
-  }, []);
+  }
 
   // Show and hide the modal depending on the isShown state.
   useEffect(() => {

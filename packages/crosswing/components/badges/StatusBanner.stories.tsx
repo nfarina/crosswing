@@ -9,7 +9,7 @@ export default {
   parameters: { layout: "centered" },
 } satisfies Meta<typeof StatusBanner>;
 
-function Decorator(Story: StoryFn) {
+function Decorator(Story: any) {
   return (
     <div style={{ width: "350px" }}>
       <Story />

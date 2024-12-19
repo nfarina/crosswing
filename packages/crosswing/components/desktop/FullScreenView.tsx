@@ -2,7 +2,7 @@ import {
   createContext,
   HTMLAttributes,
   ReactNode,
-  useContext,
+  use,
   useLayoutEffect,
   useRef,
   useState,
@@ -16,9 +16,13 @@ import { HotKey, useHotKey } from "../../hooks/useHotKey.js";
 import { useSessionStorage } from "../../hooks/useSessionStorage.js";
 import { CloseIcon } from "../../icons/Close.js";
 import { FullScreenIcon } from "../../icons/FullScreen.js";
-import { useModalContext } from "../../modals/context/ModalContext.js";
+import { ModalContext } from "../../modals/context/ModalContext.js";
 import { Button, StyledButton } from "../Button.js";
-import { ToolbarSpace } from "../toolbar/Toolbar.js";
+import {
+  ToolbarButton,
+  toolbarShadows,
+  ToolbarSpace,
+} from "../toolbar/Toolbar.js";
 
 export function FullScreenView({
   restorationKey,
@@ -50,7 +54,7 @@ export function FullScreenView({
   const [buttonHovered, setButtonHovered] = useState(false);
 
   // Fit our "full screen" rect to the nearest modal provider boundary.
-  const { modalRoot } = useModalContext();
+  const { modalRoot } = use(ModalContext);
 
   const [forceRefresh, setForceRefresh] = useState(0);
 
@@ -62,6 +66,7 @@ export function FullScreenView({
 
   // Persist the fullscreen status across window reloads (don't use
   // localStorage because then other unrelated tabs would be affected).
+  /* eslint-disable prefer-const */
   let [isFullScreen, setFullScreen] = useSessionStorage(
     `FullScreenView:${restorationKey.name}:isFullScreen`,
     defaultFullScreen,
@@ -220,7 +225,7 @@ export function FullScreenView({
       </FullScreenHeader>
       <div className="children">{children}</div>
       {!isFullScreen && !disabled && (
-        <Button
+        <ToolbarButton
           className="full-screen-button"
           icon={<FullScreenIcon />}
           onClick={() => {
@@ -237,9 +242,11 @@ export function FullScreenView({
 
   return (
     <StyledFullScreenView ref={parentRef} {...rest}>
-      <FullScreenContext.Provider value={{ isFullScreen, disabled }}>
+      <FullScreenContext value={{ isFullScreen, disabled }}>
+        {/* Can't think of an alternate approach that doesn't bread this "rule". */}
+        {/* eslint-disable-next-line react-compiler/react-compiler */}
         {divRef.current && createPortal(rendered, divRef.current)}
-      </FullScreenContext.Provider>
+      </FullScreenContext>
     </StyledFullScreenView>
   );
 }
@@ -257,10 +264,6 @@ export const FullScreenContext = createContext<FullScreenContextValue>({
   disabled: true,
 });
 FullScreenContext.displayName = "FullScreenContext";
-
-export function useFullScreen(): FullScreenContextValue {
-  return useContext(FullScreenContext);
-}
 
 export const StyledFullScreenView = styled.div`
   position: relative;
@@ -335,9 +338,20 @@ const ContentLayout = styled.div`
     position: absolute;
     top: 10px;
     right: 10px;
-    background: ${colors.darkBlue()};
-    color: ${colors.white()};
     z-index: 1;
+    min-height: auto;
+    height: 30px;
+
+    /* (Alternate) Colors from StatusBadge */
+    /* box-shadow: ${toolbarShadows.control()};
+
+    background: ${colors.lightBlue({ lighten: 0.1, alpha: 0.5 })};
+    color: ${colors.lightBlue({ darken: 0.5 })};
+
+    @media (prefers-color-scheme: dark) {
+      background: ${colors.lightBlue({ darken: 0.6, alpha: 0.8 })};
+      color: ${colors.lightBlue({ lighten: 0.06 })};
+    } */
   }
 
   > .hover-outline {
@@ -363,6 +377,6 @@ const ContentLayout = styled.div`
  * screen mode.
  */
 export function FullScreenToolbarSpace() {
-  const { isFullScreen, disabled } = useFullScreen();
+  const { isFullScreen, disabled } = use(FullScreenContext);
   return !isFullScreen && !disabled ? <ToolbarSpace width={40} /> : null;
 }

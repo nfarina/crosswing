@@ -105,8 +105,8 @@ export function CalendarView({
       currentDay = currentDay.add(1, "week");
     }
 
-    const cssProps: CSSProperties = {
-      ["--position" as any]: getMonthPosition(date) + "px",
+    const cssProps: CSSProperties & { "--position": string } = {
+      ["--position"]: getMonthPosition(date) + "px",
     };
 
     return (

@@ -1,7 +1,7 @@
 import {
   CSSProperties,
   ReactNode,
-  useCallback,
+  use,
   useLayoutEffect,
   useRef,
   useState,
@@ -12,10 +12,10 @@ import {
   HotKeyContextDataAttributes,
   useHotKey,
 } from "../../hooks/useHotKey.js";
-import { useHost } from "../../host/context/HostContext.js";
-import { safeArea } from "../../host/features/safeArea.js";
+import { HostContext } from "../../host/context/HostContext.js";
+import { safeArea } from "../../safearea/safeArea.js";
 import { easing } from "../../shared/easing.js";
-import { useModalContext } from "../context/ModalContext.js";
+import { ModalContext } from "../context/ModalContext.js";
 import { Modal, useModal } from "../context/useModal.js";
 
 export type SheetAnimation = "slide" | "pop";
@@ -92,8 +92,8 @@ export const SheetContainer = ({
   delay?: string;
   onExited?: () => void;
 }) => {
-  const { container, viewport } = useHost();
-  const { allowDesktopPresentation } = useModalContext();
+  const { container, viewport } = use(HostContext);
+  const { allowDesktopPresentation } = use(ModalContext);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const resolvedOnClose = sticky ? () => {} : onClose;
 
@@ -115,11 +115,11 @@ export const SheetContainer = ({
     }
   }
 
-  const onAnimationEnd = useCallback(() => {
+  function onAnimationEnd() {
     if (animatingIn === false) {
       onExited?.();
     }
-  }, [animatingIn, onExited]);
+  }
 
   // We have to do some special handling for when we are being dismissed via
   // "slide" animation while the keyboard is visible. In this case, the keyboard
@@ -171,7 +171,7 @@ export const SheetContainer = ({
       <div
         className="backdrop"
         data-animating-in={animatingIn}
-        onClick={onClose}
+        onClick={resolvedOnClose}
       />
       {/* This container element helps with CSS targeting and also allows the
           child to return different elements from render() without triggering

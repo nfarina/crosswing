@@ -45,8 +45,6 @@ const Content = styled.div`
   background: ${colors.textBackgroundPanel()};
   color: ${colors.text()};
   font: ${fonts.display({ size: 15 })};
-  height: 100%;
-  width: calc(100% - var(--sidebar-width));
 `;
 
 const Sidebar = styled.div`
@@ -56,8 +54,6 @@ const Sidebar = styled.div`
   background: ${colors.textBackground()};
   color: ${colors.text()};
   font: ${fonts.display({ size: 15 })};
-  width: var(--sidebar-width);
-  height: 100%;
   border-left: 1px solid ${colors.separator()};
 `;
 

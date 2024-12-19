@@ -1,11 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
-import {
-  ErrorView,
-  StyledErrorView,
-  getErrorProps,
-} from "../../components/ErrorView.js";
-import { ErrorLike } from "../../shared/errors.js";
+import { ErrorView, StyledErrorView } from "../../components/ErrorView.js";
+import { ErrorLike, getErrorObj } from "../../shared/errors.js";
 import { truncate } from "../../shared/strings.js";
 import { Modal } from "../context/useModal.js";
 import { useDialog } from "../dialog/useDialog.js";
@@ -21,8 +17,11 @@ export function useErrorAlert({
 
   const modal = useDialog(
     (error?: ErrorLike) => {
-      const errorObj = getErrorProps(error ?? {});
+      const errorObj = getErrorObj(error ?? {});
+      /* eslint-disable prefer-const */
       let { name, message, details, stack, userFacing } = errorObj;
+
+      const hasDetails = !!stack || !!details;
 
       if (!error?.["isErrorWithDetails"]) {
         // Display arbitrary errors.
@@ -65,9 +64,11 @@ export function useErrorAlert({
           message={message}
           children={
             expanded &&
-            stack && <ErrorView error={{ name, message, details, stack }} />
+            hasDetails && (
+              <ErrorView error={{ name, message, details, stack }} />
+            )
           }
-          buttons={[...(stack ? [detailsButton] : []), okButton]}
+          buttons={[...(hasDetails ? [detailsButton] : []), okButton]}
           onClose={onAlertClose}
           data-expanded={expanded}
         />

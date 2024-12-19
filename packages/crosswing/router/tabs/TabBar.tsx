@@ -1,8 +1,8 @@
-import { ReactElement } from "react";
+import { ReactElement, use } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
-import { useHost } from "../../host/context/HostContext.js";
-import { safeArea } from "../../host/features/safeArea.js";
+import { HostContext } from "../../host/context/HostContext.js";
+import { safeArea } from "../../safearea/safeArea.js";
 import { StyledTabLink, TabLink, TabProps } from "./TabLink.js";
 
 export function TabBar({
@@ -16,7 +16,7 @@ export function TabBar({
   collapsed?: boolean;
   getTabLink: (tab: ReactElement<TabProps>) => string;
 }) {
-  const { container } = useHost();
+  const { container } = use(HostContext);
 
   if (collapsed) {
     return <StyledTabBar data-container={container} data-collapsed />;

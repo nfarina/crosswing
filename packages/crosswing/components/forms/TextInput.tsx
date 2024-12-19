@@ -2,6 +2,7 @@ import {
   ChangeEvent,
   FocusEvent,
   InputHTMLAttributes,
+  use,
   useLayoutEffect,
   useRef,
   useState,
@@ -9,7 +10,7 @@ import {
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
-import { useHost } from "../../host/context/HostContext.js";
+import { HostContext } from "../../host/context/HostContext.js";
 import { useScrollAboveKeyboard } from "../../host/features/useScrollAboveKeyboard.js";
 import { StatusBadge, StyledStatusBadge } from "../badges/StatusBadge.js";
 
@@ -49,7 +50,7 @@ export function TextInput({
   error?: Error | null;
   errorStyle?: TextInputErrorStyle;
 }) {
-  const { container } = useHost();
+  const { container } = use(HostContext);
 
   // Track whether you've ever focused the input so we don't open up a new
   // blank form with lots of "Required" errors right away.
@@ -135,7 +136,7 @@ export function TextInput({
         onBlur={onInputBlur}
         {...restAttrs}
       />
-      {showError && (
+      {showError && !!error?.message && (
         <StatusBadge
           type="error"
           size="smallest"

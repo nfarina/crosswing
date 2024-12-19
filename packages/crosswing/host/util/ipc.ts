@@ -7,6 +7,7 @@ import { HostContact, HostContainer, HostFeatures } from "./types.js";
 
 const container = detectContainer();
 
+/* eslint-disable */
 declare var global: any;
 
 export function detectContainer(): HostContainer {

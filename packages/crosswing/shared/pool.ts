@@ -313,6 +313,7 @@ export class AsyncPool {
     if (finished) return;
 
     // We use a "secret" argument to track who called this function.
+    /* eslint-disable prefer-rest-params */
     const num = arguments[0] ?? "from caller";
 
     // Are tasks running? If so we'll have to wait.

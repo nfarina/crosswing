@@ -122,7 +122,7 @@ export function formatNumber(
   // If you specified a number of decimal places less than our precision, we'll
   // round the number to that many decimal places.
   if (decimals < precision) {
-    let round = precision - decimals;
+    const round = precision - decimals;
     // We must unavoidably do floating-point math here, but we'll round it
     // back to an integer for toFixed.
     num = Math.round(num / 10 ** round) * 10 ** round;

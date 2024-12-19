@@ -1,6 +1,6 @@
-import { HTMLAttributes, ReactElement } from "react";
+import { HTMLAttributes, ReactElement, use } from "react";
 import { styled } from "styled-components";
-import { useHost } from "../host/context/HostContext.js";
+import { HostContext } from "../host/context/HostContext.js";
 
 export type ScrollBounce = "none" | "horizontal" | "vertical" | "both";
 
@@ -20,7 +20,7 @@ export function Scrollable({
    */
   children?: ReactElement<any>;
 }) {
-  const { container } = useHost();
+  const { container } = use(HostContext);
 
   return (
     <StyledScrollable {...rest}>

@@ -17,7 +17,7 @@ export type UseHotKeyOptions = {
    * element. You can omit or pass `null` to always allow the hotkey to
    * trigger; this should be reserved for rare global hotkeys.
    */
-  target?: RefObject<Element> | null;
+  target?: RefObject<Element | null> | null;
   onPress?: HotKeyOnPressHandler;
   /** Set to true to disable handling this hotkey. */
   disabled?: boolean;

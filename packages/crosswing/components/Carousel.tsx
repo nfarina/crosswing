@@ -1,6 +1,6 @@
-import { CSSProperties, HTMLAttributes, ReactNode } from "react";
+import { CSSProperties, HTMLAttributes, ReactNode, use } from "react";
 import { styled } from "styled-components";
-import { useHost } from "../host/context/HostContext.js";
+import { HostContext } from "../host/context/HostContext.js";
 
 export function Carousel({
   inset = [20, 20],
@@ -11,7 +11,7 @@ export function Carousel({
   inset?: [left: number, right: number];
   children?: ReactNode;
 } & HTMLAttributes<HTMLDivElement>) {
-  const { container } = useHost();
+  const { container } = use(HostContext);
 
   const [leftInset, rightInset] = inset;
 

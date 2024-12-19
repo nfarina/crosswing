@@ -9,6 +9,7 @@ export type FormValue = InputValue<any> | ToggleValue | ObjectValue<any>;
 export type FormValues = {
   submit: () => void;
   canSubmit: boolean;
+  hasChanged: boolean;
   /** Should be spread onto to `form`. */
   props: Pick<FormHTMLAttributes<HTMLFormElement>, "onKeyDown" | "onSubmit">;
   /** Props for form elements; simply propagates the `disabled` prop. */
@@ -118,6 +119,7 @@ export function useFormValues({
   return {
     submit,
     canSubmit,
+    hasChanged,
     props: { onKeyDown, onSubmit: onFormSubmit },
     valueProps,
     navProps: { onClick: submit, disabled: !canSubmit },

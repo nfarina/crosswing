@@ -1,11 +1,11 @@
-import { CSSProperties, ReactNode, useCallback, useRef } from "react";
+import { CSSProperties, ReactNode, useRef } from "react";
 import { keyframes, styled } from "styled-components";
 import {
   HotKeyContextDataAttributes,
   useHotKey,
 } from "../../hooks/useHotKey.js";
 import { AndroidBackButtonClassName } from "../../host/context/HostContext.js";
-import { safeArea } from "../../host/features/safeArea.js";
+import { safeArea } from "../../safearea/safeArea.js";
 import { easing } from "../../shared/easing.js";
 import { Modal, useModal } from "../context/useModal.js";
 
@@ -99,11 +99,11 @@ export const DialogContainer = ({
   //   }
   // }, []);
 
-  const onAnimationEnd = useCallback(() => {
+  function onAnimationEnd() {
     if (animatingIn === false) {
       onExited?.();
     }
-  }, [animatingIn, onExited]);
+  }
 
   const classNames = ["backdrop"];
 

@@ -1,35 +1,49 @@
-import { HTMLAttributes, ReactElement, RefObject } from "react";
+import { HTMLAttributes, ReactElement, RefObject, use } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { useGesture } from "../../hooks/useGesture.js";
-import { useHost } from "../../host/context/HostContext.js";
+import { HostContext } from "../../host/context/HostContext.js";
 import { easing } from "../../shared/easing.js";
 import { RouterLocation } from "../RouterLocation.js";
-import {
-  RouterContext,
-  RouterContextValue,
-  useRouter,
-} from "../context/RouterContext.js";
+import { RouterContext, RouterContextValue } from "../context/RouterContext.js";
+
+export type NavStackAnimation = "slide" | "pop" | "auto" | "none";
 
 export type NavStackItem = {
   key: string;
   childContext: RouterContextValue;
   child: ReactElement<any>;
-  ref: RefObject<HTMLDivElement>;
+  ref: RefObject<HTMLDivElement | null>;
 };
 
 export function NavStack({
   back,
   items,
+  animation: specifiedAnimation = "auto",
   ...rest
 }: HTMLAttributes<HTMLDivElement> & {
   back: RouterLocation | null;
   items: NavStackItem[];
+  animation?: NavStackAnimation;
 }) {
   // const stackRef = useRef<HTMLDivElement | null>(null);
-  const { history } = useRouter();
-  const { container } = useHost();
+  const { history } = use(RouterContext);
+  const { container } = use(HostContext);
+
+  const animation = (() => {
+    if (specifiedAnimation === "auto") {
+      switch (container) {
+        case "ios":
+          return "slide";
+        case "android":
+          return "pop";
+        default:
+          return "none";
+      }
+    }
+    return specifiedAnimation;
+  })();
 
   /**
    * Loops over the stack items and adds `aria-hidden` to all but the last.
@@ -37,7 +51,7 @@ export function NavStack({
    * content that's behind the current screen.
    *
    * This is done as DOM operation instead of modifying the `{child}` so that we
-   * don't incorrectly assign the attribute to something like a <Content.Provider>.
+   * don't incorrectly assign the attribute to something like a <SomeContext>.
    */
   // useEffect(() => {
   //   const stackEl = stackRef.current;
@@ -71,8 +85,10 @@ export function NavStack({
 
   return (
     <StyledNavs
-      onTouchStart={container === "ios" ? onTouchStart : undefined}
-      data-container={container}
+      onTouchStart={
+        container === "ios" && animation === "slide" ? onTouchStart : undefined
+      }
+      data-animation={animation}
       {...rest}
     >
       <TransitionGroup component={null}>
@@ -82,15 +98,14 @@ export function NavStack({
             nodeRef={item.ref}
             unmountOnExit
             timeout={{
-              enter:
-                container !== "web" && container !== "webapp" ? 400 + 250 : 0,
-              exit: container !== "web" && container !== "webapp" ? 300 : 0,
+              enter: animation !== "none" ? 400 + 250 : 0,
+              exit: animation !== "none" ? 300 : 0,
             }}
           >
             <div className="item" ref={item.ref}>
-              <RouterContext.Provider value={item.childContext}>
+              <RouterContext value={item.childContext}>
                 {item.child}
-              </RouterContext.Provider>
+              </RouterContext>
             </div>
           </CSSTransition>
         ))}
@@ -124,12 +139,20 @@ export const StyledNavs = styled.div`
     }
   }
 
-  /* Hide all except the last two to (maybe) increase browser render performance. */
-  > .item:not(:nth-last-child(-n + 2)) {
-    display: none;
+  /* Disabled for now, seems more annoying than helpful. */
+  &[data-render-entire-history="false"] {
+    /* Hide all except the last two to (maybe) increase browser render performance. */
+    > .item:not(:nth-last-child(-n + 2)) {
+      display: none;
+    }
   }
 
-  &[data-container="ios"] {
+  /* Bug fix where previous items could have elements that rendered on top of the last item due to stacking context. */
+  > .item:last-child {
+    z-index: 2;
+  }
+
+  &[data-animation="slide"] {
     > .item.enter {
       transform: translateX(calc(100% + 20px));
     }
@@ -153,7 +176,7 @@ export const StyledNavs = styled.div`
     }
   }
 
-  &[data-container="android"] {
+  &[data-animation="pop"] {
     > .item.enter {
       transform: scale(0.9);
       opacity: 0;

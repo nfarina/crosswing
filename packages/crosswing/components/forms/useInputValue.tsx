@@ -51,6 +51,7 @@ export function useInputValue<T = string>({
   initialStringValue = null,
   onValueChange,
   required = false,
+  hideRequiredError = false,
   transformer,
   validate,
   disabled,
@@ -64,6 +65,11 @@ export function useInputValue<T = string>({
   onValueChange?: (value: T | null, stringValue: string) => void;
   /** Whether the input is required. */
   required?: boolean;
+  /**
+   * Set to true to hide the required error message. Useful when there's only
+   * one form component so it's obviously required!
+   */
+  hideRequiredError?: boolean;
   /** Optional transformer to make the "real" value different (or a different type) from the user-entered string. */
   transformer?: InputTransformer<T>;
   /** Optional additional validation of the transformed value. */
@@ -104,7 +110,7 @@ export function useInputValue<T = string>({
     // If you haven't entered anything, there's nothing to parse.
     if (text === "") {
       if (required) {
-        validationError = new Error("Required");
+        validationError = new Error(hideRequiredError ? "" : "Required");
       }
 
       return { parsed, parseError, validationError };

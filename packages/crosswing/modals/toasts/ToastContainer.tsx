@@ -1,6 +1,6 @@
 import { TransitionGroup } from "react-transition-group";
 import { styled } from "styled-components";
-import { safeArea } from "../../host/features/safeArea";
+import { safeArea } from "../../safearea/safeArea.js";
 import { Toast } from "../context/ModalContext.js";
 import { ToastView } from "./ToastView.js";
 
@@ -51,5 +51,15 @@ export const StyledToastContainer = styled.div`
 
   > * + * {
     margin-top: 10px;
+  }
+
+  /* On mobile, we want to show the toasts at the top of the screen like a banner. */
+  @media (max-width: 400px) {
+    justify-content: flex-start;
+    align-items: stretch;
+
+    > * {
+      width: 100%;
+    }
   }
 `;

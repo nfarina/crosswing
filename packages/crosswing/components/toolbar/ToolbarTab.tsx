@@ -1,9 +1,9 @@
-import { HTMLAttributes, ReactNode } from "react";
+import { HTMLAttributes, ReactNode, use } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
+import { RouterContext } from "../../router/context/RouterContext.js";
 import { Link } from "../../router/Link.js";
-import { useRouter } from "../../router/context/RouterContext.js";
 import { Clickable } from "../Clickable.js";
 
 export interface ToolbarTabProps {
@@ -22,7 +22,7 @@ export function ToolbarTab({
   // We always want to render using "nextLocation" instead of "location" because
   // content may be loading via <Suspense> and we want to highlight the tab that
   // will be selected next regardless of that loading state.
-  const { nextLocation } = useRouter();
+  const { nextLocation } = use(RouterContext);
 
   if (to) {
     return (

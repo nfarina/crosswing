@@ -1,6 +1,7 @@
-import { HTMLAttributes, ReactNode, useCallback } from "react";
+import { HTMLAttributes } from "react";
 import { keyframes, styled } from "styled-components";
 import { colors, shadows } from "../../colors/colors.js";
+import { Button } from "../../components/Button.js";
 import { fonts } from "../../fonts/fonts.js";
 import { useGesture } from "../../hooks/useGesture.js";
 import { useInterval } from "../../hooks/useInterval.js";
@@ -8,12 +9,15 @@ import { CloseIcon } from "../../icons/Close.js";
 import { Link } from "../../router/Link.js";
 import { easing } from "../../shared/easing.js";
 import { Seconds } from "../../shared/timespan.js";
+import { Toast } from "../context/ModalContext.js";
 
 const AUTO_DISMISS_TIME = Seconds(4);
 
 export function ToastView({
   title,
   message,
+  icon,
+  action,
   truncate,
   to,
   sticky,
@@ -23,17 +27,12 @@ export function ToastView({
   in: animatingIn,
   onExited,
   ...rest
-}: Omit<HTMLAttributes<HTMLDivElement>, "title"> & {
-  title?: ReactNode;
-  message?: ReactNode;
-  truncate?: boolean;
-  to?: string;
-  sticky?: boolean;
-  onClick?: () => void;
-  onClose?: () => void;
-  in?: boolean;
-  onExited?: () => void;
-}) {
+}: Omit<HTMLAttributes<HTMLDivElement>, "title"> &
+  Omit<Toast, "key"> & {
+    truncate?: boolean;
+    in?: boolean;
+    onExited?: () => void;
+  }) {
   // Allow swiping right on the toast to dismiss it.
   const onTouchStart = useGesture({
     direction: "right",
@@ -49,16 +48,23 @@ export function ToastView({
     [sticky],
   );
 
-  const onAnimationEnd = useCallback(() => {
+  function onAnimationEnd() {
     if (animatingIn === false) {
       onExited?.();
     }
-  }, [animatingIn, onExited]);
+  }
 
-  const onToastClick = useCallback(() => {
-    onClick?.();
+  function onActionClick() {
+    rest.onActionClick?.();
     onClose?.();
-  }, [onClick]);
+  }
+
+  function onToastClick() {
+    if (onClick) {
+      onClick();
+      onClose?.();
+    }
+  }
 
   return (
     <StyledToastView
@@ -66,8 +72,14 @@ export function ToastView({
       onTouchStart={onTouchStart}
       data-truncate-text={!!truncate}
       data-animating-in={animatingIn}
+      data-clickable={!!onClick}
       onAnimationEnd={onAnimationEnd}
     >
+      {icon && (
+        <div className="icon" onClick={onToastClick}>
+          {icon}
+        </div>
+      )}
       {to ? (
         <Link className="content" to={to} onClick={onToastClick}>
           <div className="title">{title}</div>
@@ -78,6 +90,14 @@ export function ToastView({
           <div className="title">{title}</div>
           <div className="message">{message}</div>
         </div>
+      )}
+      {!!action && (
+        <Button
+          className="action"
+          size="smaller"
+          title={action}
+          onClick={onActionClick}
+        />
       )}
       <div className="close" onClick={onClose}>
         <CloseIcon />
@@ -132,13 +152,29 @@ const StyledToastView = styled.div`
   flex-flow: row;
   align-items: center;
 
+  > * {
+    flex-shrink: 0;
+  }
+
+  &[data-clickable="true"] {
+    cursor: pointer;
+  }
+
+  > .icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    margin-left: 13px;
+    margin-right: -3px;
+  }
+
   > .content {
+    flex-shrink: 1;
     flex-grow: 1;
     padding: 10px;
     padding-left: 13px;
     display: flex;
     flex-flow: column;
-    cursor: pointer;
     color: ${colors.text()};
     text-decoration: none;
 
@@ -162,6 +198,11 @@ const StyledToastView = styled.div`
         min-width: 100%;
       }
     }
+  }
+
+  > .action {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   > .close {

@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, ReactNode } from "react";
+import { ButtonHTMLAttributes, ReactNode, RefObject } from "react";
 import { styled } from "styled-components";
 import { colors } from "../colors/colors.js";
 import { fonts } from "../fonts/fonts.js";
@@ -16,6 +16,7 @@ export function Button({
   children,
   working,
   disabled,
+  ref,
   ...rest
 }: {
   primary?: boolean;
@@ -25,6 +26,7 @@ export function Button({
   subtitle?: ReactNode;
   disabled?: boolean;
   working?: boolean;
+  ref?: RefObject<HTMLButtonElement | null>;
 } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "title">) {
   const hasText = !!children || !!title || !!subtitle;
   const hasIcon = !!icon;
@@ -37,6 +39,7 @@ export function Button({
       disabled={!!disabled || !!working}
       data-icon-only={!hasText && hasIcon}
       data-icon-and-children={hasText && hasIcon}
+      ref={ref}
       {...rest}
     >
       {icon}
@@ -78,8 +81,6 @@ export const StyledButton = styled(Clickable)`
     flex-flow: column;
 
     > .title {
-      font: ${fonts.displayBold({ size: 15 })};
-      color: ${colors.text()};
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -87,7 +88,6 @@ export const StyledButton = styled(Clickable)`
 
     > .subtitle {
       font: ${fonts.displayMedium({ size: 12 })};
-      color: ${colors.text()};
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -115,6 +115,8 @@ export const StyledButton = styled(Clickable)`
 
     > .content {
       margin-left: 8px;
+      /* Assume our icons are 24px wide (Crosswing standard). */
+      max-width: calc(100% - 24px - 8px);
     }
   }
 

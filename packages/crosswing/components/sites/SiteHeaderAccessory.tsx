@@ -1,8 +1,17 @@
-import { HTMLAttributes, MouseEvent, ReactNode, RefObject } from "react";
+import {
+  HTMLAttributes,
+  MouseEvent,
+  ReactNode,
+  RefObject,
+  useImperativeHandle,
+  useRef,
+} from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
+import { Popup } from "../../modals/popup/PopupView.js";
 import { UnreadBadge } from "../../router/tabs/UnreadBadge.js";
 import { Clickable } from "../Clickable.js";
+import { PopupButtonRef } from "../PopupButton.js";
 
 export type SiteHeaderAccessory = {
   icon: ReactNode;
@@ -19,12 +28,12 @@ export type SiteHeaderAccessory = {
   mobilePlacement?: "nav" | "sidebar";
   /** True if you want to (temporarily?) hide this accessory. */
   hidden?: boolean;
+  /** Optional managed popup to show when the accessory is clicked. */
+  popup?: Popup<[]> | null;
   /**
-   * An optional ref you can pass if you need access to the rendered element
-   * that serves as the popup target (if you need to programatically open a
-   * popup, for example).
+   * An optional ref you can pass if you need to programatically open a popup.
    */
-  popupTargetRef?: RefObject<HTMLDivElement>;
+  popupRef?: RefObject<PopupButtonRef | null>;
 };
 
 export function SiteHeaderAccessoryView({
@@ -38,18 +47,26 @@ export function SiteHeaderAccessoryView({
     iconSize = ["24px", "24px"],
     unread,
     onClick,
-    popupTargetRef,
+    popup,
+    popupRef,
   } = accessory;
+
+  const ref = useRef<HTMLButtonElement>(null);
+
+  useImperativeHandle(popupRef, () => ({
+    show() {
+      popup?.show(ref);
+    },
+    hide() {
+      popup?.hide();
+    },
+  }));
 
   const [width, height] = iconSize;
 
   return (
-    <StyledSiteHeaderAccessoryView onClick={onClick} {...rest}>
-      <div
-        style={{ width, height }}
-        ref={popupTargetRef}
-        className="popup-target"
-      >
+    <StyledSiteHeaderAccessoryView ref={ref} onClick={onClick} {...rest}>
+      <div style={{ width, height }} className="popup-target">
         {icon}
       </div>
       {!!unread && <UnreadBadge>{unread}</UnreadBadge>}

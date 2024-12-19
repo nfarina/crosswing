@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
@@ -18,7 +18,7 @@ export default {
 
 export function Normal() {
   const [count, setCount] = useState(0);
-  const increment = useCallback(() => setCount((c) => c + 1), []);
+  const increment = () => setCount((c) => c + 1);
 
   // Create a dialog that demonstrates how dialogs can have their own state like
   // any other react component, but also update in response to prop changes
@@ -84,7 +84,7 @@ function StatefulDialog({
   onClose: () => void;
 }) {
   const [local, setLocal] = useState(0);
-  const incrementLocal = useCallback(() => setLocal((c) => c + 1), []);
+  const incrementLocal = () => setLocal((c) => c + 1);
 
   return (
     <SampleDialog>

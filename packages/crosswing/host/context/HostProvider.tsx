@@ -1,5 +1,6 @@
-import { HTMLAttributes, useMemo } from "react";
+import { HTMLAttributes } from "react";
 import { styled } from "styled-components";
+import { getSafeAreaCSS, SafeArea } from "../../safearea/safeArea.js";
 import {
   badgeAppIcon,
   closePlaid,
@@ -32,7 +33,6 @@ import {
   HostFeatures,
   HostPlatform,
   HostPlugin,
-  SafeArea,
 } from "../util/types.js";
 import { useBackButton } from "../util/useBackButton.js";
 import { useClipboard } from "../util/useClipboard.js";
@@ -70,65 +70,62 @@ export function HostProvider({
   // Initialize scroll-to-top when tapping status bar on iOS.
   const scrollToTop = useScrollToTop(container);
 
-  // We want to be really careful about constructing the context value,
-  // because React compares it by strict equality to determine if ALL
-  // consumers of this context need to be re-rendered.
-  const value = useMemo<HostContextValue | undefined>(() => {
-    if (features && viewport && safeArea && deepLink) {
-      return {
-        container,
-        platform: (features.platform as HostPlatform) ?? "unknown",
-        safeArea,
-        viewport,
-        preferredFontSize,
-        deepLink,
-        deviceId: deviceId ?? features.identifier,
-        clientUrl: features.clientUrl,
-        webBundle: features.webBundle,
-        supportsEmailSignIn: !!features.emailSignIn,
-        supportsLogin: !!features.login,
-        supportsNotifications:
-          container === "android" || !!features.notifications, // All android devices support notifications without prompting.
-        supportsShareSheet: !!features.shareSheet,
-        supportsMessageSheet: !!features.messageSheet,
-        supportsEmailSheet: !!features.emailSheet,
-        supportsContacts: !!features.contacts,
-        supportsWakeLock: !!features.wakeLock,
-        supportsBrightness: !!features.brightness,
-        supportsPlaid: !!features.plaid,
-        supportsLightStatusBar: container === "ios", // All iOS versions support this.
-        requiresNotificationAuthorization: !!features.notificationAuthorization,
-        smsAutoVerificationToken: features.smsAutoVerificationToken,
-        getPlugin: (plugin: string) => buildPlugin(features, plugin),
-        openUrl,
-        sendSignInLink,
-        login,
-        requestNotificationAuthorization,
-        requestLocationWhenInUseAuthorization,
-        requestTemporaryFullAccuracyLocationAuthorization,
-        requestLocationUpdate,
-        openSettings,
-        badgeAppIcon,
-        scrollToTop,
-        copyToClipboard: clipboard.copy,
-        showShareSheet,
-        showMessageSheet,
-        showEmailSheet,
-        getContacts,
-        startSmsRetriever,
-        setWakeLock,
-        getBrightness,
-        setBrightness,
-        setLightStatusBar,
-        openPlaid,
-        closePlaid,
-        delayUpdates,
-        unsafe_features: () => features,
-        unsafe_send: send,
-        unsafe_post: post,
-      };
-    }
-  }, [container, features, viewport, preferredFontSize, safeArea, deepLink]);
+  const value: HostContextValue | null =
+    features && viewport && safeArea && deepLink
+      ? {
+          container,
+          platform: (features.platform as HostPlatform) ?? "unknown",
+          safeArea,
+          viewport,
+          preferredFontSize,
+          deepLink,
+          deviceId: deviceId ?? features.identifier,
+          clientUrl: features.clientUrl,
+          webBundle: features.webBundle,
+          supportsEmailSignIn: !!features.emailSignIn,
+          supportsLogin: !!features.login,
+          supportsNotifications:
+            container === "android" || !!features.notifications, // All android devices support notifications without prompting.
+          supportsShareSheet: !!features.shareSheet,
+          supportsMessageSheet: !!features.messageSheet,
+          supportsEmailSheet: !!features.emailSheet,
+          supportsContacts: !!features.contacts,
+          supportsWakeLock: !!features.wakeLock,
+          supportsBrightness: !!features.brightness,
+          supportsPlaid: !!features.plaid,
+          supportsLightStatusBar: container === "ios", // All iOS versions support this.
+          requiresNotificationAuthorization:
+            !!features.notificationAuthorization,
+          smsAutoVerificationToken: features.smsAutoVerificationToken,
+          getPlugin: (plugin: string) => buildPlugin(features, plugin),
+          openUrl,
+          sendSignInLink,
+          login,
+          requestNotificationAuthorization,
+          requestLocationWhenInUseAuthorization,
+          requestTemporaryFullAccuracyLocationAuthorization,
+          requestLocationUpdate,
+          openSettings,
+          badgeAppIcon,
+          scrollToTop,
+          copyToClipboard: clipboard.copy,
+          showShareSheet,
+          showMessageSheet,
+          showEmailSheet,
+          getContacts,
+          startSmsRetriever,
+          setWakeLock,
+          getBrightness,
+          setBrightness,
+          setLightStatusBar,
+          openPlaid,
+          closePlaid,
+          delayUpdates,
+          unsafe_features: () => features,
+          unsafe_send: send,
+          unsafe_post: post,
+        }
+      : null;
 
   //
   // Render
@@ -139,10 +136,10 @@ export function HostProvider({
   }
 
   return (
-    <HostContext.Provider value={value}>
+    <HostContext value={value}>
       {/* We need an actual HTML element in the DOM to attach our CSS custom properties to. */}
       <StyledHostProvider $safeArea={value.safeArea} {...rest} />
-    </HostContext.Provider>
+    </HostContext>
   );
 }
 
@@ -151,11 +148,7 @@ export const StyledHostProvider = styled.div<{
 }>`
   display: flex;
   flex-flow: column;
-
-  --safe-area-top: ${(p) => p.$safeArea.top};
-  --safe-area-bottom: ${(p) => p.$safeArea.bottom};
-  --safe-area-left: ${(p) => p.$safeArea.left};
-  --safe-area-right: ${(p) => p.$safeArea.right};
+  ${({ $safeArea }) => getSafeAreaCSS($safeArea)}
 
   > * {
     flex-grow: 1;

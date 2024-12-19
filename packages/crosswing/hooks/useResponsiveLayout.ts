@@ -1,5 +1,5 @@
 import Debug from "debug";
-import { MutableRefObject, useState } from "react";
+import { RefObject, useState } from "react";
 import { ElementSize, useElementSize } from "./useElementSize.js";
 
 const debug = Debug("components:ResponsiveLayout");
@@ -12,7 +12,7 @@ export interface ResponsiveLayouts {
 }
 
 export function useResponsiveLayout<L extends ResponsiveLayouts>(
-  ref: MutableRefObject<HTMLElement | null>,
+  ref: RefObject<HTMLElement | null>,
   layouts: L,
 ): keyof L {
   const [bestLayout, setBestLayout] = useState<keyof L | null>(null);

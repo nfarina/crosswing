@@ -3,7 +3,7 @@ import {
   ReactNode,
   SyntheticEvent,
   createContext,
-  useContext,
+  use,
 } from "react";
 import { styled } from "styled-components";
 import { colors } from "../colors/colors.js";
@@ -19,10 +19,6 @@ export type OnCloseHandler = (() => any) | null | undefined;
 
 export const OnCloseContext = createContext<OnCloseHandler>(null);
 OnCloseContext.displayName = "OnCloseContext";
-
-export function useOnClose(): OnCloseHandler {
-  return useContext(OnCloseContext);
-}
 
 export function PopupMenu({
   arrowBackground,
@@ -45,9 +41,7 @@ export function PopupMenu({
       {...rest}
     >
       <StyledPopupMenu>
-        <OnCloseContext.Provider value={onClose}>
-          {children}
-        </OnCloseContext.Provider>
+        <OnCloseContext value={onClose}>{children}</OnCloseContext>
       </StyledPopupMenu>
     </PopupView>
   );
@@ -86,11 +80,11 @@ export function PopupMenuText({
   leaveOpen?: boolean;
 } & Omit<HTMLAttributes<HTMLAnchorElement & HTMLDivElement>, "onClick">) {
   // We want to automatically close the menu when you click something.
-  const onClose = useOnClose();
+  const onClose = use(OnCloseContext);
 
   function onButtonClick() {
     onClick?.();
-    !leaveOpen && onClose?.();
+    if (!leaveOpen) onClose?.();
   }
 
   if (to) {
@@ -158,7 +152,12 @@ const StyledPopupMenuLink = styled(Link)`
     pointer-events: none;
   }
 
+  /* Is this a link to somewhere you're at already? (Used in toolbar tabs) */
   &[data-prefix-active="true"] {
+    font: ${fonts.displayBold({ size: 15, line: "22px" })};
+  }
+
+  &[data-selected="true"] {
     font: ${fonts.displayBold({ size: 15, line: "22px" })};
   }
 `;
@@ -194,7 +193,7 @@ export function PopupMenuToggle({
         {children && <div className="children">{children}</div>}
         {detail && <div className="detail">{detail}</div>}
       </div>
-      <Toggle on={on} size="smaller" disabled={disabled} />
+      <Toggle on={on} size="smallest" disabled={disabled} />
     </StyledPopupMenuToggle>
   );
 }

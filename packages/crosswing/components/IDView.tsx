@@ -1,10 +1,9 @@
-import { MouseEvent } from "react";
+import { HTMLAttributes, MouseEvent, use } from "react";
 import { styled } from "styled-components";
 import { colors } from "../colors/colors.js";
 import { fonts } from "../fonts/fonts.js";
 import { CopyIcon } from "../icons/Copy.js";
-import { useModalContext } from "../modals/context/ModalContext.js";
-import { Clickable } from "./Clickable.js";
+import { ModalContext } from "../modals/context/ModalContext.js";
 
 export function IDView({
   name,
@@ -12,14 +11,14 @@ export function IDView({
   truncate = 6,
   onClick,
   ...rest
-}: Parameters<typeof Clickable>[0] & {
+}: HTMLAttributes<HTMLDivElement> & {
   name: string;
   id: string;
   truncate?: number | false;
 }) {
-  const { showToast } = useModalContext();
+  const { showToast } = use(ModalContext);
 
-  function onViewClick(e: MouseEvent<HTMLButtonElement>) {
+  function onViewClick(e: MouseEvent<HTMLDivElement>) {
     navigator.clipboard.writeText(id);
     showToast(`${name} ID copied to clipboard.`);
     onClick?.(e);
@@ -33,7 +32,7 @@ export function IDView({
   );
 }
 
-export const StyledIDView = styled(Clickable)`
+export const StyledIDView = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-flow: row;
@@ -50,6 +49,7 @@ export const StyledIDView = styled(Clickable)`
 
   > .text {
     font: ${fonts.displayMono({ size: 13 })};
+    transform: translateY(-1px);
   }
 
   &:hover {

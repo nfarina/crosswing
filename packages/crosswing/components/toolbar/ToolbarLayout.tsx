@@ -30,9 +30,9 @@ export function ToolbarLayout({
 }) {
   const divRef = useRef<HTMLDivElement | null>(null);
 
-  const insertionRefs = useRef<Record<string | symbol, ToolbarInsertionRef>>(
-    {},
-  );
+  const [insertionRefs, setInsertionRefs] = useState<
+    Record<string | symbol, ToolbarInsertionRef>
+  >({});
 
   const [, setForceRender] = useState(0);
 
@@ -63,17 +63,18 @@ export function ToolbarLayout({
   const defaultClass = hidesParentToolbars ? "toolbar-layout" : "";
 
   function getInsertionRef(name: string | symbol): ToolbarInsertionRef {
-    const ref = insertionRefs.current[name];
+    const ref = insertionRefs[name];
     if (!ref) return { current: null };
     return ref;
   }
 
   function setInsertionRef(name: string | symbol, ref: ToolbarInsertionRef) {
-    insertionRefs.current[name] = ref;
+    setInsertionRefs((refs) => ({ ...refs, [name]: ref }));
     setForceRender((n) => n + 1);
   }
 
   const context: ToolbarContextValue = {
+    isDefaultContext: false,
     getInsertionRef,
     setInsertionRef,
   };
@@ -85,9 +86,7 @@ export function ToolbarLayout({
       data-hide-separator={hideSeparator}
       {...rest}
     >
-      <ToolbarContext.Provider value={context}>
-        {children}
-      </ToolbarContext.Provider>
+      <ToolbarContext value={context}>{children}</ToolbarContext>
     </StyledToolbarLayout>
   );
 }

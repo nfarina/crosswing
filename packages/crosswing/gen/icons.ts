@@ -5,6 +5,7 @@ import fs from "fs/promises";
 import { glob } from "glob";
 import path from "path";
 import prettier from "prettier";
+import parserTypescript from "prettier/parser-typescript";
 
 // Auto-generates TypeScript code for each icon.
 
@@ -50,7 +51,7 @@ for (const iconFile of iconFiles) {
   // Transform the code with Prettier.
   const tsxFileContent = await prettier.format(tsxCode, {
     parser: "typescript",
-    plugins: [require("prettier/parser-typescript")],
+    plugins: [parserTypescript],
   });
 
   const tsxFilePath = new URL(`../icons/${name}.tsx`, import.meta.url);

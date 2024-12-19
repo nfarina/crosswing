@@ -1,6 +1,6 @@
-import { AnchorHTMLAttributes, MouseEvent, ReactNode } from "react";
+import { AnchorHTMLAttributes, MouseEvent, ReactNode, use } from "react";
 import { styled } from "styled-components";
-import { useRouter } from "./context/RouterContext.js";
+import { RouterContext } from "./context/RouterContext.js";
 import { BrowserHistory } from "./history/BrowserHistory.js";
 import { MemoryHistory } from "./history/MemoryHistory.js";
 
@@ -15,7 +15,7 @@ export function Link({
   replace?: boolean;
   children?: ReactNode;
 }) {
-  const { location, nextLocation, history } = useRouter();
+  const { location, nextLocation, history } = use(RouterContext);
 
   function getHref(): [href: string, basePath: string] {
     // Allow the `to` parameter to be optional, which creates a dead link that

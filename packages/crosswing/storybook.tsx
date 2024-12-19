@@ -1,5 +1,5 @@
 import { createGlobalStyle, styled } from "styled-components";
-import { getBuilderVarCss } from "./colors/builders.js";
+import { getBuilderVarCSS } from "./colors/builders.js";
 import { ColorBuilder, colors, shadows } from "./colors/colors.js";
 import {
   CrosswingFontFaceStyle,
@@ -88,7 +88,7 @@ const CenteredLayoutGlobalStyle = createGlobalStyle<{
   html {
     > body {
     /* Define our color and font vars so stories have access to the default theme. */
-    ${(p) => getBuilderVarCss(p.$colors)}
+    ${(p) => getBuilderVarCSS(p.$colors)}
     ${(p) => getFontVarCSS(p.$fonts)}
 
       /* We should always set a default background color; Storybook doesn't do it automatically for dark mode. */
@@ -117,7 +117,7 @@ const MobileLayoutGlobalStyle = createGlobalStyle<{
       height: 100%;
 
     /* Define our color and font vars so stories have access to the default theme. */
-    ${(p) => getBuilderVarCss(p.$colors)}
+    ${(p) => getBuilderVarCSS(p.$colors)}
     ${(p) => getFontVarCSS(p.$fonts)}
 
       /* Darken the canvas a bit so the default white background contrasts. */
@@ -170,7 +170,7 @@ const FullScreenLayoutGlobalStyle = createGlobalStyle<{
     height: 100%;
 
     /* Define our color and font vars so stories have access to the default theme. */
-    ${(p) => getBuilderVarCss(p.$colors)}
+    ${(p) => getBuilderVarCSS(p.$colors)}
     ${(p) => getFontVarCSS(p.$fonts)}
 
     /* We should always set a default background color; Storybook doesn't do it automatically for dark mode. */

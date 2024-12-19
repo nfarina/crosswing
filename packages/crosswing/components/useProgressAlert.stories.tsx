@@ -78,12 +78,12 @@ export const Progress = () => {
   const progressAlert = useProgressAlert({ onCancel: () => task.cancel() });
 
   const task = useAsyncTask({
-    async func() {
+    func: async (task) => {
       progressAlert.setProgress(0);
       progressAlert.show("Issuing Cards…");
 
       for (let i = 1; i <= 10; i++) {
-        if (this.isCanceled()) {
+        if (task.isCanceled()) {
           action("task")("Task was canceled!");
           break;
         }

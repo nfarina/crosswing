@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Toast, useModalContext } from "../context/ModalContext";
+import { use, useState } from "react";
+import { ModalContext, Toast } from "../context/ModalContext";
 
 /**
  * Represents a Toast that you can show and continue to render changes into.
@@ -11,13 +11,14 @@ export type ToastController<T extends any[] = []> = {
 };
 
 let nextToastId = 1;
+const getNextToastId = () => nextToastId++;
 
 export function useToast<T extends any[]>(
   renderToast: (...args: T) => string | Omit<Toast, "key">,
 ): ToastController<T> {
-  const { showToast, hideToast } = useModalContext();
+  const { showToast, hideToast } = use(ModalContext);
 
-  const [key] = useState(() => `useToast-${nextToastId++}`);
+  const [key] = useState(() => `useToast-${getNextToastId()}`);
 
   const [isVisible, setIsVisible] = useState(false);
 

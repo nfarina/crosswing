@@ -14,3 +14,11 @@ export type ErrorObj = {
    */
   userFacing?: boolean;
 };
+
+export function getErrorObj(error: ErrorLike): ErrorObj {
+  return typeof error === "string" ? { message: error } : error;
+}
+
+export function getErrorMessage(error: ErrorLike): string {
+  return getErrorObj(error).message ?? "";
+}

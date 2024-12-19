@@ -1,4 +1,4 @@
-import { FocusEvent, useState } from "react";
+import { FocusEvent, ReactNode, useState } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
@@ -13,7 +13,7 @@ export const LabeledTextArea = ({
   onBlur,
   ...rest
 }: Parameters<typeof TextArea>[0] & {
-  label: string;
+  label: ReactNode;
 }) => {
   // Track whether you've ever focused the input so we don't open up a new
   // blank form with lots of "Required" errors right away.
@@ -59,10 +59,15 @@ export const StyledLabeledTextArea = styled.div`
   flex-flow: column;
   position: relative;
   min-height: 60px;
+  cursor: text;
 
   > ${StyledTextArea} {
     > textarea {
       padding: 30px 10px 8px;
+
+      /* If the textarea is empty or smaller than the available height,
+         make it take up the full height so you can click anywhere to focus it. */
+      min-height: 100%;
     }
 
     flex-grow: 1;

@@ -90,7 +90,7 @@ function SheetPresenter({ wide }: { wide?: boolean }) {
         style={{ background: colors.textBackground() }}
       />
     ),
-    { stretch: { maxWidth: "700px", maxHeight: "300px" } },
+    wide ? { stretch: { maxWidth: "700px", maxHeight: "300px" } } : {},
   );
 
   return (

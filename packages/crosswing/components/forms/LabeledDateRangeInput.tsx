@@ -1,7 +1,8 @@
-import { HTMLAttributes, ReactNode, lazy } from "react";
+import { HTMLAttributes, lazy, ReactNode, Suspense } from "react";
 import { styled } from "styled-components";
 import { useSheet } from "../../modals/sheet/useSheet.js";
 import { DateRangeLabel } from "../labels/DateRangeLabel.js";
+import { LoadingCurtain } from "../LoadingCurtain.js";
 import { DateRange } from "./DateRange.js";
 import { TextCell } from "./TextCell.js";
 
@@ -25,11 +26,13 @@ export function LabeledDateRangeInput({
   disabled?: boolean;
 }) {
   const datePicker = useSheet(() => (
-    <DateRangePicker
-      defaultRange={value ?? null}
-      onDateSelected={onValueChange}
-      onClose={datePicker.hide}
-    />
+    <Suspense fallback={<LoadingCurtain lazy />}>
+      <DateRangePicker
+        defaultRange={value ?? null}
+        onDateSelected={onValueChange}
+        onClose={datePicker.hide}
+      />
+    </Suspense>
   ));
 
   return (

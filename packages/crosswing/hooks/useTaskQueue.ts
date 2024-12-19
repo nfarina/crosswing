@@ -1,12 +1,4 @@
-import {
-  ReactNode,
-  createContext,
-  createElement,
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-} from "react";
+import { ReactNode, createContext, createElement, useState } from "react";
 import { useIsMounted } from "./useIsMounted.js";
 
 // It's named "Queue" but it's really not, all tasks are run immediately in
@@ -17,6 +9,7 @@ type Class<T> = new (...args: any[]) => T;
 
 // Every Task has a unique ID.
 let nextId: number = 1;
+const getNextId = () => nextId++;
 
 /** A "task" is simply an object that implements the "run" method. */
 export interface Task {
@@ -39,8 +32,8 @@ export type TaskQueueContextValue = {
 
 export const TaskQueueContext = createContext<TaskQueueContextValue>({
   tasks: new Set(),
-  tasksOfType: invariantViolation,
-  queueTask: invariantViolation,
+  tasksOfType: throwsNoProvider,
+  queueTask: throwsNoProvider,
   lastError: null,
 });
 TaskQueueContext.displayName = "TaskQueueContext";
@@ -54,94 +47,82 @@ TaskQueueContext.displayName = "TaskQueueContext";
 export function TaskQueueProvider({ children }: { children: ReactNode }) {
   const [tasks, setTasks] = useState<Set<Task>>(new Set());
 
-  const addTask = useCallback(
-    (task: Task) => {
-      setTasks((current) => {
-        const next = new Set(current);
-        next.add(task);
-        return next;
-      });
-    },
-    [setTasks],
-  );
+  const addTask = (task: Task) => {
+    setTasks((current) => {
+      const next = new Set(current);
+      next.add(task);
+      return next;
+    });
+  };
 
-  const removeTask = useCallback(
-    (task: Task) => {
-      setTasks((current) => {
-        const next = new Set(current);
-        next.delete(task);
-        return next;
-      });
-    },
-    [setTasks],
-  );
+  const removeTask = (task: Task) => {
+    setTasks((current) => {
+      const next = new Set(current);
+      next.delete(task);
+      return next;
+    });
+  };
 
   // Basic error reporting.
   const [lastError, setLastError] = useState<Error | null>(null);
   const isMounted = useIsMounted();
 
-  const queueTask = useCallback(
-    async (task: Task) => {
-      // Assign this task a unique ID.
-      task.id = nextId++;
+  const queueTask = async (task: Task) => {
+    // Assign this task a unique ID.
+    task.id = getNextId();
 
-      // Add this task to our queue.
-      addTask(task);
+    // Add this task to our queue.
+    addTask(task);
 
-      try {
-        await task.run();
-      } catch (error: any) {
-        console.error("Task error:", error);
+    const error = await tryRunTask(task);
 
-        if (!isMounted()) {
-          console.log(
-            "TaskQueueProvider is no longer mounted; the user will not be alerted to this failure.",
-          );
-          return;
-        }
+    if (error) {
+      console.error("Task error:", error);
 
-        setLastError(error);
-      } finally {
-        if (isMounted()) {
-          // Remove the task from our global queue.
-          removeTask(task);
-        }
+      if (!isMounted()) {
+        console.log(
+          "TaskQueueProvider is no longer mounted; the user will not be alerted to this failure.",
+        );
+        return;
       }
-    },
-    [addTask, removeTask],
-  );
 
-  const tasksOfType = useCallback(
-    <T extends Task>(taskClass: Class<T>) =>
-      Array.from(tasks).filter((task) => task instanceof taskClass) as T[],
-    [tasks],
-  );
+      setLastError(error);
+    }
+
+    if (isMounted()) {
+      // Remove the task from our global queue.
+      removeTask(task);
+    }
+  };
+
+  const tasksOfType = <T extends Task>(taskClass: Class<T>) =>
+    Array.from(tasks).filter((task) => task instanceof taskClass) as T[];
 
   // Make sure to keep this object reference stable across renders so we don't
   // cause any context children to re-render unnecessarily.
-  const contextValue = useMemo(
-    () => ({ tasks, tasksOfType, queueTask, lastError }),
-    [tasks, tasksOfType, queueTask, lastError],
-  );
+  const contextValue = { tasks, tasksOfType, queueTask, lastError };
 
-  return createElement(TaskQueueContext.Provider, {
+  return createElement(TaskQueueContext, {
     value: contextValue,
     children,
   });
 }
 
-/**
- * Grab the current TaskQueue from React.Context.
- */
-export function useTaskQueue(): TaskQueueContextValue {
-  return useContext(TaskQueueContext);
+// Separated out for React Compiler.
+async function tryRunTask(task: Task): Promise<Error | null> {
+  try {
+    await task.run();
+    return null;
+  } catch (error: any) {
+    return error;
+  }
 }
 
 /**
  * Throw error when TaskQueueContext is used outside of context provider.
  */
-function invariantViolation(): never {
+function throwsNoProvider(): never {
   throw new Error(
-    "Attempted to call useTaskQueue() outside of provider context. Make sure your app is rendered inside <TaskQueueProvider>.",
+    "Attempted to use TaskQueueContext outside of a provider. Make sure your app is rendered inside <TaskQueueProvider>.",
   );
 }

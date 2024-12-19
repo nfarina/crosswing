@@ -1,7 +1,7 @@
 import Debug from "debug";
 import {
   DependencyList,
-  MutableRefObject,
+  RefObject,
   useLayoutEffect,
   useRef,
   useState,
@@ -15,7 +15,7 @@ export type ElementSize = {
 };
 
 export function useElementSize(
-  ref: MutableRefObject<HTMLElement | null>,
+  ref: RefObject<HTMLElement | null>,
   onSizeChange: (newSize: ElementSize) => void,
   deps?: DependencyList,
 ) {

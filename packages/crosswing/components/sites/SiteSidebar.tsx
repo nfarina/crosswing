@@ -4,6 +4,7 @@ import {
   isValidElement,
   ReactElement,
   ReactNode,
+  use,
 } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
@@ -11,7 +12,7 @@ import { fonts } from "../../fonts/fonts.js";
 import { flattenChildren } from "../../hooks/flattenChildren.js";
 import { CrosswingLogoIcon } from "../../icons/CrosswingLogo.js";
 import { PlaceholderIcon } from "../../icons/Placeholder.js";
-import { useRouter } from "../../router/context/RouterContext.js";
+import { RouterContext } from "../../router/context/RouterContext.js";
 import { Link } from "../../router/Link.js";
 import { UnreadBadge } from "../../router/tabs/UnreadBadge.js";
 import { Clickable } from "../Clickable.js";
@@ -36,8 +37,14 @@ export type SiteSidebarLinkProps = {
   title: ReactNode;
 };
 
+const defaultLogo = (
+  <CrosswingLogoIcon style={{ width: "50px", height: "50px" }} />
+);
+
+const defaultIcon = <PlaceholderIcon />;
+
 export function SiteSidebar({
-  logo = <CrosswingLogoIcon style={{ width: "50px", height: "50px" }} />,
+  logo = defaultLogo,
   logoTo = "/",
   onLogoClick,
   accessories,
@@ -58,13 +65,13 @@ export function SiteSidebar({
   // Pull our route information from context. Use "nextLocation" so we can
   // highlight the link that is *being* navigated to, not the one that is
   // currently being viewed.
-  const { nextLocation } = useRouter();
+  const { nextLocation } = use(RouterContext);
 
   function renderArea(area: ReactElement<SiteSidebarAreaProps>) {
     const {
       path,
       title,
-      icon: standardIcon = <PlaceholderIcon />,
+      icon: standardIcon = defaultIcon,
       classicIcon,
       children,
       badge,

@@ -2,6 +2,7 @@ import {
   ChangeEvent,
   InputHTMLAttributes,
   KeyboardEvent,
+  use,
   useEffect,
   useRef,
 } from "react";
@@ -9,7 +10,7 @@ import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
 import { useHotKey } from "../../hooks/useHotKey.js";
-import { useHost } from "../../host/context/HostContext.js";
+import { HostContext } from "../../host/context/HostContext.js";
 import { CloseCircleIcon } from "../../icons/CloseCircle.js";
 import { SearchIcon } from "../../icons/Search.js";
 import { Spinner } from "../Spinner.js";
@@ -38,7 +39,7 @@ export function SearchInput({
   // Hooks
   //
 
-  const { container } = useHost();
+  const { container } = use(HostContext);
 
   const inputRef = useRef<HTMLInputElement>(null);
 

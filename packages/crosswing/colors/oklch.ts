@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Allows transforming colors in the OKLCH color space. See README.md for more
 // information.
 

@@ -3,23 +3,24 @@ import {
   Fragment,
   ReactNode,
   createContext,
-  useContext,
+  use,
   useEffect,
-  useLayoutEffect,
-  useMemo,
   useState,
 } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
 import { BackIcon } from "../../icons/Back.js";
+import { RouterContext } from "../../router/context/RouterContext.js";
 import { Link } from "../../router/Link.js";
-import { useRouter } from "../../router/context/RouterContext.js";
 import { NavAccessoryView } from "../../router/navs/NavAccessoryView.js";
 import { NavTitleView } from "../../router/navs/NavTitleView.js";
+import { truncate } from "../../shared/strings.js";
 import { SiteHeaderAccessory } from "./SiteHeaderAccessory.js";
 
 // This is pretty fancy for a breadcrumbs system.
+
+export type SitePageTitleDesktopStyle = "compact" | "breadcrumbs";
 
 export function SitePageTitle({
   siteTitle,
@@ -28,7 +29,7 @@ export function SitePageTitle({
   siteTitle: string;
   accessories?: SiteHeaderAccessory[] | null;
 }) {
-  const { crumbs } = useContext(PageTitleContext);
+  const { crumbs, desktopStyle } = use(PageTitleContext);
 
   const sorted = Array.from(crumbs.values()).sort(
     (a, b) => a.link.length - b.link.length,
@@ -52,19 +53,36 @@ export function SitePageTitle({
 
   return (
     <StyledPageTitle>
-      {!window && (
-        <DesktopPageTitle>
-          {!!sorted[0] && <Link to={sorted[0].link}>{sorted[0].title}</Link>}
-        </DesktopPageTitle>
+      {desktopStyle === "compact" && (
+        <CompactPageTitle data-has-subtitle={!!subtitleCrumb}>
+          {subtitleCrumb ? (
+            <Link className="previous" to={subtitleCrumb.link}>
+              {subtitleCrumb.title}
+            </Link>
+          ) : null}
+          {lastCrumb ? (
+            <Link className="current" to={lastCrumb.link}>
+              {lastCrumb.title}
+            </Link>
+          ) : (
+            <>&nbsp;</>
+          )}
+        </CompactPageTitle>
       )}
-      <DesktopPageTitle>
-        {sorted.map((crumb) => (
-          <Fragment key={crumb.link}>
-            <Link to={crumb.link}>{crumb.title}</Link>
-            <div className="separator" children="/" />
-          </Fragment>
-        ))}
-      </DesktopPageTitle>
+      {desktopStyle === "breadcrumbs" && (
+        <BreadcrumbPageTitle>
+          {sorted.map((crumb) => (
+            <Fragment key={crumb.link}>
+              <Link to={crumb.link}>
+                {crumb === sorted[sorted.length - 1]
+                  ? crumb.title
+                  : truncate(crumb.title, { length: 20 })}
+              </Link>
+              <div className="separator" children="/" />
+            </Fragment>
+          ))}
+        </BreadcrumbPageTitle>
+      )}
       <MobilePageTitle
         style={
           { "--num-accessories": accessories?.length ?? 0 } as CSSProperties
@@ -95,6 +113,7 @@ export type PageTitleContextValue = {
   crumbs: Map<number, Breadcrumb>;
   setCrumb(id: number, crumb: Breadcrumb): void;
   removeCrumb(id: number): void;
+  desktopStyle: SitePageTitleDesktopStyle;
 };
 
 export const PageTitleContext = createContext<PageTitleContextValue>({
@@ -105,33 +124,43 @@ export const PageTitleContext = createContext<PageTitleContextValue>({
   removeCrumb: () => {
     throw new Error("Expected a <PageTitleProvider> as an ancestor!");
   },
+  desktopStyle: "compact",
 });
 PageTitleContext.displayName = "PageTitleContext";
 
 interface Breadcrumb {
-  title: ReactNode;
+  title: string;
   link: string;
   intermediate?: boolean;
 }
 
 let nextId = 0;
+function getNextId() {
+  return nextId++;
+}
 
 export function usePageTitle(
   title: string,
   { intermediate = false }: { intermediate?: boolean } = {},
 ) {
-  const [id] = useState(() => nextId++);
-  const { setCrumb, removeCrumb } = useContext(PageTitleContext);
-  const { location } = useRouter();
+  const [id] = useState(getNextId);
+  const { setCrumb, removeCrumb } = use(PageTitleContext);
+  const { location } = use(RouterContext);
   const link = location.claimedHref();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (title) setCrumb(id, { title, link, intermediate });
     return () => removeCrumb(id);
   }, [title]);
 }
 
-export function PageTitleProvider({ children }: { children: ReactNode }) {
+export function PageTitleProvider({
+  children,
+  desktopStyle = "compact",
+}: {
+  children: ReactNode;
+  desktopStyle?: SitePageTitleDesktopStyle;
+}) {
   const [crumbs, setCrumbs] = useState(new Map() as Map<number, Breadcrumb>);
 
   function setCrumb(id: number, crumb: Breadcrumb) {
@@ -150,12 +179,12 @@ export function PageTitleProvider({ children }: { children: ReactNode }) {
     });
   }
 
-  const context = useMemo(
-    () => ({ crumbs, setCrumb, removeCrumb }),
-    [crumbs, setCrumb, removeCrumb],
+  return (
+    <PageTitleContext
+      value={{ crumbs, setCrumb, removeCrumb, desktopStyle }}
+      children={children}
+    />
   );
-
-  return <PageTitleContext.Provider value={context} children={children} />;
 }
 
 /** For Storybook. */
@@ -163,7 +192,7 @@ export function PageTitleDecorator(Story: () => any) {
   return <PageTitleProvider children={<Story />} />;
 }
 
-export const DesktopPageTitle = styled.div`
+export const BreadcrumbPageTitle = styled.div`
   display: flex;
   flex-flow: row;
   font: ${fonts.display({ size: 15 })};
@@ -196,6 +225,46 @@ export const DesktopPageTitle = styled.div`
 
   > a:last-of-type {
     font: ${fonts.displayBold({ size: 15 })};
+  }
+`;
+
+export const CompactPageTitle = styled.div`
+  display: flex;
+  flex-flow: column;
+  padding: 10px;
+  justify-content: center;
+  align-items: flex-start;
+
+  > * {
+    flex-shrink: 0;
+  }
+
+  > .previous {
+    font: ${fonts.display({ size: 13 })};
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-decoration: none;
+    color: ${colors.text()};
+  }
+
+  > .current {
+    font: ${fonts.displayBlack({ size: 22 })};
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-decoration: none;
+    color: ${colors.text()};
+  }
+
+  &[data-has-subtitle="false"] {
+    > .previous {
+      display: none;
+    }
+
+    > .current {
+      font: ${fonts.displayBlack({ size: 28 })};
+    }
   }
 `;
 
@@ -233,7 +302,11 @@ export const StyledPageTitle = styled.div`
   /* If <ListLayout> has collapsed, we want to use a mobile breadcrumb
      system that mimics <Navs>. */
   @media (max-width: 950px) {
-    > ${DesktopPageTitle} {
+    > ${BreadcrumbPageTitle} {
+      display: none;
+    }
+
+    > ${CompactPageTitle} {
       display: none;
     }
 

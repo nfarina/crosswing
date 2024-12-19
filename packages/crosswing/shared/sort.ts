@@ -33,7 +33,7 @@ export function sort<T>(
   spec?: SortSpec<T>,
   options: Options = {},
 ): T[] | ChainedSort<T> {
-  if (!!spec) {
+  if (spec) {
     return new ChainedSort(items).finally(spec as any, options);
   } else {
     return new ChainedSort(items);
@@ -60,16 +60,16 @@ function makeCompareFunction<T>(
   options = typeof options === "object" ? options : { direction: options };
 
   if (typeof spec != "function") {
-    var prop = spec;
+    const prop = spec;
     // make unary function
-    spec = (obj: T) => (!!obj[prop] ? obj[prop] : "");
+    spec = (obj: T) => (obj[prop] ? obj[prop] : "");
   }
 
   if (isSelector(spec)) {
     // f is a unary function mapping a single item to its sort score
-    var selector = spec;
-    var preprocess = options.ignoreCase ? ignoreCase : identity;
-    var cmp = options.cmp || ((v1, v2) => (v1 < v2 ? -1 : v1 > v2 ? 1 : 0));
+    const selector = spec;
+    const preprocess = options.ignoreCase ? ignoreCase : identity;
+    const cmp = options.cmp || ((v1, v2) => (v1 < v2 ? -1 : v1 > v2 ? 1 : 0));
 
     spec = (v1, v2) => cmp(preprocess(selector(v1)), preprocess(selector(v2)));
   }

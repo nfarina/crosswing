@@ -7,7 +7,7 @@ export type NavigateListener = (location: RouterLocation) => any;
 export type Unsubscribe = () => void;
 
 export class BrowserHistory {
-  public type: "browser" = "browser";
+  public type = "browser" as const;
   private listeners: Set<NavigateListener> = new Set();
 
   // You can set a base path and it will cause all navigation events to be

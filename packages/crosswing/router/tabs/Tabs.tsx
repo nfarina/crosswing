@@ -4,16 +4,17 @@ import {
   ReactElement,
   ReactNode,
   isValidElement,
+  use,
   useEffect,
-  useRef,
+  useState,
 } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { flattenChildren } from "../../hooks/flattenChildren.js";
-import { useHost } from "../../host/context/HostContext.js";
-import { safeArea } from "../../host/features/safeArea.js";
+import { HostContext } from "../../host/context/HostContext.js";
+import { safeArea } from "../../safearea/safeArea.js";
 import { RouterLocation } from "../RouterLocation.js";
-import { RouterContext, useRouter } from "../context/RouterContext.js";
+import { RouterContext } from "../context/RouterContext.js";
 import { StyledNavs } from "../navs/NavStack.js";
 import { Redirect } from "../redirect/Redirect.js";
 import { StyledTabBar, TabBar } from "./TabBar.js";
@@ -33,14 +34,14 @@ export function Tabs({
   const tabs = flattenChildren(children).filter(isTab);
 
   // Pull our route information from context.
-  const { location, nextLocation, history, parent, flags } = useRouter();
+  const { location, nextLocation, history, parent, flags } = use(RouterContext);
 
   // Grab the viewport information from our native host so we can hide
   // the tab bar if the keyboard is visible.
-  const { viewport, container } = useHost();
+  const { viewport, container } = use(HostContext);
 
   // Construct our storage for inactive tabs.
-  const { current: tabLocations } = useRef(new Map<string, RouterLocation>());
+  const [tabLocations] = useState(() => new Map<string, RouterLocation>());
 
   debug(
     `Render <Tabs> with location "${location}" and next location "${nextLocation}"`,
@@ -120,9 +121,7 @@ export function Tabs({
 
       return (
         <TabContent key={childLocation.claimedHref()} className={className}>
-          <RouterContext.Provider value={childContext}>
-            {render()}
-          </RouterContext.Provider>
+          <RouterContext value={childContext}>{render()}</RouterContext>
         </TabContent>
       );
     }

@@ -1,10 +1,10 @@
-import { ReactElement, useCallback, useRef } from "react";
+import { ReactElement, useRef } from "react";
 import { keyframes, styled } from "styled-components";
 import {
   HotKeyContextDataAttributes,
   useHotKey,
 } from "../../hooks/useHotKey.js";
-import { safeArea } from "../../host/features/safeArea.js";
+import { safeArea } from "../../safearea/safeArea.js";
 import { easing } from "../../shared/easing.js";
 import { Modal, useModal } from "../context/useModal.js";
 import { ActionItem, ActionMenu } from "./ActionMenu.js";
@@ -44,11 +44,11 @@ export const ActionContainer = ({
   // Listen for the escape key and call onClose if pressed.
   useHotKey("Escape", { target: containerRef, onPress: onClose });
 
-  const onAnimationEnd = useCallback(() => {
+  function onAnimationEnd() {
     if (animatingIn === false) {
       onExited?.();
     }
-  }, [animatingIn, onExited]);
+  }
 
   return (
     <StyledActionContainer

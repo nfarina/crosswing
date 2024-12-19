@@ -18,7 +18,7 @@ export function diff(a: any, b: any): any {
 
     // Check keys that were present in a.
     for (const [key, aVal] of Object.entries(a)) {
-      if (b.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(b, key)) {
         const bVal = b[key];
         const valDiff = diff(aVal, bVal);
 
@@ -32,7 +32,7 @@ export function diff(a: any, b: any): any {
 
     // Check keys that were added in b.
     for (const [key, bVal] of Object.entries(b)) {
-      if (!a.hasOwnProperty(key)) {
+      if (!Object.prototype.hasOwnProperty.call(a, key)) {
         diffed[key] = bVal;
       }
     }

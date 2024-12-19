@@ -1,7 +1,8 @@
-import { HTMLAttributes, MouseEvent, ReactNode } from "react";
+import { HTMLAttributes, MouseEvent, ReactNode, use } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
+import { HostContext } from "../../host/context/HostContext.js";
 import { Toggle, ToggleSize } from "./Toggle.js";
 
 export function LabeledToggle({
@@ -22,6 +23,10 @@ export function LabeledToggle({
   disabled?: boolean;
   working?: boolean;
 }) {
+  const { container } = use(HostContext);
+  const defaultSize: ToggleSize =
+    container === "ios" || container === "android" ? "normal" : "smaller";
+
   return (
     <StyledLabeledToggle
       disabled={!!disabled || !!working}
@@ -35,7 +40,12 @@ export function LabeledToggle({
         <div className="label" children={label} />
         <div className="detail" children={detail} />
       </div>
-      <Toggle as="div" on={on} size={size} disabled={!!disabled || !!working} />
+      <Toggle
+        as="div"
+        on={on}
+        size={size ?? defaultSize}
+        disabled={!!disabled || !!working}
+      />
     </StyledLabeledToggle>
   );
 }

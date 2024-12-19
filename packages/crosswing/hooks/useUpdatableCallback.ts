@@ -1,10 +1,11 @@
 import { useEffect, useRef } from "react";
 
-// Some Hooks like useGesture permanently cache the closure you pass it
-// for the lifetime of the component. So this hook uses a ref to
-// generate a stable pointer to the given callback func that you can update
-// on each render.
-
+/**
+ * Some Hooks like useGesture permanently cache the closure you pass it
+ * for the lifetime of the component. So this hook uses a ref to
+ * generate a stable pointer to the given callback func that you can update
+ * on each render.
+ */
 export function useUpdatableCallback<T extends (...args: any[]) => any>(
   callback: T,
 ): T {
@@ -17,5 +18,7 @@ export function useUpdatableCallback<T extends (...args: any[]) => any>(
 
   const invoke = (...args: any[]) => callbackRef.current(...args);
 
+  // Can't think of an alternate approach that doesn't break this "rule".
+  // eslint-disable-next-line react-compiler/react-compiler
   return invoke as any;
 }

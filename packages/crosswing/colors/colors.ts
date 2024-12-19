@@ -31,6 +31,7 @@ const neutrals = {
 const other = {
   darkGreen: hexColor("#1A4A44"),
   turquoise: hexColor("#32BBAB"),
+  turquoiseDark: hexColor("#16B4BD"),
   turquoiseGradient: gradientColor("to right", "#32BB94", "#16B4BD"),
   extraLightTurquoise: hexColor("#F5FAF9"),
   lime: hexColor("#90D98B"),
@@ -57,6 +58,10 @@ const other = {
  */
 const responsive = {
   primary: varColor({ light: other.turquoise.rgb, var: "--primary-color" }),
+  primaryDark: varColor({
+    light: other.turquoiseDark,
+    var: "--primary-color-dark",
+  }),
   text: varColor({
     light: other.darkGreen.rgb,
     dark: neutrals.extraLightGray.rgb,
@@ -92,8 +97,8 @@ const responsive = {
   }),
   /** Static because the alpha is baked in. */
   separator: varColor({
-    light: neutrals.black({ alpha: 0.1 }),
-    dark: neutrals.white({ alpha: 0.15 }),
+    light: neutrals.black({ alpha: 0.075 }),
+    dark: neutrals.white({ alpha: 0.075 }),
     var: "--separator-color",
     static: true,
   }),

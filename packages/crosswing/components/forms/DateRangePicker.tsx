@@ -1,9 +1,10 @@
-import { lazy, useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { NavLayout } from "../../router/navs/NavLayout.js";
+import { LoadingCurtain } from "../LoadingCurtain.js";
 import { DateRange } from "./DateRange.js";
 import type { DateRangeValueType } from "./DateRangeControl.js";
 
-const DateRangeControl = lazy(() => import("./DateRangeControl"));
+const DateRangeControl = lazy(() => import("./DateRangeControl.js"));
 
 export default function DateRangePicker({
   defaultRange,
@@ -42,11 +43,13 @@ export default function DateRangePicker({
         onClick: saveAndClose,
       }}
     >
-      <DateRangeControl
-        value={draftRange}
-        onValueChange={onInnerValueChange}
-        // hidePresets
-      />
+      <Suspense fallback={<LoadingCurtain lazy />}>
+        <DateRangeControl
+          value={draftRange}
+          onValueChange={onInnerValueChange}
+          // hidePresets
+        />
+      </Suspense>
     </NavLayout>
   );
 }

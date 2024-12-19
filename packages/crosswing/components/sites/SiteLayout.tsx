@@ -14,10 +14,14 @@ import { useMatchMedia } from "../../hooks/useMatchMedia.js";
 import { MenuIcon } from "../../icons/Menu.js";
 import { Redirect } from "../../router/redirect/Redirect.js";
 import { Route, Switch } from "../../router/switch/Switch.js";
+import { safeArea } from "../../safearea/safeArea.js";
 import { NoContent } from "../NoContent.js";
 import { SiteHeader, StyledSiteHeader } from "./SiteHeader.js";
 import { SiteHeaderAccessory } from "./SiteHeaderAccessory.js";
-import { PageTitleProvider } from "./SitePageTitle.js";
+import {
+  PageTitleProvider,
+  SitePageTitleDesktopStyle,
+} from "./SitePageTitle.js";
 import {
   SiteSidebar,
   SiteSidebarArea,
@@ -43,6 +47,7 @@ export function SiteLayout({
   onLogoClick,
   sidebarWidth = 150,
   accessories,
+  desktopStyle = "compact",
   style,
   ...rest
 }: Omit<HTMLAttributes<HTMLDivElement>, "title"> & {
@@ -52,6 +57,7 @@ export function SiteLayout({
   onLogoClick?: () => void;
   sidebarWidth?: number;
   accessories?: SiteHeaderAccessory[] | null;
+  desktopStyle?: SitePageTitleDesktopStyle;
 }) {
   // The sidebar defaults to hidden in a mobile layout but can be shown with
   // a button.
@@ -157,7 +163,7 @@ export function SiteLayout({
   } as CSSProperties;
 
   return (
-    <PageTitleProvider>
+    <PageTitleProvider desktopStyle={desktopStyle}>
       <StyledSiteLayout
         data-sidebar-open={sidebarOpen}
         style={cssProps}
@@ -230,10 +236,10 @@ function isSiteLink(child: ReactNode): child is ReactElement<SiteLinkProps> {
 export const StyledSiteLayout = styled.div`
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-template-rows: 60px 1fr;
+  grid-template-rows: 70px 1fr;
   position: relative;
   background: ${colors.textBackground()};
-  padding-bottom: env(safe-area-inset-bottom);
+  padding-bottom: ${safeArea.bottom()};
 
   > ${StyledSiteHeader} {
     grid-column: 2;
@@ -267,7 +273,7 @@ export const StyledSiteLayout = styled.div`
     position: absolute;
     left: 0px;
     right: 0px;
-    bottom: calc(env(safe-area-inset-bottom));
+    bottom: ${safeArea.bottom()};
     height: 1px;
     box-shadow: 0 1px ${colors.separator()};
   }

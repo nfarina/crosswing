@@ -3,7 +3,7 @@ import {
   HTMLAttributes,
   KeyboardEvent,
   ReactNode,
-  useContext,
+  use,
   useState,
 } from "react";
 import { styled } from "styled-components";
@@ -77,7 +77,7 @@ export const StyledBrowserSimulator = styled.div`
 `;
 
 export function AddressBar() {
-  const { history, nextLocation } = useContext(RouterContext);
+  const { history, nextLocation } = use(RouterContext);
   const [focused, setFocused] = useState(false);
   const [draftLocation, setDraftLocation] = useState("");
 

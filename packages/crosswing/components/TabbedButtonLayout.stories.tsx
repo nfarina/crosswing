@@ -1,6 +1,6 @@
 import { action } from "@storybook/addon-actions";
-import { Suspense, lazy, useState } from "react";
-import { useRouter } from "../router/context/RouterContext.js";
+import { Suspense, lazy, use, useState } from "react";
+import { RouterContext } from "../router/context/RouterContext.js";
 import {
   BrowserSimulator,
   RouterDecorator,
@@ -95,7 +95,7 @@ export const LazyChild = () => {
         <NoContent title="Home" />
       </TabbedButton>
       <TabbedButton lazy title="Discover" value="discover">
-        <Suspense fallback={<LoadingCurtain />}>
+        <Suspense fallback={<LoadingCurtain lazy />}>
           <DynamicContent />
         </Suspense>
       </TabbedButton>
@@ -140,7 +140,7 @@ export const WithRouter = () => (
 // This has to be a separate component to get the Router context from
 // BrowserSimulator.
 function RoutedRedFish() {
-  const { history } = useRouter();
+  const { history } = use(RouterContext);
 
   return (
     <NoContent
@@ -152,7 +152,7 @@ function RoutedRedFish() {
 }
 
 function RoutedBlueFish() {
-  const { history, location } = useRouter();
+  const { history, location } = use(RouterContext);
 
   function onGoGreenClick() {
     const newLocation = location.withParam("color", "green");

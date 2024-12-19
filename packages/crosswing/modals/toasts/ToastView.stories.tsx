@@ -1,5 +1,6 @@
 import { action } from "@storybook/addon-actions";
 import { Meta } from "@storybook/react";
+import { CheckmarkIcon } from "../../icons/Checkmark.js";
 import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import { ToastView } from "./ToastView.js";
@@ -20,6 +21,43 @@ export const TitleAndText = () => (
   />
 );
 
+export const Text = () => (
+  <ToastView
+    style={{ width: "350px" }}
+    message="Thread marked as resolved."
+    onClose={action("close")}
+  />
+);
+
+export const TextClickable = () => (
+  <ToastView
+    style={{ width: "350px" }}
+    message="Thread marked as resolved."
+    onClick={action("click")}
+    onClose={action("close")}
+  />
+);
+
+export const TextAndIcon = () => (
+  <ToastView
+    style={{ width: "350px" }}
+    message="Thread marked as resolved."
+    icon={<CheckmarkIcon />}
+    onClick={action("click")}
+    onClose={action("close")}
+  />
+);
+
+export const TextAndAction = () => (
+  <ToastView
+    style={{ width: "350px" }}
+    message="Thread marked as resolved."
+    action="Manage"
+    onActionClick={action("action")}
+    onClose={action("close")}
+  />
+);
+
 export const Link = () => (
   <ToastView
     style={{ width: "350px" }}
@@ -36,7 +74,6 @@ export const TitleAndLongText = () => (
     style={{ width: "350px" }}
     title="New comment on Whole Foods"
     message="Bob: How's the Quinoa here? I heard it's tasty. Also I heard that it's healthy."
-    onClick={action("click")}
     onClose={action("close")}
   />
 );
@@ -47,7 +84,6 @@ export const TitleAndTruncatedText = () => (
     style={{ width: "350px" }}
     title="New comment on Whole Foods"
     message="Bob: How's the Quinoa here? I heard it's tasty. Also I heard that it's healthy."
-    onClick={action("click")}
     onClose={action("close")}
   />
 );

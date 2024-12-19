@@ -1,16 +1,18 @@
-import { createContext, MutableRefObject, useContext } from "react";
+import { createContext, RefObject } from "react";
 
-export interface ToolbarContextValue {
+export type ToolbarContextValue = {
+  isDefaultContext: boolean;
   /** Ref to one of any <ToolbarInsertionPoint> children. */
   getInsertionRef(name: string): ToolbarInsertionRef;
   /** For any <ToolbarInsertionPoint> children. */
   setInsertionRef(name: string, insertionRef: ToolbarInsertionRef): void;
-}
+};
 
-export type ToolbarRef = MutableRefObject<HTMLDivElement | null>;
-export type ToolbarInsertionRef = MutableRefObject<HTMLDivElement | null>;
+export type ToolbarRef = RefObject<HTMLDivElement | null>;
+export type ToolbarInsertionRef = RefObject<HTMLDivElement | null>;
 
 export const ToolbarContext = createContext<ToolbarContextValue>({
+  isDefaultContext: true,
   getInsertionRef() {
     throw new Error(
       "Cannot get ToolbarInsertionPoint refs without a parent <ToolbarLayout>.",
@@ -18,7 +20,3 @@ export const ToolbarContext = createContext<ToolbarContextValue>({
   },
   setInsertionRef() {},
 });
-
-export function useToolbar(): ToolbarContextValue {
-  return useContext(ToolbarContext);
-}

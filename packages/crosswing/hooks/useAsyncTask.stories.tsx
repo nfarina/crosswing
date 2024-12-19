@@ -10,31 +10,31 @@ export const Default = () => {
   const [lines, setLines] = useState<ReactNode[]>([]);
 
   const task = useAsyncTask({
-    async func(throwError?: boolean) {
-      log(`[${this.invocation}] Inside task!`);
+    func: async (task, throwError?: boolean) => {
+      log(`Inside task!`);
       for (let i = 0; i < 5; i++) {
-        if (this.isCanceled()) {
-          log(`[${this.invocation}] We were canceled!`);
+        if (task.isCanceled()) {
+          log(`We were canceled!`);
           return;
         }
         await wait(1000);
       }
 
       if (throwError) {
-        throw new Error(`Error thrown from task ${this.invocation}!`);
+        throw new Error(`Error thrown from task!`);
       }
     },
     onStart: function () {
-      log(`[${this.invocation}] Task started.`);
+      log(`Task started.`);
     },
     onComplete: function () {
-      log(`[${this.invocation}] Task complete.`);
+      log(`Task complete.`);
     },
     onError: function (error) {
-      log(`[${this.invocation}] ${error.message}`);
+      log(`${error.message}`);
     },
     onFinally: function () {
-      log(`[${this.invocation}] Task finally.`);
+      log(`Task finally.`);
     },
   });
 

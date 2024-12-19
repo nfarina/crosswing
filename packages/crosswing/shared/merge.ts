@@ -5,7 +5,7 @@
 export function merge<T>(...objects: [T?, ...DeepPartial<T>[]]): T {
   let merged: T = undefined as any;
 
-  for (let object of objects) {
+  for (const object of objects) {
     if (isObject(object)) {
       if (!isObject(merged)) merged = {} as T; // Needs to be an object now!
 

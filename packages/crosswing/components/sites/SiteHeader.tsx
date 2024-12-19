@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+import { FullScreenToolbarSpace } from "../desktop/FullScreenView.js";
 import {
   SiteHeaderAccessory,
   SiteHeaderAccessoryView,
@@ -30,6 +31,7 @@ export function SiteHeader({
           accessory={accessory}
         />
       ))}
+      <FullScreenToolbarSpace />
     </StyledSiteHeader>
   );
 }

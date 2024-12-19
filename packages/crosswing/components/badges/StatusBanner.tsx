@@ -7,12 +7,14 @@ import { StatusBadge } from "./StatusBadge.js";
 export function StatusBanner({
   action,
   actionWorking,
+  actionDisabled,
   onActionClick,
   floating,
   ...rest
 }: Parameters<typeof StatusBadge>[0] & {
   action?: ReactNode;
   actionWorking?: boolean;
+  actionDisabled?: boolean;
   onActionClick?: () => void;
   floating?: boolean;
 }) {
@@ -24,7 +26,7 @@ export function StatusBanner({
       // We don't use the "working" property because it adds a spinner to
       // the button, making it wider which can cause the message to be
       // shifted around.
-      disabled={actionWorking}
+      disabled={actionWorking || actionDisabled}
     />
   ) : null;
 

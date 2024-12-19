@@ -1,9 +1,10 @@
+import { use } from "react";
 import { colors } from "../../colors/colors.js";
 import { useInterval } from "../../hooks/useInterval.js";
 import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import { useAlert } from "../alert/useAlert.js";
-import { useModalContext } from "../context/ModalContext.js";
+import { ModalContext } from "../context/ModalContext.js";
 import {
   ModalStoryButton,
   ModalStoryButtons,
@@ -22,7 +23,7 @@ export default {
 };
 
 export function Normal() {
-  const { showToast } = useModalContext();
+  const { showToast } = use(ModalContext);
 
   function showNormalToast() {
     showToast({
@@ -72,7 +73,7 @@ export function Normal() {
 }
 
 function ShowStickyToastButton() {
-  const { showToast } = useModalContext();
+  const { showToast } = use(ModalContext);
 
   const onShowClick = () => {
     showToast({ message: "Stays open until user dismisses.", sticky: true });

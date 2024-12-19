@@ -1,11 +1,11 @@
-import { ReactNode } from "react";
+import { ReactNode, use } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
 import { CheckmarkIcon } from "../../icons/Checkmark.js";
 import { CloseIcon } from "../../icons/Close.js";
+import { RouterContext } from "../../router/context/RouterContext.js";
 import { Link } from "../../router/Link.js";
-import { useRouter } from "../../router/context/RouterContext.js";
 import { formatCurrency } from "../../shared/numeric.js";
 
 /**
@@ -38,7 +38,7 @@ export function LinkListCell({
   preserveTab?: boolean;
   children?: ReactNode;
 }) {
-  const { location } = useRouter();
+  const { location } = use(RouterContext);
 
   // Preserve the "tab" that you were on (like Devices/Support/Details).
   // If we are rendering at the "/users" point of the path, then the full path

@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import { colors } from "../colors/colors";
 import { fonts } from "../fonts/fonts";
-import { ErrorLike, ErrorObj } from "../shared/errors";
+import { ErrorLike, getErrorObj } from "../shared/errors";
 
 /**
  * An error that should is meant to be shown to the user via ErrorView.
@@ -23,7 +23,7 @@ export class ErrorWithDetails extends Error {
  * Renders an Error in a scrollable <pre> with syntax formatting.
  */
 export function ErrorView({ error }: { error: ErrorLike }) {
-  const { name, message, details, stack } = getErrorProps(error);
+  const { name, message, details, stack } = getErrorObj(error);
 
   const stackLines: string[] = stack?.split("\n") ?? [];
   stackLines.shift(); // First line is just name/message.
@@ -76,10 +76,6 @@ export function ErrorView({ error }: { error: ErrorLike }) {
       </pre>
     </StyledErrorView>
   );
-}
-
-export function getErrorProps(error: ErrorLike): ErrorObj {
-  return typeof error === "string" ? { message: error } : error;
 }
 
 export const StyledErrorView = styled.div`

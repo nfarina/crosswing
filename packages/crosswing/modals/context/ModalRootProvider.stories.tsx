@@ -1,4 +1,5 @@
 import { Meta } from "@storybook/react";
+import { use } from "react";
 import { colors } from "../../colors/colors.js";
 import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
@@ -6,7 +7,7 @@ import {
   ModalStoryButton,
   ModalStoryButtons,
 } from "../storybook/ModalStoryButtons.js";
-import { ModalRootProvider, useModalContext } from "./ModalRootProvider.js";
+import { ModalContext, ModalRootProvider } from "./ModalRootProvider.js";
 
 export default {
   component: ModalRootProvider,
@@ -19,7 +20,7 @@ export default {
 } satisfies Meta<typeof ModalRootProvider>;
 
 export function ShowToast() {
-  const { showToast } = useModalContext();
+  const { showToast } = use(ModalContext);
 
   return (
     <ModalStoryButtons style={{ background: colors.textBackgroundAlt() }}>

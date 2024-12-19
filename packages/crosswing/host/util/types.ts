@@ -1,3 +1,5 @@
+import { SafeArea } from "../../safearea/safeArea";
+
 export interface HostContextValue {
   container: HostContainer;
   platform: HostPlatform;
@@ -201,13 +203,6 @@ export interface HostPlugin {
 export interface HostViewport {
   height?: number;
   keyboardVisible?: boolean;
-}
-
-export interface SafeArea {
-  top: string;
-  right: string;
-  bottom: string;
-  left: string;
 }
 
 export interface HostContact {

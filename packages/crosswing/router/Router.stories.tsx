@@ -1,6 +1,6 @@
 import { action } from "@storybook/addon-actions";
 import { Meta } from "@storybook/react";
-import { useContext } from "react";
+import { use } from "react";
 import { styled } from "styled-components";
 import { colors } from "../colors/colors.js";
 import { NoContent } from "../components/NoContent.js";
@@ -23,7 +23,7 @@ export default {
 } satisfies Meta<typeof Router>;
 
 export const StaticSwitch = () => (
-  <StyledBrowserSimulator>
+  <StorybookBrowserSimulator>
     <Switch>
       <Route
         redirect
@@ -46,11 +46,11 @@ export const StaticSwitch = () => (
         )}
       />
     </Switch>
-  </StyledBrowserSimulator>
+  </StorybookBrowserSimulator>
 );
 
 export const DynamicSwitch = () => (
-  <StyledBrowserSimulator>
+  <StorybookBrowserSimulator>
     <Switch>
       <Route
         render={() => (
@@ -100,7 +100,7 @@ export const DynamicSwitch = () => (
         )}
       />
     </Switch>
-  </StyledBrowserSimulator>
+  </StorybookBrowserSimulator>
 );
 
 export const App = () => (
@@ -114,7 +114,7 @@ export const App = () => (
       bottom: "40px",
     }}
   >
-    <StyledBrowserSimulator rootPath="app">
+    <StorybookBrowserSimulator rootPath="app">
       <Switch>
         <Route
           path="outside"
@@ -127,7 +127,7 @@ export const App = () => (
         />
         <Route render={() => <TestAppTabs path="app" />} />
       </Switch>
-    </StyledBrowserSimulator>
+    </StorybookBrowserSimulator>
   </MockHostProvider>
 );
 
@@ -231,7 +231,7 @@ function TestAppTabs({ path }: { path: string }) {
   );
 }
 
-const StyledBrowserSimulator = styled(BrowserSimulator).attrs({
+const StorybookBrowserSimulator = styled(BrowserSimulator).attrs({
   navigateListener: action("navigate"),
 })`
   .content {
@@ -260,6 +260,6 @@ const StyledBrowserSimulator = styled(BrowserSimulator).attrs({
 `;
 
 function QuerystringView() {
-  const { location } = useContext(RouterContext);
+  const { location } = use(RouterContext);
   return <div>Querystring: {location.search}</div>;
 }

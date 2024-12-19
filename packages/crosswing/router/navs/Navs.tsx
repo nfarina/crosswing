@@ -5,14 +5,15 @@ import {
   isValidElement,
   ReactElement,
   ReactNode,
+  use,
   useEffect,
-  useRef,
+  useState,
 } from "react";
 import { flattenChildren } from "../../hooks/flattenChildren.js";
-import { RouterContextValue, useRouter } from "../context/RouterContext.js";
+import { RouterContext, RouterContextValue } from "../context/RouterContext.js";
 import { Redirect } from "../redirect/Redirect.js";
 import { MatchParams, RouterLocation } from "../RouterLocation.js";
-import { NavStack, NavStackItem } from "./NavStack.js";
+import { NavStack, NavStackAnimation, NavStackItem } from "./NavStack.js";
 
 export * from "./NavAccessoryView.js";
 export * from "./NavLayout.js";
@@ -21,6 +22,8 @@ export * from "./NavTitleView.js";
 
 const debug = Debug("router:Navs");
 
+export type NavAnimation = NavStackAnimation;
+
 export interface NavRouteProps<Path extends string = any> {
   path?: Path;
   render: (params: MatchParams<Path>) => ReactElement;
@@ -28,23 +31,34 @@ export interface NavRouteProps<Path extends string = any> {
 
 export function Navs({
   children,
+  animation,
+  preloadHistory = true,
   ...rest
-}: HTMLAttributes<HTMLDivElement> & { children: ReactNode }) {
+}: HTMLAttributes<HTMLDivElement> & {
+  children: ReactNode;
+  animation?: NavAnimation;
+  preloadHistory?: boolean;
+}) {
   // Coerce children to array, flattening fragments and falsy conditionals.
   const routes = flattenChildren(children).filter(isNavRoute);
 
   // Pull our route information from context.
-  const { location, nextLocation, history, parent, flags } = useRouter();
+  const { location, nextLocation, history, parent, flags } = use(RouterContext);
 
   const selected = selectRoute(routes, location);
   const root = selectRoot(routes, location);
   const isRootSelected = !selected.route.props.path;
 
   // Construct our storage for previous routes on this nav.
-  const previousLocations = useRef<RouterLocation[]>([]);
+  const [previousLocations, setPreviousLocations] = useState<RouterLocation[]>(
+    () =>
+      preloadHistory
+        ? getPreviousLocations(routes, location, root.location)
+        : [],
+  );
 
   debug(
-    `Render <Navs> with location "${location}" and next location "${nextLocation}" and previous locations: ${previousLocations.current}`,
+    `Render <Navs> with location "${location}" and next location "${nextLocation}" and previous locations: ${previousLocations}`,
   );
 
   // Construct the new list of locations to render.
@@ -52,11 +66,11 @@ export function Navs({
   // shouldn't be any way to go back further, and also as a safety valve).
   const allLocations = isRootSelected
     ? [location]
-    : pushLocation(root.location, previousLocations.current, location);
+    : pushLocation(root.location, previousLocations, location);
 
   // Store the list of locations we rendered.
   useEffect(() => {
-    previousLocations.current = allLocations;
+    setPreviousLocations(allLocations);
   }, [location.href()]);
 
   if (selected.redirect) {
@@ -102,7 +116,12 @@ export function Navs({
   const back = allLocations[allLocations.length - 2];
 
   return (
-    <NavStack back={back} items={allLocations.map(getNavStackItem)} {...rest} />
+    <NavStack
+      back={back}
+      items={allLocations.map(getNavStackItem)}
+      animation={animation}
+      {...rest}
+    />
   );
 }
 
@@ -145,6 +164,51 @@ function selectRoute(
 
   // Redirect to the root route by default.
   return { ...selectRoot(routes, location), redirect: true };
+}
+
+/**
+ * Gets the initial history of locations to render, excluding the current
+ * location. Basically, if you "start" on some route deeper than the root, we'd
+ * like to have the "back" stack preloaded for you so you don't just go
+ * straight back to the root from somewhere deeper in the nav tree.
+ */
+function getPreviousLocations(
+  routes: ReactElement<NavRouteProps>[],
+  location: RouterLocation,
+  root: RouterLocation,
+): RouterLocation[] {
+  let testLocation = location;
+  const locations: RouterLocation[] = [];
+
+  while (true) {
+    // Chop off the last segment of the path.
+    const newSegments = testLocation.unclaimedSegments().slice(0, -1);
+
+    if (newSegments.length === 0) {
+      break;
+    }
+
+    testLocation = testLocation.rewrite(newSegments.join("/"), {
+      preserveClaimIndex: true,
+    });
+
+    if (testLocation.equals(root, { excludeSearch: true })) {
+      break;
+    }
+
+    // If we've found a route that matches, insert it at the front of the list.
+    const maybeMatched = selectRoute(routes, testLocation);
+    if (
+      maybeMatched.route &&
+      (maybeMatched.route.props.path?.split("/")?.length ?? 0) ===
+        testLocation.unclaimedSegments().length
+    ) {
+      locations.unshift(testLocation);
+    }
+  }
+
+  locations.unshift(root);
+  return locations;
 }
 
 function pushLocation(

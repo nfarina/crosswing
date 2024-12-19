@@ -84,26 +84,24 @@ export function formatTimeSpan(ms: number): string {
   const days = hours / 24;
   const weeks = days / 7;
 
-  // We generally work with time spans that are a whole number of units.
-
-  if (weeks >= 1 && weeks === Math.round(weeks)) {
-    return pluralize(weeks, "weeks");
+  if (weeks >= 1) {
+    return pluralize(Math.round(weeks), "weeks");
   }
 
-  if (days >= 1 && days === Math.round(days)) {
-    return pluralize(days, "days");
+  if (days >= 1) {
+    return pluralize(Math.round(days), "days");
   }
 
-  if (hours >= 1 && hours === Math.round(hours)) {
-    return pluralize(hours, "hours");
+  if (hours >= 1) {
+    return pluralize(Math.round(hours), "hours");
   }
 
-  if (minutes >= 1 && minutes === Math.round(minutes)) {
-    return pluralize(minutes, "minutes");
+  if (minutes >= 1) {
+    return pluralize(Math.round(minutes), "minutes");
   }
 
-  if (seconds >= 1 && seconds === Math.round(seconds)) {
-    return pluralize(seconds, "seconds");
+  if (seconds >= 1) {
+    return pluralize(Math.round(seconds), "seconds");
   }
 
   // Maybe at this point we do an "about XYZ days" type thing?

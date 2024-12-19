@@ -33,8 +33,8 @@ export function useGesture({
     // Not active?
     if (!active) return;
 
-    let startTime = Date.now();
-    let [startX, startY] = getXY(stack, e.nativeEvent);
+    const startTime = Date.now();
+    const [startX, startY] = getXY(stack, e.nativeEvent);
     let complete = false;
     // console.log("start", [startX, startY]);
 

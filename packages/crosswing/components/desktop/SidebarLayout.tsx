@@ -1,6 +1,7 @@
 import {
   HTMLAttributes,
   PointerEvent as ReactPointerEvent,
+  use,
   useRef,
 } from "react";
 import { createPortal } from "react-dom";
@@ -10,7 +11,7 @@ import { ElementSize, useElementSize } from "../../hooks/useElementSize.js";
 import { HotKey, useHotKey } from "../../hooks/useHotKey.js";
 import { useLocalStorage } from "../../hooks/useLocalStorage.js";
 import { ToolbarSidebarButton } from "../toolbar/Toolbar.js";
-import { useToolbar } from "../toolbar/ToolbarContext.js";
+import { ToolbarContext } from "../toolbar/ToolbarContext.js";
 
 export const SidebarToggleInsertionPoint = "SidebarToggle";
 
@@ -56,7 +57,7 @@ export function SidebarLayout({
   hotKey?: HotKey | null;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const { getInsertionRef } = useToolbar();
+  const { isDefaultContext, getInsertionRef } = use(ToolbarContext);
 
   // Persist the sidebar width across window reloads.
   const [initialSidebarWidth] = useLocalStorage(
@@ -135,7 +136,8 @@ export function SidebarLayout({
     />
   );
 
-  const insertionEl = getInsertionRef(SidebarToggleInsertionPoint).current;
+  const insertionEl =
+    !isDefaultContext && getInsertionRef(SidebarToggleInsertionPoint).current;
 
   //
   // Dragging.

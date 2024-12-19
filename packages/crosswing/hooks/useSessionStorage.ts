@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 // Adapted from useLocalStorage.
 
@@ -48,7 +48,7 @@ export function useSessionStorage<S>(
 
   // Create an event listener so we can be notified of changes to session state
   // (only works if the other person is using useSessionStorage() as well).
-  const onSessionStorageChange = useCallback((event: Event) => {
+  const onSessionStorageChange = (event: Event) => {
     if (event.type === SessionStorageChanged.eventName) {
       const { detail } = event as SessionStorageChanged;
       if (detail.key === key) {
@@ -56,14 +56,14 @@ export function useSessionStorage<S>(
         setInnerItem(value != null ? JSON.parse(value) : null);
       }
     }
-  }, []);
+  };
 
   // Return a wrapped version of useState's setter function that persists the
   // new value to sessionStorage.
-  const setItem: Setter<S> = useCallback((value) => {
+  const setItem: Setter<S> = (value) => {
     setInnerItem(value);
     writeSessionStorage(key, value != null ? JSON.stringify(value) : null);
-  }, []);
+  };
 
   useEffect(() => {
     // The custom storage event allows us to update our component

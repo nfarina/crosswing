@@ -225,7 +225,7 @@ export function gradientColor(
 // Tools for outputting CSS based on "var" colors.
 //
 
-export function getBuilderVarCss(builders: ColorBuilder[]): string {
+export function getBuilderVarCSS(builders: ColorBuilder[]): string {
   let css = "";
   let darkCss = "";
 

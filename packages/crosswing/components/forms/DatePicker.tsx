@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { styled } from "styled-components";
-import { safeArea } from "../../host/features/safeArea.js";
 import { NavLayout } from "../../router/navs/NavLayout.js";
+import { safeArea } from "../../safearea/safeArea.js";
 import { Button, StyledButton } from "../Button.js";
 import { Notice } from "../Notice.js";
 import { dateTransformer } from "../transformers/dateTransformer.js";
@@ -27,7 +27,7 @@ export function DatePicker({
   notice?: ReactNode;
 }) {
   const customPrompt = usePrompt(() => ({
-    title: "Enter Date",
+    title: "Enter date",
     placeholder: "Ex: 1/1/2020",
     transformer: dateTransformer(),
     initialValue: defaultDate ?? undefined,

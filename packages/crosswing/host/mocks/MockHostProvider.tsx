@@ -1,4 +1,4 @@
-import { ReactNode, useMemo } from "react";
+import { ReactNode } from "react";
 import { HostContext, defaultHostContext } from "../context/HostContext.js";
 import { StyledHostProvider } from "../context/HostProvider.js";
 import { HostContextValue } from "../util/types.js";
@@ -10,12 +10,12 @@ export function MockHostProvider({
   children,
   ...host
 }: { children?: ReactNode } & Partial<HostContextValue>) {
-  const value = useMemo(() => defaultHostContext(host), [host]);
+  const value = defaultHostContext(host);
 
   return (
-    <HostContext.Provider value={value}>
+    <HostContext value={value}>
       {/* We need an actual HTML element in the DOM to attach our CSS custom properties to. */}
       <StyledHostProvider $safeArea={value.safeArea} children={children} />
-    </HostContext.Provider>
+    </HostContext>
   );
 }

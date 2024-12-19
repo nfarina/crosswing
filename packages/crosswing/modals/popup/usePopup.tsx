@@ -1,17 +1,17 @@
 import {
   MouseEvent,
-  MutableRefObject,
   ReactNode,
+  RefObject,
   cloneElement,
   isValidElement,
-  useCallback,
+  use,
   useLayoutEffect,
   useRef,
   useState,
 } from "react";
 import { keyframes, styled } from "styled-components";
 import { useHotKey } from "../../hooks/useHotKey.js";
-import { useHost } from "../../host/context/HostContext.js";
+import { HostContext } from "../../host/context/HostContext.js";
 import { easing } from "../../shared/easing.js";
 import { useModal } from "../context/useModal.js";
 import { useClickOutsideToClose } from "./useClickOutsideToClose.js";
@@ -35,7 +35,7 @@ export interface Popup<T extends any[] = []> {
 
 // Use a ref for our target because it could start out null then become
 // non-null after mounting.
-export type PopupTarget = MutableRefObject<HTMLElement | null>;
+export type PopupTarget = RefObject<HTMLElement | null>;
 
 /**
  * Desired placement of the Popup. Defaults to "platform" which places the popup
@@ -59,10 +59,10 @@ export interface PopupOptions {
    */
   autoReposition?: boolean;
   /**
-   * By default, a subtle backdrop is rendered to visually highlight the popup.
-   * You can turn it off if desired.
+   * You can optionally render a subtle backdrop to visually highlight the
+   * popup.
    */
-  hideBackdrop?: boolean;
+  showBackdrop?: boolean;
 }
 
 /** Props given to the element returned from usePopup(). */
@@ -77,7 +77,7 @@ export function usePopup<T extends any[]>(
     placement = "platform",
     clickOutsideToClose = true,
     autoReposition = false,
-    hideBackdrop = false,
+    showBackdrop = false,
   }: PopupOptions = {},
 ): Popup<T> {
   // Ugly wrapping of a ref in a ref. But we don't need to use state because
@@ -92,7 +92,7 @@ export function usePopup<T extends any[]>(
       children={popup(...args)}
       clickOutsideToClose={clickOutsideToClose}
       autoReposition={autoReposition}
-      hideBackdrop={hideBackdrop}
+      showBackdrop={showBackdrop}
     />
   ));
 
@@ -137,7 +137,7 @@ export const PopupContainer = ({
   onExited,
   clickOutsideToClose = true,
   autoReposition = false,
-  hideBackdrop = false,
+  showBackdrop = false,
 }: {
   placement: PopupPlacement;
   target: PopupTarget;
@@ -158,15 +158,15 @@ export const PopupContainer = ({
    */
   autoReposition?: boolean;
   /**
-   * By default, a subtle backdrop is rendered to visually highlight the popup.
-   * You can turn it off if desired.
+   * Default false, will render a subtle backdrop to visually highlight the
+   * popup.
    */
-  hideBackdrop?: boolean;
+  showBackdrop?: boolean;
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [resolvedPlacement, setResolvedPlacement] =
     useState<Omit<PopupPlacement, "platform" | "auto">>("below");
-  const { container: hostContainer } = useHost();
+  const { container: hostContainer } = use(HostContext);
 
   useClickOutsideToClose(
     () => clickOutsideToClose && onClose(),
@@ -192,11 +192,11 @@ export const PopupContainer = ({
     }
   }, [positionPopup]);
 
-  const onAnimationEnd = useCallback(() => {
+  function onAnimationEnd() {
     if (animatingIn === false) {
       onExited?.();
     }
-  }, [animatingIn, onExited]);
+  }
 
   useLayoutEffect(() => {
     const container = containerRef.current;
@@ -224,8 +224,6 @@ export const PopupContainer = ({
   }, [
     target.current,
     JSON.stringify(target.current?.getBoundingClientRect() ?? {}),
-    containerRef.current,
-    containerRef.current?.children[1]?.children[0],
   ]);
 
   function positionPopup() {
@@ -251,7 +249,7 @@ export const PopupContainer = ({
     const popupRect = popup.getBoundingClientRect();
 
     // Here's where we *want* to point, right in the middle of the target.
-    let offset = Math.round(
+    const offset = Math.round(
       targetRect.x - containerRect.x + targetRect.width / 2 - 10,
     );
 
@@ -344,7 +342,7 @@ export const PopupContainer = ({
 
   return (
     <StyledPopupContainer
-      data-hide-backdrop={hideBackdrop}
+      data-show-backdrop={showBackdrop}
       data-animating-in={animatingIn}
       onAnimationEnd={onAnimationEnd}
       ref={containerRef}
@@ -413,7 +411,7 @@ const StyledPopupContainer = styled.div`
     }
   }
 
-  &[data-hide-backdrop="true"] > .backdrop {
+  &[data-show-backdrop="false"] > .backdrop {
     display: none;
   }
 

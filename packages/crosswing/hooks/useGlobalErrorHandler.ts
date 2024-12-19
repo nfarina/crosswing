@@ -1,4 +1,4 @@
-import { createContext, createElement, ReactNode, useContext } from "react";
+import { createContext, createElement, ReactNode } from "react";
 
 // Allows you to define a shared location to handle user-visible errors for
 // presentation to the user. So you might have a modal library define a
@@ -12,10 +12,6 @@ export interface GlobalErrorHandler {
 export const GlobalErrorHandlerContext = createContext<GlobalErrorHandler>({});
 GlobalErrorHandlerContext.displayName = "GlobalErrorHandlerContext";
 
-export function useGlobalErrorHandler(): GlobalErrorHandler {
-  return useContext(GlobalErrorHandlerContext);
-}
-
 export function GlobalErrorHandlerProvider({
   handleError,
   children,
@@ -24,5 +20,5 @@ export function GlobalErrorHandlerProvider({
   children?: ReactNode;
 }) {
   const value = { handleError };
-  return createElement(GlobalErrorHandlerContext.Provider, { value }, children);
+  return createElement(GlobalErrorHandlerContext, { value }, children);
 }

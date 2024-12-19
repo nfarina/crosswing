@@ -10,10 +10,9 @@ export function flattenChildren(
   return Children.toArray(children).reduce(
     (acc: ReactNode[], node, nodeIndex) => {
       if (isFragment(node)) {
-        acc.push.apply(
-          acc,
-          flattenChildren(
-            node.props.children,
+        acc.push(
+          ...flattenChildren(
+            (node.props as any)?.children ?? null,
             depth + 1,
             keys.concat(node.key || nodeIndex),
           ),

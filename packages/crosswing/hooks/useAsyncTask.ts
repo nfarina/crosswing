@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 
-export interface AsyncTask<T extends TaskFunction> {
+export interface AsyncTask<T extends AsyncTaskFunction> {
   /**
    * Call this to run your task. Calling it will automatically discard the
    * results of any previous executions.
    */
-  run(...args: Parameters<T>): void;
+  run: (...args: RemoveFirst<Parameters<T>>) => void;
   /** Cancel all pending executions of run(). */
   cancel(): void;
   /** True if any execution of run() is still running. */
@@ -28,17 +28,17 @@ type ThenArg<T> = T extends Promise<infer U> ? U : T;
  * `someVal && doSomethingWith(someVal)` in your function closure for values
  * like `someVal` that you expect to be truthy at runtime.
  */
-export type TaskFunction = (
-  this: TaskFunctionThis,
+export type AsyncTaskFunction = (
+  task: AsyncTaskContext,
   ...args: any[]
 ) => Promise<any> | Falsy;
 
-export interface TaskFunctionThis {
-  /**
-   * Each invocation of your TaskFunction is assigned a unique number. You can
-   * use this in your function if needed to identity which invocation it is.
-   */
-  invocation: number;
+/** Utility type to remove the first element from a tuple (for parameters). */
+type RemoveFirst<T extends unknown[]> = T extends [AsyncTaskContext, ...infer R]
+  ? R
+  : [];
+
+export interface AsyncTaskContext {
   /**
    * Your task function can call `this.isCanceled()` to determine if it has been
    * superceded by a newer invocation, or canceled deliberately.
@@ -51,7 +51,7 @@ export interface TaskFunctionThis {
  * with React. In particular, the callbacks for onComplete and onError will not
  * be called if the task is canceled or if the component is unmounted.
  */
-export function useAsyncTask<T extends TaskFunction>({
+export function useAsyncTask<T extends AsyncTaskFunction>({
   func,
   runOnMount,
   leaveRunning,
@@ -69,15 +69,15 @@ export function useAsyncTask<T extends TaskFunction>({
    * Setting this to true does not prevent your onComplete() from being called.
    */
   leaveRunning?: boolean;
-  onStart?: (this: TaskFunctionThis) => any;
-  onComplete?: (this: TaskFunctionThis, result: ThenArg<ReturnType<T>>) => any;
+  onStart?: () => any;
+  onComplete?: (result: ThenArg<ReturnType<T>>) => any;
   /**
    * We intentionally require defining an `onError` handler in order to prevent
    * accidentally ignoring problems that do not occur during development.
    */
-  onError: null | ((this: TaskFunctionThis, error: Error) => void);
+  onError: null | ((error: Error) => void);
   /** Any cleanup you wish to do regardless of success or failure. */
-  onFinally?: (this: TaskFunctionThis) => any;
+  onFinally?: () => any;
 }): AsyncTask<T> {
   const [status, setStatus] = useState({
     isRunning: !!runOnMount, // If we're running on mount, then we'll start in a running state!
@@ -110,7 +110,7 @@ export function useAsyncTask<T extends TaskFunction>({
     if (runOnMount) (run as any)();
   }, []);
 
-  function run(...args: Parameters<T>) {
+  function run(...args: RemoveFirst<Parameters<T>>) {
     // This execution creates a new "invocation".
     invocationRef.current++;
     const invocation = invocationRef.current;
@@ -119,29 +119,39 @@ export function useAsyncTask<T extends TaskFunction>({
     // (or superceded by a newer invocation).
     const isCanceled = () => invocationRef.current > invocation;
 
-    let promise: Promise<any>;
+    let promise: Promise<any> | Falsy;
 
-    const thisArg = { invocation, isCanceled };
+    const task = { isCanceled };
 
     try {
       // Begin execution of the function.
-      const promiseMaybe = func.apply(thisArg, args);
-
-      // If you returned a Falsy value, we throw an Error. Falsy values are
-      // allowed at type-checking time, but forbidden at runtime. It's considered
-      // a programmer error to allow func() to be run when it has nothing to do.
-      if (!promiseMaybe) {
-        throw new Error("Task function did not return a Promise!");
-      }
-
-      promise = promiseMaybe;
+      promise = func(task, ...args);
     } catch (error: any) {
-      promise = new Promise((_, reject) => reject(error));
+      // Log it to the console for analytics.
+      console.error(
+        "Async task error:",
+        error.name,
+        error.message,
+        error.stack,
+      );
+
+      setStatus({ isRunning: false, result: null, error });
+
+      // Call handlers.
+      callbacksRef.current.onError?.(error);
+      callbacksRef.current.onFinally?.();
+    }
+
+    // If you returned a Falsy value, we throw an Error. Falsy values are
+    // allowed at type-checking time, but forbidden at runtime. It's considered
+    // a programmer error to allow func() to be run when it has nothing to do.
+    if (!promise) {
+      throw new Error("Task function did not return a Promise!");
     }
 
     setStatus({ isRunning: true, result: null, error: null });
 
-    callbacksRef.current.onStart?.apply(thisArg);
+    callbacksRef.current.onStart?.();
 
     // Don't use async/await because we don't want to return a Promise to any
     // callers of this function.
@@ -154,8 +164,8 @@ export function useAsyncTask<T extends TaskFunction>({
         setStatus({ isRunning: !!leaveRunning, result, error: null });
 
         // Call handlers.
-        callbacksRef.current.onComplete?.apply(thisArg, [result]);
-        callbacksRef.current.onFinally?.apply(thisArg);
+        callbacksRef.current.onComplete?.(result);
+        callbacksRef.current.onFinally?.();
       })
       .catch((error: Error) => {
         // Log it to the console for analytics.
@@ -172,8 +182,8 @@ export function useAsyncTask<T extends TaskFunction>({
         setStatus({ isRunning: false, result: null, error });
 
         // Call handlers.
-        callbacksRef.current.onError?.apply(thisArg, [error]);
-        callbacksRef.current.onFinally?.apply(thisArg);
+        callbacksRef.current.onError?.(error);
+        callbacksRef.current.onFinally?.();
       });
   }
 

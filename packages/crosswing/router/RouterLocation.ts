@@ -231,7 +231,10 @@ export class RouterLocation<Path extends string = any> {
    * Returns a new RouterLocation which is the combination of our claimed
    * segments, plus any new segments in the given path.
    */
-  public rewrite(path: string): RouterLocation {
+  public rewrite(
+    path: string,
+    { preserveClaimIndex = false }: { preserveClaimIndex?: boolean } = {},
+  ): RouterLocation {
     const newSegments = segmentize(path);
     const allSegments = [
       ...this.segments.slice(0, this.claimIndex),
@@ -239,7 +242,9 @@ export class RouterLocation<Path extends string = any> {
     ];
     return this.clone({
       segments: allSegments,
-      claimIndex: this.claimIndex + newSegments.length,
+      claimIndex: preserveClaimIndex
+        ? this.claimIndex
+        : this.claimIndex + newSegments.length,
       search: "",
     });
   }

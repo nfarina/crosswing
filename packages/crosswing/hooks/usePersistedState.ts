@@ -1,6 +1,5 @@
 import {
   ChangeEvent,
-  Reducer,
   useEffect,
   useLayoutEffect,
   useReducer,
@@ -60,9 +59,6 @@ export function usePersistedState<S>({
   onComplete?: (updatedValue: S) => void;
   onError: null | ((error: Error) => void);
 }): PersistedState<S> {
-  // Narrow down our Reducer type based on our persisted value type.
-  type R = Reducer<State<S>, Action<S>>;
-
   // We need to know if we were unmounted while the updateFunc was running
   // so we don't mutate state after it completes.
   const isMounted = useIsMounted();
@@ -73,7 +69,7 @@ export function usePersistedState<S>({
   // updateFunc() to be run even if unmounted! Otherwise you will lose data.
   const savedUpdateFunc = useRef(runAsyncUpdate);
 
-  const [state, dispatch] = useReducer<R>(reducer, {
+  const [state, dispatch] = useReducer(reducer, {
     draftValue: persistedValue,
     draftChanged: 0,
     updateTimeoutId: null,

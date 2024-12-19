@@ -24,24 +24,39 @@ const DEFAULT_PRESET_INDEX = 3;
  * Allow you to tweak the font size globally for testing responsive
  * type in mobile apps.
  */
-export function useFontSizeHotKeys() {
+export function useFontSizeHotKeys({
+  disabled,
+}: {
+  /** If true, this hook does nothing. (Maybe you had to call it anyway because of Rules of Hooks) */
+  disabled?: boolean;
+} = {}) {
   const [presetIndex, setPresetIndex] = useLocalStorage<number>(
     "useFontSizeHotKeys:presetIndex",
     DEFAULT_PRESET_INDEX,
   );
 
-  useHotKey("]", () => setPresetIndex(Math.max(0, presetIndex - 1)));
-  useHotKey("[", () =>
-    setPresetIndex(Math.min(presets.length - 1, presetIndex + 1)),
-  );
-  useHotKey("=", () => setPresetIndex(DEFAULT_PRESET_INDEX));
+  useHotKey("]", {
+    onPress: () => setPresetIndex(Math.max(0, presetIndex - 1)),
+    disabled,
+  });
+  useHotKey("[", {
+    onPress: () =>
+      setPresetIndex(Math.min(presets.length - 1, presetIndex + 1)),
+    disabled,
+  });
+  useHotKey("=", {
+    onPress: () => setPresetIndex(DEFAULT_PRESET_INDEX),
+    disabled,
+  });
 
   // Respond to changes in preferred font size.
   useLayoutEffect(() => {
+    if (disabled) return;
+
     const preset = presets[presetIndex];
     // Match behavior in AppContainer.
     const multiplier = preset.size / 17;
 
     document.body.style.setProperty("--font-scale", String(multiplier));
-  }, [presetIndex]);
+  }, [presetIndex, disabled]);
 }

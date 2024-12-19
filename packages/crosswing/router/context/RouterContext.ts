@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext } from "react";
 import { RouterLocation } from "../RouterLocation.js";
 import { BrowserHistory } from "../history/BrowserHistory.js";
 import { MemoryHistory } from "../history/MemoryHistory.js";
@@ -38,25 +38,26 @@ export type RouterFlags = {
 };
 
 export const RouterContext = createContext<RouterContextValue>({
-  location: new RouterLocation(),
-  nextLocation: new RouterLocation(),
-  history: new MemoryHistory(),
+  get location() {
+    warnDefaultContext();
+    return new RouterLocation();
+  },
+  get nextLocation() {
+    warnDefaultContext();
+    return new RouterLocation();
+  },
+  get history() {
+    warnDefaultContext();
+    return new MemoryHistory();
+  },
   flags: {
     isDefault: true,
   },
 });
 RouterContext.displayName = "RouterContext";
 
-export function useRouter({
-  ignoreDefaultWarning,
-}: { ignoreDefaultWarning?: boolean } = {}): RouterContextValue {
-  const context = useContext(RouterContext);
-
-  if (!ignoreDefaultWarning && context.flags?.isDefault) {
-    console.warn(
-      "You are attempting to use a RouterContext without an <Router> ancestor. Things like links may not work. Note that modals may be rendered outside of the router, so if you are getting this message from a modal window, you may need to wrap your component in a <ModalContextProvider> to propagate the router context to displayed modals.",
-    );
-  }
-
-  return context;
+function warnDefaultContext() {
+  console.warn(
+    "You are attempting to use a RouterContext without an <Router> ancestor. Things like links may not work. Note that modals may be rendered outside of the router, so if you are getting this message from a modal window, you may need to wrap your component in a <ModalContextProvider> to propagate the router context to displayed modals.",
+  );
 }

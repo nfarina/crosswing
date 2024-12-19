@@ -1,6 +1,6 @@
 import { action } from "@storybook/addon-actions";
 import { Meta, StoryFn } from "@storybook/react";
-import { useState } from "react";
+import { use, useState } from "react";
 import { createPortal } from "react-dom";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
@@ -27,7 +27,7 @@ import {
   ToolbarSidebarButton,
   ToolbarSpace,
 } from "../toolbar/Toolbar.js";
-import { useToolbar } from "./ToolbarContext.js";
+import { ToolbarContext } from "./ToolbarContext.js";
 import { ToolbarIDView } from "./ToolbarIDView.js";
 import { ToolbarLayout } from "./ToolbarLayout.js";
 import { ToolbarOverflowTab } from "./ToolbarOverflowTab.js";
@@ -63,7 +63,7 @@ export const InsertionPoints: Story = (args) => (
 );
 
 function InsertionPointsContent() {
-  const { getInsertionRef } = useToolbar();
+  const { getInsertionRef } = use(ToolbarContext);
 
   const [showBack, setShowBack] = useState(true);
 

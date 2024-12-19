@@ -3,11 +3,12 @@ import {
   HTMLAttributes,
   ReactElement,
   ReactNode,
+  use,
   useEffect,
   useRef,
 } from "react";
 import { styled } from "styled-components";
-import { useRouter } from "../../router/context/RouterContext.js";
+import { RouterContext } from "../../router/context/RouterContext.js";
 import {
   SeparatorEdges,
   SeparatorLayout,
@@ -37,7 +38,7 @@ export function LinkList<T extends { id: string }>({
   // const [scrolledToActive, setScrolledToActive] = useState(false);
   const listRef = useRef<HTMLDivElement | null>(null);
 
-  const { location } = useRouter();
+  const { location } = use(RouterContext);
 
   // Get the next path component after our current location, if any.
   // This will be the ID of the item that's currently selected.
@@ -112,6 +113,12 @@ export const StyledLinkList = styled.div`
     height: 0;
     flex-grow: 1;
     overflow-y: auto;
+
+    /* Leave enough space for the support button. */
+    /* padding-bottom: {supportArea({ alwaysPad: true }).bottom}; */
+
+    /* Forgot we don't have access to our proprietary consuming app! */
+    padding-bottom: 85px;
 
     > * {
       z-index: 1;

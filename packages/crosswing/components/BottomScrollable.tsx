@@ -1,12 +1,12 @@
-import { HTMLAttributes } from "react";
+import { HTMLAttributes, use } from "react";
 import { styled } from "styled-components";
-import { useHost } from "../host/context/HostContext.js";
+import { HostContext } from "../host/context/HostContext.js";
 
 export function BottomScrollable({
   children,
   ...rest
 }: HTMLAttributes<HTMLDivElement>) {
-  const { container } = useHost();
+  const { container } = use(HostContext);
 
   return (
     <StyledBottomScrollable {...rest}>

@@ -2,6 +2,7 @@ import {
   CSSProperties,
   HTMLAttributes,
   ReactNode,
+  use,
   useLayoutEffect,
   useRef,
 } from "react";
@@ -12,13 +13,12 @@ import { DotDotDotIcon } from "../../icons/DotDotDot.js";
 import { Button } from "../Button.js";
 import { LinkButton } from "../LinkButton.js";
 import { PopupButton } from "../PopupButton.js";
-import { StyledDateRangeInput } from "../forms/DateRangeInput.js";
 import { SearchInput } from "../forms/SearchInput.js";
 import { Select } from "../forms/Select.js";
 import {
+  ToolbarContext,
   ToolbarInsertionRef,
   ToolbarRef,
-  useToolbar,
 } from "./ToolbarContext.js";
 import { StyledToolbarIDView } from "./ToolbarIDView.js";
 
@@ -53,7 +53,7 @@ export function Toolbar({
  */
 export function ToolbarInsertionPoint({ name }: { name: string }) {
   const insertionRef: ToolbarInsertionRef = useRef(null);
-  const { setInsertionRef } = useToolbar();
+  const { setInsertionRef } = use(ToolbarContext);
 
   useLayoutEffect(() => {
     // Pass the ref we created for ourself up to our ToolbarLayout parent
@@ -91,8 +91,8 @@ export const ToolbarText = styled.div`
 `;
 
 export const toolbarShadows = {
-  control: () => `inset 0 0 0 1px ${colors.darkGreen({ alpha: 0.2 })}`,
-  controlDark: () => `inset 0 0 0 1px ${colors.white({ alpha: 0.15 })}`,
+  control: () => `inset 0 0 0 1px ${colors.darkGreen({ alpha: 0.15 })}`,
+  controlDark: () => `inset 0 0 0 1px ${colors.white({ alpha: 0.1 })}`,
 };
 
 export const ToolbarLinkButton = styled(LinkButton)`
@@ -180,17 +180,32 @@ export const StyledToolbarSidebarButton = styled(ToolbarButton)`
 
   > div {
     position: absolute;
-    top: 3px;
-    right: 3px;
-    bottom: 3px;
+    top: 3.5px;
+    right: 3.5px;
+    bottom: 3.5px;
     width: 13px;
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
-    background: ${colors.textSecondary()};
+    border-top-right-radius: 3.5px;
+    border-bottom-right-radius: 3.5px;
+    border-top-left-radius: 1.5px;
+    border-bottom-left-radius: 1.5px;
+    background: ${colors.text({ alpha: 0.5 })};
   }
 
-  &[data-sidebar-visible="true"] > div {
-    background: ${colors.text()};
+  &[data-sidebar-visible="true"] {
+    /* Colors from StatusBadge */
+    background: ${colors.lightBlue({ lighten: 0.1, alpha: 0.5 })};
+
+    > div {
+      background: ${colors.lightBlue({ darken: 0.5 })};
+    }
+
+    @media (prefers-color-scheme: dark) {
+      background: ${colors.lightBlue({ darken: 0.6, alpha: 0.8 })};
+
+      > div {
+        background: ${colors.lightBlue({ lighten: 0.06 })};
+      }
+    }
   }
 `;
 
@@ -306,18 +321,6 @@ export const StyledToolbar = styled.div`
 
   > ${ToolbarSearch} {
     margin: 0 10px;
-  }
-
-  > ${StyledDateRangeInput} {
-    height: 30px;
-    border: none;
-    background: none;
-    box-shadow: ${toolbarShadows.control()};
-    border-radius: 6px;
-
-    @media (prefers-color-scheme: dark) {
-      box-shadow: ${toolbarShadows.controlDark()};
-    }
   }
 
   > ${StyledToolbarIDView} {

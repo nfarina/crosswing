@@ -1,7 +1,7 @@
-import { lazy } from "react";
+import { lazy, use } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../../../colors/colors.js";
-import { useRouter } from "../../../../router/context/RouterContext.js";
+import { RouterContext } from "../../../../router/context/RouterContext.js";
 import { NavLayout } from "../../../../router/navs/NavLayout.js";
 import {
   TabbedButton,
@@ -21,7 +21,7 @@ const PanelTwo = lazy(() => {
 });
 
 export default function PageTwo() {
-  const { location } = useRouter();
+  const { location } = use(RouterContext);
 
   const panel = location.searchParams().get("panel");
 

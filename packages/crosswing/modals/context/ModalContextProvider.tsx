@@ -3,16 +3,15 @@ import {
   ReactNode,
   cloneElement,
   isValidElement,
-  useCallback,
+  use,
   useEffect,
-  useMemo,
   useState,
 } from "react";
 import { createPortal } from "react-dom";
 import { TransitionGroup } from "react-transition-group";
-import { useHost } from "../../host/context/HostContext.js";
+import { HostContext } from "../../host/context/HostContext.js";
 import { Minutes } from "../../shared/timespan.js";
-import { ModalContext, useModalContext } from "./ModalContext.js";
+import { ModalContext } from "./ModalContext.js";
 
 // When any modal is being displayed, we ask our native host (if present) to
 // delay updates for 30 minutes.
@@ -30,8 +29,8 @@ export function ModalContextProvider({
   allowDesktopPresentation?: boolean;
   children: ReactNode;
 }) {
-  const { delayUpdates } = useHost();
-  const modalContext = useModalContext();
+  const { delayUpdates } = use(HostContext);
+  const modalContext = use(ModalContext);
   const { showToast, hideToast, modalRoot, modalContextRoot } = modalContext;
 
   // All the modals currently being displayed with the current context.
@@ -40,25 +39,23 @@ export function ModalContextProvider({
   // createPortal() which adds elements as they are first rendered.
   const [modals, setModals] = useState(new Map<string, ReactNode>());
 
-  const showModal = useCallback(
-    (key: string, modal: (...args: any) => ReactNode, ...args: any) =>
-      setModals((current) => {
-        const next = new Map(current);
-        next.set(key, modal(...(args ?? [])));
-        return next;
-      }),
-    [setModals],
-  );
+  const showModal = (
+    key: string,
+    modal: (...args: any) => ReactNode,
+    ...args: any
+  ) =>
+    setModals((current) => {
+      const next = new Map(current);
+      next.set(key, modal(...(args ?? [])));
+      return next;
+    });
 
-  const hideModal = useCallback(
-    (key: string) =>
-      setModals((current) => {
-        const next = new Map(current);
-        next.delete(key);
-        return next;
-      }),
-    [setModals],
-  );
+  const hideModal = (key: string) =>
+    setModals((current) => {
+      const next = new Map(current);
+      next.delete(key);
+      return next;
+    });
 
   useEffect(() => {
     delayUpdates(modals.size > 0 ? UPDATE_DELAY_FOR_MODALS : 0);
@@ -68,31 +65,18 @@ export function ModalContextProvider({
   const allowDesktopPresentation =
     allowDesktopPresentationOverride ?? modalContext.allowDesktopPresentation;
 
-  // Make sure to keep this object reference stable across renders so we don't
-  // cause any context children to re-render unnecessarily.
-  const contextValue = useMemo(
-    () => ({
-      showModal,
-      hideModal,
-      showToast,
-      hideToast,
-      modalRoot,
-      modalContextRoot,
-      allowDesktopPresentation,
-    }),
-    [
-      showModal,
-      hideModal,
-      showToast,
-      hideToast,
-      modalRoot,
-      modalContextRoot,
-      allowDesktopPresentation,
-    ],
-  );
+  const contextValue = {
+    showModal,
+    hideModal,
+    showToast,
+    hideToast,
+    modalRoot,
+    modalContextRoot,
+    allowDesktopPresentation,
+  };
 
   return (
-    <ModalContext.Provider value={contextValue}>
+    <ModalContext value={contextValue}>
       {children}
       {modalRoot.current && (
         <TransitionGroup component={null}>
@@ -105,7 +89,7 @@ export function ModalContextProvider({
           ))}
         </TransitionGroup>
       )}
-    </ModalContext.Provider>
+    </ModalContext>
   );
 }
 

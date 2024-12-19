@@ -1,29 +1,29 @@
 import dayjs from "dayjs";
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import { styled } from "styled-components";
-import { fonts } from "../../fonts/fonts.js";
 import { useMatchMedia } from "../../hooks/useMatchMedia.js";
-import { DisclosureArrowIcon } from "../../icons/DisclosureArrow.js";
-import { DownArrowIcon } from "../../icons/DownArrow.js";
 import { PopupView } from "../../modals/popup/PopupView.js";
 import { usePopup } from "../../modals/popup/usePopup.js";
 import { useSheet } from "../../modals/sheet/useSheet.js";
-import { Button } from "../Button.js";
+import { LoadingCurtain } from "../LoadingCurtain.js";
+import { PopupButton } from "../PopupButton.js";
+import { ToolbarPopupButton } from "../toolbar/Toolbar.js";
 import {
   AllDateRangePresets,
-  DateRange,
   areDateRangesEqual,
+  DateRange,
 } from "./DateRange.js";
+import DateRangePicker from "./DateRangePicker.js";
 
-const DateRangeControl = lazy(() => import("./DateRangeControl"));
-const DateRangePicker = lazy(() => import("./DateRangePicker"));
+const DateRangeControl = lazy(() => import("./DateRangeControl.js"));
 
 export function DateRangeInput({
   value,
   onValueChange,
   popupAlignment = "left",
+  inToolbar,
   ...rest
-}: Omit<Parameters<typeof Button>[0], "value"> & {
+}: Omit<Parameters<typeof PopupButton>[0], "popup" | "value"> & {
   value: DateRange | null;
   onValueChange: (newValue: DateRange | null) => void;
   /**
@@ -32,23 +32,30 @@ export function DateRangeInput({
    * you to keep the popup in a consistent location.
    */
   popupAlignment?: "left" | "center" | "right";
+  /** If true, renders a ToolbarPopupButton instead of a PopupButton. */
+  inToolbar?: boolean;
 }) {
   // Use a Popup for desktop layouts with lots of space.
-  const popup = usePopup(() => (
-    <StyledPopupView>
-      <DateRangeControl
-        value={value}
-        onValueChange={(newValue, type) => {
-          onValueChange(newValue);
-          if (type === "preset" || type === "custom") {
-            // Hide the popup if you entered a custom value or clicked a preset
-            // date range button.
-            popup.hide();
-          }
-        }}
-      />
-    </StyledPopupView>
-  ));
+  const popup = usePopup(
+    () => (
+      <DateRangePopupView>
+        <Suspense fallback={<LoadingCurtain lazy />}>
+          <DateRangeControl
+            value={value}
+            onValueChange={(newValue, type) => {
+              onValueChange(newValue);
+              if (type === "preset" || type === "custom") {
+                // Hide the popup if you entered a custom value or clicked a preset
+                // date range button.
+                popup.hide();
+              }
+            }}
+          />
+        </Suspense>
+      </DateRangePopupView>
+    ),
+    { autoReposition: true },
+  );
 
   // Use a sheet for mobile layouts.
   const sheet = useSheet(() => (
@@ -101,31 +108,28 @@ export function DateRangeInput({
 
   return (
     <StyledDateRangeInput
-      data-is-open={!!popup.visible}
-      title={
+      as={inToolbar ? ToolbarPopupButton : PopupButton}
+      popup={mobileLayout ? null : popup}
+      children={
         <>
-          {renderTitle()}{" "}
-          {mobileLayout ? <DisclosureArrowIcon /> : <DownArrowIcon />}
+          {renderTitle()}
+          {/* We use a special class to cause our popup to position itself at a
+          consistent location, since our button changes in size as you interact
+          with the popup. Otherwise the popup would shift around, constantly
+          trying to be in the middle of the button. */}
+          <span className="popup-target" data-alignment={popupAlignment} />
         </>
       }
-      children={
-        /* We use a special class to cause our popup to position itself at a
-              consistent location, since our button changes in size as you
-              interact with the popup. Otherwise the popup would shift around,
-              constantly trying to be in the middle of the button. */
-        <span className="popup-target" data-alignment={popupAlignment} />
-      }
-      onClick={mobileLayout ? sheet.show : popup.onClick}
+      onClick={mobileLayout ? sheet.show : undefined}
       {...rest}
     />
   );
 }
 
-export const StyledDateRangeInput = styled(Button)`
-  font: ${fonts.displayMedium({ size: 15, line: "1" })};
+export const StyledDateRangeInput = styled(PopupButton)`
   position: relative;
 
-  > .popup-target {
+  .popup-target {
     position: absolute;
     bottom: 0;
 
@@ -141,31 +145,14 @@ export const StyledDateRangeInput = styled(Button)`
       right: 25px;
     }
   }
-
-  > .content {
-    > .title {
-      > svg {
-        width: 24px;
-        height: 24px;
-        margin: -8px -3px;
-        transform: translateX(3px);
-        /* Turns out this animation is just distracting. */
-        /* transition: transform 0.2s; */
-      }
-    }
-  }
-
-  &[data-is-open="true"] > .content > .title > svg {
-    transform: translate(3px, -1px) rotate(-180deg);
-  }
 `;
 
-const StyledPopupView = styled(PopupView)`
+const DateRangePopupView = styled(PopupView)`
   width: 100%;
   max-width: 500px;
 
   > .container {
-    height: 100%;
+    height: calc(100% - 10px);
     max-height: 600px;
   }
 `;

@@ -1,4 +1,4 @@
-import { ReactNode, useRef } from "react";
+import { HTMLAttributes, ReactNode, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 import { styled } from "styled-components";
 import { colors } from "../colors/colors.js";
@@ -9,7 +9,8 @@ export function BannerLayout({
   title = "Look at Banner, Michael!",
   visible,
   children,
-}: {
+  ...rest
+}: Omit<HTMLAttributes<HTMLDivElement>, "title"> & {
   title?: ReactNode;
   visible?: boolean;
   children?: ReactNode;
@@ -19,7 +20,7 @@ export function BannerLayout({
   const ref = useRef(null);
 
   return (
-    <StyledBannerLayout>
+    <StyledBannerLayout {...rest}>
       <CSSTransition
         classNames="banner"
         nodeRef={ref}

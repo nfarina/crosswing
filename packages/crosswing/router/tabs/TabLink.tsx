@@ -1,11 +1,11 @@
-import { MouseEvent, ReactElement, ReactNode } from "react";
+import { MouseEvent, ReactElement, ReactNode, use } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
-import { useHost } from "../../host/context/HostContext.js";
+import { HostContext } from "../../host/context/HostContext.js";
 import { PlaceholderIcon } from "../../icons/Placeholder.js";
+import { RouterContext } from "../context/RouterContext.js";
 import { Link } from "../Link.js";
-import { useRouter } from "../context/RouterContext.js";
 import { UnreadBadge } from "./UnreadBadge.js";
 
 export interface TabProps {
@@ -22,6 +22,8 @@ export interface TabProps {
   render: () => ReactNode;
 }
 
+export const DEFAULT_TAB_LINK_ICON = <PlaceholderIcon />;
+
 export function TabLink({
   to,
   active,
@@ -31,9 +33,9 @@ export function TabLink({
   active?: boolean;
   tab: ReactElement<TabProps>;
 }) {
-  const { icon = <PlaceholderIcon />, title, badge } = tab.props;
-  const { location } = useRouter();
-  const { scrollToTop } = useHost();
+  const { icon = DEFAULT_TAB_LINK_ICON, title, badge } = tab.props;
+  const { location } = use(RouterContext);
+  const { scrollToTop } = use(HostContext);
 
   // If you click a tab and have nowhere to navigate to (i.e. you're
   // already at the tab root) then try scrolling to the top, if on iOS.

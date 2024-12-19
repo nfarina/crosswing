@@ -1,10 +1,11 @@
+import { use } from "react";
 import styled from "styled-components";
 import { colors } from "../../colors/colors";
 import { fonts } from "../../fonts/fonts";
 import { ModalDecorator } from "../../modals/storybook/decorators.js";
 import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
-import { FullScreenView, useFullScreen } from "./FullScreenView.js";
+import { FullScreenContext, FullScreenView } from "./FullScreenView.js";
 
 export default {
   component: FullScreenView,
@@ -79,7 +80,7 @@ const ResponsiveContainer = styled.div`
 `;
 
 function Content() {
-  const { isFullScreen } = useFullScreen();
+  const { isFullScreen } = use(FullScreenContext);
 
   return (
     <StyledContent>

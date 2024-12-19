@@ -17,10 +17,10 @@ export function MockRouter({ children }: { children?: ReactNode }) {
   const nextLocation = new RouterLocation();
 
   return (
-    <RouterContext.Provider
+    <RouterContext
       value={{ location, nextLocation, history, flags: { isMock: true } }}
     >
       {children}
-    </RouterContext.Provider>
+    </RouterContext>
   );
 }

@@ -31,6 +31,31 @@ export const Default = () => {
   );
 };
 
+export const InToolbar = () => {
+  const [range, setRange] = useState<DateRange | null>(null);
+
+  return (
+    <Container>
+      <DateRangeInput
+        value={range}
+        onValueChange={setRange}
+        popupAlignment="center"
+        inToolbar
+      />
+    </Container>
+  );
+};
+
+export const LeftAligned = () => {
+  const [range, setRange] = useState<DateRange | null>(null);
+
+  return (
+    <Container data-popup-alignment="left">
+      <DateRangeInput value={range} onValueChange={setRange} />
+    </Container>
+  );
+};
+
 // Special layout putting the button at the top so that the desktop-mode
 // popup can appear below.
 const Container = styled.div`
@@ -41,5 +66,12 @@ const Container = styled.div`
   > ${StyledDateRangeInput} {
     margin-top: 10px;
     flex-shrink: 0;
+  }
+
+  &[data-popup-alignment="left"] {
+    > ${StyledDateRangeInput} {
+      align-self: flex-start;
+      margin-left: 100px;
+    }
   }
 `;

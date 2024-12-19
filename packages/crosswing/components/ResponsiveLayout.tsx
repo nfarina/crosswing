@@ -82,7 +82,7 @@ export function ResponsiveLayout({
   );
 }
 
-export function ResponsiveChild({}: ResponsiveChildProps): JSX.Element {
+export function ResponsiveChild({}: ResponsiveChildProps): ReactNode {
   return null as any; // This render method never gets called.
 }
 

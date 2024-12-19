@@ -5,6 +5,8 @@ import { useElementSize } from "../hooks/useElementSize.js";
 
 const debug = Debug("components:AspectLayout");
 
+type PreviousSize = { area: number; timestamp: number };
+
 export function AspectLayout({
   aspect,
   adjust = "height",
@@ -21,7 +23,7 @@ export function AspectLayout({
   // prevent flip-flop behavior (like when our resizing causes scrollbars to
   // appear, which causes us to resize again, and the scrollbars disappear, and
   // we keep resizing back and forth). We store only the total area.
-  const lastSizes = useRef<{ area: number; timestamp: number }[]>([]);
+  const lastSizes = useRef<PreviousSize[]>([]);
 
   useElementSize(
     ref,
@@ -54,11 +56,7 @@ export function AspectLayout({
       // Record the new area.
       lastSizes.current.push({ area, timestamp: Date.now() });
 
-      // We consider the area to have flip-flopped if we have entries both
-      // larger and smaller than the current area.
-      const isFlopping =
-        lastSizes.current.some((entry) => entry.area > area) &&
-        lastSizes.current.some((entry) => entry.area < area);
+      const isFlopping = detectFlopping(lastSizes.current);
 
       if (isFlopping) {
         debug("Flopping detected, skipping resize");
@@ -85,3 +83,21 @@ export const StyledAspectLayout = styled.div`
     flex-grow: 1;
   }
 `;
+
+function detectFlopping(lastSizes: PreviousSize[]): boolean {
+  if (lastSizes.length < 3) return false;
+
+  for (let i = 2; i < lastSizes.length; i++) {
+    const a = lastSizes[i - 2].area;
+    const b = lastSizes[i - 1].area;
+    const c = lastSizes[i].area;
+
+    // Check for smaller -> larger -> smaller
+    if (a < b && b > c) return true;
+
+    // Check for larger -> smaller -> larger
+    if (a > b && b < c) return true;
+  }
+
+  return false;
+}

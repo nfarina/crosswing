@@ -3,6 +3,7 @@ import {
   MouseEvent,
   ReactElement,
   ReactNode,
+  use,
   useEffect,
   useRef,
   useState,
@@ -12,7 +13,7 @@ import { colors } from "../../colors/colors.js";
 import { flattenChildren } from "../../hooks/flattenChildren.js";
 import { DownArrowIcon } from "../../icons/DownArrow.js";
 import { usePopup } from "../../modals/popup/usePopup.js";
-import { useRouter } from "../../router/context/RouterContext.js";
+import { RouterContext } from "../../router/context/RouterContext.js";
 import { PopupMenu, PopupMenuText } from "../PopupMenu.js";
 import {
   StyledToolbarTabButton,
@@ -26,7 +27,7 @@ import {
  * <ToolbarTab> links.
  */
 export function ToolbarOverflowTab({ children }: { children: ReactNode }) {
-  const { location } = useRouter();
+  const { location } = use(RouterContext);
 
   const [lastTab, setLastTab] = useState<ReactElement<ToolbarTabProps> | null>(
     null,
