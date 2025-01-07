@@ -5,7 +5,10 @@ import { LabeledCheckmark } from "./LabeledCheckmark.js";
 
 export default {
   component: LabeledCheckmark,
-  decorators: [SeparatorDecorator, CrosswingAppDecorator({ width: "wide" })],
+  decorators: [
+    SeparatorDecorator,
+    CrosswingAppDecorator({ layout: "component" }),
+  ],
   parameters: { layout: "centered" },
 };
 

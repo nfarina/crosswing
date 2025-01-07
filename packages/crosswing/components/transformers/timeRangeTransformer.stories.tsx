@@ -9,7 +9,10 @@ import { timeRangeTransformer } from "./timeRangeTransformer.js";
 
 export default {
   component: timeRangeTransformer, // Just for the title.
-  decorators: [CrosswingAppDecorator({ width: "wide" }), TransformerDecorator],
+  decorators: [
+    CrosswingAppDecorator({ layout: "component" }),
+    TransformerDecorator,
+  ],
   parameters: { layout: "centered" },
 };
 

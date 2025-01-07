@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { createGlobalStyle, styled } from "styled-components";
 import { getBuilderVarCSS } from "./colors/builders.js";
 import { ColorBuilder, colors, shadows } from "./colors/colors.js";
@@ -17,22 +18,17 @@ import { useFontSizeHotKeys } from "./host/features/useFontSizeHotKeys.js";
  */
 export function CrosswingAppDecorator({
   layout = "centered",
-  width = undefined,
-  height = undefined,
   colors: overriddenColors = [],
   faces: overriddenFaces = [],
   fonts: overriddenFonts = [],
+  background = null,
 }: {
-  layout?: "fullscreen" | "centered" | "mobile";
-  width?: number | "wide";
-  height?: number;
+  layout?: "fullscreen" | "centered" | "mobile" | "component";
   colors?: ColorBuilder[];
   faces?: GlobalFontFace[];
   fonts?: FontBuilder[];
+  background?: ColorBuilder | null;
 } = {}) {
-  // "Wide" is just a convenient way to get a phone-sized width for a component.
-  const resolvedWidth = width === "wide" ? 380 : width;
-
   const resolvedColors = [
     ...Object.values(colors),
     ...Object.values(shadows),
@@ -44,6 +40,11 @@ export function CrosswingAppDecorator({
 
   // Actual decorator function.
   function CrosswingAppInnerDecorator(Story: () => any) {
+    // Tag the body with the layout so we can style it correctly in vitest.
+    useEffect(() => {
+      document.body.dataset.layout = layout;
+    }, [layout]);
+
     // Allow the user to change the font size with hotkeys for testing
     // responsive layouts.
     useFontSizeHotKeys();
@@ -55,24 +56,30 @@ export function CrosswingAppDecorator({
           <CenteredLayoutGlobalStyle
             $colors={resolvedColors}
             $fonts={resolvedFonts}
+            $background={background}
+          />
+        )}
+        {layout === "component" && (
+          <ComponentLayoutGlobalStyle
+            $colors={resolvedColors}
+            $fonts={resolvedFonts}
+            $background={background}
           />
         )}
         {layout === "mobile" && (
           <MobileLayoutGlobalStyle
             $colors={resolvedColors}
             $fonts={resolvedFonts}
+            $background={background}
           />
         )}
         {layout === "fullscreen" && (
           <FullScreenLayoutGlobalStyle
             $colors={resolvedColors}
             $fonts={resolvedFonts}
+            $background={background}
           />
         )}
-        {resolvedWidth != null && (
-          <DefinedWidthGlobalStyle width={resolvedWidth} />
-        )}
-        {height != null && <DefinedHeightGlobalStyle height={height} />}
         <Story />
       </>
     );
@@ -84,6 +91,7 @@ export function CrosswingAppDecorator({
 const CenteredLayoutGlobalStyle = createGlobalStyle<{
   $colors: ColorBuilder[];
   $fonts: FontBuilder[];
+  $background?: ColorBuilder | null;
 }>`
   html {
     > body {
@@ -92,11 +100,46 @@ const CenteredLayoutGlobalStyle = createGlobalStyle<{
     ${(p) => getFontVarCSS(p.$fonts)}
 
       /* We should always set a default background color; Storybook doesn't do it automatically for dark mode. */
-      background: ${colors.textBackground()};
+      background: ${(p) => p.$background?.() ?? colors.textBackground()};
 
       /* Make raw text readable. */
       color: ${colors.text()};
       font: ${fonts.display({ size: 14 })};
+
+      > #storybook-root {
+      }
+    }
+  }
+
+  b, strong {
+    /* Otherwise browsers may select the "Fira Sans Black" font which is too heavy. */
+    font-weight: 600;
+  }
+`;
+
+const ComponentLayoutGlobalStyle = createGlobalStyle<{
+  $colors: ColorBuilder[];
+  $fonts: FontBuilder[];
+  $background?: ColorBuilder | null;
+}>`
+  html {
+    > body {
+    /* Define our color and font vars so stories have access to the default theme. */
+    ${(p) => getBuilderVarCSS(p.$colors)}
+    ${(p) => getFontVarCSS(p.$fonts)}
+
+      /* We should always set a default background color; Storybook doesn't do it automatically for dark mode. */
+      background: ${(p) => p.$background?.() ?? colors.textBackground()};
+
+      /* Make raw text readable. */
+      color: ${colors.text()};
+      font: ${fonts.display({ size: 14 })};
+
+      > #storybook-root {
+        /* Match the width of MobileLayoutGlobalStyle. */
+        width: 390px;
+        padding: 0 !important;
+      }
     }
   }
 
@@ -109,6 +152,7 @@ const CenteredLayoutGlobalStyle = createGlobalStyle<{
 const MobileLayoutGlobalStyle = createGlobalStyle<{
   $colors: ColorBuilder[];
   $fonts: FontBuilder[];
+  $background?: ColorBuilder | null;
 }>`
   html {
     height: 100%;
@@ -121,10 +165,10 @@ const MobileLayoutGlobalStyle = createGlobalStyle<{
     ${(p) => getFontVarCSS(p.$fonts)}
 
       /* Darken the canvas a bit so the default white background contrasts. */
-      background: #E5E5E5;
+      background: ${(p) => p.$background?.() ?? "#E5E5E5"};
 
       @media (prefers-color-scheme: dark) {
-        background: #404040;
+        background: ${(p) => p.$background?.() ?? "#404040"};
       }
 
       > #storybook-root {
@@ -144,6 +188,9 @@ const MobileLayoutGlobalStyle = createGlobalStyle<{
         /* Make the mobile frame stand out from the default Storybook background. */
         background: ${colors.textBackground()};
 
+        /* StyledCrosswingApp provides a default color. */
+        color: ${colors.text()};
+
         /* Rendered story itself. */
         > * {
           flex-grow: 1;
@@ -161,6 +208,7 @@ const MobileLayoutGlobalStyle = createGlobalStyle<{
 const FullScreenLayoutGlobalStyle = createGlobalStyle<{
   $colors: ColorBuilder[];
   $fonts: FontBuilder[];
+  $background?: ColorBuilder | null;
 }>`
   html {
     height: 100%;
@@ -174,13 +222,16 @@ const FullScreenLayoutGlobalStyle = createGlobalStyle<{
     ${(p) => getFontVarCSS(p.$fonts)}
 
     /* We should always set a default background color; Storybook doesn't do it automatically for dark mode. */
-    background: ${colors.textBackground()};
+    background: ${(p) => p.$background?.() ?? colors.textBackground()};
 
     > #storybook-root {
       width: 100%;
       height: 100%;
       display: flex;
       flex-flow: column;
+
+      /* StyledCrosswingApp provides a default color. */
+      color: ${colors.text()};
 
       /* Rendered story itself. */
       > * {
@@ -192,32 +243,6 @@ const FullScreenLayoutGlobalStyle = createGlobalStyle<{
   b, strong {
     /* Otherwise browsers may select the "Fira Sans Black" font which is too heavy. */
     font-weight: 600;
-  }
-`;
-
-/**
- * Renders a story within a root container that is sized with a fixed width, so
- * that children that typically expand to fill their container can be rendered
- * in a non-squished way.
- */
-const DefinedWidthGlobalStyle = createGlobalStyle<{ width: number }>`
-  #storybook-root {
-    width: ${(p) => p.width}px;
-  }
-`;
-
-const DefinedHeightGlobalStyle = createGlobalStyle<{ height: number }>`
-  #storybook-root {
-    height: ${(p) => p.height}px;
-
-    /* Make the main component grow to fit our defined height. */
-    display: flex;
-    flex-flow: column;
-
-    /* Rendered story itself. */
-    > * {
-      flex-grow: 1;
-    }
   }
 `;
 

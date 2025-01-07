@@ -9,7 +9,7 @@ import { LabeledContentEditable } from "./LabeledContentEditable.js";
 export default {
   component: LabeledContentEditable,
   decorators: [
-    CrosswingAppDecorator({ width: "wide" }),
+    CrosswingAppDecorator({ layout: "component" }),
     (Story: () => any) => <Container children={<Story />} />,
   ],
   parameters: { layout: "centered" },

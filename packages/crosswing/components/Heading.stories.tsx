@@ -6,7 +6,7 @@ import { Heading } from "./Heading.js";
 
 export default {
   component: Heading,
-  decorators: [CrosswingAppDecorator({ width: "wide" })],
+  decorators: [CrosswingAppDecorator({ layout: "component" })],
   parameters: { layout: "centered" },
 } satisfies Meta<typeof Heading>;
 

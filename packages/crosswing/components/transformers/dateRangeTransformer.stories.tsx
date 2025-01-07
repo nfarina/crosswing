@@ -9,7 +9,10 @@ import { TransformerDecorator } from "./storybook.js";
 
 export default {
   component: dateRangeTransformer, // Just for the title.
-  decorators: [CrosswingAppDecorator({ width: "wide" }), TransformerDecorator],
+  decorators: [
+    CrosswingAppDecorator({ layout: "component" }),
+    TransformerDecorator,
+  ],
   parameters: { layout: "centered" },
 };
 

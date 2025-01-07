@@ -23,6 +23,7 @@ export function ToastView({
   sticky,
   onClick,
   onClose,
+  onActionClick,
   // Provided by <TransitionGroup>.
   in: animatingIn,
   onExited,
@@ -54,12 +55,12 @@ export function ToastView({
     }
   }
 
-  function onActionClick() {
-    rest.onActionClick?.();
+  function handleActionClick() {
+    onActionClick?.();
     onClose?.();
   }
 
-  function onToastClick() {
+  function handleToastClick() {
     if (onClick) {
       onClick();
       onClose?.();
@@ -76,17 +77,17 @@ export function ToastView({
       onAnimationEnd={onAnimationEnd}
     >
       {icon && (
-        <div className="icon" onClick={onToastClick}>
+        <div className="icon" onClick={handleToastClick}>
           {icon}
         </div>
       )}
       {to ? (
-        <Link className="content" to={to} onClick={onToastClick}>
+        <Link className="content" to={to} onClick={handleToastClick}>
           <div className="title">{title}</div>
           <div className="message">{message}</div>
         </Link>
       ) : (
-        <div className="content" onClick={onToastClick}>
+        <div className="content" onClick={handleToastClick}>
           <div className="title">{title}</div>
           <div className="message">{message}</div>
         </div>
@@ -96,7 +97,7 @@ export function ToastView({
           className="action"
           size="smaller"
           title={action}
-          onClick={onActionClick}
+          onClick={handleActionClick}
         />
       )}
       <div className="close" onClick={onClose}>

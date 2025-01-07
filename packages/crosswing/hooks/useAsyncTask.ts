@@ -59,6 +59,7 @@ export function useAsyncTask<T extends AsyncTaskFunction>({
   onComplete,
   onError,
   onFinally,
+  silentErrors,
 }: {
   func: T;
   runOnMount?: boolean;
@@ -78,6 +79,10 @@ export function useAsyncTask<T extends AsyncTaskFunction>({
   onError: null | ((error: Error) => void);
   /** Any cleanup you wish to do regardless of success or failure. */
   onFinally?: () => any;
+  /**
+   * If true, errors will not be logged to the console. Used in Storybook.
+   */
+  silentErrors?: boolean;
 }): AsyncTask<T> {
   const [status, setStatus] = useState({
     isRunning: !!runOnMount, // If we're running on mount, then we'll start in a running state!
@@ -128,12 +133,14 @@ export function useAsyncTask<T extends AsyncTaskFunction>({
       promise = func(task, ...args);
     } catch (error: any) {
       // Log it to the console for analytics.
-      console.error(
-        "Async task error:",
-        error.name,
-        error.message,
-        error.stack,
-      );
+      if (!silentErrors) {
+        console.error(
+          "Async task error:",
+          error.name,
+          error.message,
+          error.stack,
+        );
+      }
 
       setStatus({ isRunning: false, result: null, error });
 
@@ -169,12 +176,14 @@ export function useAsyncTask<T extends AsyncTaskFunction>({
       })
       .catch((error: Error) => {
         // Log it to the console for analytics.
-        console.error(
-          "Async task error:",
-          error.name,
-          error.message,
-          error.stack,
-        );
+        if (!silentErrors) {
+          console.error(
+            "Async task error:",
+            error.name,
+            error.message,
+            error.stack,
+          );
+        }
 
         // We've been unmounted or canceled, don't do anything!
         if (invocationRef.current > invocation) return;

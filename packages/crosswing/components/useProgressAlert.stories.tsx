@@ -58,7 +58,7 @@ export const IndeterminateWithError = () => {
 
   useAsyncTask({
     async func() {
-      console.log("Running func!");
+      action("Running func!")();
       progressAlert.show("Processing Payment…");
 
       await wait(2000);
@@ -68,6 +68,7 @@ export const IndeterminateWithError = () => {
     onError: errorAlert.show,
     onFinally: progressAlert.hide,
     runOnMount: true,
+    silentErrors: true,
   });
 
   return null;

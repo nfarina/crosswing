@@ -5,7 +5,10 @@ import { LabeledTextInput } from "./LabeledTextInput.js";
 
 export default {
   component: LabeledTextInput,
-  decorators: [SeparatorDecorator, CrosswingAppDecorator({ width: "wide" })],
+  decorators: [
+    SeparatorDecorator,
+    CrosswingAppDecorator({ layout: "component" }),
+  ],
   parameters: { layout: "centered" },
 };
 

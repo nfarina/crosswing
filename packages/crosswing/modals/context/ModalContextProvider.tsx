@@ -43,12 +43,13 @@ export function ModalContextProvider({
     key: string,
     modal: (...args: any) => ReactNode,
     ...args: any
-  ) =>
+  ) => {
     setModals((current) => {
       const next = new Map(current);
       next.set(key, modal(...(args ?? [])));
       return next;
     });
+  };
 
   const hideModal = (key: string) =>
     setModals((current) => {

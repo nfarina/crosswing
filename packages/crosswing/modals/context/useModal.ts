@@ -76,7 +76,7 @@ export function useModal<T extends any[]>(
     if (visible) {
       context.showModal(key, renderModal, ...lastArgs);
     }
-  });
+  }, [visible, key, renderModal, lastArgs]);
 
   return { show, hide, isVisible: visible };
 }

@@ -5,7 +5,10 @@ import { LabeledTextArea } from "./LabeledTextArea.js";
 
 export default {
   component: LabeledTextArea,
-  decorators: [SeparatorDecorator, CrosswingAppDecorator({ width: "wide" })],
+  decorators: [
+    SeparatorDecorator,
+    CrosswingAppDecorator({ layout: "component" }),
+  ],
   parameters: { layout: "centered" },
 };
 

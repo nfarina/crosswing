@@ -1,5 +1,6 @@
 import { action } from "@storybook/addon-actions";
 import { Meta } from "@storybook/react";
+import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import { ActionMenu, ActionSeparator } from "./ActionMenu.js";
 import { ActionContainer } from "./useActions.js";
@@ -9,6 +10,7 @@ export default {
   decorators: [
     CrosswingAppDecorator({ layout: "mobile" }),
     ActionContainerDecorator,
+    RouterDecorator,
   ],
   parameters: { layout: "centered" },
 } satisfies Meta<typeof ActionMenu>;

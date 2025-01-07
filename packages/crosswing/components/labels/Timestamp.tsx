@@ -49,12 +49,15 @@ export function Timestamp({
   timezone = undefined,
   format: formatter,
   lowercase,
+  static: isStatic = false,
   ...rest
 }: {
   date: Date | number;
   timezone?: string;
   format?: TimestampFormatter | FormatString;
   lowercase?: boolean;
+  /** If true, the timestamp will not auto-update when the date changes. */
+  static?: boolean;
 } & HTMLAttributes<HTMLSpanElement>) {
   const ref = useRef<HTMLSpanElement>(null);
 
@@ -62,6 +65,8 @@ export function Timestamp({
   const timestamp = typeof date === "number" ? date : date.getTime();
 
   useEffect(() => {
+    if (isStatic) return;
+
     function updateDOM() {
       const span = ref.current;
       if (span) span.innerText = getText();
@@ -69,7 +74,7 @@ export function Timestamp({
 
     addTimestampListener(updateDOM);
     return () => removeTimestampListener(updateDOM);
-  }, [timestamp, formatter, dayjs, lowercase]);
+  }, [timestamp, formatter, dayjs, lowercase, isStatic]);
 
   function getText(): string {
     const text = formatTimestamp(timestamp, timezone, formatter);

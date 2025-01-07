@@ -52,6 +52,7 @@ export function useProgressAlert({
       // Reset state to initial.
       // setCanceling(false);
 
+      setProgress(null);
       modal.show(message);
     },
     hide: modal.hide,

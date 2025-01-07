@@ -4,7 +4,7 @@ import { Select, SelectOption } from "./Select.js";
 
 export default {
   component: Select,
-  decorators: [CrosswingAppDecorator({ width: 200 })],
+  decorators: [CrosswingAppDecorator({ layout: "component" })],
   parameters: { layout: "centered" },
 } satisfies Meta<typeof Select>;
 

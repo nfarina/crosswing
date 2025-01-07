@@ -37,7 +37,7 @@ export default {
   component: ToolbarLayout,
   decorators: [
     (Story: () => any) => <Container children={<Story />} />,
-    CrosswingAppDecorator({ width: 500, height: 400 }),
+    CrosswingAppDecorator(),
     ModalDecorator,
     RouterDecorator,
   ],
@@ -194,6 +194,8 @@ export const IDView: Story = (args) => {
 };
 
 const Container = styled.div`
+  width: 500px;
+  height: 400px;
   border: 1px solid ${colors.separator()};
 
   > * {

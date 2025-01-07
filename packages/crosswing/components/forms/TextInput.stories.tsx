@@ -10,7 +10,7 @@ import { StyledTextInput, TextInput } from "./TextInput.js";
 export default {
   component: TextInput,
   decorators: [
-    CrosswingAppDecorator({ width: "wide" }),
+    CrosswingAppDecorator({ layout: "component" }),
     (Story: () => any) => <Container children={<Story />} />,
   ],
   parameters: { layout: "centered" },

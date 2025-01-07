@@ -10,7 +10,7 @@ import { StyledTextArea, TextArea } from "./TextArea.js";
 export default {
   component: TextArea,
   decorators: [
-    CrosswingAppDecorator({ width: "wide" }),
+    CrosswingAppDecorator({ layout: "component" }),
     (Story: () => any) => <Container children={<Story />} />,
   ],
   parameters: { layout: "centered" },

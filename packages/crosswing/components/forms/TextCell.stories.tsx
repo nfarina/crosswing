@@ -8,7 +8,7 @@ export default {
   component: TextCell,
   decorators: [
     SeparatorDecorator,
-    CrosswingAppDecorator({ width: "wide" }),
+    CrosswingAppDecorator({ layout: "component" }),
     RouterDecorator,
   ],
   parameters: { layout: "centered" },

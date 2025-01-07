@@ -7,7 +7,7 @@ import { SearchInput } from "./SearchInput.js";
 
 export default {
   component: SearchInput,
-  decorators: [CrosswingAppDecorator({ width: "wide" })],
+  decorators: [CrosswingAppDecorator({ layout: "component" })],
   parameters: { layout: "centered" },
 };
 

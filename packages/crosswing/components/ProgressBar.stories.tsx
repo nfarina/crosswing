@@ -4,7 +4,7 @@ import { ProgressBar } from "./ProgressBar.js";
 
 export default {
   component: ProgressBar,
-  decorators: [CrosswingAppDecorator({ width: "wide" })],
+  decorators: [CrosswingAppDecorator({ layout: "component" })],
   parameters: { layout: "centered" },
   argTypes: {
     value: {

@@ -9,7 +9,10 @@ import { TextCell } from "./TextCell.js";
 
 export default {
   component: FileInput,
-  decorators: [SeparatorDecorator, CrosswingAppDecorator({ width: "wide" })],
+  decorators: [
+    SeparatorDecorator,
+    CrosswingAppDecorator({ layout: "component" }),
+  ],
   parameters: { layout: "centered" },
 } satisfies Meta<typeof FileInput>;
 

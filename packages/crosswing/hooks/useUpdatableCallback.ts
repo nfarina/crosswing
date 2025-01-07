@@ -18,7 +18,5 @@ export function useUpdatableCallback<T extends (...args: any[]) => any>(
 
   const invoke = (...args: any[]) => callbackRef.current(...args);
 
-  // Can't think of an alternate approach that doesn't break this "rule".
-  // eslint-disable-next-line react-compiler/react-compiler
   return invoke as any;
 }

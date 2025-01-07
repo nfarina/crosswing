@@ -5,7 +5,10 @@ import { LabeledToggle } from "./LabeledToggle.js";
 
 export default {
   component: LabeledToggle,
-  decorators: [SeparatorDecorator, CrosswingAppDecorator({ width: "wide" })],
+  decorators: [
+    SeparatorDecorator,
+    CrosswingAppDecorator({ layout: "component" }),
+  ],
   parameters: { layout: "centered" },
 };
 

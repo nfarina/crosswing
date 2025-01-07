@@ -18,7 +18,7 @@ export function StatusBadge({
   /** If provided, overrides the default icon associated with `type`. */
   icon?: ReactNode;
   type: "error" | "warning" | "info";
-  size?: "smallest" | "normal";
+  size?: "smallest" | "smaller" | "normal";
   /** True to hide the info/warning/error icon to the left of the children. */
   hideIcon?: boolean;
   /** Optional element placed to the right of any children and wrapped in a div with the class "right". */
@@ -117,6 +117,22 @@ export const StyledStatusBadge = styled.div`
     }
   }
 
+  &[data-size="smaller"] {
+    padding: 5px 10px;
+
+    > svg {
+      width: 16px;
+      height: 16px;
+      margin-left: -2px;
+      margin-right: 4px;
+      margin-top: 1.5px;
+    }
+
+    > .children {
+      font: ${fonts.display({ size: 13, line: "18px" })};
+    }
+  }
+
   &[data-size="smallest"] {
     padding: 2px 7px;
     border-radius: 3px;
@@ -129,6 +145,7 @@ export const StyledStatusBadge = styled.div`
       width: 13px;
       height: 13px;
       margin-right: 3px;
+      margin-top: 1.5px;
     }
 
     > .children {

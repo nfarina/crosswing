@@ -9,7 +9,7 @@ export default {
   component: LinkCell,
   decorators: [
     SeparatorDecorator,
-    CrosswingAppDecorator({ width: "wide" }),
+    CrosswingAppDecorator({ layout: "component" }),
     RouterDecorator,
   ],
   parameters: { layout: "centered" },

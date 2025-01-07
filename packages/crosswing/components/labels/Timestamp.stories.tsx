@@ -16,7 +16,7 @@ export default {
 
 export const Default = () => <Timestamp date={1554744840915} />;
 
-export const Today = () => <Timestamp date={Date.now()} />;
+export const Today = () => <Timestamp static date={Date.now()} />;
 
 export const Format = () => (
   <Timestamp date={1554744840915} format="MMMM D, YYYY" />
@@ -27,7 +27,8 @@ export const Custom = () => (
 );
 
 export const Relative = () => (
-  <Timestamp date={Date.now() - 42000} format={relativeFormatter} />
+  // Need to use static because we only hijack Date.now() on the initial render.
+  <Timestamp static date={Date.now() - 42000} format={relativeFormatter} />
 );
 
 function ContainerDecorator(Story: () => any) {

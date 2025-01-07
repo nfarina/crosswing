@@ -6,7 +6,10 @@ import { SelectOption } from "./Select.js";
 
 export default {
   component: LabeledSelect,
-  decorators: [SeparatorDecorator, CrosswingAppDecorator({ width: "wide" })],
+  decorators: [
+    SeparatorDecorator,
+    CrosswingAppDecorator({ layout: "component" }),
+  ],
   parameters: { layout: "centered" },
 };
 
