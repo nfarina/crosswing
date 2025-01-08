@@ -19,6 +19,8 @@ export const StyledButtonGroup = styled.div`
 
   > * {
     flex-shrink: 0;
+    /* Undo Button's min-height */
+    min-height: unset;
   }
 
   > * {
