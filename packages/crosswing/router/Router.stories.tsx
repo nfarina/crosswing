@@ -231,9 +231,7 @@ function TestAppTabs({ path }: { path: string }) {
   );
 }
 
-const StorybookBrowserSimulator = styled(BrowserSimulator).attrs({
-  navigateListener: action("navigate"),
-})`
+const StorybookBrowserSimulator = styled(BrowserSimulator)`
   .content {
     padding: 10px;
     color: ${colors.text()};

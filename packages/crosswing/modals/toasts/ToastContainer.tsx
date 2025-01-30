@@ -5,6 +5,7 @@ import { Toast } from "../context/ModalContext.js";
 import { ToastView } from "./ToastView.js";
 
 export * from "./ToastView.js";
+export { useToast } from "./useToast.js";
 
 export function ToastContainer({
   toasts = [],

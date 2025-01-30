@@ -22,9 +22,9 @@ import {
   ToolbarButton,
   ToolbarInsertionPoint,
   ToolbarMoreButton,
+  ToolbarPanelButton,
   ToolbarPopupButton,
   ToolbarSelect,
-  ToolbarSidebarButton,
   ToolbarSpace,
 } from "../toolbar/Toolbar.js";
 import { ToolbarContext } from "./ToolbarContext.js";
@@ -74,8 +74,8 @@ function InsertionPointsContent() {
   const runButton = (
     <ToolbarButton children="Run" onClick={action("runClick")} />
   );
-  const sidebarButton = (
-    <ToolbarSidebarButton active onClick={action("sidebarClick")} />
+  const panelButton = (
+    <ToolbarPanelButton active onClick={action("panelClick")} />
   );
 
   const backInsertionEl = getInsertionRef("beforeRefresh").current;
@@ -86,8 +86,7 @@ function InsertionPointsContent() {
     <>
       {showBack && backInsertionEl && createPortal(backButton, backInsertionEl)}
       {beforeMoreInsertionEl && createPortal(runButton, beforeMoreInsertionEl)}
-      {afterMoreInsertionEl &&
-        createPortal(sidebarButton, afterMoreInsertionEl)}
+      {afterMoreInsertionEl && createPortal(panelButton, afterMoreInsertionEl)}
       <NoContent
         title="Content"
         action={showBack ? "Hide Back Button" : "Show Back Button"}

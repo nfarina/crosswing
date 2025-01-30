@@ -1,18 +1,18 @@
 import { useState } from "react";
 import { styled } from "styled-components";
-import { colors } from "../../colors/colors.js";
-import { fonts } from "../../fonts/fonts.js";
-import { CrosswingAppDecorator } from "../../storybook.js";
+import { colors } from "../colors/colors.js";
+import { fonts } from "../fonts/fonts.js";
+import { CrosswingAppDecorator } from "../storybook.js";
+import { PanelLayout, PanelToggleInsertionPoint } from "./PanelLayout.js";
 import {
   Toolbar,
   ToolbarInsertionPoint,
   ToolbarSpace,
-} from "../toolbar/Toolbar.js";
-import { ToolbarLayout } from "../toolbar/ToolbarLayout.js";
-import { SidebarLayout, SidebarToggleInsertionPoint } from "./SidebarLayout.js";
+} from "./toolbar/Toolbar.js";
+import { ToolbarLayout } from "./toolbar/ToolbarLayout.js";
 
 export default {
-  component: SidebarLayout,
+  component: PanelLayout,
   decorators: [
     ToolbarContainer,
     CrosswingAppDecorator({ layout: "fullscreen" }),
@@ -21,20 +21,20 @@ export default {
 };
 
 export const Default = () => {
-  const [sidebarVisible, setSidebarVisible] = useState(true);
+  const [panelVisible, setPanelVisible] = useState(true);
 
   return (
-    <SidebarLayout
-      sidebarDefaultWidth={300}
-      sidebarMinWidth={200}
-      contentMinWidth={400}
-      sidebarVisible={sidebarVisible}
-      onSidebarVisibleChange={setSidebarVisible}
+    <PanelLayout
+      panelDefaultSize={300}
+      panelMinSize={200}
+      contentMinSize={400}
+      panelVisible={panelVisible}
+      onPanelVisibleChange={setPanelVisible}
       restorationKey={Default}
     >
       <Content>Contents of the main area</Content>
-      <Sidebar>Sidebar content here</Sidebar>
-    </SidebarLayout>
+      <Panel>Panel content here</Panel>
+    </PanelLayout>
   );
 };
 
@@ -47,7 +47,7 @@ const Content = styled.div`
   font: ${fonts.display({ size: 15 })};
 `;
 
-const Sidebar = styled.div`
+const Panel = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -62,7 +62,7 @@ function ToolbarContainer(Story: () => any) {
     <ToolbarLayout>
       <Toolbar>
         <ToolbarSpace />
-        <ToolbarInsertionPoint name={SidebarToggleInsertionPoint} />
+        <ToolbarInsertionPoint name={PanelToggleInsertionPoint} />
       </Toolbar>
       <Story />
     </ToolbarLayout>

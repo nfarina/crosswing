@@ -39,6 +39,7 @@ export const StyledIDView = styled.div`
   align-items: center;
   color: ${colors.textSecondary()};
   transition: color 0.2s ease-in-out;
+  cursor: pointer;
 
   > svg {
     flex-shrink: 0;

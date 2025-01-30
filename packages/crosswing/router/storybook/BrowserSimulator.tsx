@@ -1,3 +1,4 @@
+import { action } from "@storybook/addon-actions";
 import {
   ChangeEvent,
   HTMLAttributes,
@@ -35,9 +36,13 @@ export function BrowserSimulator({
 } & HTMLAttributes<HTMLDivElement>) {
   const [history] = useState(() => {
     const memory = new MemoryHistory(initialPath);
-    if (navigateListener) {
-      memory.listen((location) => navigateListener(location.href(), location));
-    }
+    memory.listen((location) => {
+      // Send the navigate event to Storybook as an action.
+      action("navigate")(location.href(), location);
+
+      // Also call the listener if provided.
+      navigateListener?.(location.href(), location);
+    });
     return memory;
   });
 

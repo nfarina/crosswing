@@ -160,38 +160,74 @@ export const ToolbarMoreButton = styled(ToolbarButton).attrs({
   padding: 1px 0 0 0;
 `;
 
-export const ToolbarSidebarButton = ({
+export const ToolbarPanelButton = ({
+  edge = "right",
   active,
   ...rest
 }: {
+  edge?: "top" | "bottom" | "left" | "right";
   active?: boolean;
 } & Parameters<typeof ToolbarButton>[0]) => (
-  <StyledToolbarSidebarButton
-    data-sidebar-visible={!!active}
-    children={<div />}
+  <StyledToolbarPanelButton
+    data-panel-visible={!!active}
+    children={<div data-edge={edge} />}
     {...rest}
   />
 );
 
-export const StyledToolbarSidebarButton = styled(ToolbarButton)`
+export const StyledToolbarPanelButton = styled(ToolbarButton)`
   width: 36px;
   padding: 1px;
   position: relative;
 
   > div {
+    --panel-icon-margin: 3.5px;
+    --panel-icon-size: 13px;
+    --panel-icon-near-radius: 3.5px;
+    --panel-icon-far-radius: 1.5px;
+
     position: absolute;
-    top: 3.5px;
-    right: 3.5px;
-    bottom: 3.5px;
-    width: 13px;
-    border-top-right-radius: 3.5px;
-    border-bottom-right-radius: 3.5px;
-    border-top-left-radius: 1.5px;
-    border-bottom-left-radius: 1.5px;
     background: ${colors.text({ alpha: 0.5 })};
+    border-radius: var(--panel-icon-near-radius);
+
+    &[data-edge="top"] {
+      top: var(--panel-icon-margin);
+      left: var(--panel-icon-margin);
+      right: var(--panel-icon-margin);
+      height: var(--panel-icon-size);
+      border-top-left-radius: var(--panel-icon-far-radius);
+      border-top-right-radius: var(--panel-icon-far-radius);
+    }
+
+    &[data-edge="right"] {
+      top: var(--panel-icon-margin);
+      right: var(--panel-icon-margin);
+      bottom: var(--panel-icon-margin);
+      width: var(--panel-icon-size);
+      border-top-left-radius: var(--panel-icon-far-radius);
+      border-bottom-left-radius: var(--panel-icon-far-radius);
+    }
+
+    &[data-edge="bottom"] {
+      bottom: var(--panel-icon-margin);
+      left: var(--panel-icon-margin);
+      right: var(--panel-icon-margin);
+      height: var(--panel-icon-size);
+      border-top-left-radius: var(--panel-icon-far-radius);
+      border-top-right-radius: var(--panel-icon-far-radius);
+    }
+
+    &[data-edge="left"] {
+      left: var(--panel-icon-margin);
+      top: var(--panel-icon-margin);
+      bottom: var(--panel-icon-margin);
+      width: var(--panel-icon-size);
+      border-top-right-radius: var(--panel-icon-far-radius);
+      border-bottom-right-radius: var(--panel-icon-far-radius);
+    }
   }
 
-  &[data-sidebar-visible="true"] {
+  &[data-panel-visible="true"] {
     /* Colors from StatusBadge */
     background: ${colors.lightBlue({ lighten: 0.1, alpha: 0.5 })};
 
