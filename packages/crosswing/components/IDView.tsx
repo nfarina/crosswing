@@ -8,7 +8,7 @@ import { ModalContext } from "../modals/context/ModalContext.js";
 export function IDView({
   name,
   id,
-  truncate = 6,
+  truncate,
   onClick,
   ...rest
 }: HTMLAttributes<HTMLDivElement> & {
@@ -24,12 +24,23 @@ export function IDView({
     onClick?.(e);
   }
 
+  // If the ID looks like something we got from Firebase, truncate it after
+  // the first 6 characters.
+  if (truncate === undefined && looksLikeId(id)) {
+    truncate = 6;
+  }
+
   return (
     <StyledIDView onClick={onViewClick} {...rest}>
       <CopyIcon />
       <span className="text">{truncate ? id.slice(0, truncate) : id}</span>
     </StyledIDView>
   );
+}
+
+/** Returns true if the string looks like a Firebase ID. */
+export function looksLikeId(text: string) {
+  return /^[0-9a-z]{20,28}$/i.test(text);
 }
 
 export const StyledIDView = styled.div`

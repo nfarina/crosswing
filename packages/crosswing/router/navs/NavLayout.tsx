@@ -16,6 +16,8 @@ export interface NavProps {
   children?: ReactNode;
   left?: NavAccessory | null;
   right?: NavAccessory | null;
+  /** Custom "back" accessory, only rendered when the back arrow would otherwise be rendered. */
+  back?: Omit<NavAccessory, "to" | "back"> | null;
   disabled?: boolean;
   /** If provided, the back button will always go to this path instead of cycling back through history. */
   backTo?: string | null;
@@ -47,6 +49,7 @@ export function NavLayout({
   children,
   left,
   right,
+  back: customBackAccessory,
   disabled,
   hideSeparator,
   hideBackButton,
@@ -75,13 +78,23 @@ export function NavLayout({
   function getLeftAccessory() {
     if (left) return <NavAccessoryView accessory={left} align="left" />;
 
-    if (back && !hideBackButton)
+    if (back && !hideBackButton) {
+      if (customBackAccessory) {
+        return (
+          <NavAccessoryView
+            accessory={{ ...customBackAccessory, to: resolvedBack, back: true }}
+            align="left"
+          />
+        );
+      }
+
       return (
         <NavAccessoryView
           accessory={{ icon: <BackIcon />, to: resolvedBack, back: true }}
           align="left"
         />
       );
+    }
 
     // We need something to take up the flex space to center the title.
     return <div />;

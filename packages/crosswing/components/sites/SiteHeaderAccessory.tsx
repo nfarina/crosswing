@@ -66,7 +66,7 @@ export function SiteHeaderAccessoryView({
 
   return (
     <StyledSiteHeaderAccessoryView ref={ref} onClick={onClick} {...rest}>
-      <div style={{ width, height }} className="popup-target">
+      <div style={{ width, height }} data-popup-target>
         {icon}
       </div>
       {!!unread && <UnreadBadge>{unread}</UnreadBadge>}
@@ -81,7 +81,7 @@ export const StyledSiteHeaderAccessoryView = styled(Clickable)`
   align-items: center;
   justify-content: center;
 
-  > .popup-target {
+  > *[data-popup-target] {
     > svg {
       width: 100%;
       height: 100%;

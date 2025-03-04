@@ -75,12 +75,17 @@ export const StyledListLayout = styled(PanelLayout)`
     }
 
     &[data-show-list-only="false"] {
+      flex-flow: row;
+
       > .panel {
         display: none;
       }
 
       > .content {
+        /* This width=0 flex-grow=1 combo is needed to fix the width at 100% regardless of content, for inner sections that want to scroll horizontally. Symptom was "expandable" logs. */
+        width: 0;
         flex-grow: 1;
+        height: 100%;
         margin: 0;
       }
     }

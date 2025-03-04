@@ -103,7 +103,8 @@ export function ToolbarOverflowTab({ children }: { children: ReactNode }) {
         <div className="text">{tab?.props.children ?? "More"}</div>
         <div className="separator" />
         <div
-          className="arrow popup-target"
+          className="arrow"
+          data-popup-target
           onClick={selectedTab ? undefined : onArrowClick}
         >
           <DownArrowIcon />

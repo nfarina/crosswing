@@ -1,90 +1,86 @@
 import { CSSProperties, HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
 import { colors, shadows } from "../../colors/colors.js";
+import { PopupPlacement } from "./getPopupPlacement.js";
 import { PopupChildProps } from "./usePopup.js";
 
+export * from "./getPopupPlacement.js";
+export * from "./TooltipView.js";
 export * from "./usePopup.js";
+export * from "./useTooltip.js";
 
 export function PopupView({
   placement = "below",
   background,
-  backgroundDark = background,
+  backgroundDark,
   arrowBackground,
-  arrowBackgroundDark = arrowBackground,
+  arrowBackgroundDark,
+  outlineBorder = true,
+  hideArrow = false,
   style,
-  className,
+  children,
   ...rest
 }: {
   background?: string;
   backgroundDark?: string;
   arrowBackground?: string;
   arrowBackgroundDark?: string;
+  outlineBorder?: boolean;
+  hideArrow?: boolean;
   children?: ReactNode;
+  /**
+   * Determines where the arrow will be positioned when "statically" rendered.
+   * Not used when the popup is rendered by usePopup(), instead usePopup
+   * will set data-placement at runtime to avoid re-rendering.
+   */
+  placement?: PopupPlacement;
 } & Partial<PopupChildProps> &
   HTMLAttributes<HTMLDivElement>) {
+  // If you didn't specify a background OR a backgroundDark, use our defaults.
+  if (!background && !backgroundDark) {
+    background = colors.textBackground();
+    backgroundDark = colors.extraDarkGray({ lighten: 0.1 });
+  } else if (!background || !backgroundDark) {
+    // If you specified only one, use it for both.
+    background = background || backgroundDark;
+    backgroundDark = backgroundDark || background;
+  }
+
+  // Same logic for arrowBackground and arrowBackgroundDark.
+  if (!arrowBackground && !arrowBackgroundDark) {
+    arrowBackground = colors.textBackground();
+    arrowBackgroundDark = colors.extraDarkGray({ lighten: 0.1 });
+  } else if (!arrowBackground || !arrowBackgroundDark) {
+    arrowBackground = arrowBackground || arrowBackgroundDark;
+    arrowBackgroundDark = arrowBackgroundDark || arrowBackground;
+  }
+
   const cssProps = {
     ...style,
-    "--background": background ?? colors.textBackground(),
-    "--background-dark": backgroundDark ?? colors.textBackground(),
-    "--arrow-background": arrowBackground ?? colors.textBackground(),
-    "--arrow-background-dark": arrowBackgroundDark ?? colors.textBackground(),
+    "--background": background,
+    "--background-dark": backgroundDark,
+    "--arrow-background": arrowBackground,
+    "--arrow-background-dark": arrowBackgroundDark,
   } as CSSProperties;
 
   return (
     <StyledPopupView
-      className={className}
       style={cssProps}
-      data-placement={placement}
+      data-outline-border={!!outlineBorder}
+      data-hide-arrow={!!hideArrow}
+      {...(placement ? { "data-placement": placement } : {})}
+      {...rest}
     >
-      {PopupUpArrow}
-      <div className="container" {...rest} />
+      <div className="children">{children}</div>
+      <div className="arrow-container">{PopupUpArrow}</div>
     </StyledPopupView>
   );
 }
 
 export const StyledPopupView = styled.div`
-  display: flex;
-  flex-flow: column;
   position: relative;
-  pointer-events: none;
 
-  > svg {
-    pointer-events: auto;
-    height: 9px;
-    flex-shrink: 0;
-    z-index: 1;
-    position: relative;
-    left: var(--arrow-left, 50%);
-    transform: translateX(-50%);
-
-    path#Fill {
-      fill: var(--arrow-background);
-
-      @media (prefers-color-scheme: dark) {
-        fill: var(--arrow-background-dark);
-      }
-    }
-
-    path#Shadow {
-      /* Copied from cardBorderShadow */
-      fill: ${colors.darkGreen({ alpha: 0.07 })};
-      fill-opacity: 1;
-
-      @media (prefers-color-scheme: dark) {
-        fill: ${colors.black({ alpha: 0.2 })};
-      }
-    }
-  }
-
-  > .container {
-    pointer-events: auto;
-    position: relative;
-    left: var(--popup-left, 50%);
-    transform: translateX(-50%);
-
-    box-sizing: border-box;
-    max-height: calc(100% - 9px);
-    flex-shrink: 0;
+  > .children {
     z-index: 0;
     border-radius: 6px;
     overflow: hidden;
@@ -95,6 +91,8 @@ export const StyledPopupView = styled.div`
       0 0 100px ${colors.black({ alpha: 0.2 })};
     display: flex;
     flex-flow: column;
+    max-width: 100%;
+    max-height: 100%;
 
     @media (prefers-color-scheme: dark) {
       background: var(--background-dark);
@@ -103,15 +101,112 @@ export const StyledPopupView = styled.div`
     > * {
       flex-grow: 1;
       box-sizing: border-box;
+      max-width: 100%;
       max-height: 100%;
     }
   }
 
-  &[data-placement="above"] {
-    flex-flow: column-reverse;
+  &[data-outline-border="true"] {
+    > .children {
+      @media (prefers-color-scheme: dark) {
+        /* We need some extra constrast with a white border because the shadows don't help differentiate as well as in light mode. */
+        box-shadow:
+          0 0 0 1px ${colors.white({ alpha: 0.17 })},
+          ${shadows.cardSmall()},
+          ${shadows.cardBorder()},
+          0 0 100px ${colors.black({ alpha: 0.2 })};
+      }
+    }
+  }
+
+  > .arrow-container {
+    position: absolute;
+    z-index: 1;
+    /* Take up zero space in the DOM. */
+    width: 0px;
+    height: 0px;
+    overflow: visible;
 
     > svg {
-      transform: translateX(-50%) scaleY(-1);
+      transform: translate(-50%, -50%);
+
+      path#Fill {
+        fill: var(--arrow-background);
+
+        @media (prefers-color-scheme: dark) {
+          fill: var(--arrow-background-dark);
+        }
+      }
+
+      path#Shadow {
+        /* Copied from cardBorderShadow */
+        fill: ${colors.darkGreen({ alpha: 0.07 })};
+        fill-opacity: 1;
+
+        @media (prefers-color-scheme: dark) {
+          fill: ${colors.black({ alpha: 0.2 })};
+        }
+      }
+    }
+  }
+
+  &[data-placement="below"] {
+    > .arrow-container {
+      top: 0px;
+      left: 50%;
+      transform: translate(calc(-50% + var(--arrow-offset, 0px)), -8px);
+
+      > svg {
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+    }
+  }
+
+  &[data-placement="above"] {
+    > .arrow-container {
+      left: 50%;
+      bottom: 0px;
+      transform: translate(calc(-50% + var(--arrow-offset, 0px)), 0px);
+
+      > svg {
+        transform: translate(-50%, calc(-50% - 1px)) rotate(180deg);
+      }
+    }
+  }
+
+  &[data-placement="left"] {
+    > .arrow-container {
+      right: 0px;
+      top: 50%;
+      transform: translate(calc(4px), calc(-50% + var(--arrow-offset, 0px)));
+
+      > svg {
+        transform: translate(-50%, calc(-50% - 3.5px)) rotate(90deg);
+      }
+    }
+  }
+
+  &[data-placement="right"] {
+    > .arrow-container {
+      left: 0px;
+      top: 50%;
+      transform: translate(calc(-4px), calc(-50% + var(--arrow-offset, 0px)));
+
+      > svg {
+        transform: translate(-50%, calc(-50% - 3.5px)) rotate(-90deg);
+      }
+    }
+  }
+
+  &[data-placement="floating"] {
+    > .arrow-container {
+      display: none;
+    }
+  }
+
+  &[data-hide-arrow="true"] {
+    > .arrow-container {
+      display: none;
     }
   }
 `;

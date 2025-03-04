@@ -36,26 +36,23 @@ export function DateRangeInput({
   inToolbar?: boolean;
 }) {
   // Use a Popup for desktop layouts with lots of space.
-  const popup = usePopup(
-    () => (
-      <DateRangePopupView>
-        <Suspense fallback={<LoadingCurtain lazy />}>
-          <DateRangeControl
-            value={value}
-            onValueChange={(newValue, type) => {
-              onValueChange(newValue);
-              if (type === "preset" || type === "custom") {
-                // Hide the popup if you entered a custom value or clicked a preset
-                // date range button.
-                popup.hide();
-              }
-            }}
-          />
-        </Suspense>
-      </DateRangePopupView>
-    ),
-    { autoReposition: true },
-  );
+  const popup = usePopup(() => (
+    <DateRangePopupView>
+      <Suspense fallback={<LoadingCurtain lazy />}>
+        <DateRangeControl
+          value={value}
+          onValueChange={(newValue, type) => {
+            onValueChange(newValue);
+            if (type === "preset" || type === "custom") {
+              // Hide the popup if you entered a custom value or clicked a preset
+              // date range button.
+              popup.hide();
+            }
+          }}
+        />
+      </Suspense>
+    </DateRangePopupView>
+  ));
 
   // Use a sheet for mobile layouts.
   const sheet = useSheet(() => (
@@ -117,7 +114,7 @@ export function DateRangeInput({
           consistent location, since our button changes in size as you interact
           with the popup. Otherwise the popup would shift around, constantly
           trying to be in the middle of the button. */}
-          <span className="popup-target" data-alignment={popupAlignment} />
+          <span data-popup-target data-alignment={popupAlignment} />
         </>
       }
       onClick={mobileLayout ? sheet.show : undefined}
@@ -129,7 +126,7 @@ export function DateRangeInput({
 export const StyledDateRangeInput = styled(PopupButton)`
   position: relative;
 
-  .popup-target {
+  *[data-popup-target] {
     position: absolute;
     bottom: 0;
 

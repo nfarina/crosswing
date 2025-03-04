@@ -34,7 +34,7 @@ const ContentView = styled.div`
 
 export const CustomBackground: Story = (args) => {
   return (
-    <PopupView {...args}>
+    <PopupView {...args} placement="below">
       <WhiteContentView>Hello, World!</WhiteContentView>
     </PopupView>
   );

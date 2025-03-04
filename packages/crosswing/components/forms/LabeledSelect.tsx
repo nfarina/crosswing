@@ -72,6 +72,8 @@ export const StyledLabeledSelect = styled.div`
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
+      /* Can't use a bold font in Safari, otherwise it renders as ugly sans-serif. */
+      font-weight: 400;
     }
   }
 

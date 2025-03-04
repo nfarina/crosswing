@@ -46,9 +46,13 @@ export const StyledCheckbox = styled(Clickable)`
   > .box {
     width: 20px;
     height: 20px;
-    border: 1px solid ${colors.controlBorder()};
+    border: 1px solid ${colors.mediumGray()};
     border-radius: 3px;
     position: relative;
+
+    @media (prefers-color-scheme: dark) {
+      border: 1px solid ${colors.darkerGray({ darken: 0.15 })};
+    }
 
     > svg {
       position: absolute;

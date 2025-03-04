@@ -1,5 +1,6 @@
 import {
   createContext,
+  CSSProperties,
   HTMLAttributes,
   ReactNode,
   use,
@@ -17,6 +18,7 @@ import { useSessionStorage } from "../../hooks/useSessionStorage.js";
 import { CloseIcon } from "../../icons/Close.js";
 import { FullScreenIcon } from "../../icons/FullScreen.js";
 import { ModalContext } from "../../modals/context/ModalContext.js";
+import { Position } from "../../shared/rect.js";
 import { Button, StyledButton } from "../Button.js";
 import {
   ToolbarButton,
@@ -31,6 +33,8 @@ export function FullScreenView({
   children,
   defaultFullScreen = false,
   threshold = 0.8,
+  floatingButtonOffset = { x: 0, y: 0 },
+  style,
   ...rest
 }: Omit<HTMLAttributes<HTMLDivElement>, "title"> & {
   /**
@@ -50,6 +54,10 @@ export function FullScreenView({
    * This ensures that the buttons only appear when they're needed.
    */
   threshold?: number;
+  /**
+   * The offset of the floating button from the top-right corner of the view.
+   */
+  floatingButtonOffset?: Position;
 }) {
   const [buttonHovered, setButtonHovered] = useState(false);
 
@@ -66,7 +74,6 @@ export function FullScreenView({
 
   // Persist the fullscreen status across window reloads (don't use
   // localStorage because then other unrelated tabs would be affected).
-  /* eslint-disable prefer-const */
   let [isFullScreen, setFullScreen] = useSessionStorage(
     `FullScreenView:${restorationKey.name}:isFullScreen`,
     defaultFullScreen,
@@ -234,14 +241,26 @@ export function FullScreenView({
           }}
           onMouseOver={() => setButtonHovered(true)}
           onMouseOut={() => setButtonHovered(false)}
+          data-tooltip="Go fullscreen"
+          data-tooltip-placement="below"
         />
       )}
       <div className="hover-outline" />
     </ContentLayout>
   );
 
+  const cssProps = {
+    ...style,
+    ...(floatingButtonOffset
+      ? {
+          "--floating-button-offset-x": `${floatingButtonOffset.x}px`,
+          "--floating-button-offset-y": `${floatingButtonOffset.y}px`,
+        }
+      : null),
+  } as CSSProperties;
+
   return (
-    <StyledFullScreenView ref={parentRef} {...rest}>
+    <StyledFullScreenView ref={parentRef} {...rest} style={cssProps}>
       <FullScreenContext value={{ isFullScreen, disabled }}>
         {/* Can't think of an alternate approach that doesn't bread this "rule". */}
         {/* eslint-disable-next-line react-compiler/react-compiler */}
@@ -336,8 +355,8 @@ const ContentLayout = styled.div`
 
   > .full-screen-button {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: calc(var(--floating-button-offset-y, 0px) + 10px);
+    right: calc(var(--floating-button-offset-x, 0px) + 10px);
     z-index: 1;
     min-height: auto;
     height: 30px;

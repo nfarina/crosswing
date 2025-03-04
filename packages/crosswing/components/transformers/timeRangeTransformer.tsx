@@ -45,7 +45,6 @@ export function timeRangeTransformer({
         throw new Error("Could not parse time range");
       }
 
-      /* eslint-disable prefer-const */
       let [, hours1, minutes1, ampm1, hours2, minutes2, ampm2] = match;
 
       // If ampm1 was specified but ampm2 was not, assume ampm2 is the same as

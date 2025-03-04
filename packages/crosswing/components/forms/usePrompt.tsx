@@ -177,7 +177,7 @@ export function PromptView<T = string>({
 const StyledForm = styled.form`
   > ${StyledTextArea} {
     width: 100%;
-    box-shadow: 0 -1px 0 ${colors.controlBorder({ alpha: 0.5 })};
+    box-shadow: 0 -1px 0 ${colors.controlBorder()};
     max-height: 200px;
     overflow-y: auto;
 
@@ -191,10 +191,10 @@ const StyledForm = styled.form`
     font: ${fonts.displayMedium({ size: 14 })};
     color: ${colors.red()};
     text-align: center;
-    box-shadow: 0 -1px 0 ${colors.controlBorder({ alpha: 0.5 })};
+    box-shadow: 0 -1px 0 ${colors.controlBorder()};
 
     @media (prefers-color-scheme: dark) {
-      box-shadow: 0 -1px 0 ${colors.controlBorder({ alpha: 0.5 })};
+      box-shadow: 0 -1px 0 ${colors.controlBorder()};
     }
   }
 `;

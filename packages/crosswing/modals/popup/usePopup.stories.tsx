@@ -23,16 +23,20 @@ export function Normal() {
   );
 
   const popup1 = usePopup(() => basicPopup, { placement: "below" });
-  const popup2 = usePopup(() => basicPopup, { placement: "auto" });
-  const popup3 = usePopup(() => basicPopup, { placement: "auto" });
+  const popup2 = usePopup(() => basicPopup, { placement: "platform" });
+  const popup3 = usePopup(() => basicPopup, { placement: "platform" });
   const popup4 = usePopup(() => basicPopup, { placement: "above" });
   const popup5 = usePopup(() => basicPopup);
 
   return (
     <FourCorners>
       <ModalStoryButton onClick={popup1.onClick}>Popup Below</ModalStoryButton>
-      <ModalStoryButton onClick={popup2.onClick}>Popup Auto</ModalStoryButton>
-      <ModalStoryButton onClick={popup3.onClick}>Popup Auto</ModalStoryButton>
+      <ModalStoryButton onClick={popup2.onClick}>
+        Popup Platform
+      </ModalStoryButton>
+      <ModalStoryButton onClick={popup3.onClick}>
+        Popup Platform
+      </ModalStoryButton>
       <ModalStoryButton onClick={popup4.onClick}>Popup Above</ModalStoryButton>
       <ModalStoryButton onClick={popup5.onClick}>Popup Below</ModalStoryButton>
     </FourCorners>
@@ -48,8 +52,6 @@ export function ManualControl() {
     ),
     {
       clickOutsideToClose: false,
-      autoReposition: true,
-      placement: "auto",
     },
   );
   const ref1 = useRef<HTMLDivElement | null>(null);

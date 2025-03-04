@@ -109,5 +109,5 @@ const Content = styled.div`
   background: ${colors.textBackgroundAlt()};
   font: ${fonts.display({ size: 12 })};
   color: ${colors.text()};
-  border-top: 1px solid ${colors.controlBorder({ alpha: 0.5 })};
+  border-top: 1px solid ${colors.controlBorder()};
 `;

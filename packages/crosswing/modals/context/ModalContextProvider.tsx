@@ -31,7 +31,8 @@ export function ModalContextProvider({
 }) {
   const { delayUpdates } = use(HostContext);
   const modalContext = use(ModalContext);
-  const { showToast, hideToast, modalRoot, modalContextRoot } = modalContext;
+  const { showToast, hideToast, setTooltip, modalRoot, modalContextRoot } =
+    modalContext;
 
   // All the modals currently being displayed with the current context.
   // Note that the order of items in this map is not necessarily the same
@@ -71,6 +72,7 @@ export function ModalContextProvider({
     hideModal,
     showToast,
     hideToast,
+    setTooltip,
     modalRoot,
     modalContextRoot,
     allowDesktopPresentation,

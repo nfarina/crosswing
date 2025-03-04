@@ -18,7 +18,6 @@ export function useErrorAlert({
   const modal = useDialog(
     (error?: ErrorLike) => {
       const errorObj = getErrorObj(error ?? {});
-      /* eslint-disable prefer-const */
       let { name, message, details, stack, userFacing } = errorObj;
 
       const hasDetails = !!stack || !!details;

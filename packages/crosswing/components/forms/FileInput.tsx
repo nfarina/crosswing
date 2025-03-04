@@ -87,6 +87,8 @@ export function FileInput({
         onChange={onFileChange}
         multiple={multiple}
         accept={accept}
+        // Hides the "No files chosen" tooltip in Chrome.
+        title=""
       />
     </StyledFileInput>
   );
@@ -107,6 +109,15 @@ export const StyledFileInput = styled.div`
     height: 100%;
     cursor: pointer;
     color: transparent;
+    /* Necessary to hide the tooltip in Safari. But it breaks the input! */
+    /* visibility: hidden; */
+  }
+
+  &[data-dragging-over="true"] {
+    > input[type="file"] {
+      /* Must make it visible again to accept drops. */
+      visibility: visible;
+    }
   }
 
   > input[type="file"]::-webkit-file-upload-button,

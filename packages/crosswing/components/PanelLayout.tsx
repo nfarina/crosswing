@@ -31,7 +31,7 @@ const DEFAULT_SIZE_SNAP = 12;
 export function PanelLayout({
   edge = "right",
   panelMinSize = 275,
-  panelMaxSize = 475,
+  panelMaxSize = Number.MAX_SAFE_INTEGER,
   panelDefaultSize = 375,
   contentMinSize = 375,
   panelVisible = false,

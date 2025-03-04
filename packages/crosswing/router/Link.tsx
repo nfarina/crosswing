@@ -1,4 +1,9 @@
-import { AnchorHTMLAttributes, MouseEvent, ReactNode, use } from "react";
+import {
+  AnchorHTMLAttributes,
+  MouseEvent as ReactMouseEvent,
+  ReactNode,
+  use,
+} from "react";
 import { styled } from "styled-components";
 import { RouterContext } from "./context/RouterContext.js";
 import { BrowserHistory } from "./history/BrowserHistory.js";
@@ -9,11 +14,13 @@ export function Link({
   replace,
   children,
   onClick,
+  disabled,
   ...rest
 }: Omit<AnchorHTMLAttributes<HTMLElement>, "href"> & {
   to?: string | null;
   replace?: boolean;
   children?: ReactNode;
+  disabled?: boolean;
 }) {
   const { location, nextLocation, history } = use(RouterContext);
 
@@ -39,7 +46,7 @@ export function Link({
     return [location.linkTo(to), basePath];
   }
 
-  function onAnchorClick(e: MouseEvent<HTMLAnchorElement>) {
+  function onAnchorClick(e: ReactMouseEvent<HTMLAnchorElement>) {
     if (!to) {
       e.preventDefault();
       onClick?.(e);
@@ -72,6 +79,7 @@ export function Link({
       href={basePath + href}
       data-active={active}
       data-prefix-active={prefixActive}
+      data-disabled={disabled}
       {...rest}
     >
       {children}
@@ -79,11 +87,11 @@ export function Link({
   );
 }
 
-function shouldNavigate(
+export function shouldNavigate(
   history: BrowserHistory | MemoryHistory,
   href: string,
-  target: string | undefined,
-  e: MouseEvent,
+  target: string | null | undefined,
+  e: ReactMouseEvent<HTMLAnchorElement> | MouseEvent,
 ): boolean {
   // If we are always reloading the page, we can just let the anchor handle this.
   if (history.type === "browser" && history.alwaysReloadPage) {
@@ -114,5 +122,13 @@ export const StyledLink = styled.a`
   &[data-active="true"],
   &:active {
     /* TODO: do something here, but also need to refactor every component based on Link! */
+  }
+
+  /* Match Clickable */
+  transition: opacity 0.2s ease-in-out;
+
+  &[data-disabled="true"] {
+    pointer-events: none;
+    opacity: 0.5;
   }
 `;

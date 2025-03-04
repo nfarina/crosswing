@@ -8,6 +8,7 @@ import {
 import { styled } from "styled-components";
 import { colors } from "../colors/colors.js";
 import { fonts } from "../fonts/fonts.js";
+import { PopupPlacement } from "../modals/popup/getPopupPlacement.js";
 import { PopupChildProps, PopupView } from "../modals/popup/PopupView.js";
 import { Link } from "../router/Link.js";
 import { Select } from "./forms/Select.js";
@@ -23,7 +24,7 @@ OnCloseContext.displayName = "OnCloseContext";
 export function PopupMenu({
   arrowBackground,
   arrowBackgroundDark,
-  placement = "below",
+  placement,
   onClose,
   children,
   ...rest
@@ -31,6 +32,7 @@ export function PopupMenu({
   arrowBackground?: string;
   arrowBackgroundDark?: string;
   children?: ReactNode;
+  placement?: PopupPlacement;
 } & Partial<PopupChildProps> &
   HTMLAttributes<HTMLDivElement>) {
   return (
@@ -180,15 +182,19 @@ export function PopupMenuToggle({
   on,
   onClick,
   disabled,
-}: {
-  children?: ReactNode;
+  ...rest
+}: HTMLAttributes<HTMLDivElement> & {
   detail?: ReactNode;
   on?: boolean;
   onClick?: (e: SyntheticEvent<HTMLDivElement>) => void;
   disabled?: boolean;
 }) {
   return (
-    <StyledPopupMenuToggle onClick={onClick} data-disabled={!!disabled}>
+    <StyledPopupMenuToggle
+      onClick={onClick}
+      data-disabled={!!disabled}
+      {...rest}
+    >
       <div className="content">
         {children && <div className="children">{children}</div>}
         {detail && <div className="detail">{detail}</div>}

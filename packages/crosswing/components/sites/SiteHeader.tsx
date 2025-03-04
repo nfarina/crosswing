@@ -45,7 +45,7 @@ export const StyledSiteHeader = styled.div`
   }
 
   > ${StyledPageTitle} {
-    flex-shrink: 0;
+    width: 0;
     flex-grow: 1;
   }
 

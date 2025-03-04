@@ -169,6 +169,8 @@ export const ToolbarPanelButton = ({
   active?: boolean;
 } & Parameters<typeof ToolbarButton>[0]) => (
   <StyledToolbarPanelButton
+    data-tooltip={active ? `Hide ${edge} panel` : `Show ${edge} panel`}
+    data-tooltip-placement="below" // Match <PopupMenus> that are traditionally found in a Toolbar.
     data-panel-visible={!!active}
     children={<div data-edge={edge} />}
     {...rest}

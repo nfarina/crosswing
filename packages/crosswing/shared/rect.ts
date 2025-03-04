@@ -1,18 +1,35 @@
-export interface Rect {
-  width: number;
-  height: number;
+import { Size } from "./sizing";
+
+export type Position = {
+  x: number;
+  y: number;
+};
+
+export type Rect = Position & Size;
+
+/**
+ * Given a rect and a relativeTo rect, return a new rect that is the same as
+ * the original rect but in the coordinate system of the relativeTo rect.
+ */
+export function getRectRelativeTo(rect: Rect, relativeTo: Rect): Rect {
+  return {
+    x: rect.x - relativeTo.x,
+    y: rect.y - relativeTo.y,
+    width: rect.width,
+    height: rect.height,
+  };
 }
 
 /** Helpful utility method. */
 export function scaleToFit(
-  size: Rect,
-  targetSize: Rect,
+  size: Size,
+  targetSize: Size,
   { enlarge = false }: { enlarge?: boolean } = {},
-): Rect {
+): Size {
   const aspect = size.width / size.height;
   const targetAspect = targetSize.width / targetSize.height;
 
-  let finalSize: Rect;
+  let finalSize: Size;
 
   // This makes sense when you draw out some samples on graph paper.
   if (aspect > targetAspect) {

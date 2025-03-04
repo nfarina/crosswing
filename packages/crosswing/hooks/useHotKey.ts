@@ -58,7 +58,7 @@ export function useHotKey(
       }
 
       const isMatch =
-        parsed.key === key &&
+        parsed.key.toLowerCase() === key.toLowerCase() &&
         !!parsed.ctrlKey === !!ctrlKey &&
         !!parsed.altKey === !!altKey &&
         !!parsed.shiftKey === !!shiftKey &&

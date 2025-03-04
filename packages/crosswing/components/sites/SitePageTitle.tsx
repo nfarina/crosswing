@@ -237,6 +237,7 @@ export const CompactPageTitle = styled.div`
 
   > * {
     flex-shrink: 0;
+    max-width: 100%;
   }
 
   > .previous {

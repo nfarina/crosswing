@@ -89,11 +89,12 @@ const responsive = {
     dark: neutrals.extraExtraDarkGray.rgb,
     var: "--text-background-alt-color",
   }),
-  /** Suitable for borders around controls, like <ButtonGroup>. */
+  /** Suitable for borders around controls. Static because the alpha is baked in. */
   controlBorder: varColor({
-    light: neutrals.mediumGray.rgb,
-    dark: neutrals.darkerGray.rgb,
+    light: neutrals.mediumGray({ alpha: 0.4 }),
+    dark: neutrals.darkerGray({ alpha: 0.4 }),
     var: "--control-border-color",
+    static: true,
   }),
   /** Static because the alpha is baked in. */
   separator: varColor({

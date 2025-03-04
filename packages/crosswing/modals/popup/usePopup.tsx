@@ -1,19 +1,26 @@
 import {
+  cloneElement,
+  CSSProperties,
+  isValidElement,
   MouseEvent,
   ReactNode,
   RefObject,
-  cloneElement,
-  isValidElement,
   use,
+  useEffect,
   useLayoutEffect,
   useRef,
   useState,
 } from "react";
-import { keyframes, styled } from "styled-components";
+import { createGlobalStyle, keyframes, styled } from "styled-components";
 import { useHotKey } from "../../hooks/useHotKey.js";
 import { HostContext } from "../../host/context/HostContext.js";
 import { easing } from "../../shared/easing.js";
+import { getRectRelativeTo } from "../../shared/rect.js";
+import { Size } from "../../shared/sizing.js";
+import { Seconds } from "../../shared/timespan.js";
+import { ModalContext } from "../context/ModalContext.js";
 import { useModal } from "../context/useModal.js";
+import { getPopupPlacement, PopupPlacement } from "./getPopupPlacement.js";
 import { useClickOutsideToClose } from "./useClickOutsideToClose.js";
 
 export interface Popup<T extends any[] = []> {
@@ -35,14 +42,7 @@ export interface Popup<T extends any[] = []> {
 
 // Use a ref for our target because it could start out null then become
 // non-null after mounting.
-export type PopupTarget = RefObject<HTMLElement | null>;
-
-/**
- * Desired placement of the Popup. Defaults to "platform" which places the popup
- * below the target on the web, and above the target on mobile. Auto mode
- * can be convenient but unexpected for users so we don't use it by default.
- */
-export type PopupPlacement = "platform" | "auto" | "above" | "below";
+export type PopupTarget = RefObject<Element | null>;
 
 export interface PopupOptions {
   placement?: PopupPlacement;
@@ -53,31 +53,37 @@ export interface PopupOptions {
    */
   clickOutsideToClose?: boolean;
   /**
-   * Default false, will automatically reposition the popup every 100ms. This is
-   * useful if the target's size or position frequently changes after the popup
-   * is shown.
-   */
-  autoReposition?: boolean;
-  /**
    * You can optionally render a subtle backdrop to visually highlight the
    * popup.
    */
   showBackdrop?: boolean;
+  /**
+   * The maximum width of the popup, relative to the modal root area (excluding
+   * padding). Default 80%.
+   */
+  maxWidth?: string;
+  /**
+   * The maximum height of the popup, relative to the modal root area (excluding
+   * padding). Default 100%.
+   */
+  maxHeight?: string;
 }
 
 /** Props given to the element returned from usePopup(). */
 export type PopupChildProps = {
-  placement: Omit<PopupPlacement, "auto" | "platform">;
   onClose: () => void;
 };
+
+const POPUP_AREA_PADDING = 10;
 
 export function usePopup<T extends any[]>(
   popup: (...args: T) => ReactNode,
   {
     placement = "platform",
     clickOutsideToClose = true,
-    autoReposition = false,
     showBackdrop = false,
+    maxWidth = "80%",
+    maxHeight = "100%",
   }: PopupOptions = {},
 ): Popup<T> {
   // Ugly wrapping of a ref in a ref. But we don't need to use state because
@@ -91,8 +97,9 @@ export function usePopup<T extends any[]>(
       onClose={hide}
       children={popup(...args)}
       clickOutsideToClose={clickOutsideToClose}
-      autoReposition={autoReposition}
       showBackdrop={showBackdrop}
+      maxWidth={maxWidth}
+      maxHeight={maxHeight}
     />
   ));
 
@@ -114,7 +121,9 @@ export function usePopup<T extends any[]>(
   function show(target: PopupTarget, ...args: T) {
     activeTarget.current = target;
     container.show(...args);
-    if (target.current) target.current.blur();
+    if (target.current && target.current instanceof HTMLElement) {
+      target.current.blur();
+    }
   }
 
   function hide() {
@@ -135,8 +144,10 @@ export const PopupContainer = ({
   // Provided by <TransitionGroup>.
   in: animatingIn,
   onExited,
+  delay = null,
+  maxWidth = "80%",
+  maxHeight = "100%",
   clickOutsideToClose = true,
-  autoReposition = false,
   showBackdrop = false,
 }: {
   placement: PopupPlacement;
@@ -145,6 +156,8 @@ export const PopupContainer = ({
   onClose: () => void;
   in?: boolean;
   onExited?: () => void;
+  /** Optional delay in milliseconds before the popup is shown. */
+  delay?: number | null;
   /**
    * Default true, listens for clicks on the nearest Modal root and validates
    * them against the PopupTarget to auto-close the popup when clicking outside
@@ -152,20 +165,23 @@ export const PopupContainer = ({
    */
   clickOutsideToClose?: boolean;
   /**
-   * Default false, will automatically reposition the popup every 100ms. This is
-   * useful if the target's size or position frequently changes after the popup
-   * is shown.
-   */
-  autoReposition?: boolean;
-  /**
    * Default false, will render a subtle backdrop to visually highlight the
    * popup.
    */
   showBackdrop?: boolean;
+  /**
+   * The maximum width of the popup, relative to the modal root area (excluding
+   * padding). Default 80%.
+   */
+  maxWidth?: string;
+  /**
+   * The maximum height of the popup, relative to the modal root area (excluding
+   * padding). Default 100%.
+   */
+  maxHeight?: string;
 }) => {
+  const { modalContextRoot } = use(ModalContext);
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const [resolvedPlacement, setResolvedPlacement] =
-    useState<Omit<PopupPlacement, "platform" | "auto">>("below");
   const { container: hostContainer } = use(HostContext);
 
   useClickOutsideToClose(
@@ -181,15 +197,35 @@ export const PopupContainer = ({
   // encapsulates the state of the component it was defined in.
   const positionPopupRef = useRef(positionPopup);
 
+  // Reposition the popup anytime anything in the target area (represented by
+  // the modalContextRoot) scrolls. This is sufficient to cover most practical
+  // cases.
   useLayoutEffect(() => {
     // Update the callback pointer.
     positionPopupRef.current = positionPopup;
 
-    if (autoReposition) {
-      // Start a timer to position the popup every 100ms.
-      const intervalId = setInterval(() => positionPopupRef.current(), 100);
-      return () => clearInterval(intervalId);
+    const root = modalContextRoot.current;
+    if (!root) return;
+
+    function onScroll(e: Event) {
+      // console.log("onScroll", e.target);
+      positionPopupRef.current();
     }
+
+    root.addEventListener("scroll", onScroll, {
+      passive: true,
+      capture: true,
+    });
+
+    // And if that isn't enough, start a timer to reposition the popup also.
+    const intervalId = setInterval(() => positionPopupRef.current(), 100);
+
+    return () => {
+      root.removeEventListener("scroll", onScroll, {
+        capture: true,
+      });
+      clearInterval(intervalId);
+    };
   }, [positionPopup]);
 
   function onAnimationEnd() {
@@ -234,124 +270,162 @@ export const PopupContainer = ({
 
     // If we don't have a target (or some other condition fails) then
     // we won't touch anything, in case we are animating out.
-    if (!container || !target.current || !doc || !popup) return;
+    if (
+      !container ||
+      !(container instanceof HTMLElement) ||
+      !target.current ||
+      !doc ||
+      !popupArea ||
+      !(popupArea instanceof HTMLElement) ||
+      !popup ||
+      !(popup instanceof HTMLElement)
+    ) {
+      return;
+    }
 
-    // Allow you to place a "popup-target" CSS class on some descendent of
+    // Allow you to place a data-popup-target attribute on some descendent of
     // your target element (the thing the user clicked) so you can control the
     // arrow location. This is super useful if your button that the user
     // can click has an enlarged hit area for mobile.
     const targetElement =
-      target.current.querySelector(".popup-target") || target.current;
+      target.current.querySelector(`*[data-popup-target="true"]`) ||
+      target.current;
 
-    // Get all the bounding boxes of our elements.
-    const containerRect = container.getBoundingClientRect();
-    const targetRect = targetElement.getBoundingClientRect();
-    const popupRect = popup.getBoundingClientRect();
+    const popupAreaRect = popupArea.getBoundingClientRect();
 
-    // Here's where we *want* to point, right in the middle of the target.
-    const offset = Math.round(
-      targetRect.x - containerRect.x + targetRect.width / 2 - 10,
+    // Get all the bounding boxes of our elements in the coordinate system of
+    // our container (taking padding into account).
+    const containerSize: Size = {
+      width: popupAreaRect.width,
+      height: popupAreaRect.height,
+    };
+
+    // This is the content we are pointing at and trying not to cover up.
+    const targetRect = getRectRelativeTo(
+      targetElement.getBoundingClientRect(),
+      popupAreaRect,
     );
 
-    let popupOffset = offset;
-
-    if (offset <= containerRect.width / 2) {
-      // Bias toward the left side of the container.
-      const leftEdge = offset - Math.round(popupRect.width / 2);
-      const minLeft = 0;
-      if (leftEdge < minLeft) popupOffset += minLeft - leftEdge;
-    } else {
-      const rightEdge = offset + Math.round(popupRect.width / 2);
-      const maxRight = containerRect.width - 20;
-      if (rightEdge > maxRight) popupOffset -= rightEdge - maxRight;
+    // Sanity check - if the target element is not (anymore?) in the DOM,
+    // then close the popup.
+    if (!document.body.contains(targetElement)) {
+      onClose();
+      return;
     }
 
-    // Inform the popup element about the desired place to point.
-    const style = (popupArea as HTMLElement).style;
-    const arrowLeft = offset + "px";
-    const popupLeft = popupOffset + "px";
+    // Compute the size of the popup window.
+    const popupRect = popup.getBoundingClientRect();
+    const extraHeight = getOverflowedHeight(popup);
+    const popupSize: Size = {
+      width: Math.round(popupRect.width),
+      height: Math.round(popupRect.height + extraHeight),
+    };
 
-    // Only apply the styles if they've changed, since this function is called
-    // every 100ms.
+    const [popupPosition, arrowOffset, resolvedPlacement] = getPopupPlacement({
+      containerSize,
+      targetRect,
+      popupSize,
+      placement,
+      hostContainer,
+    });
 
-    if (
-      style.getPropertyValue("--arrow-left") !== arrowLeft ||
-      style.getPropertyValue("--popup-left") !== popupLeft
-    ) {
-      style.setProperty("--arrow-left", offset + "px");
-      style.setProperty("--popup-left", popupOffset + "px");
-    }
-
-    const computedPlacement = (() => {
-      if (placement === "platform") {
-        // Default is to pop up above your finger on mobile.
-        return hostContainer === "web" ||
-          hostContainer === "webapp" ||
-          hostContainer === "electron"
-          ? "below"
-          : "above";
-      } else if (placement === "auto") {
-        // Where do we have the most vertical space?
-        const upperSpace = targetRect.top - containerRect.y;
-        const lowerSpace = containerRect.height - targetRect.bottom;
-        return upperSpace > lowerSpace ? "above" : "below";
-      } else {
-        return placement;
-      }
-    })();
-
-    // If the placement has changed, update the state.
-    if (resolvedPlacement !== computedPlacement) {
-      setResolvedPlacement(computedPlacement);
-    }
-
-    if (computedPlacement === "below") {
-      if (style.getPropertyValue("--popup-placement") !== "below") {
-        style.setProperty("--popup-placement", "below");
-        style.bottom = "0";
-        style.paddingTop = "0";
-        style.paddingBottom = "10px";
-      }
-
-      const top = targetRect.bottom - containerRect.y + "px";
-
-      if (style.top !== top) {
-        style.top = targetRect.bottom - containerRect.y + "px";
-      }
-    } else {
-      if (style.getPropertyValue("--popup-placement") !== "above") {
-        style.setProperty("--popup-placement", "above");
-        style.top = "0";
-        style.paddingTop = "10px";
-        style.paddingBottom = "0";
-      }
-
-      const bottom =
-        containerRect.height - targetRect.top + containerRect.y + "px";
-
-      if (style.bottom !== bottom) {
-        style.bottom = bottom;
-      }
-    }
+    container.dataset.placement = resolvedPlacement;
+    popupArea.style.setProperty("--popup-left", `${popupPosition.x}px`);
+    popupArea.style.setProperty("--popup-top", `${popupPosition.y}px`);
+    popupArea.style.setProperty("--arrow-offset", `${arrowOffset}px`);
+    popup.dataset.placement = resolvedPlacement;
   }
 
+  // Also reposition on every render, in case you called show() again.
+  useLayoutEffect(() => {
+    positionPopupRef.current();
+  });
+
+  //
+  // Handle presenting the popup after a delay, if provided. Surprisingly
+  // complex because we want a particular kind of behavior for tooltips:
+  // show them after a delay, but if you move around between tooltips, you
+  // shouldn't have to wait the full delay for each one.
+  //
+
+  type PopupState = {
+    type: "hidden" | "delaying" | "canceling" | "presenting" | "hiding";
+    timeoutId?: number;
+  };
+  const [state, unsafeSetState] = useState<PopupState>({ type: "hidden" });
+
+  function setState(newState: PopupState) {
+    unsafeSetState((current) => {
+      // You can never come back from canceling. We must be unmounted and
+      // remounted.
+      if (current.type === "canceling") return current;
+
+      if (current.type !== newState.type && current.timeoutId) {
+        clearTimeout(current.timeoutId);
+      }
+      if (current.type === newState.type) return current;
+      return newState;
+    });
+  }
+
+  useEffect(() => {
+    if (animatingIn) {
+      // Only delay if we are coming from completely hidden.
+      if (delay && state.type === "hidden") {
+        const timeoutId: any = setTimeout(
+          () => setState({ type: "presenting" }),
+          delay,
+        );
+        setState({ type: "delaying", timeoutId });
+      } else if (
+        state.type !== "presenting" &&
+        state.type !== "delaying" &&
+        state.type !== "canceling"
+      ) {
+        // Show right away.
+        setState({ type: "presenting" });
+      }
+    } else if (
+      !animatingIn &&
+      state.type !== "hiding" &&
+      state.type !== "hidden" &&
+      state.type !== "canceling"
+    ) {
+      if (state.type === "delaying") {
+        // If you move over the popup before the delay is up, we'll make it so
+        // it never appears (animating away would cause it to reappear briefly).
+        setState({ type: "canceling" });
+      } else {
+        const timeoutId: any = setTimeout(
+          () => setState({ type: "hidden" }),
+          // We wait at least a second before the delay will be applied again.
+          Seconds(1),
+        );
+        setState({ type: "hiding", timeoutId });
+      }
+    }
+  }, [animatingIn, delay, state]);
+
   const childProps: PopupChildProps = {
-    placement: resolvedPlacement,
     onClose,
   };
+
+  const cssProps = {
+    "--popup-max-width": maxWidth,
+    "--popup-max-height": maxHeight,
+  } as CSSProperties;
 
   return (
     <StyledPopupContainer
       data-show-backdrop={showBackdrop}
       data-animating-in={animatingIn}
+      data-state={state.type}
       onAnimationEnd={onAnimationEnd}
+      style={cssProps}
       ref={containerRef}
     >
-      <div
-        className="backdrop"
-        data-animating-in={animatingIn}
-        onClick={onClose}
-      />
+      <DisableIFramesGlobalStyle />
+      <div className="backdrop" onClick={onClose} />
       <div className="popup-area">
         {isValidElement(children)
           ? cloneElement(children, childProps)
@@ -360,6 +434,11 @@ export const PopupContainer = ({
     </StyledPopupContainer>
   );
 };
+
+// We use CSS "animations" instead of transitions because the <TransitionGroup>
+// library listens for animation completion events automatically and unmounts
+// the element when the animation completes. Otherwise we'd have invisible
+// popups hanging around capturing mouse clicks when they are "closed."
 
 const fadeIn = keyframes`
   from {
@@ -377,7 +456,16 @@ const fadeOut = keyframes`
   }
 `;
 
-const StyledPopupContainer = styled.div`
+const disappear = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0;
+  }
+`;
+
+export const StyledPopupContainer = styled.div`
   display: flex;
   position: relative;
   overflow: hidden;
@@ -397,17 +485,22 @@ const StyledPopupContainer = styled.div`
 
   > .popup-area {
     position: absolute;
-    right: 0px;
-    left: 0px;
-    padding: 10px;
-    /* top and bottom are set via JS. */
+    top: ${POPUP_AREA_PADDING}px;
+    bottom: ${POPUP_AREA_PADDING}px;
+    right: ${POPUP_AREA_PADDING}px;
+    left: ${POPUP_AREA_PADDING}px;
     display: flex;
     flex-flow: column;
+    align-items: flex-start;
 
+    /* We lay out our popup giving it our full popup-area to expand into, then
+       we'll position it at runtime using CSS variables and transforms. */
     > * {
-      align-self: flex-start;
-      height: 0;
-      flex-grow: 1;
+      pointer-events: auto;
+      box-sizing: border-box;
+      max-width: var(--popup-max-width, 100%);
+      max-height: var(--popup-max-height, 100%);
+      transform: translate(var(--popup-left, 0px), var(--popup-top, 0px));
     }
   }
 
@@ -415,17 +508,34 @@ const StyledPopupContainer = styled.div`
     display: none;
   }
 
-  &[data-animating-in="true"] {
+  &[data-state="delaying"],
+  &[data-state="hidden"] {
+    > .backdrop {
+      opacity: 0;
+    }
+
+    > .popup-area {
+      opacity: 0;
+    }
+  }
+
+  &[data-animating-in="true"][data-state="presenting"] {
     > .backdrop {
       animation: ${fadeIn} 0.2s ${easing.outQuart} backwards;
     }
 
     > .popup-area {
-      animation: ${fadeIn} 0.2s ${easing.outQuart};
+      animation: ${fadeIn} 0.2s ${easing.outQuart} backwards;
     }
   }
 
+  /* This animation must still be applied via CSS when the element is
+     completely hidden - during all states of data-animating-in=false,
+     in order for TransitionGroup to detect that it's finished animating. */
   &[data-animating-in="false"] {
+    /* Prevent user interaction while disappearing */
+    pointer-events: none;
+
     > .backdrop {
       animation: ${fadeOut} 0.2s ${easing.outCubic} forwards;
     }
@@ -433,5 +543,85 @@ const StyledPopupContainer = styled.div`
     > .popup-area {
       animation: ${fadeOut} 0.2s ${easing.outCubic} forwards;
     }
+  }
+
+  /* When we're canceling the delay, we want to make sure the popup never
+     appears, so we animate it away immediately. */
+  &[data-animating-in="false"][data-state="canceling"] {
+    /* Prevent user interaction while disappearing */
+    pointer-events: none;
+
+    > .backdrop {
+      animation: ${disappear} 0.2s ${easing.outCubic} forwards;
+    }
+
+    > .popup-area {
+      animation: ${disappear} 0.2s ${easing.outCubic} forwards;
+    }
+  }
+
+  &[data-state="presenting"] {
+    > .backdrop {
+      opacity: 1;
+    }
+
+    > .popup-area {
+      opacity: 1;
+    }
+  }
+
+  /* If we're floating, it means there wasn't enough space to show us
+     next to the target. So the target may not even be visible anymore!
+     Meaning there's no "guaranteed safe" way to close the popup. So
+     we'll convert the backdrop to a clickable one like useDialog(). */
+  &[data-placement="floating"] {
+    > .backdrop {
+      display: block;
+      background: rgba(0, 0, 0, 0.5);
+      pointer-events: auto;
+    }
+  }
+`;
+
+/**
+ * Computes the total amount of hidden height in the element (or any descendants)
+ * due to overflow, if any.
+ */
+function getOverflowedHeight(element: HTMLElement) {
+  const rect = element.getBoundingClientRect();
+
+  let totalOverflow = 0;
+
+  const style = window.getComputedStyle(element);
+
+  // Does the element have a fixed height?
+  if (style.height !== "auto") {
+    return 0;
+  }
+
+  if (element.scrollHeight > rect.height) {
+    // Is the overflowed content possible to scroll into view?
+    if (style.overflowY === "auto" || style.overflowY === "scroll") {
+      totalOverflow += element.scrollHeight - rect.height;
+    }
+  }
+
+  for (const child of element.children) {
+    if (child instanceof HTMLElement) {
+      totalOverflow += getOverflowedHeight(child);
+    }
+  }
+
+  return totalOverflow;
+}
+
+/**
+ * This is a bit heavy handed, but works reliably - anytime a popup is open,
+ * we disable pointer events on all iframes, otherwise iframes would capture
+ * pointer events and prevent the popup from closing.
+ */
+const DisableIFramesGlobalStyle = createGlobalStyle`
+  iframe {
+    pointer-events: none;
   }
 `;

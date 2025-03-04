@@ -7,14 +7,19 @@ import { Button } from "./Button.js";
 export function Heading({
   children,
   right,
+  onClick,
   ...rest
 }: HTMLAttributes<HTMLDivElement> & {
   children?: ReactNode;
   right?: ReactNode;
 }) {
   return (
-    <StyledHeading {...rest}>
-      {children && <div className="title">{children}</div>}
+    <StyledHeading data-clickable={!!onClick} {...rest}>
+      {children && (
+        <div className="title" onClick={onClick}>
+          {children}
+        </div>
+      )}
       {right && <div className="right">{right}</div>}
     </StyledHeading>
   );
@@ -38,6 +43,13 @@ export const StyledHeading = styled.div`
     flex-grow: 1;
     font: ${fonts.displayBold({ size: 18, line: "24px" })};
     color: ${colors.text()};
+  }
+
+  &[data-clickable="true"] {
+    > .title,
+    > .children {
+      cursor: pointer;
+    }
   }
 
   > .right {

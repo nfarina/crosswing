@@ -157,11 +157,11 @@ export const StyledAlertView = styled.div`
     > * {
       flex-grow: 1;
       flex-basis: 0;
-      border-top: 1px solid ${colors.controlBorder({ alpha: 0.5 })};
+      border-top: 1px solid ${colors.controlBorder()};
     }
 
     > * + * {
-      border-left: 1px solid ${colors.controlBorder({ alpha: 0.5 })};
+      border-left: 1px solid ${colors.controlBorder()};
     }
   }
 `;

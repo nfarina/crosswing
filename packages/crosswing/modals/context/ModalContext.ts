@@ -18,6 +18,14 @@ export type ModalContextValue = {
   /** Hide a Toast. */
   hideToast(key: string): void;
   /**
+   * Sets up a tooltip to be automatically displayed on any element with the
+   * given ID. The render method should return a TooltipView element.
+   */
+  setTooltip(
+    id: string,
+    tooltip: ((target: Element) => ReactNode) | null,
+  ): void;
+  /**
    * The root of the element that holds the rendered modals themselves
    * (adjacent to the normal render tree).
    */
@@ -38,6 +46,7 @@ export const ModalContext = createContext<ModalContextValue>({
   hideModal: throwsNoProvider,
   showToast: throwsNoProvider,
   hideToast: throwsNoProvider,
+  setTooltip: throwsNoProvider,
   modalRoot: { current: null },
   modalContextRoot: { current: null },
 });

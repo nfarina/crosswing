@@ -12,6 +12,7 @@ export function LabeledTextInput({
   disabled,
   onFocus,
   onBlur,
+  children,
   ...rest
 }: Parameters<typeof TextInput>[0] & {
   title?: string;
@@ -55,6 +56,7 @@ export function LabeledTextInput({
       />
       {title && <span className="title">{title}</span>}
       {label && <span className="label">{label}</span>}
+      {children}
     </StyledLabeledTextInput>
   );
 }

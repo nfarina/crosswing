@@ -7,7 +7,7 @@ import { ModalContext } from "../context/ModalContext.js";
 export function useClickOutsideToClose(
   onClose: () => any,
   containerRef: RefObject<HTMLElement | null>,
-  target: RefObject<HTMLElement | null>,
+  target: RefObject<Element | null>,
 ) {
   const { modalRoot } = use(ModalContext);
 
