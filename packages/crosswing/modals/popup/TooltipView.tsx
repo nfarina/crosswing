@@ -4,6 +4,11 @@ import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
 import { PopupView } from "./PopupView.js";
 
+export * from "./getPopupPlacement.js";
+export * from "./PopupView.js";
+export * from "./usePopup.js";
+export * from "./useTooltip.js";
+
 export function TooltipView({
   tooltip: tooltipText,
   target,

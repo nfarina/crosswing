@@ -24,4 +24,5 @@ chromatic-diagnostics.json
 
 ## Build Products
 
-dist/
+**/lib/
+**/dist/

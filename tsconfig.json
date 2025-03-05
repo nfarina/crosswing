@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     // Assume all ESNext features are available at runtime.
-    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "lib": ["ESNext"],
     // Do as little "transformation" as possible.
     "target": "ESNext",
     // Leave "import" statements alone since we are using ESM.
@@ -26,13 +26,22 @@
     "noImplicitAny": false,
     // Allow JSX syntax.
     "jsx": "react-jsx",
-    // Don't emit during normal type-checking, only during build script.
-    "noEmit": true,
+    // Output .js files in the lib folder, which won't be used, but we can't
+    // disable emit in this composite project.
+    "outDir": "./lib",
+    // This is a composite project.
+    "composite": true,
+    // Required for composite projects.
+    "allowImportingTsExtensions": false,
     // Remove comments from output.
     "removeComments": true,
     // Dramatically speed up successive compilations.
     "incremental": true
   },
-  "include": ["packages/**/*.ts", "packages/**/*.tsx", "*.ts"],
-  "exclude": ["packages/**/dist/**"]
+  "include": ["*.ts"],
+  "references": [
+    { "path": "./packages/cli/tsconfig.json" },
+    { "path": "./packages/crosswing/tsconfig.json" },
+    { "path": "./packages/example/tsconfig.json" }
+  ]
 }

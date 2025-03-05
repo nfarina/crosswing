@@ -6,7 +6,10 @@
     {
       "type": "typescript",
       "tsconfig": "tsconfig.json",
-      "option": "watch",
+      "options": {
+        "watch": "watch",
+        "build": "build"
+      },
       "problemMatcher": ["$tsc-watch"],
       "runOptions": {
         "runOn": "folderOpen"
