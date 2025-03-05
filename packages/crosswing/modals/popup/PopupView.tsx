@@ -4,6 +4,11 @@ import { colors, shadows } from "../../colors/colors.js";
 import { PopupPlacement } from "./getPopupPlacement.js";
 import { PopupChildProps } from "./usePopup.js";
 
+export * from "./getPopupPlacement.js";
+export * from "./TooltipView.js";
+export * from "./usePopup.js";
+export * from "./useTooltip.js";
+
 export function PopupView({
   placement = "below",
   background,

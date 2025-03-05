@@ -31,8 +31,6 @@
     "outDir": "./lib",
     // This is a composite project.
     "composite": true,
-    // Required for composite projects.
-    "allowImportingTsExtensions": false,
     // Remove comments from output.
     "removeComments": true,
     // Dramatically speed up successive compilations.

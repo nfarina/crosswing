@@ -2,6 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "sourceMap": true,
+    "noEmit": false,
     "incremental": false
   },
   "include": ["dist/**/*.ts", "dist/**/*.tsx", "../../types.d.ts"],

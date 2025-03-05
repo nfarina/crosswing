@@ -8,6 +8,5 @@
     // disable emit in this composite project.
     "outDir": "./lib"
   },
-  "include": ["../../types.d.ts", "**/*.ts", "**/*.tsx", "**/*.json"],
-  "exclude": ["dist/**", "lib/**"]
+  "include": ["../../types.d.ts", "**/*.ts", "**/*.tsx", "**/*.json"]
 }
