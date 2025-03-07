@@ -8,7 +8,7 @@ import {
 } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
-import { Popup } from "../../modals/popup/PopupView.js";
+import { Popup } from "../../modals/popup/usePopup.js";
 import { UnreadBadge } from "../../router/tabs/UnreadBadge.js";
 import { Clickable } from "../Clickable.js";
 import { PopupButtonRef } from "../PopupButton.js";

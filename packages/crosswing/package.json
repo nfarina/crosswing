@@ -14,7 +14,7 @@
     "./modals/confirm": "./modals/confirm/useConfirm.tsx",
     "./modals/context": "./modals/context/ModalRootProvider.tsx",
     "./modals/dialog": "./modals/dialog/useDialog.tsx",
-    "./modals/popup": "./modals/popup/PopupView.tsx",
+    "./modals/popup": "./modals/popup/TooltipView.tsx",
     "./modals/sheet": "./modals/sheet/useSheet.tsx",
     "./modals/storybook": "./modals/storybook/decorators.tsx",
     "./modals/toast": "./modals/toasts/ToastContainer.tsx",
