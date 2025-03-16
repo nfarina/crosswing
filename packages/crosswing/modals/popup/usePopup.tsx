@@ -267,13 +267,15 @@ export const PopupContainer = ({
     const doc = container?.ownerDocument;
     const popupArea = container?.children[1];
     const popup = popupArea?.children[0];
+    let targetElement = target.current;
 
     // If we don't have a target (or some other condition fails) then
     // we won't touch anything, in case we are animating out.
     if (
       !container ||
       !(container instanceof HTMLElement) ||
-      !target.current ||
+      !targetElement ||
+      !(targetElement instanceof HTMLElement) ||
       !doc ||
       !popupArea ||
       !(popupArea instanceof HTMLElement) ||
@@ -287,9 +289,14 @@ export const PopupContainer = ({
     // your target element (the thing the user clicked) so you can control the
     // arrow location. This is super useful if your button that the user
     // can click has an enlarged hit area for mobile.
-    const targetElement =
-      target.current.querySelector(`*[data-popup-target="true"]`) ||
-      target.current;
+    if (!targetElement.dataset.popupTarget) {
+      const descendent = targetElement.querySelector(
+        `*[data-popup-target="true"]`,
+      );
+      if (descendent) {
+        targetElement = descendent;
+      }
+    }
 
     const popupAreaRect = popupArea.getBoundingClientRect();
 

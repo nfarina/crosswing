@@ -18,7 +18,7 @@ export function getPopupPlacement({
   containerSize,
   targetRect,
   popupSize,
-  placement,
+  placement: requestedPlacement,
   hostContainer,
   arrowLength = 9,
 }: {
@@ -36,6 +36,8 @@ export function getPopupPlacement({
   // console.log("container", containerSize);
   // console.log("target", targetRect);
   // console.log("popup", popupSize);
+
+  let placement = requestedPlacement;
 
   const spaceAbove = targetRect.y;
   const spaceBelow = containerSize.height - targetRect.y - targetRect.height;
@@ -77,6 +79,12 @@ export function getPopupPlacement({
   if (placement === "left" && popupSize.width + arrowLength > spaceLeft) {
     if (popupSize.width + arrowLength <= spaceRight) {
       placement = "right";
+    } else if (
+      popupSize.height + arrowLength <= spaceBelow &&
+      requestedPlacement !== "below" &&
+      requestedPlacement !== "above" // Make sure we don't flip flop.
+    ) {
+      placement = "below";
     } else {
       // No space right either; we'll have to be floating.
       placement = "floating";
@@ -87,6 +95,12 @@ export function getPopupPlacement({
   ) {
     if (popupSize.width + arrowLength <= spaceLeft) {
       placement = "left";
+    } else if (
+      popupSize.height + arrowLength <= spaceBelow &&
+      requestedPlacement !== "below" &&
+      requestedPlacement !== "above" // Make sure we don't flip flop.
+    ) {
+      placement = "below";
     } else {
       // No space left either; we'll have to be floating.
       placement = "floating";

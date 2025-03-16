@@ -4,10 +4,6 @@ import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
 import { PopupView } from "./PopupView.js";
 
-export * from "./getPopupPlacement.js";
-export * from "./usePopup.js";
-export * from "./useTooltip.js";
-
 export function TooltipView({
   tooltip: tooltipText,
   target,
@@ -116,5 +112,17 @@ export const StyledTooltipView = styled(PopupView)`
     word-break: break-word;
     padding: 6px 8px;
     text-align: center;
+  }
+
+  &[data-placement="left"] {
+    > .children {
+      text-align: left;
+    }
+  }
+
+  &[data-placement="right"] {
+    > .children {
+      text-align: left;
+    }
   }
 `;

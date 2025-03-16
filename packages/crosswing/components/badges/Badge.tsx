@@ -12,7 +12,7 @@ export const Badge = styled.div`
   background: ${colors.lightGray()};
   color: ${colors.text()};
   white-space: nowrap;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 
