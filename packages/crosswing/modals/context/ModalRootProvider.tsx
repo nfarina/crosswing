@@ -37,9 +37,13 @@ export function ModalRootProvider({
 
   return (
     <ModalContext value={contextValue}>
-      <StyledModalOverlay ref={modalContextRoot} {...rest}>
+      <StyledModalOverlay
+        ref={modalContextRoot}
+        data-is-modal-provider
+        {...rest}
+      >
         <ModalContextProvider children={children} />
-        <div className="modals" ref={modalRoot} />
+        <div className="modals" data-is-modal-root ref={modalRoot} />
       </StyledModalOverlay>
     </ModalContext>
   );
@@ -75,11 +79,11 @@ export const StyledModalOverlay = styled.div`
     }
 
     > ${StyledToastContainer} {
-      z-index: 3;
+      /* z-index: 3; */
     }
 
     > ${StyledPopupContainer} {
-      z-index: 4;
+      /* z-index: 4; */
     }
   }
 `;

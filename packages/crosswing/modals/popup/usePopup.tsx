@@ -275,7 +275,10 @@ export const PopupContainer = ({
       !container ||
       !(container instanceof HTMLElement) ||
       !targetElement ||
-      !(targetElement instanceof HTMLElement) ||
+      !(
+        targetElement instanceof HTMLElement ||
+        targetElement instanceof SVGElement
+      ) ||
       !doc ||
       !popupArea ||
       !(popupArea instanceof HTMLElement) ||

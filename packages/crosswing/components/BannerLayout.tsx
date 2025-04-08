@@ -87,6 +87,8 @@ export const StyledBannerLayout = styled.div`
   }
 
   > * {
+    width: 0;
+    min-width: 100%;
     flex-grow: 1;
     z-index: 0;
   }

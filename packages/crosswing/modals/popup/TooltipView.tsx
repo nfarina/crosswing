@@ -1,6 +1,6 @@
 import { useLayoutEffect, useState } from "react";
 import styled from "styled-components";
-import { colors } from "../../colors/colors.js";
+import { colors, shadows } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
 import { PopupView } from "./PopupView.js";
 
@@ -112,6 +112,8 @@ export const StyledTooltipView = styled(PopupView)`
     word-break: break-word;
     padding: 6px 8px;
     text-align: center;
+    /* Drop the really big super subtle shadow added by PopupView (tooltips are so small that's very noticeable) */
+    box-shadow: ${shadows.cardSmall()}, ${shadows.cardBorder()} !important;
   }
 
   &[data-placement="left"] {

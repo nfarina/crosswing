@@ -16,7 +16,7 @@ import { useScrollAboveKeyboard } from "../../host/features/useScrollAboveKeyboa
 import { StatusBadge, StyledStatusBadge } from "../badges/StatusBadge.js";
 
 /** How to render errors when given via the `TextInput.error` property. */
-export type TextAreaErrorStyle = "color" | "message";
+export type TextAreaErrorStyle = "color" | "message" | "none";
 
 /**
  * Automatically trims text entered by the user, and adjusts height to fit

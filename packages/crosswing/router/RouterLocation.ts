@@ -47,6 +47,15 @@ export class RouterLocation<Path extends string = any> {
     return new URLSearchParams(this.search);
   }
 
+  public searchRecord(): Record<string, string | null> {
+    const params = this.searchParams();
+    const result: Record<string, string | null> = {};
+    for (const [key, value] of params.entries()) {
+      result[key] = value || "true"; // Coerce parameters that are present but have no value to be "true".
+    }
+    return result;
+  }
+
   public serialize(): string {
     return JSON.stringify({
       search: this.search,

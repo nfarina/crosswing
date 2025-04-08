@@ -10,6 +10,7 @@ import {
 } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
+import { fonts } from "../../fonts/fonts.js";
 import { flattenChildren } from "../../hooks/flattenChildren.js";
 import { DownArrowIcon } from "../../icons/DownArrow.js";
 import { usePopup } from "../../modals/popup/usePopup.js";
@@ -48,7 +49,7 @@ export function ToolbarOverflowTab({ children }: { children: ReactNode }) {
     <PopupMenu>
       {items.map((item) =>
         isToolbarTab(item) ? (
-          <PopupMenuText
+          <StyledPopupMenuTab
             key={item.props.to}
             to={location.linkTo(item.props.to ?? "")}
             children={item.props.children}
@@ -150,5 +151,11 @@ export const StyledToolbarOverflowTab = styled.div`
       align-items: center;
       justify-content: center;
     }
+  }
+`;
+
+export const StyledPopupMenuTab = styled(PopupMenuText)`
+  &[data-prefix-active="true"] {
+    font: ${fonts.displayBold({ size: 15, line: "22px" })};
   }
 `;

@@ -223,8 +223,10 @@ export function ModalContextProvider({
 
       // We can have nested modal roots! Check that this tooltip's first modal
       // root ancestor is THIS modal root.
-      const [nearestRoot] = findAncestor(target, "data-is-modal-context-root");
-      if (nearestRoot !== modalContextRoot.current) {
+      const nearestRoot = findNearestRoot(target);
+      if (nearestRoot !== modalRoot.current) {
+        console.log("nearestRoot", nearestRoot);
+        console.log("modalRoot.current", modalRoot.current);
         return;
       }
 
@@ -381,16 +383,23 @@ function TransitionComponent({
   return createPortal(child, element);
 }
 
-export function findAncestor(
-  element: Element | null,
-  attribute: string,
-): [HTMLElement | null, string] {
+function findNearestRoot(element: Element | null): HTMLElement | null {
   while (element) {
     if (element instanceof HTMLElement) {
-      const id = element.getAttribute(attribute);
-      if (id) return [element, id];
+      if (
+        element.getAttribute("data-is-modal-context-root") === "true" &&
+        element.nextElementSibling?.getAttribute("data-is-modal-root") ===
+          "true"
+      ) {
+        return element.nextElementSibling as HTMLElement;
+      }
+
+      // What if we're in a modal ourselves?
+      if (element.getAttribute("data-is-modal-root") === "true") {
+        return element;
+      }
     }
     element = element.parentElement;
   }
-  return [null, ""];
+  return null;
 }

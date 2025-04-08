@@ -11,6 +11,7 @@ import { fonts } from "../fonts/fonts.js";
 import { PopupPlacement } from "../modals/popup/getPopupPlacement.js";
 import { PopupChildProps, PopupView } from "../modals/popup/PopupView.js";
 import { Link } from "../router/Link.js";
+import { StatusBanner } from "./badges/StatusBanner.js";
 import { Select } from "./forms/Select.js";
 import { StyledToggle, Toggle } from "./forms/Toggle.js";
 
@@ -154,11 +155,6 @@ const StyledPopupMenuLink = styled(Link)`
     pointer-events: none;
   }
 
-  /* Is this a link to somewhere you're at already? (Used in toolbar tabs) */
-  &[data-prefix-active="true"] {
-    font: ${fonts.displayBold({ size: 15, line: "22px" })};
-  }
-
   &[data-selected="true"] {
     font: ${fonts.displayBold({ size: 15, line: "22px" })};
   }
@@ -270,4 +266,22 @@ export const PopupMenuSeparator = styled.div`
   margin: 5px 0 5px 10px;
   height: 1px;
   background: ${colors.separator()};
+`;
+
+export const PopupStatusBanner = styled(StatusBanner)`
+  margin-top: -10px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid ${colors.separator()};
+  padding-right: 12px;
+  padding-bottom: 7px;
+
+  > svg {
+    align-self: center;
+    margin-right: 6px;
+    transform: scale(0.9);
+  }
+
+  > .children {
+    font: ${fonts.display({ size: 14, line: "20px" })};
+  }
 `;

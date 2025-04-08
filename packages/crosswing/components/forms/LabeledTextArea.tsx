@@ -11,6 +11,7 @@ export const LabeledTextArea = ({
   disabled,
   onFocus,
   onBlur,
+  autoSizing = true,
   ...rest
 }: Parameters<typeof TextArea>[0] & {
   label: ReactNode;
@@ -43,7 +44,7 @@ export const LabeledTextArea = ({
       data-error={showError}
     >
       <TextArea
-        autoSizing
+        autoSizing={autoSizing}
         disabled={disabled}
         onFocus={onInputFocus}
         onBlur={onInputBlur}
