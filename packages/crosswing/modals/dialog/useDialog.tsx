@@ -211,6 +211,7 @@ const StyledDialogContainer = styled.div`
     align-items: center;
     pointer-events: none; /* I think this is here for dialog focusing? or hotkeys? I forget… */
     outline: none;
+    max-height: 100%;
 
     > * {
       pointer-events: initial;

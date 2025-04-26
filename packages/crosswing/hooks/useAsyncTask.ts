@@ -62,6 +62,9 @@ export function useAsyncTask<T extends AsyncTaskFunction>({
   silentErrors,
 }: {
   func: T;
+  /**
+   * @deprecated React Strict Mode will run the task twice if this is used!
+   */
   runOnMount?: boolean;
   /**
    * You may want to leave the task in a "running" state after successful

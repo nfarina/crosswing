@@ -100,7 +100,11 @@ export const StyledAlertView = styled.div`
   border-radius: 6px;
   display: flex;
   flex-flow: column;
-  overflow: hidden;
+  overflow: auto;
+
+  > * {
+    flex-shrink: 0;
+  }
 
   > .content {
     display: flex;
@@ -108,6 +112,10 @@ export const StyledAlertView = styled.div`
     padding: 25px;
     min-height: 55px;
     justify-content: center;
+
+    > * {
+      flex-shrink: 0;
+    }
 
     > .title {
       font: ${fonts.displayBold({ size: 18, line: "1.3" })};
@@ -140,7 +148,9 @@ export const StyledAlertView = styled.div`
   }
 
   > .children {
+    min-height: 0;
     flex-grow: 1;
+    flex-shrink: 1;
     display: flex;
     flex-flow: column;
 
@@ -150,7 +160,6 @@ export const StyledAlertView = styled.div`
   }
 
   > .buttons {
-    flex-shrink: 0;
     display: flex;
     flex-flow: row;
 

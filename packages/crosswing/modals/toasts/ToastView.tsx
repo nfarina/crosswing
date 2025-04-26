@@ -1,4 +1,4 @@
-import { HTMLAttributes } from "react";
+import { HTMLAttributes, MouseEvent, useState } from "react";
 import { keyframes, styled } from "styled-components";
 import { colors, shadows } from "../../colors/colors.js";
 import { Button } from "../../components/Button.js";
@@ -40,14 +40,33 @@ export function ToastView({
     onGestureComplete: onClose,
   });
 
+  // If the toast isn't sticky, we'll close it when the timer fires, UNLESS
+  // your mouse is hovering over the toast.
+  const [hovering, setHovering] = useState(false);
+  const [closeOnLeave, setCloseOnLeave] = useState(false);
+
+  function onMouseEnter(e: MouseEvent<HTMLDivElement>) {
+    setHovering(true);
+  }
+
+  function onMouseLeave(e: MouseEvent<HTMLDivElement>) {
+    setHovering(false);
+    if (closeOnLeave) {
+      onClose?.();
+    }
+  }
+
+  const requestClose = () => {
+    if (sticky) return;
+    if (hovering) {
+      setCloseOnLeave(true);
+    } else {
+      onClose?.();
+    }
+  };
+
   // For automatically closing the toast.
-  useInterval(
-    () => {
-      if (!sticky) onClose?.();
-    },
-    AUTO_DISMISS_TIME,
-    [sticky],
-  );
+  useInterval(requestClose, AUTO_DISMISS_TIME, [sticky]);
 
   function onAnimationEnd() {
     if (animatingIn === false) {
@@ -75,6 +94,8 @@ export function ToastView({
       data-animating-in={animatingIn}
       data-clickable={!!onClick}
       onAnimationEnd={onAnimationEnd}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       {icon && (
         <div className="icon" onClick={handleToastClick}>
@@ -181,10 +202,12 @@ const StyledToastView = styled.div`
 
     > .title {
       font: ${fonts.displayBold({ size: 15, line: "22px" })};
+      word-break: break-word;
     }
 
     > .message {
       font: ${fonts.display({ size: 15, line: "22px" })};
+      word-break: break-word;
     }
   }
 

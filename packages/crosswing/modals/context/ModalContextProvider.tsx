@@ -225,8 +225,6 @@ export function ModalContextProvider({
       // root ancestor is THIS modal root.
       const nearestRoot = findNearestRoot(target);
       if (nearestRoot !== modalRoot.current) {
-        console.log("nearestRoot", nearestRoot);
-        console.log("modalRoot.current", modalRoot.current);
         return;
       }
 

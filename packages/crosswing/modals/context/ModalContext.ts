@@ -74,6 +74,7 @@ export interface Toast {
   wrap?: boolean;
   sticky?: boolean;
   to?: string;
+  truncate?: boolean;
   onClick?: () => void;
   onClose?: () => void;
 }

@@ -58,13 +58,38 @@ export function pluralize(
   const rounded = Math.floor(num);
   const [singular, plural] = Array.isArray(units)
     ? units
-    : [units.replace(/s$/, ""), units];
+    : splitSingularAndPlural(units);
   if (rounded === 0 && !showZero) {
     return "No " + plural;
   } else if (rounded === 1) {
     return `${rounded} ${singular}`;
   } else {
     return `${rounded} ${plural}`;
+  }
+}
+
+function splitSingularAndPlural(
+  phrase: string,
+): [singular: string, plural: string] {
+  // Split "items were" into ["item was", "items were"]
+  if (phrase.endsWith("s were")) {
+    return [phrase.slice(0, -6) + " was", phrase];
+  }
+  // Split "items are" into ["item is", "items are"]
+  else if (phrase.endsWith("s are")) {
+    return [phrase.slice(0, -5) + " is", phrase];
+  }
+  // Split "items has" into ["item has", "items have"]
+  else if (phrase.endsWith("s has")) {
+    return [phrase.slice(0, -5) + " has", phrase];
+  }
+  // Split "items" into ["item", "items"]
+  else if (phrase.endsWith("s")) {
+    return [phrase.slice(0, -1), phrase];
+  }
+  // No change
+  else {
+    return [phrase, phrase];
   }
 }
 
