@@ -219,6 +219,8 @@ export const StyledTabs = styled.div`
 
     > * {
       flex-grow: 1;
+      /* "Consume" the bottom safe area so our children don't account for it. */
+      --safe-area-bottom: 0px;
     }
   }
 
