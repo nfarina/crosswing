@@ -38,7 +38,7 @@ export function TaskView({
     onError: errorAlert.show,
   });
 
-  useHotKey(hotkey, running.toggle);
+  useHotKey(hotkey, { global: true }, running.toggle);
 
   function onClick(e: SyntheticEvent) {
     if (running.isUpdating || (e.target as HTMLElement).tagName === "A") {

@@ -18,18 +18,18 @@
   },
   "dependencies": {
     "minimist": "^1.2.8",
-    "pidusage": "^3.0.2",
+    "pidusage": "^4.0.1",
     "ps-tree": "^1.2.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^4.3.4",
+    "@vitejs/plugin-react": "^4.4.1",
     "babel-plugin-styled-components": "^2.1.4",
     "crosswing": "workspace:*",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-is": "^19.0.0",
-    "styled-components": "^6.1.14",
-    "vite": "^6.0.7"
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-is": "^19.1.0",
+    "styled-components": "^6.1.18",
+    "vite": "^6.3.5"
   },
   "files": [
     "**/*.ts?(x)",
