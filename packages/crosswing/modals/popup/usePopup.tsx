@@ -191,7 +191,7 @@ export const PopupContainer = ({
   );
 
   // Listen for the escape key and call onClose if pressed.
-  useHotKey("Escape", { target: containerRef, onPress: onClose });
+  useHotKey("Escape", { target: containerRef }, onClose);
 
   // We need to keep the callback "fresh" because it's a closure that likely
   // encapsulates the state of the component it was defined in.

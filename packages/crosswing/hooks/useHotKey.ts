@@ -5,49 +5,69 @@ import { RefObject, useEffect, useRef } from "react";
 export type HotKey =
   `${"" | "ctrl+" | "cmd+" | "alt+" | "shift+"}${"" | "cmd+" | "alt+" | "shift+"}${SingleHotKey}`;
 
+export type HotKeyModifiers = {
+  ctrlKey?: boolean;
+  cmdKey?: boolean;
+  altKey?: boolean;
+  shiftKey?: boolean;
+};
+
 export const HotKeyContextDataAttributes = { "data-hotkey-context": true };
 
-export type HotKeyOnPressHandler = () => boolean | void;
+export type HotKeyOnPressHandler = (
+  pressed: HotKey,
+  modifiers: HotKeyModifiers,
+) => boolean | void;
 
-export type UseHotKeyOptions = {
+export type BaseUseHotKeyOptions = {
+  /** Set to true to disable handling this hotkey. */
+  disabled?: boolean;
+  /** Set to true to handle even single keypresses while inside an input field. */
+  alwaysFire?: boolean;
+  /**
+   * Optional modifiers that do not affect the matching of the hotkey. You can
+   * check if they were pressed by checking the `modifiers` argument in the
+   * `onPress` callback.
+   */
+  optional?: Array<"ctrl" | "alt" | "shift" | "cmd">;
+};
+
+export type GlobalHotKeyOptions = BaseUseHotKeyOptions & {
+  /** Defines a global hotkey that will trigger regardless of modal state. */
+  global: true;
+};
+
+export type LocalHotKeyOptions = BaseUseHotKeyOptions & {
   /**
    * The element on which this hotkey should be "bound". Used to control when
    * this hotkey triggers with respect to things like modals that may supercede
    * the hotkey if they've placed a HotKeyContextClassName on an ancestor
-   * element. You can omit or pass `null` to always allow the hotkey to
-   * trigger; this should be reserved for rare global hotkeys.
+   * element. Passing null will act like a global hotkey.
    */
-  target?: RefObject<Element | null> | null;
-  onPress?: HotKeyOnPressHandler;
-  /** Set to true to disable handling this hotkey. */
-  disabled?: boolean;
-  /** Set to true to handle even single keypresses while inside an <input> mode. */
-  alwaysFire?: boolean;
+  target: RefObject<Element | null> | null;
 };
 
-export function useHotKey(
-  hotKey: HotKey | null,
-  handlerOrOptions: UseHotKeyOptions | HotKeyOnPressHandler,
-) {
-  const {
-    target = null,
-    onPress,
-    disabled = false,
-    alwaysFire = false,
-  } = typeof handlerOrOptions === "function"
-    ? { onPress: handlerOrOptions }
-    : handlerOrOptions;
+export type UseHotKeyOptions = GlobalHotKeyOptions | LocalHotKeyOptions;
 
-  const onPressCallback = useRef<(() => any) | null>(onPress ?? null);
+export function useHotKey(
+  hotKey: HotKey | HotKey[] | null,
+  options: UseHotKeyOptions,
+  onPress: HotKeyOnPressHandler | null | undefined,
+) {
+  const { disabled = false, alwaysFire = false, optional = [] } = options;
+
+  const target = "target" in options ? options.target : null;
+
+  const hotKeys = Array.isArray(hotKey) ? hotKey : [hotKey];
+
+  const onPressCallback = useRef<HotKeyOnPressHandler | null>(onPress ?? null);
 
   useEffect(() => {
     onPressCallback.current = onPress ?? null;
   });
 
   useEffect(() => {
-    if (disabled || hotKey === null) return;
-
-    const parsed = parseHotKey(hotKey);
+    if (disabled || hotKeys.length === 0) return;
 
     function onKeyDown(event: KeyboardEvent) {
       const { key, ctrlKey, altKey, shiftKey, metaKey } = event;
@@ -57,19 +77,28 @@ export function useHotKey(
         return;
       }
 
-      const isMatch =
-        parsed.key.toLowerCase() === key.toLowerCase() &&
-        !!parsed.ctrlKey === !!ctrlKey &&
-        !!parsed.altKey === !!altKey &&
-        !!parsed.shiftKey === !!shiftKey &&
-        !!parsed.metaKey === !!metaKey;
+      const matchingHotkey = hotKeys.find((hotKey) => {
+        const parsed = parseHotKey(hotKey as any);
+
+        if (parsed.key.toLowerCase() !== key.toLowerCase()) {
+          return false;
+        }
+
+        // Check that the modifiers match.
+        return (
+          (!!parsed.ctrlKey === !!ctrlKey || optional.includes("ctrl")) &&
+          (!!parsed.altKey === !!altKey || optional.includes("alt")) &&
+          (!!parsed.shiftKey === !!shiftKey || optional.includes("shift")) &&
+          (!!parsed.metaKey === !!metaKey || optional.includes("cmd"))
+        );
+      });
 
       // console.log(
       //   "HotKey pressed:",
       //   formatHotKey(event, { originalCase: true }),
       // );
 
-      if (!isMatch) {
+      if (!matchingHotkey) {
         return;
       }
 
@@ -103,7 +132,12 @@ export function useHotKey(
       // console.log("HotKey matched:", formatHotKey(event), "on", target);
 
       // If we handled a hotkey, it shouldn't do anything else!
-      const result = onPressCallback.current?.();
+      const result = onPressCallback.current?.(matchingHotkey, {
+        ctrlKey,
+        altKey,
+        shiftKey,
+        cmdKey: metaKey,
+      });
 
       if (result !== false) {
         event.preventDefault();

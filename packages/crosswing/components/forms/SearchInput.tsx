@@ -44,10 +44,7 @@ export function SearchInput({
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Allow you to use the hotkey "/" to focus the search bar.
-  useHotKey("/", {
-    target: inputRef,
-    onPress: () => inputRef.current?.select(),
-  });
+  useHotKey("/", { target: inputRef }, () => inputRef.current?.select());
 
   useEffect(() => {
     // This only makes sense on mobile where the keyboard gets in the way.

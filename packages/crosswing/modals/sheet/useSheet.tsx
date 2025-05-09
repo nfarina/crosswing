@@ -98,11 +98,11 @@ export const SheetContainer = ({
   const resolvedOnClose = sticky ? () => {} : onClose;
 
   // Listen for the escape key and call onClose if pressed.
-  useHotKey("Escape", {
-    target: containerRef,
-    onPress: resolvedOnClose,
-    disabled: !pressEscapeToClose,
-  });
+  useHotKey(
+    "Escape",
+    { target: containerRef, disabled: !pressEscapeToClose },
+    resolvedOnClose,
+  );
 
   function getAnimation(): SheetAnimation {
     if (animation) {

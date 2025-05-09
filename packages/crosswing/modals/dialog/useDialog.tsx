@@ -81,11 +81,11 @@ export const DialogContainer = ({
   const resolvedOnClose = sticky ? () => {} : onClose;
 
   // Listen for the escape key and call onClose if pressed.
-  useHotKey("Escape", {
-    target: containerRef,
-    onPress: resolvedOnClose,
-    disabled: !pressEscapeToClose,
-  });
+  useHotKey(
+    "Escape",
+    { target: containerRef, disabled: !pressEscapeToClose },
+    resolvedOnClose,
+  );
 
   // We haven't finished figured out how to keep focus within modals, so this
   // won't really help much.

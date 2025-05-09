@@ -35,19 +35,17 @@ export function useFontSizeHotKeys({
     DEFAULT_PRESET_INDEX,
   );
 
-  useHotKey("]", {
-    onPress: () => setPresetIndex(Math.max(0, presetIndex - 1)),
-    disabled,
-  });
-  useHotKey("[", {
-    onPress: () =>
-      setPresetIndex(Math.min(presets.length - 1, presetIndex + 1)),
-    disabled,
-  });
-  useHotKey("=", {
-    onPress: () => setPresetIndex(DEFAULT_PRESET_INDEX),
-    disabled,
-  });
+  useHotKey("]", { global: true, disabled }, () =>
+    setPresetIndex(Math.max(0, presetIndex - 1)),
+  );
+
+  useHotKey("[", { global: true, disabled }, () =>
+    setPresetIndex(Math.min(presets.length - 1, presetIndex + 1)),
+  );
+
+  useHotKey("=", { global: true, disabled }, () =>
+    setPresetIndex(DEFAULT_PRESET_INDEX),
+  );
 
   // Respond to changes in preferred font size.
   useLayoutEffect(() => {

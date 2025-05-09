@@ -52,7 +52,7 @@ export const BannerContainer = ({
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   // Listen for the escape key and call onClose if pressed.
-  useHotKey("Escape", { target: containerRef, onPress: onClose });
+  useHotKey("Escape", { target: containerRef }, onClose);
 
   // For automatically closing the bubble.
   useInterval(

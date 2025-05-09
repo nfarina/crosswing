@@ -93,7 +93,9 @@ export function PanelLayout({
     false,
   );
 
-  useHotKey(hotKey, () => onPanelVisibleChange?.(!panelVisible));
+  useHotKey(hotKey, { global: true }, () =>
+    onPanelVisibleChange?.(!panelVisible),
+  );
 
   useElementSize(ref, updateLayout);
 

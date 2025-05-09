@@ -110,10 +110,7 @@ export function FullScreenView({
   const skipAnimation = useRef(isFullScreen);
 
   // Toggle full screen status with a hotkey.
-  useHotKey(hotkey, {
-    target: parentRef,
-    onPress: () => setFullScreen(!isFullScreen),
-  });
+  useHotKey(hotkey, { target: parentRef }, () => setFullScreen(!isFullScreen));
 
   useLayoutEffect(() => {
     // Create our managed <div> that React will render everything inside.

@@ -29,7 +29,7 @@ export function MobileAppFrame({
   );
 
   // Turn on/off the desktop "phone frame" to preview the UI in tablet form.
-  useHotKey("f", () => {
+  useHotKey("f", { global: true }, () => {
     const child = ref.current?.firstChild as HTMLElement;
     if (!child) return; // Shouldn't happen.
 

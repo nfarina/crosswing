@@ -42,7 +42,7 @@ export const ActionContainer = ({
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   // Listen for the escape key and call onClose if pressed.
-  useHotKey("Escape", { target: containerRef, onPress: onClose });
+  useHotKey("Escape", { target: containerRef }, onClose);
 
   function onAnimationEnd() {
     if (animatingIn === false) {
