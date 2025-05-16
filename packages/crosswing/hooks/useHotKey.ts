@@ -194,7 +194,7 @@ export function formatHotKey(
   if (shiftKey) formatted += "⇧";
   if (metaKey) formatted += "⌘";
 
-  return formatted + originalCase ? key : key.toUpperCase();
+  return formatted + (originalCase ? key : key.toUpperCase());
 }
 
 /**
