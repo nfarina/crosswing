@@ -1,4 +1,12 @@
-import { Children, HTMLAttributes, use, useEffect, useRef } from "react";
+import {
+  Children,
+  createContext,
+  HTMLAttributes,
+  use,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
 import { colors, shadows } from "../colors/colors.js";
@@ -82,9 +90,9 @@ export function PanelLayout({
   const { isDefaultContext, getInsertionRef } = use(ToolbarContext);
 
   // Persist the panel size across window reloads.
-  const [initialPanelSize] = useLocalStorage(
+  let [initialPanelSize, setInitialPanelSize] = useLocalStorage<number | null>(
     `PanelLayout:${restorationKey.name}:initialPanelSize`,
-    panelDefaultSize,
+    null,
   );
 
   // Remember if the user made the panel as large as possible.
@@ -93,11 +101,23 @@ export function PanelLayout({
     false,
   );
 
+  // We need to remember the mode we actually decided to use (if auto),
+  // so we can pass it through to the context.
+  const [resolvedMode, setResolvedMode] = useState<PanelLayoutMode>(mode);
+
   useHotKey(hotKey, { global: true }, () =>
     onPanelVisibleChange?.(!panelVisible),
   );
 
-  useElementSize(ref, updateLayout);
+  // Update the layout when our element size changes, or if any of the
+  // size-related properties change.
+  useElementSize(ref, updateLayout, [
+    panelDefaultSize,
+    panelMinSize,
+    panelMaxSize,
+    contentMinSize,
+    mode,
+  ]);
 
   function updateLayout(newSize?: ElementSize) {
     const container = ref.current;
@@ -113,7 +133,7 @@ export function PanelLayout({
 
     if (panelSize < 0) {
       // No CSS var, so we need to calculate it.
-      panelSize = initialPanelSize;
+      panelSize = initialPanelSize ?? panelDefaultSize;
 
       // Set the initial panel size.
       container.style.setProperty("--panel-size", panelSize + "px");
@@ -152,22 +172,33 @@ export function PanelLayout({
       container.style.setProperty("--panel-size", panelSize + "px");
     }
 
+    // If the user isn't resizing and our initial size is null, then we
+    // want to be at the default size.
+    if (!userIsResizing && initialPanelSize === null) {
+      panelSize = panelDefaultSize;
+      container.style.setProperty("--panel-size", panelSize + "px");
+    }
+
     // How much room do we have left for the content?
     const contentSize =
       layout === "vertical"
         ? container.clientHeight - panelSize
         : container.clientWidth - panelSize;
 
-    container.setAttribute(
-      "data-mode",
+    const finalMode =
       mode === "auto"
         ? // If the content width is less than the minimum, we need to use overlay
           // mode and make the panel cover the content.
           contentSize < contentMinSize
           ? "overlay"
           : "shrink"
-        : mode,
-    );
+        : mode;
+
+    if (resolvedMode !== finalMode) {
+      setResolvedMode(finalMode);
+    }
+
+    container.setAttribute("data-mode", resolvedMode);
 
     // Now that we've set the initial layout, we can enable transitions.
     container.setAttribute("data-transitions-enabled", "true");
@@ -359,11 +390,10 @@ export function PanelLayout({
         // Reset the "--bounce-offset" CSS var.
         container.style.setProperty("--bounce-offset", "0px");
 
-        // Persist the new size.
-        localStorage.setItem(
-          `PanelLayout:${restorationKey.name}:initialPanelSize`,
-          newSize.toString(),
-        );
+        // Persist the new size, making it null if it's the default size.
+        // This way if the default size changes, we don't persist the old
+        // size.
+        setInitialPanelSize(newSize === panelDefaultSize ? null : newSize);
 
         // If the user dragged the panel to the max, remember that.
         setPanelMaximized(newSize === panelMaxSize);
@@ -398,28 +428,36 @@ export function PanelLayout({
     "data-hide-drag-handle": hideDragHandle,
   };
 
+  const context: PanelLayoutContextValue = {
+    panelVisible,
+    setPanelVisible: (visible) => onPanelVisibleChange?.(visible),
+    panelMode: resolvedMode,
+  };
+
   return (
-    <StyledPanelLayout ref={ref} {...dataAttributes} {...rest}>
-      {insertionEl &&
-        !hideToolbarButton &&
-        createPortal(toggleButton, insertionEl)}
-      <div className="content" {...dataAttributes}>
-        {content}
-      </div>
-      <div className="panel" {...dataAttributes}>
-        {panel}
-        <div className="dragger" {...dataAttributes}>
-          <div className="drag-handle" {...dataAttributes}>
-            <div className="drag-handle-grabber" />
+    <PanelLayoutContext value={context}>
+      <StyledPanelLayout ref={ref} {...dataAttributes} {...rest}>
+        {insertionEl &&
+          !hideToolbarButton &&
+          createPortal(toggleButton, insertionEl)}
+        <div className="content" {...dataAttributes}>
+          {content}
+        </div>
+        <div className="panel" {...dataAttributes}>
+          {panel}
+          <div className="dragger" {...dataAttributes}>
+            <div className="drag-handle" {...dataAttributes}>
+              <div className="drag-handle-grabber" />
+            </div>
           </div>
         </div>
-      </div>
-      <div
-        className="overlay"
-        {...dataAttributes}
-        onClick={() => onPanelVisibleChange?.(false)}
-      />
-    </StyledPanelLayout>
+        <div
+          className="overlay"
+          {...dataAttributes}
+          onClick={() => onPanelVisibleChange?.(false)}
+        />
+      </StyledPanelLayout>
+    </PanelLayoutContext>
   );
 }
 
@@ -802,3 +840,19 @@ export const StyledPanelLayout = styled.div`
     }
   }
 `;
+
+//
+// Context
+//
+
+export type PanelLayoutContextValue = {
+  panelVisible: boolean;
+  setPanelVisible: (visible: boolean) => void;
+  panelMode: PanelLayoutMode;
+};
+
+export const PanelLayoutContext = createContext<PanelLayoutContextValue>({
+  panelVisible: false,
+  setPanelVisible: () => {},
+  panelMode: "auto",
+});
