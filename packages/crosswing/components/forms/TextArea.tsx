@@ -169,7 +169,8 @@ export function TextArea({
   const dataAttrs = {};
   const restAttrs = {};
   for (const key of Object.keys(rest)) {
-    if (key.startsWith("data-")) {
+    // Allow 1Password to be disabled via a special data attribute.
+    if (key.startsWith("data-") && !key.startsWith("data-1p-")) {
       dataAttrs[key] = rest[key];
     } else {
       restAttrs[key] = rest[key];
