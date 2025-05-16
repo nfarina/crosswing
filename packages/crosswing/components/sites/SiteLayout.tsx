@@ -147,6 +147,7 @@ export function SiteLayout({
   if (mobileLayout) {
     // Create a button to open the sidebar, when on mobile.
     headerAccessories.push({
+      key: "menu",
       icon: <MenuIcon />,
       onClick: () => setSidebarOpen(true),
       mobilePlacement: "sidebar",

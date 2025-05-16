@@ -14,11 +14,18 @@ import { Clickable } from "../Clickable.js";
 import { PopupButtonRef } from "../PopupButton.js";
 
 export type SiteHeaderAccessory = {
+  /** A unique key for the accessory. */
+  key: string;
+  /** The icon to display. */
   icon: ReactNode;
+  /** The size of the icon. */
   iconSize?: [string, string];
   /** Set a number to render an "unread items" badge. */
   unread?: number | null;
+  /** Called when the accessory is clicked. */
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+  /** Optional placement for the new site layout. */
+  placement?: "header" | "sidebar";
   /**
    * On larger screens, accessories will always be in the top nav. On smaller
    * screens, you can elect to relocate the accessory to the sidebar. This is
