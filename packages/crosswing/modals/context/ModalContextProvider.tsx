@@ -1,8 +1,8 @@
 import {
-  ReactElement,
-  ReactNode,
   cloneElement,
   isValidElement,
+  ReactElement,
+  ReactNode,
   use,
   useEffect,
   useRef,
@@ -12,6 +12,7 @@ import { createPortal } from "react-dom";
 import { TransitionGroup } from "react-transition-group";
 import styled from "styled-components";
 import { HostContext } from "../../host/context/HostContext.js";
+import { isInRect, Rect } from "../../shared/rect.js";
 import { Minutes } from "../../shared/timespan.js";
 import { PopupPlacement } from "../popup/getPopupPlacement.js";
 import { TooltipView } from "../popup/PopupView.js";
@@ -183,8 +184,19 @@ export function ModalContextProvider({
     // that occur shortly after the touch event.
     const lastTouchTimestamp = { current: 0 };
 
+    let lastMouseDown: Rect | null = null;
+
     function handleMouseEnter(e: MouseEvent) {
       if (Date.now() - lastTouchTimestamp.current < 500) {
+        return;
+      }
+
+      // If the mouse is in the dead zone rect created when you last clicked
+      // on something, suppress the event.
+      if (
+        lastMouseDown &&
+        isInRect(lastMouseDown, { x: e.clientX, y: e.clientY })
+      ) {
         return;
       }
 
@@ -257,8 +269,34 @@ export function ModalContextProvider({
       lastTouchTimestamp.current = Date.now();
     }
 
+    function handleMouseMove(e: MouseEvent) {
+      const position = { x: e.clientX, y: e.clientY };
+
+      if (lastMouseDown && !isInRect(lastMouseDown, position)) {
+        lastMouseDown = null;
+      }
+    }
+
+    function handleMouseDown(e: MouseEvent) {
+      // Construct a "dead zone" rect that we use to suppress subsequent
+      // mouseenter events, so we don't get tooltip spam when the UI is
+      // animating.
+      lastMouseDown = {
+        x: e.clientX - 10,
+        y: e.clientY - 10,
+        width: 20,
+        height: 20,
+      };
+
+      // Close any tooltips immediately on click so they don't scoot around
+      // awkwardly if your click caused an animation.
+      setTooltipPopup(null);
+    }
+
     // Listen for the "mouseenter" event on the modal context root.
     root.addEventListener("mouseenter", handleMouseEnter, { capture: true });
+    root.addEventListener("mousemove", handleMouseMove, { capture: true });
+    root.addEventListener("mousedown", handleMouseDown, { capture: true });
     root.addEventListener("touchstart", handleTouchStart, {
       capture: true,
       passive: true,

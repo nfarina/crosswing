@@ -7,6 +7,15 @@ export type Position = {
 
 export type Rect = Position & Size;
 
+export function isInRect(rect: Rect, position: Position): boolean {
+  return (
+    position.x >= rect.x &&
+    position.x <= rect.x + rect.width &&
+    position.y >= rect.y &&
+    position.y <= rect.y + rect.height
+  );
+}
+
 /**
  * Given a rect and a relativeTo rect, return a new rect that is the same as
  * the original rect but in the coordinate system of the relativeTo rect.

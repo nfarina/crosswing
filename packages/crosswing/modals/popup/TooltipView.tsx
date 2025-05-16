@@ -2,6 +2,7 @@ import { useLayoutEffect, useState } from "react";
 import styled from "styled-components";
 import { colors, shadows } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
+import { formatHotKey, parseHotKey } from "../../hooks/useHotKey.js";
 import { PopupView } from "./PopupView.js";
 
 export function TooltipView({
@@ -50,7 +51,13 @@ export function TooltipView({
         rest.onClose?.();
       }
 
-      setText(tooltip ?? "Missing tooltip");
+      // Special little styling for hotkeys.
+      const hotkey = getHotkey(target);
+
+      setText(
+        (tooltip ?? "Missing tooltip") +
+          (hotkey ? `<span class="hotkey">${hotkey}</span>` : ""),
+      );
       setDestructive(destructive);
     };
 
@@ -114,8 +121,17 @@ export const StyledTooltipView = styled(PopupView)`
     text-align: center;
     /* Drop the really big super subtle shadow added by PopupView (tooltips are so small that's very noticeable) */
     box-shadow: ${shadows.cardSmall()}, ${shadows.cardBorder()} !important;
-  }
 
+    .hotkey {
+      margin-left: 5px;
+      font: ${fonts.displayBold({ size: 13, line: "17px" })};
+      opacity: 0.5;
+      letter-spacing: 0.1em;
+
+      @media (prefers-color-scheme: dark) {
+      }
+    }
+  }
   &[data-placement="left"] {
     > .children {
       text-align: left;
@@ -128,3 +144,18 @@ export const StyledTooltipView = styled(PopupView)`
     }
   }
 `;
+
+function getHotkey(target: Element): string | null {
+  const hotkey = target?.getAttribute("data-tooltip-hotkey");
+  const hotkeyWin = target?.getAttribute("data-tooltip-hotkey-win");
+  const hotkeyMac = target?.getAttribute("data-tooltip-hotkey-mac");
+
+  const resolvedHotkeyStr = navigator.platform.includes("Mac")
+    ? (hotkeyMac ?? hotkey ?? "")
+    : (hotkeyWin ?? hotkey ?? "");
+
+  if (!resolvedHotkeyStr) return null;
+
+  const resolvedHotkey = parseHotKey(resolvedHotkeyStr as any);
+  return formatHotKey(resolvedHotkey);
+}

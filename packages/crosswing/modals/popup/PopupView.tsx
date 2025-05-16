@@ -106,19 +106,6 @@ export const StyledPopupView = styled.div`
     }
   }
 
-  &[data-outline-border="true"] {
-    > .children {
-      @media (prefers-color-scheme: dark) {
-        /* We need some extra constrast with a white border because the shadows don't help differentiate as well as in light mode. */
-        box-shadow:
-          0 0 0 1px ${colors.white({ alpha: 0.17 })},
-          ${shadows.cardSmall()},
-          ${shadows.cardBorder()},
-          0 0 100px ${colors.black({ alpha: 0.2 })};
-      }
-    }
-  }
-
   > .arrow-container {
     position: absolute;
     z-index: 1;
@@ -207,6 +194,29 @@ export const StyledPopupView = styled.div`
   &[data-hide-arrow="true"] {
     > .arrow-container {
       display: none;
+    }
+  }
+
+  &[data-outline-border="true"] {
+    > .children {
+      @media (prefers-color-scheme: dark) {
+        /* We need some extra constrast with a white border because the shadows don't help differentiate as well as in light mode. */
+        box-shadow:
+          0 0 0 1px ${colors.white({ alpha: 0.17 })},
+          ${shadows.cardSmall()},
+          ${shadows.cardBorder()},
+          0 0 100px ${colors.black({ alpha: 0.2 })};
+      }
+    }
+
+    > .arrow-container {
+      > svg {
+        @media (prefers-color-scheme: dark) {
+          path#Shadow {
+            fill: ${colors.white({ alpha: 0.15 })};
+          }
+        }
+      }
     }
   }
 `;
