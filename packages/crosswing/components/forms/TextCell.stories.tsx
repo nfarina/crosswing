@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { SearchIcon } from "../../icons/Search.js";
 import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
@@ -16,6 +17,28 @@ export default {
 
 export const Normal = () => (
   <TextCell title="Select an account" onClick={() => {}} />
+);
+
+export const AsLink = () => (
+  <TextCell title="Select an account" to="/somewhere" />
+);
+
+export const Checked = () => {
+  const [checked, setChecked] = useState(true);
+  return (
+    <TextCell
+      title="Select an account"
+      checked={checked}
+      onClick={() => setChecked(!checked)}
+    />
+  );
+};
+
+export const WithDetail = () => (
+  <TextCell
+    title="Select an account"
+    detail="Money can be exchanged for goods and services"
+  />
 );
 
 export const WithSubtitle = () => (

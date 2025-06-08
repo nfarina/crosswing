@@ -1,5 +1,7 @@
 import { RefObject, useImperativeHandle, useRef } from "react";
 import { styled } from "styled-components";
+import { colors } from "../colors/colors";
+import { fonts } from "../fonts/fonts";
 import { DownArrowIcon } from "../icons/DownArrow";
 import { Popup } from "../modals/popup/usePopup";
 import { Button } from "./Button";
@@ -38,40 +40,41 @@ export function PopupButton({
     },
   }));
 
-  const resolvedChildren = (() => {
-    if (children) {
-      return (
-        <>
-          {children}
-          {!hideDisclosure && <DownArrowIcon className="down-arrow" />}
-        </>
-      );
-    } else if (!hideDisclosure) {
-      return <DownArrowIcon className="down-arrow" />;
-    }
-    return null;
-  })();
+  function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
+    rest?.onClick?.(e);
+    popup?.onClick?.(e);
+  }
 
   return (
     <StyledPopupButton
       {...rest}
       ref={ref ?? backupRef}
-      onClick={popup?.onClick ?? rest.onClick}
+      onClick={handleClick}
       data-is-open={popup?.visible}
-      children={resolvedChildren}
+      children={children}
+      right={!hideDisclosure && <DownArrowIcon className="down-arrow" />}
     />
   );
 }
 
 export const StyledPopupButton = styled(Button)`
-  > .down-arrow {
+  > .right {
     width: 20px;
     height: 20px;
-    margin-left: 4px;
-    margin-right: -5px;
+    margin-right: -4px;
   }
 
-  &[data-is-open="true"] > .down-arrow {
-    transform: rotate(180deg);
+  &[data-is-open="true"] {
+    background: ${colors.buttonBackgroundHover()};
+
+    > .right {
+      transform: rotate(180deg);
+    }
+  }
+
+  &[data-new-style="true"] {
+    > .children {
+      font: ${fonts.display({ size: 14 })};
+    }
   }
 `;

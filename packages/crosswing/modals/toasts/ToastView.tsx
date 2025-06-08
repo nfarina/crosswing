@@ -104,26 +104,31 @@ export function ToastView({
       )}
       {to ? (
         <Link className="content" to={to} onClick={handleToastClick}>
-          <div className="title">{title}</div>
-          <div className="message">{message}</div>
+          {title && <div className="title">{title}</div>}
+          {message && <div className="message">{message}</div>}
         </Link>
       ) : (
         <div className="content" onClick={handleToastClick}>
-          <div className="title">{title}</div>
-          <div className="message">{message}</div>
+          {title && <div className="title">{title}</div>}
+          {message && <div className="message">{message}</div>}
         </div>
       )}
       {!!action && (
         <Button
+          newStyle
+          bordered
+          pill
           className="action"
-          size="smaller"
-          title={action}
+          children={action}
           onClick={handleActionClick}
         />
       )}
-      <div className="close" onClick={onClose}>
-        <CloseIcon />
-      </div>
+      <Button
+        className="close"
+        newStyle
+        onClick={onClose}
+        icon={<CloseIcon />}
+      />
     </StyledToastView>
   );
 }
@@ -150,12 +155,17 @@ const StyledToastView = styled.div`
   min-height: 60px;
   background: ${colors.textBackground()};
   color: ${colors.text()};
-  border-radius: 6px;
+  border-radius: 12px;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  gap: 5px;
   box-shadow:
     ${shadows.cardBorder()},
-    0 4px 20px 0 ${colors.darkGreen({ alpha: 0.3 })};
+    0 4px 20px 0 ${colors.gray800({ alpha: 0.3 })};
 
   @media (prefers-color-scheme: dark) {
+    background: ${colors.gray750()};
     box-shadow:
       ${shadows.cardBorder()},
       0 4px 20px 0 ${colors.black({ alpha: 0.65 })},
@@ -169,10 +179,6 @@ const StyledToastView = styled.div`
   &[data-animating-in="false"] {
     animation: ${slideRight} 0.3s ${easing.inOutCirc} forwards;
   }
-
-  display: flex;
-  flex-flow: row;
-  align-items: center;
 
   > * {
     flex-shrink: 0;
@@ -201,7 +207,7 @@ const StyledToastView = styled.div`
     text-decoration: none;
 
     > .title {
-      font: ${fonts.displayBold({ size: 15, line: "22px" })};
+      font: ${fonts.displayBold({ size: 14, line: "24px" })};
       word-break: break-word;
     }
 
@@ -225,19 +231,14 @@ const StyledToastView = styled.div`
   }
 
   > .action {
-    padding-left: 10px;
-    padding-right: 10px;
+    min-height: 32px;
+    padding: 0px 12px;
   }
 
   > .close {
-    width: 44px;
-    flex-shrink: 0;
-    align-self: stretch;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: ${colors.text()};
+    margin-right: 10px;
+    min-width: 32px;
+    min-height: 32px;
+    padding: 0;
   }
 `;

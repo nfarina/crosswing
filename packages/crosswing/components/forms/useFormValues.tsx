@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, FormHTMLAttributes } from "react";
+import { ButtonHTMLAttributes, FormEvent, FormHTMLAttributes } from "react";
 import { NavAccessory } from "../../router/navs/NavAccessoryView.js";
 import { InputValue } from "./useInputValue.js";
 import { ObjectValue } from "./useObjectValue.js";
@@ -18,7 +18,7 @@ export type FormValues = {
   navProps: Pick<NavAccessory, "onClick" | "disabled">;
   /** Props for a <button> that should submit the form. */
   buttonProps: Pick<
-    ButtonHTMLAttributes<HTMLButtonElement>,
+    ButtonHTMLAttributes<HTMLButtonElement | HTMLAnchorElement>,
     "onClick" | "disabled"
   >;
 };
@@ -31,6 +31,8 @@ export type TaskLike = {
 
 /**
  * Provides an abstraction around a set of FormValues.
+ *
+ * @deprecated Prefer useNewFormValues instead, but make sure all UI is wrapped in a real <form> element.
  */
 export function useFormValues({
   inputs,
@@ -101,7 +103,7 @@ export function useFormValues({
     }
   }
 
-  function onFormSubmit(event: React.FormEvent) {
+  function onFormSubmit(event: FormEvent) {
     // If you triggered the submit event some other way (like "enter" in a text
     // input) and the form isn't submittable, prevent the default action.
     if (!canSubmit) {

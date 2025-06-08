@@ -44,11 +44,12 @@ export function PanelLayout({
   contentMinSize = 375,
   panelVisible = false,
   onPanelVisibleChange,
+  hideBorder = false,
   hideDragHandle = false,
   hideToolbarButton = false,
   restorationKey,
   mode = "auto",
-  hotKey = "ctrl+e",
+  hotkey: hotKey = "ctrl+e",
   children,
   ...rest
 }: HTMLAttributes<HTMLDivElement> & {
@@ -72,32 +73,39 @@ export function PanelLayout({
   hideDragHandle?: boolean;
   /** Whether to hide the toolbar button, which we render through a portal. */
   hideToolbarButton?: boolean;
+  /** Whether to hide the border of the panel. */
+  hideBorder?: boolean;
   /**
    * Allows the parent component to store the panel size in a persistent way.
    * This could be a string but then it's easy to forget to change the string
    * when copy/pasting code, so it's a function instead, typically your
    * component function, which we'll access the `name` property of.
    */
-  restorationKey: Function;
+  restorationKey: Function | symbol;
   /** The layout mode to use. */
   mode?: PanelLayoutMode;
   /** The hotkey to toggle the panel. Set to null to disable hotkey. */
-  hotKey?: HotKey | null;
+  hotkey?: HotKey | null;
 }) {
   const layout =
     edge === "top" || edge === "bottom" ? "vertical" : "horizontal";
   const ref = useRef<HTMLDivElement>(null);
   const { isDefaultContext, getInsertionRef } = use(ToolbarContext);
 
+  const key =
+    typeof restorationKey === "symbol"
+      ? String(restorationKey)
+      : restorationKey.name;
+
   // Persist the panel size across window reloads.
   let [initialPanelSize, setInitialPanelSize] = useLocalStorage<number | null>(
-    `PanelLayout:${restorationKey.name}:initialPanelSize`,
+    `PanelLayout:${key}:initialPanelSize`,
     null,
   );
 
   // Remember if the user made the panel as large as possible.
   const [panelMaximized, setPanelMaximized] = useLocalStorage(
-    `PanelLayout:${restorationKey.name}:panelMaximized`,
+    `PanelLayout:${key}:panelMaximized`,
     false,
   );
 
@@ -105,9 +113,9 @@ export function PanelLayout({
   // so we can pass it through to the context.
   const [resolvedMode, setResolvedMode] = useState<PanelLayoutMode>(mode);
 
-  useHotKey(hotKey, { global: true }, () =>
-    onPanelVisibleChange?.(!panelVisible),
-  );
+  useHotKey(hotKey, { global: true }, () => {
+    onPanelVisibleChange?.(!panelVisible);
+  });
 
   // Update the layout when our element size changes, or if any of the
   // size-related properties change.
@@ -418,7 +426,7 @@ export function PanelLayout({
 
   // Pull our the content and panel elements from our children. The content
   // should be the first child, and the panel should be the second child.
-  const [content, panel] = Children.toArray(children);
+  const [content, panel, ...restChildren] = Children.toArray(children);
 
   // We spread these around to many elements so the CSS is more readable.
   const dataAttributes = {
@@ -426,6 +434,7 @@ export function PanelLayout({
     "data-panel-edge": edge,
     "data-panel-visible": panelVisible,
     "data-hide-drag-handle": hideDragHandle,
+    "data-hide-border": hideBorder,
   };
 
   const context: PanelLayoutContextValue = {
@@ -443,7 +452,7 @@ export function PanelLayout({
         <div className="content" {...dataAttributes}>
           {content}
         </div>
-        <div className="panel" {...dataAttributes}>
+        <div className="panel" {...dataAttributes} inert={!panelVisible}>
           {panel}
           <div className="dragger" {...dataAttributes}>
             <div className="drag-handle" {...dataAttributes}>
@@ -456,6 +465,8 @@ export function PanelLayout({
           {...dataAttributes}
           onClick={() => onPanelVisibleChange?.(false)}
         />
+        {/* For non-rendering children, like insertion points. */}
+        {restChildren}
       </StyledPanelLayout>
     </PanelLayoutContext>
   );
@@ -473,6 +484,11 @@ export const StyledPanelLayout = styled.div`
   --drag-handle-thickness: calc(7px + var(--drag-handle-padding) * 2);
   --drag-handle-offset: 6px; /* How far away from the edge of the panel the drag handle should float. Default is to try and center inside the scroller pill on iOS/macOS. */
   --shadow-padding: 25px; /* How much padding to add to compensate for our shadow possibly showing oustide our bounds when we're hidden. */
+  --panel-border: 1px solid ${colors.separator()};
+
+  &[data-hide-border="true"] {
+    --panel-border: none;
+  }
 
   /*
    * Content.
@@ -549,7 +565,7 @@ export const StyledPanelLayout = styled.div`
       height: calc(var(--panel-size));
       transform: translateY(calc(var(--bounce-offset) * 1));
       max-height: 100%;
-      border-bottom: 1px solid ${colors.separator()};
+      border-bottom: var(--panel-border);
     }
 
     &[data-panel-edge="right"] {
@@ -559,7 +575,7 @@ export const StyledPanelLayout = styled.div`
       width: calc(var(--panel-size));
       transform: translateX(calc(var(--bounce-offset) * -1));
       max-width: 100%;
-      border-left: 1px solid ${colors.separator()};
+      border-left: var(--panel-border);
     }
 
     &[data-panel-edge="bottom"] {
@@ -569,7 +585,7 @@ export const StyledPanelLayout = styled.div`
       height: calc(var(--panel-size));
       transform: translateY(calc(var(--bounce-offset) * -1));
       max-height: 100%;
-      border-top: 1px solid ${colors.separator()};
+      border-top: var(--panel-border);
     }
 
     &[data-panel-edge="left"] {
@@ -579,7 +595,7 @@ export const StyledPanelLayout = styled.div`
       width: calc(var(--panel-size));
       transform: translateX(calc(var(--bounce-offset) * 1));
       max-width: 100%;
-      border-right: 1px solid ${colors.separator()};
+      border-right: var(--panel-border);
     }
 
     /* The panel should exactly fill the container without possibility of enlarging. */

@@ -1,5 +1,5 @@
-import { action } from "@storybook/addon-actions";
 import { Meta, StoryFn } from "@storybook/react";
+import { action } from "storybook/actions";
 import { CrosswingAppDecorator } from "../storybook.js";
 import { Button } from "./Button.js";
 import { Heading } from "./Heading.js";
@@ -15,7 +15,9 @@ type Story = StoryFn<typeof Heading>;
 export const Default: Story = () => <Heading>Section Title</Heading>;
 
 export const WithRight: Story = () => (
-  <Heading right={<Button title="Action" onClick={action("action click")} />}>
+  <Heading
+    right={<Button children="Action" onClick={action("action click")} />}
+  >
     Section Title
   </Heading>
 );

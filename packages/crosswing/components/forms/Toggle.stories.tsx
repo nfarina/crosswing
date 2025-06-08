@@ -1,6 +1,6 @@
-import { action } from "@storybook/addon-actions";
 import { Meta } from "@storybook/react";
 import { useState } from "react";
+import { action } from "storybook/actions";
 import { useAsyncTask } from "../../hooks/useAsyncTask.js";
 import { wait } from "../../shared/wait.js";
 import { CrosswingAppDecorator } from "../../storybook.js";

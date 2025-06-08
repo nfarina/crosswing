@@ -1,5 +1,5 @@
-import { action } from "@storybook/addon-actions";
 import { Suspense } from "react";
+import { action } from "storybook/actions";
 import { RouterLocation } from "../RouterLocation.js";
 import { RouterContext } from "../context/RouterContext.js";
 

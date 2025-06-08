@@ -3,6 +3,8 @@ import { useState } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
+import { SearchIcon } from "../../icons/Search.js";
+import { ModalDecorator } from "../../modals/storybook/decorators.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import { Button } from "../Button.js";
 import { StyledTextArea, TextArea } from "./TextArea.js";
@@ -10,8 +12,9 @@ import { StyledTextArea, TextArea } from "./TextArea.js";
 export default {
   component: TextArea,
   decorators: [
-    CrosswingAppDecorator({ layout: "component" }),
     (Story: () => any) => <Container children={<Story />} />,
+    CrosswingAppDecorator({ layout: "component" }),
+    ModalDecorator,
   ],
   parameters: { layout: "centered" },
 } satisfies Meta<typeof TextArea>;
@@ -106,11 +109,89 @@ export const AutosizingAndScrolling = () => {
   );
 };
 
+export const NewStyleWithPlaceholder = () => {
+  const [text, setText] = useState("");
+
+  return (
+    <TextArea
+      placeholder="Enter your message"
+      value={text}
+      onValueChange={setText}
+      newStyle
+      autoSizing
+    />
+  );
+};
+
+export const NewStyleWithIcon = () => {
+  const [text, setText] = useState("");
+
+  return (
+    <TextArea
+      newStyle
+      placeholder="Enter your message"
+      value={text}
+      onValueChange={setText}
+      icon={<SearchIcon />}
+      autoSizing
+    />
+  );
+};
+
+export const NewStyleWithIconAndRequiredError = () => {
+  const [text, setText] = useState("");
+
+  return (
+    <TextArea
+      newStyle
+      placeholder="Enter your name"
+      value={text}
+      onValueChange={setText}
+      icon={<SearchIcon />}
+      autoSizing
+      error={!text ? new Error("Name is required.") : null}
+    />
+  );
+};
+
+export const NewStyleWithIconAndValidationError = () => {
+  const [text, setText] = useState("");
+
+  return (
+    <TextArea
+      newStyle
+      placeholder="Enter a fruit"
+      value={text}
+      onValueChange={setText}
+      icon={<SearchIcon />}
+      autoSizing
+      error={text.toLowerCase() !== "apple" ? new Error("Not an apple!") : null}
+    />
+  );
+};
+
+export const NewStyleWithIconAndInitialError = () => {
+  const [text, setText] = useState("Bill");
+
+  return (
+    <TextArea
+      newStyle
+      placeholder="Enter your name"
+      value={text}
+      onValueChange={setText}
+      icon={<SearchIcon />}
+      autoSizing
+      error={text === "Bill" ? new Error("Bill is not valid.") : null}
+    />
+  );
+};
+
 const Container = styled.div`
   display: flex;
   flex-flow: column;
 
-  > ${StyledTextArea} {
+  > ${StyledTextArea}[data-new-style="false"] {
+    /* Make it stand out in Storybook against the background. */
     border: 1px solid ${colors.separator()};
     border-radius: 6px;
     padding: 10px;

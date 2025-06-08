@@ -13,7 +13,7 @@ export const Default = () => (
     title="Bank Setup"
     message="You'll be connecting your bank to the app. This should only take a minute."
     actions={[
-      <Button key="continue" primary size="largest" title="Continue" />,
+      <Button key="continue" primary size="largest" children="Continue" />,
     ]}
     legal="By continuing, you agree to our Terms of Service."
   />

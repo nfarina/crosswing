@@ -47,6 +47,8 @@ export interface HexColorOptions {
   saturate?: number;
   /** For better semantics, same as saturate() with a flipped sign. */
   desaturate?: number;
+  /** Sets the chroma of the color to the chroma of the given color (overrides saturate/desaturate). */
+  chroma?: number | HexColorBuilder;
   /** Output format, either CSS to be used as a CSS color value, or raw HEX. */
   format?: "css" | "hex";
 }
@@ -83,6 +85,7 @@ export function buildHexColor(
     hue,
     saturate,
     desaturate,
+    chroma,
     format,
   }: HexColorOptions = {},
 ): string {
@@ -92,7 +95,8 @@ export function buildHexColor(
     darken != null ||
     hue != null ||
     saturate != null ||
-    desaturate != null
+    desaturate != null ||
+    chroma != null
   ) {
     // Convert to Hsl for easier manipulation.
     const lch = parseOklch(hex);
@@ -109,6 +113,14 @@ export function buildHexColor(
     }
     if (saturate != null) lch.c *= 1 + saturate;
     if (desaturate != null) lch.c *= 1 - desaturate;
+    if (chroma != null) {
+      if (typeof chroma === "number") {
+        lch.c = chroma;
+      } else {
+        const otherLch = parseOklch(chroma.hex);
+        lch.c = otherLch.c;
+      }
+    }
 
     hex = formatOklch(lch);
   }
@@ -154,12 +166,17 @@ export interface VarColorOptions {
 export type VarColorBuilder = {
   (options?: VarColorOptions): string;
   type: "var";
+  /** The CSS var that the builder is based on, expected to be raw RGB or color() components. */
   var: string;
+  /** Gets the fully rendered var() call. */
+  staticVar: string;
   light: string | ColorBuilder;
-  dark: string | ColorBuilder | null;
+  dark: string | ColorBuilder | boolean | null;
   override(
-    light: ColorBuilder,
-    options?: { dark?: ColorBuilder | null },
+    light: HexColorBuilder | GradientBuilder | string,
+    options?: {
+      dark?: HexColorBuilder | GradientBuilder | string | boolean | null;
+    },
   ): VarColorBuilder;
 };
 
@@ -171,16 +188,31 @@ export function varColor({
 }: {
   var: string;
   light: string | ColorBuilder;
-  dark?: string | ColorBuilder | null;
+  dark?: string | ColorBuilder | boolean | null;
   static?: boolean;
 }): VarColorBuilder {
   const builder: VarColorBuilder = (options: VarColorOptions = {}) =>
-    staticOnly ? `var(${cssVar})` : buildVarColor(cssVar, options);
+    staticOnly ? builder.staticVar : buildVarColor(cssVar, options);
   builder.type = "var";
   builder.var = cssVar;
+  builder.staticVar = `var(${cssVar})`;
   builder.light = light;
   builder.dark = dark ?? null;
   builder.override = (light, { dark } = {}) => {
+    if (staticOnly) {
+      if (
+        (typeof light !== "string" && light.type === "hex") ||
+        (dark &&
+          typeof dark !== "string" &&
+          typeof dark !== "boolean" &&
+          dark.type === "hex")
+      ) {
+        throw new Error(
+          "Static only colors cannot be overridden with hex builders because the site calls all assume the CSS var is completely rendered including alpha.",
+        );
+      }
+    }
+
     return varColor({ var: cssVar, light, dark, static: staticOnly });
   };
   return builder;
@@ -231,7 +263,11 @@ export function getBuilderVarCSS(builders: ColorBuilder[]): string {
 
   function renderBuilder(builder: ColorBuilder | string): string {
     if (typeof builder === "string") {
-      return builder;
+      return builder.startsWith("#")
+        ? SUPPORTS_P3_COLOR
+          ? hexToColor(builder)
+          : hexToRgba(builder)
+        : builder;
     } else if (builder.type === "hex") {
       return SUPPORTS_P3_COLOR ? builder.rgb : builder.hex;
     } else {
@@ -241,11 +277,14 @@ export function getBuilderVarCSS(builders: ColorBuilder[]): string {
 
   for (const builder of builders) {
     if (builder.type === "var") {
-      const rendered = renderBuilder(builder.light);
+      let rendered = renderBuilder(builder.light);
       css += `${builder.var}: ${rendered};\n`;
 
       if (builder.dark) {
-        const rendered = renderBuilder(builder.dark);
+        // Allow dark=true to make the light color also rendered as the dark override.
+        if (typeof builder.dark !== "boolean") {
+          rendered = renderBuilder(builder.dark);
+        }
         darkCss += `${builder.var}: ${rendered};\n`;
       }
     }

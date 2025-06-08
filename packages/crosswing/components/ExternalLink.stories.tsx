@@ -1,4 +1,4 @@
-import { action } from "@storybook/addon-actions";
+import { action } from "storybook/actions";
 import { styled } from "styled-components";
 import { colors } from "../colors/colors.js";
 import { fonts } from "../fonts/fonts.js";

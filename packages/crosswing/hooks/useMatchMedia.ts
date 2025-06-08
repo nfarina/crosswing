@@ -18,7 +18,7 @@ export function useMatchMedia(query: string): boolean {
     return () => {
       mediaQueryList.removeListener(onChange);
     };
-  }, []);
+  }, [query]);
 
   return matches;
 }

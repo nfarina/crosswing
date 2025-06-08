@@ -8,50 +8,78 @@ import {
 } from "react";
 import { styled } from "styled-components";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
-import { useResponsiveLayout } from "../../hooks/useResponsiveLayout";
 import { RouterContext } from "../../router/context/RouterContext";
 import { PanelLayout, PanelLayoutMode } from "../PanelLayout";
 import {
+  NewSiteAccessory,
   NewSiteContext,
   NewSiteContextValue,
-  NewSiteInsertionRef,
-  NewSitePage,
+  NewSiteLayoutMode,
+  shouldRenderAccessory,
 } from "./NewSiteContext";
-import { NewSiteHeader, StyledNewSiteHeader } from "./NewSiteHeader";
-import { SiteHeaderAccessory } from "./SiteHeaderAccessory";
+
+const SidebarRestorationKey = Symbol("sidebar");
 
 export function NewSiteLayout({
+  siteTitle,
+  siteAccessory,
+  layout,
   sidebarDefaultSize = 225,
   sidebarMinSize = 200,
   sidebarMaxSize = 300,
-  desktopBreakpoint = 800,
-  siteTitle,
   children,
-  accessories = [],
+  ...rest
 }: HTMLAttributes<HTMLDivElement> & {
+  siteTitle: string;
+  siteAccessory?: NewSiteAccessory | null;
+  layout: NewSiteLayoutMode;
   sidebarDefaultSize?: number;
   sidebarMinSize?: number;
   sidebarMaxSize?: number;
   desktopBreakpoint?: number;
-  siteTitle: string;
-  children: [ReactElement, ReactElement];
-  accessories?: SiteHeaderAccessory[];
+  children: [sidebar: ReactElement, content: ReactElement];
 }) {
   const { location } = use(RouterContext);
 
   const ref = useRef<HTMLDivElement>(null);
   const [sidebarVisible, setSidebarVisible] = useLocalStorage(
     `NewSiteLayout:sidebarVisible`,
-    false,
+    true,
   );
-
-  const layout = useResponsiveLayout(ref, {
-    desktop: { minWidth: desktopBreakpoint },
-    mobile: {},
-  });
 
   const sidebarMode: PanelLayoutMode =
     layout === "desktop" ? "shrink" : "overlay";
+
+  const [lastLayout, setLastLayout] = useState(layout);
+  const [sidebarWasAutoHidden, setSidebarWasAutoHidden] = useState(false);
+
+  // If the sidebar is visible and we transition from desktop to mobile, hide it.
+  useEffect(() => {
+    if (lastLayout === "desktop" && layout === "mobile" && sidebarVisible) {
+      setSidebarVisible(false);
+      setSidebarWasAutoHidden(true);
+    }
+    setLastLayout(layout);
+  }, [lastLayout, layout, setSidebarVisible, sidebarWasAutoHidden]);
+
+  // If the sidebar was auto-hidden and we transition from mobile to desktop, show it.
+  useEffect(() => {
+    if (
+      lastLayout === "mobile" &&
+      layout === "desktop" &&
+      sidebarWasAutoHidden
+    ) {
+      setSidebarVisible(true);
+      setSidebarWasAutoHidden(false);
+    } else if (
+      lastLayout === "desktop" &&
+      layout === "mobile" &&
+      sidebarWasAutoHidden
+    ) {
+      setSidebarWasAutoHidden(false);
+    }
+    setLastLayout(layout);
+  }, [lastLayout, layout, setSidebarVisible, sidebarWasAutoHidden]);
 
   // Auto-hide sidebar when navigating to a new page in overlay mode.
   const path = location.href({ excludeSearch: true });
@@ -61,75 +89,25 @@ export function NewSiteLayout({
       setSidebarVisible(false);
       setLastPath(path);
     }
-  }, [sidebarMode, path, lastPath]);
+  }, [sidebarMode, path, lastPath, setSidebarVisible]);
 
   //
-  // Sidebar insertion points
-  //
-
-  const [sidebarInsertionRefs, setSidebarInsertionRefs] = useState<
-    Record<string | symbol, NewSiteInsertionRef>
-  >({});
-
-  const [, setForceRender] = useState(0);
-
-  function getSidebarInsertionRef(name: string | symbol): NewSiteInsertionRef {
-    const ref = sidebarInsertionRefs[name];
-    if (!ref) return { current: null };
-    return ref;
-  }
-
-  function setSidebarInsertionRef(
-    name: string | symbol,
-    ref: NewSiteInsertionRef,
-  ) {
-    setSidebarInsertionRefs((refs) => ({ ...refs, [name]: ref }));
-    setForceRender((n) => n + 1);
-  }
-
-  //
-  // Page management
-  //
-
-  const [pages, setPages] = useState(new Map() as Map<number, NewSitePage>);
-
-  function setPage(id: number, page: NewSitePage) {
-    setPages((oldPages) => {
-      const newPages = new Map(oldPages);
-      newPages.set(id, page);
-      return newPages;
-    });
-  }
-
-  function removePage(id: number) {
-    setPages((oldPages) => {
-      const newPages = new Map(oldPages);
-      newPages.delete(id);
-      return newPages;
-    });
-  }
-
-  //
-  // Render
+  // Context
   //
 
   const context: NewSiteContextValue = {
     isDefaultContext: false,
+    siteTitle,
     sidebarVisible,
     setSidebarVisible,
-    sidebarMode,
-    getSidebarInsertionRef,
-    setSidebarInsertionRef,
-    pages,
-    setPage,
-    removePage,
-    accessories,
+    siteLayout: sidebarMode === "overlay" ? "mobile" : "desktop",
+    siteAccessory,
   };
 
   const [sidebar, content] = children;
 
   return (
-    <StyledNewSiteLayout ref={ref}>
+    <StyledNewSiteLayout ref={ref} {...rest}>
       <NewSiteContext value={context}>
         <PanelLayout
           edge="left"
@@ -138,16 +116,18 @@ export function NewSiteLayout({
           panelMaxSize={sidebarMaxSize}
           mode={sidebarMode}
           hideDragHandle
-          restorationKey={NewSiteLayout}
+          hideBorder
+          restorationKey={SidebarRestorationKey}
           panelVisible={sidebarVisible}
           onPanelVisibleChange={setSidebarVisible}
+          hotkey="ctrl+s"
         >
-          <Content>
-            <NewSiteHeader siteTitle={siteTitle} />
-            {content}
-          </Content>
+          <Content>{content}</Content>
           {sidebar}
         </PanelLayout>
+        {shouldRenderAccessory(siteAccessory, layout) && (
+          <div className="accessory" children={siteAccessory.component} />
+        )}
       </NewSiteContext>
     </StyledNewSiteLayout>
   );
@@ -156,10 +136,17 @@ export function NewSiteLayout({
 export const StyledNewSiteLayout = styled.div`
   display: flex;
   flex-flow: column;
+  position: relative;
 
   > * {
     height: 0;
     flex-grow: 1;
+  }
+
+  > .accessory {
+    position: absolute;
+    top: 8px;
+    right: 15px;
   }
 `;
 
@@ -167,19 +154,10 @@ const Content = styled.div`
   display: flex;
   flex-flow: column;
   position: relative;
+  height: 100%;
 
-  > ${StyledNewSiteHeader} {
-    flex-shrink: 0;
-    z-index: 1;
-    /* Prevents width overscroll when toolbar overflows. */
-    width: 0;
-    min-width: 100%;
-  }
-
-  /* Content */
-  > *:nth-child(2) {
+  > * {
     height: 0;
     flex-grow: 1;
-    z-index: 0;
   }
 `;

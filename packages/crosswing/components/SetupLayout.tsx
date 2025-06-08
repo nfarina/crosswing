@@ -1,4 +1,4 @@
-import { FormEvent, FormHTMLAttributes, ReactElement, ReactNode } from "react";
+import { FormHTMLAttributes, ReactElement, ReactNode } from "react";
 import { styled } from "styled-components";
 import { colors } from "../colors/colors.js";
 import { fonts } from "../fonts/fonts.js";
@@ -6,6 +6,7 @@ import { safeArea } from "../safearea/safeArea.js";
 import { Scrollable, StyledScrollable } from "./Scrollable.js";
 import { StyledSeparatorLayout } from "./SeparatorLayout.js";
 import { FormValues } from "./forms/useFormValues.js";
+import { NewFormValues } from "./forms/useNewFormValues.js";
 
 /**
  * A common "wizard" like layout for going through a step by step process.
@@ -20,26 +21,24 @@ export function SetupLayout({
   form,
   ...rest
 }: {
+  /** Optional content to display at the top of the layout */
   top?: ReactNode;
+  /** Main title text to display */
   title?: ReactNode;
+  /** Descriptive message text to display below the title */
   message?: ReactNode;
+  /** Main content to display in the scrollable area */
   children?: ReactElement<any>;
+  /** Action buttons or controls to display at the bottom */
   actions?: ReactNode;
+  /** Legal text or disclaimers to display at the bottom */
   legal?: ReactNode;
-  form?: FormValues;
+  /** Form values and handlers for form submission */
+  form?: FormValues | NewFormValues;
 } & Omit<FormHTMLAttributes<HTMLFormElement>, "title">) {
-  function onFormSubmit(e: FormEvent) {
-    e.preventDefault();
-  }
-
   // We handle balancing title/message/children similar to AlertView.
   return (
-    <StyledSetupLayout
-      data-has-actions={!!actions}
-      onSubmit={onFormSubmit}
-      {...rest}
-      {...form?.props}
-    >
+    <StyledSetupLayout data-has-actions={!!actions} {...rest} {...form?.props}>
       {top && <div className="top" children={top} />}
       <Scrollable>
         <ScrollingArea data-has-children={!!children}>

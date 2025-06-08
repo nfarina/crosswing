@@ -1,19 +1,22 @@
 import {
+  ComponentType,
   HTMLAttributes,
+  MouseEvent,
   ReactNode,
-  SyntheticEvent,
   createContext,
   use,
 } from "react";
 import { styled } from "styled-components";
 import { colors } from "../colors/colors.js";
 import { fonts } from "../fonts/fonts.js";
+import { CheckIcon } from "../icons/Check.js";
 import { PopupPlacement } from "../modals/popup/getPopupPlacement.js";
 import { PopupChildProps, PopupView } from "../modals/popup/PopupView.js";
 import { Link } from "../router/Link.js";
 import { StatusBanner } from "./badges/StatusBanner.js";
+import { Clickable } from "./Clickable.js";
 import { Select } from "./forms/Select.js";
-import { StyledToggle, Toggle } from "./forms/Toggle.js";
+import { Toggle } from "./forms/Toggle.js";
 
 // Used to drill the onClose prop down to the PopupMenu children without
 // having to clone elements and deal with "keys".
@@ -51,7 +54,7 @@ export function PopupMenu({
 }
 
 export const StyledPopupMenu = styled.div`
-  padding: 8px 0;
+  padding: 5px;
   display: flex;
   flex-flow: column;
   overflow: auto;
@@ -62,22 +65,32 @@ export const StyledPopupMenu = styled.div`
 `;
 
 export function PopupMenuText({
+  icon,
   children,
+  detail,
   onClick,
+  asDiv,
   to,
+  right,
   target,
   disabled,
   selected,
+  checked,
   destructive,
   leaveOpen,
   ...rest
 }: {
+  icon?: ReactNode;
   children?: ReactNode;
-  onClick?: () => void;
+  detail?: ReactNode;
+  right?: ReactNode;
+  onClick?: (e: MouseEvent<HTMLElement>) => void;
+  asDiv?: boolean;
   to?: string;
   target?: string;
   disabled?: boolean;
   selected?: boolean;
+  checked?: boolean;
   destructive?: boolean;
   /** If true, clicking the text will not call onClose() automatically. */
   leaveOpen?: boolean;
@@ -85,130 +98,70 @@ export function PopupMenuText({
   // We want to automatically close the menu when you click something.
   const onClose = use(OnCloseContext);
 
-  function onButtonClick() {
-    onClick?.();
+  function onButtonClick(e: MouseEvent<HTMLElement>) {
+    onClick?.(e);
     if (!leaveOpen) onClose?.();
   }
 
-  if (to) {
-    return (
-      <StyledPopupMenuLink
-        to={to}
-        target={target}
-        onClick={onButtonClick}
-        children={children}
-        data-disabled={disabled}
-        data-selected={selected}
-        {...rest}
-      />
-    );
-  } else {
-    return (
-      <StyledPopupMenuButton
-        onClick={onButtonClick}
-        children={children}
-        data-disabled={!!disabled}
-        data-destructive={!!destructive}
-        data-selected={!!selected}
-        {...rest}
-      />
-    );
-  }
-}
-
-const StyledPopupMenuButton = styled.div`
-  font: ${fonts.display({ size: 15, line: "22px" })};
-  color: ${colors.text()};
-  padding: 5px 10px;
-  cursor: pointer;
-
-  &:hover {
-    background: ${colors.textBackgroundAlt()};
+  function getAs(): string | ComponentType<any> {
+    if (asDiv) return "div";
+    if (to) return Link;
+    if (onClick) return Clickable;
+    return "div";
   }
 
-  &[data-disabled="true"] {
-    opacity: 0.5;
-    pointer-events: none;
-  }
-
-  &[data-selected="true"] {
-    font: ${fonts.displayBold({ size: 15, line: "22px" })};
-  }
-
-  &[data-destructive="true"] {
-    color: ${colors.red()};
-  }
-`;
-
-const StyledPopupMenuLink = styled(Link)`
-  font: ${fonts.display({ size: 15, line: "22px" })};
-  color: ${colors.text()};
-  padding: 5px 10px;
-  text-decoration: none;
-
-  &:hover {
-    background: ${colors.textBackgroundAlt()};
-  }
-
-  &[data-disabled="true"] {
-    opacity: 0.5;
-    pointer-events: none;
-  }
-
-  &[data-selected="true"] {
-    font: ${fonts.displayBold({ size: 15, line: "22px" })};
-  }
-`;
-
-export const PopupMenuSelect = styled(Select)`
-  margin: 5px 10px;
-
-  > select {
-    @media (prefers-color-scheme: dark) {
-      /* Bump up contrast since the popup has a slightly lighter background than the page. */
-      background: ${colors.extraExtraExtraDarkGray()};
-    }
-    font: ${fonts.displayBold({ size: 14 })};
-  }
-`;
-
-export function PopupMenuToggle({
-  children,
-  detail,
-  on,
-  onClick,
-  disabled,
-  ...rest
-}: HTMLAttributes<HTMLDivElement> & {
-  detail?: ReactNode;
-  on?: boolean;
-  onClick?: (e: SyntheticEvent<HTMLDivElement>) => void;
-  disabled?: boolean;
-}) {
   return (
-    <StyledPopupMenuToggle
-      onClick={onClick}
-      data-disabled={!!disabled}
+    <StyledPopupMenuText
+      as={getAs()}
+      {...(to ? { to, target } : {})}
+      onClick={onButtonClick}
+      data-disabled={disabled}
+      data-selected={selected}
+      data-checked={checked}
+      data-destructive={destructive}
       {...rest}
     >
+      {icon && <div className="icon">{icon}</div>}
       <div className="content">
         {children && <div className="children">{children}</div>}
         {detail && <div className="detail">{detail}</div>}
       </div>
-      <Toggle on={on} size="smallest" disabled={disabled} />
-    </StyledPopupMenuToggle>
+      {right && <div className="right">{right}</div>}
+      {checked != null && (
+        <div className="checked">
+          {checked ? <CheckIcon /> : <div className="not-checked" />}
+        </div>
+      )}
+    </StyledPopupMenuText>
   );
 }
 
-const StyledPopupMenuToggle = styled.div`
+export const StyledPopupMenuText = styled.div`
+  padding: 7px 12px;
+  border-radius: 13px;
+  cursor: pointer;
   display: flex;
   flex-flow: row;
   align-items: center;
-  padding: 5px 10px;
-  cursor: pointer;
+  gap: 7px;
+  color: ${colors.text()};
+
+  /* For Links. */
+  text-decoration: none;
+
+  > .icon {
+    flex-shrink: 0;
+    flex-grow: 0;
+    width: 15px;
+    height: 15px;
+
+    > svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
 
   > .content {
-    flex-shrink: 0;
     flex-grow: 1;
 
     display: flex;
@@ -216,7 +169,6 @@ const StyledPopupMenuToggle = styled.div`
 
     > .children {
       font: ${fonts.display({ size: 15, line: "22px" })};
-      color: ${colors.text()};
     }
 
     > .detail {
@@ -225,55 +177,121 @@ const StyledPopupMenuToggle = styled.div`
     }
   }
 
-  > ${StyledToggle} {
-    margin-left: 10px;
+  > .right {
     flex-shrink: 0;
     flex-grow: 0;
   }
 
+  > .checked {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+
+    > svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
   &:hover {
-    background: ${colors.textBackgroundAlt()};
+    background: ${colors.buttonBackgroundHover()};
   }
 
   &[data-disabled="true"] {
+    opacity: 0.5;
     pointer-events: none;
+  }
 
-    > .content {
-      > .children {
-        opacity: 0.5;
-      }
+  &[data-selected="true"] {
+    > .content > .children {
+      font: ${fonts.displayBold({ size: 15, line: "22px" })};
+    }
+  }
 
-      > .detail {
-        opacity: 0.5;
-      }
+  &[data-destructive="true"] {
+    color: ${colors.red({ darken: 0.2 })};
+
+    @media (prefers-color-scheme: dark) {
+      color: ${colors.red({ lighten: 0.15 })};
+    }
+
+    &:hover {
+      background: ${colors.red({ alpha: 0.1 })};
     }
   }
 `;
 
-export const PopupMenuHeader = styled.div`
-  padding: 5px 10px;
-  font: ${fonts.display({ size: 13, line: "14px" })};
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: ${colors.mediumGray()};
+export const PopupMenuSelect = styled(Select)`
+  > select {
+    border-radius: 13px;
 
-  @media (prefers-color-scheme: dark) {
-    color: ${colors.darkGray()};
+    &:hover {
+      background: ${colors.buttonBackgroundHover()};
+    }
+
+    padding: 7px 40px 7px 12px;
+    background: transparent;
+    font: ${fonts.display({ size: 15, line: "22px" })};
+  }
+
+  > .arrow-icon {
+    right: 14px;
   }
 `;
 
+export function PopupMenuToggle({
+  on,
+  ...rest
+}: Parameters<typeof PopupMenuText>[0] & {
+  on?: boolean;
+}) {
+  return (
+    <StyledPopupMenuToggle
+      leaveOpen
+      // We don't want to shadow the button by making ourselves a <button>
+      // as well.
+      asDiv
+      // Don't listen for clicks on the Toggle.
+      right={<Toggle on={on} size="smallest" disabled={rest.disabled} />}
+      {...rest}
+    />
+  );
+}
+
+const StyledPopupMenuToggle = styled(PopupMenuText)`
+  cursor: pointer;
+
+  > .right {
+    margin-left: 12px;
+    transform: translateY(1px);
+    /* Fix Safari height issue with scaled Toggle component */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+`;
+
+export const PopupMenuHeader = styled.div`
+  padding: 6px 12px 2px;
+  font: ${fonts.displayMedium({ size: 12, line: "18px" })};
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: ${colors.textSecondary()};
+`;
+
 export const PopupMenuSeparator = styled.div`
-  margin: 5px 0 5px 10px;
+  margin: 5px 12px 5px 12px;
   height: 1px;
   background: ${colors.separator()};
 `;
 
 export const PopupStatusBanner = styled(StatusBanner)`
-  margin-top: -10px;
+  margin-top: -5px;
   margin-bottom: 5px;
-  border-bottom: 1px solid ${colors.separator()};
+  margin-left: -5px;
+  margin-right: -5px;
   padding-right: 12px;
-  padding-bottom: 7px;
+  padding-bottom: 9px;
 
   > svg {
     align-self: center;
@@ -283,5 +301,12 @@ export const PopupStatusBanner = styled(StatusBanner)`
 
   > .children {
     font: ${fonts.display({ size: 14, line: "20px" })};
+  }
+
+  /* Text doesn't align so this is temporary. */
+  padding-left: calc(12px + 5px) !important;
+  padding-right: calc(12px + 5px) !important;
+  > svg {
+    display: none;
   }
 `;

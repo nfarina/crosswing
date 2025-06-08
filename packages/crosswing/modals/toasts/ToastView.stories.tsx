@@ -1,5 +1,5 @@
-import { action } from "@storybook/addon-actions";
 import { Meta } from "@storybook/react";
+import { action } from "storybook/actions";
 import { CheckmarkIcon } from "../../icons/Checkmark.js";
 import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
 import { CrosswingAppDecorator } from "../../storybook.js";

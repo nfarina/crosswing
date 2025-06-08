@@ -2,12 +2,12 @@ import {
   CSSProperties,
   HTMLAttributes,
   MouseEvent,
-  SyntheticEvent,
   TouchEvent,
   useRef,
 } from "react";
 import { styled } from "styled-components";
 import { ColorBuilder, colors } from "../../colors/colors.js";
+import { Clickable } from "../Clickable.js";
 
 export type ToggleSize = "normal" | "smaller" | "smallest";
 
@@ -16,18 +16,22 @@ export function Toggle({
   size = "normal",
   onClick,
   disabled,
-  as,
   style,
   trackBackground = colors.primaryGradient,
   ...rest
-}: {
+}: Omit<HTMLAttributes<HTMLButtonElement>, "onClick"> & {
   on?: boolean;
   size?: ToggleSize;
-  onClick?: (e: SyntheticEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
-  as?: string | React.ComponentType<any>;
+  // We include HTMLDivElement as a possible event source because of
+  // LabeledToggle.
+  onClick?: (
+    e:
+      | MouseEvent<HTMLButtonElement | HTMLDivElement>
+      | TouchEvent<HTMLButtonElement | HTMLDivElement>,
+  ) => void;
   trackBackground?: ColorBuilder;
-} & HTMLAttributes<HTMLButtonElement>) {
+}) {
   // Our visual appearance is of something draggable, but we don't implement
   // dragging the knob around. To mitigate this, we want to fire onClick
   // immediately after you begin interaction, so onMouseDown would be the
@@ -64,7 +68,6 @@ export function Toggle({
       onTouchStart={onTouchStart}
       role="switch"
       aria-checked={!!on}
-      as={as}
       style={cssProperties}
       {...rest}
     >
@@ -77,16 +80,11 @@ export function Toggle({
   );
 }
 
-export const StyledToggle = styled.button`
+export const StyledToggle = styled(Clickable)`
   width: 50px;
   height: 30px;
-  cursor: pointer;
-  appearance: none;
-  background-color: transparent;
-  border: none;
-  padding: 0;
-  text-align: left;
-  transition: opacity 0.25s ease;
+  /* For outline when focused. */
+  border-radius: 9999px;
 
   /**
    * Our design uses half pixels, which are supported well in iOS but
@@ -109,7 +107,7 @@ export const StyledToggle = styled.button`
       right: 0px;
       bottom: 0px;
       background: ${colors.black({ alpha: 0.1 })};
-      border-radius: 999px;
+      border-radius: 9999px;
       box-sizing: border-box;
     }
 

@@ -1,6 +1,6 @@
-import { action } from "@storybook/addon-actions";
 import { Meta } from "@storybook/react";
 import { use } from "react";
+import { action } from "storybook/actions";
 import { styled } from "styled-components";
 import { colors } from "../colors/colors.js";
 import { NoContent } from "../components/NoContent.js";

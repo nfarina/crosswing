@@ -34,9 +34,14 @@ for (const iconFile of iconFiles) {
       typescript: true,
       exportType: "named",
       namedExport: componentName,
-      // Our icons use the color #1A4A44, which we want to replace with the
-      // currentColor CSS variable so that the icon color is what you'd expect.
-      replaceAttrValues: { "#1A4A44": "currentColor" },
+      // Our older icons use the color #1A4A44, and our newer ones #000000,
+      // which we want to replace with the currentColor CSS variable so that
+      // the icon color is what you'd expect.
+      replaceAttrValues: {
+        "#1A4A44": "currentColor",
+        "#000000": "currentColor",
+        black: "currentColor",
+      },
       jsxRuntime: "automatic",
       // Optimize SVGs with SVGO.
       svgo: true,

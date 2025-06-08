@@ -222,8 +222,10 @@ export function ModalContextProvider({
 
       if (!children) {
         // Next check for a tooltip string.
-        const tooltipString = target.getAttribute("data-tooltip");
-        if (tooltipString) {
+        const someTooltipProp = Array.from(target.attributes).find((a) =>
+          a.name.startsWith("data-tooltip"),
+        );
+        if (someTooltipProp) {
           children = <TooltipView target={target} />;
         }
       }
@@ -304,6 +306,8 @@ export function ModalContextProvider({
 
     // Also listen on the modals themselves.
     modals.addEventListener("mouseenter", handleMouseEnter, { capture: true });
+    modals.addEventListener("mousemove", handleMouseMove, { capture: true });
+    modals.addEventListener("mousedown", handleMouseDown, { capture: true });
     modals.addEventListener("touchstart", handleTouchStart, {
       capture: true,
       passive: true,

@@ -1,7 +1,8 @@
-import { ButtonHTMLAttributes, ReactNode, RefObject } from "react";
+import { ReactNode, RefObject } from "react";
 import { styled } from "styled-components";
 import { colors } from "../colors/colors.js";
 import { fonts } from "../fonts/fonts.js";
+import { Link } from "../router/Link.js";
 import { Clickable } from "./Clickable.js";
 import { Spinner, StyledSpinner } from "./Spinner.js";
 
@@ -9,48 +10,63 @@ export type ButtonSize = "smaller" | "normal" | "larger" | "largest";
 
 export function Button({
   primary,
+  to,
+  target,
   size = "normal",
   icon,
-  title,
-  subtitle,
   children,
+  right,
   working,
   disabled,
   ref,
+  newStyle,
+  bordered,
+  pill,
   ...rest
-}: {
+}: (Parameters<typeof Clickable>[0] | Parameters<typeof Link>[0]) & {
   primary?: boolean;
+  /** If provided, the button will be rendered as a `Link` to the given URL. */
+  to?: string;
+  /** If `to` is provided, this will be passed to the `Link` component. */
+  target?: string;
   size?: ButtonSize;
   icon?: ReactNode;
-  title?: ReactNode;
-  subtitle?: ReactNode;
+  right?: ReactNode;
   disabled?: boolean;
   working?: boolean;
-  ref?: RefObject<HTMLButtonElement | null>;
-} & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "title">) {
-  const hasText = !!children || !!title || !!subtitle;
+  newStyle?: boolean;
+  bordered?: boolean;
+  pill?: boolean;
+  ref?:
+    | RefObject<HTMLButtonElement | null>
+    | RefObject<HTMLAnchorElement | null>;
+}) {
+  const hasText = !!children;
   const hasIcon = !!icon;
 
   return (
     <StyledButton
+      as={to ? Link : Clickable}
+      {...(to ? { to, target } : {})}
       data-primary={!!primary}
       data-size={size}
       data-working={!!working}
       disabled={!!disabled || !!working}
       data-icon-only={!hasText && hasIcon}
       data-icon-and-children={hasText && hasIcon}
-      ref={ref}
+      data-new-style={!!newStyle}
+      data-bordered={!!bordered}
+      data-pill={!!pill}
+      ref={ref as any}
       {...rest}
     >
-      {icon}
-      {hasText && (
-        <div className="content">
-          {!!title && <div className="title">{title}</div>}
-          {!!subtitle && !working && <div className="subtitle">{subtitle}</div>}
-        </div>
-      )}
-      {children}
-      {working && <Spinner smaller />}
+      {!newStyle && icon}
+      {newStyle && !!icon && <span className="icon">{icon}</span>}
+      {!!children && newStyle && <span className="children">{children}</span>}
+      {!!children && !newStyle && children}
+      {/* Icon-only buttons shouldn't have a spinner next to them. */}
+      {working && !!children && <Spinner smaller />}
+      {!!right && <span className="right">{right}</span>}
     </StyledButton>
   );
 }
@@ -58,7 +74,7 @@ export function Button({
 export const StyledButton = styled(Clickable)`
   display: flex;
   flex-flow: row;
-  background: ${colors.lightGray()};
+  background: ${colors.gray200()};
   box-sizing: border-box;
   min-width: 32px;
   min-height: 32px;
@@ -69,29 +85,10 @@ export const StyledButton = styled(Clickable)`
   font: ${fonts.displayBold({ size: 15 })};
   align-items: center;
   justify-content: center;
+  text-decoration: none;
 
   > * {
     flex-shrink: 0;
-  }
-
-  > .content {
-    max-width: 100%;
-    box-sizing: border-box;
-    display: flex;
-    flex-flow: column;
-
-    > .title {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    > .subtitle {
-      font: ${fonts.displayMedium({ size: 12 })};
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
   }
 
   > ${StyledSpinner} {
@@ -103,35 +100,15 @@ export const StyledButton = styled(Clickable)`
   }
 
   @media (prefers-color-scheme: dark) {
-    background: ${colors.extraExtraExtraDarkGray()};
+    background: ${colors.gray950()};
   }
 
   &[data-icon-only="true"] {
     padding: 0;
   }
 
-  &[data-icon-and-children="true"] {
-    padding-left: 10px;
-
-    > .content {
-      margin-left: 8px;
-      /* Assume our icons are 24px wide (Crosswing standard). */
-      max-width: calc(100% - 24px - 8px);
-    }
-  }
-
   &[data-primary="true"] {
     color: ${colors.white()};
-
-    > .content {
-      > .title {
-        color: ${colors.white()};
-      }
-      > .subtitle {
-        color: ${colors.white()};
-      }
-    }
-
     background: ${colors.primaryGradient()};
 
     /* Override dark mode selector above. */
@@ -144,48 +121,116 @@ export const StyledButton = styled(Clickable)`
     font: ${fonts.displayBold({ size: 14 })};
     padding: 6px 18px;
     min-height: 30px;
-
-    > .content {
-      > .title {
-        font: ${fonts.displayBold({ size: 14 })};
-      }
-
-      > .subtitle {
-        font: ${fonts.displayMedium({ size: 11 })};
-      }
-    }
   }
 
   &[data-size="larger"] {
     font: ${fonts.displayBold({ size: 16 })};
     padding: 10px 20px;
     min-height: 40px;
-
-    > .content {
-      > .title {
-        font: ${fonts.displayBold({ size: 16 })};
-      }
-
-      > .subtitle {
-        margin-top: 3px;
-        font: ${fonts.displayMedium({ size: 13 })};
-      }
-    }
   }
 
   &[data-size="largest"] {
     font: ${fonts.displayBold({ size: 16 })};
     min-height: 50px;
+  }
 
-    > .content {
-      > .title {
-        font: ${fonts.displayBold({ size: 16 })};
+  &[data-new-style="false"] {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    > .right {
+      flex-shrink: 0;
+      display: flex;
+      flex-flow: row;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &[data-icon-and-children="true"] {
+      padding-left: 10px;
+
+      > svg {
+        margin-right: 8px;
+      }
+    }
+  }
+
+  /* New style */
+  &[data-new-style="true"] {
+    min-width: 40px;
+    min-height: 40px;
+    background: transparent;
+    border-radius: 9px;
+    font: ${fonts.displayMedium({ size: 14 })};
+    gap: 8px;
+
+    > .icon {
+      flex-shrink: 0;
+      display: flex;
+      flex-flow: row;
+      align-items: center;
+      justify-content: center;
+    }
+
+    > .children {
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    > .right {
+      flex-shrink: 0;
+      display: flex;
+      flex-flow: row;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &:hover {
+      background: ${colors.buttonBackgroundHover()};
+    }
+
+    &[data-primary="true"] {
+      color: ${colors.white()};
+      background: ${colors.gray800()};
+
+      &:hover {
+        background: ${colors.gray700()};
       }
 
-      > .subtitle {
-        margin-top: 3px;
-        font: ${fonts.displayMedium({ size: 13 })};
+      @media (prefers-color-scheme: dark) {
+        color: ${colors.gray950()};
+        background: ${colors.gray100()};
+
+        &:hover {
+          background: ${colors.gray200()};
+        }
       }
+    }
+  }
+
+  &[data-pill="true"] {
+    border-radius: 9999px;
+  }
+
+  &[data-bordered="true"] {
+    min-width: 38px;
+    min-height: 38px;
+
+    &[data-primary="false"] {
+      border: 1px solid ${colors.controlBorder()};
+    }
+
+    &:hover {
+      background: ${colors.buttonBackgroundGlow()};
+    }
+
+    > .icon > svg {
+      width: 16px;
+      height: 16px;
     }
   }
 `;

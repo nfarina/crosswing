@@ -4,66 +4,44 @@ import { colors } from "../../colors/colors";
 import { fonts } from "../../fonts/fonts";
 import { SidebarIcon } from "../../icons/Sidebar";
 import { SidebarMenuIcon } from "../../icons/SidebarMenu";
+import { tooltip } from "../../modals/popup/TooltipView";
 import { RouterContext } from "../../router/context/RouterContext";
 import { Link } from "../../router/Link";
 import { AutoBorderView } from "../AutoBorderView";
 import { Button } from "../Button";
-import { Scrollable, StyledScrollable } from "../Scrollable";
 import { NewSiteContext } from "./NewSiteContext";
-import { SiteHeaderAccessoryView } from "./SiteHeaderAccessory";
 
 export function NewSiteSidebar({
   children,
   logo,
-  logoTo,
-  onLogoClick,
+  accessories,
+  footer,
   ...rest
 }: HTMLAttributes<HTMLDivElement> & {
   logo?: ReactNode;
-  logoTo?: string;
-  onLogoClick?: () => void;
+  accessories?: ReactNode;
+  footer?: ReactNode;
 }) {
-  const { sidebarVisible, setSidebarVisible, sidebarMode, accessories } =
-    use(NewSiteContext);
+  const { setSidebarVisible, siteLayout } = use(NewSiteContext);
 
   return (
     <StyledNewSiteSidebar {...rest}>
       <AutoBorderView className="header">
         <Button
-          data-tooltip="Close sidebar"
+          newStyle
           className="sidebar-toggle"
-          icon={
-            sidebarMode === "overlay" ? <SidebarMenuIcon /> : <SidebarIcon />
-          }
-          onClick={() => setSidebarVisible(!sidebarVisible)}
+          icon={siteLayout === "mobile" ? <SidebarMenuIcon /> : <SidebarIcon />}
+          onClick={() => setSidebarVisible(false)}
+          {...tooltip("Close sidebar", { hotkey: "ctrl+s" })}
         />
-        <div className="accessories">
-          {accessories
-            .filter((accessory) => accessory.placement === "sidebar")
-            .map((accessory) => (
-              <SiteHeaderAccessoryView
-                key={accessory.key}
-                accessory={accessory}
-              />
-            ))}
-        </div>
+        <div className="accessories">{accessories}</div>
       </AutoBorderView>
-      <Scrollable>
-        <div className="children">
-          {children}
-          <div className="flex" />
-          {logoTo ? (
-            <Link
-              className="logo"
-              to={logoTo}
-              onClick={onLogoClick}
-              children={logo}
-            />
-          ) : (
-            <div className="logo">{logo}</div>
-          )}
-        </div>
-      </Scrollable>
+      <div className="children">{children}</div>
+      {footer && (
+        <AutoBorderView side="top" className="footer">
+          {footer}
+        </AutoBorderView>
+      )}
     </StyledNewSiteSidebar>
   );
 }
@@ -80,55 +58,51 @@ export const StyledNewSiteSidebar = styled.div`
   > .header {
     z-index: 1;
     box-sizing: border-box;
-    padding: 10px;
-    height: 50px;
+    padding: 8px 7px;
+    height: 56px;
     display: flex;
     flex-flow: row;
-    align-items: center;
+    justify-content: space-between;
 
     > .sidebar-toggle {
       align-self: flex-start;
       flex-shrink: 0;
-      min-width: 35px;
-      background: ${colors.textBackground()};
 
-      &:not(:hover) {
-        background: transparent;
+      svg {
+        width: 22px;
+        height: 22px;
       }
     }
 
     > .accessories {
-      padding-right: 5px;
-      flex-grow: 1;
       display: flex;
       flex-flow: row;
       align-items: center;
-      justify-content: flex-end;
       gap: 10px;
     }
   }
 
-  > ${StyledScrollable} {
+  > .children {
     height: 0;
     flex-grow: 1;
+    padding: 5px;
+    padding-top: 10px;
+    display: flex;
+    flex-flow: column;
+    overflow-y: auto;
 
-    > .children {
-      padding: 5px;
-      display: flex;
-      flex-flow: column;
+    > * {
+      flex-shrink: 0;
+    }
+  }
 
-      > * {
-        flex-shrink: 0;
-      }
+  > .footer {
+    display: flex;
+    flex-flow: column;
 
-      > .flex {
-        flex-grow: 1;
-      }
-
-      > .logo {
-        padding: 18px 10px;
-        align-self: center;
-      }
+    > * {
+      flex-shrink: 0;
+      flex-grow: 1;
     }
   }
 `;
@@ -146,22 +120,22 @@ export function NewSiteSidebarText({
   const isSelected = !!nextLocation.tryClaim(path);
 
   return (
-    <StyledNewSiteSidebarLink {...rest} data-is-selected={isSelected}>
+    <StyledNewSiteSidebarText {...rest} data-is-selected={isSelected}>
       <div className="icon">{icon}</div>
       <div className="children">{children}</div>
-    </StyledNewSiteSidebarLink>
+    </StyledNewSiteSidebarText>
   );
 }
 
-export const StyledNewSiteSidebarLink = styled(Link)`
+export const StyledNewSiteSidebarText = styled(Link)`
   display: flex;
   flex-flow: row;
   align-items: center;
   color: ${colors.text()};
   text-decoration: none;
   gap: 10px;
-  border-radius: 6px;
-  padding: 10px 11px;
+  border-radius: 9px;
+  padding: 10px 12px;
 
   > .icon {
     flex-shrink: 0;
@@ -177,24 +151,17 @@ export const StyledNewSiteSidebarLink = styled(Link)`
   }
 
   > .children {
-    font: ${fonts.display({ size: 15, line: "1" })};
+    font: ${fonts.display({ size: 15 })};
+    transform: translateY(-1px);
   }
 
   &:hover {
-    background: ${colors.lightGray({ alpha: 0.333 })};
-
-    @media (prefers-color-scheme: dark) {
-      background: ${colors.extraDarkGray({ alpha: 0.8 })};
-    }
+    background: ${colors.buttonBackgroundGlow()};
   }
 
   &[data-prefix-active="true"],
   &[data-is-selected="true"] {
-    background: ${colors.lightGray()};
-
-    @media (prefers-color-scheme: dark) {
-      background: ${colors.extraDarkGray({ lighten: 0.25 })};
-    }
+    background: ${colors.linkActiveBackground()};
 
     > .icon {
       > svg {
@@ -203,7 +170,98 @@ export const StyledNewSiteSidebarLink = styled(Link)`
     }
 
     > .children {
-      font: ${fonts.displayBold({ size: 15, line: "1" })};
+      font: ${fonts.displayBold({ size: 15 })};
     }
+  }
+`;
+
+export function NewSiteSitebarSubtext({
+  children,
+  selected,
+  ...rest
+}: Parameters<typeof Link>[0] & {
+  children: ReactNode;
+  selected?: boolean;
+}) {
+  return (
+    <StyledNewSiteSidebarSubtext data-is-selected={selected} {...rest}>
+      <div className="dot" />
+      <div className="line" />
+      <div className="children">{children}</div>
+    </StyledNewSiteSidebarSubtext>
+  );
+}
+
+const StyledNewSiteSidebarSubtext = styled(Link)`
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  color: ${colors.text()};
+  text-decoration: none;
+  gap: 10px;
+  border-radius: 9px;
+  padding: 9px 12px 9px 42px;
+  position: relative;
+
+  > .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: ${colors.textSecondary({ alpha: 0.3 })};
+    /* background: ${colors.textSecondary()}; */
+    position: absolute;
+    left: 19px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  > .line {
+    display: none;
+    width: 1px;
+    height: 13px;
+    background: ${colors.textSecondary({ alpha: 0.3 })};
+    position: absolute;
+    left: 21.5px;
+    top: -6px;
+  }
+
+  > .children {
+    font: ${fonts.display({ size: 15 })};
+    transform: translateY(-1px);
+  }
+
+  &:hover {
+    background: ${colors.buttonBackgroundGlow()};
+  }
+
+  &[data-prefix-active="true"],
+  &[data-is-selected="true"] {
+    /* background: ${colors.linkActiveBackground()}; */
+
+    > .dot {
+      background: ${colors.textSecondary()};
+    }
+
+    > .children {
+      font: ${fonts.displayBold({ size: 15 })};
+    }
+  }
+`;
+
+/**
+ * For wrapping a group of subtext items in the sidebar.
+ */
+export function NewSiteSubtextGroup(props: HTMLAttributes<HTMLDivElement>) {
+  return <StyledNewSiteSubtextGroup {...props} />;
+}
+
+export const StyledNewSiteSubtextGroup = styled.div`
+  display: flex;
+  flex-flow: column;
+  margin-top: 5px;
+  margin-bottom: 8px;
+
+  > * {
+    flex-shrink: 0;
   }
 `;

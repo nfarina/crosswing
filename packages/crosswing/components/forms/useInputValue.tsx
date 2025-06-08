@@ -6,6 +6,8 @@ import { TextInput } from "./TextInput.js";
 export interface InputValue<T> {
   /** Current raw value; null if empty or invalid. */
   value: T | null;
+  /** Current raw value, even if it's invalid. */
+  rawValue: string | null;
   /** Set the current raw value directly. */
   set: (newValue: T | null) => void;
   /** If there was an error parsing the user-entered string value. */
@@ -51,7 +53,7 @@ export function useInputValue<T = string>({
   initialStringValue = null,
   onValueChange,
   required = false,
-  hideRequiredError = false,
+  showRequiredError = false,
   transformer,
   validate,
   disabled,
@@ -66,17 +68,18 @@ export function useInputValue<T = string>({
   /** Whether the input is required. */
   required?: boolean;
   /**
-   * Set to true to hide the required error message. Useful when there's only
-   * one form component so it's obviously required!
+   * Set to true to visually indicate that the field is required (spreads)
+   * the error prop to the input). Normally this isn't necessary because
+   * required fields are typically implied by the UI.
    */
-  hideRequiredError?: boolean;
+  showRequiredError?: boolean;
   /** Optional transformer to make the "real" value different (or a different type) from the user-entered string. */
   transformer?: InputTransformer<T>;
   /** Optional additional validation of the transformed value. */
   validate?: (value: T) => void;
   disabled?: boolean;
   deps?: DependencyList;
-}): InputValue<T> {
+} = {}): InputValue<T> {
   const { parse, format, display } = transformer ?? IdentityTransformer;
 
   // For checking to see if anything has changed.
@@ -110,7 +113,7 @@ export function useInputValue<T = string>({
     // If you haven't entered anything, there's nothing to parse.
     if (text === "") {
       if (required) {
-        validationError = new Error(hideRequiredError ? "" : "Required");
+        validationError = new Error("Required");
       }
 
       return { parsed, parseError, validationError };
@@ -201,6 +204,7 @@ export function useInputValue<T = string>({
 
   return {
     value,
+    rawValue: stringValue,
     set,
     error,
     hasChanged: stringValue !== resolvedInitialStringValue,
@@ -208,7 +212,7 @@ export function useInputValue<T = string>({
     props: {
       value: renderInputValue(),
       onValueChange: onInputValueChange,
-      error,
+      error: stringValue !== "" || showRequiredError ? error : null,
       onFocus,
       onBlur,
       disabled,

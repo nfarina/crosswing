@@ -10,7 +10,6 @@ import { Spinner } from "./Spinner.js";
 export function LoadingCurtain({
   hidden,
   type = "spinner",
-  transparent,
   progress,
   message,
   smaller = false,
@@ -19,7 +18,6 @@ export function LoadingCurtain({
 }: {
   hidden?: boolean;
   type?: "spinner" | "progress";
-  transparent?: boolean;
   progress?: number | null;
   message?: ReactNode;
   smaller?: boolean;
@@ -37,11 +35,7 @@ export function LoadingCurtain({
   }
 
   return (
-    <StyledLoadingCurtain
-      data-transparent={!!transparent}
-      data-waiting={waiting}
-      {...rest}
-    >
+    <StyledLoadingCurtain data-waiting={waiting} {...rest}>
       {type === "progress" ? (
         <ProgressView size="75px" thickness={0.05} progress={progress} />
       ) : (
@@ -57,14 +51,9 @@ export const StyledLoadingCurtain = styled.div`
   flex-flow: column;
   align-items: center;
   justify-content: center;
-  background: ${colors.textBackground()};
 
   > * {
     transition: opacity 0.2s ease-in-out;
-  }
-
-  &[data-transparent="true"] {
-    background: transparent;
   }
 
   &[data-waiting="true"] {

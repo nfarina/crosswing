@@ -1,75 +1,52 @@
-import { createContext, RefObject, use, useEffect, useState } from "react";
-import { RouterContext } from "../../router/context/RouterContext";
-import { PanelLayoutMode } from "../PanelLayout";
-import { SiteHeaderAccessory } from "./SiteHeaderAccessory";
+import { createContext, ReactNode } from "react";
+import { Size } from "../../shared/sizing";
+
+export type NewSiteLayoutMode = "desktop" | "mobile";
+
+export type NewSiteAccessory = {
+  /** The component to render. */
+  component: ReactNode;
+  /** The size of the accessory. */
+  size: Size;
+  /** The layout in which the accessory is rendered. */
+  onlyLayout?: NewSiteLayoutMode;
+};
 
 export type NewSiteContextValue = {
   isDefaultContext: boolean;
+  /** The title of the site, used in the document title. */
+  siteTitle: string;
   /** True if the site sidebar is visible. */
   sidebarVisible: boolean;
   /** Set the sidebar visibility. */
   setSidebarVisible(visible: boolean): void;
-  /** The mode of the sidebar layout. */
-  sidebarMode: Omit<PanelLayoutMode, "auto">;
-  /** Ref to one of any <NewSiteInsertionPoint> children. */
-  getSidebarInsertionRef(name: string): NewSiteInsertionRef;
-  /** For any <NewSiteInsertionPoint> children. */
-  setSidebarInsertionRef(name: string, insertionRef: NewSiteInsertionRef): void;
-  /** The current page and any ancestor pages. */
-  pages: Map<number, NewSitePage>;
-  /** Set a page by id. Used by useNewSitePageTitle(). */
-  setPage(id: number, page: NewSitePage): void;
-  /** Remove a page by id. Used by useNewSitePageTitle(). */
-  removePage(id: number): void;
-  /** The current site accessories. */
-  accessories: SiteHeaderAccessory[];
+  /** The mode of the site layout. */
+  siteLayout: NewSiteLayoutMode;
+  /** Information about an accessory rendered in the upper-right corner of the site layout. Usually an account button. */
+  siteAccessory?: NewSiteAccessory | null;
 };
-
-export type NewSitePage = {
-  title: string;
-  link: string;
-  intermediate?: boolean;
-};
-
-export type NewSiteRef = RefObject<HTMLDivElement | null>;
-export type NewSiteInsertionRef = RefObject<HTMLDivElement | null>;
 
 export const NewSiteContext = createContext<NewSiteContextValue>({
   isDefaultContext: true,
+  siteTitle: "",
   sidebarVisible: true,
   setSidebarVisible: alwaysThrows,
-  sidebarMode: "shrink",
-  getSidebarInsertionRef: alwaysThrows,
-  setSidebarInsertionRef: alwaysThrows,
-  pages: new Map(),
-  setPage: alwaysThrows,
-  removePage: alwaysThrows,
-  accessories: [],
+  siteLayout: "desktop",
 });
 
 function alwaysThrows(): never {
-  throw new Error(
-    "Cannot set sidebar visibility without a parent <NewSiteLayout>.",
-  );
+  throw new Error("Parent <NewSiteLayout> was not found.");
 }
 
-let nextId = 0;
-function getNextId() {
-  return nextId++;
-}
-
-export function useNewSitePageTitle(
-  title: string,
-  { intermediate = false }: { intermediate?: boolean } = {},
-) {
-  const [id] = useState(getNextId);
-  const { isDefaultContext, setPage, removePage } = use(NewSiteContext);
-  const { location } = use(RouterContext);
-  const link = location.claimedHref();
-
-  useEffect(() => {
-    if (isDefaultContext) return;
-    if (title) setPage(id, { title, link, intermediate });
-    return () => removePage(id);
-  }, [title]);
+export function shouldRenderAccessory(
+  accessory: NewSiteAccessory | null | undefined,
+  layout: NewSiteLayoutMode,
+): accessory is NewSiteAccessory {
+  if (!accessory) {
+    return false;
+  }
+  if (accessory.onlyLayout && accessory.onlyLayout !== layout) {
+    return false;
+  }
+  return true;
 }

@@ -12,7 +12,10 @@ import {
   useState,
 } from "react";
 import { createGlobalStyle, keyframes, styled } from "styled-components";
-import { useHotKey } from "../../hooks/useHotKey.js";
+import {
+  HotKeyContextDataAttributes,
+  useHotKey,
+} from "../../hooks/useHotKey.js";
 import { HostContext } from "../../host/context/HostContext.js";
 import { easing } from "../../shared/easing.js";
 import { getRectRelativeTo } from "../../shared/rect.js";
@@ -433,6 +436,10 @@ export const PopupContainer = ({
       onAnimationEnd={onAnimationEnd}
       style={cssProps}
       ref={containerRef}
+      // Popups don't obscure most content underneath, but we still want to
+      // prevent any hotkeys bound to elements underneath the popup from firing
+      // while the popup is open.
+      {...HotKeyContextDataAttributes}
     >
       <DisableIFramesGlobalStyle />
       <div className="backdrop" onClick={onClose} />

@@ -1,4 +1,4 @@
-import { FocusEvent, ReactNode, useState } from "react";
+import { FocusEvent, ReactNode, useId, useState } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
@@ -12,10 +12,15 @@ export const LabeledTextArea = ({
   onFocus,
   onBlur,
   autoSizing = true,
+  children,
+  newStyle = false,
   ...rest
 }: Parameters<typeof TextArea>[0] & {
-  label: ReactNode;
+  label?: ReactNode;
+  newStyle?: boolean;
 }) => {
+  const id = useId();
+
   // Track whether you've ever focused the input so we don't open up a new
   // blank form with lots of "Required" errors right away.
   const [hasEverFocused, setHasEverFocused] = useState(false);
@@ -42,15 +47,24 @@ export const LabeledTextArea = ({
       className={className}
       data-disabled={disabled}
       data-error={showError}
+      data-new-style={newStyle}
     >
+      {newStyle && label && (
+        <label htmlFor={id} className="label">
+          {label}
+        </label>
+      )}
       <TextArea
+        newStyle={newStyle}
         autoSizing={autoSizing}
         disabled={disabled}
         onFocus={onInputFocus}
         onBlur={onInputBlur}
+        id={id}
         {...rest}
       />
-      {label && <span className="label">{label}</span>}
+      {label && !newStyle && <span className="label">{label}</span>}
+      {children}
     </StyledLabeledTextArea>
   );
 };
@@ -59,13 +73,11 @@ export const StyledLabeledTextArea = styled.div`
   display: flex;
   flex-flow: column;
   position: relative;
-  min-height: 60px;
+  box-sizing: border-box;
   cursor: text;
 
   > ${StyledTextArea} {
     > textarea {
-      padding: 30px 10px 8px;
-
       /* If the textarea is empty or smaller than the available height,
          make it take up the full height so you can click anywhere to focus it. */
       min-height: 100%;
@@ -74,26 +86,44 @@ export const StyledLabeledTextArea = styled.div`
     flex-grow: 1;
   }
 
-  > .label {
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    font: ${fonts.displayBold({ size: 11, line: "11px" })};
-    color: ${colors.text()};
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    pointer-events: none;
-  }
+  &[data-new-style="false"] {
+    min-height: 60px;
 
-  &[data-error="true"] {
+    > ${StyledTextArea} {
+      > textarea {
+        padding: 30px 10px 8px;
+      }
+    }
+
     > .label {
-      color: ${colors.red()};
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      font: ${fonts.displayBold({ size: 11, line: "11px" })};
+      color: ${colors.text()};
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+
+    &[data-error="true"] {
+      > .label {
+        color: ${colors.red()};
+      }
+    }
+
+    &[data-disabled="true"] {
+      > .label {
+        color: ${colors.text({ alpha: 0.5 })};
+      }
     }
   }
 
-  &[data-disabled="true"] {
+  &[data-new-style="true"] {
+    gap: 8px;
+
     > .label {
-      color: ${colors.text({ alpha: 0.5 })};
+      font: ${fonts.displayMedium({ size: 14, line: "20px" })};
     }
   }
 `;

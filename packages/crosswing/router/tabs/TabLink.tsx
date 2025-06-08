@@ -6,7 +6,7 @@ import { HostContext } from "../../host/context/HostContext.js";
 import { PlaceholderIcon } from "../../icons/Placeholder.js";
 import { RouterContext } from "../context/RouterContext.js";
 import { Link } from "../Link.js";
-import { UnreadBadge } from "./UnreadBadge.js";
+import { StyledUnreadBadge, UnreadBadge } from "./UnreadBadge.js";
 
 export interface TabProps {
   /** All tab routes will render under this path. */
@@ -86,7 +86,7 @@ export const StyledTabLink = styled(Link)`
     color: ${colors.text()};
   }
 
-  > ${UnreadBadge} {
+  > ${StyledUnreadBadge} {
     position: absolute;
     top: 3px;
     left: calc(50% + 3px);

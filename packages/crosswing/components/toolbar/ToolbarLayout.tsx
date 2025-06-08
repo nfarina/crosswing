@@ -79,6 +79,8 @@ export function ToolbarLayout({
     setInsertionRef,
   };
 
+  const [toolbar, content] = children;
+
   return (
     <StyledToolbarLayout
       ref={divRef}
@@ -86,7 +88,10 @@ export function ToolbarLayout({
       data-hide-separator={hideSeparator}
       {...rest}
     >
-      <ToolbarContext value={context}>{children}</ToolbarContext>
+      <ToolbarContext value={context}>
+        {toolbar}
+        <div className="content">{content}</div>
+      </ToolbarContext>
     </StyledToolbarLayout>
   );
 }
@@ -110,10 +115,19 @@ export const StyledToolbarLayout = styled.div`
   }
 
   /* Content */
-  > *:nth-child(2) {
+  > .content {
     height: 0;
     flex-grow: 1;
     z-index: 0;
+    display: flex;
+    flex-flow: column;
+
+    > * {
+      width: 0;
+      min-width: 100%;
+      height: 0;
+      flex-grow: 1;
+    }
   }
 
   /* Mobile layout */

@@ -3,12 +3,15 @@ import { styled } from "styled-components";
 import { colors } from "../colors/colors";
 
 export type BorderSide = "top" | "right" | "bottom" | "left";
+export type BorderVisibility = "always" | "auto" | "never";
 
 export function AutoBorderView({
   side = "bottom",
+  visibility = "auto",
   ...rest
 }: HTMLAttributes<HTMLDivElement> & {
   side?: BorderSide;
+  visibility?: BorderVisibility;
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -45,12 +48,26 @@ export function AutoBorderView({
 
           // Show border when not at the most negative value (i.e., not at the visual bottom)
           isScrolled = sibling.scrollTop > maxNegativeScroll;
+        } else if (side === "top") {
+          // For top-side borders, scrolling "up" makes scrollTop negative
+          // The border should appear when not scrolled to the top (which is actually the visual bottom)
+          // We need to check if scrollTop is not at its most positive value
+
+          // Calculate the most positive possible scrollTop value
+          // This is scrollHeight - clientHeight (but positive)
+          const maxPositiveScroll = sibling.scrollHeight - sibling.clientHeight;
+
+          // Show border when not at the most positive value (i.e., not at the visual top)
+          // But make sure we don't show it if there's nothing to scroll.
+          isScrolled =
+            sibling.scrollTop < maxPositiveScroll &&
+            sibling.scrollHeight > sibling.clientHeight;
         } else {
           // Standard case - show border when scrolled down from the top
           isScrolled = sibling.scrollTop > 0;
         }
 
-        element.setAttribute("data-border", isScrolled ? "true" : "false");
+        element.setAttribute("data-auto-border", isScrolled ? "true" : "false");
         element.style.setProperty("--border-side", side);
       };
 
@@ -100,11 +117,14 @@ export function AutoBorderView({
     };
   }, [side]);
 
-  return <StyledAutoBorderView ref={ref} {...rest} />;
+  return (
+    <StyledAutoBorderView ref={ref} data-visibility={visibility} {...rest} />
+  );
 }
 
 export const StyledAutoBorderView = styled.div`
-  &[data-border="true"] {
+  &[data-auto-border="true"][data-visibility="auto"],
+  &[data-visibility="always"] {
     --shadow-color: ${colors.separator()};
     --h-offset: 0;
     --v-offset: 0;

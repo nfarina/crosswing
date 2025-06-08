@@ -1,6 +1,6 @@
 import { colors, shadows } from "crosswing/colors";
 import { StyledButton } from "crosswing/components/Button";
-import { Badge } from "crosswing/components/badges/Badge";
+import { StyledBadge } from "crosswing/components/badges/Badge";
 import { StyledToggle, Toggle } from "crosswing/components/forms/Toggle";
 import { fonts } from "crosswing/fonts";
 import { HotKey, useHotKey } from "crosswing/hooks/useHotKey";
@@ -207,7 +207,7 @@ export const StyledTaskView = styled.div`
       margin-left: 0;
     }
 
-    > ${Badge} {
+    > ${StyledBadge} {
       display: none;
     }
 

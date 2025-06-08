@@ -14,7 +14,10 @@ import { CrosswingLogoIcon } from "../../icons/CrosswingLogo.js";
 import { PlaceholderIcon } from "../../icons/Placeholder.js";
 import { RouterContext } from "../../router/context/RouterContext.js";
 import { Link } from "../../router/Link.js";
-import { UnreadBadge } from "../../router/tabs/UnreadBadge.js";
+import {
+  StyledUnreadBadge,
+  UnreadBadge,
+} from "../../router/tabs/UnreadBadge.js";
 import { Clickable } from "../Clickable.js";
 import {
   SiteHeaderAccessory,
@@ -267,7 +270,7 @@ export const StyledSiteSidebar = styled.div`
         white-space: nowrap;
       }
 
-      > ${UnreadBadge} {
+      > ${StyledUnreadBadge} {
         margin-left: 5px;
       }
 

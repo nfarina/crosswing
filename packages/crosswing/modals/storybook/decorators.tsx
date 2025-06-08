@@ -1,4 +1,4 @@
-import { action } from "@storybook/addon-actions";
+import { action } from "storybook/actions";
 import { ModalRootProvider } from "../context/ModalRootProvider.js";
 import { DialogContainer } from "../dialog/useDialog.js";
 import { SheetContainer } from "../sheet/useSheet.js";

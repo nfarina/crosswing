@@ -14,5 +14,5 @@ export default function PopupButton() {
     </PopupMenu>
   ));
 
-  return <Button primary title="Show Popup" onClick={popup.onClick} />;
+  return <Button primary children="Show Popup" onClick={popup.onClick} />;
 }

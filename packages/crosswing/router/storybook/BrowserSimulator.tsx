@@ -1,4 +1,3 @@
-import { action } from "@storybook/addon-actions";
 import {
   ChangeEvent,
   HTMLAttributes,
@@ -7,6 +6,7 @@ import {
   use,
   useState,
 } from "react";
+import { action } from "storybook/actions";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";

@@ -4,6 +4,8 @@
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     // Do as little "transformation" as possible.
     "target": "ESNext",
+    // Include experimental React types.
+    "types": ["react/experimental", "vite/client"],
     // Leave "import" statements alone since we are using ESM.
     "module": "ESNext",
     // Assume all files are ESM modules.

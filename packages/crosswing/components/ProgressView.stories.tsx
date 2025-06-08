@@ -32,7 +32,7 @@ export const IndeterminateToProgress = () => {
 export const ProgressFixed = () => {
   return (
     // Show that the <ProgressView> makes enclosing divs big enough to hold it.
-    <div style={{ background: "gray", fontSize: "0" }}>
+    <div style={{ border: "1px solid #00000022", fontSize: "0" }}>
       <ProgressView size="50px" progress={0.4} />
     </div>
   );
@@ -43,7 +43,11 @@ export const ProgressCentered = () => {
     // Show that the <ProgressView> is centered with its given size inside
     // the size given by CSS.
     <ProgressView
-      style={{ width: "100px", height: "100px", background: "gray" }}
+      style={{
+        width: "100px",
+        height: "100px",
+        border: "1px solid #00000022",
+      }}
       size="50px"
       progress={0.4}
     />

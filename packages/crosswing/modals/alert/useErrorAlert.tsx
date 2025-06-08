@@ -11,7 +11,11 @@ export type ErrorHandler = (error: ErrorLike) => void;
 
 export function useErrorAlert({
   onClose,
-}: { onClose?: () => void } = {}): Modal<Parameters<ErrorHandler>> {
+  showDetails = true,
+}: {
+  onClose?: () => void;
+  showDetails?: boolean;
+} = {}): Modal<Parameters<ErrorHandler>> {
   // If we were given an Error object, we can expand it to show the stack trace.
   const [expanded, setExpanded] = useState(false);
 
@@ -67,7 +71,10 @@ export function useErrorAlert({
               <ErrorView error={{ name, message, details, stack }} />
             )
           }
-          buttons={[...(hasDetails ? [detailsButton] : []), okButton]}
+          buttons={[
+            ...(hasDetails && showDetails ? [detailsButton] : []),
+            okButton,
+          ]}
           onClose={onAlertClose}
           data-expanded={expanded}
         />

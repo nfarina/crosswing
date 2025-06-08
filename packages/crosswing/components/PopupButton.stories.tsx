@@ -1,5 +1,5 @@
-import { action } from "@storybook/addon-actions";
 import { Meta, StoryObj } from "@storybook/react";
+import { action } from "storybook/actions";
 import styled from "styled-components";
 import { usePopup } from "../modals/popup/usePopup.js";
 import { ModalDecorator } from "../modals/storybook/decorators.js";
@@ -17,7 +17,7 @@ type Story = StoryObj<typeof PopupButton>;
 
 export const Default: Story = {
   args: {
-    title: "Menu",
+    children: "Menu",
     popup: {
       onClick: action("onClick"),
       visible: false,
@@ -27,7 +27,7 @@ export const Default: Story = {
 
 export const Opened: Story = {
   args: {
-    title: "Menu",
+    children: "Menu",
     popup: {
       onClick: action("onClick"),
       visible: true,
@@ -37,7 +37,31 @@ export const Opened: Story = {
 
 export const WithPopup: Story = {
   args: {
-    title: "Options",
+    children: "Options",
+  },
+  parameters: {
+    layout: "fullscreen",
+  },
+  decorators: [ModalDecorator, CrosswingAppDecorator({ layout: "fullscreen" })],
+  render: (args) => {
+    const menu = usePopup(() => (
+      <PopupMenu>
+        <PopupMenuText children="This is a menu." />
+      </PopupMenu>
+    ));
+
+    return (
+      <Centered>
+        <PopupButton {...args} popup={menu} />
+      </Centered>
+    );
+  },
+};
+
+export const NewStyle: Story = {
+  args: {
+    children: "Options",
+    newStyle: true,
   },
   parameters: {
     layout: "fullscreen",

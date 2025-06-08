@@ -28,6 +28,7 @@ export const StyledClickable = styled.button`
   border: none;
   cursor: pointer;
   transition: opacity 0.2s ease-in-out;
+  text-align: left;
 
   &:disabled {
     cursor: default;

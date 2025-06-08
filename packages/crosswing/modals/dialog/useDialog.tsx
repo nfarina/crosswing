@@ -184,10 +184,17 @@ const StyledDialogContainer = styled.div`
     justify-content: flex-end;
   }
 
-  padding-top: calc(25px + ${safeArea.top()});
-  padding-right: calc(25px + ${safeArea.right()});
-  padding-bottom: calc(25px + ${safeArea.bottom()});
-  padding-left: calc(25px + ${safeArea.left()});
+  padding-top: calc(24px + ${safeArea.top()});
+  padding-right: calc(24px + ${safeArea.right()});
+  padding-bottom: calc(24px + ${safeArea.bottom()});
+  padding-left: calc(24px + ${safeArea.left()});
+
+  @media (max-width: 680px) {
+    padding-top: calc(16px + ${safeArea.top()});
+    padding-right: calc(16px + ${safeArea.right()});
+    padding-bottom: calc(16px + ${safeArea.bottom()});
+    padding-left: calc(16px + ${safeArea.left()});
+  }
 
   /* We render the backdrop as a separate div that we can animate
      opacity on, in hopes that webkit will optimize the animation in

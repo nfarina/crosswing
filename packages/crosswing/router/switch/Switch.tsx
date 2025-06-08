@@ -1,5 +1,13 @@
 import Debug from "debug";
-import { isValidElement, ReactElement, ReactNode, use } from "react";
+import {
+  unstable_Activity as Activity,
+  isValidElement,
+  ReactElement,
+  ReactNode,
+  use,
+  useEffect,
+  useState,
+} from "react";
 import { flattenChildren } from "../../hooks/flattenChildren.js";
 import { RouterContext } from "../context/RouterContext.js";
 import { Redirect } from "../redirect/Redirect.js";
@@ -19,9 +27,22 @@ export interface RouteProps<Path extends string = any> {
   redirect?: boolean;
 }
 
-export function Switch({ children }: { children: ReactNode }) {
+export function Switch({
+  children,
+  onRender,
+}: {
+  children: ReactNode;
+  /** Called after the Switch renders a selected route. */
+  onRender?: (props: RouteProps, location: RouterLocation) => void;
+}) {
   // Coerce children to array, flattening fragments and falsy conditionals.
   const routes = flattenChildren(children).filter(isRoute);
+
+  // We store rendered routes in a ref so we can access them in the Activity
+  // API. The key is the path of the route.
+  const [renderedRoutes, setRenderedRoutes] = useState(
+    new Map<string, ReactNode>(),
+  );
 
   // Pull our route information from context.
   const {
@@ -48,6 +69,23 @@ export function Switch({ children }: { children: ReactNode }) {
   const selected = selectRoute(routes, location);
   const nextSelected = selectRoute(routes, nextLocation);
 
+  let rendered: ReactNode;
+  const activeKey = selected?.route.props.path || "<default>";
+
+  useEffect(() => {
+    // If this location was fully-loaded, store it in the renderedRoutes map.
+    if (location.href() === nextLocation.href() && !selected?.redirect) {
+      setRenderedRoutes((prev) => {
+        prev.set(activeKey, rendered);
+        return prev;
+      });
+
+      if (selected) {
+        onRender?.(selected.route.props, selected.location);
+      }
+    }
+  });
+
   if (!selected || !nextSelected) {
     debug(`No routes matched, and no default found. Rendering nothing.`);
     return <noscript />;
@@ -67,11 +105,24 @@ export function Switch({ children }: { children: ReactNode }) {
     flags,
   };
 
-  return (
+  rendered = (
     <RouterContext value={childContext}>
       {render(selected.location.params)}
     </RouterContext>
   );
+
+  // if (window) {
+  //   return rendered;
+  // }
+
+  // Render all routes, but only show the active one.
+  return routes.map((route) => {
+    const key = route.props.path || "<default>";
+    const lastRendered = renderedRoutes.get(key);
+    const mode = key === activeKey ? "visible" : "hidden";
+    const content = key === activeKey ? rendered : lastRendered;
+    return <Activity key={key} mode={mode} children={content} />;
+  });
 }
 
 interface SelectedRoute {

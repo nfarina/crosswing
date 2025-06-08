@@ -58,8 +58,10 @@ export function DatePicker({
       <PageLayout>
         {notice && <Notice children={notice} size="smaller" />}
         <div className="buttons">
-          {!requireSelection && <Button title="Clear" onClick={onClearClick} />}
-          <Button title="Custom" onClick={customPrompt.show} />
+          {!requireSelection && (
+            <Button children="Clear" onClick={onClearClick} />
+          )}
+          <Button children="Custom" onClick={customPrompt.show} />
         </div>
         <CalendarView
           selectedRange={defaultDate ? dateRange(defaultDate) : null}

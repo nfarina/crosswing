@@ -1,7 +1,7 @@
-import { action } from "@storybook/addon-actions";
 import { Meta, StoryFn } from "@storybook/react";
 import { use, useState } from "react";
 import { createPortal } from "react-dom";
+import { action } from "storybook/actions";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { useAsyncTask } from "../../hooks/useAsyncTask.js";
@@ -134,7 +134,7 @@ export const Select: Story = (args) => {
           <SelectOption title="Green" value="green" />
           <SelectOption title="Blue" value="blue" />
         </ToolbarSelect>
-        <ToolbarPopupButton title="Popup" popup={menu} />
+        <ToolbarPopupButton children="Popup" popup={menu} />
       </Toolbar>
       <NoContent title="Content" />
     </ToolbarLayout>

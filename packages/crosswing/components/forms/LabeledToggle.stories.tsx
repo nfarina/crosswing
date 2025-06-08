@@ -48,17 +48,6 @@ export const Disabled = () => (
   />
 );
 
-export const Working = () => (
-  <LabeledToggle
-    working
-    label="Ludicrous Mode"
-    on={true}
-    onClick={() => {
-      throw new Error("Shouldn't happen");
-    }}
-  />
-);
-
 export const WithDetail = () => (
   <LabeledToggle
     label="Ludicrous Mode"
@@ -71,6 +60,15 @@ export const WithLongDetail = () => (
   <LabeledToggle
     label="Ludicrous Mode"
     detail="Turns your car into a spaceship. This is highly dangerous and not advised."
+    on={true}
+  />
+);
+
+export const NewStyle = () => (
+  <LabeledToggle
+    newStyle
+    label="Ludicrous Mode"
+    detail="Turns your car into a spaceship."
     on={true}
   />
 );

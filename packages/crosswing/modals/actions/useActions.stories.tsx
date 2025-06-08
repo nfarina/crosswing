@@ -1,4 +1,4 @@
-import { action } from "@storybook/addon-actions";
+import { action } from "storybook/actions";
 import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import {

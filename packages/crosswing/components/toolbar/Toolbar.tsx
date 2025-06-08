@@ -96,7 +96,7 @@ export const toolbarShadows = {
 };
 
 export const ToolbarLinkButton = styled(LinkButton)`
-  background: ${colors.extraExtraLightGray()};
+  background: ${colors.extraLightGray()};
   box-shadow: ${toolbarShadows.control()};
   box-sizing: border-box;
   min-height: 30px;
@@ -112,7 +112,7 @@ export const ToolbarLinkButton = styled(LinkButton)`
 `;
 
 export const ToolbarButton = styled(Button)`
-  background: ${colors.extraExtraLightGray()};
+  background: ${colors.extraLightGray()};
   box-shadow: ${toolbarShadows.control()};
   box-sizing: border-box;
   min-height: 30px;
@@ -133,7 +133,7 @@ export const ToolbarButton = styled(Button)`
 `;
 
 export const ToolbarPopupButton = styled(PopupButton)`
-  background: ${colors.extraExtraLightGray()};
+  background: ${colors.extraLightGray()};
   box-shadow: ${toolbarShadows.control()};
   box-sizing: border-box;
   min-height: 30px;
@@ -277,7 +277,7 @@ export const ToolbarFlexSearch = styled(ToolbarSearch)`
 
 export const ToolbarSelect = styled(Select)`
   select {
-    background: ${colors.extraExtraLightGray()};
+    background: ${colors.extraLightGray()};
     box-shadow: ${toolbarShadows.control()};
     box-sizing: border-box;
     height: 30px;

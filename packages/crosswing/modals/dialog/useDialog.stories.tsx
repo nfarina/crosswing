@@ -8,6 +8,7 @@ import {
   ModalStoryButtons,
 } from "../storybook/ModalStoryButtons.js";
 import { ModalDecorator } from "../storybook/decorators.js";
+import { DialogView } from "./DialogView.js";
 import { useDialog } from "./useDialog.js";
 
 export default {
@@ -17,6 +18,49 @@ export default {
 };
 
 export function Normal() {
+  const dialog = useDialog(() => (
+    <DialogView
+      title="Normal dialog"
+      onClose={dialog.hide}
+      buttons={[{ primary: true, title: "Close" }]}
+    >
+      This is a normal dialog.
+    </DialogView>
+  ));
+
+  return (
+    <ModalStoryButtons>
+      <ModalStoryButton onClick={dialog.show}>Show dialog</ModalStoryButton>
+    </ModalStoryButtons>
+  );
+}
+
+export function LongContent() {
+  const dialog = useDialog(() => (
+    <DialogView
+      title="Dialog with long content"
+      onClose={dialog.hide}
+      buttons={[{ title: "Close" }]}
+    >
+      <p>This dialog has a lot of content to demonstrate scrolling.</p>
+      {Array.from({ length: 20 }, (_, i) => (
+        <p key={i}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris.
+        </p>
+      ))}
+    </DialogView>
+  ));
+
+  return (
+    <ModalStoryButtons>
+      <ModalStoryButton onClick={dialog.show}>Show dialog</ModalStoryButton>
+    </ModalStoryButtons>
+  );
+}
+
+export function CustomDialog() {
   const [count, setCount] = useState(0);
   const increment = () => setCount((c) => c + 1);
 
@@ -40,13 +84,13 @@ export function Normal() {
   return (
     <ModalStoryButtons>
       <ModalStoryButton onClick={() => dialog.show(Date.now())}>
-        Show Dialog
+        Show dialog
       </ModalStoryButton>
     </ModalStoryButtons>
   );
 }
 
-export function Sticky() {
+export function CustomSticky() {
   const dialog = useDialog(
     () => (
       <SampleDialog>
@@ -60,7 +104,7 @@ export function Sticky() {
   return (
     <ModalStoryButtons>
       <ModalStoryButton onClick={dialog.show}>
-        Show Sticky Dialog
+        Show sticky dialog
       </ModalStoryButton>
     </ModalStoryButtons>
   );

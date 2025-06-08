@@ -1,7 +1,31 @@
+import { CSSProperties, HTMLAttributes } from "react";
 import { keyframes, styled } from "styled-components";
-import { colors } from "../../colors/colors.js";
+import { ColorBuilder, colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
 import { easing } from "../../shared/easing.js";
+
+export function UnreadBadge({
+  children,
+  style,
+  color = colors.white,
+  backgroundColor = colors.red,
+  ...rest
+}: Omit<HTMLAttributes<HTMLDivElement>, "color" | "backgroundColor"> & {
+  color?: ColorBuilder;
+  backgroundColor?: ColorBuilder;
+}) {
+  const cssProps = {
+    ["--background-color"]: backgroundColor(),
+    ["--color"]: color(),
+    style,
+  } as CSSProperties;
+
+  return (
+    <StyledUnreadBadge style={cssProps} {...rest}>
+      {children}
+    </StyledUnreadBadge>
+  );
+}
 
 /**
  * We want to fade in on a delay when visible, for two reasons. First,
@@ -16,18 +40,17 @@ const fadeIn = keyframes`
   }
 `;
 
-export const UnreadBadge = styled.div`
+export const StyledUnreadBadge = styled.div`
   box-sizing: border-box;
-  min-width: 17px;
-  height: 17px;
+  min-width: 18px;
+  height: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font: ${fonts.displayBold({ size: 10, line: "10px" })};
-  color: ${colors.white()};
-  background: ${colors.red()};
-  border: 1px solid ${colors.white()};
-  padding: 0 2px 1px 2px;
+  font: ${fonts.displayBold({ size: 11, line: "1" })};
+  color: var(--color);
+  background: var(--background-color);
+  padding: 0 4px 1px 4px;
   border-radius: 9999px;
   animation: ${fadeIn} 1s ${easing.outQuint};
 `;

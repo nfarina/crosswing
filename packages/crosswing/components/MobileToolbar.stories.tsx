@@ -1,4 +1,4 @@
-import { action } from "@storybook/addon-actions";
+import { action } from "storybook/actions";
 import { BrowserIcon } from "../icons/Browser.js";
 import { TrashIcon } from "../icons/Trash.js";
 import { CrosswingAppDecorator } from "../storybook.js";

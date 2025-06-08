@@ -119,10 +119,10 @@ export type PageTitleContextValue = {
 export const PageTitleContext = createContext<PageTitleContextValue>({
   crumbs: new Map(),
   setCrumb: () => {
-    throw new Error("Expected a <PageTitleProvider> as an ancestor!");
+    // throw new Error("Expected a <PageTitleProvider> as an ancestor!");
   },
   removeCrumb: () => {
-    throw new Error("Expected a <PageTitleProvider> as an ancestor!");
+    // throw new Error("Expected a <PageTitleProvider> as an ancestor!");
   },
   desktopStyle: "compact",
 });

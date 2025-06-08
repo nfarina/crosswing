@@ -1,33 +1,31 @@
-import { action } from "@storybook/addon-actions";
 import { Meta, StoryFn } from "@storybook/react";
 import { useState } from "react";
+import { action } from "storybook/actions";
 import { CloseIcon } from "../icons/Close.js";
+import { DotDotDotIcon } from "../icons/DotDotDot.js";
 import { WarningIcon } from "../icons/Warning.js";
+import { RouterDecorator } from "../router/storybook/RouterDecorator.js";
 import { CrosswingAppDecorator } from "../storybook.js";
 import { Button } from "./Button.js";
 
 export default {
   component: Button,
-  decorators: [CrosswingAppDecorator()],
+  decorators: [CrosswingAppDecorator(), RouterDecorator],
   parameters: { layout: "centered" },
 } satisfies Meta<typeof Button>;
 
 type Story = StoryFn<typeof Button>;
-
-export const WithTitle: Story = () => (
-  <Button title="Hello!" onClick={action("onClick")} />
-);
 
 export const WithChildren: Story = () => (
   <Button children="Hello!" onClick={action("onClick")} />
 );
 
 export const Disabled: Story = () => (
-  <Button disabled title="Hello!" onClick={action("onClick")} />
+  <Button disabled children="Hello!" onClick={action("onClick")} />
 );
 
 export const Working: Story = () => (
-  <Button working title="Hello!" onClick={action("onClick")} />
+  <Button working children="Hello!" onClick={action("onClick")} />
 );
 
 export const WorkingState: Story = () => {
@@ -38,57 +36,67 @@ export const WorkingState: Story = () => {
     setTimeout(() => setWorking(false), 2000);
   }
 
-  return <Button title="Hello!" onClick={onClick} working={working} />;
+  return <Button children="Hello!" onClick={onClick} working={working} />;
 };
 
 export const PrimarySmaller: Story = () => (
-  <Button size="smaller" primary title="Hello!" onClick={action("onClick")} />
+  <Button
+    size="smaller"
+    primary
+    children="Hello!"
+    onClick={action("onClick")}
+  />
 );
 
 export const PrimaryNormal: Story = () => (
-  <Button primary title="Hello!" onClick={action("onClick")} />
+  <Button primary children="Hello!" onClick={action("onClick")} />
 );
 
 export const PrimaryNormalWithDescender: Story = () => (
-  <Button primary title="Engage!" onClick={action("onClick")} />
+  <Button primary children="Engage!" onClick={action("onClick")} />
 );
 
 export const PrimaryLarger: Story = () => (
-  <Button size="larger" primary title="Hello!" onClick={action("onClick")} />
+  <Button size="larger" primary children="Hello!" onClick={action("onClick")} />
 );
 
 export const PrimaryLargest: Story = () => (
-  <Button size="largest" primary title="Hello!" onClick={action("onClick")} />
-);
-
-export const WithSubtitle: Story = () => (
   <Button
+    size="largest"
     primary
-    title="Buy Now"
-    subtitle="Terms Apply"
+    children="Hello!"
     onClick={action("onClick")}
   />
 );
 
-export const WithSubtitleSmaller: Story = () => (
-  <Button
-    primary
-    size="smaller"
-    title="Buy Now"
-    subtitle="Terms Apply"
-    onClick={action("onClick")}
-  />
-);
+// export const WithSubtitle: Story = () => (
+//   <Button
+//     primary
+//     children="Buy Now"
+//     subchildren="Terms Apply"
+//     onClick={action("onClick")}
+//   />
+// );
 
-export const WithSubtitleLarger: Story = () => (
-  <Button
-    primary
-    size="larger"
-    title="Buy Now"
-    subtitle="Terms Apply"
-    onClick={action("onClick")}
-  />
-);
+// export const WithSubtitleSmaller: Story = () => (
+//   <Button
+//     primary
+//     size="smaller"
+//     children="Buy Now"
+//     subchildren="Terms Apply"
+//     onClick={action("onClick")}
+//   />
+// );
+
+// export const WithSubtitleLarger: Story = () => (
+//   <Button
+//     primary
+//     size="larger"
+//     children="Buy Now"
+//     subchildren="Terms Apply"
+//     onClick={action("onClick")}
+//   />
+// );
 
 export const IconOnly: Story = () => (
   <Button icon={<CloseIcon />} onClick={action("onClick")} />
@@ -97,7 +105,56 @@ export const IconOnly: Story = () => (
 export const IconAndTitle: Story = () => (
   <Button
     icon={<WarningIcon />}
-    title="Error Details"
+    children="Error Details"
     onClick={action("onClick")}
+  />
+);
+
+export const NewStyle: Story = () => (
+  <Button newStyle children="New style" onClick={action("onClick")} />
+);
+
+export const NewStylePrimary: Story = () => (
+  <Button
+    newStyle
+    primary
+    children="New style primary"
+    onClick={action("onClick")}
+  />
+);
+
+export const NewStyleBordered: Story = () => (
+  <Button
+    newStyle
+    bordered
+    pill
+    icon={<WarningIcon />}
+    children="Bordered"
+    onClick={action("onClick")}
+  />
+);
+
+export const NewStyleIcon: Story = () => (
+  <Button newStyle icon={<CloseIcon />} onClick={action("onClick")} />
+);
+
+export const NewStyleCircularIcon: Story = () => (
+  <Button newStyle pill icon={<DotDotDotIcon />} onClick={action("onClick")} />
+);
+
+export const NewStyleAsLink: Story = () => (
+  <Button newStyle to="/some-page" children="Go to page" />
+);
+
+export const NewStyleAsLinkPrimary: Story = () => (
+  <Button newStyle to="/some-page" primary children="Go to page" />
+);
+
+export const NewStyleAsLinkNewTab: Story = () => (
+  <Button
+    newStyle
+    to="https://example.com"
+    target="_blank"
+    children="Open in new tab"
   />
 );

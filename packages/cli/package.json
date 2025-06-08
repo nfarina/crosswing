@@ -22,7 +22,7 @@
     "ps-tree": "^1.2.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^4.4.1",
+    "@vitejs/plugin-react": "^4.5.1",
     "babel-plugin-styled-components": "^2.1.4",
     "crosswing": "workspace:*",
     "react": "^19.1.0",

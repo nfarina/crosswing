@@ -5,13 +5,15 @@ import {
   ReactNode,
   isValidElement,
   use,
+  useRef,
   useState,
 } from "react";
 import { styled } from "styled-components";
-import { colors, shadows } from "../colors/colors.js";
+import { ColorBuilder, colors, shadows } from "../colors/colors.js";
 import { fonts } from "../fonts/fonts.js";
 import { flattenChildren } from "../hooks/flattenChildren.js";
 import { useDebounced } from "../hooks/useDebounced.js";
+import { HotKey, useHotKey } from "../hooks/useHotKey.js";
 import { useResettableState } from "../hooks/useResettableState.js";
 import { HostContext } from "../host/context/HostContext.js";
 import { RouterContext } from "../router/context/RouterContext.js";
@@ -21,33 +23,64 @@ import { easing } from "../shared/easing.js";
 import { Button } from "./Button.js";
 
 export interface TabbedButtonProps {
-  title: ReactNode;
+  icon?: ReactNode;
+  title?: ReactNode;
   /** Allow any value type in case you want to use enums. */
   value?: any;
   children?: ReactNode;
   lazy?: boolean;
+  /** (For buttonStyle only) Whether the width of the tab should fit its content, instead of expanding to fill the available space. Default false. */
+  fit?: boolean;
   /** Badges the tab like the mobile tab bar. */
   badge?: number | null;
+  /** The color of the badge. */
+  badgeColor?: ColorBuilder;
+  /** The background color of the badge. */
+  badgeBackgroundColor?: ColorBuilder;
+  /** Optional props to pass to the button. */
+  buttonProps?: any;
+  /** Optional hotkey to select this tab. */
+  hotkey?: HotKey;
 }
 
 export function TabbedButtonLayout({
   value,
   defaultValue,
   onValueChange,
-  primary,
   layout = "panel",
   searchParam,
   disabled,
   children,
   style,
+  buttonStyle,
+  pill = true,
+  pad = true,
   ...rest
 }: HTMLAttributes<HTMLDivElement> & {
   value?: any;
   defaultValue?: any;
   onValueChange?: (value: any) => any;
-  /** Set to true for a much bigger and bolder style. */
-  primary?: boolean;
-  /** I forget exactly why these are different but most of the time I think "panel" is desired. */
+  /**
+   * Determines the layout behavior of the content area.
+   *
+   * - **`"panel"` (default):**
+   *   The content area attempts to fill available vertical space if `TabbedButtonLayout`
+   *   is a flex item in a height-managed container. Tab contents are absolutely
+   *   positioned, overlaying each other within this area. Switching tabs
+   *   **does not** change the height of the content area, ensuring a stable layout
+   *   below the tabs. Ideal for self-contained UI panels, modals, or sections
+   *   within a fixed application layout.
+   *
+   * - **`"page"`:**
+   *   The content area's height is determined by the actual height of the
+   *   currently active tab's content. Tab contents are in the normal document flow
+   *   (though only one is visible). Switching tabs **can** change the overall
+   *   height of the component, potentially causing content below it on the page
+   *   to reflow. Suitable when the tabbed interface is a primary section of a
+   *   scrolling page and dynamic height is acceptable or desired.
+   *
+   * @default "panel"
+   */
   layout?: "panel" | "page";
   /** If defined, will store the current tab value in the querystring (using router). */
   searchParam?: string;
@@ -57,7 +90,14 @@ export function TabbedButtonLayout({
     | ReactElement<TabbedButtonProps>
     | null
     | boolean;
+  /** If true, will render as a horizontal list of buttons instead of a tab/track layout. */
+  buttonStyle?: boolean;
+  pill?: boolean;
+  /** Whether to pad the tabs with 20px vertical and 10px horizontal space. */
+  pad?: boolean;
 }) {
+  const ref = useRef<HTMLDivElement>(null);
+
   // We always want to render using "nextLocation" instead of "location" because
   // content may be loading via <Suspense> and we want to highlight the tab that
   // will be selected next regardless of that loading state.
@@ -80,6 +120,16 @@ export function TabbedButtonLayout({
 
   // Coerce children to array, flattening fragments and falsy conditionals.
   const buttons = flattenChildren(children).filter(isTabbedButton);
+
+  const hotkeys = buttons
+    .map((b) => b.props.hotkey)
+    .filter(Boolean) as HotKey[];
+  useHotKey(hotkeys, { target: ref }, (hotkey) => {
+    const button = buttons.find((b) => b.props.hotkey === hotkey);
+    if (button) {
+      selectTab(button.props.value);
+    }
+  });
 
   // What React wants us to render right now, possibly suspended.
   const paramValue = searchParam && location.searchParams().get(searchParam);
@@ -175,6 +225,8 @@ export function TabbedButtonLayout({
     ...style,
     "--selected-index": selectedIndex,
     "--child-count": buttons.length,
+    "--border-radius": pill ? "9999px" : "9px",
+    "--border-radius-inner": pill ? "9999px" : "7px",
   } as CSSProperties;
 
   // Using our Router integration, and trying to render an invalid paramValue?
@@ -197,10 +249,12 @@ export function TabbedButtonLayout({
 
   return (
     <StyledTabbedButtonLayout
-      data-primary={!!primary}
+      ref={ref}
+      data-button-style={!!buttonStyle}
       data-layout={layout}
       data-hide-tabs={buttons.length === 1}
       data-disabled={!!disabled}
+      data-pad={!!pad}
       style={cssProps}
       {...rest}
     >
@@ -209,18 +263,25 @@ export function TabbedButtonLayout({
           <div className="background" onTouchStart={onTouchStart} />
           {buttons.map((child, i) => (
             <Button
-              primary
+              newStyle
+              data-fit={!!child.props.fit}
               disabled={!!disabled}
               key={String(child.props.value ?? i)}
               data-selected={(child.props.value ?? i) === resolvedValue}
               onClick={() => selectTab(child.props.value ?? i)}
               role="tab"
               aria-selected={(child.props.value ?? i) === resolvedValue}
+              {...child.props.buttonProps}
             >
               <TabButtonContent>
+                {child.props.icon}
                 {child.props.title}
                 {child.props.badge ? (
-                  <UnreadBadge children={child.props.badge} />
+                  <UnreadBadge
+                    children={child.props.badge}
+                    color={child.props.badgeColor}
+                    backgroundColor={child.props.badgeBackgroundColor}
+                  />
                 ) : null}
               </TabButtonContent>
             </Button>
@@ -238,9 +299,12 @@ export const StyledTabbedButtonLayout = styled.div`
 
   > .tabs {
     flex-shrink: 0;
-    padding: 20px 10px;
     display: flex;
     flex-flow: column;
+  }
+
+  &[data-pad="true"] > .tabs {
+    padding: 20px 10px;
   }
 
   &[data-hide-tabs="true"] {
@@ -249,16 +313,16 @@ export const StyledTabbedButtonLayout = styled.div`
     }
   }
 
-  &[data-primary="false"] > .tabs > .track {
+  &[data-button-style="false"] > .tabs > .track {
     display: flex;
     flex-flow: row;
-    background: ${colors.lightGray()};
-    border-radius: 10px;
+    background: ${colors.gray200()};
+    border-radius: var(--border-radius);
     position: relative;
     min-height: 38px;
 
     @media (prefers-color-scheme: dark) {
-      background: ${colors.textBackgroundPanel()};
+      background: ${colors.gray950()};
     }
 
     > .background {
@@ -269,7 +333,7 @@ export const StyledTabbedButtonLayout = styled.div`
       width: calc((100% / var(--child-count)) - 4px * 2);
       height: calc(100% - 4px * 2);
       background: ${colors.textBackground()};
-      border-radius: 6px;
+      border-radius: var(--border-radius-inner);
       box-shadow: ${shadows.cardSmall()};
     }
 
@@ -281,15 +345,22 @@ export const StyledTabbedButtonLayout = styled.div`
       z-index: 1;
       font: ${fonts.displayMedium({ size: 14 })};
       color: ${colors.text()};
+      transition: color 0.2s linear;
+      /* For outline. */
+      border-radius: var(--border-radius);
 
       &[data-selected="true"] {
         font: ${fonts.displayBold({ size: 14 })};
         pointer-events: none;
       }
+
+      &[data-selected="false"] {
+        color: ${colors.textSecondary()};
+      }
     }
   }
 
-  &[data-primary="true"] > .tabs > .track {
+  &[data-button-style="true"] > .tabs > .track {
     display: flex;
     flex-flow: row;
 
@@ -298,27 +369,30 @@ export const StyledTabbedButtonLayout = styled.div`
     }
 
     > button {
-      width: 0;
       flex-grow: 1;
       flex-shrink: 0;
-      height: 40px;
+      min-height: 38px;
       transition: transform linear 0.1s;
+      padding: 6px 8px;
+
+      &[data-fit="true"] {
+        flex-grow: 0;
+        width: auto;
+      }
 
       &[data-selected="false"] {
-        background: transparent;
         font: ${fonts.display({ size: 14 })};
         color: ${colors.text()};
-        box-shadow: ${shadows.cardBorder()}, ${shadows.cardSmall()};
-        transform: translateY(-2px);
 
-        @media (prefers-color-scheme: dark) {
-          box-shadow: ${shadows.cardSmall()};
+        &:hover {
+          background: ${colors.buttonBackgroundGlow()};
         }
       }
-    }
 
-    > button + button {
-      margin-left: 10px;
+      &[data-selected="true"] {
+        background: ${colors.linkActiveBackground()};
+        font: ${fonts.displayBold({ size: 14 })};
+      }
     }
   }
 
@@ -373,11 +447,13 @@ function isTabbedButton(
 
 const TabButtonContent = styled.div`
   position: relative;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  gap: 6px;
 
-  > ${UnreadBadge} {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: -20px;
+  > svg {
+    width: 16px;
+    height: 16px;
   }
 `;

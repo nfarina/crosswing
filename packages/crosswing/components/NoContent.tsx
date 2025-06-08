@@ -4,14 +4,15 @@ import { colors } from "../colors/colors.js";
 import { fonts } from "../fonts/fonts.js";
 import { Button } from "./Button.js";
 import { Clickable } from "./Clickable.js";
-import { LinkButton } from "./LinkButton.js";
 
 export function NoContent({
   title,
   subtitle,
   primaryText,
   children,
+  newStyle,
   action,
+  actionIcon,
   actionTo,
   actionWorking,
   primaryAction,
@@ -24,7 +25,9 @@ export function NoContent({
   title?: ReactNode;
   subtitle?: ReactNode;
   primaryText?: boolean;
+  newStyle?: boolean;
   action?: ReactNode;
+  actionIcon?: ReactNode;
   actionTo?: string;
   actionWorking?: boolean;
   primaryAction?: boolean;
@@ -34,24 +37,27 @@ export function NoContent({
   onOrActionClick?: () => void;
 }) {
   return (
-    <StyledNoContent data-primary-text={!!primaryText} {...rest}>
+    <StyledNoContent
+      data-primary-text={!!primaryText}
+      data-new-style={!!newStyle}
+      {...rest}
+    >
       {title && <div className="title">{title}</div>}
       {subtitle && <div className="subtitle">{subtitle}</div>}
-      {action && !actionTo && (
+      {action && (
         <Button
-          className="action"
-          children={action}
-          onClick={onActionClick}
-          primary={primaryAction}
-          working={actionWorking}
-        />
-      )}
-      {action && actionTo && (
-        <LinkButton
+          {...(newStyle && {
+            newStyle: true,
+            icon: actionIcon,
+            bordered: true,
+            pill: true,
+          })}
           className="action"
           children={action}
           to={actionTo}
+          onClick={onActionClick}
           primary={primaryAction}
+          working={actionWorking}
         />
       )}
       {orAction && (
@@ -72,6 +78,7 @@ export const StyledNoContent = styled.div`
   padding: 30px 10px;
   box-sizing: border-box;
   background: ${colors.textBackground()};
+  gap: 30px;
 
   > * {
     max-width: 400px;
@@ -108,10 +115,6 @@ export const StyledNoContent = styled.div`
     }
   }
 
-  > * + * {
-    margin-top: 30px;
-  }
-
   > .or {
     font: ${fonts.display({ size: 14, line: "22px" })};
     color: ${colors.text()};
@@ -125,5 +128,27 @@ export const StyledNoContent = styled.div`
 
   > .children {
     margin-top: 30px;
+  }
+
+  &[data-new-style="true"] {
+    gap: 20px;
+    background: transparent;
+
+    > .title {
+      font: ${fonts.displayBold({ size: 24, line: "1.4" })};
+      color: ${colors.text()};
+      /* Only way to defeat ts-styled-plugin's lints right now. */
+      ${"text-wrap: pretty;"}
+    }
+
+    > .subtitle {
+      font: ${fonts.display({ size: 16, line: "1.4" })};
+      color: ${colors.textSecondary()};
+      ${"text-wrap: pretty;"}
+    }
+
+    > .action {
+      margin-top: 5px;
+    }
   }
 `;

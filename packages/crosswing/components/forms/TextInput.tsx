@@ -2,6 +2,8 @@ import {
   ChangeEvent,
   FocusEvent,
   InputHTMLAttributes,
+  KeyboardEvent,
+  ReactNode,
   use,
   useLayoutEffect,
   useRef,
@@ -12,10 +14,14 @@ import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
 import { HostContext } from "../../host/context/HostContext.js";
 import { useScrollAboveKeyboard } from "../../host/features/useScrollAboveKeyboard.js";
+import { AlertTriangleIcon } from "../../icons/AlertTriangle.js";
+import { useErrorAlert } from "../../modals/alert/useErrorAlert.js";
+import { tooltip } from "../../modals/popup/TooltipView.js";
 import { StatusBadge, StyledStatusBadge } from "../badges/StatusBadge.js";
+import { Button } from "../Button.js";
 
 /** How to render errors when given via the `TextInput.error` property. */
-export type TextInputErrorStyle = "color" | "message";
+export type TextInputErrorStyle = "color" | "message" | "none";
 
 /**
  * A text input that supports automatically trimming user-entered input.
@@ -24,6 +30,8 @@ export type TextInputErrorStyle = "color" | "message";
  * automatic trimming.
  */
 export function TextInput({
+  newStyle = false,
+  icon,
   value = "",
   autoFocusOnDesktop,
   autoSelect,
@@ -35,10 +43,12 @@ export function TextInput({
   autoTrim = true,
   style,
   className,
-  onFocus,
   onBlur,
+  onKeyDown,
   ...rest
 }: Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> & {
+  newStyle?: boolean;
+  icon?: ReactNode;
   value?: string;
   autoFocusOnDesktop?: boolean;
   /** When the input is auto-focused initially, any existing value will be selected. */
@@ -52,10 +62,12 @@ export function TextInput({
 }) {
   const { container } = use(HostContext);
 
-  // Track whether you've ever focused the input so we don't open up a new
-  // blank form with lots of "Required" errors right away.
-  const [hasEverFocused, setHasEverFocused] = useState(false);
-  const [focused, setFocused] = useState(false);
+  // Details button isn't useful for form errors (they are "intentional" errors so no debugging info needed).
+  const errorAlert = useErrorAlert({ showDetails: false });
+
+  // We only want to show errors if there's an initial value, or if the
+  // user has interacted with the field.
+  const [canShowError, setCanShowError] = useState(!!value && !!error?.message);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -92,18 +104,23 @@ export function TextInput({
     onValueChange?.(autoTrim ? newValue.trim() : newValue);
   }
 
-  function onInputFocus(e: FocusEvent<HTMLInputElement>) {
-    setFocused(true);
-    setHasEverFocused(true);
-    onFocus?.(e);
-  }
-
   function onInputBlur(e: FocusEvent<HTMLInputElement>) {
-    setFocused(false);
+    if (value) {
+      setCanShowError(true);
+    }
     onBlur?.(e);
   }
 
-  const showError = !!error && (!!value || hasEverFocused) && !focused;
+  function onInputKeyDown(e: KeyboardEvent<HTMLInputElement>) {
+    // If you attempt to "submit" anything, we want to show the error.
+    if (e.key === "Enter") {
+      setCanShowError(true);
+    }
+    onKeyDown?.(e);
+  }
+
+  const showingError =
+    errorStyle !== "none" && !!error?.message && canShowError;
 
   // Separate any data- attributes from rest.
   const dataAttrs = {};
@@ -120,9 +137,11 @@ export function TextInput({
     <StyledTextInput
       style={style}
       className={className}
-      data-error={showError}
+      data-new-style={newStyle}
+      data-error={showingError}
       data-error-style={errorStyle}
       data-value-empty={!innerValue}
+      data-has-icon={!!icon}
       {...dataAttrs}
     >
       <input
@@ -132,16 +151,26 @@ export function TextInput({
         data-numeric={!!numeric}
         {...(numeric ? { inputMode: "decimal" } : null)}
         autoFocus={autoFocus}
-        onFocus={onInputFocus}
         onBlur={onInputBlur}
+        onKeyDown={onInputKeyDown}
         {...restAttrs}
       />
-      {showError && !!error?.message && (
+      {icon && <div className="icon">{icon}</div>}
+      {!newStyle && showingError && (
         <StatusBadge
           type="error"
           size="smallest"
           hideIcon
           children={error.message}
+        />
+      )}
+      {newStyle && showingError && (
+        <Button
+          newStyle
+          className="error-button"
+          icon={<AlertTriangleIcon />}
+          {...tooltip(error.message)}
+          onClick={() => errorAlert.show(error)}
         />
       )}
     </StyledTextInput>
@@ -152,20 +181,43 @@ export const StyledTextInput = styled.div`
   display: flex;
   flex-flow: row;
   box-sizing: border-box;
+  position: relative;
+
+  > .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: ${colors.gray450()};
+    pointer-events: none;
+
+    @media (prefers-color-scheme: dark) {
+      color: ${colors.gray400()};
+    }
+
+    > svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
 
   > input {
     /* Remove intrinsic size and allow it to fit whatever container you put it in. */
     width: 0;
     flex-grow: 1;
-    padding: 0;
 
     appearance: none;
+    outline: none;
     display: block;
     box-sizing: border-box;
     font: ${fonts.display({ size: 16 })};
     color: ${colors.text()};
     border: none;
     border-radius: 0;
+    padding: 0;
     background: transparent;
 
     &[data-numeric="true"] {
@@ -173,14 +225,13 @@ export const StyledTextInput = styled.div`
       letter-spacing: 0.5px;
     }
 
-    &:focus {
-      /* Better outline styles on focus for desktop TBD. */
-      outline: none;
-    }
-
     &::-webkit-input-placeholder {
-      color: ${colors.darkGray()};
+      color: ${colors.gray400()};
       font: inherit;
+
+      @media (prefers-color-scheme: dark) {
+        color: ${colors.gray450()};
+      }
     }
 
     &:disabled {
@@ -194,23 +245,82 @@ export const StyledTextInput = styled.div`
     transition: color 0.2s ease-in-out;
   }
 
-  > ${StyledStatusBadge} {
-    display: none;
-    margin: 7px 7px 7px 0;
-    align-self: center;
-    max-width: 50%;
-  }
-
-  &[data-error="true"][data-error-style="color"],
-  &[data-error="true"][data-error-style="message"] {
+  &[data-has-icon="true"] {
     > input {
-      color: ${colors.red()};
+      padding-left: 34px;
     }
   }
 
-  &[data-error="true"][data-error-style="message"] {
+  &[data-new-style="false"] {
     > ${StyledStatusBadge} {
-      display: unset;
+      display: none;
+      margin: 7px 7px 7px 0;
+      align-self: center;
+      max-width: 50%;
+    }
+
+    &[data-error="true"]:not(:focus-within) {
+      > input {
+        color: ${colors.red()};
+      }
+    }
+
+    &[data-error="true"][data-error-style="message"] {
+      > ${StyledStatusBadge} {
+        display: unset;
+      }
+    }
+  }
+
+  &[data-new-style="true"] {
+    border: 1px solid ${colors.controlBorder()};
+    border-radius: 9px;
+    min-height: 40px;
+    box-sizing: border-box;
+    background: ${colors.textBackground()};
+
+    > input {
+      /* For outline when focused. */
+      border-radius: 9px;
+      font: ${fonts.display({ size: 14, line: "18px" })};
+      padding: 8px 10px;
+    }
+
+    &[data-has-icon="true"] {
+      > input {
+        padding-left: 35px;
+      }
+    }
+
+    &[data-error="true"]:not(:focus-within) {
+      border-color: ${colors.red({ darken: 0.1 })};
+
+      @media (prefers-color-scheme: dark) {
+        border-color: ${colors.red({ lighten: 0.15 })};
+      }
+    }
+
+    > .error-button {
+      padding: 2px 5px;
+      min-width: 32px;
+      min-height: 32px;
+      color: ${colors.red({ darken: 0.1 })};
+      position: absolute;
+      right: 3px;
+      top: 3px;
+
+      @media (prefers-color-scheme: dark) {
+        color: ${colors.red({ lighten: 0.15 })};
+      }
+
+      &:hover {
+        background: ${colors.red({ alpha: 0.1 })};
+      }
+
+      > svg {
+        width: 18px;
+        height: 18px;
+      }
     }
   }
 `;

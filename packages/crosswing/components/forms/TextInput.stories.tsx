@@ -3,6 +3,8 @@ import { useState } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
+import { SearchIcon } from "../../icons/Search.js";
+import { ModalDecorator } from "../../modals/storybook/decorators.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import { Button } from "../Button.js";
 import { StyledTextInput, TextInput } from "./TextInput.js";
@@ -10,8 +12,9 @@ import { StyledTextInput, TextInput } from "./TextInput.js";
 export default {
   component: TextInput,
   decorators: [
-    CrosswingAppDecorator({ layout: "component" }),
     (Story: () => any) => <Container children={<Story />} />,
+    CrosswingAppDecorator({ layout: "component" }),
+    ModalDecorator,
   ],
   parameters: { layout: "centered" },
 } satisfies Meta<typeof TextInput>;
@@ -60,7 +63,7 @@ export const WithErrorColorOnly = () => {
     <TextInput
       value={text}
       onValueChange={setText}
-      error={new Error("Invalid Number")}
+      error={new Error("Invalid number")}
       errorStyle="color"
     />
   );
@@ -96,7 +99,7 @@ const Container = styled.div`
   display: flex;
   flex-flow: column;
 
-  > ${StyledTextInput} {
+  > ${StyledTextInput}[data-new-style="false"] {
     /* Make it stand out in Storybook against the background. */
     border: 1px solid ${colors.separator()};
     border-radius: 6px;
@@ -115,3 +118,75 @@ const Container = styled.div`
     margin-top: 20px;
   }
 `;
+
+export const NewStyleWithPlaceholder = () => {
+  const [text, setText] = useState("");
+
+  return (
+    <TextInput
+      placeholder="Enter your name"
+      value={text}
+      onValueChange={setText}
+      newStyle
+    />
+  );
+};
+
+export const NewStyleWithIcon = () => {
+  const [text, setText] = useState("");
+
+  return (
+    <TextInput
+      newStyle
+      placeholder="Enter your name"
+      value={text}
+      onValueChange={setText}
+      icon={<SearchIcon />}
+    />
+  );
+};
+
+export const NewStyleWithIconAndRequiredError = () => {
+  const [text, setText] = useState("");
+
+  return (
+    <TextInput
+      newStyle
+      placeholder="Enter your name"
+      value={text}
+      onValueChange={setText}
+      icon={<SearchIcon />}
+      error={!text ? new Error("Name is required.") : null}
+    />
+  );
+};
+
+export const NewStyleWithIconAndValidationError = () => {
+  const [text, setText] = useState("");
+
+  return (
+    <TextInput
+      newStyle
+      placeholder="Enter a fruit"
+      value={text}
+      onValueChange={setText}
+      icon={<SearchIcon />}
+      error={text.toLowerCase() !== "apple" ? new Error("Not an apple!") : null}
+    />
+  );
+};
+
+export const NewStyleWithIconAndInitialError = () => {
+  const [text, setText] = useState("Bill");
+
+  return (
+    <TextInput
+      newStyle
+      placeholder="Enter your name"
+      value={text}
+      onValueChange={setText}
+      icon={<SearchIcon />}
+      error={text === "Bill" ? new Error("Bill is not valid.") : null}
+    />
+  );
+};

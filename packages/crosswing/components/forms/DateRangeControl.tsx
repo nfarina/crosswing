@@ -97,7 +97,7 @@ export default function DateRangeControl({
       <div className="presets">
         <Button
           size="smaller"
-          title="Clear"
+          children="Clear"
           onClick={() => onValueChange(null, "preset")}
         />
         {!hidePresets &&
@@ -105,11 +105,11 @@ export default function DateRangeControl({
             <Button
               key={preset.title}
               size="smaller"
-              title={preset.title}
+              children={preset.title}
               onClick={() => onValueChange(preset.range(), "preset")}
             />
           ))}
-        <Button size="smaller" title="Custom" onClick={customPrompt.show} />
+        <Button size="smaller" children="Custom" onClick={customPrompt.show} />
       </div>
     </StyledDateRangeControl>
   );

@@ -41,7 +41,7 @@ export function ExternalLink({
 }
 
 export const StyledExternalLink = styled.span`
-  color: ${colors.primary()};
+  color: ${colors.blue()};
   cursor: pointer;
 
   &:hover {

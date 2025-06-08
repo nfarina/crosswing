@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import { ModalDecorator } from "../../modals/storybook/decorators.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import { Button } from "../Button.js";
 import { TextInput } from "../forms/TextInput.js";
@@ -11,6 +12,7 @@ export default {
   decorators: [
     CrosswingAppDecorator({ layout: "component" }),
     TransformerDecorator,
+    ModalDecorator,
   ],
   parameters: { layout: "centered" },
 };

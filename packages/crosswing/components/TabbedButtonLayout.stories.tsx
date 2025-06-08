@@ -1,5 +1,5 @@
-import { action } from "@storybook/addon-actions";
 import { Suspense, lazy, use, useState } from "react";
+import { action } from "storybook/actions";
 import { RouterContext } from "../router/context/RouterContext.js";
 import {
   BrowserSimulator,
@@ -36,12 +36,12 @@ export const OneTab = () => (
   </TabbedButtonLayout>
 );
 
-export const Primary = () => (
-  <TabbedButtonLayout primary onValueChange={action("onValueChange")}>
+export const ButtonStyle = () => (
+  <TabbedButtonLayout buttonStyle onValueChange={action("onValueChange")}>
     <TabbedButton title="Red Fish" value="red">
       <NoContent title="Red Fish" />
     </TabbedButton>
-    <TabbedButton title="Blue Fish" value="blue">
+    <TabbedButton title="Blue Fish" value="blue" badge={2}>
       <NoContent style={{ background: "blue" }} title="Blue Fish" />
     </TabbedButton>
   </TabbedButtonLayout>

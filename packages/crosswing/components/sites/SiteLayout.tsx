@@ -109,7 +109,7 @@ export function SiteLayout({
     const { path, children, render } = area.props;
 
     const links = flattenChildren(children).filter(isSiteLink);
-    const key = path ?? "area-" + links[0]?.props.path;
+    const key = path ?? "area-route-" + links[0]?.props.path;
 
     const renderRedirect = () => {
       // Redirect to first link if area has child links.
@@ -123,7 +123,7 @@ export function SiteLayout({
     return (
       <Fragment key={key}>
         {links.map((link) => renderLinkRoutes(area, link))}
-        <Route path={path} render={render ?? renderRedirect} />
+        {path && <Route path={path} render={render ?? renderRedirect} />}
       </Fragment>
     );
   }
@@ -137,7 +137,9 @@ export function SiteLayout({
 
     const fullPath = areaPath ? `${areaPath}/${path}` : path;
 
-    return render && <Route key={path} path={fullPath} render={render} />;
+    return (
+      render && <Route key={"link-" + path} path={fullPath} render={render} />
+    );
   }
 
   const headerAccessories = (accessories ?? []).filter(
@@ -185,13 +187,34 @@ export function SiteLayout({
             {areas.map(renderAreaRoutes)}
             {/* Site default redirect. */}
             <Route
-              render={() =>
-                areas[0].props.path ? (
-                  <Redirect to={areas[0].props.path} />
-                ) : (
-                  <NoContent title="Nothing Selected" />
-                )
-              }
+              render={() => {
+                {
+                  /*
+                   * CHANGE 2: Make the default redirect smarter. It now handles
+                   * redirecting to the first link of the first area if that
+                   * area doesn't have a path of its own.
+                   */
+                }
+                if (!areas[0]) {
+                  return <NoContent title="Nothing Selected" />;
+                }
+
+                const firstArea = areas[0];
+
+                if (firstArea.props.path) {
+                  return <Redirect to={firstArea.props.path} />;
+                }
+
+                const links = flattenChildren(firstArea.props.children).filter(
+                  isSiteLink,
+                );
+
+                if (links[0]?.props.path) {
+                  return <Redirect to={links[0].props.path} />;
+                }
+
+                return <NoContent title="Nothing Selected" />;
+              }}
             />
           </Switch>
         </div>

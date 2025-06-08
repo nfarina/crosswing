@@ -1,4 +1,4 @@
-import { action } from "@storybook/addon-actions";
+import { action } from "storybook/actions";
 import { useAsyncTask } from "../hooks/useAsyncTask.js";
 import { useErrorAlert } from "../modals/alert/useErrorAlert.js";
 import { ModalDecorator } from "../modals/storybook/decorators.js";

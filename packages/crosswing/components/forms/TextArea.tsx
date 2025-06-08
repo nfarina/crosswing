@@ -1,6 +1,7 @@
 import {
   ChangeEvent,
   FocusEvent,
+  ReactNode,
   TextareaHTMLAttributes,
   use,
   useLayoutEffect,
@@ -13,7 +14,11 @@ import { fonts } from "../../fonts/fonts.js";
 import { useElementSize } from "../../hooks/useElementSize.js";
 import { HostContext } from "../../host/context/HostContext.js";
 import { useScrollAboveKeyboard } from "../../host/features/useScrollAboveKeyboard.js";
+import { AlertTriangleIcon } from "../../icons/AlertTriangle.js";
+import { useErrorAlert } from "../../modals/alert/useErrorAlert.js";
+import { tooltip } from "../../modals/popup/TooltipView.js";
 import { StatusBadge, StyledStatusBadge } from "../badges/StatusBadge.js";
+import { Button } from "../Button.js";
 
 /** How to render errors when given via the `TextInput.error` property. */
 export type TextAreaErrorStyle = "color" | "message" | "none";
@@ -26,6 +31,8 @@ export type TextAreaErrorStyle = "color" | "message" | "none";
  * automatic trimming.
  */
 export function TextArea({
+  newStyle = false,
+  icon,
   value = "",
   autoFocusOnDesktop,
   autoSelect,
@@ -36,12 +43,13 @@ export function TextArea({
   autoTrim = true,
   style,
   className,
-  onFocus,
   onBlur,
   minHeight = 22, // default line height
   maxHeight = Number.POSITIVE_INFINITY,
   ...rest
 }: Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "onChange"> & {
+  newStyle?: boolean;
+  icon?: ReactNode;
   value?: string;
   autoFocusOnDesktop?: boolean;
   /** When the input is auto-focused initially, any existing value will be selected. */
@@ -63,10 +71,12 @@ export function TextArea({
 
   const { container } = use(HostContext);
 
-  // Track whether you've ever focused the input so we don't open up a new
-  // blank form with lots of "Required" errors right away.
-  const [hasEverFocused, setHasEverFocused] = useState(false);
-  const [focused, setFocused] = useState(false);
+  // Details button isn't useful for form errors (they are "intentional" errors so no debugging info needed).
+  const errorAlert = useErrorAlert({ showDetails: false });
+
+  // We only want to show errors if there's an initial value, or if the
+  // user has interacted with the field.
+  const [canShowError, setCanShowError] = useState(!!value && !!error?.message);
 
   const [innerValue, setInnerValue] = useState(value);
 
@@ -100,7 +110,7 @@ export function TextArea({
   function onInputChange(e: ChangeEvent<HTMLTextAreaElement>) {
     const newValue = e.currentTarget.value;
     setInnerValue(newValue);
-    onValueChange?.(newValue.trim());
+    onValueChange?.(autoTrim ? newValue.trim() : newValue);
   }
 
   //
@@ -152,18 +162,15 @@ export function TextArea({
   // Focus & Error Management
   //
 
-  function onInputFocus(e: FocusEvent<HTMLTextAreaElement>) {
-    setFocused(true);
-    setHasEverFocused(true);
-    onFocus?.(e);
-  }
-
   function onInputBlur(e: FocusEvent<HTMLTextAreaElement>) {
-    setFocused(false);
+    if (value) {
+      setCanShowError(true);
+    }
     onBlur?.(e);
   }
 
-  const showError = !!error && (!!value || hasEverFocused) && !focused;
+  const showingError =
+    errorStyle !== "none" && !!error?.message && canShowError;
 
   // Separate any data- attributes from rest.
   const dataAttrs = {};
@@ -181,27 +188,38 @@ export function TextArea({
     <StyledTextArea
       style={style}
       className={className}
-      data-error={showError}
+      data-new-style={newStyle}
+      data-error={showingError}
       data-error-style={errorStyle}
       data-value-empty={!innerValue}
+      data-has-icon={!!icon}
       {...dataAttrs}
     >
       <textarea
         value={innerValue}
         onChange={onInputChange}
-        onFocus={onInputFocus}
         onBlur={onInputBlur}
         autoFocus={autoFocus}
         data-auto-sizing={!!autoSizing}
         ref={ref}
         {...restAttrs}
       />
-      {showError && (
+      {icon && <div className="icon">{icon}</div>}
+      {!newStyle && showingError && (
         <StatusBadge
           type="error"
           size="smallest"
           hideIcon
           children={error.message}
+        />
+      )}
+      {newStyle && showingError && (
+        <Button
+          newStyle
+          className="error-button"
+          icon={<AlertTriangleIcon />}
+          {...tooltip(error.message)}
+          onClick={() => errorAlert.show(error)}
         />
       )}
     </StyledTextArea>
@@ -212,6 +230,27 @@ export const StyledTextArea = styled.div`
   display: flex;
   flex-flow: row;
   box-sizing: border-box;
+  position: relative;
+
+  > .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    color: ${colors.gray450()};
+    pointer-events: none;
+
+    @media (prefers-color-scheme: dark) {
+      color: ${colors.gray400()};
+    }
+
+    > svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
 
   > textarea {
     /* Remove intrinsic size and allow it to fit whatever container you put it in. */
@@ -235,8 +274,12 @@ export const StyledTextArea = styled.div`
     }
 
     &::-webkit-input-placeholder {
-      color: ${colors.darkGray()};
+      color: ${colors.gray400()};
       font: inherit;
+
+      @media (prefers-color-scheme: dark) {
+        color: ${colors.gray450()};
+      }
     }
 
     /* Target Safari browsers only, which drop the bottom padding from the placeholder: http://browserbu.gs/css-hacks/webkit-full-page-media/ */
@@ -256,23 +299,82 @@ export const StyledTextArea = styled.div`
     transition: color 0.2s ease-in-out;
   }
 
-  > ${StyledStatusBadge} {
-    display: none;
-    margin: 7px 7px 7px 0;
-    align-self: center;
-    max-width: 30%;
-  }
-
-  &[data-error="true"][data-error-style="color"],
-  &[data-error="true"][data-error-style="message"] {
+  &[data-has-icon="true"] {
     > textarea {
-      color: ${colors.red()};
+      padding-left: 34px;
     }
   }
 
-  &[data-error="true"][data-error-style="message"] {
+  &[data-new-style="false"] {
     > ${StyledStatusBadge} {
-      display: unset;
+      display: none;
+      margin: 7px 7px 7px 0;
+      align-self: center;
+      max-width: 30%;
+    }
+
+    &[data-error="true"]:not(:focus-within) {
+      > textarea {
+        color: ${colors.red()};
+      }
+    }
+
+    &[data-error="true"][data-error-style="message"] {
+      > ${StyledStatusBadge} {
+        display: unset;
+      }
+    }
+  }
+
+  &[data-new-style="true"] {
+    border: 1px solid ${colors.controlBorder()};
+    border-radius: 9px;
+    min-height: 40px;
+    box-sizing: border-box;
+    background: ${colors.textBackground()};
+
+    > textarea {
+      /* For outline when focused. */
+      border-radius: 9px;
+      font: ${fonts.display({ size: 14, line: "18px" })};
+      padding: 10px 10px;
+    }
+
+    &[data-has-icon="true"] {
+      > textarea {
+        padding-left: 35px;
+      }
+    }
+
+    &[data-error="true"]:not(:focus-within) {
+      border-color: ${colors.red({ darken: 0.1 })};
+
+      @media (prefers-color-scheme: dark) {
+        border-color: ${colors.red({ lighten: 0.15 })};
+      }
+    }
+
+    > .error-button {
+      padding: 2px 5px;
+      min-width: 32px;
+      min-height: 32px;
+      color: ${colors.red({ darken: 0.1 })};
+      position: absolute;
+      right: 3px;
+      top: 3px;
+
+      @media (prefers-color-scheme: dark) {
+        color: ${colors.red({ lighten: 0.15 })};
+      }
+
+      &:hover {
+        background: ${colors.red({ alpha: 0.1 })};
+      }
+
+      > svg {
+        width: 18px;
+        height: 18px;
+      }
     }
   }
 `;

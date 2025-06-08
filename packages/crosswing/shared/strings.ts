@@ -53,18 +53,21 @@ export function makePosessive(s: string): string {
 export function pluralize(
   num: number,
   units: string | [singular: string, plural: string],
-  { showZero = false }: { showZero?: boolean } = {},
+  {
+    showZero = false,
+    unitsOnly = false,
+  }: { showZero?: boolean; unitsOnly?: boolean } = {},
 ) {
   const rounded = Math.floor(num);
   const [singular, plural] = Array.isArray(units)
     ? units
     : splitSingularAndPlural(units);
   if (rounded === 0 && !showZero) {
-    return "No " + plural;
+    return unitsOnly ? plural : "No " + plural;
   } else if (rounded === 1) {
-    return `${rounded} ${singular}`;
+    return unitsOnly ? singular : `${rounded} ${singular}`;
   } else {
-    return `${rounded} ${plural}`;
+    return unitsOnly ? plural : `${rounded} ${plural}`;
   }
 }
 

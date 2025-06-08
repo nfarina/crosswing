@@ -1,4 +1,10 @@
-import { CSSProperties, HTMLAttributes, ReactNode } from "react";
+import {
+  CSSProperties,
+  HTMLAttributes,
+  ReactNode,
+  useEffect,
+  useRef,
+} from "react";
 import { styled } from "styled-components";
 import { colors, shadows } from "../../colors/colors.js";
 import { PopupPlacement } from "./getPopupPlacement.js";
@@ -16,7 +22,8 @@ export function PopupView({
   arrowBackground,
   arrowBackgroundDark,
   outlineBorder = true,
-  hideArrow = false,
+  hideArrow = true,
+  autoFocus = true,
   style,
   children,
   ...rest
@@ -27,6 +34,7 @@ export function PopupView({
   arrowBackgroundDark?: string;
   outlineBorder?: boolean;
   hideArrow?: boolean;
+  autoFocus?: boolean;
   children?: ReactNode;
   /**
    * Determines where the arrow will be positioned when "statically" rendered.
@@ -36,10 +44,18 @@ export function PopupView({
   placement?: PopupPlacement;
 } & Partial<PopupChildProps> &
   HTMLAttributes<HTMLDivElement>) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (autoFocus) {
+      ref.current?.focus();
+    }
+  }, [autoFocus]);
+
   // If you didn't specify a background OR a backgroundDark, use our defaults.
   if (!background && !backgroundDark) {
     background = colors.textBackground();
-    backgroundDark = colors.extraDarkGray({ lighten: 0.1 });
+    backgroundDark = colors.gray750();
   } else if (!background || !backgroundDark) {
     // If you specified only one, use it for both.
     background = background || backgroundDark;
@@ -49,7 +65,7 @@ export function PopupView({
   // Same logic for arrowBackground and arrowBackgroundDark.
   if (!arrowBackground && !arrowBackgroundDark) {
     arrowBackground = colors.textBackground();
-    arrowBackgroundDark = colors.extraDarkGray({ lighten: 0.1 });
+    arrowBackgroundDark = colors.gray750();
   } else if (!arrowBackground || !arrowBackgroundDark) {
     arrowBackground = arrowBackground || arrowBackgroundDark;
     arrowBackgroundDark = arrowBackgroundDark || arrowBackground;
@@ -65,6 +81,8 @@ export function PopupView({
 
   return (
     <StyledPopupView
+      ref={ref}
+      tabIndex={0}
       style={cssProps}
       data-outline-border={!!outlineBorder}
       data-hide-arrow={!!hideArrow}
@@ -79,16 +97,15 @@ export function PopupView({
 
 export const StyledPopupView = styled.div`
   position: relative;
+  /* For outline when focused. */
+  border-radius: 16px;
 
   > .children {
     z-index: 0;
-    border-radius: 6px;
+    border-radius: 16px;
     overflow: hidden;
     background: var(--background);
-    box-shadow:
-      ${shadows.cardSmall()},
-      ${shadows.cardBorder()},
-      0 0 100px ${colors.black({ alpha: 0.2 })};
+    box-shadow: ${shadows.popup()};
     display: flex;
     flex-flow: column;
     max-width: 100%;
@@ -127,7 +144,7 @@ export const StyledPopupView = styled.div`
 
       path#Shadow {
         /* Copied from cardBorderShadow */
-        fill: ${colors.darkGreen({ alpha: 0.07 })};
+        fill: ${colors.gray800({ alpha: 0.07 })};
         fill-opacity: 1;
 
         @media (prefers-color-scheme: dark) {
@@ -199,14 +216,12 @@ export const StyledPopupView = styled.div`
 
   &[data-outline-border="true"] {
     > .children {
-      @media (prefers-color-scheme: dark) {
-        /* We need some extra constrast with a white border because the shadows don't help differentiate as well as in light mode. */
-        box-shadow:
-          0 0 0 1px ${colors.white({ alpha: 0.17 })},
-          ${shadows.cardSmall()},
-          ${shadows.cardBorder()},
-          0 0 100px ${colors.black({ alpha: 0.2 })};
-      }
+      box-shadow: ${shadows.popupBorder()}, ${shadows.popup()};
+
+      /* box-shadow:
+        0 10px 15px -3px ${colors.gray800({ alpha: 0.14 })},
+        0 4px 6px -4px ${colors.gray800({ alpha: 0.14 })},
+        0 0 0 1px ${colors.gray300()}; */
     }
 
     > .arrow-container {
