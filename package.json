@@ -12,8 +12,9 @@
   ],
   "scripts": {
     "dev": "packages/cli/bin/crosswing.js",
-    "test": "npm run prettier && npm run tsc && npm run vitest",
+    "test": "npm run prettier && npm run tsc && npm run lint && npm run vitest",
     "vitest": "vitest --run",
+    "lint": "eslint",
     "check-imports": "npx npm-check",
     "prettier": "prettier --check 'packages/**/*.ts?(x)'",
     "prettier:fix": "npm run prettier -- --write",
@@ -28,6 +29,8 @@
     "chromatic": "npx chromatic --project-token chpt_432b79370525d1b --only-changed"
   },
   "devDependencies": {
+    "@eslint/compat": "^1.2.9",
+    "@eslint/js": "^9.28.0",
     "@storybook/addon-vitest": "^9.0.6",
     "@storybook/react": "^9.0.6",
     "@storybook/react-vite": "^9.0.6",
@@ -42,6 +45,7 @@
     "babel-plugin-react-compiler": "^19.1.0-rc.2",
     "babel-plugin-styled-components": "^2.1.4",
     "chromatic": "^12.1.1",
+    "eslint": "^9.28.0",
     "prettier": "^3.5.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -49,8 +53,10 @@
     "styled-components": "^6.1.18",
     "timemachine": "^0.3.2",
     "typescript": "^5.8.3",
+    "typescript-eslint": "^8.33.1",
     "vite": "^6.3.5",
     "vite-node": "3.2.2",
+    "vite-plugin-react-click-to-component": "^3.1.1",
     "vitest": "^3.2.2"
   },
   "peerDependencies": {
