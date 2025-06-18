@@ -68,14 +68,14 @@ export function DialogView({
   fullScreen?: boolean;
   /** Whether to ellipsize the title and/or subtitle. */
   ellipsize?: "none" | "title" | "subtitle" | "both";
-  onClose: () => void;
+  onClose?: () => void;
 }) {
   function onButtonClick(
     e: MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
     { onClick, leaveOpen }: DialogButton,
   ) {
     onClick?.(e);
-    if (!leaveOpen) onClose();
+    if (!leaveOpen) onClose?.();
   }
 
   function getBorderVisibility(side: "top" | "bottom") {

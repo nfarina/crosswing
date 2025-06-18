@@ -47,7 +47,7 @@ export function TabbedButtonLayout({
   value,
   defaultValue,
   onValueChange,
-  layout = "panel",
+  layout = "fixed",
   searchParam,
   disabled,
   children,
@@ -63,7 +63,7 @@ export function TabbedButtonLayout({
   /**
    * Determines the layout behavior of the content area.
    *
-   * - **`"panel"` (default):**
+   * - **`"fixed"` (default):**
    *   The content area attempts to fill available vertical space if `TabbedButtonLayout`
    *   is a flex item in a height-managed container. Tab contents are absolutely
    *   positioned, overlaying each other within this area. Switching tabs
@@ -71,7 +71,7 @@ export function TabbedButtonLayout({
    *   below the tabs. Ideal for self-contained UI panels, modals, or sections
    *   within a fixed application layout.
    *
-   * - **`"page"`:**
+   * - **`"grow"`:**
    *   The content area's height is determined by the actual height of the
    *   currently active tab's content. Tab contents are in the normal document flow
    *   (though only one is visible). Switching tabs **can** change the overall
@@ -79,9 +79,9 @@ export function TabbedButtonLayout({
    *   to reflow. Suitable when the tabbed interface is a primary section of a
    *   scrolling page and dynamic height is acceptable or desired.
    *
-   * @default "panel"
+   * @default "fixed"
    */
-  layout?: "panel" | "page";
+  layout?: "fixed" | "grow";
   /** If defined, will store the current tab value in the querystring (using router). */
   searchParam?: string;
   disabled?: boolean;
@@ -396,7 +396,7 @@ export const StyledTabbedButtonLayout = styled.div`
     }
   }
 
-  &[data-layout="panel"] > .content {
+  &[data-layout="fixed"] > .content {
     height: 0;
     flex-grow: 1;
     position: relative;
@@ -419,7 +419,7 @@ export const StyledTabbedButtonLayout = styled.div`
     }
   }
 
-  &[data-layout="page"] > .content {
+  &[data-layout="grow"] > .content {
     flex-shrink: 0;
 
     > .tab-content[data-selected="false"] {

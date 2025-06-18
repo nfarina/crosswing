@@ -267,6 +267,11 @@ export const StyledSearchInput = styled.div`
     > .icon {
       opacity: 0.5;
     }
+
+    > .close {
+      opacity: 0.5;
+      pointer-events: none;
+    }
   }
 
   &[data-show-spinner="true"] {

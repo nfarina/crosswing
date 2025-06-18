@@ -68,7 +68,6 @@ export function AutoBorderView({
         }
 
         element.setAttribute("data-auto-border", isScrolled ? "true" : "false");
-        element.style.setProperty("--border-side", side);
       };
 
       // Sign up for scroll events on the sibling.
@@ -118,7 +117,12 @@ export function AutoBorderView({
   }, [side]);
 
   return (
-    <StyledAutoBorderView ref={ref} data-visibility={visibility} {...rest} />
+    <StyledAutoBorderView
+      ref={ref}
+      data-visibility={visibility}
+      data-border-side={side}
+      {...rest}
+    />
   );
 }
 
@@ -129,19 +133,19 @@ export const StyledAutoBorderView = styled.div`
     --h-offset: 0;
     --v-offset: 0;
 
-    &[style*="--border-side: top"] {
+    &[data-border-side="top"] {
       --v-offset: -1px;
     }
 
-    &[style*="--border-side: right"] {
+    &[data-border-side="right"] {
       --h-offset: 1px;
     }
 
-    &[style*="--border-side: bottom"] {
+    &[data-border-side="bottom"] {
       --v-offset: 1px;
     }
 
-    &[style*="--border-side: left"] {
+    &[data-border-side="left"] {
       --h-offset: -1px;
     }
 
