@@ -12,7 +12,7 @@ export function useClickOutsideToClose(
   const { modalRoot } = use(ModalContext);
 
   useEffect(() => {
-    function onClick(e: MouseEvent) {
+    function onMouseDown(e: MouseEvent) {
       const clicked = e.target as Element;
       const container = containerRef.current;
       const creator = target.current; // The element that the user originally clicked to show us.
@@ -42,8 +42,8 @@ export function useClickOutsideToClose(
     const el = modalRoot.current?.parentElement;
     if (!el) return;
 
-    el.addEventListener("click", onClick, true); // useCapture = true
-    return () => el.removeEventListener("click", onClick, true);
+    el.addEventListener("mousedown", onMouseDown, true); // useCapture = true
+    return () => el.removeEventListener("mousedown", onMouseDown, true);
   }, []);
 }
 

@@ -11,12 +11,14 @@ export function LabeledSelect({
   className,
   disabled,
   working,
+  newStyle,
   ...rest
 }: SelectHTMLAttributes<HTMLSelectElement> & {
   label: ReactNode;
   detail?: ReactNode;
   disabled?: boolean;
   working?: boolean;
+  newStyle?: boolean;
   value?: string;
   onValueChange?: (newValue: any) => void;
 }) {
@@ -26,6 +28,7 @@ export function LabeledSelect({
       className={className}
       data-has-label={!!label}
       data-disabled={!!disabled}
+      data-new-style={!!newStyle}
     >
       <div className="content">
         <div className="label" children={label} />
@@ -83,6 +86,18 @@ export const StyledLabeledSelect = styled.div`
 
     > .content > .label {
       opacity: 0.5;
+    }
+  }
+
+  &[data-new-style="true"] {
+    padding-left: 0;
+
+    > .content > .label {
+      font: ${fonts.display({ size: 14, line: "20px" })};
+    }
+
+    > .content > .detail {
+      font: ${fonts.display({ size: 12, line: "16px" })};
     }
   }
 `;

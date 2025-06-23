@@ -206,7 +206,7 @@ export function PanelLayout({
       setResolvedMode(finalMode);
     }
 
-    container.setAttribute("data-mode", resolvedMode);
+    container.setAttribute("data-mode", finalMode);
 
     // Now that we've set the initial layout, we can enable transitions.
     container.setAttribute("data-transitions-enabled", "true");
