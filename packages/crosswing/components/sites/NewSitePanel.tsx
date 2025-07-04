@@ -76,6 +76,8 @@ export const StyledNewSitePanel = styled.div`
   > .content {
     height: 0;
     flex-grow: 1;
+    display: flex;
+    flex-flow: column;
 
     > * {
       flex-shrink: 0;

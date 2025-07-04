@@ -43,6 +43,7 @@ export function DialogView({
   fullScreen = false,
   ellipsize = "none",
   onClose,
+  form = true,
   ...rest
 }: Omit<HTMLAttributes<HTMLFormElement>, "title"> & {
   ref?: RefObject<HTMLFormElement | null>;
@@ -69,6 +70,8 @@ export function DialogView({
   /** Whether to ellipsize the title and/or subtitle. */
   ellipsize?: "none" | "title" | "subtitle" | "both";
   onClose?: () => void;
+  /** If true (default), the dialog will be rendered as a form element. */
+  form?: boolean;
 }) {
   function onButtonClick(
     e: MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
@@ -90,6 +93,7 @@ export function DialogView({
   return (
     <ViewTransition>
       <StyledDialogView
+        as={form ? "form" : "div"}
         ref={ref}
         data-pad={pad}
         data-scroll={scroll}

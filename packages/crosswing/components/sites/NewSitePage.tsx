@@ -1,8 +1,7 @@
-import { HTMLAttributes, ReactNode, use, useEffect } from "react";
+import { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
 import { BorderVisibility } from "../AutoBorderView";
 import { PanelLayout } from "../PanelLayout";
-import { NewSiteContext } from "./NewSiteContext";
 import { NewSiteHeader, StyledNewSiteHeader } from "./NewSiteHeader";
 import { NewSitePanel } from "./NewSitePanel";
 
@@ -22,12 +21,12 @@ export function NewSitePage({
   children,
   headerBorderVisibility = "auto",
   ...rest
-}: HTMLAttributes<HTMLDivElement> &
+}: Omit<HTMLAttributes<HTMLDivElement>, "title"> &
   Pick<
     Parameters<typeof PanelLayout>[0],
     "panelDefaultSize" | "panelMinSize" | "panelMaxSize"
   > & {
-    title?: string;
+    title?: ReactNode;
     accessories?: ReactNode;
     panelContent?: ReactNode;
     panelAccessories?: ReactNode;
@@ -37,23 +36,10 @@ export function NewSitePage({
     children: ReactNode;
     headerBorderVisibility?: BorderVisibility;
   }) {
-  const { siteTitle } = use(NewSiteContext);
-
-  // Set document title
-  useEffect(() => {
-    if (siteTitle && title) {
-      document.title = title + " | " + siteTitle;
-    } else if (title) {
-      document.title = title;
-    } else if (siteTitle) {
-      document.title = siteTitle;
-    }
-  }, [title, siteTitle]);
-
   if (!panelContent) {
     return (
       <StyledNewSitePage {...rest}>
-        <div className="content">
+        <PageLayout>
           <NewSiteHeader
             title={title}
             accessories={accessories}
@@ -61,7 +47,7 @@ export function NewSitePage({
             borderVisibility={headerBorderVisibility}
           />
           <div className="page-content">{children}</div>
-        </div>
+        </PageLayout>
       </StyledNewSitePage>
     );
   }
@@ -80,7 +66,7 @@ export function NewSitePage({
         onPanelVisibleChange={onPanelVisibleChange}
         contentMinSize={400}
       >
-        <div className="content">
+        <PageLayout>
           <NewSiteHeader
             title={title}
             accessories={accessories}
@@ -88,7 +74,7 @@ export function NewSitePage({
             borderVisibility={headerBorderVisibility}
           />
           <div className="page-content">{children}</div>
-        </div>
+        </PageLayout>
         <NewSitePanel
           accessories={panelAccessories}
           onClose={() => onPanelVisibleChange?.(false)}
@@ -109,30 +95,30 @@ const StyledNewSitePage = styled.div`
     height: 0;
     flex-grow: 1;
   }
+`;
 
-  .content {
+const PageLayout = styled.div`
+  display: flex;
+  flex-flow: column;
+  position: relative;
+
+  > * {
+    flex-shrink: 0;
+  }
+
+  > ${StyledNewSiteHeader} {
+    z-index: 1;
+  }
+
+  > .page-content {
+    height: 0;
+    flex-grow: 1;
     display: flex;
     flex-flow: column;
-    position: relative;
 
     > * {
-      flex-shrink: 0;
-    }
-
-    > ${StyledNewSiteHeader} {
-      z-index: 1;
-    }
-
-    > .page-content {
       height: 0;
       flex-grow: 1;
-      display: flex;
-      flex-flow: column;
-
-      > * {
-        height: 0;
-        flex-grow: 1;
-      }
     }
   }
 `;

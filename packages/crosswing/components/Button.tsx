@@ -174,8 +174,8 @@ export const StyledButton = styled(Clickable)`
     }
 
     > .children {
+      flex-shrink: 1;
       min-width: 0;
-      max-width: 100%;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;

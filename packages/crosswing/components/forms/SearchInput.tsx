@@ -261,6 +261,19 @@ export const StyledSearchInput = styled.div`
     padding: 0 5px 0 8px;
     visibility: hidden;
     cursor: pointer;
+    color: ${colors.gray450()};
+
+    &:hover {
+      color: ${colors.black()};
+    }
+
+    @media (prefers-color-scheme: dark) {
+      color: ${colors.gray300()};
+
+      &:hover {
+        color: ${colors.white()};
+      }
+    }
   }
 
   &[data-disabled="true"] {

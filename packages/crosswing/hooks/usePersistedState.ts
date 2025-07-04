@@ -10,6 +10,7 @@ import { Seconds } from "../shared/timespan.js";
 import { Falsy } from "./useAsyncTask.js";
 import { useIsMounted } from "./useIsMounted.js";
 
+/** @deprecated Use `useNewPersistedState` instead. */
 export interface PersistedState<S> {
   /** Current persisted or draft value. The value to display to the user as they are editing. */
   value: S;

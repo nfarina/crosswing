@@ -4,6 +4,8 @@ import {
   isValidElement,
   ReactNode,
   use,
+  useEffect,
+  useRef,
 } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors";
@@ -24,11 +26,27 @@ export function NewSiteHeader({
   borderVisibility = "auto",
   ...rest
 }: Omit<HTMLAttributes<HTMLDivElement>, "title"> & {
-  title?: string;
+  title?: ReactNode;
   accessories?: ReactNode;
   hideSiteAccessory?: boolean;
   borderVisibility?: BorderVisibility;
 }) {
+  const { siteTitle } = use(NewSiteContext);
+  const titleRef = useRef<HTMLDivElement>(null);
+
+  // Set document title based on the text content of the title element.
+  useEffect(() => {
+    const titleText = titleRef.current?.textContent;
+
+    if (siteTitle && titleText) {
+      document.title = titleText + " | " + siteTitle;
+    } else if (titleText) {
+      document.title = titleText;
+    } else if (siteTitle) {
+      document.title = siteTitle;
+    }
+  }, [siteTitle, title]);
+
   const { sidebarVisible, setSidebarVisible, siteLayout, siteAccessory } =
     use(NewSiteContext);
 
@@ -76,7 +94,7 @@ export function NewSiteHeader({
         <div className="overflow-accessory">{overflowAccessory}</div>
       )}
       <div className="title-left" />
-      <div className="page-title" children={title} />
+      <div className="page-title" ref={titleRef} children={title} />
       <div className="title-right" />
       <div className="accessories">{accessories}</div>
     </StyledNewSiteHeader>

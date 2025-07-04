@@ -11,6 +11,7 @@ export function NoContent({
   primaryText,
   children,
   newStyle,
+  smaller,
   action,
   actionIcon,
   actionTo,
@@ -26,6 +27,7 @@ export function NoContent({
   subtitle?: ReactNode;
   primaryText?: boolean;
   newStyle?: boolean;
+  smaller?: boolean;
   action?: ReactNode;
   actionIcon?: ReactNode;
   actionTo?: string;
@@ -40,6 +42,7 @@ export function NoContent({
     <StyledNoContent
       data-primary-text={!!primaryText}
       data-new-style={!!newStyle}
+      data-smaller={!!smaller}
       {...rest}
     >
       {title && <div className="title">{title}</div>}
@@ -149,6 +152,18 @@ export const StyledNoContent = styled.div`
 
     > .action {
       margin-top: 5px;
+    }
+
+    &[data-smaller="true"] {
+      gap: 10px;
+
+      > .title {
+        font: ${fonts.displayBold({ size: 20, line: "1.4" })};
+      }
+
+      > .subtitle {
+        font: ${fonts.display({ size: 14, line: "1.4" })};
+      }
     }
   }
 `;

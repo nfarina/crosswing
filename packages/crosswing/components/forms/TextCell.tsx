@@ -245,12 +245,14 @@ export const StyledTextCell = styled.div`
 
   &:disabled,
   &[data-disabled="true"] {
+    opacity: unset; /* Override Clickable's disabled state so we don't fade out the background. */
     cursor: default;
 
     > .content {
       > .label,
       > .action,
       > .subtitle,
+      > .children,
       > .title {
         opacity: 0.5;
       }

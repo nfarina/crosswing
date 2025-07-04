@@ -176,16 +176,18 @@ export const StyledNewSiteSidebarText = styled(Link)`
 `;
 
 export function NewSiteSitebarSubtext({
+  icon,
   children,
   selected,
   ...rest
 }: Parameters<typeof Link>[0] & {
+  icon?: ReactNode;
   children: ReactNode;
   selected?: boolean;
 }) {
   return (
     <StyledNewSiteSidebarSubtext data-is-selected={selected} {...rest}>
-      <div className="dot" />
+      {icon ? <div className="icon">{icon}</div> : <div className="dot" />}
       <div className="line" />
       <div className="children">{children}</div>
     </StyledNewSiteSidebarSubtext>
@@ -202,6 +204,25 @@ const StyledNewSiteSidebarSubtext = styled(Link)`
   border-radius: 9px;
   padding: 9px 12px 9px 42px;
   position: relative;
+
+  > .icon {
+    width: 14px;
+    height: 14px;
+    color: ${colors.textSecondary({ alpha: 0.5 })};
+    position: absolute;
+    left: 16px;
+    top: calc(50% - 0.5px);
+    transform: translateY(-50%);
+
+    > svg {
+      width: 14px;
+      height: 14px;
+
+      * {
+        stroke-width: 3px;
+      }
+    }
+  }
 
   > .dot {
     width: 6px;
@@ -240,6 +261,12 @@ const StyledNewSiteSidebarSubtext = styled(Link)`
 
     > .dot {
       background: ${colors.textSecondary()};
+    }
+
+    > .icon {
+      > svg {
+        color: ${colors.textSecondary()};
+      }
     }
 
     > .children {

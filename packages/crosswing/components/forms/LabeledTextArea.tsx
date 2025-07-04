@@ -125,5 +125,11 @@ export const StyledLabeledTextArea = styled.div`
     > .label {
       font: ${fonts.displayMedium({ size: 14, line: "20px" })};
     }
+
+    &[data-disabled="true"] {
+      > .label {
+        color: ${colors.text({ alpha: 0.5 })};
+      }
+    }
   }
 `;

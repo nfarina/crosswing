@@ -13,6 +13,7 @@ export function Heading({
   smaller = false,
   badgeText,
   badgeTint,
+  disabled = false,
   ...rest
 }: HTMLAttributes<HTMLDivElement> & {
   children?: ReactNode;
@@ -23,9 +24,16 @@ export function Heading({
   badgeText?: string;
   /** Optional tint for the badge. */
   badgeTint?: HexColorBuilder;
+  /** Fades out the text similar to labeled text inputs, and disables the click handler. */
+  disabled?: boolean;
 }) {
   return (
-    <StyledHeading data-clickable={!!onClick} data-smaller={smaller} {...rest}>
+    <StyledHeading
+      data-clickable={!!onClick}
+      data-smaller={smaller}
+      data-disabled={disabled}
+      {...rest}
+    >
       {(!!children || !!subtitle) && (
         <div className="content">
           {children && (
@@ -96,6 +104,20 @@ export const StyledHeading = styled.div`
         > ${StyledBadge} {
           margin-left: 7px;
           transform: translateY(0);
+        }
+      }
+    }
+  }
+
+  &[data-disabled="true"] {
+    > .content {
+      pointer-events: none;
+
+      > .title {
+        color: ${colors.text({ alpha: 0.5 })};
+
+        > ${StyledBadge} {
+          opacity: 0.5;
         }
       }
     }

@@ -32,7 +32,7 @@ export const StyledClickable = styled.button`
 
   &:disabled {
     cursor: default;
-    opacity: 0.5;
     pointer-events: none;
+    opacity: 0.5;
   }
 `;

@@ -222,8 +222,10 @@ export function ModalContextProvider({
 
       if (!children) {
         // Next check for a tooltip string.
-        const someTooltipProp = Array.from(target.attributes).find((a) =>
-          a.name.startsWith("data-tooltip"),
+        const someTooltipProp = Array.from(target.attributes).find(
+          (a) =>
+            a.name.startsWith("data-tooltip-hotkey") ||
+            a.name === "data-tooltip",
         );
         if (someTooltipProp) {
           children = <TooltipView target={target} />;

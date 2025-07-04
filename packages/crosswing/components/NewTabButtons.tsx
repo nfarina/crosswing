@@ -109,6 +109,13 @@ export const StyledNewTabButtons = styled.div`
 
   /* Button style (individual buttons) */
   &[data-mode="buttons"] > .track {
+    /* background: ${colors.gray150()};
+    border-radius: 9px;
+
+    @media (prefers-color-scheme: dark) {
+      background: ${colors.gray850()};
+    } */
+
     ${StyledButton} {
       flex-grow: 1;
       flex-shrink: 0;
