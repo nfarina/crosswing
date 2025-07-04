@@ -12,13 +12,19 @@ import {
 } from "./ProcessRunner.js";
 import { ServerTasks, ServerTasksFile } from "./ServerTasks.js";
 
-// This script accepts a single argument, the path to tasks.json.
-// It then reads the file and parses it as JSON.
+// This script accepts a tasks.json path and optional task names to auto-start.
+// Usage: crosswing [path to tasks.json] --start=task1,task2
 const {
   port = 2700,
   title = "Crosswing Dev",
+  start,
   _: [tasksJsonPath],
 } = parseArgs(process.argv.slice(2));
+
+// Parse comma-separated task names from --start flag
+const autoStartTasks = start
+  ? start.split(",").map((task: string) => task.trim())
+  : [];
 
 let tasksJson: ServerTasksFile;
 let tasksJsonFullPath: string;
@@ -40,10 +46,11 @@ if (tasksJsonPath) {
     tasksJson = JSON.parse(await readFile(tasksJsonFullPath, "utf-8"));
   } catch (error) {
     console.error(
-      "Usage: crosswing <path to tasks.json>\n\n" +
+      "Usage: crosswing [path to tasks.json] --start=task1,task2\n\n" +
         "You can also run this script from the root of the project, " +
         "in which case it will look for tasks.json in the current directory " +
-        `(which is ${process.cwd()})`,
+        `(which is ${process.cwd()})\n\n` +
+        "Use --start=task1,task2 to auto-start specific tasks on startup.",
     );
     process.exit(1);
   }
@@ -135,7 +142,7 @@ async function handleRequest(req: IncomingMessage, res: ServerResponse) {
   res.end(response);
 }
 
-server.listen(port, () => {
+server.listen(port, async () => {
   console.log(
     `
 =============================
@@ -145,6 +152,25 @@ server.listen(port, () => {
 Visit http://localhost:${port} to start local development services.
 `,
   );
+
+  // Auto-start any specified tasks
+  if (autoStartTasks.length > 0) {
+    console.log(`\nAuto-starting tasks: ${autoStartTasks.join(", ")}`);
+
+    for (const taskName of autoStartTasks) {
+      try {
+        // Verify the task exists before trying to start it
+        tasks.getOne(taskName);
+        await startTask(taskName);
+        console.log(`✓ Started task: ${taskName}`);
+      } catch (error) {
+        console.error(
+          `✗ Failed to start task '${taskName}': ${error instanceof Error ? error.message : error}`,
+        );
+      }
+    }
+    console.log("");
+  }
 });
 
 async function getStatus(): Promise<ServerStatus> {
