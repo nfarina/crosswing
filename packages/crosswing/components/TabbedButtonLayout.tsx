@@ -421,6 +421,19 @@ export const StyledTabbedButtonLayout = styled.div`
 
   &[data-layout="grow"] > .content {
     flex-shrink: 0;
+    display: flex;
+    flex-flow: column;
+    flex-grow: 1;
+
+    > .tab-content {
+      flex-grow: 1;
+      display: flex;
+      flex-flow: column;
+
+      > * {
+        flex-grow: 1;
+      }
+    }
 
     > .tab-content[data-selected="false"] {
       display: none;

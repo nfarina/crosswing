@@ -138,7 +138,7 @@ class UpdateScheduler<S> {
   }
 
   update(value: S) {
-    console.log(`Scheduler[${this.key}]: Update requested with value`, value);
+    // console.log(`Scheduler[${this.key}]: Update requested with value`, value);
     this.pendingValue = value;
 
     // Clear any existing scheduled update
@@ -149,7 +149,7 @@ class UpdateScheduler<S> {
 
     // If we're currently running updateFunc, just queue the value
     if (this.isUpdating) {
-      console.log(`Scheduler[${this.key}]: Update in progress, queuing value`);
+      // console.log(`Scheduler[${this.key}]: Update in progress, queuing value`);
       return;
     }
 
@@ -165,9 +165,9 @@ class UpdateScheduler<S> {
       this.runUpdate();
     } else {
       // Need to wait before updating
-      console.log(
-        `Scheduler[${this.key}]: Waiting ${remainingDelay}ms before update`,
-      );
+      // console.log(
+      //   `Scheduler[${this.key}]: Waiting ${remainingDelay}ms before update`,
+      // );
       this.pendingTimeout = setTimeout(() => {
         this.pendingTimeout = null;
         this.runUpdate();
@@ -189,22 +189,22 @@ class UpdateScheduler<S> {
     this.isUpdating = true;
 
     try {
-      console.log(
-        `Scheduler[${this.key}]: Starting update with value`,
-        valueToUpdate,
-      );
+      // console.log(
+      //   `Scheduler[${this.key}]: Starting update with value`,
+      //   valueToUpdate,
+      // );
       await this.updateFunc(valueToUpdate);
 
       this.lastUpdateTime = Date.now();
-      console.log(`Scheduler[${this.key}]: Update complete`);
+      // console.log(`Scheduler[${this.key}]: Update complete`);
       this.onComplete?.(valueToUpdate);
 
       // Check if we have another pending update
       const nextValue = this.pendingValue;
       if (nextValue !== undefined) {
-        console.log(
-          `Scheduler[${this.key}]: Found pending value, scheduling next update`,
-        );
+        // console.log(
+        //   `Scheduler[${this.key}]: Found pending value, scheduling next update`,
+        // );
         // Use setTimeout to avoid deep recursion
         setTimeout(() => this.update(nextValue), 0);
       }

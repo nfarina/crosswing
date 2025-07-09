@@ -78,7 +78,7 @@ export function NavLayout({
   function getLeftAccessory() {
     if (left) return <NavAccessoryView accessory={left} align="left" />;
 
-    if (back && !hideBackButton) {
+    if ((back || backTo) && !hideBackButton) {
       if (customBackAccessory) {
         return (
           <NavAccessoryView
