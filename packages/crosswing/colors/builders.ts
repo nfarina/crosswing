@@ -122,6 +122,13 @@ export function buildHexColor(
       }
     }
 
+    // Sanity check - if we ended up with an OKLCH color with an `undefined`
+    // hue, it means we ended up with a grayscale color.
+    if (lch.h == null) {
+      lch.h = 0;
+      lch.c = 0; // Make it grayscale!
+    }
+
     hex = formatOklch(lch);
   }
 
