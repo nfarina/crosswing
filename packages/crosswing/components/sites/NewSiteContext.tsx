@@ -26,13 +26,17 @@ export type NewSiteContextValue = {
   siteAccessory?: NewSiteAccessory | null;
 };
 
-export const NewSiteContext = createContext<NewSiteContextValue>({
+export const defaultNewSiteContextValue: NewSiteContextValue = {
   isDefaultContext: true,
   siteTitle: "",
   sidebarVisible: true,
   setSidebarVisible: alwaysThrows,
   siteLayout: "desktop",
-});
+};
+
+export const NewSiteContext = createContext<NewSiteContextValue>(
+  defaultNewSiteContextValue,
+);
 
 function alwaysThrows(): never {
   throw new Error("Parent <NewSiteLayout> was not found.");

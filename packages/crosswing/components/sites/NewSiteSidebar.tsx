@@ -2,6 +2,7 @@ import { HTMLAttributes, ReactNode, use } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors";
 import { fonts } from "../../fonts/fonts";
+import { PanelIcon } from "../../icons/Panel";
 import { SidebarIcon } from "../../icons/Sidebar";
 import { SidebarMenuIcon } from "../../icons/SidebarMenu";
 import { tooltip } from "../../modals/popup/TooltipView";
@@ -135,7 +136,7 @@ export const StyledNewSiteSidebarText = styled(Link)`
   text-decoration: none;
   gap: 10px;
   border-radius: 9px;
-  padding: 10px 12px;
+  padding: 8px 12px;
 
   > .icon {
     flex-shrink: 0;
@@ -179,15 +180,25 @@ export function NewSiteSitebarSubtext({
   icon,
   children,
   selected,
+  smaller,
   ...rest
 }: Parameters<typeof Link>[0] & {
   icon?: ReactNode;
   children: ReactNode;
   selected?: boolean;
+  smaller?: boolean;
 }) {
   return (
-    <StyledNewSiteSidebarSubtext data-is-selected={selected} {...rest}>
-      {icon ? <div className="icon">{icon}</div> : <div className="dot" />}
+    <StyledNewSiteSidebarSubtext
+      data-is-selected={selected}
+      data-is-smaller={smaller}
+      {...rest}
+    >
+      {icon ? (
+        <div className="icon">{icon}</div>
+      ) : (
+        !smaller && <div className="dot" />
+      )}
       <div className="line" />
       <div className="children">{children}</div>
     </StyledNewSiteSidebarSubtext>
@@ -203,6 +214,7 @@ const StyledNewSiteSidebarSubtext = styled(Link)`
   gap: 10px;
   border-radius: 9px;
   padding: 9px 12px 9px 42px;
+  margin-left: 10px;
   position: relative;
 
   > .icon {
@@ -247,8 +259,16 @@ const StyledNewSiteSidebarSubtext = styled(Link)`
   }
 
   > .children {
-    font: ${fonts.display({ size: 15 })};
+    font: ${fonts.display({ size: 13 })};
     transform: translateY(-1px);
+  }
+
+  &[data-is-smaller="true"] {
+    padding-left: 54px;
+
+    > .children {
+      font: ${fonts.display({ size: 13, line: "15px" })};
+    }
   }
 
   &:hover {
@@ -270,8 +290,47 @@ const StyledNewSiteSidebarSubtext = styled(Link)`
     }
 
     > .children {
-      font: ${fonts.displayBold({ size: 15 })};
+      font: ${fonts.displayBold({ size: 13 })};
     }
+  }
+
+  &[data-is-smaller="true"][data-prefix-active="true"],
+  &[data-is-smaller="true"][data-is-selected="true"] {
+    > .children {
+      font: ${fonts.displayBold({ size: 13 })};
+    }
+  }
+`;
+
+/**
+ * Header for a group of subtext items in the sidebar.
+ * Aligns with the text of NewSiteSitebarSubtext items.
+ */
+export function NewSiteSubtextHeader({
+  children,
+  smaller,
+  ...rest
+}: HTMLAttributes<HTMLDivElement> & {
+  smaller?: boolean;
+}) {
+  return (
+    <StyledNewSiteSubtextHeader data-is-smaller={smaller} {...rest}>
+      {children}
+    </StyledNewSiteSubtextHeader>
+  );
+}
+
+export const StyledNewSiteSubtextHeader = styled.div`
+  font-size: 10px;
+  font-weight: 600;
+  color: ${colors.textSecondary()};
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 4px 12px 4px 42px;
+  margin-top: 5px;
+
+  &[data-is-smaller="true"] {
+    margin-left: 10px;
   }
 `;
 
@@ -292,3 +351,29 @@ export const StyledNewSiteSubtextGroup = styled.div`
     flex-shrink: 0;
   }
 `;
+
+export function NewSiteOpenPanelButton({
+  panelVisible,
+  setPanelVisible,
+  ...rest
+}: Parameters<typeof Button>[0] & {
+  panelVisible: boolean;
+  setPanelVisible: (visible: boolean) => void;
+}) {
+  const { siteLayout } = use(NewSiteContext);
+
+  if (siteLayout !== "mobile" && panelVisible) {
+    return null;
+  }
+
+  return (
+    <Button
+      newStyle
+      icon={<PanelIcon />}
+      style={{ marginRight: "5px" }}
+      onClick={() => setPanelVisible(true)}
+      {...tooltip("Open panel", { hotkey: "ctrl+e" })}
+      {...rest}
+    />
+  );
+}

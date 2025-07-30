@@ -1,7 +1,7 @@
 import { HTMLAttributes, SyntheticEvent } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
-import { CheckmarkIcon } from "../../icons/Checkmark.js";
+import { CheckIcon } from "../../icons/Check.js";
 import { Clickable } from "../Clickable.js";
 
 export function Checkbox({
@@ -28,15 +28,15 @@ export function Checkbox({
       {...rest}
     >
       <div className="box">
-        <CheckmarkIcon />
+        <CheckIcon />
       </div>
     </StyledCheckbox>
   );
 }
 
 export const StyledCheckbox = styled(Clickable)`
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -44,23 +44,31 @@ export const StyledCheckbox = styled(Clickable)`
   display: flex; /* Gets rid of extra space below the button. */
 
   > .box {
-    width: 20px;
-    height: 20px;
-    border: 1px solid ${colors.mediumGray()};
+    box-sizing: border-box;
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid ${colors.gray600()};
     border-radius: 3px;
     position: relative;
 
     @media (prefers-color-scheme: dark) {
-      border: 1px solid ${colors.darkerGray({ darken: 0.15 })};
+      border-color: ${colors.gray300()};
     }
 
     > svg {
       position: absolute;
-      top: -5px;
-      left: 2px;
-      transform: scale(1.1);
+      top: -3px;
+      left: -2.5px;
+      transform: scale(0.85);
       pointer-events: none;
-      color: ${colors.turquoise()};
+      color: ${colors.white()};
+    }
+  }
+
+  &[data-checked="true"] {
+    > .box {
+      border: none;
+      background: ${colors.primary()};
     }
   }
 

@@ -20,6 +20,7 @@ import { NewSiteContext, shouldRenderAccessory } from "./NewSiteContext";
 
 export function NewSiteHeader({
   title,
+  subtitle,
   accessories,
   hideSiteAccessory,
   style,
@@ -27,6 +28,7 @@ export function NewSiteHeader({
   ...rest
 }: Omit<HTMLAttributes<HTMLDivElement>, "title"> & {
   title?: ReactNode;
+  subtitle?: ReactNode;
   accessories?: ReactNode;
   hideSiteAccessory?: boolean;
   borderVisibility?: BorderVisibility;
@@ -45,7 +47,7 @@ export function NewSiteHeader({
     } else if (siteTitle) {
       document.title = siteTitle;
     }
-  }, [siteTitle, title]);
+  }, [siteTitle, title, subtitle]);
 
   const { sidebarVisible, setSidebarVisible, siteLayout, siteAccessory } =
     use(NewSiteContext);
@@ -94,7 +96,10 @@ export function NewSiteHeader({
         <div className="overflow-accessory">{overflowAccessory}</div>
       )}
       <div className="title-left" />
-      <div className="page-title" ref={titleRef} children={title} />
+      <div className="page-title" ref={titleRef} data-has-subtitle={!!subtitle}>
+        <div className="title">{title}</div>
+        {subtitle && <div className="subtitle">{subtitle}</div>}
+      </div>
       <div className="title-right" />
       <div className="accessories">{accessories}</div>
     </StyledNewSiteHeader>
@@ -149,6 +154,34 @@ export const StyledNewSiteHeader = styled(AutoBorderView)`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
+    > .title {
+      /* Default title styling */
+    }
+
+    > .subtitle {
+      font: ${fonts.display({ size: 11, line: "14px" })};
+      margin-bottom: -3px;
+      color: ${colors.textSecondary()};
+      margin-top: 2px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &[data-has-subtitle="true"] {
+      white-space: normal;
+      overflow: visible;
+      text-overflow: unset;
+
+      > .title {
+        font: ${fonts.display({ size: 17, line: "20px" })};
+        margin-bottom: -3px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
   }
 
   > .title-right {
@@ -197,6 +230,10 @@ export const StyledNewSiteHeader = styled(AutoBorderView)`
 
     > .title-left {
       flex-grow: 1;
+    }
+
+    > .page-title {
+      text-align: center;
     }
 
     > .accessories {

@@ -24,7 +24,7 @@ export function PopupButton({
   popup,
   hideDisclosure = false,
   ...rest
-}: Parameters<typeof Button>[0] & {
+}: Omit<Parameters<typeof Button>[0], "right"> & {
   popupRef?: RefObject<PopupButtonRef | null>;
   popup: Popup<[]> | null;
   hideDisclosure?: boolean;
@@ -62,19 +62,25 @@ export const StyledPopupButton = styled(Button)`
     width: 20px;
     height: 20px;
     margin-right: -4px;
+    /* Too distracting. */
+    /* transition: transform 0.2s ease-in-out; */
   }
 
   &[data-is-open="true"] {
     background: ${colors.buttonBackgroundHover()};
 
     > .right {
-      transform: rotate(180deg);
+      transform: scaleY(-1);
     }
   }
 
   &[data-new-style="true"] {
     > .children {
       font: ${fonts.display({ size: 14 })};
+    }
+
+    > .right {
+      margin-left: -5px;
     }
   }
 `;

@@ -28,10 +28,9 @@ export function useErrorAlert({
 
       if (!error?.["isErrorWithDetails"]) {
         // Display arbitrary errors.
-        message =
-          message && userFacing !== false
-            ? ensurePeriod(message)
-            : "Something went wrong.";
+        message = message // && userFacing !== false
+          ? ensurePeriod(message)
+          : "Something went wrong.";
 
         // If the message is super long, truncate it.
         if (message.length > 300) {

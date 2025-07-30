@@ -292,6 +292,12 @@ export const StyledTextInput = styled.div`
       }
     }
 
+    &[data-error="true"] {
+      > input {
+        padding-right: 42px;
+      }
+    }
+
     &[data-error="true"]:not(:focus-within) {
       border-color: ${colors.red({ darken: 0.1 })};
 

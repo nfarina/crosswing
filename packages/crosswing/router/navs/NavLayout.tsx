@@ -29,6 +29,8 @@ export interface NavProps {
   hideTabBar?: boolean;
   /** Pass true to render a transparent header. */
   transparentHeader?: boolean;
+  /** Pass true to render a transparent background. */
+  transparent?: boolean;
   /** Pass true to lay out any children below the nav bar area. */
   fullBleed?: boolean;
   /** Pass true to render a subtle dark gradient under the status bar area to increase text readability. Only rendered when `fullBleed` is true and on a supported platform. */
@@ -56,6 +58,7 @@ export function NavLayout({
   hideTabBar,
   backTo,
   transparentHeader,
+  transparent,
   fullBleed,
   darkenUnderStatusBar,
   lightStatusBar,
@@ -128,6 +131,7 @@ export function NavLayout({
 
   return (
     <StyledNavLayout
+      data-transparent={!!transparent}
       data-full-bleed={!!fullBleed}
       data-disabled={!!disabled}
       data-hidden={!!hidden}
@@ -206,7 +210,10 @@ export const StyledNavHeader = styled.div`
 export const StyledNavLayout = styled.div`
   display: flex;
   flex-flow: column;
-  background: ${colors.textBackground()};
+
+  &[data-transparent="false"] {
+    background: ${colors.textBackground()};
+  }
 
   /* Create new stacking context so our children's z-index will work.
      we can't "position: relative" because if we're presented in a

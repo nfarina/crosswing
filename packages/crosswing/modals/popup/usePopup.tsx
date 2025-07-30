@@ -286,7 +286,9 @@ export const PopupContainer = ({
       !popupArea ||
       !(popupArea instanceof HTMLElement) ||
       !popup ||
-      !(popup instanceof HTMLElement)
+      !(popup instanceof HTMLElement) ||
+      (popup instanceof HTMLElement &&
+        popup.parentElement?.parentElement?.dataset.animatingIn === "false")
     ) {
       return;
     }

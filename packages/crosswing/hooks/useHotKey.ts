@@ -3,7 +3,8 @@ import { RefObject, useEffect, useRef } from "react";
 // TypeScript type that constrains String to a valid hotkey format. Valid hotkey
 // examples: "ctrl+shift+a", "cmd+Enter", "alt+1", etc.
 export type HotKey =
-  `${"" | "ctrl+" | "cmd+" | "alt+" | "shift+"}${"" | "cmd+" | "alt+" | "shift+"}${SingleHotKey}`;
+  | `${"" | "ctrl+" | "cmd+" | "alt+" | "shift+"}${"" | "cmd+" | "alt+" | "shift+"}${SingleHotKey}`
+  | "*";
 
 export type HotKeyModifiers = {
   ctrlKey?: boolean;
@@ -80,7 +81,10 @@ export function useHotKey(
       const matchingHotkey = hotKeys.find((hotKey) => {
         const parsed = parseHotKey(hotKey as any);
 
-        if (parsed.key.toLowerCase() !== key.toLowerCase()) {
+        if (
+          parsed.key !== "*" &&
+          parsed.key.toLowerCase() !== key.toLowerCase()
+        ) {
           return false;
         }
 
@@ -132,7 +136,10 @@ export function useHotKey(
       // console.log("HotKey matched:", formatHotKey(event), "on", target);
 
       // If we handled a hotkey, it shouldn't do anything else!
-      const result = onPressCallback.current?.(matchingHotkey, {
+      const keyForCallback =
+        matchingHotkey === "*" ? (key as HotKey) : matchingHotkey;
+
+      const result = onPressCallback.current?.(keyForCallback, {
         ctrlKey,
         altKey,
         shiftKey,

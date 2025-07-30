@@ -83,6 +83,23 @@ export function useLocalStorage<S>(
   };
 
   useEffect(() => {
+    // Re-sync with localStorage on every mount/remount (including when
+    // React Activity makes a component visible again). This ensures we pick up
+    // any changes that happened while the component was preserved but not visible.
+    const currentValue = localStorage.getItem(key);
+    const expectedValue = item != null ? JSON.stringify(item) : null;
+
+    // Only update if the raw localStorage value differs from what we expect
+    if (currentValue !== expectedValue) {
+      const parsedValue =
+        currentValue != null
+          ? JSON.parse(currentValue)
+          : initialValue instanceof Function
+            ? initialValue()
+            : initialValue;
+      setInnerItem(parsedValue);
+    }
+
     // The custom storage event allows us to update our component
     // when a change occurs in localStorage outside of our component
     window.addEventListener(
@@ -100,7 +117,7 @@ export function useLocalStorage<S>(
       );
       window.removeEventListener("storage", onLocalStorageChange);
     };
-  }, []);
+  }, [key]); // Re-run if the key changes
 
   return [item, setItem];
 }

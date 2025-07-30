@@ -5,6 +5,7 @@ import {
   ReactNode,
   createContext,
   use,
+  useRef,
 } from "react";
 import { styled } from "styled-components";
 import { colors } from "../colors/colors.js";
@@ -17,6 +18,7 @@ import { StatusBanner } from "./badges/StatusBanner.js";
 import { Clickable } from "./Clickable.js";
 import { Select } from "./forms/Select.js";
 import { Toggle } from "./forms/Toggle.js";
+import { useListKeyboardNavigationJS } from "./useListKeyboardNavigationJS.js";
 
 // Used to drill the onClose prop down to the PopupMenu children without
 // having to clone elements and deal with "keys".
@@ -39,6 +41,11 @@ export function PopupMenu({
   placement?: PopupPlacement;
 } & Partial<PopupChildProps> &
   HTMLAttributes<HTMLDivElement>) {
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  // Add keyboard navigation with auto-focus
+  useListKeyboardNavigationJS(menuRef, { role: "menu" });
+
   return (
     <PopupView
       placement={placement}
@@ -46,7 +53,7 @@ export function PopupMenu({
       arrowBackgroundDark={arrowBackgroundDark}
       {...rest}
     >
-      <StyledPopupMenu>
+      <StyledPopupMenu ref={menuRef}>
         <OnCloseContext value={onClose}>{children}</OnCloseContext>
       </StyledPopupMenu>
     </PopupView>
@@ -103,22 +110,37 @@ export function PopupMenuText({
     if (!leaveOpen) onClose?.();
   }
 
-  function getAs(): string | ComponentType<any> {
-    if (asDiv) return "div";
-    if (to) return Link;
-    if (onClick) return Clickable;
-    return "div";
+  function onMouseEnter(e: MouseEvent<HTMLElement>) {
+    // Move focus to the hovered item for seamless keyboard/mouse interaction
+    if (!disabled) {
+      (e.currentTarget as HTMLElement).focus();
+    }
+    rest.onMouseEnter?.(e as any);
   }
+
+  function getAs(): string | ComponentType<any> {
+    if (asDiv && !onClick) return "div";
+    if (to) return Link;
+    return Clickable; // Default to button for menu items to ensure they're focusable
+  }
+
+  // Determine if this item should be focusable
+  const isInteractive = !disabled && (onClick || to || !asDiv);
 
   return (
     <StyledPopupMenuText
       as={getAs()}
       {...(to ? { to, target } : {})}
       onClick={onButtonClick}
+      onMouseEnter={onMouseEnter}
       data-disabled={disabled}
       data-selected={selected}
       data-checked={checked}
       data-destructive={destructive}
+      // ARIA and focusability attributes
+      role="menuitem"
+      aria-disabled={disabled}
+      tabIndex={isInteractive ? 0 : -1}
       {...rest}
     >
       {icon && <div className="icon">{icon}</div>}
@@ -145,6 +167,7 @@ export const StyledPopupMenuText = styled.div`
   align-items: center;
   gap: 7px;
   color: ${colors.text()};
+  box-sizing: border-box; /* Needed for <a> elements */
 
   /* For Links. */
   text-decoration: none;
@@ -193,13 +216,16 @@ export const StyledPopupMenuText = styled.div`
     }
   }
 
-  &:hover {
+  &:hover,
+  &:focus {
     background: ${colors.buttonBackgroundHover()};
+    outline: none;
   }
 
   &[data-disabled="true"] {
     opacity: 0.5;
     pointer-events: none;
+    cursor: default;
   }
 
   &[data-selected="true"] {
@@ -215,7 +241,8 @@ export const StyledPopupMenuText = styled.div`
       color: ${colors.red({ lighten: 0.15 })};
     }
 
-    &:hover {
+    &:hover,
+    &:focus {
       background: ${colors.red({ alpha: 0.1 })};
     }
   }
@@ -252,7 +279,9 @@ export function PopupMenuToggle({
       // as well.
       asDiv
       // Don't listen for clicks on the Toggle.
-      right={<Toggle on={on} size="smallest" disabled={rest.disabled} />}
+      right={
+        <Toggle on={on} size="smallest" disabled={rest.disabled} as="div" />
+      }
       {...rest}
     />
   );

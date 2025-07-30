@@ -66,6 +66,23 @@ export function useSessionStorage<S>(
   };
 
   useEffect(() => {
+    // Re-sync with sessionStorage on every mount/remount (including when
+    // React Activity makes a component visible again). This ensures we pick up
+    // any changes that happened while the component was preserved but not visible.
+    const currentValue = sessionStorage.getItem(key);
+    const expectedValue = item != null ? JSON.stringify(item) : null;
+
+    // Only update if the raw sessionStorage value differs from what we expect
+    if (currentValue !== expectedValue) {
+      const parsedValue =
+        currentValue != null
+          ? JSON.parse(currentValue)
+          : initialValue instanceof Function
+            ? initialValue()
+            : initialValue;
+      setInnerItem(parsedValue);
+    }
+
     // The custom storage event allows us to update our component
     // when a change occurs in sessionStorage outside of our component
     window.addEventListener(
@@ -79,7 +96,7 @@ export function useSessionStorage<S>(
         onSessionStorageChange,
       );
     };
-  }, []);
+  }, [key]); // Re-run if the key changes
 
   return [item, setItem];
 }

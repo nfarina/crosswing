@@ -9,6 +9,7 @@ const PanelRestorationKey = Symbol("panel");
 
 export function NewSitePage({
   title,
+  subtitle,
   accessories,
   panelContent,
   panelAccessories,
@@ -27,6 +28,7 @@ export function NewSitePage({
     "panelDefaultSize" | "panelMinSize" | "panelMaxSize"
   > & {
     title?: ReactNode;
+    subtitle?: ReactNode;
     accessories?: ReactNode;
     panelContent?: ReactNode;
     panelAccessories?: ReactNode;
@@ -42,6 +44,7 @@ export function NewSitePage({
         <PageLayout>
           <NewSiteHeader
             title={title}
+            subtitle={subtitle}
             accessories={accessories}
             hideSiteAccessory={panelVisible}
             borderVisibility={headerBorderVisibility}
@@ -69,6 +72,7 @@ export function NewSitePage({
         <PageLayout>
           <NewSiteHeader
             title={title}
+            subtitle={subtitle}
             accessories={accessories}
             hideSiteAccessory={panelVisible}
             borderVisibility={headerBorderVisibility}
@@ -107,7 +111,7 @@ const PageLayout = styled.div`
   }
 
   > ${StyledNewSiteHeader} {
-    z-index: 1;
+    z-index: 10;
   }
 
   > .page-content {

@@ -1,5 +1,6 @@
 import {
   CSSProperties,
+  ElementType,
   HTMLAttributes,
   MouseEvent,
   TouchEvent,
@@ -12,6 +13,7 @@ import { Clickable } from "../Clickable.js";
 export type ToggleSize = "normal" | "smaller" | "smallest";
 
 export function Toggle({
+  as = Clickable,
   on,
   size = "normal",
   onClick,
@@ -20,6 +22,7 @@ export function Toggle({
   trackBackground = colors.primaryGradient,
   ...rest
 }: Omit<HTMLAttributes<HTMLButtonElement>, "onClick"> & {
+  as?: ElementType;
   on?: boolean;
   size?: ToggleSize;
   disabled?: boolean;
@@ -60,6 +63,7 @@ export function Toggle({
 
   return (
     <StyledToggle
+      as={as}
       data-on={!!on}
       data-size={size}
       disabled={!!disabled}

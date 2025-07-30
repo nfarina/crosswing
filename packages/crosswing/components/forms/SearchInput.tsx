@@ -369,10 +369,10 @@ export const StyledSearchInput = styled.div`
 
     &[data-muted="true"] {
       border: none;
-      background: ${colors.gray200()};
+      background: ${colors.gray500({ alpha: 0.1 })};
 
       @media (prefers-color-scheme: dark) {
-        background: ${colors.gray950()};
+        background: ${colors.gray550({ alpha: 0.2 })};
       }
     }
   }
