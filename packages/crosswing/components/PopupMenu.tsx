@@ -16,6 +16,7 @@ import { PopupChildProps, PopupView } from "../modals/popup/PopupView.js";
 import { Link } from "../router/Link.js";
 import { StatusBanner } from "./badges/StatusBanner.js";
 import { Clickable } from "./Clickable.js";
+import { FileInput } from "./forms/FileInput.js";
 import { Select } from "./forms/Select.js";
 import { Toggle } from "./forms/Toggle.js";
 import { useListKeyboardNavigationJS } from "./useListKeyboardNavigationJS.js";
@@ -76,7 +77,7 @@ export function PopupMenuText({
   children,
   detail,
   onClick,
-  asDiv,
+  component = null,
   to,
   right,
   target,
@@ -92,7 +93,7 @@ export function PopupMenuText({
   detail?: ReactNode;
   right?: ReactNode;
   onClick?: (e: MouseEvent<HTMLElement>) => void;
-  asDiv?: boolean;
+  component?: string | ComponentType<any> | null;
   to?: string;
   target?: string;
   disabled?: boolean;
@@ -119,13 +120,13 @@ export function PopupMenuText({
   }
 
   function getAs(): string | ComponentType<any> {
-    if (asDiv && !onClick) return "div";
+    if (typeof component === "string" && !onClick) return component;
     if (to) return Link;
-    return Clickable; // Default to button for menu items to ensure they're focusable
+    return component ?? Clickable; // Default to button for menu items to ensure they're focusable
   }
 
   // Determine if this item should be focusable
-  const isInteractive = !disabled && (onClick || to || !asDiv);
+  const isInteractive = !disabled && (onClick || to || component !== "div");
 
   return (
     <StyledPopupMenuText
@@ -277,7 +278,7 @@ export function PopupMenuToggle({
       leaveOpen
       // We don't want to shadow the button by making ourselves a <button>
       // as well.
-      asDiv
+      component="div"
       // Don't listen for clicks on the Toggle.
       right={
         <Toggle on={on} size="smallest" disabled={rest.disabled} as="div" />
@@ -339,3 +340,17 @@ export const PopupStatusBanner = styled(StatusBanner)`
     display: none;
   }
 `;
+
+/**
+ * Specialized version of PopupMenuText that renders a FileInput instead of a
+ * button.
+ */
+export function PopupMenuFileInput({
+  leaveOpen = true,
+  ...rest
+}: (Parameters<typeof PopupMenuText>[0] &
+  Parameters<typeof FileInput>[0]) & {}) {
+  return (
+    <PopupMenuText component={FileInput} leaveOpen={leaveOpen} {...rest} />
+  );
+}

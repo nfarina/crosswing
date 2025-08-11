@@ -15,10 +15,8 @@ import { DialogView } from "./DialogView.js";
 export default {
   component: DialogView,
   decorators: [CrosswingAppDecorator(), ModalDecorator, RouterDecorator],
-  parameters: {
-    layout: "centered",
-    backgrounds: { default: "modal" },
-  },
+  parameters: { layout: "centered" },
+  globals: { backgrounds: { value: "modal" } },
 } satisfies Meta<typeof DialogView>;
 
 type Story = StoryFn<typeof DialogView>;

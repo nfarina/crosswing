@@ -22,6 +22,7 @@ export function PopupButton({
   popupRef,
   children,
   popup,
+  onClick,
   hideDisclosure = false,
   ...rest
 }: Omit<Parameters<typeof Button>[0], "right"> & {
@@ -41,7 +42,7 @@ export function PopupButton({
   }));
 
   function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
-    rest?.onClick?.(e);
+    onClick?.(e);
     popup?.onClick?.(e);
   }
 
