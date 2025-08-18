@@ -199,7 +199,6 @@ export function NewSiteSitebarSubtext({
       ) : (
         !smaller && <div className="dot" />
       )}
-      <div className="line" />
       <div className="children">{children}</div>
     </StyledNewSiteSidebarSubtext>
   );
@@ -220,11 +219,15 @@ const StyledNewSiteSidebarSubtext = styled(Link)`
   > .icon {
     width: 14px;
     height: 14px;
-    color: ${colors.textSecondary({ alpha: 0.5 })};
     position: absolute;
     left: 16px;
     top: calc(50% - 0.5px);
     transform: translateY(-50%);
+    color: ${colors.gray400()};
+
+    @media (prefers-color-scheme: dark) {
+      color: ${colors.gray500()};
+    }
 
     > svg {
       width: 14px;
@@ -240,22 +243,15 @@ const StyledNewSiteSidebarSubtext = styled(Link)`
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: ${colors.textSecondary({ alpha: 0.3 })};
-    /* background: ${colors.textSecondary()}; */
     position: absolute;
     left: 19px;
     top: 50%;
     transform: translateY(-50%);
-  }
+    background: ${colors.gray300()};
 
-  > .line {
-    display: none;
-    width: 1px;
-    height: 13px;
-    background: ${colors.textSecondary({ alpha: 0.3 })};
-    position: absolute;
-    left: 21.5px;
-    top: -6px;
+    @media (prefers-color-scheme: dark) {
+      background: ${colors.gray600()};
+    }
   }
 
   > .children {
@@ -277,15 +273,21 @@ const StyledNewSiteSidebarSubtext = styled(Link)`
 
   &[data-prefix-active="true"],
   &[data-is-selected="true"] {
-    /* background: ${colors.linkActiveBackground()}; */
-
     > .dot {
-      background: ${colors.textSecondary()};
+      background: ${colors.gray500()};
+
+      @media (prefers-color-scheme: dark) {
+        background: ${colors.gray350()};
+      }
     }
 
     > .icon {
       > svg {
-        color: ${colors.textSecondary()};
+        color: ${colors.gray600()};
+
+        @media (prefers-color-scheme: dark) {
+          color: ${colors.gray300()};
+        }
       }
     }
 

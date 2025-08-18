@@ -1,11 +1,6 @@
-import {
-  ChangeEvent,
-  HTMLAttributes,
-  ReactNode,
-  useRef,
-  useState,
-} from "react";
+import { ChangeEvent, HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
+import { useDragEvents } from "../../hooks/useDragEvents";
 
 export function FileInput({
   accept,
@@ -25,32 +20,7 @@ export function FileInput({
   disabled?: boolean;
   children?: ReactNode;
 } & HTMLAttributes<HTMLDivElement>) {
-  // https://stackoverflow.com/a/21002544/66673
-  // We useRef instead of useState because we can't rely on state changes
-  // firing render updates in time for the drag events.
-  const overCountRef = useRef(0);
-
-  // Keep our own internal state for our data attribute for quick styling.
-  const [isDraggingOver, setIsDraggingOver] = useState(false);
-
-  function onDragEnter() {
-    overCountRef.current++;
-    onDragOverChange?.(true);
-    setIsDraggingOver(true);
-  }
-
-  function onDragLeave() {
-    overCountRef.current--;
-    const isDraggingOver = overCountRef.current > 0;
-    onDragOverChange?.(isDraggingOver);
-    setIsDraggingOver(isDraggingOver);
-  }
-
-  function onDrop() {
-    overCountRef.current = 0;
-    onDragOverChange?.(false);
-    setIsDraggingOver(false);
-  }
+  const dragEvents = useDragEvents({ onDragOverChange });
 
   function onFileChange(e: ChangeEvent<HTMLInputElement>) {
     const input = e.target;
@@ -72,14 +42,7 @@ export function FileInput({
   }
 
   return (
-    <StyledFileInput
-      data-disabled={disabled}
-      data-dragging-over={isDraggingOver}
-      onDragEnter={onDragEnter}
-      onDragLeave={onDragLeave}
-      onDrop={onDrop}
-      {...rest}
-    >
+    <StyledFileInput data-disabled={disabled} {...dragEvents} {...rest}>
       {children}
       <input
         type="file"
