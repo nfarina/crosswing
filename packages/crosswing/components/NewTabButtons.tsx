@@ -99,10 +99,30 @@ export const StyledNewTabButtons = styled.div`
       border-radius: var(--border-radius);
 
       &[data-selected="true"],
-      &[data-prefix-active="true"] {
+      &[data-prefix-active="true"][data-selected-when-prefix-active="true"],
+      &[data-active="true"][data-selected-when-active="true"] {
         font: ${fonts.displayBold({ size: 14 })};
         color: ${colors.text()};
-        pointer-events: none;
+        /* pointer-events: none; */
+
+        > .children {
+          > .labels {
+            > .label-unselected {
+              opacity: 0;
+            }
+            > .label-selected {
+              opacity: 1;
+            }
+          }
+        }
+      }
+
+      > .children {
+        > .labels {
+          > .label-selected {
+            opacity: 0;
+          }
+        }
       }
     }
   }

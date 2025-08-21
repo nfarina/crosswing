@@ -422,7 +422,18 @@ export function PanelLayout({
       dragger.removeEventListener("touchstart", onStart);
       dragger.removeEventListener("mousedown", onStart);
     };
-  }, [edge, layout, panelVisible, panelMinSize, panelDefaultSize, mode]);
+  }, [
+    edge,
+    layout,
+    panelMinSize,
+    panelMaxSize,
+    panelDefaultSize,
+    contentMinSize,
+    initialPanelSize,
+    panelMaximized,
+    resolvedMode,
+    mode,
+  ]);
 
   // Pull our the content and panel elements from our children. The content
   // should be the first child, and the panel should be the second child.

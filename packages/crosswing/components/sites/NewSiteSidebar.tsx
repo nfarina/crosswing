@@ -1,4 +1,4 @@
-import { HTMLAttributes, ReactNode, use } from "react";
+import { HTMLAttributes, MouseEvent, ReactNode, use } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors";
 import { fonts } from "../../fonts/fonts";
@@ -111,17 +111,33 @@ export const StyledNewSiteSidebar = styled.div`
 export function NewSiteSidebarText({
   icon,
   children,
+  leaveOpen = false,
+  onClick,
   ...rest
 }: Parameters<typeof Link>[0] & {
   icon?: ReactNode;
+  /** Set to true to keep the sidebar open when the link is selected (in overlay mode). */
+  leaveOpen?: boolean;
 }) {
   const { nextLocation } = use(RouterContext);
+  const { setSidebarVisible, siteLayout } = use(NewSiteContext);
 
   const path = nextLocation.linkTo(rest.to ?? "");
   const isSelected = !!nextLocation.tryClaim(path);
 
+  const handleClick = (e: MouseEvent<HTMLElement>) => {
+    if (!leaveOpen && siteLayout === "mobile") {
+      setSidebarVisible(false);
+    }
+    onClick?.(e);
+  };
+
   return (
-    <StyledNewSiteSidebarText {...rest} data-is-selected={isSelected}>
+    <StyledNewSiteSidebarText
+      {...rest}
+      data-is-selected={isSelected}
+      onClick={handleClick}
+    >
       <div className="icon">{icon}</div>
       <div className="children">{children}</div>
     </StyledNewSiteSidebarText>
@@ -181,17 +197,31 @@ export function NewSiteSitebarSubtext({
   children,
   selected,
   smaller,
+  leaveOpen = false,
+  onClick,
   ...rest
 }: Parameters<typeof Link>[0] & {
   icon?: ReactNode;
   children: ReactNode;
   selected?: boolean;
   smaller?: boolean;
+  /** Set to true to keep the sidebar open when the link is selected (in overlay mode). */
+  leaveOpen?: boolean;
 }) {
+  const { setSidebarVisible, siteLayout } = use(NewSiteContext);
+
+  const handleClick = (e: MouseEvent<HTMLElement>) => {
+    if (!leaveOpen && siteLayout === "mobile") {
+      setSidebarVisible(false);
+    }
+    onClick?.(e);
+  };
+
   return (
     <StyledNewSiteSidebarSubtext
       data-is-selected={selected}
       data-is-smaller={smaller}
+      onClick={handleClick}
       {...rest}
     >
       {icon ? (

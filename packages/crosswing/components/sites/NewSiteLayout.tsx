@@ -81,16 +81,6 @@ export function NewSiteLayout({
     setLastLayout(layout);
   }, [lastLayout, layout, setSidebarVisible, sidebarWasAutoHidden]);
 
-  // Auto-hide sidebar when navigating to a new page in overlay mode.
-  const path = location.href({ excludeSearch: true });
-  const [lastPath, setLastPath] = useState(path);
-  useEffect(() => {
-    if (sidebarMode === "overlay" && path !== lastPath) {
-      setSidebarVisible(false);
-      setLastPath(path);
-    }
-  }, [sidebarMode, path, lastPath, setSidebarVisible]);
-
   //
   // Context
   //
