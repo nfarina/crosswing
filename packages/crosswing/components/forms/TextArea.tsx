@@ -97,11 +97,13 @@ export function TextArea({
     rest.autoFocus ?? (autoFocusOnDesktop && container === "web");
 
   useLayoutEffect(() => {
-    if (autoFocus && autoSelect && ref.current) {
+    if (autoFocus && ref.current) {
       ref.current.focus();
-      setTimeout(() => {
-        ref.current?.select();
-      }, 0);
+      if (autoSelect) {
+        setTimeout(() => {
+          ref.current?.select();
+        }, 0);
+      }
     }
   }, []);
 

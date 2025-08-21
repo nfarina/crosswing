@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { styled } from "styled-components";
 import { usePopup } from "../../modals/popup/usePopup.js";
 import { PopupButton } from "../PopupButton.js";
@@ -5,6 +6,8 @@ import { PopupMenu, PopupMenuText } from "../PopupMenu.js";
 
 export type DropdownItem = Parameters<typeof PopupMenuText>[0] & {
   value: string;
+  /** Custom display text for the item when it's selected (can be different from children, which is used for the popup menu). */
+  display?: ReactNode;
 };
 
 export function Dropdown({
@@ -21,7 +24,16 @@ export function Dropdown({
   placeholder?: string;
 }) {
   const selectedItem = items.find((item) => item.value === value);
-  const displayText = selectedItem?.children || placeholder;
+
+  function renderDisplayText() {
+    if (selectedItem && selectedItem.display) {
+      return selectedItem.display;
+    } else if (selectedItem && selectedItem.children) {
+      return selectedItem.children;
+    } else {
+      return placeholder;
+    }
+  }
 
   const popup = usePopup(() => (
     <PopupMenu>
@@ -43,7 +55,7 @@ export function Dropdown({
       disabled={disabled || items.length === 0}
       {...rest}
     >
-      <span className="text">{displayText}</span>
+      <span className="text">{renderDisplayText()}</span>
     </StyledDropdown>
   );
 }

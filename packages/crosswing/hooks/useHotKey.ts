@@ -59,7 +59,7 @@ export function useHotKey(
 
   const target = "target" in options ? options.target : null;
 
-  const hotKeys = Array.isArray(hotKey) ? hotKey : [hotKey];
+  const hotKeys = Array.isArray(hotKey) ? hotKey : hotKey ? [hotKey] : [];
 
   const onPressCallback = useRef<HotKeyOnPressHandler | null>(onPress ?? null);
 
