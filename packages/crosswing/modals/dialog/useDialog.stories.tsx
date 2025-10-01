@@ -22,7 +22,7 @@ export function Normal() {
     <DialogView
       title="Normal dialog"
       onClose={dialog.hide}
-      buttons={[{ primary: true, title: "Close" }]}
+      buttons={[{ primary: true, title: "Close", onClick: dialog.hide }]}
     >
       This is a normal dialog.
     </DialogView>
@@ -40,7 +40,7 @@ export function LongContent() {
     <DialogView
       title="Dialog with long content"
       onClose={dialog.hide}
-      buttons={[{ title: "Close" }]}
+      buttons={[{ title: "Close", onClick: dialog.hide }]}
     >
       <p>This dialog has a lot of content to demonstrate scrolling.</p>
       {Array.from({ length: 20 }, (_, i) => (

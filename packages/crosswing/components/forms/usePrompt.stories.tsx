@@ -1,6 +1,5 @@
 import { action } from "storybook/actions";
 import { styled } from "styled-components";
-import { colors } from "../../colors/colors.js";
 import { ModalDecorator } from "../../modals/storybook/decorators.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import { Button } from "../Button.js";
@@ -23,7 +22,7 @@ export function Normal() {
 
   return (
     <ButtonContainer>
-      <Button onClick={prompt.show}>Choose Color…</Button>
+      <Button bordered newStyle onClick={prompt.show} children="Choose color" />
     </ButtonContainer>
   );
 }
@@ -39,7 +38,7 @@ export function WithInitialValue() {
 
   return (
     <ButtonContainer>
-      <Button onClick={prompt.show}>Choose Color…</Button>
+      <Button bordered newStyle onClick={prompt.show} children="Choose color" />
     </ButtonContainer>
   );
 }
@@ -59,7 +58,7 @@ export function WithValidation() {
 
   return (
     <ButtonContainer>
-      <Button onClick={prompt.show}>Choose Color…</Button>
+      <Button bordered newStyle onClick={prompt.show} children="Choose color" />
     </ButtonContainer>
   );
 }
@@ -75,7 +74,7 @@ export function WithTransformer() {
 
   return (
     <ButtonContainer>
-      <Button onClick={prompt.show}>Enter URL…</Button>
+      <Button bordered newStyle onClick={prompt.show} children="Enter URL" />
     </ButtonContainer>
   );
 }
@@ -96,13 +95,17 @@ export function WithTransformerAndValidation() {
 
   return (
     <ButtonContainer>
-      <Button onClick={prompt.show}>Enter Secure URL…</Button>
+      <Button
+        bordered
+        newStyle
+        onClick={prompt.show}
+        children="Enter secure URL"
+      />
     </ButtonContainer>
   );
 }
 
 const ButtonContainer = styled.div`
-  background: ${colors.textBackground()};
   display: flex;
   flex-flow: column;
   justify-content: center;

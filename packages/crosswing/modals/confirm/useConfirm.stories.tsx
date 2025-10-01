@@ -1,9 +1,7 @@
 import { action } from "storybook/actions";
+import { styled } from "styled-components";
+import { Button } from "../../components/Button.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
-import {
-  ModalStoryButton,
-  ModalStoryButtons,
-} from "../storybook/ModalStoryButtons.js";
 import { ModalDecorator } from "../storybook/decorators.js";
 import { useConfirm } from "./useConfirm.js";
 
@@ -15,15 +13,26 @@ export default {
 
 export function Normal() {
   const confirm = useConfirm(() => ({
-    title: "Skin Cat",
+    title: "Skin cat?",
     message: "Are you sure you want to skin the cat this particular way?",
     destructiveText: "Skin it",
     onConfirm: () => action("skinned")(),
   }));
 
   return (
-    <ModalStoryButtons>
-      <ModalStoryButton onClick={confirm.show}>Skin Cat</ModalStoryButton>
-    </ModalStoryButtons>
+    <ButtonContainer>
+      <Button newStyle bordered onClick={confirm.show} children="Skin cat" />
+    </ButtonContainer>
   );
 }
+
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+
+  > * + * {
+    margin-top: 10px;
+  }
+`;

@@ -60,6 +60,8 @@ export const StyledModalOverlay = styled.div`
     flex-grow: 1;
     box-sizing: border-box;
     z-index: 0;
+    max-width: 100%;
+    max-height: 100%;
   }
 
   > .modals {

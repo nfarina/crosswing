@@ -70,6 +70,9 @@ export function SiteHeaderAccessoryView({
     hide() {
       popup?.hide();
     },
+    toggle(target) {
+      popup?.toggle(target);
+    },
   }));
 
   const [width, height] = iconSize;

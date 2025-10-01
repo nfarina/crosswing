@@ -8,6 +8,8 @@ import { Link } from "../../router/Link.js";
 /**
  * A versatile mobile clickable form component. Is a Link but can behave like
  * a button.
+ *
+ * @deprecated Use TextCell instead now that it supports rendering as a Link.
  */
 export function LinkCell({
   to,

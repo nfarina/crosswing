@@ -59,6 +59,7 @@ export function Link({
 
     if (shouldNavigate(history, href, rest.target, e)) {
       e.preventDefault();
+      e.stopPropagation();
       history.navigate(href, { replace });
     }
   }

@@ -40,9 +40,12 @@ export function CrosswingAppDecorator({
 
   // Actual decorator function.
   function CrosswingAppInnerDecorator(Story: () => any) {
-    // Tag the body with the layout so we can style it correctly in vitest.
     useEffect(() => {
+      // Tag the body with the layout so we can style it correctly in vitest.
       document.body.dataset.layout = layout;
+
+      // Also make the draggable root the body so you can useDraggable.
+      document.body.dataset.draggableRoot = "true";
     }, [layout]);
 
     // Allow the user to change the font size with hotkeys for testing
@@ -236,6 +239,8 @@ const FullScreenLayoutGlobalStyle = createGlobalStyle<{
       /* Rendered story itself. */
       > * {
         flex-grow: 1;
+        max-width: 100%;
+        max-height: 100%;
       }
     }
   }

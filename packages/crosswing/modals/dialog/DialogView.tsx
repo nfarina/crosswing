@@ -10,6 +10,7 @@ import { colors } from "../../colors/colors.js";
 import { AutoBorderView } from "../../components/AutoBorderView.js";
 import { Button } from "../../components/Button.js";
 import { fonts } from "../../fonts/fonts.js";
+import { ArrowLeftIcon } from "../../icons/ArrowLeft.js";
 import { CloseIcon } from "../../icons/Close.js";
 
 export * from "./useDialog.js";
@@ -17,21 +18,24 @@ export * from "./useDialog.js";
 export interface DialogButton {
   title: ReactNode;
   primary?: boolean;
+  /** Renders the button with a red background. */
+  destructive?: boolean;
   /** Defaults to true for primary. */
   autoFocus?: boolean;
   disabled?: boolean;
   working?: boolean;
   onClick?: (e: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void;
-  /** If true, the button will not call onClose() automatically. */
-  leaveOpen?: boolean;
   type?: "submit" | "button" | "reset";
 }
 
 export function DialogView({
   ref,
+  back,
+  onBackClick,
   title,
   subtitle,
   children,
+  childrenAltBackground = false,
   buttons,
   accessories,
   footer,
@@ -47,6 +51,10 @@ export function DialogView({
   ...rest
 }: Omit<HTMLAttributes<HTMLFormElement>, "title"> & {
   ref?: RefObject<HTMLFormElement | null>;
+  /** If provided, a back button will be displayed in the header left of the title, with the `to` property set to the provided value. */
+  back?: string;
+  /** If provided, the back button will also call this function when clicked. */
+  onBackClick?: (e: MouseEvent<HTMLDivElement>) => void;
   title?: ReactNode;
   /** Optional subtitle to display below the title */
   subtitle?: ReactNode;
@@ -70,24 +78,18 @@ export function DialogView({
   /** Whether to ellipsize the title and/or subtitle. */
   ellipsize?: "none" | "title" | "subtitle" | "both";
   onClose?: () => void;
+  /** If true, the dialog children will be rendered with an alternative background color to set it apart from the header/footer. */
+  childrenAltBackground?: boolean;
   /** If true (default), the dialog will be rendered as a form element. */
   form?: boolean;
 }) {
-  function onButtonClick(
-    e: MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
-    { onClick, leaveOpen }: DialogButton,
-  ) {
-    onClick?.(e);
-    if (!leaveOpen) onClose?.();
-  }
-
   function getBorderVisibility(side: "top" | "bottom") {
     if (borders === "auto") return "auto";
     if (borders === "none") return "never";
     return borders === "both" || borders === side ? "always" : "never";
   }
 
-  const hasHeader = !!title || !hideCloseButton;
+  const hasHeader = !!title || !!back || !hideCloseButton;
   const hasFooter = (!!buttons && buttons.length > 0) || !!footer;
 
   return (
@@ -101,6 +103,7 @@ export function DialogView({
         data-has-footer={hasFooter}
         data-always-top-border={borders === "top" || borders === "both"}
         data-always-bottom-border={borders === "bottom" || borders === "both"}
+        data-children-alt-background={childrenAltBackground}
         data-disabled={disabled}
         data-full-screen={fullScreen}
         data-ellipsize={ellipsize}
@@ -112,6 +115,15 @@ export function DialogView({
             visibility={getBorderVisibility("top")}
             className="header"
           >
+            {(back || onBackClick) && (
+              <Button
+                newStyle
+                to={back}
+                onClick={onBackClick}
+                className="back-button"
+                icon={<ArrowLeftIcon />}
+              />
+            )}
             <div className="title-area">
               <div className="title">
                 <ViewTransition>
@@ -130,13 +142,15 @@ export function DialogView({
             <ViewTransition>
               <div className="accessories">
                 {accessories}
-                <Button
-                  newStyle
-                  icon={<CloseIcon />}
-                  onClick={onClose}
-                  className="close-button"
-                  disabled={disabled}
-                />
+                {!hideCloseButton && (
+                  <Button
+                    newStyle
+                    icon={<CloseIcon />}
+                    onClick={onClose}
+                    className="close-button"
+                    disabled={disabled}
+                  />
+                )}
               </div>
             </ViewTransition>
           </AutoBorderView>
@@ -162,10 +176,11 @@ export function DialogView({
                         bordered
                         pill
                         primary={button.primary}
+                        destructive={button.destructive}
                         autoFocus={button.autoFocus ?? !!button.primary}
                         disabled={button.disabled || disabled}
                         working={button.working}
-                        onClick={(e) => onButtonClick(e, button)}
+                        onClick={button.onClick}
                         children={button.title}
                         type={button.type}
                       />
@@ -214,7 +229,13 @@ export const StyledDialogView = styled.form`
     justify-content: space-between;
     padding: calc(var(--dialog-padding) - 1px) var(--dialog-padding);
     box-sizing: border-box;
-    gap: var(--dialog-padding);
+
+    > .back-button {
+      flex-shrink: 0;
+      margin-right: 5px;
+      /* Line up the left edge of the graphic with the left edge of the content text, it's distracting otherwise (less so with the close button). */
+      margin-left: -11px;
+    }
 
     > .title-area {
       flex-grow: 1;
@@ -233,6 +254,7 @@ export const StyledDialogView = styled.form`
     }
 
     > .accessories {
+      margin-left: var(--dialog-padding);
       display: flex;
       flex-flow: row;
       align-items: center;
@@ -282,6 +304,18 @@ export const StyledDialogView = styled.form`
     flex-shrink: 1;
     min-height: 0;
     font: ${fonts.display({ size: 14, line: "20px" })};
+    display: flex;
+    flex-flow: column;
+  }
+
+  &[data-children-alt-background="true"] {
+    > .children {
+      background: ${colors.textBackgroundPanel()};
+
+      @media (prefers-color-scheme: dark) {
+        background: ${colors.textBackground()};
+      }
+    }
   }
 
   &[data-disabled="true"] {
@@ -334,6 +368,8 @@ export const StyledDialogView = styled.form`
         flex-grow: 1;
         min-width: 0;
         margin-right: auto;
+        font: ${fonts.display({ size: 14, line: "20px" })};
+        color: ${colors.textSecondary()};
       }
 
       > .buttons {

@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { startTransition, useState } from "react";
 import styled from "styled-components";
 import { ErrorView, StyledErrorView } from "../../components/ErrorView.js";
 import { ErrorLike, getErrorObj } from "../../shared/errors.js";
 import { truncate } from "../../shared/strings.js";
 import { Modal } from "../context/useModal.js";
+import { DialogButton, DialogView } from "../dialog/DialogView.js";
 import { useDialog } from "../dialog/useDialog.js";
-import { AlertButton, AlertView } from "./useAlert.js";
 
 export type ErrorHandler = (error: ErrorLike) => void;
 
@@ -18,6 +18,12 @@ export function useErrorAlert({
 } = {}): Modal<Parameters<ErrorHandler>> {
   // If we were given an Error object, we can expand it to show the stack trace.
   const [expanded, setExpanded] = useState(false);
+
+  function onDetailsClick() {
+    startTransition(() => {
+      setExpanded((expanded) => !expanded);
+    });
+  }
 
   const modal = useDialog(
     (error?: ErrorLike) => {
@@ -49,34 +55,33 @@ export function useErrorAlert({
         modal.hide();
       }
 
-      const detailsButton: AlertButton = {
+      const detailsButton: DialogButton = {
         title: "Details",
-        onClick: () => setExpanded((expanded) => !expanded),
-        leaveOpen: true,
+        onClick: onDetailsClick,
       };
 
-      const okButton: AlertButton = {
+      const okButton: DialogButton = {
         title: "OK",
         primary: true,
+        onClick: onAlertClose,
       };
 
       return (
         <ErrorAlertView
           title="Error"
-          message={message}
-          children={
-            expanded &&
-            hasDetails && (
-              <ErrorView error={{ name, message, details, stack }} />
-            )
-          }
+          onClose={onAlertClose}
+          hideCloseButton
           buttons={[
             ...(hasDetails && showDetails ? [detailsButton] : []),
             okButton,
           ]}
-          onClose={onAlertClose}
           data-expanded={expanded}
-        />
+        >
+          {message && <div>{message}</div>}
+          {expanded && hasDetails && (
+            <ErrorView error={{ name, message, details, stack }} />
+          )}
+        </ErrorAlertView>
       );
     },
     { stretch: expanded },
@@ -94,12 +99,16 @@ function ensurePeriod(str: string): string {
   return str;
 }
 
-const ErrorAlertView = styled(AlertView)`
+const ErrorAlertView = styled(DialogView)`
+  width: 300px;
+
   &[data-expanded="true"] {
     max-width: 100%;
   }
 
   ${StyledErrorView} {
+    margin-top: 16px;
     max-height: 250px;
+    border-radius: 9px;
   }
 `;

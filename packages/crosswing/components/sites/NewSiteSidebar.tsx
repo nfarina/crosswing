@@ -192,9 +192,10 @@ export const StyledNewSiteSidebarText = styled(Link)`
   }
 `;
 
-export function NewSiteSitebarSubtext({
+export function NewSiteSidebarSubtext({
   icon,
   children,
+  right,
   selected,
   smaller,
   leaveOpen = false,
@@ -203,6 +204,7 @@ export function NewSiteSitebarSubtext({
 }: Parameters<typeof Link>[0] & {
   icon?: ReactNode;
   children: ReactNode;
+  right?: ReactNode;
   selected?: boolean;
   smaller?: boolean;
   /** Set to true to keep the sidebar open when the link is selected (in overlay mode). */
@@ -230,6 +232,7 @@ export function NewSiteSitebarSubtext({
         !smaller && <div className="dot" />
       )}
       <div className="children">{children}</div>
+      {right && <div className="right">{right}</div>}
     </StyledNewSiteSidebarSubtext>
   );
 }
@@ -242,7 +245,7 @@ const StyledNewSiteSidebarSubtext = styled(Link)`
   text-decoration: none;
   gap: 10px;
   border-radius: 9px;
-  padding: 9px 12px 9px 42px;
+  padding: 8px 12px 8px 42px;
   margin-left: 10px;
   position: relative;
 
@@ -285,8 +288,17 @@ const StyledNewSiteSidebarSubtext = styled(Link)`
   }
 
   > .children {
-    font: ${fonts.display({ size: 13 })};
+    flex-grow: 1;
+    min-width: 0;
+    font: ${fonts.display({ size: 13, line: "16px" })};
     transform: translateY(-1px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  > .right {
+    flex-shrink: 0;
   }
 
   &[data-is-smaller="true"] {
@@ -336,7 +348,7 @@ const StyledNewSiteSidebarSubtext = styled(Link)`
 
 /**
  * Header for a group of subtext items in the sidebar.
- * Aligns with the text of NewSiteSitebarSubtext items.
+ * Aligns with the text of NewSiteSidebarSubtext items.
  */
 export function NewSiteSubtextHeader({
   children,
@@ -354,6 +366,7 @@ export function NewSiteSubtextHeader({
 
 export const StyledNewSiteSubtextHeader = styled.div`
   font-size: 10px;
+  line-height: 13px;
   font-weight: 600;
   color: ${colors.textSecondary()};
   letter-spacing: 0.5px;

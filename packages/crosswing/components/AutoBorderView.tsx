@@ -220,9 +220,10 @@ function checkElementMatch(
 
   // Check if the element can scroll
   const computedStyle = window.getComputedStyle(element);
+
   const canScroll =
-    computedStyle.overflow === "auto" ||
-    computedStyle.overflow === "scroll" ||
+    computedStyle.overflowX === "auto" ||
+    computedStyle.overflowX === "scroll" ||
     computedStyle.overflowY === "auto" ||
     computedStyle.overflowY === "scroll";
 

@@ -16,7 +16,25 @@ export type ErrorObj = {
 };
 
 export function getErrorObj(error: ErrorLike): ErrorObj {
-  return typeof error === "string" ? { message: error } : error;
+  if (typeof error === "string") {
+    return { message: error };
+  } else if (typeof error === "object" && !!error) {
+    // Take the properties we support out of the Error instance such that it
+    // becomes a minimal plain object.
+    return {
+      ...(error.name ? { name: error.name } : {}),
+      ...(error.message ? { message: error.message } : {}),
+      ...("details" in error && error.details
+        ? { details: error.details }
+        : {}),
+      ...("stack" in error && error.stack ? { stack: error.stack } : {}),
+      ...("userFacing" in error && error.userFacing
+        ? { userFacing: error.userFacing }
+        : {}),
+    };
+  } else {
+    return { message: "Unknown error" };
+  }
 }
 
 export function getErrorMessage(error: ErrorLike): string {

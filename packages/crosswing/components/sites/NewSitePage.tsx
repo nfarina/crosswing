@@ -18,6 +18,7 @@ export function NewSitePage({
   panelDefaultSize,
   panelMinSize,
   panelMaxSize,
+  contentMinSize = 400,
   onPanelVisibleChange,
   children,
   headerBorderVisibility = "auto",
@@ -25,7 +26,7 @@ export function NewSitePage({
 }: Omit<HTMLAttributes<HTMLDivElement>, "title"> &
   Pick<
     Parameters<typeof PanelLayout>[0],
-    "panelDefaultSize" | "panelMinSize" | "panelMaxSize"
+    "panelDefaultSize" | "panelMinSize" | "panelMaxSize" | "contentMinSize"
   > & {
     title?: ReactNode;
     subtitle?: ReactNode;
@@ -66,8 +67,8 @@ export function NewSitePage({
         panelMinSize={panelMinSize}
         panelMaxSize={panelMaxSize}
         panelVisible={panelVisible && !!panelContent}
+        contentMinSize={contentMinSize}
         onPanelVisibleChange={onPanelVisibleChange}
-        contentMinSize={400}
       >
         <PageLayout>
           <NewSiteHeader

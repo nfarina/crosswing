@@ -1,7 +1,9 @@
 import { ReactNode, useState } from "react";
 import { styled } from "styled-components";
-import { AlertButton, AlertView } from "../modals/alert/AlertView.js";
+import { colors } from "../colors/colors.js";
+import { fonts } from "../fonts/fonts.js";
 import { Modal } from "../modals/context/useModal.js";
+import { DialogButton, DialogView } from "../modals/dialog/DialogView.js";
 import { useDialog } from "../modals/dialog/useDialog.js";
 import { ProgressView } from "./ProgressView.js";
 
@@ -15,7 +17,7 @@ export interface ProgressModal extends Modal<Parameters<ProgressHandler>> {
  * A sticky alert that displays a progress donut and a message, along with a
  * cancel button (if an onCancel handler is provided).
  */
-export function useProgressAlert({
+export function useProgressDialog({
   onCancel,
 }: {
   onCancel?: () => void;
@@ -24,25 +26,35 @@ export function useProgressAlert({
 
   // const [canceling, setCanceling] = useState(false);
 
-  const cancelButton: AlertButton = {
+  const cancelButton: DialogButton = {
     title: "Cancel",
     onClick: () => {
       onCancel?.();
+      modal.hide();
       // setCanceling(true);
     },
     // disabled: canceling,
-    // leaveOpen: true,
   };
 
   const modal = useDialog(
     (message?: ReactNode) => (
-      <StyledAlertView
+      <StyledProgressDialogView
         onClose={modal.hide}
-        message={message}
+        hideCloseButton
         buttons={onCancel ? [cancelButton] : undefined}
         data-has-message={!!message}
-        children={<ProgressView size="50px" progress={progress} />}
-      />
+        pad={false}
+        borders={onCancel ? "bottom" : "none"}
+      >
+        <div className="progress-content">
+          {message && <div className="message">{message}</div>}
+          <ProgressView
+            backgroundColor={colors.textBackground}
+            size="50px"
+            progress={progress}
+          />
+        </div>
+      </StyledProgressDialogView>
     ),
     { sticky: true },
   );
@@ -61,23 +73,32 @@ export function useProgressAlert({
   };
 }
 
-const StyledAlertView = styled(AlertView)`
+const StyledProgressDialogView = styled(DialogView)`
   > .children {
+    display: flex;
+    flex-flow: column;
+  }
+
+  .progress-content {
     display: flex;
     flex-flow: column;
     align-items: center;
     justify-content: center;
     padding: 40px;
-  }
 
-  &[data-has-message="true"] {
-    > .children {
-      padding-top: 0;
-      margin-top: -10px;
+    .message {
+      text-align: center;
+      margin: 10px 0 30px;
+      font: ${fonts.display({ size: 15, line: "24px" })};
     }
   }
 
-  &[data-has-message="false"] {
-    min-width: unset;
+  &[data-has-message="true"] {
+    min-width: 200px;
+
+    .progress-content {
+      padding-top: 20px;
+      padding-bottom: 35px;
+    }
   }
 `;

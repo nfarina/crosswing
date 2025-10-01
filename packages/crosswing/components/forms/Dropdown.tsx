@@ -16,12 +16,14 @@ export function Dropdown({
   onValueChange,
   placeholder = "Select",
   disabled,
+  maxPopupWidth,
   ...rest
 }: Omit<Parameters<typeof PopupButton>[0], "popup"> & {
   items?: DropdownItem[];
   value?: string;
   onValueChange?: (newValue: string) => void;
   placeholder?: string;
+  maxPopupWidth?: number;
 }) {
   const selectedItem = items.find((item) => item.value === value);
 
@@ -36,7 +38,11 @@ export function Dropdown({
   }
 
   const popup = usePopup(() => (
-    <PopupMenu>
+    <PopupMenu
+      style={{
+        ...(maxPopupWidth ? { maxWidth: maxPopupWidth } : {}),
+      }}
+    >
       {items.map(({ value: itemValue, ...itemProps }) => (
         <PopupMenuText
           key={itemValue}

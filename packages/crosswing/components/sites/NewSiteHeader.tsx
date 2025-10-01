@@ -97,7 +97,9 @@ export function NewSiteHeader({
       )}
       <div className="title-left" />
       <div className="page-title" ref={titleRef} data-has-subtitle={!!subtitle}>
-        <div className="title">{title}</div>
+        <div className="title" data-is-string-title={typeof title === "string"}>
+          {title}
+        </div>
         {subtitle && <div className="subtitle">{subtitle}</div>}
       </div>
       <div className="title-right" />
@@ -156,7 +158,13 @@ export const StyledNewSiteHeader = styled(AutoBorderView)`
     white-space: nowrap;
 
     > .title {
-      /* Default title styling */
+      /* This auto-truncation doesn't always work for non-strings. */
+      &[data-is-string-title="true"] {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
     }
 
     > .subtitle {
@@ -189,6 +197,7 @@ export const StyledNewSiteHeader = styled(AutoBorderView)`
   }
 
   > .accessories {
+    margin-left: 10px;
     padding-right: 5px;
     box-sizing: border-box;
     display: flex;

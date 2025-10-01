@@ -22,6 +22,12 @@ export function FileInput({
 } & HTMLAttributes<HTMLDivElement>) {
   const dragEvents = useDragEvents({ onDragOverChange });
 
+  if (onFileListSelect && !multiple) {
+    console.warn("FileInput: onFileListSelect is set but multiple is false");
+  } else if (onFileSelect && multiple) {
+    console.warn("FileInput: onFileSelect is set but multiple is true");
+  }
+
   function onFileChange(e: ChangeEvent<HTMLInputElement>) {
     const input = e.target;
 

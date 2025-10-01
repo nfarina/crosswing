@@ -1,7 +1,8 @@
-import { ReactNode } from "react";
+import { MouseEvent, ReactNode, useRef } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
+import { PopupButtonRef } from "../PopupButton.js";
 import { Dropdown, StyledDropdown } from "./Dropdown.js";
 
 export function LabeledDropdown({
@@ -13,11 +14,30 @@ export function LabeledDropdown({
   working,
   newStyle,
   ...rest
-}: Parameters<typeof Dropdown>[0] & {
+}: Omit<Parameters<typeof Dropdown>[0], "onClick"> & {
+  onClick?: (e: MouseEvent<HTMLDivElement>) => void;
   label: ReactNode;
   detail?: ReactNode;
   newStyle?: boolean;
 }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const popupRef = useRef<PopupButtonRef>(null);
+
+  function onClick(e: MouseEvent<HTMLDivElement>) {
+    // If you clicked on the popup button itself, don't toggle the popup.
+    const buttonEl = ref.current?.querySelector(StyledDropdown);
+
+    if (
+      !(e.target instanceof HTMLElement) ||
+      e.target.closest(StyledDropdown) !== buttonEl
+    ) {
+      console.log("toggle");
+      popupRef.current?.toggle(ref);
+    }
+
+    rest.onClick?.(e);
+  }
+
   return (
     <StyledLabeledDropdown
       style={style}
@@ -25,12 +45,18 @@ export function LabeledDropdown({
       data-has-label={!!label}
       data-disabled={!!disabled}
       data-new-style={!!newStyle}
+      onClick={onClick}
+      ref={ref}
     >
       <div className="content">
         <div className="label" children={label} />
         <div className="detail" children={detail} />
       </div>
-      <Dropdown disabled={!!disabled || !!working} {...rest} />
+      <Dropdown
+        disabled={!!disabled || !!working}
+        {...rest}
+        popupRef={popupRef}
+      />
     </StyledLabeledDropdown>
   );
 }
@@ -78,6 +104,7 @@ export const StyledLabeledDropdown = styled.div`
 
   &[data-new-style="true"] {
     padding-left: 0;
+    cursor: pointer;
 
     > .content > .label {
       font: ${fonts.display({ size: 14, line: "20px" })};
@@ -86,5 +113,11 @@ export const StyledLabeledDropdown = styled.div`
     > .content > .detail {
       font: ${fonts.display({ size: 12, line: "16px" })};
     }
+
+    /* &:hover {
+      > ${StyledDropdown} {
+        background: ${colors.buttonBackgroundHover()};
+      }
+    } */
   }
 `;

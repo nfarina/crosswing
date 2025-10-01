@@ -12,6 +12,10 @@ import { ToggleValue } from "./useToggleValue.js";
 //     This is why our base <Clickable> component always sets a type.
 //   - If there are no type=submit buttons in the form, but there IS a
 //     type=button button, the form will submit.
+//
+// Do you have the opposite problem?
+//
+//   - Check that useHotKey() is not capturing the Enter key.
 
 export type NewFormValue = InputValue<any> | ToggleValue | ObjectValue<any>;
 

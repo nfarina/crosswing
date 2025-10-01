@@ -2,8 +2,10 @@ import {
   ChangeEvent,
   InputHTMLAttributes,
   KeyboardEvent,
+  Ref,
   use,
   useEffect,
+  useImperativeHandle,
   useLayoutEffect,
   useRef,
 } from "react";
@@ -16,6 +18,10 @@ import { useScrollAboveKeyboard } from "../../host/features/useScrollAboveKeyboa
 import { CloseCircleIcon } from "../../icons/CloseCircle.js";
 import { SearchIcon } from "../../icons/Search.js";
 import { Spinner } from "../Spinner.js";
+
+export type SearchInputRef = {
+  focus(): void;
+};
 
 export function SearchInput({
   newStyle = false,
@@ -31,6 +37,7 @@ export function SearchInput({
   clearOnEscape = true,
   muted,
   pill,
+  ref,
   ...rest
 }: {
   newStyle?: boolean;
@@ -45,14 +52,17 @@ export function SearchInput({
   clearOnEscape?: boolean;
   muted?: boolean;
   pill?: boolean;
+  ref?: Ref<SearchInputRef>;
 } & InputHTMLAttributes<HTMLInputElement>) {
-  //
-  // Hooks
-  //
-
   const { container } = use(HostContext);
 
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useImperativeHandle(ref, () => ({
+    focus: () => {
+      inputRef.current?.focus();
+    },
+  }));
 
   // Allow you to use the hotkey "/" to focus the search bar.
   useHotKey("/", { target: inputRef }, () => inputRef.current?.select());

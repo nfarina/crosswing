@@ -83,7 +83,12 @@ export const DialogContainer = ({
   // Listen for the escape key and call onClose if pressed.
   useHotKey(
     "Escape",
-    { target: containerRef, disabled: !pressEscapeToClose },
+    {
+      target: containerRef,
+      disabled: !pressEscapeToClose,
+      // Fire even if you're focused on an input field.
+      fireInInputs: "always",
+    },
     resolvedOnClose,
   );
 

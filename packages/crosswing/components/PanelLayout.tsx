@@ -113,7 +113,7 @@ export function PanelLayout({
   // so we can pass it through to the context.
   const [resolvedMode, setResolvedMode] = useState<PanelLayoutMode>(mode);
 
-  useHotKey(hotKey, { global: true }, () => {
+  useHotKey(hotKey, { target: ref }, () => {
     onPanelVisibleChange?.(!panelVisible);
   });
 

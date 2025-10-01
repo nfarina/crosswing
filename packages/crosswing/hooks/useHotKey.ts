@@ -23,8 +23,13 @@ export type HotKeyOnPressHandler = (
 export type BaseUseHotKeyOptions = {
   /** Set to true to disable handling this hotkey. */
   disabled?: boolean;
-  /** Set to true to handle even single keypresses while inside an input field. */
-  alwaysFire?: boolean;
+  /**
+   * Pass "never" to prevent firing when inside an input-like field. Pass "auto"
+   * to alow firing when input fields are focused, but only for hotkeys with
+   * modifiers. Pass "always" to always fire when inside an input-like field,
+   * even for "naked" keys (typically "enter"). Defaults to "auto".
+   */
+  fireInInputs?: "always" | "never" | "auto";
   /**
    * Optional modifiers that do not affect the matching of the hotkey. You can
    * check if they were pressed by checking the `modifiers` argument in the
@@ -55,7 +60,7 @@ export function useHotKey(
   options: UseHotKeyOptions,
   onPress: HotKeyOnPressHandler | null | undefined,
 ) {
-  const { disabled = false, alwaysFire = false, optional = [] } = options;
+  const { disabled = false, fireInInputs = "auto", optional = [] } = options;
 
   const target = "target" in options ? options.target : null;
 
@@ -106,25 +111,19 @@ export function useHotKey(
         return;
       }
 
-      // Is this a "naked" key?
-      if (!ctrlKey && !altKey && !shiftKey && !metaKey) {
-        if (!alwaysFire && !AlwaysFireOnKeys.includes(key)) {
-          // Make sure you're not in a text entry context.
-          if (
-            event.target instanceof HTMLElement &&
-            IgnoredElements.includes(event.target.tagName)
-          ) {
-            return;
-          }
+      // Check if we're in an input-like field.
+      const insideInput =
+        event.target instanceof HTMLElement &&
+        (IgnoredElements.includes(event.target.tagName) ||
+          event.target.isContentEditable);
 
-          // Make sure you're not in a contentEditable element!
-          if (
-            event.target instanceof HTMLElement &&
-            event.target.isContentEditable
-          ) {
-            return;
-          }
-        }
+      // Is this a "naked" key?
+      const isNakedKey = !ctrlKey && !altKey && !shiftKey && !metaKey;
+
+      // Check if we need to ignore this hotkey because we're in an input-like field.
+      if (insideInput) {
+        if (fireInInputs === "never") return;
+        if (fireInInputs === "auto" && isNakedKey) return;
       }
 
       // Did you specify a target, and if so, is it obscured by a modal or other
@@ -158,11 +157,10 @@ export function useHotKey(
       // console.log("Remove listener for ", hotkey, "on", target);
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [hotKey, disabled, target, alwaysFire]);
+  }, [hotKey, disabled, target, fireInInputs]);
 }
 
 const IgnoredElements = ["INPUT", "TEXTAREA", "SELECT"];
-const AlwaysFireOnKeys = ["Enter", "Escape"];
 
 export type ParsedHotKey = {
   key: string;
@@ -190,18 +188,21 @@ export function parseHotKey(hotKey: HotKey): ParsedHotKey {
 /**
  * Formats a HotKey to a display format using unicode characters, like "⇧⌘A".
  */
-export function formatHotKey(
-  { key, ctrlKey, altKey, shiftKey, metaKey }: ParsedHotKey,
-  { originalCase }: { originalCase?: boolean } = {},
-): string {
-  let formatted = "";
+export function formatHotKey({
+  key,
+  ctrlKey,
+  altKey,
+  shiftKey,
+  metaKey,
+}: ParsedHotKey): string[] {
+  const formatted: string[] = [];
 
-  if (ctrlKey) formatted += "⌃";
-  if (altKey) formatted += "⌥";
-  if (shiftKey) formatted += "⇧";
-  if (metaKey) formatted += "⌘";
+  if (ctrlKey) formatted.push("⌃");
+  if (altKey) formatted.push("⌥");
+  if (shiftKey) formatted.push("⇧");
+  if (metaKey) formatted.push("⌘");
 
-  return formatted + (originalCase ? key : key.toUpperCase());
+  return [...formatted, key];
 }
 
 /**
@@ -242,6 +243,7 @@ export type SingleHotKey =
   | "ArrowLeft"
   | "ArrowRight"
   | "Tab"
+  | "Space"
   | " "
   | "a"
   | "b"

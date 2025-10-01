@@ -49,12 +49,12 @@ export function useListKeyboardNavigationJS(
     }
   }, [autoFocusFirst]);
 
-  useHotKey("ArrowUp", { target: listRef, alwaysFire: true }, () => {
+  useHotKey("ArrowUp", { target: listRef, fireInInputs: "always" }, () => {
     clearTypeAhead();
     onArrowPress("up");
   });
 
-  useHotKey("ArrowDown", { target: listRef, alwaysFire: true }, () => {
+  useHotKey("ArrowDown", { target: listRef, fireInInputs: "always" }, () => {
     clearTypeAhead();
     onArrowPress("down");
   });

@@ -4,17 +4,17 @@ import { useErrorAlert } from "../modals/alert/useErrorAlert.js";
 import { ModalDecorator } from "../modals/storybook/decorators.js";
 import { wait } from "../shared/wait.js";
 import { CrosswingAppDecorator } from "../storybook.js";
-import { useProgressAlert } from "./useProgressAlert.js";
+import { useProgressDialog } from "./useProgressDialog.js";
 
 export default {
-  component: useProgressAlert,
+  component: useProgressDialog,
   decorators: [CrosswingAppDecorator({ layout: "mobile" }), ModalDecorator],
   parameters: { layout: "centered", chromatic: { disableSnapshot: true } }, // Animations make it hard to snapshot.
 };
 
 export const Indeterminate = () => {
   const errorAlert = useErrorAlert();
-  const progressAlert = useProgressAlert();
+  const progressAlert = useProgressDialog();
 
   useAsyncTask({
     async func() {
@@ -34,7 +34,7 @@ export const Indeterminate = () => {
 
 export const IndeterminateWithoutMessage = () => {
   const errorAlert = useErrorAlert();
-  const progressAlert = useProgressAlert();
+  const progressAlert = useProgressDialog();
 
   useAsyncTask({
     async func() {
@@ -54,7 +54,7 @@ export const IndeterminateWithoutMessage = () => {
 
 export const IndeterminateWithError = () => {
   const errorAlert = useErrorAlert();
-  const progressAlert = useProgressAlert();
+  const progressAlert = useProgressDialog();
 
   useAsyncTask({
     async func() {
@@ -76,7 +76,7 @@ export const IndeterminateWithError = () => {
 
 export const Progress = () => {
   const errorAlert = useErrorAlert();
-  const progressAlert = useProgressAlert({ onCancel: () => task.cancel() });
+  const progressAlert = useProgressDialog({ onCancel: () => task.cancel() });
 
   const task = useAsyncTask({
     func: async (task) => {

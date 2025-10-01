@@ -10,6 +10,7 @@ export type ButtonSize = "smaller" | "normal" | "larger" | "largest";
 
 export function Button({
   primary,
+  destructive,
   to,
   target,
   size = "normal",
@@ -25,6 +26,7 @@ export function Button({
   ...rest
 }: (Parameters<typeof Clickable>[0] | Parameters<typeof Link>[0]) & {
   primary?: boolean;
+  destructive?: boolean;
   /** If provided, the button will be rendered as a `Link` to the given URL. */
   to?: string;
   /** If `to` is provided, this will be passed to the `Link` component. */
@@ -49,6 +51,7 @@ export function Button({
       as={to ? Link : Clickable}
       {...(to ? { to, target } : {})}
       data-primary={!!primary}
+      data-destructive={!!destructive}
       data-size={size}
       data-working={!!working}
       disabled={!!disabled || !!working}
@@ -207,6 +210,48 @@ export const StyledButton = styled(Clickable)`
 
         &:hover {
           background: ${colors.gray200()};
+        }
+      }
+    }
+
+    &[data-destructive="true"] {
+      color: ${colors.red({ darken: 0.05 })};
+
+      @media (prefers-color-scheme: dark) {
+        color: ${colors.red({ lighten: 0.13 })};
+      }
+
+      &[data-bordered="true"] {
+        border-color: ${colors.red({ darken: 0.05, alpha: 0.5 })};
+
+        @media (prefers-color-scheme: dark) {
+          border-color: ${colors.red({ lighten: 0.13, alpha: 0.5 })};
+        }
+      }
+
+      &:hover {
+        background: ${colors.red({ darken: 0.05, alpha: 0.1 })};
+
+        @media (prefers-color-scheme: dark) {
+          background: ${colors.red({ lighten: 0.13, alpha: 0.1 })};
+        }
+      }
+
+      &[data-destructive="true"] {
+        background: ${colors.red({ darken: 0.05, alpha: 0.1 })};
+        border: 1px solid ${colors.red({ darken: 0.05, alpha: 0.5 })};
+
+        @media (prefers-color-scheme: dark) {
+          background: ${colors.red({ lighten: 0.13, alpha: 0.1 })};
+          border: 1px solid ${colors.red({ lighten: 0.13, alpha: 0.5 })};
+        }
+
+        &:hover {
+          background: ${colors.red({ darken: 0.05, alpha: 0.2 })};
+
+          @media (prefers-color-scheme: dark) {
+            background: ${colors.red({ lighten: 0.13, alpha: 0.2 })};
+          }
         }
       }
     }

@@ -1,9 +1,9 @@
 import {
   ComponentType,
+  createContext,
   HTMLAttributes,
   MouseEvent,
   ReactNode,
-  createContext,
   use,
   useRef,
 } from "react";
@@ -12,6 +12,11 @@ import { colors } from "../colors/colors.js";
 import { fonts } from "../fonts/fonts.js";
 import { CheckIcon } from "../icons/Check.js";
 import { PopupPlacement } from "../modals/popup/getPopupPlacement.js";
+import {
+  Hotkeys,
+  HotkeyView,
+  StyledHotkeyView,
+} from "../modals/popup/HotkeyView.js";
 import { PopupChildProps, PopupView } from "../modals/popup/PopupView.js";
 import { Link } from "../router/Link.js";
 import { StatusBanner } from "./badges/StatusBanner.js";
@@ -84,8 +89,10 @@ export function PopupMenuText({
   disabled,
   selected,
   checked,
+  hotkeys,
   destructive,
   leaveOpen,
+  ellipsize,
   ...rest
 }: {
   icon?: ReactNode;
@@ -99,9 +106,11 @@ export function PopupMenuText({
   disabled?: boolean;
   selected?: boolean;
   checked?: boolean;
+  hotkeys?: Hotkeys | null;
   destructive?: boolean;
   /** If true, clicking the text will not call onClose() automatically. */
   leaveOpen?: boolean;
+  ellipsize?: boolean;
 } & Omit<HTMLAttributes<HTMLAnchorElement & HTMLDivElement>, "onClick">) {
   // We want to automatically close the menu when you click something.
   const onClose = use(OnCloseContext);
@@ -138,6 +147,7 @@ export function PopupMenuText({
       data-selected={selected}
       data-checked={checked}
       data-destructive={destructive}
+      data-ellipsize={ellipsize}
       // ARIA and focusability attributes
       role="menuitem"
       aria-disabled={disabled}
@@ -155,6 +165,7 @@ export function PopupMenuText({
           {checked ? <CheckIcon /> : <div className="not-checked" />}
         </div>
       )}
+      {hotkeys && <HotkeyView hotkeys={hotkeys} />}
     </StyledPopupMenuText>
   );
 }
@@ -187,17 +198,19 @@ export const StyledPopupMenuText = styled.div`
 
   > .content {
     flex-grow: 1;
-
+    min-width: 0; /* Enable ellipsizing when needed. */
     display: flex;
     flex-flow: column;
 
     > .children {
       font: ${fonts.display({ size: 15, line: "22px" })};
+      ${"text-wrap: pretty;"}
     }
 
     > .detail {
       font: ${fonts.display({ size: 12, line: "18px" })};
       color: ${colors.textSecondary()};
+      ${"text-wrap: pretty;"}
     }
   }
 
@@ -215,6 +228,10 @@ export const StyledPopupMenuText = styled.div`
       width: 100%;
       height: 100%;
     }
+  }
+
+  > ${StyledHotkeyView} {
+    margin-left: 10px;
   }
 
   &:hover,
@@ -247,6 +264,18 @@ export const StyledPopupMenuText = styled.div`
       background: ${colors.red({ alpha: 0.1 })};
     }
   }
+
+  &[data-ellipsize="true"] {
+    > .content {
+      > .children,
+      > .detail {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
 `;
 
 export const PopupMenuSelect = styled(Select)`
@@ -276,10 +305,7 @@ export function PopupMenuToggle({
   return (
     <StyledPopupMenuToggle
       leaveOpen
-      // We don't want to shadow the button by making ourselves a <button>
-      // as well.
-      component="div"
-      // Don't listen for clicks on the Toggle.
+      // Don't listen for clicks on the Toggle; it would shadow our button element.
       right={
         <Toggle on={on} size="smallest" disabled={rest.disabled} as="div" />
       }

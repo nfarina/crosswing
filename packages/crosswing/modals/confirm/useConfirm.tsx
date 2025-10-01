@@ -1,12 +1,15 @@
 import { ReactNode } from "react";
-import { AlertButton, AlertView } from "../alert/AlertView.js";
+import { styled } from "styled-components";
 import { Modal } from "../context/useModal.js";
+import { DialogView } from "../dialog/DialogView.js";
 import { useDialog } from "../dialog/useDialog.js";
 
 export interface Confirm {
   title?: ReactNode;
   message?: ReactNode;
   children?: ReactNode;
+  /** If true, the dialog children will be rendered with an alternative background color to set it apart from the header/footer. */
+  childrenAltBackground?: boolean;
   okText?: ReactNode;
   cancelText?: ReactNode;
   destructiveText?: ReactNode;
@@ -29,6 +32,7 @@ export function useConfirm<T extends any[]>(
       title,
       message,
       children,
+      childrenAltBackground,
       okText,
       cancelText,
       destructiveText,
@@ -36,28 +40,38 @@ export function useConfirm<T extends any[]>(
       onConfirm,
     } = confirm;
 
-    const cancelButton: AlertButton = {
-      title: cancelText || "Cancel",
-    };
-
-    const okButton: AlertButton = {
-      title: destructiveText || okText || "OK",
-      primary: true,
-      destructive: !!destructiveText,
-      disabled: !canConfirm,
-      onClick: onConfirm,
-    };
-
     return (
-      <AlertView
+      <StyledConfirmDialogView
         title={title}
-        message={message}
+        subtitle={message}
         children={children}
+        childrenAltBackground={childrenAltBackground}
         onClose={dialog.hide}
-        buttons={[cancelButton, okButton]}
+        hideCloseButton
+        borders={children ? "both" : "bottom"}
+        buttons={[
+          {
+            title: cancelText || "Cancel",
+            onClick: dialog.hide,
+          },
+          {
+            title: destructiveText || okText || "OK",
+            primary: true,
+            destructive: !!destructiveText,
+            disabled: !canConfirm,
+            onClick: () => {
+              onConfirm?.();
+              dialog.hide();
+            },
+          },
+        ]}
       />
     );
   });
 
   return dialog;
 }
+
+const StyledConfirmDialogView = styled(DialogView)`
+  width: 350px;
+`;

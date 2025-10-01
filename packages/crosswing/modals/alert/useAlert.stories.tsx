@@ -28,6 +28,23 @@ export function Normal() {
   );
 }
 
+export function WithTitle() {
+  const alert = useAlert((name: string) => ({
+    title: `Hello!`,
+    message: `It's lovely to meet you, ${name}! Here's some long text that should wrap around to the next line.`,
+    onClose: action("close"),
+    okText: "Cheers",
+  }));
+
+  return (
+    <ModalStoryButtons>
+      <ModalStoryButton onClick={() => alert.show("Bob")}>
+        Show Alert
+      </ModalStoryButton>
+    </ModalStoryButtons>
+  );
+}
+
 export function Sticky() {
   const alert = useAlert(
     () => ({

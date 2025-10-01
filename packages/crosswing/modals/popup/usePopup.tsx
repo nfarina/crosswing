@@ -152,6 +152,7 @@ export const PopupContainer = ({
   maxHeight = "100%",
   clickOutsideToClose = true,
   showBackdrop = false,
+  createsHotkeyContext = true,
 }: {
   placement: PopupPlacement;
   target: PopupTarget;
@@ -182,6 +183,10 @@ export const PopupContainer = ({
    * padding). Default 100%.
    */
   maxHeight?: string;
+  /**
+   * Default true, creates a hotkey context for the popup (prevents hotkeys from firing on elements "below" us).
+   */
+  createsHotkeyContext?: boolean;
 }) => {
   const { modalContextRoot } = use(ModalContext);
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -194,7 +199,11 @@ export const PopupContainer = ({
   );
 
   // Listen for the escape key and call onClose if pressed.
-  useHotKey("Escape", { target: containerRef }, onClose);
+  useHotKey(
+    "Escape",
+    { target: containerRef, fireInInputs: "always" },
+    onClose,
+  );
 
   // We need to keep the callback "fresh" because it's a closure that likely
   // encapsulates the state of the component it was defined in.
@@ -441,7 +450,7 @@ export const PopupContainer = ({
       // Popups don't obscure most content underneath, but we still want to
       // prevent any hotkeys bound to elements underneath the popup from firing
       // while the popup is open.
-      {...HotKeyContextDataAttributes}
+      {...(createsHotkeyContext ? HotKeyContextDataAttributes : {})}
     >
       <DisableIFramesGlobalStyle />
       <div className="backdrop" onClick={onClose} />

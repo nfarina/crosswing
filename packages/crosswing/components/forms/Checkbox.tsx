@@ -68,7 +68,7 @@ export const StyledCheckbox = styled(Clickable)`
   &[data-checked="true"] {
     > .box {
       border: none;
-      background: ${colors.primary()};
+      background: ${colors.blue()};
     }
   }
 

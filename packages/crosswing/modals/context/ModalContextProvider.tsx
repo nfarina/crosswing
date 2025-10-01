@@ -378,6 +378,9 @@ export function ModalContextProvider({
                   children={tooltipPopup.children}
                   delay={tooltipPopup.delay}
                   onClose={() => setTooltipPopup(null)}
+                  // Tooltips don't create a hotkey context, so we don't want
+                  // to prevent hotkeys from firing on elements "below" us.
+                  createsHotkeyContext={false}
                 />
               }
             />
@@ -398,6 +401,8 @@ export const StyledModalContextProvider = styled.div`
     flex-grow: 1;
     box-sizing: border-box;
     z-index: 0;
+    max-width: 100%;
+    max-height: 100%;
   }
 `;
 

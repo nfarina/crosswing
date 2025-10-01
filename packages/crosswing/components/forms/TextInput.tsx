@@ -4,7 +4,9 @@ import {
   InputHTMLAttributes,
   KeyboardEvent,
   ReactNode,
+  Ref,
   use,
+  useImperativeHandle,
   useLayoutEffect,
   useRef,
   useState,
@@ -22,6 +24,10 @@ import { Button } from "../Button.js";
 
 /** How to render errors when given via the `TextInput.error` property. */
 export type TextInputErrorStyle = "color" | "message" | "none";
+
+export type TextInputRef = {
+  focus(): void;
+};
 
 /**
  * A text input that supports automatically trimming user-entered input.
@@ -45,6 +51,7 @@ export function TextInput({
   className,
   onBlur,
   onKeyDown,
+  ref,
   ...rest
 }: Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> & {
   newStyle?: boolean;
@@ -59,7 +66,14 @@ export function TextInput({
   onValueChange?: (newValue: string) => void;
   error?: Error | null;
   errorStyle?: TextInputErrorStyle;
+  ref?: Ref<TextInputRef>;
 }) {
+  useImperativeHandle(ref, () => ({
+    focus: () => {
+      inputRef.current?.focus();
+    },
+  }));
+
   const { container } = use(HostContext);
 
   // Details button isn't useful for form errors (they are "intentional" errors so no debugging info needed).

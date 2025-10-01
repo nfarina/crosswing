@@ -1,11 +1,12 @@
 import { FormEvent, KeyboardEvent, ReactNode, useState } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
-import { fonts } from "../../fonts/fonts.js";
-import { AlertButton, AlertView } from "../../modals/alert/AlertView.js";
+import { AlertTriangleIcon } from "../../icons/AlertTriangle.js";
 import { Modal } from "../../modals/context/useModal.js";
+import { DialogView } from "../../modals/dialog/DialogView.js";
 import { useDialog } from "../../modals/dialog/useDialog.js";
-import { StyledTextArea, TextArea } from "./TextArea.js";
+import { TipView } from "../TipView.js";
+import { TextArea } from "./TextArea.js";
 import { InputTransformer, useInputValue } from "./useInputValue.js";
 
 // Automagically adjusts the type given to onSubmit() to be nullable, based on
@@ -101,19 +102,19 @@ export function PromptView<T = string>({
     return !!input.props.value;
   })();
 
-  const cancelButton: AlertButton = {
-    title: cancelText || "Cancel",
-  };
-
-  const okButton: AlertButton = {
-    title: destructiveText || okText || "OK",
-    primary: true,
-    autoFocus: false, // Don't steal focus from the text field.
-    destructive: !!destructiveText,
-    disabled: !canSubmit || !!working,
-    leaveOpen: true, // We close the dialog ourselves only if the input validates.
-    onClick: trySubmit,
-  };
+  const buttons = [
+    {
+      title: cancelText || "Cancel",
+      onClick: onClose,
+    },
+    {
+      title: destructiveText || okText || "OK",
+      primary: true,
+      destructive: !!destructiveText,
+      disabled: !canSubmit || !!working,
+      onClick: trySubmit,
+    },
+  ];
 
   function onValueChange(newValue: T | null, newStringValue: string) {
     if (!newStringValue || newValue) {
@@ -151,14 +152,17 @@ export function PromptView<T = string>({
   const { error: _, ...inputProps } = input.props;
 
   return (
-    <AlertView
+    <StyledPromptDialogView
       title={title}
-      message={message}
+      subtitle={message}
       onClose={onClose}
-      buttons={[cancelButton, okButton]}
+      hideCloseButton
+      buttons={buttons}
+      onSubmit={onFormSubmit}
     >
-      <StyledForm onSubmit={onFormSubmit}>
+      <StyledPromptContent>
         <TextArea
+          newStyle
           placeholder={placeholder}
           autoFocus
           autoSelect
@@ -168,33 +172,26 @@ export function PromptView<T = string>({
           onKeyDown={onKeyDown}
           {...inputProps}
         />
-        {!!error && <div className="error">{error.message}</div>}
-      </StyledForm>
-    </AlertView>
+        {!!error && (
+          <TipView
+            icon={<AlertTriangleIcon />}
+            tint={colors.red}
+            className="error"
+          >
+            {error.message}
+          </TipView>
+        )}
+      </StyledPromptContent>
+    </StyledPromptDialogView>
   );
 }
 
-const StyledForm = styled.form`
-  > ${StyledTextArea} {
-    width: 100%;
-    box-shadow: 0 -1px 0 ${colors.controlBorder()};
-    max-height: 200px;
-    overflow-y: auto;
+const StyledPromptDialogView = styled(DialogView)`
+  width: 350px;
+`;
 
-    > textarea {
-      padding: 18.5px 10px; /* For legacy compatibility with previous TextInput approach. */
-    }
-  }
-
+const StyledPromptContent = styled.div`
   > .error {
-    padding: 15px 25px;
-    font: ${fonts.displayMedium({ size: 14 })};
-    color: ${colors.red()};
-    text-align: center;
-    box-shadow: 0 -1px 0 ${colors.controlBorder()};
-
-    @media (prefers-color-scheme: dark) {
-      box-shadow: 0 -1px 0 ${colors.controlBorder()};
-    }
+    margin-top: 10px;
   }
 `;

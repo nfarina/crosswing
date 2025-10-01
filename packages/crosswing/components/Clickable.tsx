@@ -29,6 +29,8 @@ export const StyledClickable = styled.button`
   cursor: pointer;
   transition: opacity 0.2s ease-in-out;
   text-align: left;
+  font: inherit;
+  color: inherit;
 
   &:disabled {
     cursor: default;

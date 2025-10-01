@@ -106,7 +106,12 @@ export const StyledSeparatorLayout = styled.div`
     > * {
       background: ${colors.textBackgroundAlt()};
       border: 1px solid ${colors.controlBorder()};
+      border-radius: 0; /* Undo any border radius set on children. */
       outline-offset: -3px;
+
+      &[data-new-style="true"] {
+        border-radius: 0; /* Fight specificity wars on TextCell. */
+      }
     }
 
     &[data-transparent="true"] {

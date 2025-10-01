@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import { colors } from "../colors/colors";
 import { fonts } from "../fonts/fonts";
 import { DownArrowIcon } from "../icons/DownArrow";
-import { Popup } from "../modals/popup/usePopup";
+import { Popup, PopupTarget } from "../modals/popup/usePopup";
 import { Button } from "./Button";
 
 export type PopupButtonRef = {
@@ -11,6 +11,8 @@ export type PopupButtonRef = {
   show(): void;
   /** Hides the associated popup. */
   hide(): void;
+  /** Shows the popup if not shown, otherwise hides. */
+  toggle: (target: PopupTarget) => void;
 };
 
 /**
@@ -38,6 +40,9 @@ export function PopupButton({
     },
     hide() {
       popup?.hide();
+    },
+    toggle(target) {
+      popup?.toggle(target);
     },
   }));
 

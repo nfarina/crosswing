@@ -20,6 +20,7 @@ export function ToastView({
   action,
   truncate,
   to,
+  dismissAfter,
   sticky,
   onClick,
   onClose,
@@ -66,7 +67,7 @@ export function ToastView({
   };
 
   // For automatically closing the toast.
-  useInterval(requestClose, AUTO_DISMISS_TIME, [sticky]);
+  useInterval(requestClose, dismissAfter ?? AUTO_DISMISS_TIME, [sticky]);
 
   function onAnimationEnd() {
     if (animatingIn === false) {

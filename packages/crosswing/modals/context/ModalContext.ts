@@ -73,6 +73,8 @@ export interface Toast {
   onActionClick?: () => void;
   wrap?: boolean;
   sticky?: boolean;
+  /** Milliseconds after which the toast will be dismissed. Default is four seconds. */
+  dismissAfter?: number;
   to?: string;
   truncate?: boolean;
   onClick?: () => void;

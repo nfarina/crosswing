@@ -116,10 +116,6 @@ export const StyledTextCell = styled.div`
   text-decoration: none;
   gap: 10px;
 
-  &[data-new-style="true"] {
-    /* padding-left: 0; */
-  }
-
   /* Re-enable text selection in a mobile setting. */
   user-select: text;
 
@@ -216,6 +212,25 @@ export const StyledTextCell = styled.div`
     margin: 0 -2px;
     flex-shrink: 0;
     color: ${colors.textSecondary()};
+  }
+
+  &[data-new-style="true"] {
+    border-radius: 9px;
+    /* padding-left: 0; */
+
+    > .content {
+      > .title {
+        font: ${fonts.display({ size: 14, line: "20px" })};
+      }
+
+      > .subtitle {
+        font: ${fonts.display({ size: 12, line: "16px" })};
+      }
+
+      > .detail {
+        font: ${fonts.display({ size: 12, line: "16px" })};
+      }
+    }
   }
 
   &[data-show-disclosure="false"] {

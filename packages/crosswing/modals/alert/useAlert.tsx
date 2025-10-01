@@ -1,7 +1,8 @@
 import { ReactNode } from "react";
+import styled from "styled-components";
 import { Modal } from "../context/useModal.js";
+import { DialogButton, DialogView } from "../dialog/DialogView.js";
 import { UseDialogOptions, useDialog } from "../dialog/useDialog.js";
-import { AlertButton, AlertView } from "./AlertView.js";
 
 export * from "./AlertView.js";
 
@@ -37,21 +38,28 @@ export function useAlert<T extends any[]>(
       modal.hide();
     }
 
-    const okButton: AlertButton = {
+    const okButton: DialogButton = {
       title: okText || "OK",
       primary: true,
+      onClick: onAlertClose,
     };
 
     return (
-      <AlertView
+      <StyledUseAlertView
         title={title}
-        message={message}
-        children={children}
-        buttons={hideButtons ? [] : [okButton]}
         onClose={onAlertClose}
-      />
+        hideCloseButton
+        buttons={hideButtons ? [] : [okButton]}
+      >
+        {message && <div>{message}</div>}
+        {children}
+      </StyledUseAlertView>
     );
   }, options);
 
   return modal;
 }
+
+const StyledUseAlertView = styled(DialogView)`
+  width: 300px;
+`;
