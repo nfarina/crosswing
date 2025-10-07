@@ -3,7 +3,7 @@ import {
   MouseEvent,
   ReactNode,
   RefObject,
-  unstable_ViewTransition as ViewTransition,
+  ViewTransition,
 } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";

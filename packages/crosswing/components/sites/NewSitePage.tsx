@@ -9,6 +9,7 @@ const PanelRestorationKey = Symbol("panel");
 
 export function NewSitePage({
   title,
+  ellipsizeTitle = true,
   subtitle,
   accessories,
   panelContent,
@@ -29,6 +30,8 @@ export function NewSitePage({
     "panelDefaultSize" | "panelMinSize" | "panelMaxSize" | "contentMinSize"
   > & {
     title?: ReactNode;
+    /** Whether to ellipsize the title. Some custom title components don't support our auto-truncation. Default true. */
+    ellipsizeTitle?: boolean;
     subtitle?: ReactNode;
     accessories?: ReactNode;
     panelContent?: ReactNode;
@@ -45,6 +48,7 @@ export function NewSitePage({
         <PageLayout>
           <NewSiteHeader
             title={title}
+            ellipsizeTitle={ellipsizeTitle}
             subtitle={subtitle}
             accessories={accessories}
             hideSiteAccessory={panelVisible}

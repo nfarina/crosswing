@@ -175,18 +175,18 @@ export function getPopupPlacement({
 
     // Place it vertically centered at the middle of the target.
     position.y = targetRect.y + targetRect.height / 2 - popupSize.height / 2;
+  }
 
-    // Now constrain the popup to the container.
-    if (position.x < 0) {
-      position.x = 0;
-    } else if (position.x + popupSize.width > containerSize.width) {
-      position.x = containerSize.width - popupSize.width;
-    }
-    if (position.y < 0) {
-      position.y = 0;
-    } else if (position.y + popupSize.height > containerSize.height) {
-      position.y = containerSize.height - popupSize.height;
-    }
+  // Now constrain the popup to the container.
+  if (position.x < 0) {
+    position.x = 0;
+  } else if (position.x + popupSize.width > containerSize.width) {
+    position.x = containerSize.width - popupSize.width;
+  }
+  if (position.y < 0) {
+    position.y = 0;
+  } else if (position.y + popupSize.height > containerSize.height) {
+    position.y = containerSize.height - popupSize.height;
   }
 
   return [position, arrowOffset, placement];

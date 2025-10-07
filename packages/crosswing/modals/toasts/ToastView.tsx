@@ -18,10 +18,14 @@ export function ToastView({
   message,
   icon,
   action,
-  truncate,
+  actionTo,
+  actionTarget,
+  ellipsize,
   to,
+  target,
   dismissAfter,
   sticky,
+  destructive,
   onClick,
   onClose,
   onActionClick,
@@ -31,7 +35,6 @@ export function ToastView({
   ...rest
 }: Omit<HTMLAttributes<HTMLDivElement>, "title"> &
   Omit<Toast, "key"> & {
-    truncate?: boolean;
     in?: boolean;
     onExited?: () => void;
   }) {
@@ -80,7 +83,10 @@ export function ToastView({
     onClose?.();
   }
 
-  function handleToastClick() {
+  function handleToastClick(e: MouseEvent<HTMLDivElement>) {
+    // Make sure you didn't click a <button> like the close button or action button.
+    if ((e.target as HTMLElement).closest("button")) return;
+
     if (onClick) {
       onClick();
       onClose?.();
@@ -91,25 +97,25 @@ export function ToastView({
     <StyledToastView
       {...rest}
       onTouchStart={onTouchStart}
-      data-truncate-text={!!truncate}
+      data-ellipsize={!!ellipsize}
+      data-destructive={!!destructive}
       data-animating-in={animatingIn}
       data-clickable={!!onClick}
       onAnimationEnd={onAnimationEnd}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
+      onClick={handleToastClick}
     >
-      {icon && (
-        <div className="icon" onClick={handleToastClick}>
-          {icon}
-        </div>
-      )}
+      {/* These hover background are translucent so we need to paint them on top of the toast's natural opaque background. */}
+      <div className="hover-bg" />
+      {icon && <div className="icon">{icon}</div>}
       {to ? (
-        <Link className="content" to={to} onClick={handleToastClick}>
+        <Link className="content" to={to} target={target}>
           {title && <div className="title">{title}</div>}
           {message && <div className="message">{message}</div>}
         </Link>
       ) : (
-        <div className="content" onClick={handleToastClick}>
+        <div className="content">
           {title && <div className="title">{title}</div>}
           {message && <div className="message">{message}</div>}
         </div>
@@ -122,11 +128,15 @@ export function ToastView({
           className="action"
           children={action}
           onClick={handleActionClick}
+          destructive={destructive}
+          to={actionTo}
+          target={actionTarget}
         />
       )}
       <Button
         className="close"
         newStyle
+        destructive={destructive}
         onClick={onClose}
         icon={<CloseIcon />}
       />
@@ -164,6 +174,7 @@ const StyledToastView = styled.div`
   box-shadow:
     ${shadows.cardBorder()},
     0 4px 20px 0 ${colors.gray800({ alpha: 0.3 })};
+  position: relative;
 
   @media (prefers-color-scheme: dark) {
     background: ${colors.gray750()};
@@ -189,12 +200,21 @@ const StyledToastView = styled.div`
     cursor: pointer;
   }
 
+  > .hover-bg {
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
   > .icon {
     width: 24px;
     height: 24px;
     flex-shrink: 0;
     margin-left: 13px;
-    margin-right: -3px;
+    margin-right: -6px;
   }
 
   > .content {
@@ -208,7 +228,7 @@ const StyledToastView = styled.div`
     text-decoration: none;
 
     > .title {
-      font: ${fonts.displayBold({ size: 14, line: "24px" })};
+      font: ${fonts.displayBold({ size: 15, line: "24px" })};
       word-break: break-word;
     }
 
@@ -218,7 +238,7 @@ const StyledToastView = styled.div`
     }
   }
 
-  &[data-truncate-text="true"] {
+  &[data-ellipsize="true"] {
     > .content {
       > .title,
       > .message {
@@ -241,5 +261,40 @@ const StyledToastView = styled.div`
     min-width: 32px;
     min-height: 32px;
     padding: 0;
+    color: inherit;
+  }
+
+  &[data-clickable="true"] {
+    &:hover {
+      > .hover-bg {
+        background: ${colors.buttonBackgroundHover()};
+      }
+    }
+  }
+
+  &[data-destructive="true"] {
+    color: ${colors.red({ darken: 0.2 })};
+
+    @media (prefers-color-scheme: dark) {
+      color: ${colors.red({ lighten: 0.15 })};
+    }
+
+    > .content > .title,
+    > .content > .message {
+      color: ${colors.red({ darken: 0.2, desaturate: 0.45 })};
+
+      @media (prefers-color-scheme: dark) {
+        color: ${colors.red({ lighten: 0.15, desaturate: 0.65 })};
+      }
+    }
+
+    &[data-clickable="true"] {
+      &:hover,
+      &:focus {
+        > .hover-bg {
+          background: ${colors.red({ alpha: 0.1 })};
+        }
+      }
+    }
   }
 `;

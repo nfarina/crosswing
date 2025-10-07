@@ -1,6 +1,6 @@
 import Debug from "debug";
 import {
-  unstable_Activity as Activity,
+  Activity,
   isValidElement,
   ReactElement,
   ReactNode,

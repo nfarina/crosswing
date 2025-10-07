@@ -101,7 +101,7 @@ export function useListKeyboardNavigationJS(
 
     // First try to find an item that starts with the search string
     for (const item of focusableItems) {
-      const itemText = getItemText(item).toLowerCase();
+      const itemText = item.innerText.toLowerCase();
       if (itemText.startsWith(searchString)) {
         return item;
       }
@@ -109,7 +109,7 @@ export function useListKeyboardNavigationJS(
 
     // If no exact start match, try to find any item that contains the search string
     for (const item of focusableItems) {
-      const itemText = getItemText(item).toLowerCase();
+      const itemText = item.innerText.toLowerCase();
       if (itemText.includes(searchString)) {
         return item;
       }
@@ -118,6 +118,7 @@ export function useListKeyboardNavigationJS(
     return null;
   }
 
+  /** @deprecated Using innerText instead, much simpler and captures everything. */
   function getItemText(element: HTMLElement): string {
     // Try to get the most relevant text content from the menu item
 
@@ -146,13 +147,13 @@ export function useListKeyboardNavigationJS(
 
     // Get all focusable elements within the list, including menu items
     const focusableSelectors = [
-      'button:not([disabled]):not([aria-disabled="true"])',
-      'a[href]:not([aria-disabled="true"])',
-      '[role="menuitem"]:not([aria-disabled="true"])',
+      'button:not([disabled]):not([aria-disabled="true"]):not([data-selectable="false"])',
+      'a[href]:not([aria-disabled="true"]):not([data-selectable="false"])',
+      '[role="menuitem"]:not([aria-disabled="true"]):not([data-selectable="false"])',
       '[tabindex]:not([tabindex="-1"]):not([disabled]):not([aria-disabled="true"])',
-      'input:not([disabled]):not([aria-disabled="true"])',
-      'select:not([disabled]):not([aria-disabled="true"])',
-      'textarea:not([disabled]):not([aria-disabled="true"])',
+      'input:not([disabled]):not([aria-disabled="true"]):not([data-selectable="false"])',
+      'select:not([disabled]):not([aria-disabled="true"]):not([data-selectable="false"])',
+      'textarea:not([disabled]):not([aria-disabled="true"]):not([data-selectable="false"])',
     ].join(", ");
 
     return Array.from(listRef.current.querySelectorAll(focusableSelectors));

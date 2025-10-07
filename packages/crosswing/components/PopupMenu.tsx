@@ -38,6 +38,8 @@ export function PopupMenu({
   arrowBackgroundDark,
   placement,
   onClose,
+  onScroll,
+  onScrollCapture,
   children,
   ...rest
 }: {
@@ -59,7 +61,12 @@ export function PopupMenu({
       arrowBackgroundDark={arrowBackgroundDark}
       {...rest}
     >
-      <StyledPopupMenu ref={menuRef}>
+      {/* Send any onScroll events to the menu since it has overflow: auto */}
+      <StyledPopupMenu
+        ref={menuRef}
+        onScroll={onScroll}
+        onScrollCapture={onScrollCapture}
+      >
         <OnCloseContext value={onClose}>{children}</OnCloseContext>
       </StyledPopupMenu>
     </PopupView>
@@ -87,6 +94,7 @@ export function PopupMenuText({
   right,
   target,
   disabled,
+  selectable = true,
   selected,
   checked,
   hotkeys,
@@ -104,6 +112,8 @@ export function PopupMenuText({
   to?: string;
   target?: string;
   disabled?: boolean;
+  /** If false, then behaves like disabled=true, but doesn't dim out the item. Default true. */
+  selectable?: boolean;
   selected?: boolean;
   checked?: boolean;
   hotkeys?: Hotkeys | null;
@@ -117,7 +127,7 @@ export function PopupMenuText({
 
   function onButtonClick(e: MouseEvent<HTMLElement>) {
     onClick?.(e);
-    if (!leaveOpen) onClose?.();
+    if (onClick && !leaveOpen) onClose?.();
   }
 
   function onMouseEnter(e: MouseEvent<HTMLElement>) {
@@ -135,7 +145,8 @@ export function PopupMenuText({
   }
 
   // Determine if this item should be focusable
-  const isInteractive = !disabled && (onClick || to || component !== "div");
+  const isInteractive =
+    !disabled && selectable && (onClick || to || component !== "div");
 
   return (
     <StyledPopupMenuText
@@ -148,6 +159,7 @@ export function PopupMenuText({
       data-checked={checked}
       data-destructive={destructive}
       data-ellipsize={ellipsize}
+      data-selectable={selectable}
       // ARIA and focusability attributes
       role="menuitem"
       aria-disabled={disabled}
@@ -173,13 +185,17 @@ export function PopupMenuText({
 export const StyledPopupMenuText = styled.div`
   padding: 7px 12px;
   border-radius: 13px;
-  cursor: pointer;
+  cursor: default;
   display: flex;
   flex-flow: row;
   align-items: center;
   gap: 7px;
   color: ${colors.text()};
   box-sizing: border-box; /* Needed for <a> elements */
+
+  &[data-selectable="true"] {
+    cursor: pointer;
+  }
 
   /* For Links. */
   text-decoration: none;
@@ -234,10 +250,12 @@ export const StyledPopupMenuText = styled.div`
     margin-left: 10px;
   }
 
-  &:hover,
-  &:focus {
-    background: ${colors.buttonBackgroundHover()};
-    outline: none;
+  &[data-selectable="true"] {
+    &:hover,
+    &:focus {
+      background: ${colors.buttonBackgroundHover()};
+      outline: none;
+    }
   }
 
   &[data-disabled="true"] {
@@ -257,6 +275,14 @@ export const StyledPopupMenuText = styled.div`
 
     @media (prefers-color-scheme: dark) {
       color: ${colors.red({ lighten: 0.15 })};
+    }
+
+    > .content > .detail {
+      color: ${colors.red({ darken: 0.2, desaturate: 0.45 })};
+
+      @media (prefers-color-scheme: dark) {
+        color: ${colors.red({ lighten: 0.15, desaturate: 0.65 })};
+      }
     }
 
     &:hover,

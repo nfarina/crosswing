@@ -237,7 +237,7 @@ export const StyledButton = styled(Clickable)`
         }
       }
 
-      &[data-destructive="true"] {
+      &[data-destructive="true"][data-bordered="true"] {
         background: ${colors.red({ darken: 0.05, alpha: 0.1 })};
         border: 1px solid ${colors.red({ darken: 0.05, alpha: 0.5 })};
 

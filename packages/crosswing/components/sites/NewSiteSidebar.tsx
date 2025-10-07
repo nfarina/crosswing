@@ -79,7 +79,7 @@ export const StyledNewSiteSidebar = styled.div`
       display: flex;
       flex-flow: row;
       align-items: center;
-      gap: 10px;
+      gap: 5px;
     }
   }
 

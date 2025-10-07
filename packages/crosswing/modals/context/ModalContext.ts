@@ -70,13 +70,19 @@ export interface Toast {
   message?: ReactNode;
   icon?: ReactNode;
   action?: ReactNode;
+  actionTo?: string;
+  actionTarget?: string;
   onActionClick?: () => void;
   wrap?: boolean;
   sticky?: boolean;
   /** Milliseconds after which the toast will be dismissed. Default is four seconds. */
   dismissAfter?: number;
   to?: string;
-  truncate?: boolean;
+  target?: string;
+  /** Whether to ellipsize both the title and message. */
+  ellipsize?: boolean;
+  /** Whether to render the toast with a red tint. */
+  destructive?: boolean;
   onClick?: () => void;
   onClose?: () => void;
 }

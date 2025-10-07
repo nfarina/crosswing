@@ -1,5 +1,6 @@
 import { Meta } from "@storybook/react";
 import { action } from "storybook/actions";
+import { AlertTriangleIcon } from "../../icons/AlertTriangle.js";
 import { CheckmarkIcon } from "../../icons/Checkmark.js";
 import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
@@ -48,6 +49,17 @@ export const TextAndIcon = () => (
   />
 );
 
+export const TextClickableAndAction = () => (
+  <ToastView
+    style={{ width: "350px" }}
+    message="Thread marked as resolved."
+    onClick={action("click")}
+    onActionClick={action("action")}
+    onClose={action("close")}
+    action="Manage"
+  />
+);
+
 export const TextAndAction = () => (
   <ToastView
     style={{ width: "350px" }}
@@ -80,10 +92,24 @@ export const TitleAndLongText = () => (
 
 export const TitleAndTruncatedText = () => (
   <ToastView
-    truncate
+    ellipsize
     style={{ width: "350px" }}
     title="New comment on Whole Foods"
     message="Bob: How's the Quinoa here? I heard it's tasty. Also I heard that it's healthy."
     onClose={action("close")}
+  />
+);
+
+export const Destructive = () => (
+  <ToastView
+    destructive
+    style={{ width: "350px" }}
+    icon={<AlertTriangleIcon />}
+    title="Task error"
+    message="The task failed to complete."
+    onClick={action("click")}
+    onClose={action("close")}
+    action="Retry"
+    onActionClick={action("retry")}
   />
 );

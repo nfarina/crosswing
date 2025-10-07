@@ -20,6 +20,7 @@ import { NewSiteContext, shouldRenderAccessory } from "./NewSiteContext";
 
 export function NewSiteHeader({
   title,
+  ellipsizeTitle = true,
   subtitle,
   accessories,
   hideSiteAccessory,
@@ -28,6 +29,8 @@ export function NewSiteHeader({
   ...rest
 }: Omit<HTMLAttributes<HTMLDivElement>, "title"> & {
   title?: ReactNode;
+  /** Whether to ellipsize the title. Some custom title components don't support our auto-truncation. Default true. */
+  ellipsizeTitle?: boolean;
   subtitle?: ReactNode;
   accessories?: ReactNode;
   hideSiteAccessory?: boolean;
@@ -97,7 +100,7 @@ export function NewSiteHeader({
       )}
       <div className="title-left" />
       <div className="page-title" ref={titleRef} data-has-subtitle={!!subtitle}>
-        <div className="title" data-is-string-title={typeof title === "string"}>
+        <div className="title" data-ellipsize={!!ellipsizeTitle}>
           {title}
         </div>
         {subtitle && <div className="subtitle">{subtitle}</div>}
@@ -158,8 +161,7 @@ export const StyledNewSiteHeader = styled(AutoBorderView)`
     white-space: nowrap;
 
     > .title {
-      /* This auto-truncation doesn't always work for non-strings. */
-      &[data-is-string-title="true"] {
+      &[data-ellipsize="true"] {
         min-width: 0;
         overflow: hidden;
         text-overflow: ellipsis;
