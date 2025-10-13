@@ -56,8 +56,8 @@ export function NewSiteHeader({
     use(NewSiteContext);
 
   const cssProps = {
-    "--accessory-width": siteAccessory?.size.width + "px",
-    "--accessory-height": siteAccessory?.size.height + "px",
+    "--accessory-width": (siteAccessory?.size.width ?? 0) + "px",
+    "--accessory-height": (siteAccessory?.size.height ?? 0) + "px",
     ...style,
   } as CSSProperties;
 
