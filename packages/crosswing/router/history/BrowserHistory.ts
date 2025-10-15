@@ -4,11 +4,14 @@ import { RouterLocation } from "../RouterLocation.js";
 const debug = Debug("router:BrowserHistory");
 
 export type NavigateListener = (location: RouterLocation) => any;
+export type BeforeNavigateListener = (to: string) => boolean | void;
 export type Unsubscribe = () => void;
 
 export class BrowserHistory {
   public type = "browser" as const;
   private listeners: Set<NavigateListener> = new Set();
+  private beforeNavigateListeners: Set<BeforeNavigateListener> = new Set();
+  private previousLocation: RouterLocation | null = null;
 
   // You can set a base path and it will cause all navigation events to be
   // "rooted" under this path. Useful for embedding an <Router> inside
@@ -35,7 +38,17 @@ export class BrowserHistory {
     return RouterLocation.fromLocation(document.location, this.basePath);
   }
 
-  public navigate(to: string, { replace = false }: { replace?: boolean } = {}) {
+  public navigate(
+    to: string,
+    {
+      replace = false,
+      force = false,
+    }: {
+      replace?: boolean;
+      /** If true, ignore beforeNavigate listeners and navigate anyway. */
+      force?: boolean;
+    } = {},
+  ) {
     const { basePath } = this;
 
     if (!to.startsWith("/")) {
@@ -47,6 +60,22 @@ export class BrowserHistory {
     const href = basePath + to;
 
     debug(`navigate("${href}", {replace: ${replace}}`);
+
+    if (!force) {
+      // Check beforeNavigate listeners - if any return false, abort navigation
+      for (const listener of this.beforeNavigateListeners) {
+        if (listener(to) === false) {
+          debug(`Navigation to "${to}" blocked by beforeNavigate listener`);
+          return;
+        }
+      }
+    }
+
+    // Track previous location before navigating
+    this.previousLocation = RouterLocation.fromLocation(
+      window.location,
+      basePath,
+    );
 
     if (replace) {
       window.history.replaceState({}, "", href);
@@ -66,6 +95,26 @@ export class BrowserHistory {
     const popstateListener = () => {
       const location = this.top();
       debug(`Popstate called with location "${location}"`);
+
+      // Check beforeNavigate listeners - if any return false, undo the navigation
+      const to = location.href();
+      for (const beforeListener of this.beforeNavigateListeners) {
+        if (beforeListener(to) === false) {
+          debug(
+            `Navigation to "${to}" blocked by beforeNavigate listener, undoing`,
+          );
+          // The URL already changed, so we need to push back to the previous location
+          if (this.previousLocation) {
+            const previousHref = this.basePath + this.previousLocation.href();
+            window.history.pushState({}, "", previousHref);
+          }
+          return;
+        }
+      }
+
+      // Track this location as the previous one for future navigations
+      this.previousLocation = location;
+
       listener(location);
     };
 
@@ -75,5 +124,10 @@ export class BrowserHistory {
       this.listeners.delete(listener);
       window.removeEventListener("popstate", popstateListener);
     };
+  }
+
+  public beforeNavigate(listener: BeforeNavigateListener) {
+    this.beforeNavigateListeners.add(listener);
+    return () => this.beforeNavigateListeners.delete(listener);
   }
 }

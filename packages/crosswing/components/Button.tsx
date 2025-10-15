@@ -165,7 +165,7 @@ export const StyledButton = styled(Clickable)`
     min-height: 40px;
     background: transparent;
     border-radius: 9px;
-    font: ${fonts.displayMedium({ size: 14 })};
+    font: ${fonts.displayMedium({ size: 14, line: "1" })};
     gap: 8px;
 
     > .icon {
@@ -190,6 +190,10 @@ export const StyledButton = styled(Clickable)`
       flex-flow: row;
       align-items: center;
       justify-content: center;
+    }
+
+    > ${StyledSpinner} {
+      margin-left: 5px;
     }
 
     &:hover {
