@@ -56,6 +56,10 @@ export const StyledLabeledToggle = styled.div`
   box-sizing: border-box;
   cursor: pointer;
 
+  &:hover {
+    background: ${colors.buttonBackgroundHover()};
+  }
+
   > * {
     flex-shrink: 0;
   }

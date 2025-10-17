@@ -96,5 +96,9 @@ export const StyledTipView = styled.div`
       /* Only way to defeat ts-styled-plugin's lints right now. */
       ${"text-wrap: pretty;"}
     }
+
+    a {
+      color: inherit;
+    }
   }
 `;

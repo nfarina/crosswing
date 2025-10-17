@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, RefObject, useImperativeHandle } from "react";
 import { styled } from "styled-components";
 import { usePopup } from "../../modals/popup/usePopup.js";
 import { PopupButton } from "../PopupButton.js";
@@ -10,6 +10,11 @@ export type DropdownItem = Parameters<typeof PopupMenuText>[0] & {
   display?: ReactNode;
 };
 
+export type DropdownRef = {
+  /** Whether the dropdown is currently shown. We can't do this in PopupButton itself because PopupButton doesn't manage its own popup. */
+  visible(): boolean;
+};
+
 export function Dropdown({
   items = [],
   value,
@@ -17,6 +22,7 @@ export function Dropdown({
   placeholder = "Select",
   disabled,
   maxPopupWidth,
+  dropdownRef,
   ...rest
 }: Omit<Parameters<typeof PopupButton>[0], "popup"> & {
   items?: DropdownItem[];
@@ -24,6 +30,7 @@ export function Dropdown({
   onValueChange?: (newValue: string) => void;
   placeholder?: string;
   maxPopupWidth?: number;
+  dropdownRef?: RefObject<DropdownRef | null>;
 }) {
   const selectedItem = items.find((item) => item.value === value);
 
@@ -53,6 +60,16 @@ export function Dropdown({
       ))}
     </PopupMenu>
   ));
+
+  useImperativeHandle(
+    dropdownRef,
+    () => ({
+      visible() {
+        return popup.visible;
+      },
+    }),
+    [popup.visible],
+  );
 
   return (
     <StyledDropdown

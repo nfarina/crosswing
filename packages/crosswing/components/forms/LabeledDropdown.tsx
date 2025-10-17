@@ -23,21 +23,6 @@ export function LabeledDropdown({
   const ref = useRef<HTMLDivElement>(null);
   const popupRef = useRef<PopupButtonRef>(null);
 
-  function onClick(e: MouseEvent<HTMLDivElement>) {
-    // If you clicked on the popup button itself, don't toggle the popup.
-    const buttonEl = ref.current?.querySelector(StyledDropdown);
-
-    if (
-      !(e.target instanceof HTMLElement) ||
-      e.target.closest(StyledDropdown) !== buttonEl
-    ) {
-      console.log("toggle");
-      popupRef.current?.toggle(ref);
-    }
-
-    rest.onClick?.(e);
-  }
-
   return (
     <StyledLabeledDropdown
       style={style}
@@ -45,7 +30,7 @@ export function LabeledDropdown({
       data-has-label={!!label}
       data-disabled={!!disabled}
       data-new-style={!!newStyle}
-      onClick={onClick}
+      onClick={() => popupRef.current?.toggle(ref)}
       ref={ref}
     >
       <div className="content">
@@ -66,8 +51,13 @@ export const StyledLabeledDropdown = styled.div`
   flex-flow: row;
   align-items: center;
   min-height: 50px;
-  padding: 0 10px;
+  padding: 0 0 0 10px;
   box-sizing: border-box;
+  cursor: pointer;
+
+  &:hover {
+    background: ${colors.buttonBackgroundHover()};
+  }
 
   > .content {
     width: 0;
@@ -91,6 +81,11 @@ export const StyledLabeledDropdown = styled.div`
     flex-shrink: 0;
     box-sizing: border-box;
     max-width: 50%;
+    pointer-events: none;
+
+    &[data-is-open="true"] {
+      background: transparent;
+    }
   }
 
   &[data-disabled="true"] {
