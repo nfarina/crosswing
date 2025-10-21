@@ -347,24 +347,25 @@ const StyledNewSiteSidebarSubtext = styled(Link)`
 `;
 
 /**
- * Header for a group of subtext items in the sidebar.
- * Aligns with the text of NewSiteSidebarSubtext items.
+ * Header for a group of items in the sidebar.
+ * Aligns with the text of NewSiteSidebarText items.
  */
-export function NewSiteSubtextHeader({
+export function NewSiteSidebarHeader({
   children,
-  smaller,
+  subtext,
   ...rest
 }: HTMLAttributes<HTMLDivElement> & {
-  smaller?: boolean;
+  /** True to align with the indentation of subtext items instead of text items. */
+  subtext?: boolean;
 }) {
   return (
-    <StyledNewSiteSubtextHeader data-is-smaller={smaller} {...rest}>
+    <StyledNewSiteSidebarHeader data-is-subtext={subtext} {...rest}>
       {children}
-    </StyledNewSiteSubtextHeader>
+    </StyledNewSiteSidebarHeader>
   );
 }
 
-export const StyledNewSiteSubtextHeader = styled.div`
+export const StyledNewSiteSidebarHeader = styled.div`
   font-size: 10px;
   line-height: 13px;
   font-weight: 600;
@@ -374,7 +375,7 @@ export const StyledNewSiteSubtextHeader = styled.div`
   padding: 4px 12px 4px 42px;
   margin-top: 5px;
 
-  &[data-is-smaller="true"] {
+  &[data-is-subtext="true"] {
     margin-left: 10px;
   }
 `;
