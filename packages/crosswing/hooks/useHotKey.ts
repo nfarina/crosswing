@@ -201,6 +201,7 @@ export function formatHotKey({
   if (altKey) formatted.push("⌥");
   if (shiftKey) formatted.push("⇧");
   if (metaKey) formatted.push("⌘");
+  if (key === "Escape") key = "Esc";
 
   return [...formatted, key];
 }

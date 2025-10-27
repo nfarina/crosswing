@@ -89,7 +89,7 @@ export function DialogView({
     return borders === "both" || borders === side ? "always" : "never";
   }
 
-  const hasHeader = !!title || !!back || !hideCloseButton;
+  const hasHeader = !!title || !!back || !!subtitle || !hideCloseButton;
   const hasFooter = (!!buttons && buttons.length > 0) || !!footer;
 
   return (

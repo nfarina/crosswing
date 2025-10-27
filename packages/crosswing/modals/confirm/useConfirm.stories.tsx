@@ -26,6 +26,19 @@ export function Normal() {
   );
 }
 
+export function SubtitleOnly() {
+  const confirm = useConfirm(() => ({
+    message: "Really skin the cat?",
+    onConfirm: () => action("skinned")(),
+  }));
+
+  return (
+    <ButtonContainer>
+      <Button newStyle bordered onClick={confirm.show} children="Skin cat" />
+    </ButtonContainer>
+  );
+}
+
 const ButtonContainer = styled.div`
   display: flex;
   flex-flow: column;

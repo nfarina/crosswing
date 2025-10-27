@@ -183,7 +183,13 @@ export const StyledTooltipView = styled(PopupView)`
     ${"text-wrap: pretty;"}
 
     .hotkey {
-      margin-left: 5px;
+      margin-left: 6px;
+      opacity: 0.5;
+      letter-spacing: 0.05em;
+
+      > .key {
+        letter-spacing: 0;
+      }
     }
 
     .empty + .hotkey {

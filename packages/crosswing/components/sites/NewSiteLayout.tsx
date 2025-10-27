@@ -21,6 +21,7 @@ import {
 const SidebarRestorationKey = Symbol("sidebar");
 
 export function NewSiteLayout({
+  siteKey,
   siteTitle,
   siteAccessory,
   layout,
@@ -30,6 +31,8 @@ export function NewSiteLayout({
   children,
   ...rest
 }: HTMLAttributes<HTMLDivElement> & {
+  /** A unique key for the site. Used to persist the sidebar visibility. */
+  siteKey: string;
   siteTitle: string;
   siteAccessory?: NewSiteAccessory | null;
   layout: NewSiteLayoutMode;
@@ -43,7 +46,7 @@ export function NewSiteLayout({
 
   const ref = useRef<HTMLDivElement>(null);
   const [sidebarVisible, setSidebarVisible] = useLocalStorage(
-    `NewSiteLayout:sidebarVisible`,
+    `NewSiteLayout:${siteKey}:sidebarVisible`,
     true,
   );
 

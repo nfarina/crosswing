@@ -353,13 +353,20 @@ const StyledNewSiteSidebarSubtext = styled(Link)`
 export function NewSiteSidebarHeader({
   children,
   subtext,
+  ellipsize = false,
   ...rest
 }: HTMLAttributes<HTMLDivElement> & {
   /** True to align with the indentation of subtext items instead of text items. */
   subtext?: boolean;
+  /** True to ellipsize the text. */
+  ellipsize?: boolean;
 }) {
   return (
-    <StyledNewSiteSidebarHeader data-is-subtext={subtext} {...rest}>
+    <StyledNewSiteSidebarHeader
+      data-is-subtext={subtext}
+      data-ellipsize={ellipsize}
+      {...rest}
+    >
       {children}
     </StyledNewSiteSidebarHeader>
   );
@@ -377,6 +384,12 @@ export const StyledNewSiteSidebarHeader = styled.div`
 
   &[data-is-subtext="true"] {
     margin-left: 10px;
+  }
+
+  &[data-ellipsize="true"] {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 `;
 
