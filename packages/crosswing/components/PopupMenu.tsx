@@ -37,6 +37,7 @@ export function PopupMenu({
   arrowBackground,
   arrowBackgroundDark,
   placement,
+  keyboardNavigation = true,
   onClose,
   onScroll,
   onScrollCapture,
@@ -47,12 +48,17 @@ export function PopupMenu({
   arrowBackgroundDark?: string;
   children?: ReactNode;
   placement?: PopupPlacement;
+  /** If false, will not add automatic keyboard navigation to the menu. */
+  keyboardNavigation?: boolean;
 } & Partial<PopupChildProps> &
   HTMLAttributes<HTMLDivElement>) {
   const menuRef = useRef<HTMLDivElement>(null);
 
   // Add keyboard navigation with auto-focus
-  useListKeyboardNavigationJS(menuRef, { role: "menu" });
+  useListKeyboardNavigationJS(menuRef, {
+    role: "menu",
+    disabled: !keyboardNavigation,
+  });
 
   return (
     <PopupView
@@ -252,7 +258,8 @@ export const StyledPopupMenuText = styled.div`
 
   &[data-selectable="true"] {
     &:hover,
-    &:focus {
+    &:focus,
+    &.focused {
       background: ${colors.buttonBackgroundHover()};
       outline: none;
     }
@@ -286,7 +293,8 @@ export const StyledPopupMenuText = styled.div`
     }
 
     &:hover,
-    &:focus {
+    &:focus,
+    &.focused {
       background: ${colors.red({ alpha: 0.1 })};
     }
   }

@@ -15,6 +15,7 @@ export function useListKeyboardNavigationJS(
     autoFocusFirst = false,
     role = "menu",
     typeAheadTimeout = 1000,
+    disabled = false,
   }: {
     /** Auto-focus the first focusable item when the component mounts */
     autoFocusFirst?: boolean;
@@ -22,6 +23,8 @@ export function useListKeyboardNavigationJS(
     role?: string;
     /** Timeout in ms before clearing the typed string (default 1000ms) */
     typeAheadTimeout?: number;
+    /** Set to true to disable all behavior of this hook (in case you still have to call this hook to follow the rules of react). */
+    disabled?: boolean;
   } = {},
 ) {
   // Type-ahead state
@@ -35,31 +38,42 @@ export function useListKeyboardNavigationJS(
   // Set up ARIA attributes on the container
   useEffect(() => {
     const container = listRef.current;
-    if (container) {
+    if (container && !disabled) {
       container.setAttribute("role", role);
       container.setAttribute("tabindex", "-1"); // Make container focusable for hotkeys
+    } else if (container) {
+      container.removeAttribute("role");
+      container.removeAttribute("tabindex");
     }
-  }, [role]);
+  }, [role, disabled]);
 
   // Auto-focus first item if requested
   useEffect(() => {
-    if (autoFocusFirst) {
+    if (autoFocusFirst && !disabled) {
       const firstFocusable = getFocusableItems()[0];
       firstFocusable?.focus();
     }
-  }, [autoFocusFirst]);
+  }, [autoFocusFirst, disabled]);
 
-  useHotKey("ArrowUp", { target: listRef, fireInInputs: "always" }, () => {
-    clearTypeAhead();
-    onArrowPress("up");
-  });
+  useHotKey(
+    "ArrowUp",
+    { target: listRef, fireInInputs: "always", disabled },
+    () => {
+      clearTypeAhead();
+      onArrowPress("up");
+    },
+  );
 
-  useHotKey("ArrowDown", { target: listRef, fireInInputs: "always" }, () => {
-    clearTypeAhead();
-    onArrowPress("down");
-  });
+  useHotKey(
+    "ArrowDown",
+    { target: listRef, fireInInputs: "always", disabled },
+    () => {
+      clearTypeAhead();
+      onArrowPress("down");
+    },
+  );
 
-  useHotKey("*", { target: listRef }, (pressed) => {
+  useHotKey("*", { target: listRef, disabled }, (pressed) => {
     // Only handle printable characters (letters, numbers, symbols)
     if (
       typeof pressed === "string" &&
