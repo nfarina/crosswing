@@ -1,5 +1,6 @@
 import { ReactNode, RefObject, useImperativeHandle } from "react";
 import { styled } from "styled-components";
+import { PopupPlacement } from "../../modals/popup/getPopupPlacement.js";
 import { usePopup } from "../../modals/popup/usePopup.js";
 import { PopupButton } from "../PopupButton.js";
 import { PopupMenu, PopupMenuText } from "../PopupMenu.js";
@@ -23,6 +24,7 @@ export function Dropdown({
   disabled,
   maxPopupWidth,
   dropdownRef,
+  placement,
   ...rest
 }: Omit<Parameters<typeof PopupButton>[0], "popup"> & {
   items?: DropdownItem[];
@@ -31,6 +33,7 @@ export function Dropdown({
   placeholder?: string;
   maxPopupWidth?: number;
   dropdownRef?: RefObject<DropdownRef | null>;
+  placement?: PopupPlacement;
 }) {
   const selectedItem = items.find((item) => item.value === value);
 
@@ -44,22 +47,25 @@ export function Dropdown({
     }
   }
 
-  const popup = usePopup(() => (
-    <PopupMenu
-      style={{
-        ...(maxPopupWidth ? { maxWidth: maxPopupWidth } : {}),
-      }}
-    >
-      {items.map(({ value: itemValue, ...itemProps }) => (
-        <PopupMenuText
-          key={itemValue}
-          checked={itemValue === value}
-          onClick={() => onValueChange?.(itemValue)}
-          {...itemProps}
-        />
-      ))}
-    </PopupMenu>
-  ));
+  const popup = usePopup(
+    () => (
+      <PopupMenu
+        style={{
+          ...(maxPopupWidth ? { maxWidth: maxPopupWidth } : {}),
+        }}
+      >
+        {items.map(({ value: itemValue, ...itemProps }) => (
+          <PopupMenuText
+            key={itemValue}
+            checked={itemValue === value}
+            onClick={() => onValueChange?.(itemValue)}
+            {...itemProps}
+          />
+        ))}
+      </PopupMenu>
+    ),
+    { placement },
+  );
 
   useImperativeHandle(
     dropdownRef,
