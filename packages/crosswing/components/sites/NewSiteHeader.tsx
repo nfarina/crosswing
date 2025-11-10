@@ -239,6 +239,10 @@ export const StyledNewSiteHeader = styled(AutoBorderView)`
       }
     }
 
+    > .overflow-accessory {
+      margin-right: 10px;
+    }
+
     > .title-left {
       flex-grow: 1;
     }

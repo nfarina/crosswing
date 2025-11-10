@@ -77,6 +77,7 @@ export function NewSitePage({
         <PageLayout>
           <NewSiteHeader
             title={title}
+            ellipsizeTitle={ellipsizeTitle}
             subtitle={subtitle}
             accessories={accessories}
             hideSiteAccessory={panelVisible}
