@@ -81,3 +81,23 @@ export const NewStyle = () => {
     />
   );
 };
+
+export const NewStyleWithError = () => {
+  const [text, setText] = useState("Invalid content");
+
+  return (
+    <LabeledTextArea
+      newStyle
+      label="Description"
+      value={text}
+      onValueChange={setText}
+      error={new Error("This description is not valid.")}
+    />
+  );
+};
+
+export const NewStyleWithoutLabel = () => {
+  const [text, setText] = useState("Some text content");
+
+  return <LabeledTextArea newStyle value={text} onValueChange={setText} />;
+};

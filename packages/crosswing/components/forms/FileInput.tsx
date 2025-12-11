@@ -1,10 +1,17 @@
-import { ChangeEvent, HTMLAttributes, ReactNode } from "react";
+import {
+  ChangeEvent,
+  DragEvent,
+  DragEventHandler,
+  HTMLAttributes,
+  ReactNode,
+} from "react";
 import { styled } from "styled-components";
 import { useDragEvents } from "../../hooks/useDragEvents";
 
 export function FileInput({
   accept,
   onDragOverChange,
+  onDrop,
   onFileSelect,
   onFileListSelect,
   multiple,
@@ -19,8 +26,12 @@ export function FileInput({
   multiple?: boolean;
   disabled?: boolean;
   children?: ReactNode;
+  onDrop?: DragEventHandler<HTMLDivElement>;
 } & HTMLAttributes<HTMLDivElement>) {
-  const dragEvents = useDragEvents({ onDragOverChange });
+  const dragEvents = useDragEvents({
+    onDragOverChange,
+    onDrop: onDrop as ((e: DragEvent) => void) | undefined,
+  });
 
   if (onFileListSelect && !multiple) {
     console.warn("FileInput: onFileListSelect is set but multiple is false");

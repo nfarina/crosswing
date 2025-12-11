@@ -61,3 +61,31 @@ export const NewStyle = () => {
     />
   );
 };
+
+export const NewStyleWithError = () => {
+  const [name, setName] = useState("Bill");
+
+  return (
+    <LabeledTextInput
+      newStyle
+      label="Name"
+      value={name}
+      onValueChange={setName}
+      error={name === "Bill" ? new Error("Bill is not valid.") : null}
+    />
+  );
+};
+
+export const NewStyleWithLabelAndLongPlaceholder = () => {
+  const [name, setName] = useState("");
+
+  return (
+    <LabeledTextInput
+      newStyle
+      label="Project name"
+      placeholder="Enter a descriptive name for your project that will help you identify it later"
+      value={name}
+      onValueChange={setName}
+    />
+  );
+};

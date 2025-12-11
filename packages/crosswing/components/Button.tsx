@@ -165,7 +165,7 @@ export const StyledButton = styled(Clickable)`
     min-height: 40px;
     background: transparent;
     border-radius: 9px;
-    font: ${fonts.displayMedium({ size: 14, line: "1" })};
+    font: ${fonts.displayMedium({ size: 14, line: "1.3" })};
     gap: 8px;
 
     > .icon {

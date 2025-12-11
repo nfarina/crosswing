@@ -25,6 +25,8 @@ export function Dropdown({
   maxPopupWidth,
   dropdownRef,
   placement,
+  autoFocus,
+  keyboardNavigation,
   ...rest
 }: Omit<Parameters<typeof PopupButton>[0], "popup"> & {
   items?: DropdownItem[];
@@ -34,6 +36,8 @@ export function Dropdown({
   maxPopupWidth?: number;
   dropdownRef?: RefObject<DropdownRef | null>;
   placement?: PopupPlacement;
+  autoFocus?: boolean;
+  keyboardNavigation?: boolean;
 }) {
   const selectedItem = items.find((item) => item.value === value);
 
@@ -50,6 +54,8 @@ export function Dropdown({
   const popup = usePopup(
     () => (
       <PopupMenu
+        autoFocus={autoFocus}
+        keyboardNavigation={keyboardNavigation}
         style={{
           ...(maxPopupWidth ? { maxWidth: maxPopupWidth } : {}),
         }}
@@ -59,6 +65,7 @@ export function Dropdown({
             key={itemValue}
             checked={itemValue === value}
             onClick={() => onValueChange?.(itemValue)}
+            keyboardNavigation={keyboardNavigation}
             {...itemProps}
           />
         ))}

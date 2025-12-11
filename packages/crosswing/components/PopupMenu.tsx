@@ -107,6 +107,7 @@ export function PopupMenuText({
   destructive,
   leaveOpen,
   ellipsize,
+  keyboardNavigation,
   ...rest
 }: {
   icon?: ReactNode;
@@ -127,6 +128,7 @@ export function PopupMenuText({
   /** If true, clicking the text will not call onClose() automatically. */
   leaveOpen?: boolean;
   ellipsize?: boolean;
+  keyboardNavigation?: boolean;
 } & Omit<HTMLAttributes<HTMLAnchorElement & HTMLDivElement>, "onClick">) {
   // We want to automatically close the menu when you click something.
   const onClose = use(OnCloseContext);
@@ -138,7 +140,7 @@ export function PopupMenuText({
 
   function onMouseEnter(e: MouseEvent<HTMLElement>) {
     // Move focus to the hovered item for seamless keyboard/mouse interaction
-    if (!disabled) {
+    if (!disabled && keyboardNavigation) {
       (e.currentTarget as HTMLElement).focus();
     }
     rest.onMouseEnter?.(e as any);
