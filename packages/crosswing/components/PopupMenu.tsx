@@ -88,6 +88,11 @@ export const StyledPopupMenu = styled.div`
   > * {
     flex-shrink: 0;
   }
+
+  /* Bonus feature! Hide multiple successive separators. This can be really common with dynamic content. */
+  > .separator + .separator {
+    display: none;
+  }
 `;
 
 export function PopupMenuText({
@@ -371,7 +376,7 @@ export const PopupMenuHeader = styled.div`
   color: ${colors.textSecondary()};
 `;
 
-export const PopupMenuSeparator = styled.div`
+export const PopupMenuSeparator = styled.div.attrs({ className: "separator" })`
   margin: 5px 12px 5px 12px;
   height: 1px;
   background: ${colors.separator()};

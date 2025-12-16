@@ -16,6 +16,8 @@ export type Prompt<T> = RequiredPrompt<T> | NullablePrompt<T>;
 export type BasePrompt<T> = {
   title?: ReactNode;
   message?: ReactNode;
+  children?: ReactNode;
+  footer?: ReactNode;
   placeholder?: string;
   spellCheck?: boolean;
   okText?: string;
@@ -58,6 +60,8 @@ export function PromptView<T = string>({
   const {
     title,
     message,
+    children,
+    footer,
     placeholder,
     spellCheck,
     okText,
@@ -157,10 +161,12 @@ export function PromptView<T = string>({
       subtitle={message}
       onClose={onClose}
       hideCloseButton
+      footer={footer}
       buttons={buttons}
       onSubmit={onFormSubmit}
     >
       <StyledPromptContent>
+        {children}
         <TextArea
           newStyle
           placeholder={placeholder}
