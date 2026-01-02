@@ -184,7 +184,7 @@ function selectTab(
   };
 }
 
-export function Tab({}: TabProps) {
+export function Tab({ }: TabProps) {
   // Our own render method is never called.
   return null;
 }
@@ -243,8 +243,8 @@ export const StyledTabs = styled.div`
     }
 
     /* Special data attribute added by <NavLayout>. Our approach to hiding the tab bar used to be complex, but is now simple, we just stretch the content of any <NavLayout> to cover up the tabs. */
-    *[data-hide-tab-bar="true"] {
-      bottom: calc(0px - var(--tab-bar-height) - ${safeArea.bottom()});
+    &:has(*[data-hide-tab-bar="true"]) {
+      bottom: 0;
     }
   }
 
