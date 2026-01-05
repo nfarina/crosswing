@@ -71,7 +71,7 @@ export function ImageViewer({
       viewerEl.clientHeight / contentSize.height,
     );
 
-    return Math.min(Math.max(scale, minScale), 1);
+    return Math.min(Math.max(scale, minScale), 2); // Allow up to 2x zoom beyond native size.
   }
 
   function setBoundedTransform(newTransform: ImageTransform) {

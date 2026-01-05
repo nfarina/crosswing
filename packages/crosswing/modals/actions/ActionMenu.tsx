@@ -26,6 +26,8 @@ export type ActionButton = {
  */
 export type ActionPanel = {
   content: ReactNode;
+  /** Hide the background of the panel so you can render arbitrary content. */
+  hideBackground?: boolean;
 };
 
 export const ActionSeparator = "ActionSeparator";
@@ -58,7 +60,7 @@ export function ActionMenu({
 
   function renderItem(item: ActionButton | ActionPanel, index: number) {
     if ("content" in item) {
-      return <ActionPanelView key={index}>{item.content}</ActionPanelView>;
+      return <ActionPanelView key={index} data-hide-background={!!item.hideBackground}>{item.content}</ActionPanelView>;
     } else {
       return (
         <ActionButtonView
@@ -251,7 +253,10 @@ export const ActionPanelView = styled.div`
   display: flex;
   flex-flow: column;
   box-sizing: border-box;
-  background: ${colors.textBackground({ alpha: 0.92 })};
+
+  &[data-hide-background="false"] {
+    background: ${colors.textBackground({ alpha: 0.92 })};
+  }
 
   > * {
     flex-grow: 1;

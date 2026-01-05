@@ -48,7 +48,7 @@ export const StyledBottomScrollable = styled.div`
   > .bouncer {
     position: absolute;
     left: 0px;
-    bottom: 0px;
+    top: 0px;
     width: 1px;
     pointer-events: none;
     height: calc(100% + 1px);

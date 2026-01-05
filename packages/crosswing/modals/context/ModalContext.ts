@@ -72,6 +72,7 @@ export interface Toast {
   action?: ReactNode;
   actionTo?: string;
   actionTarget?: string;
+  actionReplace?: boolean;
   onActionClick?: () => void;
   wrap?: boolean;
   sticky?: boolean;

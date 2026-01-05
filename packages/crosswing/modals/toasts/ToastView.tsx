@@ -20,6 +20,7 @@ export function ToastView({
   action,
   actionTo,
   actionTarget,
+  actionReplace,
   ellipsize,
   to,
   target,
@@ -130,6 +131,7 @@ export function ToastView({
           onClick={handleActionClick}
           destructive={destructive}
           to={actionTo}
+          replace={actionReplace}
           target={actionTarget}
         />
       )}

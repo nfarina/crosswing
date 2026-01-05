@@ -222,8 +222,13 @@ export const StyledTabs = styled.div`
       max-width: 100%;
 
       flex-grow: 1;
-      /* "Consume" the bottom safe area so our children don't account for it. */
-      --safe-area-bottom: 0px;
+    }
+    
+    &:not(:has(*[data-hide-tab-bar="true"])) {
+      > * {
+        /* "Consume" the bottom safe area so our children don't account for it. */
+        --safe-area-bottom: 0px;
+      }
     }
   }
 
@@ -243,8 +248,8 @@ export const StyledTabs = styled.div`
     }
 
     /* Special data attribute added by <NavLayout>. Our approach to hiding the tab bar used to be complex, but is now simple, we just stretch the content of any <NavLayout> to cover up the tabs. */
-    &:has(*[data-hide-tab-bar="true"]) {
-      bottom: 0;
+    *[data-hide-tab-bar="true"] {
+      bottom: calc(0px - var(--tab-bar-height) - ${safeArea.bottom()});
     }
   }
 
