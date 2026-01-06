@@ -64,7 +64,9 @@ export const StyledIDView = styled.div`
     transform: translateY(-1px);
   }
 
-  &:hover {
-    color: ${colors.text()};
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      color: ${colors.text()};
+    }
   }
 `;

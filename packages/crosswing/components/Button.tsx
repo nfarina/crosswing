@@ -196,24 +196,30 @@ export const StyledButton = styled(Clickable)`
       margin-left: 5px;
     }
 
-    &:hover {
-      background: ${colors.buttonBackgroundHover()};
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background: ${colors.buttonBackgroundHover()};
+      }
     }
 
     &[data-primary="true"] {
       color: ${colors.white()};
       background: ${colors.gray800()};
 
-      &:hover {
-        background: ${colors.gray700()};
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          background: ${colors.gray700()};
+        }
       }
 
       @media (prefers-color-scheme: dark) {
         color: ${colors.gray950()};
         background: ${colors.gray100()};
 
-        &:hover {
-          background: ${colors.gray200()};
+        @media (hover: hover) and (pointer: fine) {
+          &:hover {
+            background: ${colors.gray200()};
+          }
         }
       }
     }
@@ -233,11 +239,13 @@ export const StyledButton = styled(Clickable)`
         }
       }
 
-      &:hover {
-        background: ${colors.red({ darken: 0.05, alpha: 0.1 })};
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          background: ${colors.red({ darken: 0.05, alpha: 0.1 })};
 
-        @media (prefers-color-scheme: dark) {
-          background: ${colors.red({ lighten: 0.13, alpha: 0.1 })};
+          @media (prefers-color-scheme: dark) {
+            background: ${colors.red({ lighten: 0.13, alpha: 0.1 })};
+          }
         }
       }
 
@@ -250,11 +258,13 @@ export const StyledButton = styled(Clickable)`
           border: 1px solid ${colors.red({ lighten: 0.13, alpha: 0.5 })};
         }
 
-        &:hover {
-          background: ${colors.red({ darken: 0.05, alpha: 0.2 })};
+        @media (hover: hover) and (pointer: fine) {
+          &:hover {
+            background: ${colors.red({ darken: 0.05, alpha: 0.2 })};
 
-          @media (prefers-color-scheme: dark) {
-            background: ${colors.red({ lighten: 0.13, alpha: 0.2 })};
+            @media (prefers-color-scheme: dark) {
+              background: ${colors.red({ lighten: 0.13, alpha: 0.2 })};
+            }
           }
         }
       }
@@ -273,8 +283,10 @@ export const StyledButton = styled(Clickable)`
       border: 1px solid ${colors.controlBorder()};
     }
 
-    &:hover {
-      background: ${colors.buttonBackgroundGlow()};
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background: ${colors.buttonBackgroundGlow()};
+      }
     }
 
     > .icon > svg {

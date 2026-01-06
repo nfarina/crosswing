@@ -384,8 +384,10 @@ export const StyledTabbedButtonLayout = styled.div`
         font: ${fonts.display({ size: 14 })};
         color: ${colors.text()};
 
-        &:hover {
-          background: ${colors.buttonBackgroundGlow()};
+        @media (hover: hover) and (pointer: fine) {
+          &:hover {
+            background: ${colors.buttonBackgroundGlow()};
+          }
         }
       }
 

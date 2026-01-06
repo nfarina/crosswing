@@ -69,8 +69,10 @@ export const StyledLabeledCheckbox = styled(Clickable)`
     }
   }
 
-  &:hover {
-    background: ${colors.buttonBackgroundHover()};
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background: ${colors.buttonBackgroundHover()};
+    }
   }
 
   &[data-disabled="true"] {

@@ -264,11 +264,16 @@ export const StyledPopupMenuText = styled.div`
   }
 
   &[data-selectable="true"] {
-    &:hover,
     &:focus,
     &.focused {
       background: ${colors.buttonBackgroundHover()};
       outline: none;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background: ${colors.buttonBackgroundHover()};
+        outline: none;
+      }
     }
   }
 
@@ -299,10 +304,14 @@ export const StyledPopupMenuText = styled.div`
       }
     }
 
-    &:hover,
     &:focus,
     &.focused {
       background: ${colors.red({ alpha: 0.1 })};
+    }
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background: ${colors.red({ alpha: 0.1 })};
+      }
     }
   }
 
@@ -323,8 +332,10 @@ export const PopupMenuSelect = styled(Select)`
   > select {
     border-radius: 13px;
 
-    &:hover {
-      background: ${colors.buttonBackgroundHover()};
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background: ${colors.buttonBackgroundHover()};
+      }
     }
 
     padding: 7px 40px 7px 12px;

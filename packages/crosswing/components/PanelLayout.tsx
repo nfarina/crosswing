@@ -720,10 +720,12 @@ export const StyledPanelLayout = styled.div`
       }
     }
 
-    &:hover {
-      > .drag-handle {
-        > .drag-handle-grabber {
-          background-color: ${colors.mediumBlue()};
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        > .drag-handle {
+          > .drag-handle-grabber {
+            background-color: ${colors.mediumBlue()};
+          }
         }
       }
     }

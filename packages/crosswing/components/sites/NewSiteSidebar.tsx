@@ -172,8 +172,10 @@ export const StyledNewSiteSidebarText = styled(Link)`
     transform: translateY(-1px);
   }
 
-  &:hover {
-    background: ${colors.buttonBackgroundGlow()};
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background: ${colors.buttonBackgroundGlow()};
+    }
   }
 
   &[data-prefix-active="true"],
@@ -309,8 +311,10 @@ const StyledNewSiteSidebarSubtext = styled(Link)`
     }
   }
 
-  &:hover {
-    background: ${colors.buttonBackgroundGlow()};
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background: ${colors.buttonBackgroundGlow()};
+    }
   }
 
   &[data-prefix-active="true"],

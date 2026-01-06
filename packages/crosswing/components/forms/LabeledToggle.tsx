@@ -56,8 +56,10 @@ export const StyledLabeledToggle = styled.div`
   box-sizing: border-box;
   cursor: pointer;
 
-  &:hover {
-    background: ${colors.buttonBackgroundHover()};
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background: ${colors.buttonBackgroundHover()};
+    }
   }
 
   > * {

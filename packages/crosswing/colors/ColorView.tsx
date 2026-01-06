@@ -49,7 +49,9 @@ const StyledColorView = styled.div`
     display: none;
   }
 
-  &:hover > .name {
-    display: block;
+  @media (hover: hover) and (pointer: fine) {
+    &:hover > .name {
+      display: block;
+    }
   }
 `;

@@ -333,8 +333,10 @@ export const StyledTextInput = styled.div`
         color: ${colors.red({ lighten: 0.15 })};
       }
 
-      &:hover {
-        background: ${colors.red({ alpha: 0.1 })};
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          background: ${colors.red({ alpha: 0.1 })};
+        }
       }
 
       > svg {

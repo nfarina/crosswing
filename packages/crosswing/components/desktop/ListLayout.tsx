@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 import { RouterContext } from "../../router/context/RouterContext.js";
 import { PanelLayout } from "../PanelLayout.js";
 
+/** @deprecated Use NewSitePage and its built-in sidebar instead. */
 export function ListLayout({
   defaultWidth = 275,
   minWidth = 200,

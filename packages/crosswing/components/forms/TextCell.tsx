@@ -253,8 +253,10 @@ export const StyledTextCell = styled.div`
   }
 
   &[data-clickable="true"] {
-    &:hover {
-      background: ${colors.buttonBackgroundHover()};
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background: ${colors.buttonBackgroundHover()};
+      }
     }
   }
 

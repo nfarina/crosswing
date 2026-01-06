@@ -267,9 +267,11 @@ const StyledToastView = styled.div`
   }
 
   &[data-clickable="true"] {
-    &:hover {
-      > .hover-bg {
-        background: ${colors.buttonBackgroundHover()};
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        > .hover-bg {
+          background: ${colors.buttonBackgroundHover()};
+        }
       }
     }
   }
@@ -291,10 +293,17 @@ const StyledToastView = styled.div`
     }
 
     &[data-clickable="true"] {
-      &:hover,
       &:focus {
         > .hover-bg {
           background: ${colors.red({ alpha: 0.1 })};
+        }
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          > .hover-bg {
+            background: ${colors.red({ alpha: 0.1 })};
+          }
         }
       }
     }

@@ -44,7 +44,9 @@ export const StyledExternalLink = styled.span`
   color: ${colors.blue()};
   cursor: pointer;
 
-  &:hover {
-    text-decoration: underline;
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      text-decoration: underline;
+    }
   }
 `;

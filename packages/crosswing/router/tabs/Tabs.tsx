@@ -184,7 +184,7 @@ function selectTab(
   };
 }
 
-export function Tab({ }: TabProps) {
+export function Tab({}: TabProps) {
   // Our own render method is never called.
   return null;
 }
@@ -223,7 +223,7 @@ export const StyledTabs = styled.div`
 
       flex-grow: 1;
     }
-    
+
     &:not(:has(*[data-hide-tab-bar="true"])) {
       > * {
         /* "Consume" the bottom safe area so our children don't account for it. */

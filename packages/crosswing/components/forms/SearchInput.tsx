@@ -273,15 +273,19 @@ export const StyledSearchInput = styled.div`
     cursor: pointer;
     color: ${colors.gray450()};
 
-    &:hover {
-      color: ${colors.black()};
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: ${colors.black()};
+      }
     }
 
     @media (prefers-color-scheme: dark) {
       color: ${colors.gray300()};
 
-      &:hover {
-        color: ${colors.white()};
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          color: ${colors.white()};
+        }
       }
     }
   }
