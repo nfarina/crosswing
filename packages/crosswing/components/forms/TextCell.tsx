@@ -1,9 +1,8 @@
+import { Check, ChevronRight } from "lucide-react";
 import { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
-import { CheckIcon } from "../../icons/Check.js";
-import { DisclosureArrowIcon } from "../../icons/DisclosureArrow.js";
 import { Link } from "../../router/Link.js";
 import { Clickable } from "../Clickable.js";
 
@@ -97,10 +96,10 @@ export function TextCell({
       {right && <div className="right">{right}</div>}
       {checked != null && (
         <div className="checked">
-          {checked ? <CheckIcon /> : <div className="not-checked" />}
+          {checked ? <Check /> : <div className="not-checked" />}
         </div>
       )}
-      {showDisclosure && <DisclosureArrowIcon className="disclosure" />}
+      {showDisclosure && <ChevronRight size={20} className="disclosure" />}
     </StyledTextCell>
   );
 }

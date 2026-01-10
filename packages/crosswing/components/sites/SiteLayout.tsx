@@ -7,11 +7,11 @@ import {
   isValidElement,
   useState,
 } from "react";
+import { Menu } from "lucide-react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { flattenChildren } from "../../hooks/flattenChildren.js";
 import { useMatchMedia } from "../../hooks/useMatchMedia.js";
-import { MenuIcon } from "../../icons/Menu.js";
 import { Redirect } from "../../router/redirect/Redirect.js";
 import { Route, Switch } from "../../router/switch/Switch.js";
 import { safeArea } from "../../safearea/safeArea.js";
@@ -150,7 +150,7 @@ export function SiteLayout({
     // Create a button to open the sidebar, when on mobile.
     headerAccessories.push({
       key: "menu",
-      icon: <MenuIcon />,
+      icon: <Menu />,
       onClick: () => setSidebarOpen(true),
       mobilePlacement: "sidebar",
     });

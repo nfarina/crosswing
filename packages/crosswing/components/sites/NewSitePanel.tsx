@@ -1,10 +1,10 @@
 import { HTMLAttributes, ReactNode, useRef } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors";
-import { XIcon } from "../../icons/X";
 import { tooltip } from "../../modals/popup/TooltipView";
 import { AutoBorderView } from "../AutoBorderView";
 import { Button } from "../Button";
+import { X } from "lucide-react";
 
 export function NewSitePanel({
   accessories,
@@ -23,7 +23,7 @@ export function NewSitePanel({
         <Button
           newStyle
           className="panel-toggle"
-          icon={<XIcon />}
+          icon={<X />}
           onClick={onClose}
           {...tooltip("Close panel", { hotkey: "ctrl+e" })}
         />

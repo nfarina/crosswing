@@ -1,13 +1,13 @@
 import { FormEvent, KeyboardEvent, ReactNode, useState } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
-import { AlertTriangleIcon } from "../../icons/AlertTriangle.js";
 import { Modal } from "../../modals/context/useModal.js";
 import { DialogView } from "../../modals/dialog/DialogView.js";
 import { useDialog } from "../../modals/dialog/useDialog.js";
 import { TipView } from "../TipView.js";
 import { TextArea } from "./TextArea.js";
 import { InputTransformer, useInputValue } from "./useInputValue.js";
+import { AlertTriangle } from "lucide-react";
 
 // Automagically adjusts the type given to onSubmit() to be nullable, based on
 // whether you've provided nullable = true.
@@ -179,11 +179,7 @@ export function PromptView<T = string>({
           {...inputProps}
         />
         {!!error && (
-          <TipView
-            icon={<AlertTriangleIcon />}
-            tint={colors.red}
-            className="error"
-          >
+          <TipView icon={<AlertTriangle />} tint={colors.red} className="error">
             {error.message}
           </TipView>
         )}

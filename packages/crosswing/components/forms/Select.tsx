@@ -5,11 +5,11 @@ import {
   SelectHTMLAttributes,
   isValidElement,
 } from "react";
+import { ChevronDown } from "lucide-react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
 import { flattenChildren } from "../../hooks/flattenChildren.js";
-import { DownArrowIcon } from "../../icons/DownArrow.js";
 
 export interface SelectOptionProps {
   title?: string;
@@ -50,7 +50,7 @@ export function Select({
           </option>
         ))}
       </InnerSelect>
-      {<DownArrowIcon className="arrow-icon" />}
+      {<ChevronDown className="arrow-icon" />}
     </StyledSelect>
   );
 }

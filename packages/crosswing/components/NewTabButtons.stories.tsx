@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { colors } from "../colors/colors.js";
-import { SidebarIcon } from "../icons/Sidebar.js";
-import { TrashIcon } from "../icons/Trash.js";
 import { CrosswingAppDecorator } from "../storybook.js";
 import { RouterDecorator } from "../router/storybook/RouterDecorator.js";
 import { NewTabButtons, TabButton } from "./NewTabButtons.js";
+import { Sidebar, Trash } from "lucide-react";
 
 export default {
   component: NewTabButtons,
@@ -146,7 +145,7 @@ export const WithIcons = () => {
         <TabButton
           selected={activeTab === "dashboard"}
           onClick={() => setActiveTab("dashboard")}
-          icon={<SidebarIcon />}
+          icon={<Sidebar />}
           hotkey="1"
         >
           Dashboard
@@ -154,7 +153,7 @@ export const WithIcons = () => {
         <TabButton
           selected={activeTab === "messages"}
           onClick={() => setActiveTab("messages")}
-          icon={<TrashIcon />}
+          icon={<Trash />}
           badge={3}
           badgeColor={colors.white}
           badgeBackgroundColor={colors.red}

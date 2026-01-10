@@ -1,9 +1,8 @@
+import { Check, X } from "lucide-react";
 import { ReactNode, use } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
-import { CheckmarkIcon } from "../../icons/Checkmark.js";
-import { CloseIcon } from "../../icons/Close.js";
 import { RouterContext } from "../../router/context/RouterContext.js";
 import { Link } from "../../router/Link.js";
 import { formatCurrency } from "../../shared/numeric.js";
@@ -73,7 +72,7 @@ export function LinkListCell({
 
 /** A component you can drop in to LinkListCell.right. */
 export const LinkListIconFailed = styled.div.attrs({
-  children: <CloseIcon />,
+  children: <X />,
 })`
   font-size: 0;
   border-radius: 100%;
@@ -81,16 +80,24 @@ export const LinkListIconFailed = styled.div.attrs({
   height: 24px;
   color: ${colors.red({ darken: 0.2, saturate: 1 })};
   background: ${colors.red({ lighten: 0.2 })};
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   @media (prefers-color-scheme: dark) {
     background: ${colors.red({ darken: 0.4, desaturate: 0.2 })};
     color: ${colors.red()};
   }
+
+  > svg {
+    width: 18px;
+    height: 18px;
+  }
 `;
 
 /** A component you can drop in to LinkListCell.right. */
 export const LinkListIconSucceeded = styled.div.attrs({
-  children: <CheckmarkIcon />,
+  children: <Check />,
 })`
   font-size: 0;
   border-radius: 100%;

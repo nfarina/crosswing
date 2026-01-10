@@ -1,3 +1,4 @@
+import { Check } from "lucide-react";
 import {
   ComponentType,
   createContext,
@@ -10,7 +11,6 @@ import {
 import { styled } from "styled-components";
 import { colors } from "../colors/colors.js";
 import { fonts } from "../fonts/fonts.js";
-import { CheckIcon } from "../icons/Check.js";
 import { PopupPlacement } from "../modals/popup/getPopupPlacement.js";
 import {
   Hotkeys,
@@ -187,7 +187,7 @@ export function PopupMenuText({
       {right && <div className="right">{right}</div>}
       {checked != null && (
         <div className="checked">
-          {checked ? <CheckIcon /> : <div className="not-checked" />}
+          {checked ? <Check /> : <div className="not-checked" />}
         </div>
       )}
       {hotkeys && <HotkeyView hotkeys={hotkeys} />}
@@ -250,8 +250,8 @@ export const StyledPopupMenuText = styled.div`
 
   > .checked {
     flex-shrink: 0;
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
 
     > svg {
       width: 100%;

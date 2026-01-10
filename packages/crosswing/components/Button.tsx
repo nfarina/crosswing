@@ -142,6 +142,11 @@ export const StyledButton = styled(Clickable)`
     text-overflow: ellipsis;
     white-space: nowrap;
 
+    > svg {
+      width: 18px;
+      height: 18px;
+    }
+
     > .right {
       flex-shrink: 0;
       display: flex;

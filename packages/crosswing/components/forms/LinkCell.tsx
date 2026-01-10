@@ -1,8 +1,8 @@
+import { ChevronRight } from "lucide-react";
 import { HTMLAttributes, KeyboardEvent, ReactNode } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
-import { DisclosureArrowIcon } from "../../icons/DisclosureArrow.js";
 import { Link } from "../../router/Link.js";
 
 /**
@@ -74,7 +74,7 @@ export function LinkCell({
       </div>
       {badge && <div className="badge">{badge}</div>}
       {isClickable && !hideDisclosure && (
-        <DisclosureArrowIcon className="disclosure" />
+        <ChevronRight size={20} className="disclosure" />
       )}
     </StyledLinkCell>
   );
@@ -100,7 +100,14 @@ export const StyledLinkCell = styled(Link)`
   > .icon {
     margin-right: 6px;
     display: flex;
+    align-items: center;
+    justify-content: center;
     color: ${colors.text()};
+
+    > svg {
+      width: 20px;
+      height: 20px;
+    }
   }
 
   > .content {

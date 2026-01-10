@@ -1,3 +1,4 @@
+import { AlertTriangle } from "lucide-react";
 import {
   ChangeEvent,
   FocusEvent,
@@ -16,7 +17,6 @@ import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
 import { HostContext } from "../../host/context/HostContext.js";
 import { useScrollAboveKeyboard } from "../../host/features/useScrollAboveKeyboard.js";
-import { AlertTriangleIcon } from "../../icons/AlertTriangle.js";
 import { useErrorAlert } from "../../modals/alert/useErrorAlert.js";
 import { tooltip } from "../../modals/popup/TooltipView.js";
 import { StatusBadge, StyledStatusBadge } from "../badges/StatusBadge.js";
@@ -182,7 +182,7 @@ export function TextInput({
         <Button
           newStyle
           className="error-button"
-          icon={<AlertTriangleIcon />}
+          icon={<AlertTriangle size={18} />}
           {...tooltip(error.message)}
           onClick={() => errorAlert.show(error)}
         />

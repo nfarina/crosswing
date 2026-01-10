@@ -2,15 +2,13 @@ import { HTMLAttributes, MouseEvent, ReactNode, use } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors";
 import { fonts } from "../../fonts/fonts";
-import { PanelIcon } from "../../icons/Panel";
-import { SidebarIcon } from "../../icons/Sidebar";
-import { SidebarMenuIcon } from "../../icons/SidebarMenu";
 import { tooltip } from "../../modals/popup/TooltipView";
 import { RouterContext } from "../../router/context/RouterContext";
 import { Link } from "../../router/Link";
 import { AutoBorderView } from "../AutoBorderView";
 import { Button } from "../Button";
 import { NewSiteContext } from "./NewSiteContext";
+import { PanelLeft, Sidebar, AlignLeft } from "lucide-react";
 
 export function NewSiteSidebar({
   children,
@@ -31,7 +29,7 @@ export function NewSiteSidebar({
         <Button
           newStyle
           className="sidebar-toggle"
-          icon={siteLayout === "mobile" ? <SidebarMenuIcon /> : <SidebarIcon />}
+          icon={siteLayout === "mobile" ? <AlignLeft /> : <Sidebar />}
           onClick={() => setSidebarVisible(false)}
           {...tooltip("Close sidebar", { hotkey: "ctrl+s" })}
         />
@@ -432,7 +430,7 @@ export function NewSiteOpenPanelButton({
   return (
     <Button
       newStyle
-      icon={<PanelIcon />}
+      icon={<PanelLeft />}
       style={{ marginRight: "5px" }}
       onClick={() => setPanelVisible(true)}
       {...tooltip("Open panel", { hotkey: "ctrl+e" })}

@@ -7,12 +7,11 @@ import {
   useEffect,
   useRef,
 } from "react";
+import { Sidebar, AlignLeft } from "lucide-react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors";
 import { fonts } from "../../fonts/fonts";
 import { flattenChildren } from "../../hooks/flattenChildren";
-import { SidebarIcon } from "../../icons/Sidebar";
-import { SidebarMenuIcon } from "../../icons/SidebarMenu";
 import { tooltip } from "../../modals/popup/TooltipView";
 import { AutoBorderView, BorderVisibility } from "../AutoBorderView";
 import { Button, StyledButton } from "../Button";
@@ -90,7 +89,7 @@ export function NewSiteHeader({
       >
         <Button
           newStyle
-          icon={siteLayout === "mobile" ? <SidebarMenuIcon /> : <SidebarIcon />}
+          icon={siteLayout === "mobile" ? <AlignLeft /> : <Sidebar />}
           onClick={() => setSidebarVisible(!sidebarVisible)}
           {...tooltip("Open sidebar", { hotkey: "ctrl+s" })}
         />

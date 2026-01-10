@@ -1,10 +1,9 @@
 import { Meta } from "@storybook/react";
 import { action } from "storybook/actions";
-import { AlertTriangleIcon } from "../../icons/AlertTriangle.js";
-import { CheckmarkIcon } from "../../icons/Checkmark.js";
 import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import { ToastView } from "./ToastView.js";
+import { AlertTriangle, Check } from "lucide-react";
 
 export default {
   component: ToastView,
@@ -43,7 +42,7 @@ export const TextAndIcon = () => (
   <ToastView
     style={{ width: "350px" }}
     message="Thread marked as resolved."
-    icon={<CheckmarkIcon />}
+    icon={<Check />}
     onClick={action("click")}
     onClose={action("close")}
   />
@@ -104,7 +103,7 @@ export const Destructive = () => (
   <ToastView
     destructive
     style={{ width: "350px" }}
-    icon={<AlertTriangleIcon />}
+    icon={<AlertTriangle />}
     title="Task error"
     message="The task failed to complete."
     onClick={action("click")}

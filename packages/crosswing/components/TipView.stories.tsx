@@ -1,11 +1,9 @@
 import { Meta, StoryFn } from "@storybook/react";
 import { styled } from "styled-components";
 import { colors } from "../colors/colors.js";
-import { CheckIcon } from "../icons/Check.js";
-import { InfoCircleIcon } from "../icons/InfoCircle.js";
-import { WarningIcon } from "../icons/Warning.js";
 import { CrosswingAppDecorator } from "../storybook.js";
 import { TipView } from "./TipView.js";
+import { Check, Info, AlertTriangle } from "lucide-react";
 
 export default {
   component: TipView,
@@ -23,10 +21,10 @@ export const AllVariations = () => (
       <TipView title="Pro tip">
         This tip has a title but no icon for better organization.
       </TipView>
-      <TipView icon={<InfoCircleIcon />}>
+      <TipView icon={<Info />}>
         This tip has an icon but no title for visual emphasis.
       </TipView>
-      <TipView icon={<InfoCircleIcon />} title="Information">
+      <TipView icon={<Info />} title="Information">
         This tip has both an icon and a title for maximum clarity and visual
         impact.
       </TipView>
@@ -37,7 +35,7 @@ export const AllVariations = () => (
       <TipView tint={colors.blue}>
         This is a blue-tinted tip for informational content.
       </TipView>
-      <TipView tint={colors.blue} title="Information" icon={<InfoCircleIcon />}>
+      <TipView tint={colors.blue} title="Information" icon={<Info />}>
         Blue tinted tips work well for general information and helpful hints.
       </TipView>
     </div>
@@ -47,7 +45,7 @@ export const AllVariations = () => (
       <TipView tint={colors.green}>
         This is a green-tinted tip for success or positive feedback.
       </TipView>
-      <TipView tint={colors.green} title="Success" icon={<CheckIcon />}>
+      <TipView tint={colors.green} title="Success" icon={<Check />}>
         Green tinted tips are perfect for success messages and positive
         feedback.
       </TipView>
@@ -58,7 +56,7 @@ export const AllVariations = () => (
       <TipView tint={colors.yellow}>
         This is a yellow-tinted tip for warnings or important notices.
       </TipView>
-      <TipView tint={colors.yellow} title="Warning" icon={<WarningIcon />}>
+      <TipView tint={colors.yellow} title="Warning" icon={<AlertTriangle />}>
         Yellow tinted tips draw attention to important warnings or cautions.
       </TipView>
     </div>
@@ -68,7 +66,7 @@ export const AllVariations = () => (
       <TipView tint={colors.red}>
         This is a red-tinted tip for errors or critical information.
       </TipView>
-      <TipView tint={colors.red} title="Error" icon={<WarningIcon />}>
+      <TipView tint={colors.red} title="Error" icon={<AlertTriangle />}>
         Red tinted tips are ideal for error messages and critical alerts.
       </TipView>
     </div>
@@ -78,11 +76,7 @@ export const AllVariations = () => (
       <TipView tint={colors.purple}>
         This is a purple-tinted tip for special features or premium content.
       </TipView>
-      <TipView
-        tint={colors.purple}
-        title="Premium feature"
-        icon={<InfoCircleIcon />}
-      >
+      <TipView tint={colors.purple} title="Premium feature" icon={<Info />}>
         Purple tinted tips can highlight premium features or special content.
       </TipView>
     </div>

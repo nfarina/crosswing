@@ -1,12 +1,10 @@
 import { Meta, StoryFn } from "@storybook/react";
 import { useState } from "react";
 import { action } from "storybook/actions";
-import { CloseIcon } from "../icons/Close.js";
-import { DotDotDotIcon } from "../icons/DotDotDot.js";
-import { WarningIcon } from "../icons/Warning.js";
 import { RouterDecorator } from "../router/storybook/RouterDecorator.js";
 import { CrosswingAppDecorator } from "../storybook.js";
 import { Button } from "./Button.js";
+import { X, MoreHorizontal, AlertTriangle } from "lucide-react";
 
 export default {
   component: Button,
@@ -99,12 +97,12 @@ export const PrimaryLargest: Story = () => (
 // );
 
 export const IconOnly: Story = () => (
-  <Button icon={<CloseIcon />} onClick={action("onClick")} />
+  <Button icon={<X />} onClick={action("onClick")} />
 );
 
 export const IconAndTitle: Story = () => (
   <Button
-    icon={<WarningIcon />}
+    icon={<AlertTriangle />}
     children="Error Details"
     onClick={action("onClick")}
   />
@@ -128,18 +126,18 @@ export const NewStyleBordered: Story = () => (
     newStyle
     bordered
     pill
-    icon={<WarningIcon />}
+    icon={<AlertTriangle />}
     children="Bordered"
     onClick={action("onClick")}
   />
 );
 
 export const NewStyleIcon: Story = () => (
-  <Button newStyle icon={<CloseIcon />} onClick={action("onClick")} />
+  <Button newStyle icon={<X />} onClick={action("onClick")} />
 );
 
 export const NewStyleCircularIcon: Story = () => (
-  <Button newStyle pill icon={<DotDotDotIcon />} onClick={action("onClick")} />
+  <Button newStyle pill icon={<MoreHorizontal />} onClick={action("onClick")} />
 );
 
 export const NewStyleAsLink: Story = () => (

@@ -6,11 +6,11 @@ import { TextInput } from "../../components/forms/TextInput.js";
 import { useInputValue } from "../../components/forms/useInputValue.js";
 import { useNewFormValues } from "../../components/forms/useNewFormValues.js";
 import { TipView } from "../../components/TipView.js";
-import { InfoCircleIcon } from "../../icons/InfoCircle.js";
 import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import { ModalDecorator } from "../storybook/decorators.js";
 import { DialogContainer, DialogView } from "./DialogView.js";
+import { Info } from "lucide-react";
 
 export default {
   component: DialogView,
@@ -109,7 +109,7 @@ export const ProjectCreation: Story = () => {
             // errorStyle="none"
             autoFocus
           />
-          <TipView icon={<InfoCircleIcon />} title="What's a project?">
+          <TipView icon={<Info />} title="What's a project?">
             Projects keep chats, files, and custom instructions in one place.
             Use them for ongoing work, or just to keep things tidy.
           </TipView>

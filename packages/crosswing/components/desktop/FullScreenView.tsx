@@ -8,6 +8,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { X, Maximize } from "lucide-react";
 import { createPortal } from "react-dom";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
@@ -15,8 +16,6 @@ import { fonts } from "../../fonts/fonts.js";
 import { useElementSize } from "../../hooks/useElementSize.js";
 import { HotKey, useHotKey } from "../../hooks/useHotKey.js";
 import { useSessionStorage } from "../../hooks/useSessionStorage.js";
-import { CloseIcon } from "../../icons/Close.js";
-import { FullScreenIcon } from "../../icons/FullScreen.js";
 import { ModalContext } from "../../modals/context/ModalContext.js";
 import { Position } from "../../shared/rect.js";
 import { Button, StyledButton } from "../Button.js";
@@ -225,13 +224,13 @@ export function FullScreenView({
     >
       <FullScreenHeader id="header">
         <div className="title" children={title} />
-        <Button icon={<CloseIcon />} onClick={() => setFullScreen(false)} />
+        <Button icon={<X />} onClick={() => setFullScreen(false)} />
       </FullScreenHeader>
       <div className="children">{children}</div>
       {!isFullScreen && !disabled && (
         <ToolbarButton
           className="full-screen-button"
-          icon={<FullScreenIcon />}
+          icon={<Maximize />}
           onClick={() => {
             setFullScreen(true);
             setButtonHovered(false);

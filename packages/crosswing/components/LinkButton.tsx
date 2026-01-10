@@ -1,8 +1,8 @@
+import { ChevronRight } from "lucide-react";
 import { KeyboardEvent, ReactNode } from "react";
 import { styled } from "styled-components";
 import { colors } from "../colors/colors.js";
 import { fonts } from "../fonts/fonts.js";
-import { DisclosureArrowIcon } from "../icons/DisclosureArrow.js";
 import { Link } from "../router/Link.js";
 import { ButtonSize } from "./Button.js";
 
@@ -61,7 +61,7 @@ export function LinkButton({
         </div>
       )}
       {children}
-      {!!showDisclosure && <DisclosureArrowIcon className="disclosure" />}
+      {!!showDisclosure && <ChevronRight className="disclosure" />}
     </StyledLinkButton>
   );
 }
@@ -110,6 +110,8 @@ export const StyledLinkButton = styled(Link)`
 
   > .disclosure {
     margin: -5px -7px -5px 0;
+    width: 20px;
+    height: 20px;
   }
 
   &[data-icon-only="true"] {

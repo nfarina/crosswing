@@ -2,7 +2,7 @@ import { HTMLAttributes, MouseEvent, ReactNode } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
-import { CheckmarkIcon } from "../../icons/Checkmark.js";
+import { Check } from "lucide-react";
 
 export function LabeledCheckmark({
   label,
@@ -32,7 +32,7 @@ export function LabeledCheckmark({
         {label && <div className="label" children={label} />}
         {detail && <div className="detail" children={detail} />}
       </div>
-      <CheckmarkIcon className="checkmark" />
+      <Check className="checkmark" />
     </StyledLabeledCheckmark>
   );
 }

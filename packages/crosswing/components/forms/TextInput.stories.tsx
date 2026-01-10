@@ -3,11 +3,11 @@ import { useState } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
-import { SearchIcon } from "../../icons/Search.js";
 import { ModalDecorator } from "../../modals/storybook/decorators.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import { Button } from "../Button.js";
 import { StyledTextInput, TextInput } from "./TextInput.js";
+import { Search } from "lucide-react";
 
 export default {
   component: TextInput,
@@ -141,7 +141,7 @@ export const NewStyleWithIcon = () => {
       placeholder="Enter your name"
       value={text}
       onValueChange={setText}
-      icon={<SearchIcon />}
+      icon={<Search />}
     />
   );
 };
@@ -155,7 +155,7 @@ export const NewStyleWithIconAndRequiredError = () => {
       placeholder="Enter your name"
       value={text}
       onValueChange={setText}
-      icon={<SearchIcon />}
+      icon={<Search />}
       error={!text ? new Error("Name is required.") : null}
     />
   );
@@ -170,7 +170,7 @@ export const NewStyleWithIconAndValidationError = () => {
       placeholder="Enter a fruit"
       value={text}
       onValueChange={setText}
-      icon={<SearchIcon />}
+      icon={<Search />}
       error={text.toLowerCase() !== "apple" ? new Error("Not an apple!") : null}
     />
   );
@@ -185,7 +185,7 @@ export const NewStyleWithIconAndInitialError = () => {
       placeholder="Enter your name"
       value={text}
       onValueChange={setText}
-      icon={<SearchIcon />}
+      icon={<Search />}
       error={text === "Bill" ? new Error("Bill is not valid.") : null}
     />
   );

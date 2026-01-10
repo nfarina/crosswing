@@ -1,8 +1,8 @@
+import { Copy } from "lucide-react";
 import { HTMLAttributes, MouseEvent, use } from "react";
 import { styled } from "styled-components";
 import { colors } from "../colors/colors.js";
 import { fonts } from "../fonts/fonts.js";
-import { CopyIcon } from "../icons/Copy.js";
 import { ModalContext } from "../modals/context/ModalContext.js";
 
 export function IDView({
@@ -32,7 +32,7 @@ export function IDView({
 
   return (
     <StyledIDView onClick={onViewClick} {...rest}>
-      <CopyIcon />
+      <Copy />
       <span className="text">{truncate ? id.slice(0, truncate) : id}</span>
     </StyledIDView>
   );
@@ -54,9 +54,9 @@ export const StyledIDView = styled.div`
 
   > svg {
     flex-shrink: 0;
-    margin-right: 2px;
-    width: 16px;
-    height: 16px;
+    margin-right: 4px;
+    width: 13px;
+    height: 13px;
   }
 
   > .text {

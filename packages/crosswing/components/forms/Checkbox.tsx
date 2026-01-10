@@ -1,7 +1,7 @@
+import { Check } from "lucide-react";
 import { HTMLAttributes, SyntheticEvent } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
-import { CheckIcon } from "../../icons/Check.js";
 import { Clickable } from "../Clickable.js";
 
 export function Checkbox({
@@ -28,7 +28,7 @@ export function Checkbox({
       {...rest}
     >
       <div className="box">
-        <CheckIcon />
+        <Check />
       </div>
     </StyledCheckbox>
   );
@@ -57,11 +57,12 @@ export const StyledCheckbox = styled(Clickable)`
 
     > svg {
       position: absolute;
-      top: -3px;
+      top: -2.5px;
       left: -2.5px;
-      transform: scale(0.85);
+      transform: scale(0.7);
       pointer-events: none;
       color: ${colors.white()};
+      stroke-width: 2.5px;
     }
   }
 

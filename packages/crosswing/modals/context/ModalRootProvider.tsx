@@ -17,9 +17,12 @@ export * from "./useModal.js";
 export function ModalRootProvider({
   allowDesktopPresentation,
   children,
+  centerChildren = false,
   ...rest
 }: HTMLAttributes<HTMLDivElement> & {
   allowDesktopPresentation?: boolean;
+  /** Primarily for Storybook; centers the children in the modal root. */
+  centerChildren?: boolean;
 }) {
   const modalRoot = useRef<HTMLDivElement | null>(null);
   const modalContextRoot = useRef<HTMLDivElement | null>(null);
@@ -42,7 +45,10 @@ export function ModalRootProvider({
         data-is-modal-provider
         {...rest}
       >
-        <ModalContextProvider children={children} />
+        <ModalContextProvider
+          centerChildren={centerChildren}
+          children={children}
+        />
         <div className="modals" data-is-modal-root ref={modalRoot} />
       </StyledModalOverlay>
     </ModalContext>

@@ -1,9 +1,9 @@
 import { Meta, StoryFn } from "@storybook/react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
-import { SidebarIcon } from "../../icons/Sidebar.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import { Badge } from "./Badge.js";
+import { Sidebar } from "lucide-react";
 
 export default {
   component: Badge,
@@ -18,13 +18,13 @@ export const AllVariations = () => (
     <div>
       <h3>Default</h3>
       <Badge>Default</Badge>
-      <Badge icon={<SidebarIcon />}>With icon</Badge>
+      <Badge icon={<Sidebar />}>With icon</Badge>
       <Badge small>Small</Badge>
-      <Badge small icon={<SidebarIcon />}>
+      <Badge small icon={<Sidebar />}>
         Small icon
       </Badge>
       <Badge large>Large</Badge>
-      <Badge large icon={<SidebarIcon />}>
+      <Badge large icon={<Sidebar />}>
         Large icon
       </Badge>
     </div>
@@ -32,19 +32,19 @@ export const AllVariations = () => (
     <div>
       <h3>Bordered</h3>
       <Badge bordered>Bordered</Badge>
-      <Badge bordered icon={<SidebarIcon />}>
+      <Badge bordered icon={<Sidebar />}>
         With icon
       </Badge>
       <Badge bordered small>
         Small
       </Badge>
-      <Badge bordered small icon={<SidebarIcon />}>
+      <Badge bordered small icon={<Sidebar />}>
         Small icon
       </Badge>
       <Badge bordered large>
         Large
       </Badge>
-      <Badge bordered large icon={<SidebarIcon />}>
+      <Badge bordered large icon={<Sidebar />}>
         Large icon
       </Badge>
     </div>
@@ -52,19 +52,19 @@ export const AllVariations = () => (
     <div>
       <h3>Pill</h3>
       <Badge pill>Pill</Badge>
-      <Badge pill icon={<SidebarIcon />}>
+      <Badge pill icon={<Sidebar />}>
         With icon
       </Badge>
       <Badge pill small>
         Small
       </Badge>
-      <Badge pill small icon={<SidebarIcon />}>
+      <Badge pill small icon={<Sidebar />}>
         Small icon
       </Badge>
       <Badge pill large>
         Large
       </Badge>
-      <Badge pill large icon={<SidebarIcon />}>
+      <Badge pill large icon={<Sidebar />}>
         Large icon
       </Badge>
     </div>

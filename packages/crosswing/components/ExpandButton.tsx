@@ -1,8 +1,8 @@
 import { ButtonHTMLAttributes, CSSProperties } from "react";
 import { styled } from "styled-components";
 import { colors } from "../colors/colors.js";
-import { DisclosureArrowIcon } from "../icons/DisclosureArrow.js";
 import { Clickable } from "./Clickable.js";
+import { ChevronRight } from "lucide-react";
 
 export function ExpandButton({
   rotate = 0,
@@ -23,7 +23,7 @@ export function ExpandButton({
   return (
     <StyledExpandButton style={cssProps} {...rest} as={as}>
       <div className="circle" data-transparent={!!transparent}>
-        <DisclosureArrowIcon />
+        <ChevronRight />
       </div>
     </StyledExpandButton>
   );

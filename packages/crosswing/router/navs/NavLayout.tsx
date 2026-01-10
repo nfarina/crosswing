@@ -4,11 +4,11 @@ import { colors } from "../../colors/colors.js";
 import { HostContext } from "../../host/context/HostContext.js";
 import { useHostStatusBar } from "../../host/features/HostStatusBar.js";
 import { StatusBarStyleAttribute } from "../../host/util/useAutoStatusBar.js";
-import { BackIcon } from "../../icons/Back.js";
 import { safeArea } from "../../safearea/safeArea.js";
 import { RouterContext } from "../context/RouterContext.js";
 import { NavAccessory, NavAccessoryView } from "./NavAccessoryView.js";
 import { NavTitleView } from "./NavTitleView.js";
+import { ArrowLeft } from "lucide-react";
 
 export interface NavProps {
   title?: ReactNode;
@@ -93,7 +93,7 @@ export function NavLayout({
 
       return (
         <NavAccessoryView
-          accessory={{ icon: <BackIcon />, to: resolvedBack, back: true }}
+          accessory={{ icon: <ArrowLeft />, to: resolvedBack, back: true }}
           align="left"
         />
       );

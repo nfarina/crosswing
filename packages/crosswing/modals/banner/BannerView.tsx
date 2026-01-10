@@ -1,9 +1,9 @@
+import { X } from "lucide-react";
 import { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
 import { colors, shadows } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
 import { useGesture } from "../../hooks/useGesture.js";
-import { CloseIcon } from "../../icons/Close.js";
 import { Link } from "../../router/Link.js";
 
 export function BannerView({
@@ -46,7 +46,7 @@ export function BannerView({
         </div>
       )}
       <div className="close" onClick={onClose}>
-        <CloseIcon />
+        <X />
       </div>
     </StyledBannerView>
   );
@@ -112,5 +112,10 @@ const StyledBannerView = styled.div`
     justify-content: center;
     cursor: pointer;
     color: ${colors.text()};
+
+    > svg {
+      width: 18px;
+      height: 18px;
+    }
   }
 `;

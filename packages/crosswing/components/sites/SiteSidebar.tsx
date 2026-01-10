@@ -6,12 +6,12 @@ import {
   ReactNode,
   use,
 } from "react";
+import { Circle } from "lucide-react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
 import { flattenChildren } from "../../hooks/flattenChildren.js";
 import { CrosswingLogoIcon } from "../../icons/CrosswingLogo.js";
-import { PlaceholderIcon } from "../../icons/Placeholder.js";
 import { RouterContext } from "../../router/context/RouterContext.js";
 import { Link } from "../../router/Link.js";
 import {
@@ -44,7 +44,7 @@ const defaultLogo = (
   <CrosswingLogoIcon style={{ width: "50px", height: "50px" }} />
 );
 
-const defaultIcon = <PlaceholderIcon />;
+const defaultIcon = <Circle />;
 
 export function SiteSidebar({
   logo = defaultLogo,

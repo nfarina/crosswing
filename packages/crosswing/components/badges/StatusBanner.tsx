@@ -4,6 +4,7 @@ import { fonts } from "../../fonts/fonts.js";
 import { Button } from "../Button.js";
 import { StatusBadge } from "./StatusBadge.js";
 
+/** @deprecated Use <TipView> for big things, <Badge> for small things. */
 export function StatusBanner({
   action,
   actionWorking,
@@ -47,6 +48,10 @@ export const StyledStatusBanner = styled(StatusBadge)`
   padding-bottom: 9px;
   align-items: flex-start;
 
+  > svg {
+    margin-top: 1.5px;
+  }
+
   &[data-floating="false"] {
     border-radius: 0;
   }
@@ -54,9 +59,12 @@ export const StyledStatusBanner = styled(StatusBadge)`
   &[data-has-action="true"] {
     cursor: pointer;
 
-    > svg,
+    > svg {
+      margin-top: 4.5px;
+    }
+
     > .children {
-      margin-top: 1.5px;
+      margin-top: 3.5px;
     }
   }
 

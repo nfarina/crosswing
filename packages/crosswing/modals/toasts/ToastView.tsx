@@ -1,3 +1,4 @@
+import { X } from "lucide-react";
 import { HTMLAttributes, MouseEvent, useState } from "react";
 import { keyframes, styled } from "styled-components";
 import { colors, shadows } from "../../colors/colors.js";
@@ -5,7 +6,6 @@ import { Button } from "../../components/Button.js";
 import { fonts } from "../../fonts/fonts.js";
 import { useGesture } from "../../hooks/useGesture.js";
 import { useInterval } from "../../hooks/useInterval.js";
-import { CloseIcon } from "../../icons/Close.js";
 import { Link } from "../../router/Link.js";
 import { easing } from "../../shared/easing.js";
 import { Seconds } from "../../shared/timespan.js";
@@ -140,7 +140,7 @@ export function ToastView({
         newStyle
         destructive={destructive}
         onClick={onClose}
-        icon={<CloseIcon />}
+        icon={<X size={17} />}
       />
     </StyledToastView>
   );
@@ -217,6 +217,14 @@ const StyledToastView = styled.div`
     flex-shrink: 0;
     margin-left: 13px;
     margin-right: -6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    > svg {
+      width: 20px;
+      height: 20px;
+    }
   }
 
   > .content {

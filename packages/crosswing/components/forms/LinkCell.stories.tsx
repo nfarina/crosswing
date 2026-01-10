@@ -1,9 +1,9 @@
 import { action } from "storybook/actions";
-import { SearchIcon } from "../../icons/Search.js";
 import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import { SeparatorDecorator } from "../SeparatorLayout.js";
 import { LinkCell } from "./LinkCell.js";
+import { Search } from "lucide-react";
 
 export default {
   component: LinkCell,
@@ -29,7 +29,7 @@ export const WithSubtitle = () => (
 
 export const WithIcon = () => (
   <LinkCell
-    icon={<SearchIcon />}
+    icon={<Search />}
     title="Attach a Receipt"
     onClick={action("click")}
   />

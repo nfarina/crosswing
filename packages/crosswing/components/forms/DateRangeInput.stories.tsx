@@ -23,6 +23,8 @@ export const Default = () => {
   return (
     <Container>
       <DateRangeInput
+        newStyle
+        bordered
         value={range}
         onValueChange={setRange}
         popupAlignment="center"
@@ -37,6 +39,8 @@ export const InToolbar = () => {
   return (
     <Container>
       <DateRangeInput
+        newStyle
+        bordered
         value={range}
         onValueChange={setRange}
         popupAlignment="center"
@@ -51,7 +55,12 @@ export const LeftAligned = () => {
 
   return (
     <Container data-popup-alignment="left">
-      <DateRangeInput value={range} onValueChange={setRange} />
+      <DateRangeInput
+        newStyle
+        bordered
+        value={range}
+        onValueChange={setRange}
+      />
     </Container>
   );
 };

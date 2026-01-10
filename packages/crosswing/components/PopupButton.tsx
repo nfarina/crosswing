@@ -1,8 +1,8 @@
+import { ChevronDown } from "lucide-react";
 import { RefObject, useImperativeHandle, useRef } from "react";
 import { styled } from "styled-components";
 import { colors } from "../colors/colors";
 import { fonts } from "../fonts/fonts";
-import { DownArrowIcon } from "../icons/DownArrow";
 import { Popup, PopupTarget } from "../modals/popup/usePopup";
 import { Button } from "./Button";
 
@@ -58,7 +58,9 @@ export function PopupButton({
       onClick={handleClick}
       data-is-open={popup?.visible}
       children={children}
-      right={!hideDisclosure && <DownArrowIcon className="down-arrow" />}
+      right={
+        !hideDisclosure && <ChevronDown size={18} className="down-arrow" />
+      }
     />
   );
 }

@@ -4,11 +4,11 @@ import { colors } from "../../colors/colors.js";
 import { Button } from "../../components/Button.js";
 import { fonts } from "../../fonts/fonts.js";
 import { MockHostProvider } from "../../host/mocks/MockHostProvider.js";
-import { DotDotDotIcon } from "../../icons/DotDotDot.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import { RouterDecorator } from "../storybook/RouterDecorator.js";
 import { NavLayout } from "./NavLayout.js";
 import { StyledNavTitleView } from "./NavTitleView.js";
+import { MoreHorizontal } from "lucide-react";
 
 export default {
   component: NavLayout,
@@ -36,7 +36,7 @@ export const WithIconAccessory = () => (
   <NavLayout
     title="Cupcakes"
     isApplicationRoot
-    right={{ icon: <DotDotDotIcon />, onClick: action("Icon clicked") }}
+    right={{ icon: <MoreHorizontal />, onClick: action("Icon clicked") }}
   >
     <SamplePage>Cupcakes are tasty.</SamplePage>
   </NavLayout>

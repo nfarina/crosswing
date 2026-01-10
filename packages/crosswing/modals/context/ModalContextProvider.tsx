@@ -43,9 +43,12 @@ function nextToastKey() {
 export function ModalContextProvider({
   allowDesktopPresentation: allowDesktopPresentationOverride,
   children,
+  centerChildren = false,
 }: {
   allowDesktopPresentation?: boolean;
   children: ReactNode;
+  /** Primarily for Storybook; centers the children in the modal context. */
+  centerChildren?: boolean;
 }) {
   const { delayUpdates } = use(HostContext);
   const modalContext = use(ModalContext);
@@ -346,6 +349,7 @@ export function ModalContextProvider({
     <ModalContext value={contextValue}>
       <StyledModalContextProvider
         data-is-modal-context-root
+        data-center-children={centerChildren}
         ref={modalContextRoot}
       >
         {children}
@@ -403,6 +407,15 @@ export const StyledModalContextProvider = styled.div`
     z-index: 0;
     max-width: 100%;
     max-height: 100%;
+  }
+
+  &[data-center-children="true"] {
+    justify-content: center;
+    align-items: center;
+
+    > * {
+      flex-grow: unset;
+    }
   }
 `;
 

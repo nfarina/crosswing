@@ -6,10 +6,10 @@ import {
   useLayoutEffect,
   useRef,
 } from "react";
+import { MoreHorizontal } from "lucide-react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
-import { DotDotDotIcon } from "../../icons/DotDotDot.js";
 import { Button } from "../Button.js";
 import { LinkButton } from "../LinkButton.js";
 import { PopupButton } from "../PopupButton.js";
@@ -154,7 +154,7 @@ export const ToolbarPopupButton = styled(PopupButton)`
 `;
 
 export const ToolbarMoreButton = styled(ToolbarButton).attrs({
-  icon: <DotDotDotIcon />,
+  icon: <MoreHorizontal />,
 })`
   width: 36px;
   padding: 1px 0 0 0;

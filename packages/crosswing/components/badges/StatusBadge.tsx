@@ -1,11 +1,10 @@
+import { AlertTriangle, Info, OctagonX } from "lucide-react";
 import { HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
-import { ErrorIcon } from "../../icons/Error.js";
-import { InfoCircleIcon } from "../../icons/InfoCircle.js";
-import { WarningIcon } from "../../icons/Warning.js";
 
+/** @deprecated Use <Badge> for small things, <TipView> for big things. */
 export function StatusBadge({
   children,
   icon,
@@ -34,9 +33,9 @@ export function StatusBadge({
       {!hideIcon && icon}
       {!icon && !hideIcon && (
         <>
-          {type === "info" && <InfoCircleIcon />}
-          {type === "warning" && <WarningIcon />}
-          {type === "error" && <ErrorIcon />}
+          {type === "info" && <Info />}
+          {type === "warning" && <AlertTriangle />}
+          {type === "error" && <OctagonX />}
         </>
       )}
       <div className="children">{children}</div>
@@ -89,9 +88,9 @@ export const StyledStatusBadge = styled.div`
 
   > svg {
     flex-shrink: 0;
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
+    width: 18px;
+    height: 18px;
+    margin-right: 7px;
   }
 
   > .children {
@@ -121,8 +120,8 @@ export const StyledStatusBadge = styled.div`
     padding: 5px 10px;
 
     > svg {
-      width: 16px;
-      height: 16px;
+      width: 14px;
+      height: 14px;
       margin-left: -2px;
       margin-right: 4px;
       margin-top: 1.5px;
@@ -142,10 +141,9 @@ export const StyledStatusBadge = styled.div`
     }
 
     > svg {
-      width: 13px;
-      height: 13px;
-      margin-right: 3px;
-      margin-top: 1.5px;
+      width: 12px;
+      height: 12px;
+      margin-right: 4px;
     }
 
     > .children {

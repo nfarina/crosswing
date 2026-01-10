@@ -1,11 +1,10 @@
 import { Meta } from "@storybook/react";
 import { useState } from "react";
 import styled from "styled-components";
-import { BrowserIcon } from "../../icons/Browser.js";
-import { CheckIcon } from "../../icons/Check.js";
 import { ModalDecorator } from "../../modals/storybook/decorators.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import { Dropdown } from "./Dropdown.js";
+import { Compass, Check } from "lucide-react";
 
 export default {
   component: Dropdown,
@@ -62,13 +61,13 @@ export const WithIconsAndDetails = () => {
           value: "admin",
           children: "Administrator",
           detail: "Full access to all features",
-          icon: <BrowserIcon />,
+          icon: <Compass />,
         },
         {
           value: "editor",
           children: "Editor",
           detail: "Can create and edit content",
-          icon: <CheckIcon />,
+          icon: <Check />,
         },
         {
           value: "viewer",
@@ -142,13 +141,13 @@ export const KeyboardNavigation = () => {
           {
             value: "item1",
             children: "First Item",
-            icon: <CheckIcon />,
+            icon: <Check />,
           },
           {
             value: "item2",
             children: "Second Item (Selected)",
             detail: "This item is pre-selected",
-            icon: <BrowserIcon />,
+            icon: <Compass />,
           },
           {
             value: "item3",

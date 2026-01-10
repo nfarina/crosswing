@@ -8,11 +8,11 @@ import {
   useRef,
   useState,
 } from "react";
+import { ChevronDown } from "lucide-react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
 import { flattenChildren } from "../../hooks/flattenChildren.js";
-import { DownArrowIcon } from "../../icons/DownArrow.js";
 import { usePopup } from "../../modals/popup/usePopup.js";
 import { RouterContext } from "../../router/context/RouterContext.js";
 import { PopupMenu, PopupMenuText } from "../PopupMenu.js";
@@ -108,7 +108,7 @@ export function ToolbarOverflowTab({ children }: { children: ReactNode }) {
           data-popup-target
           onClick={selectedTab ? undefined : onArrowClick}
         >
-          <DownArrowIcon />
+          <ChevronDown />
         </div>
       </ToolbarTab>
     </StyledToolbarOverflowTab>

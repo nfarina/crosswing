@@ -1,6 +1,4 @@
 import { action } from "storybook/actions";
-import { BrowserIcon } from "../icons/Browser.js";
-import { TrashIcon } from "../icons/Trash.js";
 import { CrosswingAppDecorator } from "../storybook.js";
 import {
   MobileToolbar,
@@ -8,6 +6,7 @@ import {
   MobileToolbarLayout,
   MobileToolbarSpace,
 } from "./MobileToolbar.js";
+import { Compass, Trash } from "lucide-react";
 import { NoContent } from "./NoContent.js";
 
 export default {
@@ -21,12 +20,12 @@ export const Default = () => (
     <NoContent title="Content Area" />
     <MobileToolbar>
       <MobileToolbarButton
-        children={<BrowserIcon />}
+        children={<Compass />}
         onClick={action("onBrowserClick")}
       />
       <MobileToolbarSpace />
       <MobileToolbarButton
-        children={<TrashIcon />}
+        children={<Trash />}
         onClick={action("onTrashClick")}
       />
     </MobileToolbar>

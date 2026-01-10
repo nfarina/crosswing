@@ -1,3 +1,4 @@
+import { ArrowLeft, X } from "lucide-react";
 import {
   HTMLAttributes,
   MouseEvent,
@@ -10,8 +11,6 @@ import { colors } from "../../colors/colors.js";
 import { AutoBorderView } from "../../components/AutoBorderView.js";
 import { Button } from "../../components/Button.js";
 import { fonts } from "../../fonts/fonts.js";
-import { ArrowLeftIcon } from "../../icons/ArrowLeft.js";
-import { CloseIcon } from "../../icons/Close.js";
 
 export * from "./useDialog.js";
 
@@ -121,7 +120,7 @@ export function DialogView({
                 to={back}
                 onClick={onBackClick}
                 className="back-button"
-                icon={<ArrowLeftIcon />}
+                icon={<ArrowLeft />}
               />
             )}
             <div className="title-area">
@@ -145,7 +144,7 @@ export function DialogView({
                 {!hideCloseButton && (
                   <Button
                     newStyle
-                    icon={<CloseIcon />}
+                    icon={<X size={20} />}
                     onClick={onClose}
                     className="close-button"
                     disabled={disabled}

@@ -7,10 +7,10 @@ import {
   useEffect,
   useState,
 } from "react";
+import { ArrowLeft } from "lucide-react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
-import { BackIcon } from "../../icons/Back.js";
 import { RouterContext } from "../../router/context/RouterContext.js";
 import { Link } from "../../router/Link.js";
 import { NavAccessoryView } from "../../router/navs/NavAccessoryView.js";
@@ -90,7 +90,7 @@ export function SitePageTitle({
       >
         {backCrumb ? (
           <NavAccessoryView
-            accessory={{ icon: <BackIcon />, to: backCrumb.link }}
+            accessory={{ icon: <ArrowLeft />, to: backCrumb.link }}
             align="left"
           />
         ) : (

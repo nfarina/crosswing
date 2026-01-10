@@ -1,3 +1,4 @@
+import { AlertTriangle } from "lucide-react";
 import {
   ChangeEvent,
   FocusEvent,
@@ -14,7 +15,6 @@ import { fonts } from "../../fonts/fonts.js";
 import { useElementSize } from "../../hooks/useElementSize.js";
 import { HostContext } from "../../host/context/HostContext.js";
 import { useScrollAboveKeyboard } from "../../host/features/useScrollAboveKeyboard.js";
-import { AlertTriangleIcon } from "../../icons/AlertTriangle.js";
 import { useErrorAlert } from "../../modals/alert/useErrorAlert.js";
 import { tooltip } from "../../modals/popup/TooltipView.js";
 import { StatusBadge, StyledStatusBadge } from "../badges/StatusBadge.js";
@@ -219,7 +219,7 @@ export function TextArea({
         <Button
           newStyle
           className="error-button"
-          icon={<AlertTriangleIcon />}
+          icon={<AlertTriangle size={18} />}
           {...tooltip(error.message)}
           onClick={() => errorAlert.show(error)}
         />
@@ -373,11 +373,6 @@ export const StyledTextArea = styled.div`
         &:hover {
           background: ${colors.red({ alpha: 0.1 })};
         }
-      }
-
-      > svg {
-        width: 18px;
-        height: 18px;
       }
     }
   }

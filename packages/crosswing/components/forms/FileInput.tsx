@@ -31,6 +31,7 @@ export function FileInput({
   const dragEvents = useDragEvents({
     onDragOverChange,
     onDrop: onDrop as ((e: DragEvent) => void) | undefined,
+    disabled,
   });
 
   if (onFileListSelect && !multiple) {
@@ -108,6 +109,7 @@ export const StyledFileInput = styled.div`
   &[data-disabled="true"] {
     > input[type="file"] {
       pointer-events: none;
+      cursor: default;
     }
   }
 `;

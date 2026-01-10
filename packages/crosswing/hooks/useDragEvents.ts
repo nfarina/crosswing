@@ -1,12 +1,13 @@
 import { DragEvent, useRef, useState } from "react";
 
 export interface UseDragEventsOptions {
+  disabled?: boolean;
   onDragOverChange?: (isDraggingOver: boolean) => void;
   onDrop?: (e: DragEvent) => void;
 }
 
 export function useDragEvents(options: UseDragEventsOptions = {}) {
-  const { onDragOverChange, onDrop: onDropCallback } = options;
+  const { disabled, onDragOverChange, onDrop: onDropCallback } = options;
 
   // https://stackoverflow.com/a/21002544/66673
   // We useRef instead of useState because we can't rely on state changes
@@ -17,12 +18,14 @@ export function useDragEvents(options: UseDragEventsOptions = {}) {
   const [isDraggingOver, setIsDraggingOver] = useState(false);
 
   function onDragEnter() {
+    if (disabled) return;
     overCountRef.current++;
     onDragOverChange?.(true);
     setIsDraggingOver(true);
   }
 
   function onDragLeave() {
+    if (disabled) return;
     overCountRef.current--;
     const isDraggingOver = overCountRef.current > 0;
     onDragOverChange?.(isDraggingOver);
@@ -30,6 +33,7 @@ export function useDragEvents(options: UseDragEventsOptions = {}) {
   }
 
   function onDrop(e: DragEvent) {
+    if (disabled) return;
     overCountRef.current = 0;
     onDragOverChange?.(false);
     setIsDraggingOver(false);
@@ -38,6 +42,7 @@ export function useDragEvents(options: UseDragEventsOptions = {}) {
 
   // Prevent default behavior for dragover to allow drop
   function onDragOver(e: DragEvent) {
+    if (disabled) return;
     e.preventDefault();
   }
 
