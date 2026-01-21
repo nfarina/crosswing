@@ -1,5 +1,6 @@
 import {
   cloneElement,
+  CSSProperties,
   isValidElement,
   ReactElement,
   ReactNode,
@@ -36,6 +37,17 @@ function nextToastKey() {
 }
 
 /**
+ * A convenience type for specifying the layout of the modal context children.
+ * This is primarily for Storybook, where we want to center the children in the
+ * modal context without creating a new container.
+ */
+export type ChildLayout = {
+  centered?: boolean;
+  width?: number;
+  height?: number;
+};
+
+/**
  * Rendered automatically by <ModalRootProvider>, but you can place it yourself
  * deeper in your component tree to "capture" the current React Context and
  * make it available to any modals presented at that point in the tree.
@@ -43,12 +55,12 @@ function nextToastKey() {
 export function ModalContextProvider({
   allowDesktopPresentation: allowDesktopPresentationOverride,
   children,
-  centerChildren = false,
+  childLayout,
 }: {
   allowDesktopPresentation?: boolean;
   children: ReactNode;
-  /** Primarily for Storybook; centers the children in the modal context. */
-  centerChildren?: boolean;
+  /** Primarily for Storybook; specifies the layout of the children in the modal context. */
+  childLayout?: ChildLayout | null;
 }) {
   const { delayUpdates } = use(HostContext);
   const modalContext = use(ModalContext);
@@ -345,12 +357,24 @@ export function ModalContextProvider({
     allowDesktopPresentation,
   };
 
+  const cssProps = childLayout
+    ? ({
+        "--child-width": childLayout.width
+          ? `${childLayout.width}px`
+          : undefined,
+        "--child-height": childLayout.height
+          ? `${childLayout.height}px`
+          : undefined,
+      } as CSSProperties)
+    : {};
+
   return (
     <ModalContext value={contextValue}>
       <StyledModalContextProvider
         data-is-modal-context-root
-        data-center-children={centerChildren}
+        data-center-children={childLayout?.centered}
         ref={modalContextRoot}
+        style={cssProps}
       >
         {children}
       </StyledModalContextProvider>
@@ -415,6 +439,8 @@ export const StyledModalContextProvider = styled.div`
 
     > * {
       flex-grow: unset;
+      width: var(--child-width, unset);
+      height: var(--child-height, unset);
     }
   }
 `;

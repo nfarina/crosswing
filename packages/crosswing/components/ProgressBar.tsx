@@ -1,6 +1,6 @@
 import { CSSProperties, HTMLAttributes } from "react";
 import { styled } from "styled-components";
-import { colors } from "../colors/colors.js";
+import { ColorBuilder, colors } from "../colors/colors.js";
 
 export type ProgressBarSize = "normal" | "larger" | "largest" | "smaller";
 
@@ -10,12 +10,20 @@ export function ProgressBar({
   rounded,
   animated = true,
   style,
+  foregroundColor = colors.primary,
+  foregroundColorDark = foregroundColor,
+  backgroundColor = colors.gray200({ alpha: 0.6 }),
+  backgroundColorDark = colors.gray400({ alpha: 0.2 }),
   ...rest
 }: {
   value: number;
   size?: ProgressBarSize;
   rounded?: boolean;
   animated?: boolean;
+  foregroundColor?: ColorBuilder | string;
+  foregroundColorDark?: ColorBuilder | string;
+  backgroundColor?: ColorBuilder | string;
+  backgroundColorDark?: ColorBuilder | string;
 } & HTMLAttributes<HTMLDivElement>) {
   const barHeight = (() => {
     switch (size) {
@@ -34,6 +42,18 @@ export function ProgressBar({
     ...style,
     "--bar-height": barHeight,
     "--value": `${Math.round(value * 100)}%`,
+    "--foreground-color":
+      typeof foregroundColor === "string" ? foregroundColor : foregroundColor(),
+    "--foreground-color-dark":
+      typeof foregroundColorDark === "string"
+        ? foregroundColorDark
+        : foregroundColorDark(),
+    "--background-color":
+      typeof backgroundColor === "string" ? backgroundColor : backgroundColor(),
+    "--background-color-dark":
+      typeof backgroundColorDark === "string"
+        ? backgroundColorDark
+        : backgroundColorDark(),
   } as CSSProperties;
 
   return (
@@ -52,22 +72,26 @@ export const StyledProgressBar = styled.div`
   --rounded-corner: 9999px;
 
   position: relative;
-  background-color: ${colors.lightGray({ alpha: 0.6 })};
+  background-color: var(--background-color);
   height: var(--bar-height);
   border-radius: var(--rounded-corner);
   overflow: hidden;
 
   @media (prefers-color-scheme: dark) {
-    background-color: ${colors.darkGray({ alpha: 0.2 })};
+    background-color: var(--background-color-dark);
   }
 
   > .bar {
     position: absolute;
     left: 0;
     height: 100%;
-    background: ${colors.turquoiseGradient()};
+    background: var(--foreground-color);
     width: var(--value);
     max-width: 100%;
+
+    @media (prefers-color-scheme: dark) {
+      background: var(--foreground-color-dark);
+    }
   }
 
   &[data-rounded="true"] {

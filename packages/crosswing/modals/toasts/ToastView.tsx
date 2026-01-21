@@ -79,8 +79,8 @@ export function ToastView({
     }
   }
 
-  function handleActionClick() {
-    onActionClick?.();
+  function handleActionClick(e: MouseEvent<HTMLElement>) {
+    onActionClick?.(e);
     onClose?.();
   }
 

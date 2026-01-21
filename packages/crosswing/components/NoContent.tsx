@@ -92,6 +92,7 @@ export const StyledNoContent = styled.div`
     font: ${fonts.display({ size: 20, line: "1.4" })};
     color: ${colors.textSecondary()};
     text-align: center;
+    ${"text-wrap: pretty;"}
 
     a {
       text-decoration: none;
@@ -104,6 +105,7 @@ export const StyledNoContent = styled.div`
     color: ${colors.textSecondary()};
     text-align: center;
     word-break: break-word;
+    ${"text-wrap: pretty;"}
 
     a {
       text-decoration: none;

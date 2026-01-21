@@ -2,6 +2,7 @@ import { action } from "storybook/actions";
 import { useAsyncTask } from "../hooks/useAsyncTask.js";
 import { useErrorAlert } from "../modals/alert/useErrorAlert.js";
 import { ModalDecorator } from "../modals/storybook/decorators.js";
+import { Seconds } from "../shared/timespan.js";
 import { wait } from "../shared/wait.js";
 import { CrosswingAppDecorator } from "../storybook.js";
 import { useProgressDialog } from "./useProgressDialog.js";
@@ -105,4 +106,24 @@ export const Progress = () => {
   });
 
   return null;
+};
+
+export const Cancelable = () => {
+  const errorAlert = useErrorAlert();
+  const progressAlert = useProgressDialog({ onCancel: () => task.cancel() });
+
+  const task = useAsyncTask({
+    func: async (task) => {
+      progressAlert.show("Processing Payment…");
+
+      await wait(Seconds(5));
+
+      if (task.isCanceled()) return;
+
+      throw new Error("Test error!");
+    },
+    onError: errorAlert.show,
+    onFinally: progressAlert.hide,
+    runOnMount: true,
+  });
 };

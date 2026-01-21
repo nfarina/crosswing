@@ -93,6 +93,12 @@ export const StyledPopupMenu = styled.div`
   > .separator + .separator {
     display: none;
   }
+
+  /* Bonus feature! Hide first/last item if it's a separator. */
+  > .separator:first-child,
+  > .separator:last-child {
+    display: none;
+  }
 `;
 
 export function PopupMenuText({

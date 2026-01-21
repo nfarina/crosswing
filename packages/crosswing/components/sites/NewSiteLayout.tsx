@@ -24,6 +24,7 @@ export function NewSiteLayout({
   siteKey,
   siteTitle,
   siteAccessory,
+  sidebarBadge = null,
   layout,
   sidebarDefaultSize = 225,
   sidebarMinSize = 200,
@@ -35,6 +36,7 @@ export function NewSiteLayout({
   siteKey: string;
   siteTitle: string;
   siteAccessory?: NewSiteAccessory | null;
+  sidebarBadge?: number | null;
   layout: NewSiteLayoutMode;
   sidebarDefaultSize?: number;
   sidebarMinSize?: number;
@@ -93,6 +95,7 @@ export function NewSiteLayout({
     siteTitle,
     sidebarVisible,
     setSidebarVisible,
+    sidebarBadge,
     siteLayout: sidebarMode === "overlay" ? "mobile" : "desktop",
     siteAccessory,
   };

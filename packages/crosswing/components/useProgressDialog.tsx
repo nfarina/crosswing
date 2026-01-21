@@ -5,6 +5,7 @@ import { fonts } from "../fonts/fonts.js";
 import { Modal } from "../modals/context/useModal.js";
 import { DialogButton, DialogView } from "../modals/dialog/DialogView.js";
 import { useDialog } from "../modals/dialog/useDialog.js";
+import { StyledButton } from "./Button.js";
 import { ProgressView } from "./ProgressView.js";
 
 export type ProgressHandler = (message?: ReactNode) => void;
@@ -44,7 +45,7 @@ export function useProgressDialog({
         buttons={onCancel ? [cancelButton] : undefined}
         data-has-message={!!message}
         pad={false}
-        borders={onCancel ? "bottom" : "none"}
+        borders="none"
       >
         <div className="progress-content">
           {message && <div className="message">{message}</div>}
@@ -99,6 +100,18 @@ const StyledProgressDialogView = styled(DialogView)`
     .progress-content {
       padding-top: 20px;
       padding-bottom: 35px;
+    }
+  }
+
+  .footer {
+    padding-top: 0;
+
+    .buttons {
+      flex-grow: 1;
+
+      > ${StyledButton} {
+        flex-grow: 1;
+      }
     }
   }
 `;

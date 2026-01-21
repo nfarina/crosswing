@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import { StyledPopupContainer } from "../popup/usePopup.js";
 import { StyledToastContainer } from "../toasts/ToastContainer.js";
 import { ModalContext, throwsNoProvider } from "./ModalContext.js";
-import { ModalContextProvider } from "./ModalContextProvider.js";
+import { ChildLayout, ModalContextProvider } from "./ModalContextProvider.js";
 
 export * from "./ModalContext.js";
 export * from "./ModalContextProvider.js";
@@ -17,12 +17,12 @@ export * from "./useModal.js";
 export function ModalRootProvider({
   allowDesktopPresentation,
   children,
-  centerChildren = false,
+  childLayout,
   ...rest
 }: HTMLAttributes<HTMLDivElement> & {
   allowDesktopPresentation?: boolean;
   /** Primarily for Storybook; centers the children in the modal root. */
-  centerChildren?: boolean;
+  childLayout?: ChildLayout | null;
 }) {
   const modalRoot = useRef<HTMLDivElement | null>(null);
   const modalContextRoot = useRef<HTMLDivElement | null>(null);
@@ -45,10 +45,7 @@ export function ModalRootProvider({
         data-is-modal-provider
         {...rest}
       >
-        <ModalContextProvider
-          centerChildren={centerChildren}
-          children={children}
-        />
+        <ModalContextProvider childLayout={childLayout} children={children} />
         <div className="modals" data-is-modal-root ref={modalRoot} />
       </StyledModalOverlay>
     </ModalContext>

@@ -20,6 +20,8 @@ export type NewSiteContextValue = {
   sidebarVisible: boolean;
   /** Set the sidebar visibility. */
   setSidebarVisible(visible: boolean): void;
+  /** Optional badge count to show on the sidebar toggle. */
+  sidebarBadge?: number | null;
   /** The mode of the site layout. */
   siteLayout: NewSiteLayoutMode;
   /** Information about an accessory rendered in the upper-right corner of the site layout. Usually an account button. */
@@ -31,6 +33,7 @@ export const defaultNewSiteContextValue: NewSiteContextValue = {
   siteTitle: "",
   sidebarVisible: true,
   setSidebarVisible: alwaysThrows,
+  sidebarBadge: null,
   siteLayout: "desktop",
 };
 

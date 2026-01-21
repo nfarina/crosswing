@@ -1,4 +1,4 @@
-import { ReactNode, RefObject, createContext } from "react";
+import { MouseEvent, ReactNode, RefObject, createContext } from "react";
 
 /**
  * The shape of the modal context.
@@ -73,7 +73,7 @@ export interface Toast {
   actionTo?: string;
   actionTarget?: string;
   actionReplace?: boolean;
-  onActionClick?: () => void;
+  onActionClick?: (event: MouseEvent<HTMLElement>) => void;
   wrap?: boolean;
   sticky?: boolean;
   /** Milliseconds after which the toast will be dismissed. Default is four seconds. */

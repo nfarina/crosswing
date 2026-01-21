@@ -1,6 +1,7 @@
 import { CSSProperties, HTMLAttributes, RefObject } from "react";
 import { styled } from "styled-components";
 import { colors } from "../colors/colors.js";
+import { StyledLabeledDropdown } from "./forms/LabeledDropdown.js";
 
 export type SeparatorEdges = "none" | "top" | "bottom" | "both";
 
@@ -112,6 +113,11 @@ export const StyledSeparatorLayout = styled.div`
       &[data-new-style="true"] {
         border-radius: 0; /* Fight specificity wars on TextCell. */
       }
+    }
+
+    /* Special rules for this component which normally has text to the edge. */
+    > ${StyledLabeledDropdown} {
+      padding-left: 10px;
     }
 
     &[data-transparent="true"] {
