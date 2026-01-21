@@ -9,13 +9,14 @@ import {
   useLayoutEffect,
   useRef,
 } from "react";
-import { XCircle, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
 import { useHotKey } from "../../hooks/useHotKey.js";
 import { HostContext } from "../../host/context/HostContext.js";
 import { useScrollAboveKeyboard } from "../../host/features/useScrollAboveKeyboard.js";
+import { CloseCircleIcon } from "../../icons/CloseCircle.js";
 import { Spinner } from "../Spinner.js";
 
 export type SearchInputRef = {
@@ -182,7 +183,7 @@ export function SearchInput({
         <Spinner smaller />
       </div>
       <div className="close" onClick={() => onValueChange?.("", null)}>
-        <XCircle />
+        <CloseCircleIcon />
       </div>
     </StyledSearchInput>
   );
