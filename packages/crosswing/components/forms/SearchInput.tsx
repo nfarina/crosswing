@@ -1,3 +1,4 @@
+import { Search } from "lucide-react";
 import {
   ChangeEvent,
   InputHTMLAttributes,
@@ -9,7 +10,6 @@ import {
   useLayoutEffect,
   useRef,
 } from "react";
-import { Search } from "lucide-react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
@@ -164,7 +164,7 @@ export function SearchInput({
     >
       <input
         ref={inputRef}
-        type="text"
+        type="search"
         autoFocus={autoFocus}
         autoCorrect="off"
         autoCapitalize="off"
@@ -217,6 +217,10 @@ export const StyledSearchInput = styled.div`
       @media (prefers-color-scheme: dark) {
         color: ${colors.gray450()};
       }
+    }
+
+    &::-webkit-search-cancel-button {
+      display: none;
     }
 
     &:disabled {
@@ -272,6 +276,11 @@ export const StyledSearchInput = styled.div`
     visibility: hidden;
     cursor: pointer;
     color: ${colors.gray450()};
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
 
     @media (hover: hover) and (pointer: fine) {
       &:hover {

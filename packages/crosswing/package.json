@@ -26,6 +26,7 @@
     "./router/link": "./router/Link.tsx",
     "./router/mocks": "./router/mocks/MockRouter.tsx",
     "./router/navs": "./router/navs/Navs.tsx",
+    "./router/pages": "./router/pages/PageStack.tsx",
     "./router/switch": "./router/switch/Switch.tsx",
     "./router/redirect": "./router/redirect/Redirect.tsx",
     "./router/tabs": "./router/tabs/Tabs.tsx",
@@ -61,7 +62,7 @@
   "dependencies": {
     "dayjs": "^1.11.19",
     "debug": "^4.4.3",
-    "lucide-react": "^0.562.0",
+    "lucide-react": "^0.563.0",
     "react-transition-group": "^4.4.5"
   },
   "peerDependencies": {
@@ -74,10 +75,10 @@
     "@svgr/core": "^8.1.0",
     "@svgr/plugin-jsx": "^8.1.0",
     "@svgr/plugin-svgo": "^8.1.0",
-    "glob": "^13.0.0",
-    "prettier": "^3.8.0",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3",
-    "react-is": "^19.2.3"
+    "glob": "^13.0.1",
+    "prettier": "^3.8.1",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-is": "^19.2.4"
   }
 }

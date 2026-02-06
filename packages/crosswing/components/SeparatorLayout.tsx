@@ -2,6 +2,7 @@ import { CSSProperties, HTMLAttributes, RefObject } from "react";
 import { styled } from "styled-components";
 import { colors } from "../colors/colors.js";
 import { StyledLabeledDropdown } from "./forms/LabeledDropdown.js";
+import { StyledLabeledToggle } from "./forms/LabeledToggle.js";
 
 export type SeparatorEdges = "none" | "top" | "bottom" | "both";
 
@@ -115,8 +116,8 @@ export const StyledSeparatorLayout = styled.div`
       }
     }
 
-    /* Special rules for this component which normally has text to the edge. */
-    > ${StyledLabeledDropdown} {
+    /* Special rules for these components which normally have text to the edge. */
+    > ${StyledLabeledDropdown}, > ${StyledLabeledToggle} {
       padding-left: 10px;
     }
 

@@ -353,7 +353,7 @@ const StyledSheetContainer = styled.div`
         width: 390px;
         max-height: 615px;
         box-shadow: 0 5px 22px rgba(0, 0, 0, 0.5);
-        border-radius: 6px;
+        border-radius: 9px;
         overflow: hidden;
       }
     }

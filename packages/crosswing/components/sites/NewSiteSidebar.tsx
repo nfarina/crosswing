@@ -1,3 +1,4 @@
+import { AlignLeft, PanelLeft, Sidebar } from "lucide-react";
 import { HTMLAttributes, MouseEvent, ReactNode, use } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors";
@@ -8,7 +9,6 @@ import { Link } from "../../router/Link";
 import { AutoBorderView } from "../AutoBorderView";
 import { Button } from "../Button";
 import { NewSiteContext } from "./NewSiteContext";
-import { PanelLeft, Sidebar, AlignLeft } from "lucide-react";
 
 export function NewSiteSidebar({
   children,
@@ -121,7 +121,7 @@ export function NewSiteSidebarText({
   const { setSidebarVisible, siteLayout } = use(NewSiteContext);
 
   const path = nextLocation.linkTo(rest.to ?? "");
-  const isSelected = !!nextLocation.tryClaim(path);
+  const isSelected = rest.to != null && !!nextLocation.tryClaim(path);
 
   const handleClick = (e: MouseEvent<HTMLElement>) => {
     if (!leaveOpen && siteLayout === "mobile") {

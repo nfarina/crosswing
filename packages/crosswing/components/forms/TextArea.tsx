@@ -3,8 +3,10 @@ import {
   ChangeEvent,
   FocusEvent,
   ReactNode,
+  Ref,
   TextareaHTMLAttributes,
   use,
+  useImperativeHandle,
   useLayoutEffect,
   useRef,
   useState,
@@ -22,6 +24,10 @@ import { Button } from "../Button.js";
 
 /** How to render errors when given via the `TextInput.error` property. */
 export type TextAreaErrorStyle = "color" | "message" | "none";
+
+export type TextAreaRef = {
+  focus(): void;
+};
 
 /**
  * Automatically trims text entered by the user, and adjusts height to fit
@@ -46,6 +52,7 @@ export function TextArea({
   onBlur,
   minHeight = 22, // default line height
   maxHeight = Number.POSITIVE_INFINITY,
+  ref,
   ...rest
 }: Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "onChange"> & {
   newStyle?: boolean;
@@ -62,8 +69,15 @@ export function TextArea({
   autoSizing?: boolean;
   minHeight?: number;
   maxHeight?: number;
+  ref?: Ref<TextAreaRef>;
 }) {
-  const ref = useRef<HTMLTextAreaElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  useImperativeHandle(ref, () => ({
+    focus: () => {
+      textareaRef.current?.focus();
+    },
+  }));
 
   //
   // Auto-trimming copied from TextInput
@@ -97,17 +111,17 @@ export function TextArea({
     rest.autoFocus ?? (autoFocusOnDesktop && container === "web");
 
   useLayoutEffect(() => {
-    if (autoFocus && ref.current) {
-      ref.current.focus();
+    if (autoFocus && textareaRef.current) {
+      textareaRef.current.focus();
       if (autoSelect) {
         setTimeout(() => {
-          ref.current?.select();
+          textareaRef.current?.select();
         }, 0);
       }
     }
   }, []);
 
-  useScrollAboveKeyboard(ref);
+  useScrollAboveKeyboard(textareaRef);
 
   function onInputChange(e: ChangeEvent<HTMLTextAreaElement>) {
     const newValue = e.currentTarget.value;
@@ -122,7 +136,7 @@ export function TextArea({
   function autoSize() {
     if (!autoSizing) return;
 
-    const textarea = ref.current;
+    const textarea = textareaRef.current;
     const container = textarea?.parentElement;
     if (!textarea || !container) return;
 
@@ -158,7 +172,7 @@ export function TextArea({
   });
 
   // Resize when the element itself changes size.
-  useElementSize(ref, autoSize);
+  useElementSize(textareaRef, autoSize);
 
   //
   // Focus & Error Management
@@ -203,7 +217,7 @@ export function TextArea({
         onBlur={onInputBlur}
         autoFocus={autoFocus}
         data-auto-sizing={!!autoSizing}
-        ref={ref}
+        ref={textareaRef}
         {...restAttrs}
       />
       {icon && <div className="icon">{icon}</div>}
