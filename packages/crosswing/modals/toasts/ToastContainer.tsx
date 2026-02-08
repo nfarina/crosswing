@@ -1,6 +1,5 @@
 import { TransitionGroup } from "react-transition-group";
 import { styled } from "styled-components";
-import { safeArea } from "../../safearea/safeArea.js";
 import { Toast } from "../context/ModalContext.js";
 import { ToastView } from "./ToastView.js";
 
@@ -38,10 +37,7 @@ export const StyledToastContainer = styled.div`
   justify-content: flex-end;
   overflow: hidden;
   box-sizing: border-box;
-  padding-top: calc(20px + ${safeArea.top()});
-  padding-right: calc(20px + ${safeArea.right()});
-  padding-bottom: calc(20px + ${safeArea.bottom()});
-  padding-left: calc(20px + ${safeArea.left()});
+  padding: 20px;
   pointer-events: none;
 
   > * {

@@ -1,5 +1,6 @@
 import { HTMLAttributes, useRef } from "react";
 import { styled } from "styled-components";
+import { safeArea } from "../../safearea/safeArea.js";
 import { StyledPopupContainer } from "../popup/usePopup.js";
 import { StyledToastContainer } from "../toasts/ToastContainer.js";
 import { ModalContext, throwsNoProvider } from "./ModalContext.js";
@@ -81,6 +82,15 @@ export const StyledModalOverlay = styled.div`
       /* "Fix" for WebKit painting bug on iOS when keyboard disappears: https://files.slack.com/files-pri/T0KS0F280-F027N3S17K9/image_from_ios.png */
       /* https://stackoverflow.com/questions/3485365/how-can-i-force-webkit-to-redraw-repaint-to-propagate-style-changes */
       transform: translateZ(0);
+    }
+
+    &[data-is-modal-root="true"] {
+      > ${StyledToastContainer}, > ${StyledPopupContainer} {
+        top: ${safeArea.top()};
+        right: ${safeArea.right()};
+        bottom: ${safeArea.bottom()};
+        left: ${safeArea.left()};
+      }
     }
 
     > ${StyledToastContainer} {

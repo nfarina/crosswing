@@ -1,3 +1,4 @@
+import { AlertTriangle } from "lucide-react";
 import { FormEvent, KeyboardEvent, ReactNode, useState } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
@@ -7,7 +8,6 @@ import { useDialog } from "../../modals/dialog/useDialog.js";
 import { TipView } from "../TipView.js";
 import { TextArea } from "./TextArea.js";
 import { InputTransformer, useInputValue } from "./useInputValue.js";
-import { AlertTriangle } from "lucide-react";
 
 // Automagically adjusts the type given to onSubmit() to be nullable, based on
 // whether you've provided nullable = true.
@@ -30,6 +30,8 @@ export type BasePrompt<T> = {
   working?: boolean;
   transformer?: InputTransformer<T>;
   validate?: (value: T) => void;
+  /** If true (default), the user can submit the prompt by pressing Enter. */
+  enterSubmits?: boolean;
 };
 
 export type RequiredPrompt<T> = BasePrompt<T> & {
@@ -75,6 +77,7 @@ export function PromptView<T = string>({
     numeric,
     validate,
     onSubmit,
+    enterSubmits = true,
   } = prompt;
 
   const nullable = "nullable" in prompt && !!prompt.nullable;
@@ -145,9 +148,11 @@ export function PromptView<T = string>({
   }
 
   function onKeyDown(e: KeyboardEvent<HTMLTextAreaElement>) {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      trySubmit();
+    if (e.key === "Enter") {
+      if ((enterSubmits && !e.shiftKey) || (!enterSubmits && e.metaKey)) {
+        e.preventDefault();
+        trySubmit();
+      }
     }
   }
 
