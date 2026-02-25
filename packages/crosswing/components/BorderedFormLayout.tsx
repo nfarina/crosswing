@@ -10,9 +10,7 @@ import { StyledTextCell } from "./forms/TextCell.js";
  * Like BorderedLayout but applies default styling to certain children,
  * and renders separators between children.
  */
-export function BorderedFormLayout({
-  ...rest
-}: HTMLAttributes<HTMLDivElement>) {
+export function BorderedFormLayout({ ...rest }: HTMLAttributes<HTMLDivElement>) {
   return <StyledBorderedFormLayout {...rest} />;
 }
 

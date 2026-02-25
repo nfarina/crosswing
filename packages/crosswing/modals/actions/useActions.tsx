@@ -1,9 +1,6 @@
 import { ReactElement, useRef } from "react";
 import { keyframes, styled } from "styled-components";
-import {
-  HotKeyContextDataAttributes,
-  useHotKey,
-} from "../../hooks/useHotKey.js";
+import { HotKeyContextDataAttributes, useHotKey } from "../../hooks/useHotKey.js";
 import { safeArea } from "../../safearea/safeArea.js";
 import { easing } from "../../shared/easing.js";
 import { Modal, useModal } from "../context/useModal.js";
@@ -11,9 +8,7 @@ import { ActionItem, ActionMenu } from "./ActionMenu.js";
 
 export * from "./ActionMenu.js";
 
-export function useActions<T extends any[]>(
-  actions: (...args: T) => ActionItem[],
-): Modal<T> {
+export function useActions<T extends any[]>(actions: (...args: T) => ActionItem[]): Modal<T> {
   const modal = useModal((...args: T) => {
     const items = actions(...args);
 

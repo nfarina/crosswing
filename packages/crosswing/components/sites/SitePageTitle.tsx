@@ -1,12 +1,4 @@
-import {
-  CSSProperties,
-  Fragment,
-  ReactNode,
-  createContext,
-  use,
-  useEffect,
-  useState,
-} from "react";
+import { CSSProperties, Fragment, ReactNode, createContext, use, useEffect, useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
@@ -31,9 +23,7 @@ export function SitePageTitle({
 }) {
   const { crumbs, desktopStyle } = use(PageTitleContext);
 
-  const sorted = Array.from(crumbs.values()).sort(
-    (a, b) => a.link.length - b.link.length,
-  );
+  const sorted = Array.from(crumbs.values()).sort((a, b) => a.link.length - b.link.length);
 
   // Get the last crumb for the document title.
   const [lastCrumb] = sorted.slice(-1);
@@ -44,9 +34,7 @@ export function SitePageTitle({
   });
 
   // For mobile.
-  const subtitleCrumb = [...sorted]
-    .reverse()
-    .find((crumb) => crumb !== lastCrumb);
+  const subtitleCrumb = [...sorted].reverse().find((crumb) => crumb !== lastCrumb);
   const backCrumb = [...sorted]
     .reverse()
     .find((crumb) => crumb !== lastCrumb && !crumb.intermediate);
@@ -83,16 +71,9 @@ export function SitePageTitle({
           ))}
         </BreadcrumbPageTitle>
       )}
-      <MobilePageTitle
-        style={
-          { "--num-accessories": accessories?.length ?? 0 } as CSSProperties
-        }
-      >
+      <MobilePageTitle style={{ "--num-accessories": accessories?.length ?? 0 } as CSSProperties}>
         {backCrumb ? (
-          <NavAccessoryView
-            accessory={{ icon: <ArrowLeft />, to: backCrumb.link }}
-            align="left"
-          />
+          <NavAccessoryView accessory={{ icon: <ArrowLeft />, to: backCrumb.link }} align="left" />
         ) : (
           <div />
         )}
@@ -180,10 +161,7 @@ export function PageTitleProvider({
   }
 
   return (
-    <PageTitleContext
-      value={{ crumbs, setCrumb, removeCrumb, desktopStyle }}
-      children={children}
-    />
+    <PageTitleContext value={{ crumbs, setCrumb, removeCrumb, desktopStyle }} children={children} />
   );
 }
 

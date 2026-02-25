@@ -10,11 +10,7 @@ import {
   getFontVarCSS,
   GlobalFontFace,
 } from "./fonts/fonts.js";
-import {
-  BROWSER_SAFE_AREA,
-  getSafeAreaCSS,
-  SafeArea,
-} from "./safearea/safeArea.js";
+import { BROWSER_SAFE_AREA, getSafeAreaCSS, SafeArea } from "./safearea/safeArea.js";
 
 export function CrosswingApp({
   colors: overriddenColors = [],
@@ -31,11 +27,7 @@ export function CrosswingApp({
   safeArea?: SafeArea;
   transparent?: boolean;
 } & HTMLAttributes<HTMLDivElement>) {
-  const resolvedColors = [
-    ...Object.values(colors),
-    ...Object.values(shadows),
-    ...overriddenColors,
-  ];
+  const resolvedColors = [...Object.values(colors), ...Object.values(shadows), ...overriddenColors];
 
   const resolvedFaces = [...Object.values(faces), ...overriddenFaces];
   const resolvedFonts = [...Object.values(fonts), ...overriddenFonts];

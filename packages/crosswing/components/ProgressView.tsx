@@ -54,12 +54,7 @@ export function ProgressView({
             },
           ]}
         />
-        <Donut
-          className="fg"
-          size={size}
-          thickness={thickness}
-          sections={renderSections()}
-        />
+        <Donut className="fg" size={size} thickness={thickness} sections={renderSections()} />
       </div>
     </StyledProgressView>
   );

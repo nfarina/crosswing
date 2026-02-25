@@ -95,12 +95,7 @@ export function WithTransformerAndValidation() {
 
   return (
     <ButtonContainer>
-      <Button
-        bordered
-        newStyle
-        onClick={prompt.show}
-        children="Enter secure URL"
-      />
+      <Button bordered newStyle onClick={prompt.show} children="Enter secure URL" />
     </ButtonContainer>
   );
 }

@@ -41,11 +41,7 @@ export function ModalRootProvider({
 
   return (
     <ModalContext value={contextValue}>
-      <StyledModalOverlay
-        ref={modalContextRoot}
-        data-is-modal-provider
-        {...rest}
-      >
+      <StyledModalOverlay ref={modalContextRoot} data-is-modal-provider {...rest}>
         <ModalContextProvider childLayout={childLayout} children={children} />
         <div className="modals" data-is-modal-root ref={modalRoot} />
       </StyledModalOverlay>

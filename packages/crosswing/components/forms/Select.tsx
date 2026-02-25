@@ -1,10 +1,4 @@
-import {
-  ChangeEvent,
-  ReactElement,
-  ReactNode,
-  SelectHTMLAttributes,
-  isValidElement,
-} from "react";
+import { ChangeEvent, ReactElement, ReactNode, SelectHTMLAttributes, isValidElement } from "react";
 import { ChevronDown } from "lucide-react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
@@ -62,9 +56,7 @@ export function SelectOption({ title, value }: SelectOptionProps) {
 // pointer is not stable during development with hot reloading.
 SelectOption.isSelectOption = true;
 
-function isSelectOption(
-  child: ReactNode,
-): child is ReactElement<SelectOptionProps> {
+function isSelectOption(child: ReactNode): child is ReactElement<SelectOptionProps> {
   return isValidElement(child) && !!child.type?.["isSelectOption"];
 }
 

@@ -31,10 +31,7 @@ test("adds new deep property", () => {
 
 test("changes deep property", () => {
   expect(
-    merge(
-      { friends: { friend1: { name: "Bob" } } },
-      { friends: { friend1: { name: "Robert" } } },
-    ),
+    merge({ friends: { friend1: { name: "Bob" } } }, { friends: { friend1: { name: "Robert" } } }),
   ).toEqual({
     friends: {
       friend1: { name: "Robert" },
@@ -71,9 +68,7 @@ test("merges undefined properties", () => {
 });
 
 test("merges null properties", () => {
-  expect(
-    merge({ hello: "world" } as { hello: string | null }, { hello: null }),
-  ).toEqual({
+  expect(merge({ hello: "world" } as { hello: string | null }, { hello: null })).toEqual({
     hello: null,
   });
 });
@@ -140,7 +135,7 @@ test("performs a deep clone as a side-effect", () => {
 });
 
 test("deletes properties", () => {
-  expect(
-    merge({ color: "blue", hex: "#0000FF" }, { hex: merge.delete }),
-  ).toEqual({ color: "blue" } as any);
+  expect(merge({ color: "blue", hex: "#0000FF" }, { hex: merge.delete })).toEqual({
+    color: "blue",
+  } as any);
 });

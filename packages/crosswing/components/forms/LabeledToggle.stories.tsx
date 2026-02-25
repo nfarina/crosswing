@@ -5,10 +5,7 @@ import { LabeledToggle } from "./LabeledToggle.js";
 
 export default {
   component: LabeledToggle,
-  decorators: [
-    SeparatorDecorator,
-    CrosswingAppDecorator({ layout: "component" }),
-  ],
+  decorators: [SeparatorDecorator, CrosswingAppDecorator({ layout: "component" })],
   parameters: { layout: "centered" },
 };
 
@@ -16,11 +13,7 @@ export const Normal = () => {
   const [ludicrous, setLudicrous] = useState(true);
 
   return (
-    <LabeledToggle
-      label="Ludicrous Mode"
-      on={ludicrous}
-      onClick={() => setLudicrous(!ludicrous)}
-    />
+    <LabeledToggle label="Ludicrous Mode" on={ludicrous} onClick={() => setLudicrous(!ludicrous)} />
   );
 };
 
@@ -49,11 +42,7 @@ export const Disabled = () => (
 );
 
 export const WithDetail = () => (
-  <LabeledToggle
-    label="Ludicrous Mode"
-    detail="Turns your car into a spaceship."
-    on={true}
-  />
+  <LabeledToggle label="Ludicrous Mode" detail="Turns your car into a spaceship." on={true} />
 );
 
 export const WithLongDetail = () => (

@@ -24,12 +24,7 @@ export function StatusBadge({
   right?: ReactNode;
 }) {
   return (
-    <StyledStatusBadge
-      data-type={type}
-      data-size={size}
-      data-has-icon={!hideIcon}
-      {...rest}
-    >
+    <StyledStatusBadge data-type={type} data-size={size} data-has-icon={!hideIcon} {...rest}>
       {!hideIcon && icon}
       {!icon && !hideIcon && (
         <>

@@ -23,9 +23,7 @@ export function useGesture({
   direction: directionSpec = ["left", "right", "up", "down"],
   onGestureComplete,
 }: UseGestureOptions): TouchEventHandler<HTMLElement> | undefined {
-  const directions = Array.isArray(directionSpec)
-    ? directionSpec
-    : [directionSpec];
+  const directions = Array.isArray(directionSpec) ? directionSpec : [directionSpec];
 
   function onTouchStart(e: React.TouchEvent<HTMLDivElement>) {
     const stack = e.currentTarget as HTMLElement;
@@ -105,10 +103,7 @@ function isOnEdge(el: HTMLElement, x: number, y: number, edge: GestureEdge) {
   }
 }
 
-function getSwipeDirection(
-  dx: number,
-  dy: number,
-): GestureDirection | undefined {
+function getSwipeDirection(dx: number, dy: number): GestureDirection | undefined {
   if (dx < -GESTURE_ZONE / 2) return "left";
   if (dx > GESTURE_ZONE / 2) return "right";
   if (dy < -GESTURE_ZONE / 2) return "up";

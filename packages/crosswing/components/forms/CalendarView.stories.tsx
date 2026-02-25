@@ -3,12 +3,7 @@ import { useState } from "react";
 import { styled } from "styled-components";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import { CalendarView } from "./CalendarView.js";
-import {
-  areDateRangesEqual,
-  DateRange,
-  dateRange,
-  isSameDay,
-} from "./DateRange.js";
+import { areDateRangesEqual, DateRange, dateRange, isSameDay } from "./DateRange.js";
 
 export default {
   component: CalendarView,
@@ -18,19 +13,14 @@ export default {
 
 export const NoSelection = () => <PaddedCalendarView />;
 
-export const SingleDateSelected = () => (
-  <PaddedCalendarView selectedRange={dateRange()} />
-);
+export const SingleDateSelected = () => <PaddedCalendarView selectedRange={dateRange()} />;
 
 export const SingleDatePicker = () => {
   // Build a simple single-day picker.
   const [range, setRange] = useState<DateRange | null>(null);
 
   return (
-    <PaddedCalendarView
-      selectedRange={range}
-      onDateClick={(date) => setRange(dateRange(date))}
-    />
+    <PaddedCalendarView selectedRange={range} onDateClick={(date) => setRange(dateRange(date))} />
   );
 };
 
@@ -67,12 +57,7 @@ export const DateRangePicker = () => {
     }
   }
 
-  return (
-    <PaddedCalendarView
-      selectedRange={range}
-      onDateClick={onCalendarDateClick}
-    />
-  );
+  return <PaddedCalendarView selectedRange={range} onDateClick={onCalendarDateClick} />;
 };
 
 const PaddedCalendarView = styled(CalendarView)`

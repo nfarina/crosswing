@@ -1,9 +1,4 @@
-import {
-  deg2rad,
-  geohashForLocation,
-  geohashQueryBounds,
-  GeohashRange,
-} from "./geohash.js";
+import { deg2rad, geohashForLocation, geohashQueryBounds, GeohashRange } from "./geohash.js";
 
 // Google Maps.
 interface LatLng {
@@ -28,10 +23,7 @@ export type AnyLatLng = LatLng | LatLon | LngLat;
  * Uses the Haversine formula. Note that this is approximate due to the fact
  * that the Earth's radius varies between 6356.752 km and 6378.137 km.
  */
-export function getDistance(
-  location1: AnyLatLng,
-  location2: AnyLatLng,
-): number {
+export function getDistance(location1: AnyLatLng, location2: AnyLatLng): number {
   const [lon1, lat1] = toLngLat(location1);
   const [lon2, lat2] = toLngLat(location2);
 
@@ -41,10 +33,7 @@ export function getDistance(
 
   const a =
     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(deg2rad(lat1)) *
-      Math.cos(deg2rad(lat2)) *
-      Math.sin(dLon / 2) *
-      Math.sin(dLon / 2);
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
 
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   const km = R * c; // Distance in km
@@ -77,9 +66,7 @@ export function translateLocation(
   const [lon, lat] = toLngLat(location);
 
   const newLat = lat + (180 / Math.PI) * (dy / 6378137);
-  const newLon =
-    lon +
-    ((180 / Math.PI) * (dx / 6378137)) / Math.cos((Math.PI / 180.0) * lat);
+  const newLon = lon + ((180 / Math.PI) * (dx / 6378137)) / Math.cos((Math.PI / 180.0) * lat);
 
   return [newLon, newLat];
 }
@@ -98,10 +85,7 @@ export function getGeohash(location: AnyLatLng): string {
  * @param radius in meters.
  * @returns
  */
-export function getGeohashQueryBounds(
-  center: AnyLatLng,
-  radius: number,
-): GeohashRange[] {
+export function getGeohashQueryBounds(center: AnyLatLng, radius: number): GeohashRange[] {
   const [lng, lat] = toLngLat(center);
   return geohashQueryBounds([lat, lng], radius);
 }

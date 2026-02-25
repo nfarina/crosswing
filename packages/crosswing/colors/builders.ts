@@ -58,8 +58,7 @@ export interface HexColorOptions {
  * P3 color space.
  */
 export function hexColor(hex: string): HexColorBuilder {
-  const builder: HexColorBuilder = (options: HexColorOptions = {}) =>
-    buildHexColor(hex, options);
+  const builder: HexColorBuilder = (options: HexColorOptions = {}) => buildHexColor(hex, options);
 
   builder.type = "hex";
 
@@ -78,16 +77,7 @@ export function hexColor(hex: string): HexColorBuilder {
  */
 export function buildHexColor(
   hex: string,
-  {
-    alpha,
-    lighten,
-    darken,
-    hue,
-    saturate,
-    desaturate,
-    chroma,
-    format,
-  }: HexColorOptions = {},
+  { alpha, lighten, darken, hue, saturate, desaturate, chroma, format }: HexColorOptions = {},
 ): string {
   // Transform it if you so wish.
   if (
@@ -209,10 +199,7 @@ export function varColor({
     if (staticOnly) {
       if (
         (typeof light !== "string" && light.type === "hex") ||
-        (dark &&
-          typeof dark !== "string" &&
-          typeof dark !== "boolean" &&
-          dark.type === "hex")
+        (dark && typeof dark !== "string" && typeof dark !== "boolean" && dark.type === "hex")
       ) {
         throw new Error(
           "Static only colors cannot be overridden with hex builders because the site calls all assume the CSS var is completely rendered including alpha.",
@@ -225,10 +212,7 @@ export function varColor({
   return builder;
 }
 
-export function buildVarColor(
-  cssVar: string,
-  { alpha }: VarColorOptions = {},
-): string {
+export function buildVarColor(cssVar: string, { alpha }: VarColorOptions = {}): string {
   if (SUPPORTS_P3_COLOR) {
     return `color(display-p3 var(${cssVar}) / ${alpha ?? 1})`;
   } else {
@@ -248,10 +232,7 @@ export type GradientBuilder = {
   type: "gradient";
 };
 
-export function gradientColor(
-  direction: string,
-  ...hexStops: string[]
-): GradientBuilder {
+export function gradientColor(direction: string, ...hexStops: string[]): GradientBuilder {
   const builder: GradientBuilder = (options: GradientOptions = {}) => {
     const stops = hexStops.map((stop) => buildHexColor(stop, options));
     return `linear-gradient(${direction}, ${stops.join(", ")})`;

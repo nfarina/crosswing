@@ -1,11 +1,5 @@
 import { ArrowLeft, X } from "lucide-react";
-import {
-  HTMLAttributes,
-  MouseEvent,
-  ReactNode,
-  RefObject,
-  ViewTransition,
-} from "react";
+import { HTMLAttributes, MouseEvent, ReactNode, RefObject, ViewTransition } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { AutoBorderView } from "../../components/AutoBorderView.js";
@@ -109,11 +103,7 @@ export function DialogView({
         {...rest}
       >
         {hasHeader && (
-          <AutoBorderView
-            side="bottom"
-            visibility={getBorderVisibility("top")}
-            className="header"
-          >
+          <AutoBorderView side="bottom" visibility={getBorderVisibility("top")} className="header">
             {(back || onBackClick) && (
               <Button
                 newStyle
@@ -158,11 +148,7 @@ export function DialogView({
         {children && <div className="children">{children}</div>}
 
         {hasFooter && (
-          <AutoBorderView
-            side="top"
-            visibility={getBorderVisibility("bottom")}
-            className="footer"
-          >
+          <AutoBorderView side="top" visibility={getBorderVisibility("bottom")} className="footer">
             <div className="footer-content">
               {footer && <div className="footer-left">{footer}</div>}
               {buttons && buttons.length > 0 && (

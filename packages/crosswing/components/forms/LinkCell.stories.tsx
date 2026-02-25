@@ -7,17 +7,11 @@ import { Search } from "lucide-react";
 
 export default {
   component: LinkCell,
-  decorators: [
-    SeparatorDecorator,
-    CrosswingAppDecorator({ layout: "component" }),
-    RouterDecorator,
-  ],
+  decorators: [SeparatorDecorator, CrosswingAppDecorator({ layout: "component" }), RouterDecorator],
   parameters: { layout: "centered" },
 };
 
-export const Normal = () => (
-  <LinkCell title="Select an account" onClick={action("click")} />
-);
+export const Normal = () => <LinkCell title="Select an account" onClick={action("click")} />;
 
 export const WithSubtitle = () => (
   <LinkCell
@@ -28,16 +22,10 @@ export const WithSubtitle = () => (
 );
 
 export const WithIcon = () => (
-  <LinkCell
-    icon={<Search />}
-    title="Attach a Receipt"
-    onClick={action("click")}
-  />
+  <LinkCell icon={<Search />} title="Attach a Receipt" onClick={action("click")} />
 );
 
-export const WithAction = () => (
-  <LinkCell action="Attach a Receipt" onClick={action("click")} />
-);
+export const WithAction = () => <LinkCell action="Attach a Receipt" onClick={action("click")} />;
 
 export const WithLabel = () => (
   <LinkCell label="User" title="Nick Farina" onClick={action("click")} />

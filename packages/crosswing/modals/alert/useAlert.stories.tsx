@@ -1,9 +1,6 @@
 import { action } from "storybook/actions";
 import { CrosswingAppDecorator } from "../../storybook.js";
-import {
-  ModalStoryButton,
-  ModalStoryButtons,
-} from "../storybook/ModalStoryButtons.js";
+import { ModalStoryButton, ModalStoryButtons } from "../storybook/ModalStoryButtons.js";
 import { ModalDecorator } from "../storybook/decorators.js";
 import { useAlert } from "./useAlert.js";
 
@@ -21,9 +18,7 @@ export function Normal() {
 
   return (
     <ModalStoryButtons>
-      <ModalStoryButton onClick={() => alert.show("Bob")}>
-        Show Alert
-      </ModalStoryButton>
+      <ModalStoryButton onClick={() => alert.show("Bob")}>Show Alert</ModalStoryButton>
     </ModalStoryButtons>
   );
 }
@@ -38,9 +33,7 @@ export function WithTitle() {
 
   return (
     <ModalStoryButtons>
-      <ModalStoryButton onClick={() => alert.show("Bob")}>
-        Show Alert
-      </ModalStoryButton>
+      <ModalStoryButton onClick={() => alert.show("Bob")}>Show Alert</ModalStoryButton>
     </ModalStoryButtons>
   );
 }

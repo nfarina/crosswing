@@ -4,11 +4,7 @@ import { Callback } from "./useInterval.js";
 /**
  * Similar to useInterval, but only runs once after the delay or deps change.
  */
-export function useTimeout(
-  callback: Callback,
-  delay: number | null,
-  deps?: DependencyList,
-) {
+export function useTimeout(callback: Callback, delay: number | null, deps?: DependencyList) {
   const savedCallback = useRef<Callback | null>(null);
 
   // Remember the latest callback.

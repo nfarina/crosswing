@@ -20,11 +20,7 @@ export const Empty = () => {
   return (
     <>
       <SeparatorLayout>
-        <LabeledContentEditable
-          label="Name"
-          value={name}
-          onValueChange={setName}
-        />
+        <LabeledContentEditable label="Name" value={name} onValueChange={setName} />
       </SeparatorLayout>
       <pre>HTML Value: "{name}"</pre>
     </>
@@ -54,11 +50,7 @@ export const WithValue = () => {
   return (
     <>
       <SeparatorLayout>
-        <LabeledContentEditable
-          label="Name"
-          value={name}
-          onValueChange={setName}
-        />
+        <LabeledContentEditable label="Name" value={name} onValueChange={setName} />
       </SeparatorLayout>
       <pre>HTML Value: "{name}"</pre>
     </>

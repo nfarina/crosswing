@@ -31,9 +31,7 @@ export function useBackButton() {
       // can influence z-order. So we'll filter out invisible elements. This
       // works for our own <Tabs> implementation (becuase unfocused tabs are
       // hidden using display:none) but may not work for other cases.
-      const visibleElements = Array.from(taggedElements).filter(
-        (el) => el.offsetWidth > 0,
-      );
+      const visibleElements = Array.from(taggedElements).filter((el) => el.offsetWidth > 0);
 
       // Take the top element remaining.
       const element = visibleElements[visibleElements.length - 1];

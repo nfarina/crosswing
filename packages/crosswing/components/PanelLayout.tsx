@@ -1,12 +1,4 @@
-import {
-  Children,
-  createContext,
-  HTMLAttributes,
-  use,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { Children, createContext, HTMLAttributes, use, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
 import { colors, shadows } from "../colors/colors.js";
@@ -15,11 +7,7 @@ import { HotKey, useHotKey } from "../hooks/useHotKey.js";
 import { useLocalStorage } from "../hooks/useLocalStorage.js";
 import { ToolbarPanelButton } from "./toolbar/Toolbar.js";
 import { ToolbarContext } from "./toolbar/ToolbarContext.js";
-import {
-  getCoordinate,
-  hasTouchIdentifier,
-  isTouchEvent,
-} from "./touchUtils.js";
+import { getCoordinate, hasTouchIdentifier, isTouchEvent } from "./touchUtils.js";
 
 export const PanelToggleInsertionPoint = "SidebarToggle";
 
@@ -87,15 +75,11 @@ export function PanelLayout({
   /** The hotkey to toggle the panel. Set to null to disable hotkey. */
   hotkey?: HotKey | null;
 }) {
-  const layout =
-    edge === "top" || edge === "bottom" ? "vertical" : "horizontal";
+  const layout = edge === "top" || edge === "bottom" ? "vertical" : "horizontal";
   const ref = useRef<HTMLDivElement>(null);
   const { isDefaultContext, getInsertionRef } = use(ToolbarContext);
 
-  const key =
-    typeof restorationKey === "symbol"
-      ? String(restorationKey)
-      : restorationKey.name;
+  const key = typeof restorationKey === "symbol" ? String(restorationKey) : restorationKey.name;
 
   // Persist the panel size across window reloads.
   let [initialPanelSize, setInitialPanelSize] = useLocalStorage<number | null>(
@@ -135,9 +119,7 @@ export function PanelLayout({
     // re-rendering the component, for performance reasons.
 
     // Do we have a CSS var directly stored at "--panel-size"?
-    let panelSize = parseInt(
-      container.style.getPropertyValue("--panel-size") || "-1",
-    );
+    let panelSize = parseInt(container.style.getPropertyValue("--panel-size") || "-1");
 
     if (panelSize < 0) {
       // No CSS var, so we need to calculate it.
@@ -172,10 +154,7 @@ export function PanelLayout({
     // if we were already at the max width.
     const userIsResizing = !newSize;
 
-    if (
-      panelSize > resolvedPanelMaxSize ||
-      (panelMaximized && !userIsResizing)
-    ) {
+    if (panelSize > resolvedPanelMaxSize || (panelMaximized && !userIsResizing)) {
       panelSize = resolvedPanelMaxSize;
       container.style.setProperty("--panel-size", panelSize + "px");
     }
@@ -220,8 +199,7 @@ export function PanelLayout({
     />
   );
 
-  const insertionEl =
-    !isDefaultContext && getInsertionRef(PanelToggleInsertionPoint).current;
+  const insertionEl = !isDefaultContext && getInsertionRef(PanelToggleInsertionPoint).current;
 
   //
   // Dragging.
@@ -240,9 +218,7 @@ export function PanelLayout({
     const onStart = (e: TouchEvent | MouseEvent) => {
       // console.log(isTouchEvent(e) ? "onTouchStart" : "onMouseDown");
 
-      const panelSize = parseInt(
-        container.style.getPropertyValue("--panel-size") || "-1",
-      );
+      const panelSize = parseInt(container.style.getPropertyValue("--panel-size") || "-1");
 
       // We don't handle multi-touch events.
       if (isTouchEvent(e) && e.touches.length > 1) return;
@@ -321,15 +297,9 @@ export function PanelLayout({
         // We'll set a "--bounce-offset" CSS var to add to the size to
         // show the panel at the dragged size temporarily.
         if (draggedSize > panelMaxSize) {
-          container.style.setProperty(
-            "--bounce-offset",
-            (draggedSize - panelMaxSize) / 3 + "px",
-          );
+          container.style.setProperty("--bounce-offset", (draggedSize - panelMaxSize) / 3 + "px");
         } else if (draggedSize < panelMinSize) {
-          container.style.setProperty(
-            "--bounce-offset",
-            (draggedSize - panelMinSize) / 3 + "px",
-          );
+          container.style.setProperty("--bounce-offset", (draggedSize - panelMinSize) / 3 + "px");
         } else {
           container.style.setProperty("--bounce-offset", "0px");
         }
@@ -338,10 +308,7 @@ export function PanelLayout({
       };
 
       const onCancel = (e: TouchEvent | MouseEvent) => {
-        if (
-          isTouchEvent(e) &&
-          !hasTouchIdentifier(e.changedTouches, identifier)
-        ) {
+        if (isTouchEvent(e) && !hasTouchIdentifier(e.changedTouches, identifier)) {
           // console.log("ignoring onTouchCancel");
           return;
         }
@@ -350,10 +317,7 @@ export function PanelLayout({
       };
 
       const onEnd = (e: TouchEvent | MouseEvent) => {
-        if (
-          isTouchEvent(e) &&
-          !hasTouchIdentifier(e.changedTouches, identifier)
-        ) {
+        if (isTouchEvent(e) && !hasTouchIdentifier(e.changedTouches, identifier)) {
           // console.log("ignoring onTouchEnd");
           return;
         }
@@ -391,9 +355,7 @@ export function PanelLayout({
         container.removeAttribute("data-dragging");
 
         // What is the new size?
-        const newSize = parseInt(
-          container.style.getPropertyValue("--panel-size") || "-1",
-        );
+        const newSize = parseInt(container.style.getPropertyValue("--panel-size") || "-1");
 
         // Reset the "--bounce-offset" CSS var.
         container.style.setProperty("--bounce-offset", "0px");
@@ -457,9 +419,7 @@ export function PanelLayout({
   return (
     <PanelLayoutContext value={context}>
       <StyledPanelLayout ref={ref} {...dataAttributes} {...rest}>
-        {insertionEl &&
-          !hideToolbarButton &&
-          createPortal(toggleButton, insertionEl)}
+        {insertionEl && !hideToolbarButton && createPortal(toggleButton, insertionEl)}
         <div className="content" {...dataAttributes}>
           {content}
         </div>

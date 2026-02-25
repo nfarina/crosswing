@@ -23,19 +23,13 @@ export function LabeledDateInput({
   placeholder?: string;
 }) {
   const datePicker = useSheet(() => (
-    <DatePicker
-      defaultDate={value}
-      onDateSelected={onValueChange}
-      onClose={datePicker.hide}
-    />
+    <DatePicker defaultDate={value} onDateSelected={onValueChange} onClose={datePicker.hide} />
   ));
 
   return (
     <StyledLabeledDateInput
       label={label}
-      title={
-        value ? <Timestamp date={value} format="MMM D, YYYY" /> : placeholder
-      }
+      title={value ? <Timestamp date={value} format="MMM D, YYYY" /> : placeholder}
       data-no-date={!value}
       onClick={datePicker.show}
       {...rest}

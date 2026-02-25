@@ -25,10 +25,7 @@ export function LoadingCurtain({
 } & HTMLAttributes<HTMLDivElement>) {
   const [waiting, setWaiting] = useState(!!lazy);
 
-  useTimeout(
-    () => setWaiting(false),
-    typeof lazy === "number" ? lazy : Seconds(1),
-  );
+  useTimeout(() => setWaiting(false), typeof lazy === "number" ? lazy : Seconds(1));
 
   if (hidden) {
     return null; // don't render anything!

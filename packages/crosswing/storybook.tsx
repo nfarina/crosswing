@@ -29,11 +29,7 @@ export function CrosswingAppDecorator({
   fonts?: FontBuilder[];
   background?: ColorBuilder | null;
 } = {}) {
-  const resolvedColors = [
-    ...Object.values(colors),
-    ...Object.values(shadows),
-    ...overriddenColors,
-  ];
+  const resolvedColors = [...Object.values(colors), ...Object.values(shadows), ...overriddenColors];
 
   const resolvedFaces = [...Object.values(faces), ...overriddenFaces];
   const resolvedFonts = [...Object.values(fonts), ...overriddenFonts];
@@ -256,9 +252,7 @@ const FullScreenLayoutGlobalStyle = createGlobalStyle<{
  * some optional padding. Designed to be used with
  * CrosswingAppDecorator({layout: "mobile"}).
  */
-export function MobileComponentDecorator({
-  padding = 0,
-}: { padding?: string | number } = {}) {
+export function MobileComponentDecorator({ padding = 0 }: { padding?: string | number } = {}) {
   return (Story: () => any) => (
     <MobileComponentContainer style={{ padding }} children={<Story />} />
   );

@@ -3,10 +3,7 @@ export type Size = {
   height: number;
 };
 
-export type SizeLike =
-  | string
-  | [number, number]
-  | { width: number; height: number };
+export type SizeLike = string | [number, number] | { width: number; height: number };
 
 export type Fit = "contain" | "cover";
 

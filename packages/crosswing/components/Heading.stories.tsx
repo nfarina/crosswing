@@ -15,9 +15,7 @@ type Story = StoryFn<typeof Heading>;
 export const Default: Story = () => <Heading>Section Title</Heading>;
 
 export const WithRight: Story = () => (
-  <Heading
-    right={<Button children="Action" onClick={action("action click")} />}
-  >
+  <Heading right={<Button children="Action" onClick={action("action click")} />}>
     Section Title
   </Heading>
 );

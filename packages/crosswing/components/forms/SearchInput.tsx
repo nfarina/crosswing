@@ -135,8 +135,7 @@ export function SearchInput({
   // Render
   //
 
-  const autoFocus =
-    rest.autoFocus ?? (autoFocusOnDesktop && container === "web");
+  const autoFocus = rest.autoFocus ?? (autoFocusOnDesktop && container === "web");
 
   // Separate any data- attributes from rest.
   const dataAttrs = {};

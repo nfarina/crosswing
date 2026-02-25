@@ -39,13 +39,7 @@ export function NavAccessoryView({ accessory, align }: NavAccessoryViewProps) {
   if (to) {
     return <StyledNavAccessoryView as={Link} to={to} {...sharedProps} />;
   } else if (onClick) {
-    return (
-      <StyledNavAccessoryView
-        as={StyledButton}
-        onClick={onClick}
-        {...sharedProps}
-      />
-    );
+    return <StyledNavAccessoryView as={StyledButton} onClick={onClick} {...sharedProps} />;
   } else {
     return <StyledNavAccessoryView {...sharedProps} />;
   }

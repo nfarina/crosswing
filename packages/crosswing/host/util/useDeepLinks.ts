@@ -3,9 +3,7 @@ import { DeepLink, HostFeatures } from "./types.js";
 
 // Returns the current DeepLink that our host wishes us to navigate to, else
 // undefined if not yet determined.
-export function useDeepLinks(
-  features: HostFeatures | undefined,
-): DeepLink | undefined {
+export function useDeepLinks(features: HostFeatures | undefined): DeepLink | undefined {
   const [deepLink, setDeepLink] = useState<DeepLink>(new DeepLink());
 
   // Sign up for host deep link events.

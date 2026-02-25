@@ -91,9 +91,7 @@ export const Disabled = () => (
   />
 );
 
-export const Empty = () => (
-  <Dropdown placeholder="No options available" items={[]} />
-);
+export const Empty = () => <Dropdown placeholder="No options available" items={[]} />;
 
 export const LongText = () => {
   const [value, setValue] = useState("option1");
@@ -124,9 +122,7 @@ export const KeyboardNavigation = () => {
 
   return (
     <div>
-      <p
-        style={{ marginBottom: "20px", maxWidth: "300px", textAlign: "center" }}
-      >
+      <p style={{ marginBottom: "20px", maxWidth: "300px", textAlign: "center" }}>
         <strong>Keyboard Navigation Test:</strong>
         <br />
         Click dropdown, then use <kbd>Tab</kbd> or arrow keys to navigate

@@ -101,8 +101,8 @@ export function LabeledContentEditable({
         <div className="placeholder">
           {placeholder || (
             <>
-              Enter a rich text description here. You can use standard hotkeys
-              for <b>bold</b>, <i>italic</i>, etc.
+              Enter a rich text description here. You can use standard hotkeys for <b>bold</b>,{" "}
+              <i>italic</i>, etc.
             </>
           )}
         </div>

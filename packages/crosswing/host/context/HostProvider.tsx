@@ -84,8 +84,7 @@ export function HostProvider({
           webBundle: features.webBundle,
           supportsEmailSignIn: !!features.emailSignIn,
           supportsLogin: !!features.login,
-          supportsNotifications:
-            container === "android" || !!features.notifications, // All android devices support notifications without prompting.
+          supportsNotifications: container === "android" || !!features.notifications, // All android devices support notifications without prompting.
           supportsShareSheet: !!features.shareSheet,
           supportsMessageSheet: !!features.messageSheet,
           supportsEmailSheet: !!features.emailSheet,
@@ -94,8 +93,7 @@ export function HostProvider({
           supportsBrightness: !!features.brightness,
           supportsPlaid: !!features.plaid,
           supportsLightStatusBar: container === "ios", // All iOS versions support this.
-          requiresNotificationAuthorization:
-            !!features.notificationAuthorization,
+          requiresNotificationAuthorization: !!features.notificationAuthorization,
           smsAutoVerificationToken: features.smsAutoVerificationToken,
           getPlugin: (plugin: string) => buildPlugin(features, plugin),
           openUrl,
@@ -155,10 +153,7 @@ export const StyledHostProvider = styled.div<{
   }
 `;
 
-function buildPlugin(
-  features: HostFeatures,
-  plugin: string,
-): HostPlugin | null {
+function buildPlugin(features: HostFeatures, plugin: string): HostPlugin | null {
   const pluginFeatures = features.plugins?.[plugin];
 
   if (!pluginFeatures) {

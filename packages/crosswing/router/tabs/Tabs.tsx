@@ -43,9 +43,7 @@ export function Tabs({
   // Construct our storage for inactive tabs.
   const [tabLocations] = useState(() => new Map<string, RouterLocation>());
 
-  debug(
-    `Render <Tabs> with location "${location}" and next location "${nextLocation}"`,
-  );
+  debug(`Render <Tabs> with location "${location}" and next location "${nextLocation}"`);
 
   // The tab that will be selected next, regardless of whether it is loaded.
   const nextSelected = selectTab(tabs, nextLocation);
@@ -99,14 +97,10 @@ export function Tabs({
     const { path: tabPath, render } = tab.props;
 
     const isSelected = tab === selected.tab;
-    const childLocation = isSelected
-      ? selected.location
-      : tabLocations.get(tabPath);
+    const childLocation = isSelected ? selected.location : tabLocations.get(tabPath);
 
     const isNextSelected = tab === nextSelected.tab;
-    const nextChildLocation = isNextSelected
-      ? nextSelected.location
-      : tabLocations.get(tabPath);
+    const nextChildLocation = isNextSelected ? nextSelected.location : tabLocations.get(tabPath);
 
     // Do we have a current or old location for this tab? Render it if so.
     if (childLocation && nextChildLocation) {
@@ -159,10 +153,7 @@ interface SelectedTab {
   redirect?: boolean;
 }
 
-function selectTab(
-  tabs: ReactElement<TabProps>[],
-  location: RouterLocation,
-): SelectedTab {
+function selectTab(tabs: ReactElement<TabProps>[], location: RouterLocation): SelectedTab {
   // Look to see if the desired path matches any of our child tabs.
   for (const tab of tabs) {
     const tabPath = tab.props.path;

@@ -35,17 +35,13 @@ export function useFontSizeHotKeys({
     DEFAULT_PRESET_INDEX,
   );
 
-  useHotKey("]", { global: true, disabled }, () =>
-    setPresetIndex(Math.max(0, presetIndex - 1)),
-  );
+  useHotKey("]", { global: true, disabled }, () => setPresetIndex(Math.max(0, presetIndex - 1)));
 
   useHotKey("[", { global: true, disabled }, () =>
     setPresetIndex(Math.min(presets.length - 1, presetIndex + 1)),
   );
 
-  useHotKey("=", { global: true, disabled }, () =>
-    setPresetIndex(DEFAULT_PRESET_INDEX),
-  );
+  useHotKey("=", { global: true, disabled }, () => setPresetIndex(DEFAULT_PRESET_INDEX));
 
   // Respond to changes in preferred font size.
   useLayoutEffect(() => {

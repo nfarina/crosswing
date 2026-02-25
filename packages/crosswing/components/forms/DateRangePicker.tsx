@@ -22,10 +22,7 @@ export default function DateRangePicker({
     onClose();
   }
 
-  function onInnerValueChange(
-    newValue: DateRange | null,
-    type?: DateRangeValueType,
-  ) {
+  function onInnerValueChange(newValue: DateRange | null, type?: DateRangeValueType) {
     setDraftRange(newValue);
 
     if (type === "preset" || type === "custom") {

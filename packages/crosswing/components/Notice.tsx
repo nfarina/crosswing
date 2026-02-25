@@ -11,9 +11,7 @@ export function Notice({
   size?: "smaller" | "normal";
   transparent?: boolean;
 }) {
-  return (
-    <StyledNotice data-size={size} data-transparent={!!transparent} {...rest} />
-  );
+  return <StyledNotice data-size={size} data-transparent={!!transparent} {...rest} />;
 }
 
 export const StyledNotice = styled.div`

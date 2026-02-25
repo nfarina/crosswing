@@ -12,6 +12,4 @@ export const Default = () => <NumberLabel amount={42} />;
 
 export const InheritFont = () => <NumberLabel font="none" amount={42} />;
 
-export const FormattingOptions = () => (
-  <NumberLabel precision={2} amount={2500_00} dropZeros />
-);
+export const FormattingOptions = () => <NumberLabel precision={2} amount={2500_00} dropZeros />;

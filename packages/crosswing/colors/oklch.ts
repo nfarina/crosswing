@@ -9,9 +9,7 @@ export type Oklch = { mode: "oklch"; l: number; c: number; h: number };
  * Parses a hex string like "#abcdef" only, not like "#aaa", into its raw
  * component values (0-255).
  */
-export function parseHex(
-  hex: string,
-): [red: number, green: number, blue: number] {
+export function parseHex(hex: string): [red: number, green: number, blue: number] {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   if (!result) throw new Error(`Invalid color ${hex}`);
   const [_, ...components] = result;
@@ -248,33 +246,23 @@ export const convertLrgbToRgb = ({ r, g, b, alpha }: any, mode = "rgb") => {
 
 export const convertOklabToLrgb = ({ l, a, b, alpha }) => {
   let L = Math.pow(
-    l * 0.99999999845051981432 +
-      0.39633779217376785678 * a +
-      0.21580375806075880339 * b,
+    l * 0.99999999845051981432 + 0.39633779217376785678 * a + 0.21580375806075880339 * b,
     3,
   );
   let M = Math.pow(
-    l * 1.0000000088817607767 -
-      0.1055613423236563494 * a -
-      0.063854174771705903402 * b,
+    l * 1.0000000088817607767 - 0.1055613423236563494 * a - 0.063854174771705903402 * b,
     3,
   );
   let S = Math.pow(
-    l * 1.0000000546724109177 -
-      0.089484182094965759684 * a -
-      1.2914855378640917399 * b,
+    l * 1.0000000546724109177 - 0.089484182094965759684 * a - 1.2914855378640917399 * b,
     3,
   );
 
   let res: any = {
     mode: "lrgb",
     r: +4.076741661347994 * L - 3.307711590408193 * M + 0.230969928729428 * S,
-    g:
-      -1.2684380040921763 * L + 2.6097574006633715 * M - 0.3413193963102197 * S,
-    b:
-      -0.004196086541837188 * L -
-      0.7034186144594493 * M +
-      1.7076147009309444 * S,
+    g: -1.2684380040921763 * L + 2.6097574006633715 * M - 0.3413193963102197 * S,
+    b: -0.004196086541837188 * L - 0.7034186144594493 * M + 1.7076147009309444 * S,
   };
 
   if (alpha !== undefined) {
@@ -326,15 +314,9 @@ export const convertRgbToOklab = (rgb) => {
 };
 
 export const convertLrgbToOklab = ({ r, g, b, alpha }) => {
-  let L = Math.cbrt(
-    0.41222147079999993 * r + 0.5363325363 * g + 0.0514459929 * b,
-  );
-  let M = Math.cbrt(
-    0.2119034981999999 * r + 0.6806995450999999 * g + 0.1073969566 * b,
-  );
-  let S = Math.cbrt(
-    0.08830246189999998 * r + 0.2817188376 * g + 0.6299787005000002 * b,
-  );
+  let L = Math.cbrt(0.41222147079999993 * r + 0.5363325363 * g + 0.0514459929 * b);
+  let M = Math.cbrt(0.2119034981999999 * r + 0.6806995450999999 * g + 0.1073969566 * b);
+  let S = Math.cbrt(0.08830246189999998 * r + 0.2817188376 * g + 0.6299787005000002 * b);
 
   let res: any = {
     mode: "oklab",
@@ -367,16 +349,9 @@ export const convertRgbToXyz65 = (rgb) => {
 export const convertXyz65ToP3 = ({ x, y, z, alpha }) => {
   let res: any = convertLrgbToRgb(
     {
-      r:
-        x * 2.4934969119414263 - y * 0.9313836179191242 - 0.402710784450717 * z,
-      g:
-        x * -0.8294889695615749 +
-        y * 1.7626640603183465 +
-        0.0236246858419436 * z,
-      b:
-        x * 0.0358458302437845 -
-        y * 0.0761723892680418 +
-        0.9568845240076871 * z,
+      r: x * 2.4934969119414263 - y * 0.9313836179191242 - 0.402710784450717 * z,
+      g: x * -0.8294889695615749 + y * 1.7626640603183465 + 0.0236246858419436 * z,
+      b: x * 0.0358458302437845 - y * 0.0761723892680418 + 0.9568845240076871 * z,
     },
     "p3",
   );
@@ -389,8 +364,7 @@ export const convertXyz65ToP3 = ({ x, y, z, alpha }) => {
 export const convertXyz65ToRgb = ({ x, y, z, alpha }: any) => {
   let res = convertLrgbToRgb({
     r: x * 3.2409699419045226 - y * 1.5373831775700939 - 0.4986107602930034 * z,
-    g:
-      x * -0.9692436362808796 + y * 1.8759675015077204 + 0.0415550574071756 * z,
+    g: x * -0.9692436362808796 + y * 1.8759675015077204 + 0.0415550574071756 * z,
     b: x * 0.0556300796969936 - y * 0.2039769588889765 + 1.0569715142428784 * z,
   });
   if (alpha !== undefined) {
@@ -590,27 +564,15 @@ const differenceEuclidean = (mode = "rgb", weights = [1, 1, 1, 0]) => {
     let ConvSmp = conv(smp);
     return Math.sqrt(
       channels.reduce((sum, k, idx) => {
-        let delta = diffs[k]
-          ? diffs[k](ConvStd, ConvSmp)
-          : ConvStd[k] - ConvSmp[k];
-        return (
-          sum + (weights[idx] || 0) * Math.pow(isNaN(delta) ? 0 : delta, 2)
-        );
+        let delta = diffs[k] ? diffs[k](ConvStd, ConvSmp) : ConvStd[k] - ConvSmp[k];
+        return sum + (weights[idx] || 0) * Math.pow(isNaN(delta) ? 0 : delta, 2);
       }, 0),
     );
   };
 };
 
 const inrange_rgb = (c) => {
-  return (
-    c !== undefined &&
-    c.r >= 0 &&
-    c.r <= 1 &&
-    c.g >= 0 &&
-    c.g <= 1 &&
-    c.b >= 0 &&
-    c.b <= 1
-  );
+  return c !== undefined && c.r >= 0 && c.r <= 1 && c.g >= 0 && c.g <= 1 && c.b >= 0 && c.b <= 1;
 };
 
 export function inGamut(mode = "rgb") {
@@ -722,10 +684,7 @@ export function toGamut(
     while (end - start > epsilon) {
       candidate.c = (start + end) * 0.5;
       clipped = clipToGamut(candidate);
-      if (
-        inDestinationGamut(candidate) ||
-        (jnd > 0 && delta(candidate, clipped) <= jnd)
-      ) {
+      if (inDestinationGamut(candidate) || (jnd > 0 && delta(candidate, clipped) <= jnd)) {
         start = candidate.c;
       } else {
         end = candidate.c;

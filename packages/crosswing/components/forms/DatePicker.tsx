@@ -58,9 +58,7 @@ export function DatePicker({
       <PageLayout>
         {notice && <Notice children={notice} size="smaller" />}
         <div className="buttons">
-          {!requireSelection && (
-            <Button children="Clear" onClick={onClearClick} />
-          )}
+          {!requireSelection && <Button children="Clear" onClick={onClearClick} />}
           <Button children="Custom" onClick={customPrompt.show} />
         </div>
         <CalendarView

@@ -1,12 +1,5 @@
 import Debug from "debug";
-import {
-  ReactNode,
-  Suspense,
-  use,
-  useDeferredValue,
-  useLayoutEffect,
-  useState,
-} from "react";
+import { ReactNode, Suspense, use, useDeferredValue, useLayoutEffect, useState } from "react";
 import { RouterLocation } from "./RouterLocation.js";
 import { RouterContext, RouterFlags } from "./context/RouterContext.js";
 import { BrowserHistory } from "./history/BrowserHistory.js";
@@ -46,9 +39,7 @@ export function Router({
   // Use React 18's deferred value to avoid rendering the next route's contents
   // until they are completely loaded (for instance, if contents are loaded
   // via React.lazy imports).
-  const location = RouterLocation.deserialize(
-    useDeferredValue(nextLocation.serialize()),
-  );
+  const location = RouterLocation.deserialize(useDeferredValue(nextLocation.serialize()));
 
   // We use a layout effect to listen to history events so we can re-render
   // on <Redirect> without flashing anything on screen.
@@ -68,9 +59,7 @@ export function Router({
     return history.listen((newLocation) => setNextLocation(newLocation));
   }, []);
 
-  debug(
-    `Render <Router> with location "${location}" and next location "${nextLocation}"`,
-  );
+  debug(`Render <Router> with location "${location}" and next location "${nextLocation}"`);
 
   // Inspect the current location to see what we should render.
   const childLocation = path ? location.tryClaim(path) : location;

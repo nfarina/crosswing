@@ -6,9 +6,7 @@ import { useEffect, useRef } from "react";
  * generate a stable pointer to the given callback func that you can update
  * on each render.
  */
-export function useUpdatableCallback<T extends (...args: any[]) => any>(
-  callback: T,
-): T {
+export function useUpdatableCallback<T extends (...args: any[]) => any>(callback: T): T {
   const callbackRef = useRef(callback);
 
   useEffect(() => {

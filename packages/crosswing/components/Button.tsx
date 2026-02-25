@@ -39,9 +39,7 @@ export function Button({
   newStyle?: boolean;
   bordered?: boolean;
   pill?: boolean;
-  ref?:
-    | RefObject<HTMLButtonElement | null>
-    | RefObject<HTMLAnchorElement | null>;
+  ref?: RefObject<HTMLButtonElement | null> | RefObject<HTMLAnchorElement | null>;
 }) {
   const hasText = !!children;
   const hasIcon = !!icon;

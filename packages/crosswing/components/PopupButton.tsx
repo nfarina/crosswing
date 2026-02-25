@@ -58,9 +58,7 @@ export function PopupButton({
       onClick={handleClick}
       data-is-open={popup?.visible}
       children={children}
-      right={
-        !hideDisclosure && <ChevronDown size={18} className="down-arrow" />
-      }
+      right={!hideDisclosure && <ChevronDown size={18} className="down-arrow" />}
     />
   );
 }

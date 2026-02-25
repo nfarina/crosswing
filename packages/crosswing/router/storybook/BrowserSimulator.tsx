@@ -1,11 +1,4 @@
-import {
-  ChangeEvent,
-  HTMLAttributes,
-  KeyboardEvent,
-  ReactNode,
-  use,
-  useState,
-} from "react";
+import { ChangeEvent, HTMLAttributes, KeyboardEvent, ReactNode, use, useState } from "react";
 import { action } from "storybook/actions";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
@@ -17,10 +10,7 @@ import { MemoryHistory } from "../history/MemoryHistory.js";
 
 // For Storybook, when action()ing a navigation event, we mostly want to know
 // the path. The location object doesn't print well in the Storybook UI.
-export type BrowserNavigateListener = (
-  path: string,
-  location: RouterLocation,
-) => void;
+export type BrowserNavigateListener = (path: string, location: RouterLocation) => void;
 
 export function BrowserSimulator({
   rootPath,

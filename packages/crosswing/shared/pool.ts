@@ -5,8 +5,7 @@ const debug = Debug("util:pool");
 
 // Log stats after running by default if we're in the browser, or if we're
 // running in Node (but not during tests).
-const DEFAULT_LOG_STATS =
-  typeof process === "undefined" || !isRunningUnderTest();
+const DEFAULT_LOG_STATS = typeof process === "undefined" || !isRunningUnderTest();
 
 /**
  * Utility method that creates a AsyncPool and uses it to call the given
@@ -313,7 +312,6 @@ export class AsyncPool {
     if (finished) return;
 
     // We use a "secret" argument to track who called this function.
-    /* eslint-disable prefer-rest-params */
     const num = arguments[0] ?? "from caller";
 
     // Are tasks running? If so we'll have to wait.

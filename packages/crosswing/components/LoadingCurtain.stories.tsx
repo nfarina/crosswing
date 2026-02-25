@@ -16,9 +16,7 @@ export const Message = () => <LoadingCurtain message="Reticulating splines…" /
 
 export const Progress = () => <LoadingCurtain type="progress" />;
 
-export const ProgressValue = () => (
-  <LoadingCurtain type="progress" progress={0.75} />
-);
+export const ProgressValue = () => <LoadingCurtain type="progress" progress={0.75} />;
 
 export const ProgressMessage = () => (
   <LoadingCurtain type="progress" message="Loading vertex mesh…" />

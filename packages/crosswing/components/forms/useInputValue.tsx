@@ -86,10 +86,7 @@ export function useInputValue<T = string>({
   const resolvedInitialStringValue = initialStringValue ?? format(initialValue);
 
   // Storage for the underlying string value fed to TextInput.
-  const [stringValue, setStringValue] = useResettableState(
-    resolvedInitialStringValue,
-    deps ?? [],
-  );
+  const [stringValue, setStringValue] = useResettableState(resolvedInitialStringValue, deps ?? []);
 
   const [focused, setFocused] = useState(false);
 

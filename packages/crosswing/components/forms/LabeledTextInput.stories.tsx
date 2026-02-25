@@ -37,9 +37,7 @@ export const WithValue = () => {
 };
 WithValue.decorators = [SeparatorDecorator];
 
-export const Disabled = () => (
-  <LabeledTextInput label="Name" value="Nick Farina" disabled />
-);
+export const Disabled = () => <LabeledTextInput label="Name" value="Nick Farina" disabled />;
 Disabled.decorators = [SeparatorDecorator];
 
 export const WithoutLabel = () => {
@@ -52,14 +50,7 @@ WithoutLabel.decorators = [SeparatorDecorator];
 export const NewStyle = () => {
   const [name, setName] = useState("Nick Farina");
 
-  return (
-    <LabeledTextInput
-      newStyle
-      label="Name"
-      value={name}
-      onValueChange={setName}
-    />
-  );
+  return <LabeledTextInput newStyle label="Name" value={name} onValueChange={setName} />;
 };
 
 export const NewStyleWithError = () => {

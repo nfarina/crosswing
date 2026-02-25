@@ -4,9 +4,7 @@ import { NoContent } from "../../../NoContent.js";
 export default function DataTab() {
   const result = use(fetchData());
 
-  return (
-    <NoContent title="Suspense Data" subtitle={<>Data fetched: {result}</>} />
-  );
+  return <NoContent title="Suspense Data" subtitle={<>Data fetched: {result}</>} />;
 }
 
 let cached: Promise<number> | undefined;

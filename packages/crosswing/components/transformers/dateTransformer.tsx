@@ -50,9 +50,7 @@ export function dateTransformer({
       // Use the first format in the list, or a fallback.
       const format = formats[0] ?? "M/D/YYYY";
 
-      return utc
-        ? dayjs.utc(value).format(format)
-        : dayjs(value).format(format);
+      return utc ? dayjs.utc(value).format(format) : dayjs(value).format(format);
     },
   };
 }

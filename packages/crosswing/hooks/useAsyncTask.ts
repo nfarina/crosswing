@@ -28,15 +28,10 @@ type ThenArg<T> = T extends Promise<infer U> ? U : T;
  * `someVal && doSomethingWith(someVal)` in your function closure for values
  * like `someVal` that you expect to be truthy at runtime.
  */
-export type AsyncTaskFunction = (
-  task: AsyncTaskContext,
-  ...args: any[]
-) => Promise<any> | Falsy;
+export type AsyncTaskFunction = (task: AsyncTaskContext, ...args: any[]) => Promise<any> | Falsy;
 
 /** Utility type to remove the first element from a tuple (for parameters). */
-type RemoveFirst<T extends unknown[]> = T extends [AsyncTaskContext, ...infer R]
-  ? R
-  : [];
+type RemoveFirst<T extends unknown[]> = T extends [AsyncTaskContext, ...infer R] ? R : [];
 
 export interface AsyncTaskContext {
   /**
@@ -137,12 +132,7 @@ export function useAsyncTask<T extends AsyncTaskFunction>({
     } catch (error: any) {
       // Log it to the console for analytics.
       if (!silentErrors) {
-        console.error(
-          "Async task error:",
-          error.name,
-          error.message,
-          error.stack,
-        );
+        console.error("Async task error:", error.name, error.message, error.stack);
       }
 
       setStatus({ isRunning: false, result: null, error });
@@ -180,12 +170,7 @@ export function useAsyncTask<T extends AsyncTaskFunction>({
       .catch((error: Error) => {
         // Log it to the console for analytics.
         if (!silentErrors) {
-          console.error(
-            "Async task error:",
-            error.name,
-            error.message,
-            error.stack,
-          );
+          console.error("Async task error:", error.name, error.message, error.stack);
         }
 
         // We've been unmounted or canceled, don't do anything!

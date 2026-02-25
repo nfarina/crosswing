@@ -10,9 +10,7 @@ export default {
   parameters: { layout: "centered" },
 };
 
-export const Visible = () => (
-  <BannerLayout title="Reticulating Splines" visible />
-);
+export const Visible = () => <BannerLayout title="Reticulating Splines" visible />;
 
 export const WithHandler = () => {
   const task = useAsyncTask({

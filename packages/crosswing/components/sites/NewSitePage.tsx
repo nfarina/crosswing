@@ -85,10 +85,7 @@ export function NewSitePage({
           />
           <div className="page-content">{children}</div>
         </PageLayout>
-        <NewSitePanel
-          accessories={panelAccessories}
-          onClose={() => onPanelVisibleChange?.(false)}
-        >
+        <NewSitePanel accessories={panelAccessories} onClose={() => onPanelVisibleChange?.(false)}>
           {panelContent}
         </NewSitePanel>
       </PanelLayout>

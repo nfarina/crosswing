@@ -84,8 +84,7 @@ export function TooltipView({
     const updateState = () => {
       const tooltip = tooltipText ?? target?.getAttribute("data-tooltip");
       const hidden = target?.getAttribute("data-tooltip-hidden") === "true";
-      const destructive =
-        target?.getAttribute("data-tooltip-destructive") === "true";
+      const destructive = target?.getAttribute("data-tooltip-destructive") === "true";
 
       if (hidden) {
         rest.onClose?.();
@@ -115,15 +114,9 @@ export function TooltipView({
   return (
     <StyledTooltipView
       background={destructive ? colors.red({ darken: 0.3 }) : colors.gray900()}
-      backgroundDark={
-        destructive ? colors.red({ lighten: 0.25 }) : colors.gray50()
-      }
-      arrowBackground={
-        destructive ? colors.red({ darken: 0.3 }) : colors.gray900()
-      }
-      arrowBackgroundDark={
-        destructive ? colors.red({ lighten: 0.25 }) : colors.gray50()
-      }
+      backgroundDark={destructive ? colors.red({ lighten: 0.25 }) : colors.gray50()}
+      arrowBackground={destructive ? colors.red({ darken: 0.3 }) : colors.gray900()}
+      arrowBackgroundDark={destructive ? colors.red({ lighten: 0.25 }) : colors.gray50()}
       outlineBorder={false}
       data-destructive={destructive}
       autoFocus={autoFocus}
@@ -210,12 +203,9 @@ export const StyledTooltipView = styled(PopupView)`
 `;
 
 function getHotkey(target: Element): string | null {
-  const hotkey = (target?.getAttribute("data-tooltip-hotkey") ??
-    null) as HotKey | null;
-  const hotkeyWin = (target?.getAttribute("data-tooltip-hotkey-win") ??
-    null) as HotKey | null;
-  const hotkeyMac = (target?.getAttribute("data-tooltip-hotkey-mac") ??
-    null) as HotKey | null;
+  const hotkey = (target?.getAttribute("data-tooltip-hotkey") ?? null) as HotKey | null;
+  const hotkeyWin = (target?.getAttribute("data-tooltip-hotkey-win") ?? null) as HotKey | null;
+  const hotkeyMac = (target?.getAttribute("data-tooltip-hotkey-mac") ?? null) as HotKey | null;
 
   return renderHotkey({ key: hotkey, win: hotkeyWin, mac: hotkeyMac });
 }

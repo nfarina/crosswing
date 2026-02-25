@@ -52,10 +52,7 @@ export class AsyncEventEmitter<E extends Record<keyof E, AsyncListener>> {
     this.events.get(type)?.delete(listener);
   }
 
-  public async emit<T extends keyof E>(
-    type: T,
-    ...args: ListenerArgs<E[T]>
-  ): Promise<void> {
+  public async emit<T extends keyof E>(type: T, ...args: ListenerArgs<E[T]>): Promise<void> {
     const listeners = this.events.get(type);
     if (listeners) {
       // Create a copy in case a listener modifies the set during iteration (e.g., calls off())

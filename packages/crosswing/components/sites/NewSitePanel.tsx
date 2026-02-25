@@ -27,9 +27,7 @@ export function NewSitePanel({
           onClick={onClose}
           {...tooltip("Close panel", { hotkey: "ctrl+e" })}
         />
-        {!!accessories && (
-          <div className="accessories" children={accessories} />
-        )}
+        {!!accessories && <div className="accessories" children={accessories} />}
       </AutoBorderView>
       <div className="content" ref={contentRef} children={children} />
     </StyledNewSitePanel>

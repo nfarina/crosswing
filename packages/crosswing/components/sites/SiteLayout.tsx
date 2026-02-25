@@ -18,10 +18,7 @@ import { safeArea } from "../../safearea/safeArea.js";
 import { NoContent } from "../NoContent.js";
 import { SiteHeader, StyledSiteHeader } from "./SiteHeader.js";
 import { SiteHeaderAccessory } from "./SiteHeaderAccessory.js";
-import {
-  PageTitleProvider,
-  SitePageTitleDesktopStyle,
-} from "./SitePageTitle.js";
+import { PageTitleProvider, SitePageTitleDesktopStyle } from "./SitePageTitle.js";
 import {
   SiteSidebar,
   SiteSidebarArea,
@@ -128,18 +125,13 @@ export function SiteLayout({
     );
   }
 
-  function renderLinkRoutes(
-    area: ReactElement<SiteAreaProps>,
-    link: ReactElement<SiteLinkProps>,
-  ) {
+  function renderLinkRoutes(area: ReactElement<SiteAreaProps>, link: ReactElement<SiteLinkProps>) {
     const { path: areaPath } = area.props;
     const { path, render } = link.props;
 
     const fullPath = areaPath ? `${areaPath}/${path}` : path;
 
-    return (
-      render && <Route key={"link-" + path} path={fullPath} render={render} />
-    );
+    return render && <Route key={"link-" + path} path={fullPath} render={render} />;
   }
 
   const headerAccessories = (accessories ?? []).filter(
@@ -167,11 +159,7 @@ export function SiteLayout({
 
   return (
     <PageTitleProvider desktopStyle={desktopStyle}>
-      <StyledSiteLayout
-        data-sidebar-open={sidebarOpen}
-        style={cssProps}
-        {...rest}
-      >
+      <StyledSiteLayout data-sidebar-open={sidebarOpen} style={cssProps} {...rest}>
         <SiteHeader siteTitle={title} accessories={headerAccessories} />
         <SiteSidebar
           logo={logo}
@@ -205,9 +193,7 @@ export function SiteLayout({
                   return <Redirect to={firstArea.props.path} />;
                 }
 
-                const links = flattenChildren(firstArea.props.children).filter(
-                  isSiteLink,
-                );
+                const links = flattenChildren(firstArea.props.children).filter(isSiteLink);
 
                 if (links[0]?.props.path) {
                   return <Redirect to={links[0].props.path} />;
@@ -226,10 +212,7 @@ export function SiteLayout({
          * scrolled into view).
          */}
         <div className="bottom-border" />
-        <div
-          className="sidebar-overlay"
-          onClick={() => setSidebarOpen(false)}
-        />
+        <div className="sidebar-overlay" onClick={() => setSidebarOpen(false)} />
       </StyledSiteLayout>
     </PageTitleProvider>
   );

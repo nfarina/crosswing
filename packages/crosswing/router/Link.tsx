@@ -1,9 +1,4 @@
-import {
-  AnchorHTMLAttributes,
-  MouseEvent as ReactMouseEvent,
-  ReactNode,
-  use,
-} from "react";
+import { AnchorHTMLAttributes, MouseEvent as ReactMouseEvent, ReactNode, use } from "react";
 import { styled } from "styled-components";
 import { RouterContext } from "./context/RouterContext.js";
 import { BrowserHistory } from "./history/BrowserHistory.js";

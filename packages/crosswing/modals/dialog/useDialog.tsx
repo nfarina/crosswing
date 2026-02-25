@@ -1,9 +1,6 @@
 import { CSSProperties, ReactNode, useRef } from "react";
 import { keyframes, styled } from "styled-components";
-import {
-  HotKeyContextDataAttributes,
-  useHotKey,
-} from "../../hooks/useHotKey.js";
+import { HotKeyContextDataAttributes, useHotKey } from "../../hooks/useHotKey.js";
 import { AndroidBackButtonClassName } from "../../host/context/HostContext.js";
 import { safeArea } from "../../safearea/safeArea.js";
 import { easing } from "../../shared/easing.js";
@@ -32,13 +29,7 @@ export type DialogVerticalAlignment = "top" | "middle" | "bottom";
 
 export function useDialog<T extends any[]>(
   renderDialog: (...args: T) => ReactNode,
-  {
-    sticky,
-    stretch,
-    delay,
-    verticalAlign,
-    pressEscapeToClose,
-  }: UseDialogOptions = {},
+  { sticky, stretch, delay, verticalAlign, pressEscapeToClose }: UseDialogOptions = {},
 ): Modal<T> {
   const modal = useModal((...args: any) => (
     <DialogContainer

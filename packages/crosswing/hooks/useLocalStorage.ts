@@ -25,10 +25,7 @@ type Setter<S> = (value: S | ((prevState: S) => S)) => void;
  * @returns An array containing the value associated with the key in position 0,
  * and a function to set the value in position 1.
  */
-export function useLocalStorage<S>(
-  key: string,
-  initialValue: S | (() => S),
-): [S, Setter<S>] {
+export function useLocalStorage<S>(key: string, initialValue: S | (() => S)): [S, Setter<S>] {
   // The initialValue arg is only used if there is nothing in localStorage,
   // otherwise we use the value in localStorage so state persists through a
   // page refresh. We pass a function to useState so localStorage lookup only
@@ -70,10 +67,7 @@ export function useLocalStorage<S>(
     if (value instanceof Function) {
       setInnerItem((prevState) => {
         const newValue = value(prevState);
-        writeLocalStorage(
-          key,
-          newValue != null ? JSON.stringify(newValue) : null,
-        );
+        writeLocalStorage(key, newValue != null ? JSON.stringify(newValue) : null);
         return newValue;
       });
     } else {
@@ -102,19 +96,13 @@ export function useLocalStorage<S>(
 
     // The custom storage event allows us to update our component
     // when a change occurs in localStorage outside of our component
-    window.addEventListener(
-      LocalStorageChanged.eventName,
-      onLocalStorageChange,
-    );
+    window.addEventListener(LocalStorageChanged.eventName, onLocalStorageChange);
 
     // The storage event only works in the context of other documents (eg. other browser tabs)
     window.addEventListener("storage", onLocalStorageChange);
 
     return () => {
-      window.removeEventListener(
-        LocalStorageChanged.eventName,
-        onLocalStorageChange,
-      );
+      window.removeEventListener(LocalStorageChanged.eventName, onLocalStorageChange);
       window.removeEventListener("storage", onLocalStorageChange);
     };
   }, [key]); // Re-run if the key changes

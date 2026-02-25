@@ -21,11 +21,7 @@ export const Normal = () => {
       history={history}
       render={() => (
         <Tabs>
-          <Tab
-            path="home"
-            title="Home"
-            render={() => <SamplePage>Favorite Cupcakes</SamplePage>}
-          />
+          <Tab path="home" title="Home" render={() => <SamplePage>Favorite Cupcakes</SamplePage>} />
           <Tab
             path="activity"
             title="Activity"

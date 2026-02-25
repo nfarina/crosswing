@@ -1,10 +1,7 @@
 import { Suspense, lazy, use, useState } from "react";
 import { action } from "storybook/actions";
 import { RouterContext } from "../router/context/RouterContext.js";
-import {
-  BrowserSimulator,
-  RouterDecorator,
-} from "../router/storybook/RouterDecorator.js";
+import { BrowserSimulator, RouterDecorator } from "../router/storybook/RouterDecorator.js";
 import { wait } from "../shared/wait.js";
 import { CrosswingAppDecorator } from "../storybook.js";
 import { LoadingCurtain } from "./LoadingCurtain.js";
@@ -48,10 +45,7 @@ export const ButtonStyle = () => (
 );
 
 export const DefaultSelected = () => (
-  <TabbedButtonLayout
-    defaultValue="blue"
-    onValueChange={action("onValueChange")}
-  >
+  <TabbedButtonLayout defaultValue="blue" onValueChange={action("onValueChange")}>
     <TabbedButton title="Red Fish" value="red">
       <NoContent title="Red Fish" />
     </TabbedButton>
@@ -96,6 +90,7 @@ export const LazyChild = () => {
       </TabbedButton>
       <TabbedButton lazy title="Discover" value="discover">
         <Suspense fallback={<LoadingCurtain lazy />}>
+          {/* oxlint-disable-next-line react-hooks-js/static-components */}
           <DynamicContent />
         </Suspense>
       </TabbedButton>
@@ -142,13 +137,7 @@ export const WithRouter = () => (
 function RoutedRedFish() {
   const { history } = use(RouterContext);
 
-  return (
-    <NoContent
-      title="Red"
-      action="Go to Root"
-      onActionClick={() => history.navigate("/")}
-    />
-  );
+  return <NoContent title="Red" action="Go to Root" onActionClick={() => history.navigate("/")} />;
 }
 
 function RoutedBlueFish() {
@@ -159,11 +148,5 @@ function RoutedBlueFish() {
     history.navigate(newLocation.href(), { replace: true });
   }
 
-  return (
-    <NoContent
-      title="Blue Fish"
-      action="Go Green"
-      onActionClick={onGoGreenClick}
-    />
-  );
+  return <NoContent title="Blue Fish" action="Go Green" onActionClick={onGoGreenClick} />;
 }

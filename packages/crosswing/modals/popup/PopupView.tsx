@@ -1,10 +1,4 @@
-import {
-  CSSProperties,
-  HTMLAttributes,
-  ReactNode,
-  useEffect,
-  useRef,
-} from "react";
+import { CSSProperties, HTMLAttributes, ReactNode, useEffect, useRef } from "react";
 import { styled } from "styled-components";
 import { colors, shadows } from "../../colors/colors.js";
 import { PopupPlacement } from "./getPopupPlacement.js";

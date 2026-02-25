@@ -1,10 +1,4 @@
-import {
-  ChangeEvent,
-  useEffect,
-  useLayoutEffect,
-  useReducer,
-  useRef,
-} from "react";
+import { ChangeEvent, useEffect, useLayoutEffect, useReducer, useRef } from "react";
 import { deepEqual } from "../shared/compare.js";
 import { Seconds } from "../shared/timespan.js";
 import { Falsy } from "./useAsyncTask.js";
@@ -32,10 +26,7 @@ export interface PersistedState<S> {
   flush: () => void;
 }
 
-type OnChangeElements =
-  | HTMLInputElement
-  | HTMLSelectElement
-  | HTMLTextAreaElement;
+type OnChangeElements = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
 
 export function usePersistedState<S>({
   persistedValue,
@@ -80,14 +71,7 @@ export function usePersistedState<S>({
     updateError: null,
   });
 
-  const {
-    draftValue,
-    draftChanged,
-    updateTimeoutId,
-    isUpdating,
-    lastUpdated,
-    updateError,
-  } = state;
+  const { draftValue, draftChanged, updateTimeoutId, isUpdating, lastUpdated, updateError } = state;
 
   useEffect(() => {
     // Remember the latest callback.
@@ -105,10 +89,7 @@ export function usePersistedState<S>({
       // Wait until at least `updateDelay` seconds have passed since the last update.
       const delay = Math.max(0, lastUpdated + updateDelay - Date.now());
 
-      const timeoutId = setTimeout(
-        () => savedUpdateFunc.current(),
-        delay || undefined,
-      ) as any;
+      const timeoutId = setTimeout(() => savedUpdateFunc.current(), delay || undefined) as any;
       dispatch({ type: "updateScheduled", timeoutId });
     }
   });

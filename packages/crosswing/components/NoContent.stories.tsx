@@ -12,10 +12,7 @@ export default {
 export const WithTitle = () => <NoContent title="Nothing Here" />;
 
 export const WithSubtitle = () => (
-  <NoContent
-    title="Nothing Here"
-    subtitle="We couldn't find any content here."
-  />
+  <NoContent title="Nothing Here" subtitle="We couldn't find any content here." />
 );
 
 export const WithAction = () => (

@@ -6,10 +6,7 @@ import { LabeledCheckbox } from "./LabeledCheckbox.js";
 
 export default {
   component: LabeledCheckbox,
-  decorators: [
-    SeparatorDecorator,
-    CrosswingAppDecorator({ layout: "component" }),
-  ],
+  decorators: [SeparatorDecorator, CrosswingAppDecorator({ layout: "component" })],
   parameters: { layout: "centered" },
 };
 

@@ -131,11 +131,7 @@ export function NewSiteSidebarText({
   };
 
   return (
-    <StyledNewSiteSidebarText
-      {...rest}
-      data-is-selected={isSelected}
-      onClick={handleClick}
-    >
+    <StyledNewSiteSidebarText {...rest} data-is-selected={isSelected} onClick={handleClick}>
       <div className="icon">{icon}</div>
       <div className="children">{children}</div>
     </StyledNewSiteSidebarText>
@@ -226,11 +222,7 @@ export function NewSiteSidebarSubtext({
       onClick={handleClick}
       {...rest}
     >
-      {icon ? (
-        <div className="icon">{icon}</div>
-      ) : (
-        !smaller && <div className="dot" />
-      )}
+      {icon ? <div className="icon">{icon}</div> : !smaller && <div className="dot" />}
       <div className="children">{children}</div>
       {right && <div className="right">{right}</div>}
     </StyledNewSiteSidebarSubtext>
@@ -364,11 +356,7 @@ export function NewSiteSidebarHeader({
   ellipsize?: boolean;
 }) {
   return (
-    <StyledNewSiteSidebarHeader
-      data-is-subtext={subtext}
-      data-ellipsize={ellipsize}
-      {...rest}
-    >
+    <StyledNewSiteSidebarHeader data-is-subtext={subtext} data-ellipsize={ellipsize} {...rest}>
       {children}
     </StyledNewSiteSidebarHeader>
   );

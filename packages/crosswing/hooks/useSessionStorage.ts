@@ -24,10 +24,7 @@ type Setter<S> = (value: S) => any;
  * @returns An array containing the value associated with the key in position 0,
  * and a function to set the value in position 1.
  */
-export function useSessionStorage<S>(
-  key: string,
-  initialValue: S | (() => S),
-): [S, Setter<S>] {
+export function useSessionStorage<S>(key: string, initialValue: S | (() => S)): [S, Setter<S>] {
   // The initialValue arg is only used if there is nothing in sessionStorage,
   // otherwise we use the value in sessionStorage so state persists through a
   // page refresh. We pass a function to useState so sessionStorage lookup only
@@ -85,16 +82,10 @@ export function useSessionStorage<S>(
 
     // The custom storage event allows us to update our component
     // when a change occurs in sessionStorage outside of our component
-    window.addEventListener(
-      SessionStorageChanged.eventName,
-      onSessionStorageChange,
-    );
+    window.addEventListener(SessionStorageChanged.eventName, onSessionStorageChange);
 
     return () => {
-      window.removeEventListener(
-        SessionStorageChanged.eventName,
-        onSessionStorageChange,
-      );
+      window.removeEventListener(SessionStorageChanged.eventName, onSessionStorageChange);
     };
   }, [key]); // Re-run if the key changes
 

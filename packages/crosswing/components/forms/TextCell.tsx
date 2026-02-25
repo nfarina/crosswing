@@ -27,9 +27,7 @@ export function TextCell({
   newStyle,
   ...rest
 }: Omit<
-  | HTMLAttributes<HTMLDivElement>
-  | Parameters<typeof Clickable>[0]
-  | Parameters<typeof Link>[0],
+  HTMLAttributes<HTMLDivElement> | Parameters<typeof Clickable>[0] | Parameters<typeof Link>[0],
   "title"
 > & {
   /** If provided, the cell will be rendered as a `Link` to the given URL. */
@@ -95,9 +93,7 @@ export function TextCell({
       {badge && <div className="badge">{badge}</div>}
       {right && <div className="right">{right}</div>}
       {checked != null && (
-        <div className="checked">
-          {checked ? <Check /> : <div className="not-checked" />}
-        </div>
+        <div className="checked">{checked ? <Check /> : <div className="not-checked" />}</div>
       )}
       {showDisclosure && <ChevronRight size={20} className="disclosure" />}
     </StyledTextCell>

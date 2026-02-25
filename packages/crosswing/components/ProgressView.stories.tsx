@@ -54,9 +54,7 @@ export const ProgressCentered = () => {
   );
 };
 
-export const IndeterminateTiny = () => (
-  <ProgressView thickness={0.5} size="12px" />
-);
+export const IndeterminateTiny = () => <ProgressView thickness={0.5} size="12px" />;
 
 export const ProgressTiny = () => {
   const props = usePropSequence<typeof ProgressView>(

@@ -3,9 +3,7 @@ import { colors } from "../../colors/colors";
 import { fonts } from "../../fonts/fonts";
 import { StyledTextInput } from "../forms/TextInput";
 
-export const TransformerDecorator = (Story: () => any) => (
-  <Container children={<Story />} />
-);
+export const TransformerDecorator = (Story: () => any) => <Container children={<Story />} />;
 
 const Container = styled.div`
   display: flex;

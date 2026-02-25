@@ -1,10 +1,7 @@
 import { use, useEffect } from "react";
 import { HostContext } from "../context/HostContext.js";
 
-export function useWindowListener(
-  name: string,
-  listener: Function | null | undefined,
-) {
+export function useWindowListener(name: string, listener: Function | null | undefined) {
   const { unsafe_post } = use(HostContext);
 
   // Capture for error message below.
@@ -32,9 +29,7 @@ export function useWindowListener(
       try {
         result = await listener(args);
       } catch (error: any) {
-        console.error(
-          `Error calling the listener for ${name}: ${error.message}`,
-        );
+        console.error(`Error calling the listener for ${name}: ${error.message}`);
 
         // Pass the error on to the native host if it cares.
         if (callbackNum) {

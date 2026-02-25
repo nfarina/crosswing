@@ -13,10 +13,7 @@ import { colors } from "../../colors/colors";
 import { fonts } from "../../fonts/fonts";
 import { flattenChildren } from "../../hooks/flattenChildren";
 import { tooltip } from "../../modals/popup/TooltipView";
-import {
-  StyledUnreadBadge,
-  UnreadBadge,
-} from "../../router/tabs/UnreadBadge.js";
+import { StyledUnreadBadge, UnreadBadge } from "../../router/tabs/UnreadBadge.js";
 import { AutoBorderView, BorderVisibility } from "../AutoBorderView";
 import { Button, StyledButton } from "../Button";
 import { NewSiteContext, shouldRenderAccessory } from "./NewSiteContext";
@@ -55,27 +52,20 @@ export function NewSiteHeader({
     }
   }, [siteTitle, title, subtitle]);
 
-  const {
-    sidebarVisible,
-    setSidebarVisible,
-    siteLayout,
-    siteAccessory,
-    sidebarBadge,
-  } = use(NewSiteContext);
+  const { sidebarVisible, setSidebarVisible, siteLayout, siteAccessory, sidebarBadge } =
+    use(NewSiteContext);
 
   const cssProps = {
     "--accessory-width": (siteAccessory?.size.width ?? 0) + "px",
     "--accessory-height": (siteAccessory?.size.height ?? 0) + "px",
     ...style,
   } as CSSProperties;
-  const showSidebarBadge =
-    !!sidebarBadge && (!sidebarVisible || siteLayout === "mobile");
+  const showSidebarBadge = !!sidebarBadge && (!sidebarVisible || siteLayout === "mobile");
 
   // In mobile layout, we have space on the left for one "overflow" accessory.
   // Get the list of children in the accessories, if provided, and move the first one to the left.
   let overflowAccessory: ReactNode | undefined;
-  const flattenedAccessories =
-    flattenChildren(accessories).filter(isValidElement);
+  const flattenedAccessories = flattenChildren(accessories).filter(isValidElement);
   if (siteLayout === "mobile" && flattenedAccessories.length > 2) {
     overflowAccessory = flattenedAccessories[0];
     accessories = flattenedAccessories.slice(1);
@@ -106,9 +96,7 @@ export function NewSiteHeader({
         />
         {showSidebarBadge && <UnreadBadge>{sidebarBadge}</UnreadBadge>}
       </div>
-      {overflowAccessory && (
-        <div className="overflow-accessory">{overflowAccessory}</div>
-      )}
+      {overflowAccessory && <div className="overflow-accessory">{overflowAccessory}</div>}
       <div className="title-left" />
       <div className="page-title" ref={titleRef} data-has-subtitle={!!subtitle}>
         <div className="title" data-ellipsize={!!ellipsizeTitle}>

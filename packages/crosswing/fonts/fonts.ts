@@ -182,9 +182,7 @@ export function font({
     // You can define the CSS var "--font-scale" to globally scale up or
     // down fonts created with FontBuilder. This is how we handle adjusting the
     // entire UI for accessibility.
-    const scaledSize = fixed
-      ? `${size}px`
-      : `calc(${size}px * var(--font-scale, 1))`;
+    const scaledSize = fixed ? `${size}px` : `calc(${size}px * var(--font-scale, 1))`;
 
     // Scale the line size if you defined it in points.
     const scaledLine =

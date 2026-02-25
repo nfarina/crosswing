@@ -85,9 +85,7 @@ export function NavStack({
 
   return (
     <StyledNavs
-      onTouchStart={
-        container === "ios" && animation === "slide" ? onTouchStart : undefined
-      }
+      onTouchStart={container === "ios" && animation === "slide" ? onTouchStart : undefined}
       data-animation={animation}
       {...rest}
     >
@@ -103,9 +101,7 @@ export function NavStack({
             }}
           >
             <div className="item" ref={item.ref}>
-              <RouterContext value={item.childContext}>
-                {item.child}
-              </RouterContext>
+              <RouterContext value={item.childContext}>{item.child}</RouterContext>
             </div>
           </CSSTransition>
         ))}

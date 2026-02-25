@@ -9,11 +9,7 @@ import { LabeledDateRangeInput } from "./LabeledDateRangeInput.js";
 
 export default {
   component: LabeledDateRangeInput,
-  decorators: [
-    SeparatorDecorator,
-    ModalDecorator,
-    CrosswingAppDecorator({ layout: "mobile" }),
-  ],
+  decorators: [SeparatorDecorator, ModalDecorator, CrosswingAppDecorator({ layout: "mobile" })],
   parameters: { layout: "centered" },
 } satisfies Meta<typeof LabeledDateRangeInput>;
 

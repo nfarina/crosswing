@@ -71,16 +71,11 @@ export function useErrorAlert({
           title="Error"
           onClose={onAlertClose}
           hideCloseButton
-          buttons={[
-            ...(hasDetails && showDetails ? [detailsButton] : []),
-            okButton,
-          ]}
+          buttons={[...(hasDetails && showDetails ? [detailsButton] : []), okButton]}
           data-expanded={expanded}
         >
           {message && <div>{message}</div>}
-          {expanded && hasDetails && (
-            <ErrorView error={{ name, message, details, stack }} />
-          )}
+          {expanded && hasDetails && <ErrorView error={{ name, message, details, stack }} />}
         </ErrorAlertView>
       );
     },

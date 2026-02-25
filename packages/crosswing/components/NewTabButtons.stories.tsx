@@ -7,10 +7,7 @@ import { Sidebar, Trash } from "lucide-react";
 
 export default {
   component: NewTabButtons,
-  decorators: [
-    CrosswingAppDecorator({ layout: "fullscreen" }),
-    RouterDecorator,
-  ],
+  decorators: [CrosswingAppDecorator({ layout: "fullscreen" }), RouterDecorator],
   parameters: {
     layout: "fullscreen",
   },
@@ -22,22 +19,13 @@ export const TrackStyle = () => {
   return (
     <div style={{ width: 300, padding: 20 }}>
       <NewTabButtons mode="track" pill={true}>
-        <TabButton
-          selected={activeTab === "first"}
-          onClick={() => setActiveTab("first")}
-        >
+        <TabButton selected={activeTab === "first"} onClick={() => setActiveTab("first")}>
           First Tab
         </TabButton>
-        <TabButton
-          selected={activeTab === "second"}
-          onClick={() => setActiveTab("second")}
-        >
+        <TabButton selected={activeTab === "second"} onClick={() => setActiveTab("second")}>
           Second Tab
         </TabButton>
-        <TabButton
-          selected={activeTab === "third"}
-          onClick={() => setActiveTab("third")}
-        >
+        <TabButton selected={activeTab === "third"} onClick={() => setActiveTab("third")}>
           Third Tab
         </TabButton>
       </NewTabButtons>
@@ -62,22 +50,13 @@ export const TrackStyleSquare = () => {
   return (
     <div style={{ width: 300, padding: 20 }}>
       <NewTabButtons mode="track" pill={false}>
-        <TabButton
-          selected={activeTab === "first"}
-          onClick={() => setActiveTab("first")}
-        >
+        <TabButton selected={activeTab === "first"} onClick={() => setActiveTab("first")}>
           First Tab
         </TabButton>
-        <TabButton
-          selected={activeTab === "second"}
-          onClick={() => setActiveTab("second")}
-        >
+        <TabButton selected={activeTab === "second"} onClick={() => setActiveTab("second")}>
           Second Tab
         </TabButton>
-        <TabButton
-          selected={activeTab === "third"}
-          onClick={() => setActiveTab("third")}
-        >
+        <TabButton selected={activeTab === "third"} onClick={() => setActiveTab("third")}>
           Third Tab
         </TabButton>
       </NewTabButtons>
@@ -102,22 +81,13 @@ export const ButtonStyle = () => {
   return (
     <div style={{ width: 300, padding: 20 }}>
       <NewTabButtons mode="buttons">
-        <TabButton
-          selected={activeTab === "first"}
-          onClick={() => setActiveTab("first")}
-        >
+        <TabButton selected={activeTab === "first"} onClick={() => setActiveTab("first")}>
           First Tab
         </TabButton>
-        <TabButton
-          selected={activeTab === "second"}
-          onClick={() => setActiveTab("second")}
-        >
+        <TabButton selected={activeTab === "second"} onClick={() => setActiveTab("second")}>
           Second Tab
         </TabButton>
-        <TabButton
-          selected={activeTab === "third"}
-          onClick={() => setActiveTab("third")}
-        >
+        <TabButton selected={activeTab === "third"} onClick={() => setActiveTab("third")}>
           Third Tab
         </TabButton>
       </NewTabButtons>
@@ -237,10 +207,7 @@ export const SingleTab = () => {
   return (
     <div style={{ width: 200, padding: 20 }}>
       <NewTabButtons mode="track">
-        <TabButton
-          selected={activeTab === "only"}
-          onClick={() => setActiveTab("only")}
-        >
+        <TabButton selected={activeTab === "only"} onClick={() => setActiveTab("only")}>
           Only Tab
         </TabButton>
       </NewTabButtons>

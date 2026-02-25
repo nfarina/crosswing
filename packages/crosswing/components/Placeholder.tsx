@@ -7,9 +7,7 @@ import { Link } from "../router/Link.js";
  * Just a useful component to use during development, to put something on the
  * screen quickly that isn't distractingly-ugly.
  */
-export function Placeholder({
-  ...rest
-}: Record<string, any> & Parameters<typeof Link>[0]) {
+export function Placeholder({ ...rest }: Record<string, any> & Parameters<typeof Link>[0]) {
   return <StyledPlaceholder {...rest} />;
 }
 

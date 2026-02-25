@@ -25,10 +25,7 @@ export default function DateRangeControl({
   ...rest
 }: HTMLAttributes<HTMLDivElement> & {
   value: DateRange | null;
-  onValueChange: (
-    newValue: DateRange | null,
-    type?: DateRangeValueType,
-  ) => void;
+  onValueChange: (newValue: DateRange | null, type?: DateRangeValueType) => void;
   hidePresets?: boolean;
 }) {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -95,11 +92,7 @@ export default function DateRangeControl({
       />
       <div className="separator" />
       <div className="presets">
-        <Button
-          size="smaller"
-          children="Clear"
-          onClick={() => onValueChange(null, "preset")}
-        />
+        <Button size="smaller" children="Clear" onClick={() => onValueChange(null, "preset")} />
         {!hidePresets &&
           filteredPresets.map((preset) => (
             <Button

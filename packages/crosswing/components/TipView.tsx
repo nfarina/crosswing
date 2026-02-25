@@ -23,18 +23,10 @@ export function TipView({
     "--background-dark": tint
       ? colors.neutral750({ hue: tint, chroma: 0.08 })
       : colors.gray500({ alpha: 0.25 }),
-    "--color": tint
-      ? colors.neutral600({ hue: tint, chroma: 0.08 })
-      : colors.gray600(),
-    "--color-dark": tint
-      ? colors.neutral300({ hue: tint, chroma: 0.1 })
-      : colors.gray300(),
-    "--icon-color": tint
-      ? colors.neutral550({ hue: tint, chroma: 0.1 })
-      : colors.gray550(),
-    "--icon-color-dark": tint
-      ? colors.neutral200({ hue: tint, chroma: 0.12 })
-      : colors.gray200(),
+    "--color": tint ? colors.neutral600({ hue: tint, chroma: 0.08 }) : colors.gray600(),
+    "--color-dark": tint ? colors.neutral300({ hue: tint, chroma: 0.1 }) : colors.gray300(),
+    "--icon-color": tint ? colors.neutral550({ hue: tint, chroma: 0.1 }) : colors.gray550(),
+    "--icon-color-dark": tint ? colors.neutral200({ hue: tint, chroma: 0.12 }) : colors.gray200(),
     ...style,
   } as CSSProperties;
 

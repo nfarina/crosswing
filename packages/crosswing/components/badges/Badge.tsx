@@ -24,24 +24,12 @@ export function Badge({
   children?: ReactNode;
 }) {
   const cssProps = {
-    "--background": tint
-      ? colors.neutral50({ hue: tint, chroma: 0.035 })
-      : colors.gray50(),
-    "--background-dark": tint
-      ? colors.neutral750({ hue: tint, chroma: 0.04 })
-      : colors.gray750(),
-    "--color": tint
-      ? colors.neutral500({ hue: tint, chroma: 0.15 })
-      : colors.gray600(),
-    "--color-dark": tint
-      ? colors.neutral350({ hue: tint, chroma: 0.18 })
-      : colors.gray300(),
-    "--border-color": tint
-      ? colors.neutral200({ hue: tint, chroma: 0.08 })
-      : colors.gray150(),
-    "--border-color-dark": tint
-      ? colors.neutral650({ hue: tint, chroma: 0.08 })
-      : colors.gray650(),
+    "--background": tint ? colors.neutral50({ hue: tint, chroma: 0.035 }) : colors.gray50(),
+    "--background-dark": tint ? colors.neutral750({ hue: tint, chroma: 0.04 }) : colors.gray750(),
+    "--color": tint ? colors.neutral500({ hue: tint, chroma: 0.15 }) : colors.gray600(),
+    "--color-dark": tint ? colors.neutral350({ hue: tint, chroma: 0.18 }) : colors.gray300(),
+    "--border-color": tint ? colors.neutral200({ hue: tint, chroma: 0.08 }) : colors.gray150(),
+    "--border-color-dark": tint ? colors.neutral650({ hue: tint, chroma: 0.08 }) : colors.gray650(),
     ...style,
   } as CSSProperties;
 
@@ -53,9 +41,7 @@ export function Badge({
     cssProps["--background-dark"] = tint
       ? colors.neutral700({ hue: tint, chroma: 0.1 })
       : colors.gray700();
-    cssProps["--color"] = tint
-      ? colors.neutral500({ hue: tint, chroma: 0.2 })
-      : colors.gray600();
+    cssProps["--color"] = tint ? colors.neutral500({ hue: tint, chroma: 0.2 }) : colors.gray600();
     cssProps["--color-dark"] = tint
       ? colors.neutral350({ hue: tint, chroma: 0.15 })
       : colors.gray350();

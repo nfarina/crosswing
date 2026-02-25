@@ -66,9 +66,7 @@ export const BasicTextInput = () => {
         </div>
 
         <div style={ButtonGroupStyle}>
-          <button onClick={() => persistedState.set("Force update")}>
-            Force Update
-          </button>
+          <button onClick={() => persistedState.set("Force update")}>Force Update</button>
           <button onClick={() => setSimulateError(!simulateError)}>
             {simulateError ? "Disable" : "Enable"} Errors
           </button>
@@ -266,15 +264,11 @@ export const ErrorHandling = () => {
         </div>
 
         <div style={ButtonGroupStyle}>
-          <button onClick={() => persistedState.set("good value")}>
-            Update to "good value"
-          </button>
+          <button onClick={() => persistedState.set("good value")}>Update to "good value"</button>
           <button onClick={() => persistedState.set("neutral value")}>
             Update to "neutral value"
           </button>
-          <button onClick={() => persistedState.set("bad value")}>
-            Update to "bad value"
-          </button>
+          <button onClick={() => persistedState.set("bad value")}>Update to "bad value"</button>
           <button onClick={() => setShouldError(!shouldError)}>
             {shouldError ? "Disable" : "Enable"} Error Mode
           </button>
@@ -322,9 +316,7 @@ export const ConcurrentUpdates = () => {
 
       // Simulate the race condition - the last one to complete wins
       setPersistedValue(newValue);
-      log(
-        `✅ Update #${updateNumber} completed: "${newValue}" (NOW PERSISTED)`,
-      );
+      log(`✅ Update #${updateNumber} completed: "${newValue}" (NOW PERSISTED)`);
     },
     updateDelay: 400, // Short delay to make concurrent calls more likely
     onComplete: (value) => log(`🎉 onComplete: "${value}"`),
@@ -361,15 +353,11 @@ export const ConcurrentUpdates = () => {
         </div>
 
         <div style={ButtonGroupStyle}>
-          <button onClick={() => persistedState.set("slow update")}>
-            Slow Update (3s delay)
-          </button>
+          <button onClick={() => persistedState.set("slow update")}>Slow Update (3s delay)</button>
           <button onClick={() => persistedState.set("fast update")}>
             Fast Update (0.5s delay)
           </button>
-          <button onClick={simulateRaceCondition}>
-            Simulate Race Condition
-          </button>
+          <button onClick={simulateRaceCondition}>Simulate Race Condition</button>
           <button onClick={() => setLogs([])}>Clear Logs</button>
         </div>
 
@@ -380,16 +368,16 @@ export const ConcurrentUpdates = () => {
             color: colors.textSecondary(),
           }}
         >
-          Expected problem: "slow update" should overwrite "fast update" even
-          though it started first
+          Expected problem: "slow update" should overwrite "fast update" even though it started
+          first
         </div>
       </div>
 
       <div style={LogsStyle}>
         <h4>Race Condition Log:</h4>
         <div style={{ marginBottom: "10px", fontSize: "12px", opacity: 0.8 }}>
-          Watch the update numbers - a lower-numbered update completing after a
-          higher-numbered one indicates the race condition bug.
+          Watch the update numbers - a lower-numbered update completing after a higher-numbered one
+          indicates the race condition bug.
         </div>
         {logs.map((log, i) => (
           <div key={i} style={LogLineStyle}>
@@ -469,9 +457,7 @@ export const KeyIsolation = () => {
       editCurrentKey(value);
     } else {
       // Queue the edit for when we switch to this key
-      log(
-        `📝 Queueing edit for ${key}: "${value}" (will apply when switched to)`,
-      );
+      log(`📝 Queueing edit for ${key}: "${value}" (will apply when switched to)`);
       pendingEditsRef.current[key] = value;
     }
   }
@@ -533,10 +519,7 @@ export const KeyIsolation = () => {
                 key={k}
                 style={{
                   fontWeight: k === currentKey ? "bold" : "normal",
-                  color:
-                    k === currentKey
-                      ? colors.primary()
-                      : colors.textSecondary(),
+                  color: k === currentKey ? colors.primary() : colors.textSecondary(),
                 }}
               >
                 {k}: "{v}"
@@ -570,9 +553,8 @@ export const KeyIsolation = () => {
             color: colors.textSecondary(),
           }}
         >
-          <strong>Expected behavior:</strong> Each user should maintain their
-          own update queue. Switching keys mid-update should not cancel or
-          interfere with other keys' updates.
+          <strong>Expected behavior:</strong> Each user should maintain their own update queue.
+          Switching keys mid-update should not cancel or interfere with other keys' updates.
         </div>
       </div>
 

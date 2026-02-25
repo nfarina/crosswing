@@ -14,9 +14,7 @@ export default {
 
 type Story = StoryFn<typeof Button>;
 
-export const WithChildren: Story = () => (
-  <Button children="Hello!" onClick={action("onClick")} />
-);
+export const WithChildren: Story = () => <Button children="Hello!" onClick={action("onClick")} />;
 
 export const Disabled: Story = () => (
   <Button disabled children="Hello!" onClick={action("onClick")} />
@@ -38,12 +36,7 @@ export const WorkingState: Story = () => {
 };
 
 export const PrimarySmaller: Story = () => (
-  <Button
-    size="smaller"
-    primary
-    children="Hello!"
-    onClick={action("onClick")}
-  />
+  <Button size="smaller" primary children="Hello!" onClick={action("onClick")} />
 );
 
 export const PrimaryNormal: Story = () => (
@@ -59,12 +52,7 @@ export const PrimaryLarger: Story = () => (
 );
 
 export const PrimaryLargest: Story = () => (
-  <Button
-    size="largest"
-    primary
-    children="Hello!"
-    onClick={action("onClick")}
-  />
+  <Button size="largest" primary children="Hello!" onClick={action("onClick")} />
 );
 
 // export const WithSubtitle: Story = () => (
@@ -96,16 +84,10 @@ export const PrimaryLargest: Story = () => (
 //   />
 // );
 
-export const IconOnly: Story = () => (
-  <Button icon={<X />} onClick={action("onClick")} />
-);
+export const IconOnly: Story = () => <Button icon={<X />} onClick={action("onClick")} />;
 
 export const IconAndTitle: Story = () => (
-  <Button
-    icon={<AlertTriangle />}
-    children="Error Details"
-    onClick={action("onClick")}
-  />
+  <Button icon={<AlertTriangle />} children="Error Details" onClick={action("onClick")} />
 );
 
 export const NewStyle: Story = () => (
@@ -113,12 +95,7 @@ export const NewStyle: Story = () => (
 );
 
 export const NewStylePrimary: Story = () => (
-  <Button
-    newStyle
-    primary
-    children="New style primary"
-    onClick={action("onClick")}
-  />
+  <Button newStyle primary children="New style primary" onClick={action("onClick")} />
 );
 
 export const NewStyleBordered: Story = () => (
@@ -149,10 +126,5 @@ export const NewStyleAsLinkPrimary: Story = () => (
 );
 
 export const NewStyleAsLinkNewTab: Story = () => (
-  <Button
-    newStyle
-    to="https://example.com"
-    target="_blank"
-    children="Open in new tab"
-  />
+  <Button newStyle to="https://example.com" target="_blank" children="Open in new tab" />
 );

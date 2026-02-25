@@ -10,9 +10,7 @@ test("sorts objects by named key", () => {
 
   expect(sortedNames).toEqual(["Apples", "Bananas"]);
 
-  const reverseSortedNames = sort(items, "name", "desc").map(
-    (item) => item.name,
-  );
+  const reverseSortedNames = sort(items, "name", "desc").map((item) => item.name);
 
   expect(reverseSortedNames).toEqual(["Bananas", "Apples"]);
 });

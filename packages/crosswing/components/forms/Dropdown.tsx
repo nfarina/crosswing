@@ -85,12 +85,7 @@ export function Dropdown({
   );
 
   return (
-    <StyledDropdown
-      newStyle
-      popup={popup}
-      disabled={disabled || items.length === 0}
-      {...rest}
-    >
+    <StyledDropdown newStyle popup={popup} disabled={disabled || items.length === 0} {...rest}>
       <span className="text">{renderDisplayText()}</span>
     </StyledDropdown>
   );

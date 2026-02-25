@@ -12,30 +12,15 @@ export default {
 type Story = StoryFn<typeof StatusBadge>;
 
 export const Info: Story = (args) => (
-  <StatusBadge
-    children="Processed today"
-    onClick={action("click")}
-    {...args}
-    type="info"
-  />
+  <StatusBadge children="Processed today" onClick={action("click")} {...args} type="info" />
 );
 
 export const Warning: Story = (args) => (
-  <StatusBadge
-    children="Amounts do not match"
-    onClick={action("click")}
-    {...args}
-    type="warning"
-  />
+  <StatusBadge children="Amounts do not match" onClick={action("click")} {...args} type="warning" />
 );
 
 export const Error: Story = (args) => (
-  <StatusBadge
-    children="This field is required"
-    onClick={action("click")}
-    {...args}
-    type="error"
-  />
+  <StatusBadge children="This field is required" onClick={action("click")} {...args} type="error" />
 );
 
 export const WithoutIcon: Story = (args) => (
@@ -49,13 +34,7 @@ export const WithoutIcon: Story = (args) => (
 );
 
 export const Smallest: Story = (args) => (
-  <StatusBadge
-    size="smallest"
-    children="Today"
-    onClick={action("click")}
-    {...args}
-    type="info"
-  />
+  <StatusBadge size="smallest" children="Today" onClick={action("click")} {...args} type="info" />
 );
 
 export const SmallestWithoutIcon: Story = (args) => (

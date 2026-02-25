@@ -9,10 +9,7 @@ const queue: Map<symbol, Set<() => void>> = new Map();
  * Locks on the given value then runs the given function asynchronously,
  * ensuring that only one instance of the function can be running at a time.
  */
-export function runWithMutex<T>(
-  mutex: symbol,
-  func: () => Promise<T>,
-): Promise<T> {
+export function runWithMutex<T>(mutex: symbol, func: () => Promise<T>): Promise<T> {
   return new Promise((resolve, reject) => {
     // Get the waitlist for this mutex or create a new one.
     const waitList = queue.get(mutex) ?? new Set();
@@ -27,9 +24,7 @@ export function runWithMutex<T>(
       try {
         resolve(await func());
       } catch (error: any) {
-        debug(
-          `Error while processing on mutex ${mutex.toString()}: ${error.stack}`,
-        );
+        debug(`Error while processing on mutex ${mutex.toString()}: ${error.stack}`);
         reject(error);
       } finally {
         // We are done! Remove ourself from the waitList.
@@ -47,9 +42,7 @@ export function runWithMutex<T>(
     }
 
     // Add ourself to the list.
-    debug(
-      `Waiting on mutex ${mutex.toString()} (${waitList.size} others waiting)`,
-    );
+    debug(`Waiting on mutex ${mutex.toString()} (${waitList.size} others waiting)`);
     waitList.add(process);
 
     // If we are the only thing on this list, we can process immediately.

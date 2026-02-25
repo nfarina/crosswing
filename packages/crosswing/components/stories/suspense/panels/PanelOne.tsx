@@ -5,9 +5,7 @@ import { Placeholder } from "../../../Placeholder.js";
 
 export default function PanelOne({}: any) {
   return (
-    <StyledPanel style={{ background: colors.purple(), color: colors.white() }}>
-      One
-    </StyledPanel>
+    <StyledPanel style={{ background: colors.purple(), color: colors.white() }}>One</StyledPanel>
   );
 }
 

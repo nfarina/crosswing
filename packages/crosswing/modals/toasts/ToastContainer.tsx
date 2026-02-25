@@ -16,16 +16,12 @@ export function ToastContainer({
   const renderToast = (toast: Toast) => {
     const { key, ...rest } = toast;
 
-    return (
-      <ToastView key={key} {...rest} onClose={() => onToastClose?.(toast)} />
-    );
+    return <ToastView key={key} {...rest} onClose={() => onToastClose?.(toast)} />;
   };
 
   return (
     <StyledToastContainer>
-      <TransitionGroup component={null}>
-        {toasts.map(renderToast)}
-      </TransitionGroup>
+      <TransitionGroup component={null}>{toasts.map(renderToast)}</TransitionGroup>
     </StyledToastContainer>
   );
 }

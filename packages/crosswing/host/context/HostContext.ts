@@ -3,13 +3,10 @@ import { detectContainer } from "../util/ipc.js";
 import { openExternalLink } from "../util/openExternalLink.js";
 import { DeepLink, HostContextValue } from "../util/types.js";
 
-export const HostContext =
-  createContext<HostContextValue>(defaultHostContext());
+export const HostContext = createContext<HostContextValue>(defaultHostContext());
 HostContext.displayName = "HostContext";
 
-export function defaultHostContext(
-  merge?: Partial<HostContextValue>,
-): HostContextValue {
+export function defaultHostContext(merge?: Partial<HostContextValue>): HostContextValue {
   return {
     container: detectContainer(),
     platform: "unknown",

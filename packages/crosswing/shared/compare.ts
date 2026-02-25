@@ -3,12 +3,7 @@
  * point to the same object.
  */
 export function deepEqual<T>(a: T, b: T): boolean {
-  if (
-    typeof a === "object" &&
-    typeof b === "object" &&
-    a !== null &&
-    b !== null
-  ) {
+  if (typeof a === "object" && typeof b === "object" && a !== null && b !== null) {
     const keysA = Object.keys(a);
     const keysB = Object.keys(b);
 
@@ -39,7 +34,5 @@ export function shallowEqualArrays<T>(
 
   if (a.length !== b.length) return false;
 
-  return ordered
-    ? a.every((v, i) => v === b[i])
-    : a.every((v) => b.includes(v));
+  return ordered ? a.every((v, i) => v === b[i]) : a.every((v) => b.includes(v));
 }

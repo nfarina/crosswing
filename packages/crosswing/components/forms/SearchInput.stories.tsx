@@ -22,9 +22,7 @@ export const Empty = () => <SearchInput placeholder="Search templates..." />;
 
 export const WithValue = () => <SearchInput defaultValue="kitchen design" />;
 
-export const Disabled = () => (
-  <SearchInput defaultValue="kitchen design" disabled />
-);
+export const Disabled = () => <SearchInput defaultValue="kitchen design" disabled />;
 
 export const Working = () => {
   const [value, setValue] = useState("");
@@ -59,21 +57,13 @@ export const WithClearButton = () => {
   const [value, setValue] = useState("removable search term");
 
   return (
-    <SearchInput
-      value={value}
-      onValueChange={setValue}
-      placeholder="Search with clear button..."
-    />
+    <SearchInput value={value} onValueChange={setValue} placeholder="Search with clear button..." />
   );
 };
 
-export const NewStyleEmpty = () => (
-  <SearchInput newStyle pill placeholder="Search templates..." />
-);
+export const NewStyleEmpty = () => <SearchInput newStyle pill placeholder="Search templates..." />;
 
-export const NewStyleWithValue = () => (
-  <SearchInput newStyle pill defaultValue="kitchen design" />
-);
+export const NewStyleWithValue = () => <SearchInput newStyle pill defaultValue="kitchen design" />;
 
 export const NewStyleDisabled = () => (
   <SearchInput newStyle pill defaultValue="kitchen design" disabled />

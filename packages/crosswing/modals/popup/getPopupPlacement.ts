@@ -6,13 +6,7 @@ import { Size } from "../../shared/sizing";
  * Desired placement of the Popup. Defaults to "platform" which places the popup
  * below the target on the web, and above the target on mobile.
  */
-export type PopupPlacement =
-  | "platform"
-  | "above"
-  | "below"
-  | "left"
-  | "right"
-  | "floating";
+export type PopupPlacement = "platform" | "above" | "below" | "left" | "right" | "floating";
 
 export function getPopupPlacement({
   containerSize,
@@ -28,11 +22,7 @@ export function getPopupPlacement({
   placement: PopupPlacement;
   hostContainer: HostContainer;
   arrowLength?: number;
-}): [
-  popupPosition: Position,
-  arrowOffset: number,
-  resolvedPlacement: PopupPlacement,
-] {
+}): [popupPosition: Position, arrowOffset: number, resolvedPlacement: PopupPlacement] {
   // console.log("container", containerSize);
   // console.log("target", targetRect);
   // console.log("popup", popupSize);
@@ -47,9 +37,7 @@ export function getPopupPlacement({
   // First resolve the "platform" placement depending on the host container.
   if (placement === "platform") {
     placement =
-      hostContainer === "web" ||
-      hostContainer === "webapp" ||
-      hostContainer === "electron"
+      hostContainer === "web" || hostContainer === "webapp" || hostContainer === "electron"
         ? "below"
         : "above";
   }
@@ -62,10 +50,7 @@ export function getPopupPlacement({
       // No space above either; bump to the left for now.
       placement = "left";
     }
-  } else if (
-    placement === "above" &&
-    popupSize.height + arrowLength > spaceAbove
-  ) {
+  } else if (placement === "above" && popupSize.height + arrowLength > spaceAbove) {
     if (popupSize.height + arrowLength <= spaceBelow) {
       placement = "below";
     } else {
@@ -89,10 +74,7 @@ export function getPopupPlacement({
       // No space right either; we'll have to be floating.
       placement = "floating";
     }
-  } else if (
-    placement === "right" &&
-    popupSize.width + arrowLength > spaceRight
-  ) {
+  } else if (placement === "right" && popupSize.width + arrowLength > spaceRight) {
     if (popupSize.width + arrowLength <= spaceLeft) {
       placement = "left";
     } else if (

@@ -22,9 +22,7 @@ const generateModalKey = (() => {
 /**
  * React hook for showing modal windows.
  */
-export function useModal<T extends any[]>(
-  renderModal: (...args: T) => ReactNode,
-): Modal<T> {
+export function useModal<T extends any[]>(renderModal: (...args: T) => ReactNode): Modal<T> {
   const [key] = useState(generateModalKey);
   const context = use(ModalContext);
 

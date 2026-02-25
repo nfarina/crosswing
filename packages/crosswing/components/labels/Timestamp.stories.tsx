@@ -18,13 +18,9 @@ export const Default = () => <Timestamp date={1554744840915} />;
 
 export const Today = () => <Timestamp static date={Date.now()} />;
 
-export const Format = () => (
-  <Timestamp date={1554744840915} format="MMMM D, YYYY" />
-);
+export const Format = () => <Timestamp date={1554744840915} format="MMMM D, YYYY" />;
 
-export const Custom = () => (
-  <Timestamp date={1554744840915} format={customFormatter} />
-);
+export const Custom = () => <Timestamp date={1554744840915} format={customFormatter} />;
 
 export const Relative = () => (
   // Need to use static because we only hijack Date.now() on the initial render.

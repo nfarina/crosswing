@@ -24,15 +24,8 @@ export const AutoTrimDemo = () => {
 
   return (
     <>
-      <TextInput
-        placeholder="Display Name"
-        value={value}
-        onValueChange={setValue}
-      />
-      <Button
-        children="Reset Value to 'Blue '"
-        onClick={() => setValue("Blue ")}
-      />
+      <TextInput placeholder="Display Name" value={value} onValueChange={setValue} />
+      <Button children="Reset Value to 'Blue '" onClick={() => setValue("Blue ")} />
       <pre>TextInput Value: "{value}"</pre>
     </>
   );
@@ -41,13 +34,7 @@ export const AutoTrimDemo = () => {
 export const WithPlaceholder = () => {
   const [name, setName] = useState("");
 
-  return (
-    <TextInput
-      placeholder={'Ex: "Kitchen Remodel"'}
-      value={name}
-      onValueChange={setName}
-    />
-  );
+  return <TextInput placeholder={'Ex: "Kitchen Remodel"'} value={name} onValueChange={setName} />;
 };
 
 export const WithValue = () => {
@@ -72,13 +59,7 @@ export const WithErrorColorOnly = () => {
 export const WithError = () => {
   const [text, setText] = useState("Forty");
 
-  return (
-    <TextInput
-      value={text}
-      onValueChange={setText}
-      error={new Error("Invalid Number")}
-    />
-  );
+  return <TextInput value={text} onValueChange={setText} error={new Error("Invalid Number")} />;
 };
 
 export const WithLongError = () => {
@@ -122,14 +103,7 @@ const Container = styled.div`
 export const NewStyleWithPlaceholder = () => {
   const [text, setText] = useState("");
 
-  return (
-    <TextInput
-      placeholder="Enter your name"
-      value={text}
-      onValueChange={setText}
-      newStyle
-    />
-  );
+  return <TextInput placeholder="Enter your name" value={text} onValueChange={setText} newStyle />;
 };
 
 export const NewStyleWithIcon = () => {

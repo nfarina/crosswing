@@ -8,11 +8,7 @@ import { useSheet } from "../../modals/sheet/useSheet.js";
 import { LoadingCurtain } from "../LoadingCurtain.js";
 import { PopupButton } from "../PopupButton.js";
 import { ToolbarPopupButton } from "../toolbar/Toolbar.js";
-import {
-  AllDateRangePresets,
-  areDateRangesEqual,
-  DateRange,
-} from "./DateRange.js";
+import { AllDateRangePresets, areDateRangesEqual, DateRange } from "./DateRange.js";
 import DateRangePicker from "./DateRangePicker.js";
 
 const DateRangeControl = lazy(() => import("./DateRangeControl.js"));
@@ -56,11 +52,7 @@ export function DateRangeInput({
 
   // Use a sheet for mobile layouts.
   const sheet = useSheet(() => (
-    <DateRangePicker
-      onClose={sheet.hide}
-      defaultRange={value}
-      onDateSelected={onValueChange}
-    />
+    <DateRangePicker onClose={sheet.hide} defaultRange={value} onDateSelected={onValueChange} />
   ));
 
   const mobileLayout = useMatchMedia("(max-width: 500px)");

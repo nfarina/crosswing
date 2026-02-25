@@ -15,10 +15,7 @@ export type HotKeyModifiers = {
 
 export const HotKeyContextDataAttributes = { "data-hotkey-context": true };
 
-export type HotKeyOnPressHandler = (
-  pressed: HotKey,
-  modifiers: HotKeyModifiers,
-) => boolean | void;
+export type HotKeyOnPressHandler = (pressed: HotKey, modifiers: HotKeyModifiers) => boolean | void;
 
 export type BaseUseHotKeyOptions = {
   /** Set to true to disable handling this hotkey. */
@@ -86,10 +83,7 @@ export function useHotKey(
       const matchingHotkey = hotKeys.find((hotKey) => {
         const parsed = parseHotKey(hotKey as any);
 
-        if (
-          parsed.key !== "*" &&
-          parsed.key.toLowerCase() !== key.toLowerCase()
-        ) {
+        if (parsed.key !== "*" && parsed.key.toLowerCase() !== key.toLowerCase()) {
           return false;
         }
 
@@ -114,8 +108,7 @@ export function useHotKey(
       // Check if we're in an input-like field.
       const insideInput =
         event.target instanceof HTMLElement &&
-        (IgnoredElements.includes(event.target.tagName) ||
-          event.target.isContentEditable);
+        (IgnoredElements.includes(event.target.tagName) || event.target.isContentEditable);
 
       // Is this a "naked" key?
       const isNakedKey = !ctrlKey && !altKey && !shiftKey && !metaKey;
@@ -135,8 +128,7 @@ export function useHotKey(
       // console.log("HotKey matched:", formatHotKey(event), "on", target);
 
       // If we handled a hotkey, it shouldn't do anything else!
-      const keyForCallback =
-        matchingHotkey === "*" ? (key as HotKey) : matchingHotkey;
+      const keyForCallback = matchingHotkey === "*" ? (key as HotKey) : matchingHotkey;
 
       const result = onPressCallback.current?.(keyForCallback, {
         ctrlKey,
@@ -188,13 +180,7 @@ export function parseHotKey(hotKey: HotKey): ParsedHotKey {
 /**
  * Formats a HotKey to a display format using unicode characters, like "⇧⌘A".
  */
-export function formatHotKey({
-  key,
-  ctrlKey,
-  altKey,
-  shiftKey,
-  metaKey,
-}: ParsedHotKey): string[] {
+export function formatHotKey({ key, ctrlKey, altKey, shiftKey, metaKey }: ParsedHotKey): string[] {
   const formatted: string[] = [];
 
   if (ctrlKey) formatted.push("⌃");
@@ -221,9 +207,7 @@ function isObscuredByContext(target: Element): boolean {
   for (let i = 0; i < contexts.length; i++) {
     const context = contexts[i];
 
-    const isObscured =
-      target.compareDocumentPosition(context) &
-      Node.DOCUMENT_POSITION_FOLLOWING;
+    const isObscured = target.compareDocumentPosition(context) & Node.DOCUMENT_POSITION_FOLLOWING;
 
     if (isObscured) {
       // console.log("HotKey blocked by context:", context);

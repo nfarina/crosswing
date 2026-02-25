@@ -4,19 +4,12 @@ import { colors } from "../colors/colors.js";
 import { fonts } from "../fonts/fonts.js";
 import { CrosswingAppDecorator } from "../storybook.js";
 import { PanelLayout, PanelToggleInsertionPoint } from "./PanelLayout.js";
-import {
-  Toolbar,
-  ToolbarInsertionPoint,
-  ToolbarSpace,
-} from "./toolbar/Toolbar.js";
+import { Toolbar, ToolbarInsertionPoint, ToolbarSpace } from "./toolbar/Toolbar.js";
 import { ToolbarLayout } from "./toolbar/ToolbarLayout.js";
 
 export default {
   component: PanelLayout,
-  decorators: [
-    ToolbarContainer,
-    CrosswingAppDecorator({ layout: "fullscreen" }),
-  ],
+  decorators: [ToolbarContainer, CrosswingAppDecorator({ layout: "fullscreen" })],
   parameters: { layout: "fullscreen" },
 };
 

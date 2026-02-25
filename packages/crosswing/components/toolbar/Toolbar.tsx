@@ -1,11 +1,4 @@
-import {
-  CSSProperties,
-  HTMLAttributes,
-  ReactNode,
-  use,
-  useLayoutEffect,
-  useRef,
-} from "react";
+import { CSSProperties, HTMLAttributes, ReactNode, use, useLayoutEffect, useRef } from "react";
 import { MoreHorizontal } from "lucide-react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
@@ -15,11 +8,7 @@ import { LinkButton } from "../LinkButton.js";
 import { PopupButton } from "../PopupButton.js";
 import { SearchInput } from "../forms/SearchInput.js";
 import { Select } from "../forms/Select.js";
-import {
-  ToolbarContext,
-  ToolbarInsertionRef,
-  ToolbarRef,
-} from "./ToolbarContext.js";
+import { ToolbarContext, ToolbarInsertionRef, ToolbarRef } from "./ToolbarContext.js";
 import { StyledToolbarIDView } from "./ToolbarIDView.js";
 
 export function Toolbar({
@@ -78,9 +67,7 @@ export function ToolbarSpace({
     ...(width != null ? { width: `${width}px` } : null),
   };
 
-  return (
-    <StyledToolbarSpace style={cssProps} data-fixed={width != null} {...rest} />
-  );
+  return <StyledToolbarSpace style={cssProps} data-fixed={width != null} {...rest} />;
 }
 
 export const StyledToolbarSpace = styled.div``;

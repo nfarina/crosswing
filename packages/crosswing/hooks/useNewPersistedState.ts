@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { deepEqual } from "../shared/compare.js";
 import { Seconds } from "../shared/timespan";
 import { Falsy } from "./useAsyncTask";
 import { useResettableState } from "./useResettableState";
@@ -45,10 +46,7 @@ export function useNewPersistedState<S>({
   const [isUpdating, setIsUpdating] = useResettableState(false, [key]);
 
   // Create a new scheduler when key changes
-  const [scheduler] = useResettableState(
-    () => new UpdateScheduler<S>(key),
-    [key],
-  );
+  const [scheduler] = useResettableState(() => new UpdateScheduler<S>(key), [key]);
 
   // Keep scheduler properties fresh every render.
   useEffect(() => {
@@ -79,7 +77,7 @@ export function useNewPersistedState<S>({
 
   // Sync persisted value to draft when not updating.
   useEffect(() => {
-    if (!scheduler.isProcessing) {
+    if (!scheduler.isProcessing && !deepEqual(persistedValue, draftValue)) {
       setDraftValue(persistedValue);
     }
   }, [persistedValue, scheduler]);
@@ -108,8 +106,7 @@ class UpdateScheduler<S> {
   public delay?: number;
   public onComplete?: ((value: S) => void) | null = null;
   public onError?: ((error: Error) => void) | null = null;
-  public onStatusChange?: ((key: string, isUpdating: boolean) => void) | null =
-    null;
+  public onStatusChange?: ((key: string, isUpdating: boolean) => void) | null = null;
 
   constructor(key: string) {
     this.key = key;
@@ -131,9 +128,7 @@ class UpdateScheduler<S> {
     this.onError = onError;
   }
 
-  setOnStatusChange(
-    onStatusChange: (key: string, isUpdating: boolean) => void,
-  ) {
+  setOnStatusChange(onStatusChange: (key: string, isUpdating: boolean) => void) {
     this.onStatusChange = onStatusChange;
   }
 

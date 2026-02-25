@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 
-export function useThrottled<T>(
-  value: T,
-  { limit = 1000 }: { limit?: number } = {},
-) {
+export function useThrottled<T>(value: T, { limit = 1000 }: { limit?: number } = {}) {
   const [throttled, setThrottled] = useState({ value, updated: 0 });
 
   useEffect(() => {

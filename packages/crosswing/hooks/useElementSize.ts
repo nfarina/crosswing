@@ -1,11 +1,5 @@
 import Debug from "debug";
-import {
-  DependencyList,
-  RefObject,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import { DependencyList, RefObject, useLayoutEffect, useRef, useState } from "react";
 
 const debug = Debug("hooks:useElementSize");
 
@@ -90,10 +84,7 @@ export function useElementSize(
           height: ref.current.offsetHeight,
         };
         const lastSize = lastSizeRef.current;
-        if (
-          newSize.width !== lastSize.width ||
-          newSize.height !== lastSize.height
-        ) {
+        if (newSize.width !== lastSize.width || newSize.height !== lastSize.height) {
           lastSizeRef.current = newSize;
           // debug("New size:", newSize);
           callbackRef.current(newSize);

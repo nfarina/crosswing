@@ -46,11 +46,7 @@ export const Default = () => {
     <div style={ContainerStyle}>
       <button children="Run New Task" onClick={() => task.run()} />
       <button children="Run Error Task" onClick={() => task.run(true)} />
-      <button
-        children="Cancel Task"
-        onClick={task.cancel}
-        style={{ marginBottom: "5px" }}
-      />
+      <button children="Cancel Task" onClick={task.cancel} style={{ marginBottom: "5px" }} />
       {lines.map((line, i) => (
         <div key={i} style={LineStyle}>
           {line}

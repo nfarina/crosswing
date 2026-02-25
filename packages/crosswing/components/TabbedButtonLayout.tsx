@@ -101,11 +101,7 @@ export function TabbedButtonLayout({
   // We always want to render using "nextLocation" instead of "location" because
   // content may be loading via <Suspense> and we want to highlight the tab that
   // will be selected next regardless of that loading state.
-  const {
-    history,
-    location,
-    nextLocation: anyNextLocation,
-  } = use(RouterContext);
+  const { history, location, nextLocation: anyNextLocation } = use(RouterContext);
   const { container } = use(HostContext);
 
   // The nextLocation could be _anywhere_. We only want to pre-render the
@@ -114,16 +110,12 @@ export function TabbedButtonLayout({
   // (because we're going to like, another screen entirely, or navigating
   // backwards in a <Navs>).
   const nextLocation =
-    anyNextLocation.claimedPath() === location.claimedPath()
-      ? anyNextLocation
-      : location;
+    anyNextLocation.claimedPath() === location.claimedPath() ? anyNextLocation : location;
 
   // Coerce children to array, flattening fragments and falsy conditionals.
   const buttons = flattenChildren(children).filter(isTabbedButton);
 
-  const hotkeys = buttons
-    .map((b) => b.props.hotkey)
-    .filter(Boolean) as HotKey[];
+  const hotkeys = buttons.map((b) => b.props.hotkey).filter(Boolean) as HotKey[];
   useHotKey(hotkeys, { target: ref }, (hotkey) => {
     const button = buttons.find((b) => b.props.hotkey === hotkey);
     if (button) {
@@ -133,12 +125,10 @@ export function TabbedButtonLayout({
 
   // What React wants us to render right now, possibly suspended.
   const paramValue = searchParam && location.searchParams().get(searchParam);
-  const paramChild =
-    paramValue && buttons.find((c) => c.props.value === paramValue);
+  const paramChild = paramValue && buttons.find((c) => c.props.value === paramValue);
 
   // What we will be rendering next, possibly suspended.
-  const nextParamValue =
-    searchParam && nextLocation.searchParams().get(searchParam);
+  const nextParamValue = searchParam && nextLocation.searchParams().get(searchParam);
 
   const [innerValue, setInnerValue] = useResettableState(() => {
     return nextParamValue ?? defaultValue ?? buttons[0]?.props.value ?? 0;
@@ -148,9 +138,7 @@ export function TabbedButtonLayout({
   const [renderedValues, setRenderedValues] = useState<Set<string>>(new Set());
 
   const resolvedValue = value ?? innerValue;
-  const selectedIndex = buttons.findIndex(
-    (child, i) => (child.props.value ?? i) === resolvedValue,
-  );
+  const selectedIndex = buttons.findIndex((child, i) => (child.props.value ?? i) === resolvedValue);
 
   // Wait to render our children until after the tab animation is complete,
   // only when running in a native Android app, otherwise it feels choppy.
@@ -233,18 +221,8 @@ export function TabbedButtonLayout({
   // Redirect to our first child's value if it defines one.
   // Note that we are not using the "nextLocation" value here, because we want
   // React might be concurrently rendering us.
-  if (
-    searchParam &&
-    !!paramValue &&
-    !paramChild &&
-    buttons.length > 1 &&
-    buttons[0].props.value
-  ) {
-    return (
-      <Redirect
-        to={location.withParam(searchParam, buttons[0].props.value).href()}
-      />
-    );
+  if (searchParam && !!paramValue && !paramChild && buttons.length > 1 && buttons[0].props.value) {
+    return <Redirect to={location.withParam(searchParam, buttons[0].props.value).href()} />;
   }
 
   return (
@@ -454,9 +432,7 @@ export function TabbedButton(props: TabbedButtonProps) {
 // pointer is not stable during development with hot reloading.
 TabbedButton.isTabbedButton = true;
 
-function isTabbedButton(
-  child: ReactNode,
-): child is ReactElement<TabbedButtonProps> {
+function isTabbedButton(child: ReactNode): child is ReactElement<TabbedButtonProps> {
   return isValidElement(child) && !!child.type?.["isTabbedButton"];
 }
 

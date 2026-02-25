@@ -72,10 +72,7 @@ export class BrowserHistory {
     }
 
     // Track previous location before navigating
-    this.previousLocation = RouterLocation.fromLocation(
-      window.location,
-      basePath,
-    );
+    this.previousLocation = RouterLocation.fromLocation(window.location, basePath);
 
     if (replace) {
       window.history.replaceState({}, "", href);
@@ -100,9 +97,7 @@ export class BrowserHistory {
       const to = location.href();
       for (const beforeListener of this.beforeNavigateListeners) {
         if (beforeListener(to) === false) {
-          debug(
-            `Navigation to "${to}" blocked by beforeNavigate listener, undoing`,
-          );
+          debug(`Navigation to "${to}" blocked by beforeNavigate listener, undoing`);
           // The URL already changed, so we need to push back to the previous location
           if (this.previousLocation) {
             const previousHref = this.basePath + this.previousLocation.href();

@@ -3,10 +3,7 @@ import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
-import {
-  ModalStoryButton,
-  ModalStoryButtons,
-} from "../storybook/ModalStoryButtons.js";
+import { ModalStoryButton, ModalStoryButtons } from "../storybook/ModalStoryButtons.js";
 import { ModalDecorator } from "../storybook/decorators.js";
 import { DialogView } from "./DialogView.js";
 import { useDialog } from "./useDialog.js";
@@ -45,9 +42,9 @@ export function LongContent() {
       <p>This dialog has a lot of content to demonstrate scrolling.</p>
       {Array.from({ length: 20 }, (_, i) => (
         <p key={i}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
+          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+          ullamco laboris.
         </p>
       ))}
     </DialogView>
@@ -77,15 +74,11 @@ export function CustomDialog() {
     />
   ));
 
-  const alert = useDialog(() => (
-    <SampleDialog>This should be on top!</SampleDialog>
-  ));
+  const alert = useDialog(() => <SampleDialog>This should be on top!</SampleDialog>);
 
   return (
     <ModalStoryButtons>
-      <ModalStoryButton onClick={() => dialog.show(Date.now())}>
-        Show dialog
-      </ModalStoryButton>
+      <ModalStoryButton onClick={() => dialog.show(Date.now())}>Show dialog</ModalStoryButton>
     </ModalStoryButtons>
   );
 }
@@ -103,9 +96,7 @@ export function CustomSticky() {
 
   return (
     <ModalStoryButtons>
-      <ModalStoryButton onClick={dialog.show}>
-        Show sticky dialog
-      </ModalStoryButton>
+      <ModalStoryButton onClick={dialog.show}>Show sticky dialog</ModalStoryButton>
     </ModalStoryButtons>
   );
 }
@@ -137,9 +128,7 @@ function StatefulDialog({
         Host count is {count}, local count is {local}
       </div>
       <ModalStoryButton onClick={increment}>Increment Host</ModalStoryButton>
-      <ModalStoryButton onClick={incrementLocal}>
-        Increment Local
-      </ModalStoryButton>
+      <ModalStoryButton onClick={incrementLocal}>Increment Local</ModalStoryButton>
       <ModalStoryButton onClick={onAlert}>Show Alert</ModalStoryButton>
       <ModalStoryButton onClick={onClose}>Close</ModalStoryButton>
     </SampleDialog>

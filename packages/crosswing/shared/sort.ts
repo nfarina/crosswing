@@ -14,16 +14,8 @@ type Options =
 type SortSpec<T> = CompareFunction<T> | KeySelector<T>;
 
 export function sort<T>(items: T[]): ChainedSort<T>;
-export function sort<T>(
-  items: T[],
-  comparator: CompareFunction<T>,
-  options?: Options,
-): T[];
-export function sort<T>(
-  items: T[],
-  keySelector: KeySelector<T>,
-  options?: Options,
-): T[];
+export function sort<T>(items: T[], comparator: CompareFunction<T>, options?: Options): T[];
+export function sort<T>(items: T[], keySelector: KeySelector<T>, options?: Options): T[];
 /**
  * Sorts the given items and returns a new sorted array, or returns a chained
  * sort object for multiple sort specs.
@@ -53,10 +45,7 @@ function isSelector<T>(func: SortSpec<T>): func is KeySelector<T> {
   return typeof func === "function" && func.length === 1;
 }
 
-function makeCompareFunction<T>(
-  spec: SortSpec<T>,
-  options: Options = {},
-): CompareFunction<T> {
+function makeCompareFunction<T>(spec: SortSpec<T>, options: Options = {}): CompareFunction<T> {
   options = typeof options === "object" ? options : { direction: options };
 
   if (typeof spec != "function") {

@@ -9,11 +9,7 @@ import {
 } from "react";
 import { styled } from "styled-components";
 import { RouterContext } from "../../router/context/RouterContext.js";
-import {
-  SeparatorEdges,
-  SeparatorLayout,
-  StyledSeparatorLayout,
-} from "../SeparatorLayout.js";
+import { SeparatorEdges, SeparatorLayout, StyledSeparatorLayout } from "../SeparatorLayout.js";
 import { LinkListCell } from "./LinkListCell.js";
 import { LinkListHeading, StyledLinkListHeading } from "./LinkListHeading.js";
 
@@ -47,9 +43,7 @@ export function LinkList<T extends { id: string }>({
 
   useEffect(() => {
     // Do an initial scroll of the list to the selected item, if any.
-    listRef.current
-      ?.querySelector(`[data-id="${currentId}"]`)
-      ?.scrollIntoView();
+    listRef.current?.querySelector(`[data-id="${currentId}"]`)?.scrollIntoView();
   }, []);
 
   function renderItemWithProps(item: T) {
@@ -63,9 +57,7 @@ export function LinkList<T extends { id: string }>({
   }
 
   function renderHeadingWithProps(group: string) {
-    const rendered = renderHeading?.(group) ?? (
-      <LinkListHeading children={group} />
-    );
+    const rendered = renderHeading?.(group) ?? <LinkListHeading children={group} />;
 
     return cloneElement(rendered, {
       ...(!rendered.key ? { key: group } : null),

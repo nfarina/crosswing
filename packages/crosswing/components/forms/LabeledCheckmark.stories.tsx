@@ -5,16 +5,11 @@ import { LabeledCheckmark } from "./LabeledCheckmark.js";
 
 export default {
   component: LabeledCheckmark,
-  decorators: [
-    SeparatorDecorator,
-    CrosswingAppDecorator({ layout: "component" }),
-  ],
+  decorators: [SeparatorDecorator, CrosswingAppDecorator({ layout: "component" })],
   parameters: { layout: "centered" },
 };
 
-export const Normal = () => (
-  <LabeledCheckmark label="Ludicrous Mode" onClick={action("click")} />
-);
+export const Normal = () => <LabeledCheckmark label="Ludicrous Mode" onClick={action("click")} />;
 
 export const WithDetail = () => (
   <LabeledCheckmark

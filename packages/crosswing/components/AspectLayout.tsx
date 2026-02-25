@@ -32,9 +32,7 @@ export function AspectLayout({
       if (!element) return;
 
       // Clean up old entries in the lastSizes array.
-      lastSizes.current = lastSizes.current.filter(
-        (entry) => Date.now() - entry.timestamp < 500,
-      );
+      lastSizes.current = lastSizes.current.filter((entry) => Date.now() - entry.timestamp < 500);
 
       let newWidth = width;
       let newHeight = height;

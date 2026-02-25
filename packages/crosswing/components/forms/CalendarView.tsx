@@ -120,9 +120,7 @@ export function CalendarView({
         <div
           className="month-name"
           data-is-month-clickable={!!onMonthClick}
-          onClick={
-            onMonthClick ? () => onMonthClick(date.valueOf()) : undefined
-          }
+          onClick={onMonthClick ? () => onMonthClick(date.valueOf()) : undefined}
         >
           {date.format("MMMM YYYY")}
         </div>
@@ -169,17 +167,13 @@ export function CalendarView({
 
   function renderDay(date: dayjs.Dayjs): ReactNode {
     const isInsideRange =
-      selectedRange &&
-      !isSameDay(selectedRange) &&
-      isDateInRange(date.valueOf(), selectedRange);
+      selectedRange && !isSameDay(selectedRange) && isDateInRange(date.valueOf(), selectedRange);
 
     const isRangeEndcap =
       selectedRange &&
-      (date.isSame(selectedRange.start, "day") ||
-        date.isSame(selectedRange.end, "day"));
+      (date.isSame(selectedRange.start, "day") || date.isSame(selectedRange.end, "day"));
 
-    const isRangeStart =
-      !!selectedRange && date.isSame(selectedRange.start, "day");
+    const isRangeStart = !!selectedRange && date.isSame(selectedRange.start, "day");
     const isRangeEnd = !!selectedRange && date.isSame(selectedRange.end, "day");
 
     return (

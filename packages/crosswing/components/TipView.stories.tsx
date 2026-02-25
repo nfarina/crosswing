@@ -18,23 +18,16 @@ export const AllVariations = () => (
     <div>
       <h3>Default</h3>
       <TipView>This is a basic tip without an icon or title.</TipView>
-      <TipView title="Pro tip">
-        This tip has a title but no icon for better organization.
-      </TipView>
-      <TipView icon={<Info />}>
-        This tip has an icon but no title for visual emphasis.
-      </TipView>
+      <TipView title="Pro tip">This tip has a title but no icon for better organization.</TipView>
+      <TipView icon={<Info />}>This tip has an icon but no title for visual emphasis.</TipView>
       <TipView icon={<Info />} title="Information">
-        This tip has both an icon and a title for maximum clarity and visual
-        impact.
+        This tip has both an icon and a title for maximum clarity and visual impact.
       </TipView>
     </div>
 
     <div>
       <h3>Blue tinted</h3>
-      <TipView tint={colors.blue}>
-        This is a blue-tinted tip for informational content.
-      </TipView>
+      <TipView tint={colors.blue}>This is a blue-tinted tip for informational content.</TipView>
       <TipView tint={colors.blue} title="Information" icon={<Info />}>
         Blue tinted tips work well for general information and helpful hints.
       </TipView>
@@ -46,8 +39,7 @@ export const AllVariations = () => (
         This is a green-tinted tip for success or positive feedback.
       </TipView>
       <TipView tint={colors.green} title="Success" icon={<Check />}>
-        Green tinted tips are perfect for success messages and positive
-        feedback.
+        Green tinted tips are perfect for success messages and positive feedback.
       </TipView>
     </div>
 

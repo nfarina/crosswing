@@ -39,9 +39,7 @@ export function Heading({
           {children && (
             <div className="title" onClick={onClick}>
               {children}
-              {badgeText && (
-                <Badge children={badgeText} tint={badgeTint} small={smaller} />
-              )}
+              {badgeText && <Badge children={badgeText} tint={badgeTint} small={smaller} />}
             </div>
           )}
           {subtitle && <div className="subtitle">{subtitle}</div>}

@@ -30,8 +30,7 @@ export function AutoBorderView({
         const computedStyle = window.getComputedStyle(sibling);
         const isColumnReverse =
           computedStyle.flexDirection === "column-reverse" ||
-          (computedStyle.display === "flex" &&
-            computedStyle.flexDirection === "column-reverse");
+          (computedStyle.display === "flex" && computedStyle.flexDirection === "column-reverse");
 
         let isScrolled = false;
 
@@ -42,9 +41,7 @@ export function AutoBorderView({
 
           // Calculate the most negative possible scrollTop value
           // This is scrollHeight - clientHeight (but negative)
-          const maxNegativeScroll = -(
-            sibling.scrollHeight - sibling.clientHeight
-          );
+          const maxNegativeScroll = -(sibling.scrollHeight - sibling.clientHeight);
 
           // Show border when not at the most negative value (i.e., not at the visual bottom)
           isScrolled = sibling.scrollTop > maxNegativeScroll;
@@ -60,8 +57,7 @@ export function AutoBorderView({
           // Show border when not at the most positive value (i.e., not at the visual top)
           // But make sure we don't show it if there's nothing to scroll.
           isScrolled =
-            sibling.scrollTop < maxPositiveScroll &&
-            sibling.scrollHeight > sibling.clientHeight;
+            sibling.scrollTop < maxPositiveScroll && sibling.scrollHeight > sibling.clientHeight;
         } else {
           // Standard case - show border when scrolled down from the top
           isScrolled = sibling.scrollTop > 0;
@@ -158,10 +154,7 @@ export const StyledAutoBorderView = styled.div`
  * The sibling must share the relevant dimension with the element.
  * Searches recursively through siblings and their children.
  */
-function findMatchingSibling(
-  element: HTMLDivElement,
-  side: BorderSide,
-): HTMLDivElement | null {
+function findMatchingSibling(element: HTMLDivElement, side: BorderSide): HTMLDivElement | null {
   const siblings = element.parentElement?.children;
   if (!siblings) return null;
 

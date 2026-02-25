@@ -1,13 +1,5 @@
 import Debug from "debug";
-import {
-  Activity,
-  isValidElement,
-  ReactElement,
-  ReactNode,
-  use,
-  useEffect,
-  useState,
-} from "react";
+import { Activity, isValidElement, ReactElement, ReactNode, use, useEffect, useState } from "react";
 import { flattenChildren } from "../../hooks/flattenChildren.js";
 import { RouterContext } from "../context/RouterContext.js";
 import { Redirect } from "../redirect/Redirect.js";
@@ -40,30 +32,18 @@ export function Switch({
 
   // We store rendered routes in a ref so we can access them in the Activity
   // API. The key is the path of the route.
-  const [renderedRoutes, setRenderedRoutes] = useState(
-    new Map<string, ReactNode>(),
-  );
+  const [renderedRoutes, setRenderedRoutes] = useState(new Map<string, ReactNode>());
 
   // Pull our route information from context.
-  const {
-    location,
-    nextLocation: anyNextLocation,
-    history,
-    parent,
-    flags,
-  } = use(RouterContext);
+  const { location, nextLocation: anyNextLocation, history, parent, flags } = use(RouterContext);
 
   // The nextLocation could be _anywhere_. We only want to pre-render any
   // UI if the path matches our current location. Otherwise we might
   // want to highlight a default link or button.
   const nextLocation =
-    anyNextLocation.claimedPath() === location.claimedPath()
-      ? anyNextLocation
-      : location;
+    anyNextLocation.claimedPath() === location.claimedPath() ? anyNextLocation : location;
 
-  debug(
-    `Render <Switch> with location "${location}" and next location "${nextLocation}"`,
-  );
+  debug(`Render <Switch> with location "${location}" and next location "${nextLocation}"`);
 
   // Select the best child <Route> to render.
   const selected = selectRoute(routes, location);
@@ -105,11 +85,7 @@ export function Switch({
     flags,
   };
 
-  rendered = (
-    <RouterContext value={childContext}>
-      {render(selected.location.params)}
-    </RouterContext>
-  );
+  rendered = <RouterContext value={childContext}>{render(selected.location.params)}</RouterContext>;
 
   // if (window) {
   //   return rendered;

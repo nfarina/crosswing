@@ -9,10 +9,7 @@ import { TextCell } from "./TextCell.js";
 
 export default {
   component: FileInput,
-  decorators: [
-    SeparatorDecorator,
-    CrosswingAppDecorator({ layout: "component" }),
-  ],
+  decorators: [SeparatorDecorator, CrosswingAppDecorator({ layout: "component" })],
   parameters: { layout: "centered" },
 } satisfies Meta<typeof FileInput>;
 
@@ -27,14 +24,9 @@ export const Default: Story = () => (
 export const Multiple: Story = () => (
   <StyledFileInput
     multiple
-    onFileListSelect={(list) =>
-      action("onFileListSelect")(Array.from(list).map((f) => f.name))
-    }
+    onFileListSelect={(list) => action("onFileListSelect")(Array.from(list).map((f) => f.name))}
   >
-    <TextCell
-      title="Click to Upload (Multiple)"
-      subtitle="Drag & Drop Supported"
-    />
+    <TextCell title="Click to Upload (Multiple)" subtitle="Drag & Drop Supported" />
   </StyledFileInput>
 );
 

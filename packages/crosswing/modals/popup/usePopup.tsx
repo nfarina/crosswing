@@ -12,10 +12,7 @@ import {
   useState,
 } from "react";
 import { createGlobalStyle, keyframes, styled } from "styled-components";
-import {
-  HotKeyContextDataAttributes,
-  useHotKey,
-} from "../../hooks/useHotKey.js";
+import { HotKeyContextDataAttributes, useHotKey } from "../../hooks/useHotKey.js";
 import { HostContext } from "../../host/context/HostContext.js";
 import { easing } from "../../shared/easing.js";
 import { getRectRelativeTo } from "../../shared/rect.js";
@@ -192,18 +189,10 @@ export const PopupContainer = ({
   const containerRef = useRef<HTMLDivElement | null>(null);
   const { container: hostContainer } = use(HostContext);
 
-  useClickOutsideToClose(
-    () => clickOutsideToClose && onClose(),
-    containerRef,
-    target,
-  );
+  useClickOutsideToClose(() => clickOutsideToClose && onClose(), containerRef, target);
 
   // Listen for the escape key and call onClose if pressed.
-  useHotKey(
-    "Escape",
-    { target: containerRef, fireInInputs: "always" },
-    onClose,
-  );
+  useHotKey("Escape", { target: containerRef, fireInInputs: "always" }, onClose);
 
   // We need to keep the callback "fresh" because it's a closure that likely
   // encapsulates the state of the component it was defined in.
@@ -269,10 +258,7 @@ export const PopupContainer = ({
         };
       }
     }
-  }, [
-    target.current,
-    JSON.stringify(target.current?.getBoundingClientRect() ?? {}),
-  ]);
+  }, [target.current, JSON.stringify(target.current?.getBoundingClientRect() ?? {})]);
 
   function positionPopup() {
     const container = containerRef.current;
@@ -287,10 +273,7 @@ export const PopupContainer = ({
       !container ||
       !(container instanceof HTMLElement) ||
       !targetElement ||
-      !(
-        targetElement instanceof HTMLElement ||
-        targetElement instanceof SVGElement
-      ) ||
+      !(targetElement instanceof HTMLElement || targetElement instanceof SVGElement) ||
       !doc ||
       !popupArea ||
       !(popupArea instanceof HTMLElement) ||
@@ -307,9 +290,7 @@ export const PopupContainer = ({
     // arrow location. This is super useful if your button that the user
     // can click has an enlarged hit area for mobile.
     if (!targetElement.dataset.popupTarget) {
-      const descendent = targetElement.querySelector(
-        `*[data-popup-target="true"]`,
-      );
+      const descendent = targetElement.querySelector(`*[data-popup-target="true"]`);
       if (descendent) {
         targetElement = descendent;
       }
@@ -325,10 +306,7 @@ export const PopupContainer = ({
     };
 
     // This is the content we are pointing at and trying not to cover up.
-    const targetRect = getRectRelativeTo(
-      targetElement.getBoundingClientRect(),
-      popupAreaRect,
-    );
+    const targetRect = getRectRelativeTo(targetElement.getBoundingClientRect(), popupAreaRect);
 
     // Sanity check - if the target element is not (anymore?) in the DOM,
     // then close the popup.
@@ -396,10 +374,7 @@ export const PopupContainer = ({
     if (animatingIn) {
       // Only delay if we are coming from completely hidden.
       if (delay && state.type === "hidden") {
-        const timeoutId: any = setTimeout(
-          () => setState({ type: "presenting" }),
-          delay,
-        );
+        const timeoutId: any = setTimeout(() => setState({ type: "presenting" }), delay);
         setState({ type: "delaying", timeoutId });
       } else if (
         state.type !== "presenting" &&
@@ -455,9 +430,7 @@ export const PopupContainer = ({
       <DisableIFramesGlobalStyle />
       <div className="backdrop" onClick={onClose} />
       <div className="popup-area">
-        {isValidElement(children)
-          ? cloneElement(children, childProps)
-          : children}
+        {isValidElement(children) ? cloneElement(children, childProps) : children}
       </div>
     </StyledPopupContainer>
   );

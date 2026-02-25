@@ -37,11 +37,7 @@ export function LabeledDropdown({
         <div className="label" children={label} />
         <div className="detail" children={detail} />
       </div>
-      <Dropdown
-        disabled={!!disabled || !!working}
-        {...rest}
-        popupRef={popupRef}
-      />
+      <Dropdown disabled={!!disabled || !!working} {...rest} popupRef={popupRef} />
     </StyledLabeledDropdown>
   );
 }

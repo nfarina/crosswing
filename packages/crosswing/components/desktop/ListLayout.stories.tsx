@@ -7,10 +7,7 @@ import { ListLayout } from "./ListLayout.js";
 
 export default {
   component: ListLayout,
-  decorators: [
-    RouterDecorator,
-    CrosswingAppDecorator({ layout: "fullscreen" }),
-  ],
+  decorators: [RouterDecorator, CrosswingAppDecorator({ layout: "fullscreen" })],
   parameters: { layout: "fullscreen" },
 };
 

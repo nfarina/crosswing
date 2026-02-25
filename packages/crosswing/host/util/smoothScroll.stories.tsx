@@ -23,9 +23,7 @@ export const Default = () => {
 
   return (
     <Container>
-      <button onClick={() => smoothScroll(ref.current!, 0)}>
-        Scroll to top
-      </button>
+      <button onClick={() => smoothScroll(ref.current!, 0)}>Scroll to top</button>
       <div className="people" ref={ref}>
         {people.map((person, i) => (
           <div className="person" key={i}>

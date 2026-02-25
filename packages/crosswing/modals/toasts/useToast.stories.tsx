@@ -5,20 +5,13 @@ import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import { useAlert } from "../alert/useAlert.js";
 import { ModalContext } from "../context/ModalContext.js";
-import {
-  ModalStoryButton,
-  ModalStoryButtons,
-} from "../storybook/ModalStoryButtons.js";
+import { ModalStoryButton, ModalStoryButtons } from "../storybook/ModalStoryButtons.js";
 import { ModalDecorator } from "../storybook/decorators.js";
 import { useToast } from "./useToast.js";
 
 export default {
   component: useToast,
-  decorators: [
-    CrosswingAppDecorator({ layout: "fullscreen" }),
-    ModalDecorator,
-    RouterDecorator,
-  ],
+  decorators: [CrosswingAppDecorator({ layout: "fullscreen" }), ModalDecorator, RouterDecorator],
   parameters: { layout: "fullscreen" },
 };
 
@@ -36,37 +29,27 @@ export function Normal() {
   const updatable = useToast((number: number) => ({
     title: "New Version Available",
     message: (
-      <>
-        Click to update to the latest version of Crosswing. Random updating
-        number: {number}
-      </>
+      <>Click to update to the latest version of Crosswing. Random updating number: {number}</>
     ),
     sticky: true,
     onClick: () => console.log("click"),
     onClose: () => console.log("close"),
   }));
 
-  useInterval(
-    () => updatable.show(Math.random()),
-    updatable.isVisible ? 1000 : null,
-    [updatable.isVisible],
-  );
+  useInterval(() => updatable.show(Math.random()), updatable.isVisible ? 1000 : null, [
+    updatable.isVisible,
+  ]);
 
   const alert = useAlert(() => ({
     title: "Alert That Unmounts",
-    message:
-      "The toast should remain visible after clicking OK to dismiss the Alert.",
+    message: "The toast should remain visible after clicking OK to dismiss the Alert.",
     children: <ShowStickyToastButton />,
   }));
 
   return (
     <ModalStoryButtons style={{ background: colors.textBackgroundAlt() }}>
-      <ModalStoryButton onClick={showNormalToast}>
-        Show One-Off
-      </ModalStoryButton>
-      <ModalStoryButton onClick={() => updatable.show(1)}>
-        Show Updatable
-      </ModalStoryButton>
+      <ModalStoryButton onClick={showNormalToast}>Show One-Off</ModalStoryButton>
+      <ModalStoryButton onClick={() => updatable.show(1)}>Show Updatable</ModalStoryButton>
       <ModalStoryButton onClick={alert.show}>Show Alert First</ModalStoryButton>
     </ModalStoryButtons>
   );

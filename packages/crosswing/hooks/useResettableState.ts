@@ -31,9 +31,7 @@ function depsChanged(
   if (previous === undefined || current === undefined) return true;
 
   if (previous.length !== current.length) {
-    console.error(
-      "useResettableState(): Dependency array size changed between renders!",
-    );
+    console.error("useResettableState(): Dependency array size changed between renders!");
     return false;
   }
 

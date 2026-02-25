@@ -4,8 +4,7 @@ import svgo from "@svgr/plugin-svgo";
 import fs from "fs/promises";
 import { glob } from "glob";
 import path from "path";
-import prettier from "prettier";
-import parserTypescript from "prettier/parser-typescript";
+import { format } from "oxfmt";
 
 // Auto-generates TypeScript code for each icon.
 
@@ -53,11 +52,8 @@ for (const iconFile of iconFiles) {
     { componentName },
   );
 
-  // Transform the code with Prettier.
-  const tsxFileContent = await prettier.format(tsxCode, {
-    parser: "typescript",
-    plugins: [parserTypescript],
-  });
+  // Format the generated code.
+  const { code: tsxFileContent } = await format(`${name}.tsx`, tsxCode);
 
   const tsxFilePath = new URL(`../icons/${name}.tsx`, import.meta.url);
   await fs.writeFile(tsxFilePath, tsxFileContent);

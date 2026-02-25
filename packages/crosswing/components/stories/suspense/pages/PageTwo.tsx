@@ -3,10 +3,7 @@ import { styled } from "styled-components";
 import { colors } from "../../../../colors/colors.js";
 import { RouterContext } from "../../../../router/context/RouterContext.js";
 import { NavLayout } from "../../../../router/navs/NavLayout.js";
-import {
-  TabbedButton,
-  TabbedButtonLayout,
-} from "../../../TabbedButtonLayout.js";
+import { TabbedButton, TabbedButtonLayout } from "../../../TabbedButtonLayout.js";
 import { StyledToolbar } from "../../../toolbar/Toolbar.js";
 
 const PanelOne = lazy(() => import("../panels/PanelOne"));

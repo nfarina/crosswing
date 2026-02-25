@@ -26,9 +26,7 @@ export function useBanner<T extends any[]>(
   const modal = useModal((...args: T) => {
     const bannerOrString = renderBanner(...args);
     const banner =
-      typeof bannerOrString === "string"
-        ? { message: bannerOrString, wrap: true }
-        : bannerOrString;
+      typeof bannerOrString === "string" ? { message: bannerOrString, wrap: true } : bannerOrString;
 
     return <BannerContainer onClose={modal.hide} banner={banner} />;
   });

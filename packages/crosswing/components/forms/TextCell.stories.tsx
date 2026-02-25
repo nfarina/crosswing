@@ -7,45 +7,27 @@ import { Search } from "lucide-react";
 
 export default {
   component: TextCell,
-  decorators: [
-    SeparatorDecorator,
-    CrosswingAppDecorator({ layout: "component" }),
-    RouterDecorator,
-  ],
+  decorators: [SeparatorDecorator, CrosswingAppDecorator({ layout: "component" }), RouterDecorator],
   parameters: { layout: "centered" },
 };
 
-export const Normal = () => (
-  <TextCell title="Select an account" onClick={() => {}} />
-);
+export const Normal = () => <TextCell title="Select an account" onClick={() => {}} />;
 
-export const AsLink = () => (
-  <TextCell title="Select an account" to="/somewhere" />
-);
+export const AsLink = () => <TextCell title="Select an account" to="/somewhere" />;
 
 export const Checked = () => {
   const [checked, setChecked] = useState(true);
   return (
-    <TextCell
-      title="Select an account"
-      checked={checked}
-      onClick={() => setChecked(!checked)}
-    />
+    <TextCell title="Select an account" checked={checked} onClick={() => setChecked(!checked)} />
   );
 };
 
 export const WithDetail = () => (
-  <TextCell
-    title="Select an account"
-    detail="Money can be exchanged for goods and services"
-  />
+  <TextCell title="Select an account" detail="Money can be exchanged for goods and services" />
 );
 
 export const WithSubtitle = () => (
-  <TextCell
-    title="Select an account"
-    subtitle="Money can be exchanged for goods and services"
-  />
+  <TextCell title="Select an account" subtitle="Money can be exchanged for goods and services" />
 );
 
 export const Disabled = () => (
@@ -57,9 +39,7 @@ export const Disabled = () => (
   />
 );
 
-export const WithIcon = () => (
-  <TextCell icon={<Search />} action="Attach a Receipt" />
-);
+export const WithIcon = () => <TextCell icon={<Search />} action="Attach a Receipt" />;
 
 export const WithLabel = () => <TextCell label="User" title="Nick Farina" />;
 

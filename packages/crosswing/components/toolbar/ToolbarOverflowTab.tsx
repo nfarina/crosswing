@@ -30,9 +30,7 @@ import {
 export function ToolbarOverflowTab({ children }: { children: ReactNode }) {
   const { location } = use(RouterContext);
 
-  const [lastTab, setLastTab] = useState<ReactElement<ToolbarTabProps> | null>(
-    null,
-  );
+  const [lastTab, setLastTab] = useState<ReactElement<ToolbarTabProps> | null>(null);
 
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -64,8 +62,7 @@ export function ToolbarOverflowTab({ children }: { children: ReactNode }) {
   const currentPath = location.href({ excludeSearch: true });
 
   const selectedTab = tabs.find(
-    (tab) =>
-      tab.props.to && currentPath.startsWith(location.linkTo(tab.props.to)),
+    (tab) => tab.props.to && currentPath.startsWith(location.linkTo(tab.props.to)),
   );
 
   // Store the currently selected tab in lastTab so we can restore it when
@@ -103,11 +100,7 @@ export function ToolbarOverflowTab({ children }: { children: ReactNode }) {
       >
         <div className="text">{tab?.props.children ?? "More"}</div>
         <div className="separator" />
-        <div
-          className="arrow"
-          data-popup-target
-          onClick={selectedTab ? undefined : onArrowClick}
-        >
+        <div className="arrow" data-popup-target onClick={selectedTab ? undefined : onArrowClick}>
           <ChevronDown />
         </div>
       </ToolbarTab>

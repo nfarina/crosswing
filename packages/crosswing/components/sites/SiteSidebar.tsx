@@ -1,11 +1,4 @@
-import {
-  Fragment,
-  HTMLAttributes,
-  isValidElement,
-  ReactElement,
-  ReactNode,
-  use,
-} from "react";
+import { Fragment, HTMLAttributes, isValidElement, ReactElement, ReactNode, use } from "react";
 import { Circle } from "lucide-react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
@@ -14,10 +7,7 @@ import { flattenChildren } from "../../hooks/flattenChildren.js";
 import { CrosswingLogoIcon } from "../../icons/CrosswingLogo.js";
 import { RouterContext } from "../../router/context/RouterContext.js";
 import { Link } from "../../router/Link.js";
-import {
-  StyledUnreadBadge,
-  UnreadBadge,
-} from "../../router/tabs/UnreadBadge.js";
+import { StyledUnreadBadge, UnreadBadge } from "../../router/tabs/UnreadBadge.js";
 import { Clickable } from "../Clickable.js";
 import {
   SiteHeaderAccessory,
@@ -40,9 +30,7 @@ export type SiteSidebarLinkProps = {
   title: ReactNode;
 };
 
-const defaultLogo = (
-  <CrosswingLogoIcon style={{ width: "50px", height: "50px" }} />
-);
+const defaultLogo = <CrosswingLogoIcon style={{ width: "50px", height: "50px" }} />;
 
 const defaultIcon = <Circle />;
 
@@ -101,9 +89,7 @@ export function SiteSidebar({
         >
           {classicIcon ?? standardIcon}
           <div className="title">{title}</div>
-          {!!badge && (
-            <UnreadBadge children={badge === "any" ? <>&nbsp;</> : badge} />
-          )}
+          {!!badge && <UnreadBadge children={badge === "any" ? <>&nbsp;</> : badge} />}
         </Link>
         {links.map((link) => renderLink(area, links, link))}
       </Fragment>
@@ -145,26 +131,15 @@ export function SiteSidebar({
   }
 
   return (
-    <StyledSiteSidebar
-      {...rest}
-      data-showing-accessories={!!accessories?.length}
-    >
+    <StyledSiteSidebar {...rest} data-showing-accessories={!!accessories?.length}>
       {logoTo ? (
-        <Link
-          className="home"
-          to={logoTo}
-          onClick={onLogoClick}
-          children={logo}
-        />
+        <Link className="home" to={logoTo} onClick={onLogoClick} children={logo} />
       ) : (
         <Clickable className="home" children={logo} onClick={onLogoClick} />
       )}
       <div className="menu">{areas.map(renderArea)}</div>
       {accessories?.map((accessory, i) => (
-        <SiteHeaderAccessoryView
-          key={String(`accessory-${i}`)}
-          accessory={accessory}
-        />
+        <SiteHeaderAccessoryView key={String(`accessory-${i}`)} accessory={accessory} />
       ))}
     </StyledSiteSidebar>
   );
@@ -184,15 +159,11 @@ export function SiteSidebarLink({}: SiteSidebarLinkProps) {
 }
 SiteSidebarLink.isSiteSidebarLink = true;
 
-function isSidebarArea(
-  item: ReactNode,
-): item is ReactElement<SiteSidebarAreaProps> {
+function isSidebarArea(item: ReactNode): item is ReactElement<SiteSidebarAreaProps> {
   return isValidElement(item) && !!item.type?.["isSiteSidebarArea"];
 }
 
-function isSidebarLink(
-  item: ReactNode,
-): item is ReactElement<SiteSidebarLinkProps> {
+function isSidebarLink(item: ReactNode): item is ReactElement<SiteSidebarLinkProps> {
   return isValidElement(item) && !!item.type?.["isSiteSidebarLink"];
 }
 

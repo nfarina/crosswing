@@ -38,8 +38,7 @@ export const LabeledTextArea = ({
   }
 
   // Mirror logic from <TextArea>.
-  const showError =
-    !!rest.error && (!!rest.value || hasEverFocused) && !focused;
+  const showError = !!rest.error && (!!rest.value || hasEverFocused) && !focused;
 
   return (
     <StyledLabeledTextArea

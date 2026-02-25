@@ -14,9 +14,7 @@ export type ToolbarInsertionRef = RefObject<HTMLDivElement | null>;
 export const ToolbarContext = createContext<ToolbarContextValue>({
   isDefaultContext: true,
   getInsertionRef() {
-    throw new Error(
-      "Cannot get ToolbarInsertionPoint refs without a parent <ToolbarLayout>.",
-    );
+    throw new Error("Cannot get ToolbarInsertionPoint refs without a parent <ToolbarLayout>.");
   },
   setInsertionRef() {},
 });

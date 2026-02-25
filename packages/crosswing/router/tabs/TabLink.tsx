@@ -50,9 +50,7 @@ export function TabLink({
     <StyledTabLink to={to} data-active={active} onClick={onClick}>
       <div className="icon" children={icon} />
       <div className="text">{title}</div>
-      {!!badge && (
-        <UnreadBadge children={badge === "any" ? <>&nbsp;</> : badge} />
-      )}
+      {!!badge && <UnreadBadge children={badge === "any" ? <>&nbsp;</> : badge} />}
     </StyledTabLink>
   );
 }

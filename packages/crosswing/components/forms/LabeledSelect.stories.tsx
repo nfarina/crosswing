@@ -6,10 +6,7 @@ import { SelectOption } from "./Select.js";
 
 export default {
   component: LabeledSelect,
-  decorators: [
-    SeparatorDecorator,
-    CrosswingAppDecorator({ layout: "component" }),
-  ],
+  decorators: [SeparatorDecorator, CrosswingAppDecorator({ layout: "component" })],
   parameters: { layout: "centered" },
 };
 
@@ -17,10 +14,7 @@ export const Normal = () => {
   const [ludicrous, setLudicrous] = useState(true);
 
   return (
-    <LabeledSelect
-      label="Ludicrous Mode"
-      onClick={() => setLudicrous(!ludicrous)}
-    >
+    <LabeledSelect label="Ludicrous Mode" onClick={() => setLudicrous(!ludicrous)}>
       <SelectOption title="On" value="1" />
       <SelectOption title="Off" value="2" />
       <SelectOption title="N/A" value="3" />
@@ -60,14 +54,8 @@ export const WithLongOption = () => {
   const [ludicrous, setLudicrous] = useState(true);
 
   return (
-    <LabeledSelect
-      label="Ludicrous Mode"
-      onClick={() => setLudicrous(!ludicrous)}
-    >
-      <SelectOption
-        title="On, and I have agreed to the terms and conditions"
-        value="1"
-      />
+    <LabeledSelect label="Ludicrous Mode" onClick={() => setLudicrous(!ludicrous)}>
+      <SelectOption title="On, and I have agreed to the terms and conditions" value="1" />
       <SelectOption title="Off" value="2" />
       <SelectOption title="N/A" value="3" />
     </LabeledSelect>
@@ -75,10 +63,7 @@ export const WithLongOption = () => {
 };
 
 export const WithDetail = () => (
-  <LabeledSelect
-    label="Ludicrous Mode"
-    detail="Turns your car into a spaceship."
-  >
+  <LabeledSelect label="Ludicrous Mode" detail="Turns your car into a spaceship.">
     <SelectOption title="On" value="1" />
     <SelectOption title="Off" value="2" />
     <SelectOption title="N/A" value="3" />

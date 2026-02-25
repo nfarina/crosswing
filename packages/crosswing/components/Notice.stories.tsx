@@ -12,8 +12,8 @@ export default {
 export const Normal = () => (
   <SeparatorLayout edges="bottom" inset={["0", "0"]}>
     <Notice>
-      Here's some information, typically presented at the top of a form, with
-      instructions to the user.
+      Here's some information, typically presented at the top of a form, with instructions to the
+      user.
     </Notice>
   </SeparatorLayout>
 );
@@ -21,8 +21,8 @@ export const Normal = () => (
 export const Smaller = () => (
   <SeparatorLayout edges="bottom" inset={["0", "0"]}>
     <Notice size="smaller">
-      Here's some information, typically presented at the top of a form, with
-      instructions to the user.
+      Here's some information, typically presented at the top of a form, with instructions to the
+      user.
     </Notice>
   </SeparatorLayout>
 );

@@ -16,9 +16,7 @@ export function ModalDecorator(
   if (typeof StoryOrParams === "function") {
     return <ModalRootProvider children={<StoryOrParams />} />;
   } else {
-    return (Story: () => any) => (
-      <ModalRootProvider children={<Story />} {...StoryOrParams} />
-    );
+    return (Story: () => any) => <ModalRootProvider children={<Story />} {...StoryOrParams} />;
   }
 }
 
@@ -30,24 +28,13 @@ export function ModalDecorator(
  * a function.
  */
 export function DialogDecorator(
-  StoryOrParams:
-    | (() => any)
-    | Omit<Parameters<typeof DialogContainer>[0], "onClose" | "children">,
+  StoryOrParams: (() => any) | Omit<Parameters<typeof DialogContainer>[0], "onClose" | "children">,
 ): any {
   if (typeof StoryOrParams === "function") {
-    return (
-      <DialogContainer
-        onClose={action("onClose")}
-        children={<StoryOrParams />}
-      />
-    );
+    return <DialogContainer onClose={action("onClose")} children={<StoryOrParams />} />;
   } else {
     return (Story: () => any) => (
-      <DialogContainer
-        onClose={action("onClose")}
-        children={<Story />}
-        {...StoryOrParams}
-      />
+      <DialogContainer onClose={action("onClose")} children={<Story />} {...StoryOrParams} />
     );
   }
 }
@@ -60,24 +47,13 @@ export function DialogDecorator(
  * a function.
  */
 export function SheetDecorator(
-  StoryOrParams:
-    | (() => any)
-    | Omit<Parameters<typeof SheetContainer>[0], "onClose" | "children">,
+  StoryOrParams: (() => any) | Omit<Parameters<typeof SheetContainer>[0], "onClose" | "children">,
 ): any {
   if (typeof StoryOrParams === "function") {
-    return (
-      <SheetContainer
-        onClose={action("onClose")}
-        children={<StoryOrParams />}
-      />
-    );
+    return <SheetContainer onClose={action("onClose")} children={<StoryOrParams />} />;
   } else {
     return (Story: () => any) => (
-      <SheetContainer
-        onClose={action("onClose")}
-        children={<Story />}
-        {...StoryOrParams}
-      />
+      <SheetContainer onClose={action("onClose")} children={<Story />} {...StoryOrParams} />
     );
   }
 }

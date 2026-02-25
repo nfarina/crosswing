@@ -50,9 +50,6 @@ export function useClickOutsideToClose(
 function isOrContainsElement(parent: Element, child: Element): boolean {
   return (
     parent === child ||
-    !!(
-      parent.compareDocumentPosition(child) &
-      Node.DOCUMENT_POSITION_CONTAINED_BY
-    )
+    !!(parent.compareDocumentPosition(child) & Node.DOCUMENT_POSITION_CONTAINED_BY)
   );
 }

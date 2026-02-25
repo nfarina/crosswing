@@ -158,8 +158,7 @@ export function formatNumber(
     frac = frac.slice(0, decimals);
   }
 
-  const drop =
-    typeof dropZeros === "boolean" ? (dropZeros ? "all" : "none") : dropZeros;
+  const drop = typeof dropZeros === "boolean" ? (dropZeros ? "all" : "none") : dropZeros;
 
   // If you don't want to see all zeroes in the fractional component, remove
   // them.
@@ -196,12 +195,7 @@ export function parsePercentage(
  */
 export function formatPercentage(
   bps: number,
-  {
-    suffix = "%",
-    precision = 2,
-    dropZeros = "any",
-    ...rest
-  }: FormatNumberOptions = {},
+  { suffix = "%", precision = 2, dropZeros = "any", ...rest }: FormatNumberOptions = {},
 ): string {
   return formatNumber(bps, { ...rest, precision, suffix, dropZeros });
 }

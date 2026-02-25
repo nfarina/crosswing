@@ -8,10 +8,7 @@ import { useAsyncTask } from "../../hooks/useAsyncTask.js";
 import { ModalContextProvider } from "../../modals/context/ModalContextProvider.js";
 import { usePopup } from "../../modals/popup/usePopup.js";
 import { ModalDecorator } from "../../modals/storybook/decorators.js";
-import {
-  BrowserSimulator,
-  RouterDecorator,
-} from "../../router/storybook/RouterDecorator.js";
+import { BrowserSimulator, RouterDecorator } from "../../router/storybook/RouterDecorator.js";
 import { wait } from "../../shared/wait.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import { NoContent } from "../NoContent.js";
@@ -67,16 +64,10 @@ function InsertionPointsContent() {
 
   const [showBack, setShowBack] = useState(true);
 
-  const backButton = (
-    <ToolbarButton children="Back" onClick={action("backClick")} />
-  );
+  const backButton = <ToolbarButton children="Back" onClick={action("backClick")} />;
 
-  const runButton = (
-    <ToolbarButton children="Run" onClick={action("runClick")} />
-  );
-  const panelButton = (
-    <ToolbarPanelButton active onClick={action("panelClick")} />
-  );
+  const runButton = <ToolbarButton children="Run" onClick={action("runClick")} />;
+  const panelButton = <ToolbarPanelButton active onClick={action("panelClick")} />;
 
   const backInsertionEl = getInsertionRef("beforeRefresh").current;
   const beforeMoreInsertionEl = getInsertionRef("beforeMore").current;
@@ -102,11 +93,7 @@ export const Buttons: Story = (args) => {
   return (
     <ToolbarLayout {...args}>
       <Toolbar>
-        <ToolbarButton
-          children="Enabled"
-          onClick={task.run}
-          working={task.isRunning}
-        />
+        <ToolbarButton children="Enabled" onClick={task.run} working={task.isRunning} />
         <ToolbarButton children="Disabled" disabled />
         <ToolbarButton children="Working" working />
         <ToolbarSpace />
@@ -151,10 +138,7 @@ export const Tabs: Story = (args) => {
               <ToolbarTab children="Sub Item One" to="one" />
               <ToolbarTab children="Sub Item Two" to="two" />
             </ToolbarOverflowTab>
-            <ToolbarTab
-              children="Tab Button"
-              onClick={action("tabButtonClick")}
-            />
+            <ToolbarTab children="Tab Button" onClick={action("tabButtonClick")} />
             <ToolbarTab children="Tab Link" to="somewhere" />
           </Toolbar>
           <NoContent title="Content" />

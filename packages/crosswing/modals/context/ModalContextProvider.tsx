@@ -19,7 +19,7 @@ import { PopupPlacement } from "../popup/getPopupPlacement.js";
 import { TooltipView } from "../popup/PopupView.js";
 import { PopupContainer, PopupTarget } from "../popup/usePopup.js";
 import { ToastContainer } from "../toasts/ToastContainer.js";
-import { ModalContext, Toast } from "./ModalContext.js";
+import { ModalContext, ModalContextValue, Toast } from "./ModalContext.js";
 
 // When any modal is being displayed, we ask our native host (if present) to
 // delay updates for 30 minutes.
@@ -73,11 +73,7 @@ export function ModalContextProvider({
   // createPortal() which adds elements as they are first rendered.
   const [modals, setModals] = useState(new Map<string, ReactNode>());
 
-  const showModal = (
-    key: string,
-    modal: (...args: any) => ReactNode,
-    ...args: any
-  ) => {
+  const showModal = (key: string, modal: (...args: any) => ReactNode, ...args: any) => {
     setModals((current) => {
       const next = new Map(current);
       next.set(key, modal(...(args ?? [])));
@@ -116,8 +112,7 @@ export function ModalContextProvider({
     options?: Omit<Toast, "message" | "key">,
   ) =>
     setToasts((current) => {
-      const key =
-        typeof toast === "object" && toast.key ? toast.key : nextToastKey();
+      const key = typeof toast === "object" && toast.key ? toast.key : nextToastKey();
 
       const newToast: Toast =
         typeof toast === "string"
@@ -152,14 +147,9 @@ export function ModalContextProvider({
 
   // Keep a map of tooltip IDs to tooltip render functions, for "fancy" tooltips
   // that aren't just text embedded in an HTML attribute.
-  const [tooltips, setTooltips] = useState(
-    new Map<string, (target: Element) => ReactNode>(),
-  );
+  const [tooltips, setTooltips] = useState(new Map<string, (target: Element) => ReactNode>());
 
-  const setTooltip = (
-    id: string,
-    tooltip: ((target: Element) => ReactNode) | null,
-  ) => {
+  const setTooltip = (id: string, tooltip: ((target: Element) => ReactNode) | null) => {
     setTooltips((current) => {
       const newMap = new Map(current);
       if (tooltip === null) {
@@ -208,10 +198,7 @@ export function ModalContextProvider({
 
       // If the mouse is in the dead zone rect created when you last clicked
       // on something, suppress the event.
-      if (
-        lastMouseDown &&
-        isInRect(lastMouseDown, { x: e.clientX, y: e.clientY })
-      ) {
+      if (lastMouseDown && isInRect(lastMouseDown, { x: e.clientX, y: e.clientY })) {
         return;
       }
 
@@ -238,9 +225,7 @@ export function ModalContextProvider({
       if (!children) {
         // Next check for a tooltip string.
         const someTooltipProp = Array.from(target.attributes).find(
-          (a) =>
-            a.name.startsWith("data-tooltip-hotkey") ||
-            a.name === "data-tooltip",
+          (a) => a.name.startsWith("data-tooltip-hotkey") || a.name === "data-tooltip",
         );
         if (someTooltipProp) {
           children = <TooltipView target={target} />;
@@ -346,30 +331,41 @@ export function ModalContextProvider({
     };
   }, []);
 
-  const contextValue = {
-    showModal,
-    hideModal,
-    showToast,
-    hideToast,
-    setTooltip,
-    modalRoot,
-    modalContextRoot,
-    allowDesktopPresentation,
-  };
+  // Stable context value. All context functions only close over stable useState
+  // setters, so the first render's instances are valid for the component's
+  // entire lifecycle. This prevents context consumers from re-rendering when
+  // internal state (like the modals map) changes, which would otherwise create
+  // an infinite render loop in useModal's content-update effect.
+  const contextValueRef = useRef<ModalContextValue | null>(null);
+  if (!contextValueRef.current) {
+    contextValueRef.current = {
+      showModal,
+      hideModal,
+      showToast,
+      hideToast,
+      setTooltip,
+      modalRoot,
+      modalContextRoot,
+      allowDesktopPresentation,
+    };
+  } else if (
+    contextValueRef.current.allowDesktopPresentation !== allowDesktopPresentation
+  ) {
+    contextValueRef.current = {
+      ...contextValueRef.current,
+      allowDesktopPresentation,
+    };
+  }
 
   const cssProps = childLayout
     ? ({
-        "--child-width": childLayout.width
-          ? `${childLayout.width}px`
-          : undefined,
-        "--child-height": childLayout.height
-          ? `${childLayout.height}px`
-          : undefined,
+        "--child-width": childLayout.width ? `${childLayout.width}px` : undefined,
+        "--child-height": childLayout.height ? `${childLayout.height}px` : undefined,
       } as CSSProperties)
     : {};
 
   return (
-    <ModalContext value={contextValue}>
+    <ModalContext value={contextValueRef.current}>
       <StyledModalContextProvider
         data-is-modal-context-root
         data-center-children={childLayout?.centered}
@@ -381,19 +377,12 @@ export function ModalContextProvider({
       {modalRoot.current && (
         <TransitionGroup component={null}>
           {Array.from(modals.entries()).map(([key, component]) => (
-            <TransitionComponent
-              key={key}
-              component={component}
-              element={modalRoot.current}
-            />
+            <TransitionComponent key={key} component={component} element={modalRoot.current} />
           ))}
           <TransitionComponent
             element={modalRoot.current}
             component={
-              <ToastContainer
-                toasts={toasts}
-                onToastClose={(toast) => hideToast(toast.key)}
-              />
+              <ToastContainer toasts={toasts} onToastClose={(toast) => hideToast(toast.key)} />
             }
           />
           {tooltipPopup && (
@@ -474,8 +463,7 @@ function findNearestRoot(element: Element | null): HTMLElement | null {
     if (element instanceof HTMLElement) {
       if (
         element.getAttribute("data-is-modal-context-root") === "true" &&
-        element.nextElementSibling?.getAttribute("data-is-modal-root") ===
-          "true"
+        element.nextElementSibling?.getAttribute("data-is-modal-root") === "true"
       ) {
         return element.nextElementSibling as HTMLElement;
       }

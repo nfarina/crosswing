@@ -20,9 +20,7 @@ export function formatHsl(hsl: HSL): string {
  * Parses a hex string like "#abcdef" only, not like "#aaa", into its raw
  * component values (0-255).
  */
-export function parseHex(
-  hex: string,
-): [red: number, green: number, blue: number] {
+export function parseHex(hex: string): [red: number, green: number, blue: number] {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   if (!result) throw new Error(`Invalid color ${hex}`);
   const [_, ...components] = result;
@@ -39,8 +37,7 @@ function p3ToHsl({ r, g, b }: P3): HSL {
     c = v - Math.min(r, g, b),
     f = 1 - Math.abs(v + v - c - 1);
 
-  const h =
-    c && (v == r ? (g - b) / c : v == g ? 2 + (b - r) / c : 4 + (r - g) / c);
+  const h = c && (v == r ? (g - b) / c : v == g ? 2 + (b - r) / c : 4 + (r - g) / c);
 
   return {
     type: "hsl",

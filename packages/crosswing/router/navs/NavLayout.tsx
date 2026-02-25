@@ -150,9 +150,7 @@ export function NavLayout({
         {getRightAccessory()}
       </StyledNavHeader>
       {children}
-      {fullBleed && darkenUnderStatusBar && statusBar && (
-        <div className="top-fade" />
-      )}
+      {fullBleed && darkenUnderStatusBar && statusBar && <div className="top-fade" />}
     </StyledNavLayout>
   );
 }

@@ -100,8 +100,7 @@ export function TextInput({
     }
   }, [autoTrim, value.trim() !== value]);
 
-  const autoFocus =
-    rest.autoFocus ?? (autoFocusOnDesktop && container === "web");
+  const autoFocus = rest.autoFocus ?? (autoFocusOnDesktop && container === "web");
 
   useLayoutEffect(() => {
     if (autoFocus && autoSelect && inputRef.current) {
@@ -133,8 +132,7 @@ export function TextInput({
     onKeyDown?.(e);
   }
 
-  const showingError =
-    errorStyle !== "none" && !!error?.message && canShowError;
+  const showingError = errorStyle !== "none" && !!error?.message && canShowError;
 
   // Separate any data- attributes from rest.
   const dataAttrs = {};
@@ -171,12 +169,7 @@ export function TextInput({
       />
       {icon && <div className="icon">{icon}</div>}
       {!newStyle && showingError && (
-        <StatusBadge
-          type="error"
-          size="smallest"
-          hideIcon
-          children={error.message}
-        />
+        <StatusBadge type="error" size="smallest" hideIcon children={error.message} />
       )}
       {newStyle && showingError && (
         <Button

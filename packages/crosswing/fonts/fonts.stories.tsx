@@ -97,19 +97,11 @@ function FontBook() {
   return <StyledFontBook>{views}</StyledFontBook>;
 }
 
-function SpecimenView({
-  name,
-  builder,
-}: {
-  name: string;
-  builder: FontBuilder;
-}) {
+function SpecimenView({ name, builder }: { name: string; builder: FontBuilder }) {
   return (
     <StyledSpecimenView $builder={builder}>
       <div className="name">{name}</div>
-      <div className="specimen">
-        The answer is 42. But what is the question?
-      </div>
+      <div className="specimen">The answer is 42. But what is the question?</div>
     </StyledSpecimenView>
   );
 }

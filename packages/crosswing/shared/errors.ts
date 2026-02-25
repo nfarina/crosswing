@@ -24,13 +24,9 @@ export function getErrorObj(error: ErrorLike): ErrorObj {
     return {
       ...(error.name ? { name: error.name } : {}),
       ...(error.message ? { message: error.message } : {}),
-      ...("details" in error && error.details
-        ? { details: error.details }
-        : {}),
+      ...("details" in error && error.details ? { details: error.details } : {}),
       ...("stack" in error && error.stack ? { stack: error.stack } : {}),
-      ...("userFacing" in error && error.userFacing
-        ? { userFacing: error.userFacing }
-        : {}),
+      ...("userFacing" in error && error.userFacing ? { userFacing: error.userFacing } : {}),
     };
   } else {
     return { message: "Unknown error" };

@@ -31,12 +31,8 @@ export function Normal() {
   return (
     <FourCorners>
       <ModalStoryButton onClick={popup1.onClick}>Popup Below</ModalStoryButton>
-      <ModalStoryButton onClick={popup2.onClick}>
-        Popup Platform
-      </ModalStoryButton>
-      <ModalStoryButton onClick={popup3.onClick}>
-        Popup Platform
-      </ModalStoryButton>
+      <ModalStoryButton onClick={popup2.onClick}>Popup Platform</ModalStoryButton>
+      <ModalStoryButton onClick={popup3.onClick}>Popup Platform</ModalStoryButton>
       <ModalStoryButton onClick={popup4.onClick}>Popup Above</ModalStoryButton>
       <ModalStoryButton onClick={popup5.onClick}>Popup Below</ModalStoryButton>
     </FourCorners>
@@ -59,29 +55,19 @@ export function ManualControl() {
 
   return (
     <ManualControlView>
-      <ModalStoryButton onClick={() => popup.show(ref1)}>
-        Show on Target 1
-      </ModalStoryButton>
+      <ModalStoryButton onClick={() => popup.show(ref1)}>Show on Target 1</ModalStoryButton>
       <ModalStoryButton
         onClick={() => {
-          ref1.current?.style.setProperty(
-            "transform",
-            `translateY(${Math.random() * 100}px)`,
-          );
+          ref1.current?.style.setProperty("transform", `translateY(${Math.random() * 100}px)`);
           popup.show(ref1);
         }}
       >
         Move Target 1 (calls show())
       </ModalStoryButton>
-      <ModalStoryButton onClick={() => popup.show(ref2)}>
-        Show on Target 2
-      </ModalStoryButton>
+      <ModalStoryButton onClick={() => popup.show(ref2)}>Show on Target 2</ModalStoryButton>
       <ModalStoryButton
         onClick={() => {
-          ref2.current?.style.setProperty(
-            "transform",
-            `translateY(${Math.random() * 100}px)`,
-          );
+          ref2.current?.style.setProperty("transform", `translateY(${Math.random() * 100}px)`);
         }}
       >
         Move Target 2 (auto reposition)

@@ -1,20 +1,9 @@
-import {
-  gradientColor,
-  hexColor,
-  HexColorBuilder,
-  varColor,
-  VarColorBuilder,
-} from "./builders.js";
+import { gradientColor, hexColor, HexColorBuilder, varColor, VarColorBuilder } from "./builders.js";
 import { formatOklch, parseOklch } from "./oklch.js";
 
 export * from "./builders.js";
 
-export {
-  gradientColor,
-  hexColor,
-  varColor,
-  type ColorBuilder,
-} from "./builders.js";
+export { gradientColor, hexColor, varColor, type ColorBuilder } from "./builders.js";
 
 // Default Crosswing colors.
 // Isomorphic.
@@ -294,63 +283,25 @@ export function overrideGrays({
   chroma?: number;
 }): VarColorBuilder[] {
   return [
-    colors.gray50.override(
-      tintNeutral({ tint, neutral: neutrals.neutral50, chroma }),
-    ),
-    colors.gray100.override(
-      tintNeutral({ tint, neutral: neutrals.neutral100, chroma }),
-    ),
-    colors.gray150.override(
-      tintNeutral({ tint, neutral: neutrals.neutral150, chroma }),
-    ),
-    colors.gray200.override(
-      tintNeutral({ tint, neutral: neutrals.neutral200, chroma }),
-    ),
-    colors.gray250.override(
-      tintNeutral({ tint, neutral: neutrals.neutral250, chroma }),
-    ),
-    colors.gray300.override(
-      tintNeutral({ tint, neutral: neutrals.neutral300, chroma }),
-    ),
-    colors.gray350.override(
-      tintNeutral({ tint, neutral: neutrals.neutral350, chroma }),
-    ),
-    colors.gray400.override(
-      tintNeutral({ tint, neutral: neutrals.neutral400, chroma }),
-    ),
-    colors.gray450.override(
-      tintNeutral({ tint, neutral: neutrals.neutral450, chroma }),
-    ),
-    colors.gray500.override(
-      tintNeutral({ tint, neutral: neutrals.neutral500, chroma }),
-    ),
-    colors.gray550.override(
-      tintNeutral({ tint, neutral: neutrals.neutral550, chroma }),
-    ),
-    colors.gray600.override(
-      tintNeutral({ tint, neutral: neutrals.neutral600, chroma }),
-    ),
-    colors.gray650.override(
-      tintNeutral({ tint, neutral: neutrals.neutral650, chroma }),
-    ),
-    colors.gray700.override(
-      tintNeutral({ tint, neutral: neutrals.neutral700, chroma }),
-    ),
-    colors.gray750.override(
-      tintNeutral({ tint, neutral: neutrals.neutral750, chroma }),
-    ),
-    colors.gray800.override(
-      tintNeutral({ tint, neutral: neutrals.neutral800, chroma }),
-    ),
-    colors.gray850.override(
-      tintNeutral({ tint, neutral: neutrals.neutral850, chroma }),
-    ),
-    colors.gray900.override(
-      tintNeutral({ tint, neutral: neutrals.neutral900, chroma }),
-    ),
-    colors.gray950.override(
-      tintNeutral({ tint, neutral: neutrals.neutral950, chroma }),
-    ),
+    colors.gray50.override(tintNeutral({ tint, neutral: neutrals.neutral50, chroma })),
+    colors.gray100.override(tintNeutral({ tint, neutral: neutrals.neutral100, chroma })),
+    colors.gray150.override(tintNeutral({ tint, neutral: neutrals.neutral150, chroma })),
+    colors.gray200.override(tintNeutral({ tint, neutral: neutrals.neutral200, chroma })),
+    colors.gray250.override(tintNeutral({ tint, neutral: neutrals.neutral250, chroma })),
+    colors.gray300.override(tintNeutral({ tint, neutral: neutrals.neutral300, chroma })),
+    colors.gray350.override(tintNeutral({ tint, neutral: neutrals.neutral350, chroma })),
+    colors.gray400.override(tintNeutral({ tint, neutral: neutrals.neutral400, chroma })),
+    colors.gray450.override(tintNeutral({ tint, neutral: neutrals.neutral450, chroma })),
+    colors.gray500.override(tintNeutral({ tint, neutral: neutrals.neutral500, chroma })),
+    colors.gray550.override(tintNeutral({ tint, neutral: neutrals.neutral550, chroma })),
+    colors.gray600.override(tintNeutral({ tint, neutral: neutrals.neutral600, chroma })),
+    colors.gray650.override(tintNeutral({ tint, neutral: neutrals.neutral650, chroma })),
+    colors.gray700.override(tintNeutral({ tint, neutral: neutrals.neutral700, chroma })),
+    colors.gray750.override(tintNeutral({ tint, neutral: neutrals.neutral750, chroma })),
+    colors.gray800.override(tintNeutral({ tint, neutral: neutrals.neutral800, chroma })),
+    colors.gray850.override(tintNeutral({ tint, neutral: neutrals.neutral850, chroma })),
+    colors.gray900.override(tintNeutral({ tint, neutral: neutrals.neutral900, chroma })),
+    colors.gray950.override(tintNeutral({ tint, neutral: neutrals.neutral950, chroma })),
     // Also override colors that use the grays.
     colors.buttonBackgroundHover.override(
       tintNeutral({

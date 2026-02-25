@@ -16,9 +16,7 @@ export function Clickable({
   children?: ReactNode;
   ref?: RefObject<HTMLButtonElement | null>;
 }) {
-  return (
-    <StyledClickable type={type} {...rest} children={children} ref={ref} />
-  );
+  return <StyledClickable type={type} {...rest} children={children} ref={ref} />;
 }
 
 export const StyledClickable = styled.button`

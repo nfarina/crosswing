@@ -64,17 +64,8 @@ export const BasicForm: Story = () => {
           placeholder="Tell us about yourself"
           {...form.valueProps(bio)}
         />
-        <LabeledToggle
-          newStyle
-          label="Make profile public"
-          {...form.valueProps(isPublic)}
-        />
-        <Button
-          newStyle
-          type="submit"
-          children={"Create Profile"}
-          {...form.buttonProps}
-        />
+        <LabeledToggle newStyle label="Make profile public" {...form.valueProps(isPublic)} />
+        <Button newStyle type="submit" children={"Create Profile"} {...form.buttonProps} />
       </form>
     </StoryContainer>
   );
@@ -111,8 +102,7 @@ export const ValidationErrors: Story = () => {
     <StoryContainer>
       <Heading>Set Password</Heading>
       <TipView>
-        Try various invalid passwords to see validation in action. Both fields
-        are required.
+        Try various invalid passwords to see validation in action. Both fields are required.
       </TipView>
 
       <form {...form.props}>
@@ -130,12 +120,7 @@ export const ValidationErrors: Story = () => {
           placeholder="Confirm your password"
           {...form.valueProps(confirmPassword)}
         />
-        <Button
-          newStyle
-          type="submit"
-          children={"Set Password"}
-          {...form.buttonProps}
-        />
+        <Button newStyle type="submit" children={"Set Password"} {...form.buttonProps} />
       </form>
     </StoryContainer>
   );

@@ -9,10 +9,7 @@ import {
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { Popup } from "../../modals/popup/PopupView.js";
-import {
-  StyledUnreadBadge,
-  UnreadBadge,
-} from "../../router/tabs/UnreadBadge.js";
+import { StyledUnreadBadge, UnreadBadge } from "../../router/tabs/UnreadBadge.js";
 import { Clickable } from "../Clickable.js";
 import { PopupButtonRef } from "../PopupButton.js";
 
@@ -52,14 +49,7 @@ export function SiteHeaderAccessoryView({
 }: HTMLAttributes<HTMLButtonElement> & {
   accessory: SiteHeaderAccessory;
 }) {
-  const {
-    icon,
-    iconSize = ["24px", "24px"],
-    unread,
-    onClick,
-    popup,
-    popupRef,
-  } = accessory;
+  const { icon, iconSize = ["24px", "24px"], unread, onClick, popup, popupRef } = accessory;
 
   const ref = useRef<HTMLButtonElement>(null);
 

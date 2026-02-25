@@ -54,12 +54,7 @@ export interface HostContextValue {
   /** Displays the system message compose sheet, if supported. */
   showMessageSheet(args: { to: string; body: string }): void;
   /** Displays the system email compose sheet, if supported. */
-  showEmailSheet(args: {
-    to: string;
-    subject: string;
-    body: string;
-    isHTML: boolean;
-  }): void;
+  showEmailSheet(args: { to: string; subject: string; body: string; isHTML: boolean }): void;
   /** Fetches all contacts from the user's address book, if supported. */
   getContacts(): Promise<HostContact[]>;
   /** Prevents the screen from turning off automatically on supported devices. */
@@ -79,13 +74,7 @@ export interface HostContextValue {
   /** Notify the host when the native SMS Retriever service should be started. */
   startSmsRetriever(): Promise<void>;
   /** Opens the native Plaid SDK. */
-  openPlaid({
-    token,
-    redirectUri,
-  }: {
-    token: string;
-    redirectUri?: string | null;
-  }): void;
+  openPlaid({ token, redirectUri }: { token: string; redirectUri?: string | null }): void;
   /** Closes the native Plaid SDK. */
   closePlaid(): void;
   /** Delays automatic updates (browser reloads) for the given amount of time. */

@@ -10,10 +10,7 @@ dayjs.extend(calendar);
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-export type TimestampFormatter = (
-  timestamp: number,
-  timezone?: string,
-) => string;
+export type TimestampFormatter = (timestamp: number, timezone?: string) => string;
 export type FormatString = string;
 
 export function formatTimestamp(

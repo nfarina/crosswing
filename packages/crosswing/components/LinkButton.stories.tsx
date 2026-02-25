@@ -11,21 +11,15 @@ export default {
 
 type Story = StoryFn<typeof LinkButton>;
 
-export const WithText: Story = () => (
-  <LinkButton children="Hello!" to="/somewhere" />
-);
+export const WithText: Story = () => <LinkButton children="Hello!" to="/somewhere" />;
 
-export const Disabled: Story = () => (
-  <LinkButton disabled children="Hello!" to="/somewhere" />
-);
+export const Disabled: Story = () => <LinkButton disabled children="Hello!" to="/somewhere" />;
 
 export const PrimarySmaller: Story = () => (
   <LinkButton size="smaller" primary children="Hello!" to="/somewhere" />
 );
 
-export const PrimaryNormal: Story = () => (
-  <LinkButton primary children="Hello!" to="/somewhere" />
-);
+export const PrimaryNormal: Story = () => <LinkButton primary children="Hello!" to="/somewhere" />;
 
 export const PrimaryLarger: Story = () => (
   <LinkButton size="larger" primary children="Hello!" to="/somewhere" />

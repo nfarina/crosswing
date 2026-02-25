@@ -24,10 +24,7 @@ export class MemoryHistory {
 
   public navigate(
     to: string,
-    {
-      replace = false,
-      force = false,
-    }: { replace?: boolean; force?: boolean } = {},
+    { replace = false, force = false }: { replace?: boolean; force?: boolean } = {},
   ) {
     if (!to.startsWith("/")) {
       throw new Error(

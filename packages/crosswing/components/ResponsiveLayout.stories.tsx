@@ -2,11 +2,7 @@ import { Meta } from "@storybook/react";
 import { useState } from "react";
 import { styled } from "styled-components";
 import { CrosswingAppDecorator } from "../storybook.js";
-import {
-  ResponsiveChild,
-  ResponsiveLayout,
-  StyledResponsiveLayout,
-} from "./ResponsiveLayout.js";
+import { ResponsiveChild, ResponsiveLayout, StyledResponsiveLayout } from "./ResponsiveLayout.js";
 
 export default {
   component: ResponsiveLayout,
@@ -21,10 +17,7 @@ export const Default = () => {
     <Container data-large={large}>
       <ResponsiveLayout>
         <ResponsiveChild render={() => <div>Mobile Layout</div>} />
-        <ResponsiveChild
-          minWidth={150}
-          render={() => <div>Tablet Layout</div>}
-        />
+        <ResponsiveChild minWidth={150} render={() => <div>Tablet Layout</div>} />
       </ResponsiveLayout>
       <button children="Resize" onClick={() => setLarge((l) => !l)} />
     </Container>

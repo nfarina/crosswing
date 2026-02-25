@@ -12,10 +12,7 @@ export type OpenDateRange = {
   end?: number | null | undefined;
 };
 
-export function dateRange(
-  start?: number | null,
-  end?: number | null,
-): DateRange {
+export function dateRange(start?: number | null, end?: number | null): DateRange {
   if (start == null) {
     // Today.
     return {
@@ -35,15 +32,9 @@ export function dateRange(
 }
 
 /** Meant for debugging only. */
-export function formatDateRange(
-  range: OpenDateRange | DateRange | null,
-): string {
-  const start = range?.start
-    ? dayjs(range.start).format("MMM D, YYYY h:mm a")
-    : "<none>";
-  const end = range?.end
-    ? dayjs(range.end).format("MMM D, YYYY h:mm a")
-    : "<none>";
+export function formatDateRange(range: OpenDateRange | DateRange | null): string {
+  const start = range?.start ? dayjs(range.start).format("MMM D, YYYY h:mm a") : "<none>";
+  const end = range?.end ? dayjs(range.end).format("MMM D, YYYY h:mm a") : "<none>";
 
   if (start === "<none>" && end === "<none>") {
     return "<empty range>";
@@ -102,10 +93,7 @@ export function makeAllDay(range: DateRange): DateRange {
   };
 }
 
-export function getAlgoliaFilter(
-  field: string,
-  { start, end }: DateRange,
-): string {
+export function getAlgoliaFilter(field: string, { start, end }: DateRange): string {
   return `${field}:${start} TO ${end}`;
 }
 

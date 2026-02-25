@@ -1,10 +1,4 @@
-import {
-  ChangeEvent,
-  DragEvent,
-  DragEventHandler,
-  HTMLAttributes,
-  ReactNode,
-} from "react";
+import { ChangeEvent, DragEvent, DragEventHandler, HTMLAttributes, ReactNode } from "react";
 import { styled } from "styled-components";
 import { useDragEvents } from "../../hooks/useDragEvents";
 

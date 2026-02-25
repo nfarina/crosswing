@@ -29,11 +29,7 @@ export function BannerView({
   });
 
   return (
-    <StyledBannerView
-      {...rest}
-      onTouchStart={onTouchStart}
-      data-wrap-text={!!wrap}
-    >
+    <StyledBannerView {...rest} onTouchStart={onTouchStart} data-wrap-text={!!wrap}>
       {to ? (
         <Link className="content" to={to} onClick={() => onClick?.()}>
           <div className="title">{title}</div>

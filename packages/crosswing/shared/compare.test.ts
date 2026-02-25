@@ -66,9 +66,7 @@ describe("shallowEqualArrays", () => {
   });
 
   test("returns true for equal unordered arrays", () => {
-    expect(
-      shallowEqualArrays([1, 2, 3], [3, 2, 1], { ordered: false }),
-    ).toEqual(true);
+    expect(shallowEqualArrays([1, 2, 3], [3, 2, 1], { ordered: false })).toEqual(true);
   });
 
   test("returns false for arrays with different elements", () => {

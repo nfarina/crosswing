@@ -1,3 +1,4 @@
+import { Maximize, X } from "lucide-react";
 import {
   createContext,
   CSSProperties,
@@ -8,7 +9,6 @@ import {
   useRef,
   useState,
 } from "react";
-import { X, Maximize } from "lucide-react";
 import { createPortal } from "react-dom";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
@@ -19,11 +19,7 @@ import { useSessionStorage } from "../../hooks/useSessionStorage.js";
 import { ModalContext } from "../../modals/context/ModalContext.js";
 import { Position } from "../../shared/rect.js";
 import { Button, StyledButton } from "../Button.js";
-import {
-  ToolbarButton,
-  toolbarShadows,
-  ToolbarSpace,
-} from "../toolbar/Toolbar.js";
+import { ToolbarButton, toolbarShadows, ToolbarSpace } from "../toolbar/Toolbar.js";
 
 export function FullScreenView({
   restorationKey,
@@ -258,8 +254,6 @@ export function FullScreenView({
   return (
     <StyledFullScreenView ref={parentRef} {...rest} style={cssProps}>
       <FullScreenContext value={{ isFullScreen, disabled }}>
-        {/* Can't think of an alternate approach that doesn't bread this "rule". */}
-        {/* eslint-disable-next-line react-compiler/react-compiler */}
         {divRef.current && createPortal(rendered, divRef.current)}
       </FullScreenContext>
     </StyledFullScreenView>

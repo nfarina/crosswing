@@ -17,23 +17,19 @@ describe("linkTo", () => {
   });
 
   test("reset query", () => {
-    const query = RouterLocation.fromHref(
-      "/customers/cus1?sort=date",
-    ).claimAll();
+    const query = RouterLocation.fromHref("/customers/cus1?sort=date").claimAll();
 
     expect(query.linkTo("?")).toEqual("/customers/cus1");
   });
 
   test("same dir", () => {
-    const sameDir =
-      RouterLocation.fromHref("/customers/cus1").claim("customers");
+    const sameDir = RouterLocation.fromHref("/customers/cus1").claim("customers");
 
     expect(sameDir.linkTo("./cus1")).toEqual("/customers/cus1");
   });
 
   test("partially claimed", () => {
-    const partial =
-      RouterLocation.fromHref("/customers/cus1").claim("customers");
+    const partial = RouterLocation.fromHref("/customers/cus1").claim("customers");
 
     expect(partial.linkTo("cus2")).toEqual("/customers/cus2");
   });
@@ -54,9 +50,7 @@ describe("claim", () => {
   });
 
   test("dynamic params", () => {
-    expect(location.claim("customers/:id").toString()).toEqual(
-      "[customers/cus1]",
-    );
+    expect(location.claim("customers/:id").toString()).toEqual("[customers/cus1]");
 
     // Check that parameters were parsed.
     expect(location.claim("customers/:id").params).toMatchObject({

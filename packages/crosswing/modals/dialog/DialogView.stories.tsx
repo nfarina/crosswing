@@ -14,11 +14,7 @@ import { Info } from "lucide-react";
 
 export default {
   component: DialogView,
-  decorators: [
-    CrosswingAppDecorator({ layout: "fullscreen" }),
-    RouterDecorator,
-    ModalDecorator,
-  ],
+  decorators: [CrosswingAppDecorator({ layout: "fullscreen" }), RouterDecorator, ModalDecorator],
   parameters: { layout: "fullscreen" },
 } satisfies Meta<typeof DialogView>;
 
@@ -110,8 +106,8 @@ export const ProjectCreation: Story = () => {
             autoFocus
           />
           <TipView icon={<Info />} title="What's a project?">
-            Projects keep chats, files, and custom instructions in one place.
-            Use them for ongoing work, or just to keep things tidy.
+            Projects keep chats, files, and custom instructions in one place. Use them for ongoing
+            work, or just to keep things tidy.
           </TipView>
         </ProjectForm>
       </DialogView>
@@ -132,9 +128,9 @@ export const LongContent: Story = () => (
       <p>This dialog has a lot of content to demonstrate scrolling.</p>
       {Array.from({ length: 20 }, (_, i) => (
         <p key={i}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
+          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+          ullamco laboris.
         </p>
       ))}
     </DialogView>

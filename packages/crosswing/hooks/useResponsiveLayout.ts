@@ -42,8 +42,7 @@ export function useResponsiveLayout<L extends ResponsiveLayouts>(
       if (minHeight != null && height != null && height < minHeight) {
         continue;
       }
-      const specificity =
-        (minWidth != null ? 1 : 0) + (minHeight != null ? 1 : 0);
+      const specificity = (minWidth != null ? 1 : 0) + (minHeight != null ? 1 : 0);
       if (specificity > bestSpecificity) {
         bestLayout = key;
         bestSpecificity = specificity;

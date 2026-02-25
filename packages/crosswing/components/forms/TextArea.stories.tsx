@@ -24,16 +24,8 @@ export const AutoTrimDemo = () => {
 
   return (
     <>
-      <TextArea
-        placeholder="Display Name"
-        value={value}
-        onValueChange={setValue}
-        autoSizing
-      />
-      <Button
-        children="Reset Value to 'Blue '"
-        onClick={() => setValue("Blue ")}
-      />
+      <TextArea placeholder="Display Name" value={value} onValueChange={setValue} autoSizing />
+      <Button children="Reset Value to 'Blue '" onClick={() => setValue("Blue ")} />
       <pre>TextArea Value: "{value}"</pre>
     </>
   );
@@ -46,18 +38,12 @@ export const AutoSizeDemo = () => {
 
   return (
     <>
-      <TextArea
-        placeholder="Display Name"
-        value={value}
-        onValueChange={setValue}
-        autoSizing
-      />
+      <TextArea placeholder="Display Name" value={value} onValueChange={setValue} autoSizing />
       <Button
         children="Adjust width"
         onClick={(e) => {
           const buttonRef = e.target as HTMLButtonElement;
-          const textAreaRef =
-            buttonRef.previousElementSibling as HTMLTextAreaElement;
+          const textAreaRef = buttonRef.previousElementSibling as HTMLTextAreaElement;
 
           // Set a random size between 200 and 500.
           const width = Math.floor(Math.random() * 300) + 200;
@@ -87,9 +73,7 @@ export const WithValue = () => {
   return <TextArea value={name} onValueChange={setName} autoSizing />;
 };
 
-export const Disabled = () => (
-  <TextArea value="John Smith" disabled autoSizing />
-);
+export const Disabled = () => <TextArea value="John Smith" disabled autoSizing />;
 
 export const FixedSize = () => {
   const [name, setName] = useState("John Smith");

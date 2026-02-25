@@ -49,11 +49,7 @@ export function useProgressDialog({
       >
         <div className="progress-content">
           {message && <div className="message">{message}</div>}
-          <ProgressView
-            backgroundColor={colors.textBackground}
-            size="50px"
-            progress={progress}
-          />
+          <ProgressView backgroundColor={colors.textBackground} size="50px" progress={progress} />
         </div>
       </StyledProgressDialogView>
     ),

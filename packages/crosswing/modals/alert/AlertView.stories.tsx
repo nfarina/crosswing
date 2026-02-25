@@ -11,10 +11,7 @@ import { AlertView } from "./AlertView.js";
 
 export default {
   component: AlertView,
-  decorators: [
-    CrosswingAppDecorator({ layout: "fullscreen" }),
-    DialogDecorator,
-  ],
+  decorators: [CrosswingAppDecorator({ layout: "fullscreen" }), DialogDecorator],
   parameters: { layout: "fullscreen" },
 } satisfies Meta<typeof AlertView>;
 

@@ -82,11 +82,7 @@ const ResponsiveContainer = styled.div`
 function Content() {
   const { isFullScreen } = use(FullScreenContext);
 
-  return (
-    <StyledContent>
-      {isFullScreen ? "Full Screen" : "Not Full Screen"}
-    </StyledContent>
-  );
+  return <StyledContent>{isFullScreen ? "Full Screen" : "Not Full Screen"}</StyledContent>;
 }
 
 const StyledContent = styled.div`

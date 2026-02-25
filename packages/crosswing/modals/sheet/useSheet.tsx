@@ -1,17 +1,7 @@
-import {
-  CSSProperties,
-  ReactNode,
-  use,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import { CSSProperties, ReactNode, use, useLayoutEffect, useRef, useState } from "react";
 import { keyframes, styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
-import {
-  HotKeyContextDataAttributes,
-  useHotKey,
-} from "../../hooks/useHotKey.js";
+import { HotKeyContextDataAttributes, useHotKey } from "../../hooks/useHotKey.js";
 import { HostContext } from "../../host/context/HostContext.js";
 import { safeArea } from "../../safearea/safeArea.js";
 import { easing } from "../../shared/easing.js";
@@ -136,9 +126,7 @@ export const SheetContainer = ({
   // state of the keyboard and only update it when we transition to animating
   // out while the keyboard is already visible.
 
-  const [keyboardVisible, setKeyboardVisible] = useState(
-    !!viewport.keyboardVisible,
-  );
+  const [keyboardVisible, setKeyboardVisible] = useState(!!viewport.keyboardVisible);
 
   useLayoutEffect(() => {
     if (!animatingIn && !!viewport.keyboardVisible) {
@@ -161,9 +149,7 @@ export const SheetContainer = ({
       data-stretch-width={!!stretch?.maxWidth}
       data-stretch-height={!!stretch?.maxHeight}
       data-keyboard-visible={keyboardVisible}
-      data-allow-desktop-presentation={
-        !forceFullScreen && !!allowDesktopPresentation
-      }
+      data-allow-desktop-presentation={!forceFullScreen && !!allowDesktopPresentation}
       style={cssProps}
       data-animating-in={animatingIn}
       onAnimationEnd={onAnimationEnd}
@@ -173,11 +159,7 @@ export const SheetContainer = ({
       {...HotKeyContextDataAttributes}
     >
       {/* Backdrop is only used on large web browsers. */}
-      <div
-        className="backdrop"
-        data-animating-in={animatingIn}
-        onClick={resolvedOnClose}
-      />
+      <div className="backdrop" data-animating-in={animatingIn} onClick={resolvedOnClose} />
       {/* This container element helps with CSS targeting and also allows the
           child to return different elements from render() without triggering
           extra unwanted CSS "appear" animations. */}

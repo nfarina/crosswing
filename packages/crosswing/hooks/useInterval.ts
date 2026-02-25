@@ -5,11 +5,7 @@ import { DependencyList, useEffect, useRef } from "react";
 
 export type Callback = () => void;
 
-export function useInterval(
-  callback: Callback,
-  delay: number | null,
-  deps?: DependencyList,
-) {
+export function useInterval(callback: Callback, delay: number | null, deps?: DependencyList) {
   const savedCallback = useRef<Callback | null>(null);
 
   // Remember the latest callback.

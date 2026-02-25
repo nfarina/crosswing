@@ -90,11 +90,7 @@ export function MobileAppFrame({
   }, [disablePhoneFrame]);
 
   return (
-    <StyledMobileAppFrame
-      ref={ref}
-      data-tablet-layout={disablePhoneFrame}
-      children={children}
-    />
+    <StyledMobileAppFrame ref={ref} data-tablet-layout={disablePhoneFrame} children={children} />
   );
 }
 

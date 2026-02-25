@@ -37,9 +37,7 @@ export const defaultNewSiteContextValue: NewSiteContextValue = {
   siteLayout: "desktop",
 };
 
-export const NewSiteContext = createContext<NewSiteContextValue>(
-  defaultNewSiteContextValue,
-);
+export const NewSiteContext = createContext<NewSiteContextValue>(defaultNewSiteContextValue);
 
 function alwaysThrows(): never {
   throw new Error("Parent <NewSiteLayout> was not found.");

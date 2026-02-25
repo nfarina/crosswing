@@ -5,10 +5,7 @@ export interface CapitalizeOptions {
   allWords?: boolean;
 }
 
-export function capitalize(
-  s: string,
-  { allWords }: CapitalizeOptions = {},
-): string {
+export function capitalize(s: string, { allWords }: CapitalizeOptions = {}): string {
   if (allWords) {
     return s
       .split(" ")
@@ -53,15 +50,10 @@ export function makePosessive(s: string): string {
 export function pluralize(
   num: number,
   units: string | [singular: string, plural: string],
-  {
-    showZero = false,
-    unitsOnly = false,
-  }: { showZero?: boolean; unitsOnly?: boolean } = {},
+  { showZero = false, unitsOnly = false }: { showZero?: boolean; unitsOnly?: boolean } = {},
 ) {
   const rounded = Math.floor(num);
-  const [singular, plural] = Array.isArray(units)
-    ? units
-    : splitSingularAndPlural(units);
+  const [singular, plural] = Array.isArray(units) ? units : splitSingularAndPlural(units);
   if (rounded === 0 && !showZero) {
     return unitsOnly ? plural : "No " + plural;
   } else if (rounded === 1) {
@@ -71,9 +63,7 @@ export function pluralize(
   }
 }
 
-function splitSingularAndPlural(
-  phrase: string,
-): [singular: string, plural: string] {
+function splitSingularAndPlural(phrase: string): [singular: string, plural: string] {
   // Split "items were" into ["item was", "items were"]
   if (phrase.endsWith("s were")) {
     return [phrase.slice(0, -6) + " was", phrase];
@@ -100,8 +90,7 @@ export function joinWith(
   items: string[],
   { trailing, quotes }: { trailing: string; quotes?: boolean | string },
 ): string {
-  const quote =
-    typeof quotes === "string" ? quotes : quotes === true ? '"' : null;
+  const quote = typeof quotes === "string" ? quotes : quotes === true ? '"' : null;
 
   if (quote) {
     items = items.map((item) => `${quote}${item}${quote}`);
@@ -110,9 +99,7 @@ export function joinWith(
   if (items.length === 0) return "";
   if (items.length === 1) return items[0];
   if (items.length === 2) return `${items[0]} ${trailing} ${items[1]}`;
-  return `${items.slice(0, -1).join(", ")}, ${trailing} ${
-    items[items.length - 1]
-  }`;
+  return `${items.slice(0, -1).join(", ")}, ${trailing} ${items[items.length - 1]}`;
 }
 
 /**
@@ -132,10 +119,7 @@ export function joinWithAnd(
  * returns a string like "Apples, Bananas, or Oranges".
  * If there are only two items, returns "Apples or Bananas".
  */
-export function joinWithOr(
-  items: string[],
-  { quotes }: { quotes?: boolean | string },
-): string {
+export function joinWithOr(items: string[], { quotes }: { quotes?: boolean | string }): string {
   return joinWith(items, { trailing: "or", quotes });
 }
 

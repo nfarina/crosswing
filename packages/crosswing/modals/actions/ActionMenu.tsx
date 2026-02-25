@@ -61,10 +61,7 @@ export function ActionMenu({
   function renderItem(item: ActionButton | ActionPanel, index: number) {
     if ("content" in item) {
       return (
-        <ActionPanelView
-          key={index}
-          data-hide-background={!!item.hideBackground}
-        >
+        <ActionPanelView key={index} data-hide-background={!!item.hideBackground}>
           {item.content}
         </ActionPanelView>
       );

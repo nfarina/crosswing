@@ -73,9 +73,7 @@ export function LinkCell({
         {children && <div className="children">{children}</div>}
       </div>
       {badge && <div className="badge">{badge}</div>}
-      {isClickable && !hideDisclosure && (
-        <ChevronRight size={20} className="disclosure" />
-      )}
+      {isClickable && !hideDisclosure && <ChevronRight size={20} className="disclosure" />}
     </StyledLinkCell>
   );
 }

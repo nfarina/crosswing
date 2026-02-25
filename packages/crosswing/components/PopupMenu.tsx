@@ -12,11 +12,7 @@ import { styled } from "styled-components";
 import { colors } from "../colors/colors.js";
 import { fonts } from "../fonts/fonts.js";
 import { PopupPlacement } from "../modals/popup/getPopupPlacement.js";
-import {
-  Hotkeys,
-  HotkeyView,
-  StyledHotkeyView,
-} from "../modals/popup/HotkeyView.js";
+import { Hotkeys, HotkeyView, StyledHotkeyView } from "../modals/popup/HotkeyView.js";
 import { PopupChildProps, PopupView } from "../modals/popup/PopupView.js";
 import { Link } from "../router/Link.js";
 import { StatusBanner } from "./badges/StatusBanner.js";
@@ -68,11 +64,7 @@ export function PopupMenu({
       {...rest}
     >
       {/* Send any onScroll events to the menu since it has overflow: auto */}
-      <StyledPopupMenu
-        ref={menuRef}
-        onScroll={onScroll}
-        onScrollCapture={onScrollCapture}
-      >
+      <StyledPopupMenu ref={menuRef} onScroll={onScroll} onScrollCapture={onScrollCapture}>
         <OnCloseContext value={onClose}>{children}</OnCloseContext>
       </StyledPopupMenu>
     </PopupView>
@@ -164,8 +156,7 @@ export function PopupMenuText({
   }
 
   // Determine if this item should be focusable
-  const isInteractive =
-    !disabled && selectable && (onClick || to || component !== "div");
+  const isInteractive = !disabled && selectable && (onClick || to || component !== "div");
 
   return (
     <StyledPopupMenuText
@@ -192,9 +183,7 @@ export function PopupMenuText({
       </div>
       {right && <div className="right">{right}</div>}
       {checked != null && (
-        <div className="checked">
-          {checked ? <Check /> : <div className="not-checked" />}
-        </div>
+        <div className="checked">{checked ? <Check /> : <div className="not-checked" />}</div>
       )}
       {hotkeys && <HotkeyView hotkeys={hotkeys} />}
     </StyledPopupMenuText>
@@ -364,9 +353,7 @@ export function PopupMenuToggle({
     <StyledPopupMenuToggle
       leaveOpen
       // Don't listen for clicks on the Toggle; it would shadow our button element.
-      right={
-        <Toggle on={on} size="smallest" disabled={rest.disabled} as="div" />
-      }
+      right={<Toggle on={on} size="smallest" disabled={rest.disabled} as="div" />}
       {...rest}
     />
   );
@@ -432,9 +419,6 @@ export const PopupStatusBanner = styled(StatusBanner)`
 export function PopupMenuFileInput({
   leaveOpen = true,
   ...rest
-}: (Parameters<typeof PopupMenuText>[0] &
-  Parameters<typeof FileInput>[0]) & {}) {
-  return (
-    <PopupMenuText component={FileInput} leaveOpen={leaveOpen} {...rest} />
-  );
+}: (Parameters<typeof PopupMenuText>[0] & Parameters<typeof FileInput>[0]) & {}) {
+  return <PopupMenuText component={FileInput} leaveOpen={leaveOpen} {...rest} />;
 }

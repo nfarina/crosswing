@@ -18,9 +18,7 @@ function getNextTooltipId() {
  *   tooltip. `TooltipView` is a good base component to use.
  * @returns The props to spread onto the target element (just `data-tooltip-id`).
  */
-export function useTooltip(
-  render: (target: Element) => React.ReactNode,
-): Tooltip {
+export function useTooltip(render: (target: Element) => React.ReactNode): Tooltip {
   const { setTooltip } = use(ModalContext);
   const [id] = useState(() => getNextTooltipId());
 

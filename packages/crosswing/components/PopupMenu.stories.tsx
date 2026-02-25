@@ -33,10 +33,7 @@ type Story = StoryFn<typeof PopupMenu>;
 export const Mixed = () => (
   <PopupMenu>
     <PopupMenuHeader children="Account" />
-    <PopupMenuText
-      children="Sync with Stripe…"
-      onClick={action("onStripeClick")}
-    />
+    <PopupMenuText children="Sync with Stripe…" onClick={action("onStripeClick")} />
     <PopupMenuText
       disabled
       children="Sync with QuickBooks…"
@@ -48,11 +45,7 @@ export const Mixed = () => (
       onClick={action("onDeleteAccountClick")}
     />
     <PopupMenuSeparator />
-    <PopupMenuToggle
-      children="Sort by Recently Seen"
-      on={true}
-      onClick={action("sortByRecent")}
-    />
+    <PopupMenuToggle children="Sort by Recently Seen" on={true} onClick={action("sortByRecent")} />
     <PopupMenuSeparator />
     <PopupMenuText children="Go to User" to="/users/bob" />
   </PopupMenu>
@@ -60,10 +53,7 @@ export const Mixed = () => (
 
 export const Select = () => (
   <PopupMenu>
-    <PopupMenuText
-      children="Adjust Widgets…"
-      onClick={action("onStripeClick")}
-    />
+    <PopupMenuText children="Adjust Widgets…" onClick={action("onStripeClick")} />
     <PopupMenuSelect>
       <SelectOption title="Red" value="red" />
       <SelectOption title="Blue" value="blue" />
@@ -78,19 +68,11 @@ export const KeyboardNavigation: Story = () => {
       <PopupMenuHeader children="Keyboard Navigation Test" />
       <PopupMenuText children="First Item" onClick={action("first-item")} />
       <PopupMenuText children="Second Item" onClick={action("second-item")} />
-      <PopupMenuText
-        children="Disabled Item"
-        disabled
-        onClick={action("disabled-item")}
-      />
+      <PopupMenuText children="Disabled Item" disabled onClick={action("disabled-item")} />
       <PopupMenuText children="Third Item" onClick={action("third-item")} />
       <PopupMenuSeparator />
       <PopupMenuText children="Link Item" to="/test-link" />
-      <PopupMenuToggle
-        children="Toggle Item"
-        on={toggle}
-        onClick={() => setToggle(!toggle)}
-      />
+      <PopupMenuToggle children="Toggle Item" on={toggle} onClick={() => setToggle(!toggle)} />
       <PopupMenuText
         children="Destructive Action"
         destructive
@@ -101,9 +83,7 @@ export const KeyboardNavigation: Story = () => {
 
   return (
     <div>
-      <p
-        style={{ marginBottom: "20px", maxWidth: "300px", textAlign: "center" }}
-      >
+      <p style={{ marginBottom: "20px", maxWidth: "300px", textAlign: "center" }}>
         <strong>Keyboard Navigation Test:</strong>
         <br />• Use <kbd>Tab</kbd> or arrow keys to navigate
         <br />• <kbd>Enter</kbd>/<kbd>Space</kbd> to activate
@@ -195,18 +175,13 @@ export const NestedMenus: Story = () => {
         onClick={sizeSubmenu.onClick}
       />
       <PopupMenuSeparator />
-      <PopupMenuText
-        children="Preferences..."
-        onClick={action("preferences")}
-      />
+      <PopupMenuText children="Preferences..." onClick={action("preferences")} />
     </PopupMenu>
   ));
 
   return (
     <div>
-      <p
-        style={{ marginBottom: "20px", maxWidth: "400px", textAlign: "center" }}
-      >
+      <p style={{ marginBottom: "20px", maxWidth: "400px", textAlign: "center" }}>
         <strong>Nested Menus Test:</strong>
         <br />• Open main menu, then navigate to "Choose Color" or "Choose Size"
         <br />• Use keyboard navigation within each menu level
@@ -297,9 +272,7 @@ export const TypeAhead: Story = () => {
 
   return (
     <div>
-      <p
-        style={{ marginBottom: "20px", maxWidth: "400px", textAlign: "center" }}
-      >
+      <p style={{ marginBottom: "20px", maxWidth: "400px", textAlign: "center" }}>
         <strong>Type-Ahead Navigation Test:</strong>
         <br />• Open menu, then <strong>start typing</strong> to jump to items
         <br />• Try: "a" → "ap" → "apple" or "c" → "ch" → "cherry"
@@ -340,8 +313,8 @@ export const Dynamic: Story = () => {
     <PopupMenu>
       <PopupMenuText>Thing 1</PopupMenuText>
       <PopupMenuText>
-        Pariatur aute incididunt amet sunt id cupidatat. Ullamco incididunt
-        aliquip sunt ullamco et proident sint nulla cillum adipisicing eu.
+        Pariatur aute incididunt amet sunt id cupidatat. Ullamco incididunt aliquip sunt ullamco et
+        proident sint nulla cillum adipisicing eu.
       </PopupMenuText>
     </PopupMenu>
   );

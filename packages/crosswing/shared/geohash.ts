@@ -141,10 +141,7 @@ function metersToLongitudeDegrees(distance: number, latitude: number): number {
  * @param latitude The latitude used in the conversion.
  * @return The bits necessary to reach a given resolution, in meters.
  */
-function longitudeBitsForResolution(
-  resolution: number,
-  latitude: number,
-): number {
+function longitudeBitsForResolution(resolution: number, latitude: number): number {
   const degs = metersToLongitudeDegrees(resolution, latitude);
   return Math.abs(degs) > 0.000001 ? Math.max(1, log2(360 / degs)) : 1;
 }
@@ -156,10 +153,7 @@ function longitudeBitsForResolution(
  * @returns Bits necessary to reach a given resolution, in meters, for the latitude.
  */
 function latitudeBitsForResolution(resolution: number): number {
-  return Math.min(
-    log2(EARTH_MERI_CIRCUMFERENCE / 2 / resolution),
-    MAXIMUM_BITS_PRECISION,
-  );
+  return Math.min(log2(EARTH_MERI_CIRCUMFERENCE / 2 / resolution), MAXIMUM_BITS_PRECISION);
 }
 
 /**
@@ -193,16 +187,9 @@ function boundingBoxBits(coordinate: Geopoint, size: number): number {
   const latitudeNorth = Math.min(90, coordinate[0] + latDeltaDegrees);
   const latitudeSouth = Math.max(-90, coordinate[0] - latDeltaDegrees);
   const bitsLat = Math.floor(latitudeBitsForResolution(size)) * 2;
-  const bitsLongNorth =
-    Math.floor(longitudeBitsForResolution(size, latitudeNorth)) * 2 - 1;
-  const bitsLongSouth =
-    Math.floor(longitudeBitsForResolution(size, latitudeSouth)) * 2 - 1;
-  return Math.min(
-    bitsLat,
-    bitsLongNorth,
-    bitsLongSouth,
-    MAXIMUM_BITS_PRECISION,
-  );
+  const bitsLongNorth = Math.floor(longitudeBitsForResolution(size, latitudeNorth)) * 2 - 1;
+  const bitsLongSouth = Math.floor(longitudeBitsForResolution(size, latitudeSouth)) * 2 - 1;
+  return Math.min(bitsLat, bitsLongNorth, bitsLongSouth, MAXIMUM_BITS_PRECISION);
 }
 
 /**
@@ -217,17 +204,7 @@ function boundingBoxBits(coordinate: Geopoint, size: number): number {
 function boundingBoxCoordinates(
   center: Geopoint,
   radius: number,
-): [
-  Geopoint,
-  Geopoint,
-  Geopoint,
-  Geopoint,
-  Geopoint,
-  Geopoint,
-  Geopoint,
-  Geopoint,
-  Geopoint,
-] {
+): [Geopoint, Geopoint, Geopoint, Geopoint, Geopoint, Geopoint, Geopoint, Geopoint, Geopoint] {
   const latDegrees = radius / METERS_PER_DEGREE_LATITUDE;
   const latitudeNorth = Math.min(90, center[0] + latDegrees);
   const latitudeSouth = Math.max(-90, center[0] - latDegrees);
@@ -282,25 +259,17 @@ function geohashQuery(geohash: Geohash, bits: number): GeohashRange {
  * @param radius The radius of the circle.
  * @return An array of geohash query bounds, each containing a [start, end] pair.
  */
-export function geohashQueryBounds(
-  center: Geopoint,
-  radius: number,
-): GeohashRange[] {
+export function geohashQueryBounds(center: Geopoint, radius: number): GeohashRange[] {
   const queryBits = Math.max(1, boundingBoxBits(center, radius));
   const geohashPrecision = Math.ceil(queryBits / BITS_PER_CHAR);
   const coordinates = boundingBoxCoordinates(center, radius);
   const queries = coordinates.map((coordinate) => {
-    return geohashQuery(
-      geohashForLocation(coordinate, geohashPrecision),
-      queryBits,
-    );
+    return geohashQuery(geohashForLocation(coordinate, geohashPrecision), queryBits);
   });
   // remove duplicates
   return queries.filter((query, index) => {
     return !queries.some((other, otherIndex) => {
-      return (
-        index > otherIndex && query[0] === other[0] && query[1] === other[1]
-      );
+      return index > otherIndex && query[0] === other[0] && query[1] === other[1];
     });
   });
 }

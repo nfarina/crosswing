@@ -3,11 +3,7 @@ import { flattenChildren } from "../../hooks/flattenChildren.js";
 import { Redirect } from "../../router/redirect/Redirect.js";
 import { Route, Switch } from "../../router/switch/Switch.js";
 import { NoContent } from "../NoContent.js";
-import {
-  Toolbar,
-  ToolbarInsertionPoint,
-  ToolbarSpace,
-} from "../toolbar/Toolbar.js";
+import { Toolbar, ToolbarInsertionPoint, ToolbarSpace } from "../toolbar/Toolbar.js";
 import { ToolbarLayout } from "../toolbar/ToolbarLayout.js";
 import { ToolbarTab } from "../toolbar/ToolbarTab.js";
 import { usePageTitle } from "./SitePageTitle.js";
@@ -19,13 +15,7 @@ export interface SiteTabProps {
   render: () => ReactElement<any>;
 }
 
-export function SiteTabs({
-  title,
-  children,
-}: {
-  title: string;
-  children?: ReactNode;
-}) {
+export function SiteTabs({ title, children }: { title: string; children?: ReactNode }) {
   usePageTitle(title, { intermediate: true });
 
   // Coerce children to array, flattening fragments and falsy conditionals.
@@ -37,11 +27,7 @@ export function SiteTabs({
     <ToolbarLayout neverHides>
       <Toolbar>
         {tabs.map((tab) => (
-          <ToolbarTab
-            key={tab.props.path}
-            to={tab.props.path}
-            children={tab.props.title}
-          />
+          <ToolbarTab key={tab.props.path} to={tab.props.path} children={tab.props.title} />
         ))}
         {/* In case any children want to insert additional toolbar items, they should be on the right away from the tabs. */}
         <ToolbarSpace />
@@ -49,11 +35,7 @@ export function SiteTabs({
       </Toolbar>
       <Switch>
         {tabs.map((tab) => (
-          <Route
-            key={tab.props.path}
-            path={tab.props.path}
-            render={tab.props.render}
-          />
+          <Route key={tab.props.path} path={tab.props.path} render={tab.props.render} />
         ))}
         <Route
           render={() =>

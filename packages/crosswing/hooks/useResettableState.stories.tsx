@@ -11,10 +11,7 @@ export const Default = () => {
 
   return (
     <div>
-      <div
-        style={ColorPickerStyle}
-        onClick={() => setColor(color === "blue" ? "purple" : "blue")}
-      >
+      <div style={ColorPickerStyle} onClick={() => setColor(color === "blue" ? "purple" : "blue")}>
         Click to change color and reset click count
       </div>
       <ClickableColor color={color} />

@@ -5,11 +5,7 @@ import { colors } from "../../colors/colors.js";
 import { Router } from "../../router/Router.js";
 import { MemoryHistory } from "../../router/history/MemoryHistory.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
-import {
-  SiteSidebar,
-  SiteSidebarArea,
-  SiteSidebarLink,
-} from "./SiteSidebar.js";
+import { SiteSidebar, SiteSidebarArea, SiteSidebarLink } from "./SiteSidebar.js";
 
 export default {
   component: SiteSidebar,

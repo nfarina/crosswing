@@ -20,12 +20,7 @@ function Decorator(Story: any) {
 type Story = StoryFn<typeof StatusBanner>;
 
 export const Info: Story = (args) => (
-  <StatusBanner
-    children="Processed today"
-    onClick={action("click")}
-    {...args}
-    type="info"
-  />
+  <StatusBanner children="Processed today" onClick={action("click")} {...args} type="info" />
 );
 
 export const Warning: Story = (args) => (

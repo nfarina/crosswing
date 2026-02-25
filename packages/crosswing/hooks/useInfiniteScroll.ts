@@ -18,10 +18,7 @@ export function useInfiniteScroll(
   { pageSize }: { pageSize: number },
 ): [limit: number, onScroll: (e: UIEvent<any>) => void] {
   // Current limit. Reset the limit whenever our deps change.
-  const [limit, setLimit] = useResettableState<number>(pageSize, [
-    ...deps,
-    pageSize,
-  ]);
+  const [limit, setLimit] = useResettableState<number>(pageSize, [...deps, pageSize]);
 
   // Last scroll Y value that triggered a load of an additional page. Reset
   // it when our deps change.

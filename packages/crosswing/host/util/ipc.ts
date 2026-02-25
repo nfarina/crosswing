@@ -7,7 +7,6 @@ import { HostContact, HostContainer, HostFeatures } from "./types.js";
 
 const container = detectContainer();
 
-/* eslint-disable */
 declare var global: any;
 
 export function detectContainer(): HostContainer {
@@ -204,10 +203,7 @@ const canPost = () => ["ios", "android", "electron"].includes(container);
  */
 export function post(name: string, args?: object) {
   if (!canPost()) {
-    console.log(
-      `Container "${container}" is ignoring ipc.post("${name}") with args.`,
-      args,
-    );
+    console.log(`Container "${container}" is ignoring ipc.post("${name}") with args.`, args);
     return;
   }
 
@@ -237,10 +233,7 @@ export function canSend() {
  */
 export async function send(name: string, args?: object): Promise<object> {
   if (!canSend()) {
-    console.log(
-      `Container "${container}" is ignoring ipc.send("${name}") with args.`,
-      args,
-    );
+    console.log(`Container "${container}" is ignoring ipc.send("${name}") with args.`, args);
     return {};
   }
 

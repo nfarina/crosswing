@@ -41,8 +41,7 @@ export function LabeledTextInput({
   }
 
   // Mirror logic from <TextInput>.
-  const showError =
-    !!rest.error && (!!rest.value || hasEverFocused) && !focused;
+  const showError = !!rest.error && (!!rest.value || hasEverFocused) && !focused;
 
   return (
     <StyledLabeledTextInput

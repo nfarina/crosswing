@@ -11,10 +11,7 @@ export default function PageOne() {
         children={
           <Content>
             <LinkButton to="pages/two" children="Page Two" />
-            <LinkButton
-              to="pages/two?panel=two"
-              children="Page Two -> Panel Two"
-            />
+            <LinkButton to="pages/two?panel=two" children="Page Two -> Panel Two" />
             <LinkButton to="/switch/two" children="Switch Tab -> Panel Two" />
           </Content>
         }

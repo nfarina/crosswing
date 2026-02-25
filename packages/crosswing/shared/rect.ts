@@ -50,10 +50,7 @@ export function scaleToFit(
     };
   }
 
-  if (
-    !enlarge &&
-    (finalSize.width > size.width || finalSize.height > size.height)
-  ) {
+  if (!enlarge && (finalSize.width > size.width || finalSize.height > size.height)) {
     return size;
   }
 

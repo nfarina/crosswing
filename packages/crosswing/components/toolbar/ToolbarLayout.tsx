@@ -1,18 +1,8 @@
-import {
-  HTMLAttributes,
-  ReactElement,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import { HTMLAttributes, ReactElement, useLayoutEffect, useRef, useState } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { StyledToolbar } from "./Toolbar.js";
-import {
-  ToolbarContext,
-  ToolbarContextValue,
-  ToolbarInsertionRef,
-} from "./ToolbarContext.js";
+import { ToolbarContext, ToolbarContextValue, ToolbarInsertionRef } from "./ToolbarContext.js";
 
 export function ToolbarLayout({
   children,
@@ -30,9 +20,9 @@ export function ToolbarLayout({
 }) {
   const divRef = useRef<HTMLDivElement | null>(null);
 
-  const [insertionRefs, setInsertionRefs] = useState<
-    Record<string | symbol, ToolbarInsertionRef>
-  >({});
+  const [insertionRefs, setInsertionRefs] = useState<Record<string | symbol, ToolbarInsertionRef>>(
+    {},
+  );
 
   const [, setForceRender] = useState(0);
 

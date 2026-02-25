@@ -1,9 +1,6 @@
 import { ErrorObj } from "../../shared/errors.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
-import {
-  ModalStoryButton,
-  ModalStoryButtons,
-} from "../storybook/ModalStoryButtons.js";
+import { ModalStoryButton, ModalStoryButtons } from "../storybook/ModalStoryButtons.js";
 import { ModalDecorator } from "../storybook/decorators.js";
 import { useErrorAlert } from "./useErrorAlert.js";
 
@@ -18,9 +15,7 @@ export function ErrorString() {
 
   return (
     <ModalStoryButtons>
-      <ModalStoryButton
-        onClick={() => errorAlert.show("Something bad happened!")}
-      >
+      <ModalStoryButton onClick={() => errorAlert.show("Something bad happened!")}>
         Error String
       </ModalStoryButton>
     </ModalStoryButtons>
@@ -32,9 +27,7 @@ export function ErrorObject() {
 
   return (
     <ModalStoryButtons>
-      <ModalStoryButton
-        onClick={() => errorAlert.show(new Error("Something bad happened!"))}
-      >
+      <ModalStoryButton onClick={() => errorAlert.show(new Error("Something bad happened!"))}>
         Error Object
       </ModalStoryButton>
     </ModalStoryButtons>

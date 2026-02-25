@@ -107,8 +107,7 @@ export function TextArea({
     }
   }, [autoTrim, value.trim() !== value]);
 
-  const autoFocus =
-    rest.autoFocus ?? (autoFocusOnDesktop && container === "web");
+  const autoFocus = rest.autoFocus ?? (autoFocusOnDesktop && container === "web");
 
   useLayoutEffect(() => {
     if (autoFocus && textareaRef.current) {
@@ -154,10 +153,7 @@ export function TextArea({
 
     textarea.style.height = minHeight + "px";
     textarea.style.minHeight = "unset";
-    const newHeight = Math.max(
-      Math.min(textarea.scrollHeight, maxHeight),
-      minHeight,
-    );
+    const newHeight = Math.max(Math.min(textarea.scrollHeight, maxHeight), minHeight);
     textarea.style.height = `${newHeight}px`;
     textarea.style.minHeight = oldMinHeight;
 
@@ -185,8 +181,7 @@ export function TextArea({
     onBlur?.(e);
   }
 
-  const showingError =
-    errorStyle !== "none" && !!error?.message && canShowError;
+  const showingError = errorStyle !== "none" && !!error?.message && canShowError;
 
   // Separate any data- attributes from rest.
   const dataAttrs = {};
@@ -222,12 +217,7 @@ export function TextArea({
       />
       {icon && <div className="icon">{icon}</div>}
       {!newStyle && showingError && (
-        <StatusBadge
-          type="error"
-          size="smallest"
-          hideIcon
-          children={error.message}
-        />
+        <StatusBadge type="error" size="smallest" hideIcon children={error.message} />
       )}
       {newStyle && showingError && (
         <Button

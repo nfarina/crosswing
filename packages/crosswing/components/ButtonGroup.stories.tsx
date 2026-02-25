@@ -34,10 +34,6 @@ export const WithMultipleButtons = () => (
 export const Disabled = () => (
   <ButtonGroup>
     <Button children="One Fish" onClick={action("onClick [one fish]")} />
-    <Button
-      children="Two Fish"
-      disabled
-      onClick={action("onClick [two fish]")}
-    />
+    <Button children="Two Fish" disabled onClick={action("onClick [two fish]")} />
   </ButtonGroup>
 );

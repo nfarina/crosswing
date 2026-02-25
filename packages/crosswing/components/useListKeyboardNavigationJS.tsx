@@ -31,9 +31,7 @@ export function useListKeyboardNavigationJS(
   const [typedString, setTypedString] = useState("");
 
   // Auto-clear typed string after timeout
-  useTimeout(() => setTypedString(""), typedString ? typeAheadTimeout : null, [
-    typedString,
-  ]);
+  useTimeout(() => setTypedString(""), typedString ? typeAheadTimeout : null, [typedString]);
 
   // Set up ARIA attributes on the container
   useEffect(() => {
@@ -55,23 +53,15 @@ export function useListKeyboardNavigationJS(
     }
   }, [autoFocusFirst, disabled]);
 
-  useHotKey(
-    "ArrowUp",
-    { target: listRef, fireInInputs: "always", disabled },
-    () => {
-      clearTypeAhead();
-      onArrowPress("up");
-    },
-  );
+  useHotKey("ArrowUp", { target: listRef, fireInInputs: "always", disabled }, () => {
+    clearTypeAhead();
+    onArrowPress("up");
+  });
 
-  useHotKey(
-    "ArrowDown",
-    { target: listRef, fireInInputs: "always", disabled },
-    () => {
-      clearTypeAhead();
-      onArrowPress("down");
-    },
-  );
+  useHotKey("ArrowDown", { target: listRef, fireInInputs: "always", disabled }, () => {
+    clearTypeAhead();
+    onArrowPress("down");
+  });
 
   useHotKey("*", { target: listRef, disabled }, (pressed) => {
     // Only handle printable characters (letters, numbers, symbols)
@@ -185,9 +175,7 @@ export function useListKeyboardNavigationJS(
     if (focusableItems.length === 0) return;
 
     const currentlyFocused = getCurrentlyFocusedItem();
-    const currentIndex = currentlyFocused
-      ? focusableItems.indexOf(currentlyFocused)
-      : -1;
+    const currentIndex = currentlyFocused ? focusableItems.indexOf(currentlyFocused) : -1;
 
     let newIndex: number;
 

@@ -4,11 +4,7 @@ import { MouseEvent, ReactNode, RefObject, createContext } from "react";
  * The shape of the modal context.
  */
 export type ModalContextValue = {
-  showModal(
-    key: string,
-    modal: (...args: any) => ReactNode,
-    ...args: any
-  ): void;
+  showModal(key: string, modal: (...args: any) => ReactNode, ...args: any): void;
   hideModal(key: string): void;
   /** Show a temporary message in the frame of the modalRoot. */
   showToast(
@@ -21,10 +17,7 @@ export type ModalContextValue = {
    * Sets up a tooltip to be automatically displayed on any element with the
    * given ID. The render method should return a TooltipView element.
    */
-  setTooltip(
-    id: string,
-    tooltip: ((target: Element) => ReactNode) | null,
-  ): void;
+  setTooltip(id: string, tooltip: ((target: Element) => ReactNode) | null): void;
   /**
    * The root of the element that holds the rendered modals themselves
    * (adjacent to the normal render tree).

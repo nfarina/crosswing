@@ -6,10 +6,7 @@ import { useEffect, useState } from "react";
  *
  * https://usehooks.com/useDebounce/
  */
-export function useDebounced<T>(
-  value: T,
-  { delay = 1000 }: { delay?: number } = {},
-): T {
+export function useDebounced<T>(value: T, { delay = 1000 }: { delay?: number } = {}): T {
   const [debouncedValue, setDebouncedValue] = useState(value);
 
   useEffect(

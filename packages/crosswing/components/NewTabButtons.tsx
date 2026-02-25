@@ -41,12 +41,7 @@ export function NewTabButtons({
   } as CSSProperties;
 
   return (
-    <StyledNewTabButtons
-      data-mode={mode}
-      style={cssProps}
-      role="tablist"
-      {...rest}
-    >
+    <StyledNewTabButtons data-mode={mode} style={cssProps} role="tablist" {...rest}>
       <div className="track">
         {mode === "track" && <div className="background" />}
         {buttons}
@@ -186,9 +181,7 @@ export const StyledNewTabButtons = styled.div`
 `;
 
 // Helper function to identify TabButton components
-function isTabButton(
-  child: ReactNode,
-): child is ReactElement<NewTabButtonProps> {
+function isTabButton(child: ReactNode): child is ReactElement<NewTabButtonProps> {
   return isValidElement(child) && !!child.type?.["isTabButton"];
 }
 
@@ -255,11 +248,7 @@ export function TabButton({
         </div>
       ) : null}
       {badge ? (
-        <UnreadBadge
-          children={badge}
-          color={badgeColor}
-          backgroundColor={badgeBackgroundColor}
-        />
+        <UnreadBadge children={badge} color={badgeColor} backgroundColor={badgeBackgroundColor} />
       ) : null}
     </StyledTabButton>
   );

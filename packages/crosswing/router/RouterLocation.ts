@@ -7,10 +7,7 @@ type ExtractParams<Path extends string> =
       : never;
 
 // Maps extracted parameter names to string types.
-export type MatchParams<Path extends string> = Record<
-  ExtractParams<Path>,
-  string
->;
+export type MatchParams<Path extends string> = Record<ExtractParams<Path>, string>;
 
 export class RouterLocation<Path extends string = any> {
   public static fromHref(href: string): RouterLocation {
@@ -21,10 +18,7 @@ export class RouterLocation<Path extends string = any> {
     });
   }
 
-  public static fromLocation(
-    browserLocation: Location,
-    basePath: string = "",
-  ): RouterLocation {
+  public static fromLocation(browserLocation: Location, basePath: string = ""): RouterLocation {
     const { pathname, search } = browserLocation;
     return new RouterLocation({
       segments: segmentize(pathname.substr(basePath.length)),
@@ -112,9 +106,7 @@ export class RouterLocation<Path extends string = any> {
    * Gets the entire path and search query if any (unless excluded), including
    * claimed and unclaimed segments.
    */
-  public href({
-    excludeSearch = false,
-  }: { excludeSearch?: boolean } = {}): string {
+  public href({ excludeSearch = false }: { excludeSearch?: boolean } = {}): string {
     return "/" + this.segments.join("/") + (excludeSearch ? "" : this.search);
   }
 
@@ -123,10 +115,7 @@ export class RouterLocation<Path extends string = any> {
    * location. If you pass {prefixOnly: true}, it will return true if the
    * current location starts with the given path.
    */
-  public isLinkActive(
-    path: string,
-    { prefixOnly }: { prefixOnly?: boolean } = {},
-  ): boolean {
+  public isLinkActive(path: string, { prefixOnly }: { prefixOnly?: boolean } = {}): boolean {
     const fullPath = this.linkTo(path);
     if (prefixOnly) {
       return this.href().startsWith(fullPath);
@@ -245,15 +234,10 @@ export class RouterLocation<Path extends string = any> {
     { preserveClaimIndex = false }: { preserveClaimIndex?: boolean } = {},
   ): RouterLocation {
     const newSegments = segmentize(path);
-    const allSegments = [
-      ...this.segments.slice(0, this.claimIndex),
-      ...newSegments,
-    ];
+    const allSegments = [...this.segments.slice(0, this.claimIndex), ...newSegments];
     return this.clone({
       segments: allSegments,
-      claimIndex: preserveClaimIndex
-        ? this.claimIndex
-        : this.claimIndex + newSegments.length,
+      claimIndex: preserveClaimIndex ? this.claimIndex : this.claimIndex + newSegments.length,
       search: "",
     });
   }

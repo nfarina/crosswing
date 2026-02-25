@@ -42,18 +42,12 @@ export function ProgressBar({
     ...style,
     "--bar-height": barHeight,
     "--value": `${Math.round(value * 100)}%`,
-    "--foreground-color":
-      typeof foregroundColor === "string" ? foregroundColor : foregroundColor(),
+    "--foreground-color": typeof foregroundColor === "string" ? foregroundColor : foregroundColor(),
     "--foreground-color-dark":
-      typeof foregroundColorDark === "string"
-        ? foregroundColorDark
-        : foregroundColorDark(),
-    "--background-color":
-      typeof backgroundColor === "string" ? backgroundColor : backgroundColor(),
+      typeof foregroundColorDark === "string" ? foregroundColorDark : foregroundColorDark(),
+    "--background-color": typeof backgroundColor === "string" ? backgroundColor : backgroundColor(),
     "--background-color-dark":
-      typeof backgroundColorDark === "string"
-        ? backgroundColorDark
-        : backgroundColorDark(),
+      typeof backgroundColorDark === "string" ? backgroundColorDark : backgroundColorDark(),
   } as CSSProperties;
 
   return (

@@ -1,11 +1,4 @@
-import {
-  HTMLAttributes,
-  ReactElement,
-  use,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { HTMLAttributes, ReactElement, use, useEffect, useRef, useState } from "react";
 import { styled } from "styled-components";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { RouterContext } from "../../router/context/RouterContext";
@@ -52,8 +45,7 @@ export function NewSiteLayout({
     true,
   );
 
-  const sidebarMode: PanelLayoutMode =
-    layout === "desktop" ? "shrink" : "overlay";
+  const sidebarMode: PanelLayoutMode = layout === "desktop" ? "shrink" : "overlay";
 
   const [lastLayout, setLastLayout] = useState(layout);
   const [sidebarWasAutoHidden, setSidebarWasAutoHidden] = useState(false);
@@ -69,18 +61,10 @@ export function NewSiteLayout({
 
   // If the sidebar was auto-hidden and we transition from mobile to desktop, show it.
   useEffect(() => {
-    if (
-      lastLayout === "mobile" &&
-      layout === "desktop" &&
-      sidebarWasAutoHidden
-    ) {
+    if (lastLayout === "mobile" && layout === "desktop" && sidebarWasAutoHidden) {
       setSidebarVisible(true);
       setSidebarWasAutoHidden(false);
-    } else if (
-      lastLayout === "desktop" &&
-      layout === "mobile" &&
-      sidebarWasAutoHidden
-    ) {
+    } else if (lastLayout === "desktop" && layout === "mobile" && sidebarWasAutoHidden) {
       setSidebarWasAutoHidden(false);
     }
     setLastLayout(layout);

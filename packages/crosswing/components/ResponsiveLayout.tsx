@@ -14,13 +14,10 @@ export interface ResponsiveChildProps {
 export function ResponsiveLayout({
   children,
 }: {
-  children:
-    | ReactElement<ResponsiveChildProps>
-    | ReactElement<ResponsiveChildProps>[];
+  children: ReactElement<ResponsiveChildProps> | ReactElement<ResponsiveChildProps>[];
 }) {
   const ref = useRef<HTMLDivElement | null>(null);
-  const [bestChild, setBestChild] =
-    useState<ReactElement<ResponsiveChildProps> | null>(null);
+  const [bestChild, setBestChild] = useState<ReactElement<ResponsiveChildProps> | null>(null);
 
   // Store the last size used to determine the best child, so that we can pull
   // up the child again from our list of children during our render to make sure
@@ -41,10 +38,7 @@ export function ResponsiveLayout({
     }
   });
 
-  function getBestChild({
-    width,
-    height,
-  }: ElementSize): ReactElement<ResponsiveChildProps> | null {
+  function getBestChild({ width, height }: ElementSize): ReactElement<ResponsiveChildProps> | null {
     let bestSpecificity = -1;
     let bestChild: ReactElement<ResponsiveChildProps> | null = null;
 
@@ -56,8 +50,7 @@ export function ResponsiveLayout({
       if (minHeight != null && height != null && height < minHeight) {
         return;
       }
-      const specificity =
-        (minWidth != null ? 1 : 0) + (minHeight != null ? 1 : 0);
+      const specificity = (minWidth != null ? 1 : 0) + (minHeight != null ? 1 : 0);
       if (specificity > bestSpecificity) {
         bestChild = child;
         bestSpecificity = specificity;
@@ -74,12 +67,7 @@ export function ResponsiveLayout({
   // (comming during hot reloading).
   const childToRender = bestChildSize ? getBestChild(bestChildSize) : null;
 
-  return (
-    <StyledResponsiveLayout
-      ref={ref}
-      children={childToRender?.props.render() ?? null}
-    />
-  );
+  return <StyledResponsiveLayout ref={ref} children={childToRender?.props.render() ?? null} />;
 }
 
 export function ResponsiveChild({}: ResponsiveChildProps): ReactNode {

@@ -19,15 +19,9 @@ export const Default = () => (
   <MobileToolbarLayout>
     <NoContent title="Content Area" />
     <MobileToolbar>
-      <MobileToolbarButton
-        children={<Compass />}
-        onClick={action("onBrowserClick")}
-      />
+      <MobileToolbarButton children={<Compass />} onClick={action("onBrowserClick")} />
       <MobileToolbarSpace />
-      <MobileToolbarButton
-        children={<Trash />}
-        onClick={action("onTrashClick")}
-      />
+      <MobileToolbarButton children={<Trash />} onClick={action("onTrashClick")} />
     </MobileToolbar>
   </MobileToolbarLayout>
 );

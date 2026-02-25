@@ -8,11 +8,7 @@ import { DateRangeInput, StyledDateRangeInput } from "./DateRangeInput.js";
 
 export default {
   component: DateRangeInput,
-  decorators: [
-    ModalDecorator,
-    CrosswingAppDecorator({ layout: "fullscreen" }),
-    RouterDecorator,
-  ],
+  decorators: [ModalDecorator, CrosswingAppDecorator({ layout: "fullscreen" }), RouterDecorator],
   // Need a stretched layout for our modal to show.
   parameters: { layout: "fullscreen" },
 };
@@ -55,12 +51,7 @@ export const LeftAligned = () => {
 
   return (
     <Container data-popup-alignment="left">
-      <DateRangeInput
-        newStyle
-        bordered
-        value={range}
-        onValueChange={setRange}
-      />
+      <DateRangeInput newStyle bordered value={range} onValueChange={setRange} />
     </Container>
   );
 };

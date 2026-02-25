@@ -23,9 +23,7 @@ export function RouterDecorator(Story: () => any) {
   const nextLocation = new RouterLocation();
 
   return (
-    <RouterContext
-      value={{ location, nextLocation, history, flags: { isMock: true } }}
-    >
+    <RouterContext value={{ location, nextLocation, history, flags: { isMock: true } }}>
       <Suspense fallback={<div>Loading</div>}>
         <Story />
       </Suspense>

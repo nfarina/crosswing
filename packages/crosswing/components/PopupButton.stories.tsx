@@ -44,6 +44,7 @@ export const WithPopup: Story = {
   },
   decorators: [ModalDecorator, CrosswingAppDecorator({ layout: "fullscreen" })],
   render: (args) => {
+    // oxlint-disable-next-line eslint-plugin-react-hooks/rules-of-hooks
     const menu = usePopup(() => (
       <PopupMenu>
         <PopupMenuText children="This is a menu." />
@@ -68,6 +69,7 @@ export const NewStyle: Story = {
   },
   decorators: [ModalDecorator, CrosswingAppDecorator({ layout: "fullscreen" })],
   render: (args) => {
+    // oxlint-disable-next-line eslint-plugin-react-hooks/rules-of-hooks
     const menu = usePopup(() => (
       <PopupMenu>
         <PopupMenuText children="This is a menu." />

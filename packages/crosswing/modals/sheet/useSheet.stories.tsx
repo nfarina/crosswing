@@ -5,10 +5,7 @@ import { NavLayout } from "../../router/navs/NavLayout.js";
 import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
 import { ModalContextProvider } from "../context/ModalContextProvider.js";
-import {
-  ModalStoryButton,
-  ModalStoryButtons,
-} from "../storybook/ModalStoryButtons.js";
+import { ModalStoryButton, ModalStoryButtons } from "../storybook/ModalStoryButtons.js";
 import { ModalDecorator } from "../storybook/decorators.js";
 import { useSheet } from "./useSheet.js";
 
@@ -18,11 +15,7 @@ export default {
 
 export const Normal: StoryObj = {
   render: () => <SheetPresenter />,
-  decorators: [
-    CrosswingAppDecorator({ layout: "mobile" }),
-    ModalDecorator,
-    RouterDecorator,
-  ],
+  decorators: [CrosswingAppDecorator({ layout: "mobile" }), ModalDecorator, RouterDecorator],
   parameters: { layout: "centered" },
 };
 
@@ -36,11 +29,7 @@ export const Sliding: StoryObj = {
       </ModalContextProvider>
     </MockHostProvider>
   ),
-  decorators: [
-    CrosswingAppDecorator({ layout: "mobile" }),
-    ModalDecorator,
-    RouterDecorator,
-  ],
+  decorators: [CrosswingAppDecorator({ layout: "mobile" }), ModalDecorator, RouterDecorator],
   parameters: { layout: "centered" },
 };
 
@@ -53,11 +42,7 @@ export const Desktop: StoryObj = {
   parameters: {
     layout: "fullscreen",
   },
-  decorators: [
-    CrosswingAppDecorator({ layout: "fullscreen" }),
-    ModalDecorator,
-    RouterDecorator,
-  ],
+  decorators: [CrosswingAppDecorator({ layout: "fullscreen" }), ModalDecorator, RouterDecorator],
 };
 
 export const DesktopWide: StoryObj = {
@@ -69,11 +54,7 @@ export const DesktopWide: StoryObj = {
   parameters: {
     layout: "fullscreen",
   },
-  decorators: [
-    CrosswingAppDecorator({ layout: "fullscreen" }),
-    ModalDecorator,
-    RouterDecorator,
-  ],
+  decorators: [CrosswingAppDecorator({ layout: "fullscreen" }), ModalDecorator, RouterDecorator],
 };
 
 //

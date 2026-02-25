@@ -20,12 +20,7 @@ Empty.decorators = [SeparatorDecorator];
 export const WithPlaceholder = () => {
   const [name, setName] = useState("");
   return (
-    <LabeledTextArea
-      label="Note"
-      placeholder="Add a Note"
-      value={name}
-      onValueChange={setName}
-    />
+    <LabeledTextArea label="Note" placeholder="Add a Note" value={name} onValueChange={setName} />
   );
 };
 WithPlaceholder.decorators = [SeparatorDecorator];
@@ -64,22 +59,13 @@ export const WithError = () => {
 };
 WithError.decorators = [SeparatorDecorator];
 
-export const Disabled = () => (
-  <LabeledTextArea label="Name" value="Nick Farina" disabled />
-);
+export const Disabled = () => <LabeledTextArea label="Name" value="Nick Farina" disabled />;
 Disabled.decorators = [SeparatorDecorator];
 
 export const NewStyle = () => {
   const [name, setName] = useState("Nick Farina");
 
-  return (
-    <LabeledTextArea
-      newStyle
-      label="Name"
-      value={name}
-      onValueChange={setName}
-    />
-  );
+  return <LabeledTextArea newStyle label="Name" value={name} onValueChange={setName} />;
 };
 
 export const NewStyleWithError = () => {

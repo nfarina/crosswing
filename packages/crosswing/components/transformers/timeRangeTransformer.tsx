@@ -7,8 +7,7 @@ export function formatTimeRange(dateRange: DateRange | null): string | null {
   const { start, end } = dateRange;
 
   const allDay =
-    dayjs(start).isSame(dayjs(start).startOf("day")) &&
-    dayjs(end).isSame(dayjs(end).endOf("day"));
+    dayjs(start).isSame(dayjs(start).startOf("day")) && dayjs(end).isSame(dayjs(end).endOf("day"));
 
   if (allDay) {
     return null;
@@ -20,11 +19,7 @@ export function formatTimeRange(dateRange: DateRange | null): string | null {
   return `${startTime}–${endTime}`;
 }
 
-export function timeRangeTransformer({
-  dateRange,
-}: {
-  dateRange: DateRange | null;
-}) {
+export function timeRangeTransformer({ dateRange }: { dateRange: DateRange | null }) {
   return {
     parse(text: string) {
       if (!dateRange) {

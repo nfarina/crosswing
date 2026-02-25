@@ -30,10 +30,7 @@ export function Slider({
     onValueChange?.(clampedValue);
   }
 
-  function onMouseDown(
-    e: React.MouseEvent<HTMLDivElement>,
-    el: "bar" | "thumb",
-  ) {
+  function onMouseDown(e: React.MouseEvent<HTMLDivElement>, el: "bar" | "thumb") {
     setDragging(true);
 
     function onMove(e: MouseEvent) {
@@ -56,10 +53,7 @@ export function Slider({
     document.addEventListener("mouseup", onUp);
   }
 
-  function onTouchStart(
-    e: React.TouchEvent<HTMLDivElement>,
-    el: "bar" | "thumb",
-  ) {
+  function onTouchStart(e: React.TouchEvent<HTMLDivElement>, el: "bar" | "thumb") {
     setDragging(true);
 
     function onMove(e: TouchEvent) {
@@ -81,12 +75,7 @@ export function Slider({
   }
 
   return (
-    <StyledSlider
-      style={cssProps}
-      data-animated={!!animated}
-      data-dragging={dragging}
-      {...rest}
-    >
+    <StyledSlider style={cssProps} data-animated={!!animated} data-dragging={dragging} {...rest}>
       <div
         className="bar"
         onMouseDown={(e) => onMouseDown(e, "bar")}

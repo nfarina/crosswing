@@ -1,20 +1,13 @@
 import { colors } from "../../colors/colors.js";
 import { RouterDecorator } from "../../router/storybook/RouterDecorator.js";
 import { CrosswingAppDecorator } from "../../storybook.js";
-import {
-  ModalStoryButton,
-  ModalStoryButtons,
-} from "../storybook/ModalStoryButtons.js";
+import { ModalStoryButton, ModalStoryButtons } from "../storybook/ModalStoryButtons.js";
 import { ModalDecorator } from "../storybook/decorators.js";
 import { useBanner } from "./useBanner.js";
 
 export default {
   component: useBanner,
-  decorators: [
-    CrosswingAppDecorator({ layout: "fullscreen" }),
-    ModalDecorator,
-    RouterDecorator,
-  ],
+  decorators: [CrosswingAppDecorator({ layout: "fullscreen" }), ModalDecorator, RouterDecorator],
   parameters: { layout: "fullscreen" },
 };
 

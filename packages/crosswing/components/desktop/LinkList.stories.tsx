@@ -41,22 +41,10 @@ export const Normal = () => {
 export const Ornaments = () => {
   const elements: Record<string, ReactElement> = {
     normal: <LinkListCell to="normal" title="Normal" />,
-    failed: (
-      <LinkListCell to="failed" title="Failed" right={<LinkListIconFailed />} />
-    ),
-    succeeded: (
-      <LinkListCell
-        to="succeeded"
-        title="Succeeded"
-        right={<LinkListIconSucceeded />}
-      />
-    ),
+    failed: <LinkListCell to="failed" title="Failed" right={<LinkListIconFailed />} />,
+    succeeded: <LinkListCell to="succeeded" title="Succeeded" right={<LinkListIconSucceeded />} />,
     badged: (
-      <LinkListCell
-        to="badged"
-        title="Badged"
-        badge={<LinkListCellBadge children="Admin" />}
-      />
+      <LinkListCell to="badged" title="Badged" badge={<LinkListCellBadge children="Admin" />} />
     ),
   };
 
@@ -88,11 +76,7 @@ export const Grouped = () => {
     <BrowserSimulator>
       <StyledList>
         <LinkButton to="/">Deselect</LinkButton>
-        <LinkList
-          items={Colors}
-          renderItem={(color) => renderColor(color, true)}
-          edges="both"
-        />
+        <LinkList items={Colors} renderItem={(color) => renderColor(color, true)} edges="both" />
       </StyledList>
     </BrowserSimulator>
   );
@@ -106,9 +90,7 @@ export const GroupedWithCustomHeading = () => {
         <LinkList
           items={Colors}
           renderItem={(color) => renderColor(color, true)}
-          renderHeading={(group) => (
-            <LinkListHeading children={"Letter " + group} />
-          )}
+          renderHeading={(group) => <LinkListHeading children={"Letter " + group} />}
           edges="both"
         />
       </StyledList>

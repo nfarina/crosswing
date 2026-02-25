@@ -50,11 +50,8 @@ export function Navs({
   const isRootSelected = !selected.route.props.path;
 
   // Construct our storage for previous routes on this nav.
-  const [previousLocations, setPreviousLocations] = useState<RouterLocation[]>(
-    () =>
-      preloadHistory
-        ? getPreviousLocations(routes, location, root.location)
-        : [],
+  const [previousLocations, setPreviousLocations] = useState<RouterLocation[]>(() =>
+    preloadHistory ? getPreviousLocations(routes, location, root.location) : [],
   );
 
   debug(
@@ -82,14 +79,8 @@ export function Navs({
 
   debug(`Rendering locations: ${allLocations}`);
 
-  function getNavStackItem(
-    savedLocation: RouterLocation,
-    index: number,
-  ): NavStackItem {
-    const { route, location: childLocation } = selectRoute(
-      routes,
-      savedLocation,
-    );
+  function getNavStackItem(savedLocation: RouterLocation, index: number): NavStackItem {
+    const { route, location: childLocation } = selectRoute(routes, savedLocation);
     const backLocation = allLocations[index - 1];
 
     // Get the next location in the universe of these <Navs>.

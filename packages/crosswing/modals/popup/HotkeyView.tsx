@@ -10,11 +10,7 @@ export type Hotkeys = {
 };
 
 export function HotkeyView({ hotkeys = null }: { hotkeys?: Hotkeys | null }) {
-  return (
-    <StyledHotkeyView
-      dangerouslySetInnerHTML={{ __html: renderHotkey(hotkeys) ?? "" }}
-    />
-  );
+  return <StyledHotkeyView dangerouslySetInnerHTML={{ __html: renderHotkey(hotkeys) ?? "" }} />;
 }
 
 export const StyledHotkeyView = styled.span`

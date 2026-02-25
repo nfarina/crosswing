@@ -41,8 +41,7 @@ export function useVisibleOnScreen(
       const rect = el.getBoundingClientRect();
 
       // If an element is completely hidden, its bounding rect will be empty.
-      const emptyRect =
-        rect.x === 0 && rect.y === 0 && rect.width === 0 && rect.height === 0;
+      const emptyRect = rect.x === 0 && rect.y === 0 && rect.width === 0 && rect.height === 0;
 
       // Check if an element is hidden with CSS using opacity or similar.
       const invisible = isInvisible(el);

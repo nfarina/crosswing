@@ -1,11 +1,4 @@
-import {
-  CSSProperties,
-  ElementType,
-  HTMLAttributes,
-  MouseEvent,
-  TouchEvent,
-  useRef,
-} from "react";
+import { CSSProperties, ElementType, HTMLAttributes, MouseEvent, TouchEvent, useRef } from "react";
 import { styled } from "styled-components";
 import { ColorBuilder, colors } from "../../colors/colors.js";
 import { Clickable } from "../Clickable.js";
