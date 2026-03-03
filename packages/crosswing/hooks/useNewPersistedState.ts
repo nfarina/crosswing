@@ -84,6 +84,10 @@ export function useNewPersistedState<S>({
 
   function setValue(newValue: S) {
     setDraftValue(newValue);
+    // Skip the update if the value already matches the persisted store. This
+    // prevents spurious updates when Firestore changes echo back through UI
+    // components (e.g., Slate onChange firing after a programmatic value sync).
+    if (deepEqual(newValue, persistedValue)) return;
     scheduler.update(newValue);
   }
 
