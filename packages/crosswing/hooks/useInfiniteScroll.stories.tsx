@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { styled } from "styled-components";
+import { BottomScrollable } from "../components/BottomScrollable.js";
 import { useInfiniteScroll } from "./useInfiniteScroll.js";
 
 export default {
@@ -8,16 +9,7 @@ export default {
 };
 
 export const Default = () => {
-  // Build the big list of people.
-  const [people] = useState(() => {
-    const people: Person[] = [];
-
-    for (let i = 0; i < 1000; i++) {
-      people.push({ name: `Citizen #${i}` });
-    }
-
-    return people;
-  });
+  const [people] = useState(() => buildPeople());
 
   const [limit, onScroll] = useInfiniteScroll(people.length, [people], {
     pageSize: 50,
@@ -38,8 +30,38 @@ export const Default = () => {
   );
 };
 
+export const BottomScrollableDefault = () => {
+  const [people] = useState(() => buildPeople());
+
+  const [limit, onScroll] = useInfiniteScroll(people.length, [people], {
+    pageSize: 50,
+  });
+
+  const visiblePeople = people.slice(0, limit);
+
+  return (
+    <BottomContainer onScroll={onScroll}>
+      {visiblePeople.map((person, i) => (
+        <div className="person" key={i}>
+          {person.name}
+        </div>
+      ))}
+    </BottomContainer>
+  );
+};
+
 interface Person {
   name: string;
+}
+
+function buildPeople(): Person[] {
+  const people: Person[] = [];
+
+  for (let i = 0; i < 1000; i++) {
+    people.push({ name: `Citizen #${i}` });
+  }
+
+  return people;
 }
 
 const Container = styled.div`
@@ -78,5 +100,32 @@ const Container = styled.div`
     > .person + .person {
       border-top: 1px solid gray;
     }
+  }
+`;
+
+const BottomContainer = styled(BottomScrollable)`
+  width: 400px;
+  height: 400px;
+  border: 1px solid gray;
+
+  @media (prefers-color-scheme: dark) {
+    background: #333;
+  }
+
+  > .person {
+    height: 50px;
+    font-family: sans-serif;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+
+    @media (prefers-color-scheme: dark) {
+      color: white;
+    }
+  }
+
+  > .person + .person {
+    border-bottom: 1px solid gray;
   }
 `;

@@ -271,7 +271,7 @@ export const StyledSearchInput = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 5px 0 8px;
+    padding: 0 8px 0 8px;
     visibility: hidden;
     cursor: pointer;
     color: ${colors.gray450()};
