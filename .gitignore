@@ -26,3 +26,7 @@ chromatic-diagnostics.json
 
 **/lib/
 **/dist/
+
+## Claude
+
+.claude/settings.local.json
