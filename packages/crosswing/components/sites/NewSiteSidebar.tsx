@@ -383,6 +383,16 @@ export const StyledNewSiteSidebarHeader = styled.div`
   }
 `;
 
+export function NewSiteSidebarSeparator({ ...rest }: HTMLAttributes<HTMLDivElement>) {
+  return <StyledNewSiteSidebarSeparator {...rest} />;
+}
+
+export const StyledNewSiteSidebarSeparator = styled.div`
+  height: 1px;
+  background: ${colors.separator()};
+  margin: 7px 10px;
+`;
+
 /**
  * For wrapping a group of subtext items in the sidebar.
  */
