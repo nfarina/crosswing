@@ -55,9 +55,8 @@
   "scripts": {
     "build": "./build.sh",
     "gen:icons": "tsx gen/icons.ts",
-    "gen": "npm run gen:icons",
-    "deploy": "npm run gen && npm run build && cd dist && npm publish",
-    "deploy:yalc": "npm run build && cd dist && yalc publish"
+    "gen": "yarn gen:icons",
+    "deploy": "yarn gen && yarn build && cd dist && npm publish"
   },
   "dependencies": {
     "dayjs": "^1.11.20",
