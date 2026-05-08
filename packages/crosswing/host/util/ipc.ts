@@ -21,7 +21,11 @@ export function detectContainer(): HostContainer {
     return "android";
   } else if (typeof global !== "undefined" && global.require) {
     return "electron";
-  } else if ("standalone" in window.navigator && window.navigator.standalone) {
+  } else if (
+    typeof window !== "undefined" &&
+    "standalone" in window.navigator &&
+    window.navigator.standalone
+  ) {
     return "webapp";
   } else {
     return "web";
