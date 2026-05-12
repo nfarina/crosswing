@@ -15,11 +15,11 @@ import { PopupPlacement } from "../modals/popup/getPopupPlacement.js";
 import { Hotkeys, HotkeyView, StyledHotkeyView } from "../modals/popup/HotkeyView.js";
 import { PopupChildProps, PopupView } from "../modals/popup/PopupView.js";
 import { Link } from "../router/Link.js";
-import { StatusBanner } from "./badges/StatusBanner.js";
 import { Clickable } from "./Clickable.js";
 import { FileInput } from "./forms/FileInput.js";
 import { Select } from "./forms/Select.js";
 import { Toggle } from "./forms/Toggle.js";
+import { TipView } from "./TipView.js";
 import { useListKeyboardNavigationJS } from "./useListKeyboardNavigationJS.js";
 
 // Used to drill the onClose prop down to the PopupMenu children without
@@ -71,6 +71,34 @@ export function PopupMenu({
   );
 }
 
+/* Must define here so we can reference it in the StyledPopupMenu styles. */
+export const PopupStatusBanner = styled(TipView)`
+  margin-top: -5px;
+  margin-bottom: 5px;
+  margin-left: -5px;
+  margin-right: -5px;
+  padding-right: 12px;
+  padding-bottom: 9px;
+  border-radius: 0;
+
+  > svg {
+    align-self: center;
+    margin-right: 6px;
+    transform: scale(0.9);
+  }
+
+  > .children {
+    font: ${fonts.display({ size: 14, line: "20px" })};
+  }
+
+  /* Text doesn't align so this is temporary. */
+  padding-left: calc(12px + 5px) !important;
+  padding-right: calc(12px + 5px) !important;
+  > svg {
+    display: none;
+  }
+`;
+
 export const StyledPopupMenu = styled.div`
   padding: 5px;
   display: flex;
@@ -89,6 +117,11 @@ export const StyledPopupMenu = styled.div`
   /* Bonus feature! Hide first/last item if it's a separator. */
   > .separator:first-child,
   > .separator:last-child {
+    display: none;
+  }
+
+  /* Another bonus! Hide separator that may appear right after a status banner. */
+  > ${PopupStatusBanner} + .separator {
     display: none;
   }
 `;
@@ -384,32 +417,6 @@ export const PopupMenuSeparator = styled.div.attrs({ className: "separator" })`
   margin: 5px 12px 5px 12px;
   height: 1px;
   background: ${colors.separator()};
-`;
-
-export const PopupStatusBanner = styled(StatusBanner)`
-  margin-top: -5px;
-  margin-bottom: 5px;
-  margin-left: -5px;
-  margin-right: -5px;
-  padding-right: 12px;
-  padding-bottom: 9px;
-
-  > svg {
-    align-self: center;
-    margin-right: 6px;
-    transform: scale(0.9);
-  }
-
-  > .children {
-    font: ${fonts.display({ size: 14, line: "20px" })};
-  }
-
-  /* Text doesn't align so this is temporary. */
-  padding-left: calc(12px + 5px) !important;
-  padding-right: calc(12px + 5px) !important;
-  > svg {
-    display: none;
-  }
 `;
 
 /**

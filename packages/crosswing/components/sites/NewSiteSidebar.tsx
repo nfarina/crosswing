@@ -259,7 +259,7 @@ const StyledNewSiteSidebarSubtext = styled(Link)`
       height: 14px;
 
       * {
-        stroke-width: 3px;
+        stroke-width: 2.5px;
       }
     }
   }
