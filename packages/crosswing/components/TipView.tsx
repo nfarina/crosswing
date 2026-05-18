@@ -73,18 +73,21 @@ export const StyledTipView = styled.div`
   }
 
   > .content {
+    min-width: 0;
     display: flex;
     flex-flow: column;
     gap: 3px;
 
     > .title {
       font: ${fonts.displayMedium({ size: 13, line: "18px" })};
+      word-wrap: break-word;
       /* Only way to defeat ts-styled-plugin's lints right now. */
       ${"text-wrap: pretty;"}
     }
 
     > .message {
       font: ${fonts.display({ size: 13, line: "18px" })};
+      word-wrap: break-word;
       /* Only way to defeat ts-styled-plugin's lints right now. */
       ${"text-wrap: pretty;"}
     }
