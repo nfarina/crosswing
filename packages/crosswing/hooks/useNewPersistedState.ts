@@ -15,6 +15,8 @@ export interface PersistedState<S> {
   error: Error | null;
   /** True if `updateFunc` is running. */
   isUpdating: boolean;
+  /** Forces any pending (debounced) update to run immediately. */
+  flush: () => void;
 }
 
 export function useNewPersistedState<S>({
@@ -97,6 +99,7 @@ export function useNewPersistedState<S>({
     toggle: () => setValue(!draftValue as any),
     error,
     isUpdating,
+    flush: () => scheduler.flush(),
   };
 }
 
@@ -176,6 +179,19 @@ class UpdateScheduler<S> {
 
   get isProcessing(): boolean {
     return this.isUpdating || this.pendingTimeout !== null;
+  }
+
+  /** Runs any pending (debounced) update immediately. */
+  flush() {
+    if (this.pendingTimeout) {
+      clearTimeout(this.pendingTimeout);
+      this.pendingTimeout = null;
+    }
+    // If an update is already running, the pending value will be picked up
+    // when it finishes; otherwise run it now.
+    if (this.pendingValue !== undefined && !this.isUpdating) {
+      this.runUpdate();
+    }
   }
 
   private async runUpdate() {

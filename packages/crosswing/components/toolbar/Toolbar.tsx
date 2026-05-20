@@ -1,10 +1,9 @@
-import { CSSProperties, HTMLAttributes, ReactNode, use, useLayoutEffect, useRef } from "react";
 import { MoreHorizontal } from "lucide-react";
+import { CSSProperties, HTMLAttributes, ReactNode, use, useLayoutEffect, useRef } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
 import { fonts } from "../../fonts/fonts.js";
 import { Button } from "../Button.js";
-import { LinkButton } from "../LinkButton.js";
 import { PopupButton } from "../PopupButton.js";
 import { SearchInput } from "../forms/SearchInput.js";
 import { Select } from "../forms/Select.js";
@@ -82,56 +81,20 @@ export const toolbarShadows = {
   controlDark: () => `inset 0 0 0 1px ${colors.white({ alpha: 0.1 })}`,
 };
 
-export const ToolbarLinkButton = styled(LinkButton)`
-  background: ${colors.extraLightGray()};
-  box-shadow: ${toolbarShadows.control()};
-  box-sizing: border-box;
-  min-height: 30px;
-  padding: 3px 9px;
-  color: ${colors.text()};
-  font: ${fonts.displayMedium({ size: 15, line: "1.5" })};
-
-  @media (prefers-color-scheme: dark) {
-    background: ${colors.extraExtraDarkGray()};
-    color: ${colors.lightGray()};
-    box-shadow: ${toolbarShadows.controlDark()};
-  }
-`;
-
-export const ToolbarButton = styled(Button)`
-  background: ${colors.extraLightGray()};
-  box-shadow: ${toolbarShadows.control()};
-  box-sizing: border-box;
-  min-height: 30px;
-  padding: 3px 9px;
-  color: ${colors.text()};
-  font: ${fonts.displayMedium({ size: 15, line: "1.5" })};
-
-  @media (prefers-color-scheme: dark) {
-    background: ${colors.extraExtraDarkGray()};
-    color: ${colors.lightGray()};
-    box-shadow: ${toolbarShadows.controlDark()};
+export const ToolbarButton = styled(Button).attrs({ bordered: true, newStyle: true })`
+  &[data-new-style="true"] {
+    min-height: 30px;
+    padding: 2px 9px;
   }
 
   &[data-primary="true"] {
-    font: ${fonts.displayBold({ size: 15, line: "1.5" })};
-    box-shadow: none;
   }
 `;
 
-export const ToolbarPopupButton = styled(PopupButton)`
-  background: ${colors.extraLightGray()};
-  box-shadow: ${toolbarShadows.control()};
-  box-sizing: border-box;
-  min-height: 30px;
-  padding: 3px 9px;
-  color: ${colors.text()};
-  font: ${fonts.displayMedium({ size: 15, line: "1.5" })};
-
-  @media (prefers-color-scheme: dark) {
-    background: ${colors.extraExtraDarkGray()};
-    color: ${colors.lightGray()};
-    box-shadow: ${toolbarShadows.controlDark()};
+export const ToolbarPopupButton = styled(PopupButton).attrs({ bordered: true, newStyle: true })`
+  &[data-new-style="true"] {
+    min-height: 30px;
+    padding: 2px 9px;
   }
 
   &[data-primary="true"] {
@@ -239,17 +202,16 @@ export const ToolbarIconButton = styled(ToolbarButton)`
   padding: 1px 0 0 0;
 `;
 
-export const ToolbarSearch = styled(SearchInput)`
-  height: 30px;
-  width: 175px;
+export const ToolbarSearch = styled(SearchInput).attrs({ newStyle: true })`
+  &[data-new-style="true"] {
+    min-height: 30px;
+    width: 175px;
+    min-width: unset;
+    flex-shrink: 1;
 
-  > input {
-    border: none;
-    box-shadow: ${toolbarShadows.control()};
-    border-radius: 6px;
-
-    @media (prefers-color-scheme: dark) {
-      box-shadow: ${toolbarShadows.controlDark()};
+    > input {
+      padding-top: 2px;
+      padding-bottom: 2px;
     }
   }
 `;

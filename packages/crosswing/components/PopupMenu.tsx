@@ -72,14 +72,10 @@ export function PopupMenu({
 }
 
 /* Must define here so we can reference it in the StyledPopupMenu styles. */
-export const PopupStatusBanner = styled(TipView)`
-  margin-top: -5px;
-  margin-bottom: 5px;
-  margin-left: -5px;
-  margin-right: -5px;
+export const PopupMenuTipView = styled(TipView)`
   padding-right: 12px;
   padding-bottom: 9px;
-  border-radius: 0;
+  border-radius: 13px;
 
   > svg {
     align-self: center;
@@ -120,9 +116,45 @@ export const StyledPopupMenu = styled.div`
     display: none;
   }
 
-  /* Another bonus! Hide separator that may appear right after a status banner. */
-  > ${PopupStatusBanner} + .separator {
+  > ${PopupMenuTipView}:has(.icon) {
+    gap: 7px;
+
+    > .icon {
+      width: 15px;
+      height: 15px;
+      transform: translateY(2px);
+    }
+  }
+
+  > ${PopupMenuTipView}:first-child {
+    margin-top: -5px;
+    margin-bottom: 5px;
+    margin-left: -5px;
+    margin-right: -5px;
+    border-radius: 0;
+  }
+
+  > ${PopupMenuTipView}:last-child {
+    margin-top: 5px;
+    margin-bottom: -5px;
+    margin-left: -5px;
+    margin-right: -5px;
+    border-radius: 0;
+  }
+
+  /* Another bonus! Hide separator that may appear right after a status banner in first position. */
+  > ${PopupMenuTipView}:first-child + .separator {
     display: none;
+  }
+
+  &[data-larger="true"] > ${PopupMenuTipView}:has(.icon) {
+    gap: 12px;
+
+    > .icon {
+      margin-left: 2px;
+      width: 18px;
+      height: 18px;
+    }
   }
 `;
 
@@ -352,6 +384,18 @@ export const StyledPopupMenuText = styled.div`
         text-overflow: ellipsis;
         white-space: nowrap;
       }
+    }
+  }
+
+  /* Enlarged tap targets for touch devices. */
+  @media (hover: none), (pointer: coarse) {
+    padding: 12px 14px;
+    min-height: 44px;
+    gap: 12px;
+
+    > .icon {
+      width: 18px;
+      height: 18px;
     }
   }
 `;
