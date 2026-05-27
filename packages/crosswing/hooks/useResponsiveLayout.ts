@@ -31,8 +31,9 @@ export function useResponsiveLayout<L extends ResponsiveLayouts>(
   });
 
   function getBestLayout({ width, height }: ElementSize): keyof L | null {
-    let bestSpecificity = -1;
     let bestLayout: keyof L | null = null;
+    let bestSpecificity = -1;
+    let bestThreshold = -1;
 
     for (const [key, layout] of Object.entries(layouts)) {
       const { minWidth, minHeight } = layout;
@@ -42,10 +43,23 @@ export function useResponsiveLayout<L extends ResponsiveLayouts>(
       if (minHeight != null && height != null && height < minHeight) {
         continue;
       }
+
+      // Prefer the most restrictive matching layout. We rank first by the
+      // number of constraints (so a layout that pins both dimensions beats one
+      // that only pins width), then by the magnitude of those constraints (so a
+      // 1040px breakpoint beats a 720px one even though both define a single
+      // minWidth). Without the magnitude tie-break, breakpoints with the same
+      // constraint count would resolve purely by definition order.
       const specificity = (minWidth != null ? 1 : 0) + (minHeight != null ? 1 : 0);
-      if (specificity > bestSpecificity) {
+      const threshold = (minWidth ?? 0) + (minHeight ?? 0);
+
+      if (
+        specificity > bestSpecificity ||
+        (specificity === bestSpecificity && threshold > bestThreshold)
+      ) {
         bestLayout = key;
         bestSpecificity = specificity;
+        bestThreshold = threshold;
       }
     }
 
