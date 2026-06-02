@@ -7,8 +7,9 @@ export const HostContext = createContext<HostContextValue>(defaultHostContext())
 HostContext.displayName = "HostContext";
 
 export function defaultHostContext(merge?: Partial<HostContextValue>): HostContextValue {
+  const container = detectContainer();
   return {
-    container: detectContainer(),
+    container,
     platform: "unknown",
     viewport: {},
     safeArea: {
@@ -23,6 +24,7 @@ export function defaultHostContext(merge?: Partial<HostContextValue>): HostConte
     supportsLogin: false,
     supportsNotifications: false,
     supportsContacts: false,
+    supportsClipboardRead: container === "web" || container === "webapp",
     requiresNotificationAuthorization: false,
     supportsLightStatusBar: false,
     supportsPlaid: false,
@@ -40,7 +42,9 @@ export function defaultHostContext(merge?: Partial<HostContextValue>): HostConte
     copyToClipboard: (dataString: string) => {
       navigator.clipboard.writeText(dataString);
     },
+    readFromClipboard: () => navigator.clipboard.readText(),
     showShareSheet: () => {},
+    shareFile: async () => {},
     showMessageSheet: () => {},
     showEmailSheet: () => {},
     getContacts: async () => [],

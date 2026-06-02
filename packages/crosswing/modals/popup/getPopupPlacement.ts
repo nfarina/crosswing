@@ -15,6 +15,7 @@ export function getPopupPlacement({
   placement: requestedPlacement,
   hostContainer,
   arrowLength = 9,
+  cursorPoint,
 }: {
   containerSize: Size;
   targetRect: Rect;
@@ -22,10 +23,26 @@ export function getPopupPlacement({
   placement: PopupPlacement;
   hostContainer: HostContainer;
   arrowLength?: number;
+  /**
+   * When provided (via the popup's anchor: "cursor" option), the popup is
+   * anchored to this point — where the user clicked or tapped — instead of the
+   * target's center. We model it as a zero-size target located at the point, so
+   * all the side-selection, space-fallback, centering, and clamping logic below
+   * operates relative to the tap rather than the (possibly large) target
+   * element. The point is in the same coordinate system as targetRect.
+   */
+  cursorPoint?: Position | null;
 }): [popupPosition: Position, arrowOffset: number, resolvedPlacement: PopupPlacement] {
   // console.log("container", containerSize);
   // console.log("target", targetRect);
   // console.log("popup", popupSize);
+
+  // Anchor to the tap point if requested. A zero-size rect at the point makes
+  // the rest of the function "just work" — space is measured from the tap, the
+  // popup centers on it, and it opens into whichever side has room.
+  if (cursorPoint) {
+    targetRect = { x: cursorPoint.x, y: cursorPoint.y, width: 0, height: 0 };
+  }
 
   let placement = requestedPlacement;
 

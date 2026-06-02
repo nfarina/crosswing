@@ -15,7 +15,7 @@ import { createGlobalStyle, keyframes, styled } from "styled-components";
 import { HotKeyContextDataAttributes, useHotKey } from "../../hooks/useHotKey.js";
 import { HostContext } from "../../host/context/HostContext.js";
 import { easing } from "../../shared/easing.js";
-import { getRectRelativeTo } from "../../shared/rect.js";
+import { getRectRelativeTo, Position } from "../../shared/rect.js";
 import { Size } from "../../shared/sizing.js";
 import { Seconds } from "../../shared/timespan.js";
 import { ModalContext } from "../context/ModalContext.js";
@@ -44,8 +44,20 @@ export interface Popup<T extends any[] = []> {
 // non-null after mounting.
 export type PopupTarget = RefObject<Element | null>;
 
+export type PopupAnchor = "target" | "cursor";
+
 export interface PopupOptions {
   placement?: PopupPlacement;
+  /**
+   * How the popup is anchored to its target. The default "target" anchors the
+   * popup to the target element's center, which is ideal for menu buttons. Use
+   * "cursor" for large targets (like a big image) so the popup appears next to
+   * where the user actually clicked or tapped, rather than potentially far away
+   * at the element's center. Cursor anchoring requires the popup to be shown
+   * via onClick() (so we have a pointer location); shows triggered without a
+   * pointer fall back to "target" anchoring.
+   */
+  anchor?: PopupAnchor;
   /**
    * Default true, listens for clicks on the nearest Modal root and validates
    * them against the PopupTarget to auto-close the popup when clicking outside
@@ -80,6 +92,7 @@ export function usePopup<T extends any[]>(
   popup: (...args: T) => ReactNode,
   {
     placement = "platform",
+    anchor = "target",
     clickOutsideToClose = true,
     showBackdrop = false,
     maxWidth = "80%",
@@ -90,10 +103,18 @@ export function usePopup<T extends any[]>(
   // changing this doesn't require a re-render.
   const activeTarget = useRef<PopupTarget>({ current: null });
 
+  // For anchor: "cursor", where within the target the user clicked, stored as a
+  // fraction (0–1) of the target's bounds. We store a fraction rather than an
+  // absolute point so the anchor stays glued to the same spot as the target
+  // scrolls or resizes. `pending` is captured by onClick and adopted by show().
+  const cursorFraction = useRef<Position | null>(null);
+  const pendingCursorFraction = useRef<Position | null>(null);
+
   const container = useModal((...args: T) => (
     <PopupContainer
       placement={placement}
       target={activeTarget.current}
+      cursorFraction={cursorFraction}
       onClose={hide}
       children={popup(...args)}
       clickOutsideToClose={clickOutsideToClose}
@@ -106,6 +127,23 @@ export function usePopup<T extends any[]>(
   function onClick(e: MouseEvent) {
     const element = e.currentTarget as HTMLElement;
     const target = { current: element };
+
+    // Capture where within the target the click landed, as a fraction of its
+    // bounds, for anchor: "cursor". Keyboard-activated clicks report 0,0 with
+    // detail 0; those fall back to target anchoring.
+    if (anchor === "cursor" && (e.detail > 0 || e.clientX !== 0 || e.clientY !== 0)) {
+      const rect = element.getBoundingClientRect();
+      pendingCursorFraction.current =
+        rect.width > 0 && rect.height > 0
+          ? {
+              x: Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width)),
+              y: Math.max(0, Math.min(1, (e.clientY - rect.top) / rect.height)),
+            }
+          : null;
+    } else {
+      pendingCursorFraction.current = null;
+    }
+
     (toggle as any)(target);
   }
 
@@ -120,6 +158,10 @@ export function usePopup<T extends any[]>(
 
   function show(target: PopupTarget, ...args: T) {
     activeTarget.current = target;
+    // Adopt the pointer location captured by onClick (if any); a direct show()
+    // has none, so we fall back to target anchoring.
+    cursorFraction.current = pendingCursorFraction.current;
+    pendingCursorFraction.current = null;
     container.show(...args);
     if (target.current && target.current instanceof HTMLElement) {
       target.current.blur();
@@ -128,6 +170,8 @@ export function usePopup<T extends any[]>(
 
   function hide() {
     activeTarget.current = { current: null };
+    cursorFraction.current = null;
+    pendingCursorFraction.current = null;
     container.hide();
   }
 
@@ -139,6 +183,7 @@ export function usePopup<T extends any[]>(
 export const PopupContainer = ({
   placement,
   target,
+  cursorFraction,
   children,
   onClose,
   // Provided by <TransitionGroup>.
@@ -153,6 +198,12 @@ export const PopupContainer = ({
 }: {
   placement: PopupPlacement;
   target: PopupTarget;
+  /**
+   * For anchor: "cursor", the click location within the target as a fraction
+   * (0–1) of its bounds. A ref so positionPopup() always reads the latest value
+   * without re-rendering, mirroring how `target` is handled.
+   */
+  cursorFraction?: RefObject<Position | null>;
   children: ReactNode;
   onClose: () => void;
   in?: boolean;
@@ -289,10 +340,23 @@ export const PopupContainer = ({
     // your target element (the thing the user clicked) so you can control the
     // arrow location. This is super useful if your button that the user
     // can click has an enlarged hit area for mobile.
-    if (!targetElement.dataset.popupTarget) {
+    if (!targetElement.dataset.popupTarget || targetElement.dataset.popupTarget === "child") {
       const descendent = targetElement.querySelector(`*[data-popup-target="true"]`);
       if (descendent) {
         targetElement = descendent;
+      } else {
+        // You can also request that the popup be anchored to a child of the target element.
+        const descendentChild =
+          targetElement.dataset.popupTarget === "child"
+            ? targetElement
+            : targetElement.querySelector(`*[data-popup-target="child"]`);
+        if (
+          descendentChild &&
+          descendentChild instanceof HTMLElement &&
+          descendentChild.children.length > 0
+        ) {
+          targetElement = descendentChild.children[0];
+        }
       }
     }
 
@@ -323,12 +387,25 @@ export const PopupContainer = ({
       height: Math.round(popupRect.height + extraHeight),
     };
 
+    // For anchor: "cursor", resolve the stored fraction against the current
+    // target rect to get the tap point in popup-area coordinates. Using the
+    // live targetRect keeps the anchor glued to the same spot through scroll and
+    // resize.
+    const fraction = cursorFraction?.current;
+    const cursorPoint: Position | null = fraction
+      ? {
+          x: targetRect.x + fraction.x * targetRect.width,
+          y: targetRect.y + fraction.y * targetRect.height,
+        }
+      : null;
+
     const [popupPosition, arrowOffset, resolvedPlacement] = getPopupPlacement({
       containerSize,
       targetRect,
       popupSize,
       placement,
       hostContainer,
+      cursorPoint,
     });
 
     container.dataset.placement = resolvedPlacement;

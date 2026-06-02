@@ -22,6 +22,7 @@ import {
   setBrightness,
   setLightStatusBar,
   setWakeLock,
+  shareFile as ipcShareFile,
   showEmailSheet,
   showMessageSheet,
   showShareSheet,
@@ -86,9 +87,14 @@ export function HostProvider({
           supportsLogin: !!features.login,
           supportsNotifications: container === "android" || !!features.notifications, // All android devices support notifications without prompting.
           supportsShareSheet: !!features.shareSheet,
+          supportsFileShare: !!features.fileShare,
           supportsMessageSheet: !!features.messageSheet,
           supportsEmailSheet: !!features.emailSheet,
           supportsContacts: !!features.contacts,
+          // Any plain web context can read the clipboard via navigator; host
+          // containers must advertise the feature explicitly.
+          supportsClipboardRead:
+            container === "web" || container === "webapp" || !!features.clipboardRead,
           supportsWakeLock: !!features.wakeLock,
           supportsBrightness: !!features.brightness,
           supportsPlaid: !!features.plaid,
@@ -107,7 +113,12 @@ export function HostProvider({
           badgeAppIcon,
           scrollToTop,
           copyToClipboard: clipboard.copy,
+          readFromClipboard: clipboard.read,
           showShareSheet,
+          shareFile: async ({ blob, fileName }) => {
+            const data = await blobToBase64(blob);
+            await ipcShareFile({ data, fileName, mimeType: blob.type });
+          },
           showMessageSheet,
           showEmailSheet,
           getContacts,
@@ -152,6 +163,20 @@ export const StyledHostProvider = styled.div<{
     flex-grow: 1;
   }
 `;
+
+/** Reads a Blob into a base64 string (without the data: URL prefix). */
+function blobToBase64(blob: Blob): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const result = reader.result as string;
+      const comma = result.indexOf(",");
+      resolve(comma >= 0 ? result.slice(comma + 1) : result);
+    };
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(blob);
+  });
+}
 
 function buildPlugin(features: HostFeatures, plugin: string): HostPlugin | null {
   const pluginFeatures = features.plugins?.[plugin];

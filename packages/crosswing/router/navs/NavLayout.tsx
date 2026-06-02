@@ -1,3 +1,4 @@
+import { ArrowLeft } from "lucide-react";
 import { HTMLAttributes, ReactNode, use } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
@@ -7,8 +8,7 @@ import { StatusBarStyleAttribute } from "../../host/util/useAutoStatusBar.js";
 import { safeArea } from "../../safearea/safeArea.js";
 import { RouterContext } from "../context/RouterContext.js";
 import { NavAccessory, NavAccessoryView } from "./NavAccessoryView.js";
-import { NavTitleView } from "./NavTitleView.js";
-import { ArrowLeft } from "lucide-react";
+import { NavTitleView, StyledNavTitleView } from "./NavTitleView.js";
 
 export interface NavProps {
   title?: ReactNode;
@@ -133,6 +133,11 @@ export function NavLayout({
     <StyledNavLayout
       data-transparent={!!transparent}
       data-full-bleed={!!fullBleed}
+      // A full-bleed page's content reaches the very top of the layout, so
+      // advertise that intent: an app shell (e.g. TaskBannerLayout) can detect
+      // this and let the content extend up under the status bar/safe area
+      // rather than reserving that region globally.
+      data-extend-under-status-bar={!!fullBleed}
       data-disabled={!!disabled}
       data-hidden={!!hidden}
       data-hide-tab-bar={!!hideTabBar}
@@ -172,6 +177,15 @@ export const StyledNavHeader = styled.div`
 
   &[data-transparent-header="false"] {
     background-color: ${colors.textBackground()};
+  }
+
+  /* When the header is transparent, we want to prevent the user from clicking on the title container, but allow them to click on the left and right accessories (or any title content itself). */
+  &[data-transparent-header="true"] {
+    pointer-events: none;
+
+    > *:not(${StyledNavTitleView}) {
+      pointer-events: auto;
+    }
   }
 
   &[data-container="ios"] {
@@ -266,10 +280,6 @@ export const StyledNavLayout = styled.div`
     left: 0;
     right: 0;
     height: 60px;
-    background: linear-gradient(
-      rgba(0, 0, 0, 0.8),
-      rgba(0, 0, 0, 0.3) 40%,
-      rgba(0, 0, 0, 0)
-    );
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3) 40%, rgba(0, 0, 0, 0));
   }
 `;

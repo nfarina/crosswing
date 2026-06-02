@@ -1,17 +1,23 @@
-import { copyToClipboard } from "./ipc.js";
+import { copyToClipboard, readFromClipboard } from "./ipc.js";
 import { HostFeatures } from "./types.js";
 
 export interface HostClipboard {
   copy: (text: string) => void;
+  /** Reads the current clipboard text, prompting for permission if the OS requires it. */
+  read: () => Promise<string>;
 }
 
 // Cached.
 let inputEl: HTMLTextAreaElement | null = null;
 
-export function useClipboard(features?: HostFeatures | undefined) {
+export function useClipboard(features?: HostFeatures | undefined): HostClipboard {
+  // Reading is gated separately from copying: a host that can copy may be an
+  // older build that doesn't yet handle the readClipboard message.
+  const read = features?.clipboardRead ? readFromClipboard : () => navigator.clipboard.readText();
+
   if (features?.clipboard) {
     // Our host supports it!
-    return { copy: copyToClipboard };
+    return { copy: copyToClipboard, read };
   } else {
     // Do it old-school.
     if (!inputEl) {
@@ -26,7 +32,7 @@ export function useClipboard(features?: HostFeatures | undefined) {
       document.body.appendChild(inputEl);
     }
 
-    return { copy: browserCopy };
+    return { copy: browserCopy, read };
   }
 }
 

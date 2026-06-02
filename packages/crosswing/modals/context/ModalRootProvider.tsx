@@ -90,7 +90,7 @@ export const StyledModalOverlay = styled.div`
     }
 
     > ${StyledToastContainer} {
-      /* z-index: 3; */
+      z-index: 3;
     }
 
     > ${StyledPopupContainer} {

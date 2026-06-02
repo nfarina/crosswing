@@ -95,6 +95,44 @@ export function Inset() {
   );
 }
 
+/**
+ * Demonstrates anchor: "cursor" — the popup appears next to where you click,
+ * not at the target's center. Click around each big "image" to compare: the
+ * left one follows your click, the right one (default anchoring) always points
+ * at the center, which feels far away on large targets.
+ */
+export function CursorAnchor() {
+  const cursorPopup = usePopup(
+    () => (
+      <PopupView>
+        <BasicContent>Anchored to your click 👆</BasicContent>
+      </PopupView>
+    ),
+    { anchor: "cursor" },
+  );
+
+  const targetPopup = usePopup(() => (
+    <PopupView>
+      <BasicContent>Anchored to the center</BasicContent>
+    </PopupView>
+  ));
+
+  return (
+    <CursorAnchorView>
+      <div className="image cursor" onClick={cursorPopup.onClick}>
+        anchor="cursor"
+        <br />
+        click anywhere
+      </div>
+      <div className="image target" onClick={targetPopup.onClick}>
+        anchor="target" (default)
+        <br />
+        click anywhere
+      </div>
+    </CursorAnchorView>
+  );
+}
+
 function ResizableContent() {
   const [larger, setLarger] = useState(false);
 
@@ -147,6 +185,39 @@ const FourCorners = styled.div`
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+  }
+`;
+
+const CursorAnchorView = styled.div`
+  display: flex;
+  flex-flow: row;
+  width: 100%;
+  height: 100%;
+  gap: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+
+  > .image {
+    flex-grow: 1;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 12px;
+    cursor: pointer;
+    color: ${colors.white()};
+    font: ${fonts.displayBold({ size: 15 })};
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    user-select: none;
+  }
+
+  > .image.cursor {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  }
+
+  > .image.target {
+    background: linear-gradient(135deg, #f7971e 0%, #d62976 100%);
   }
 `;
 

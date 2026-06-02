@@ -37,11 +37,18 @@ export function NavAccessoryView({ accessory, align }: NavAccessoryViewProps) {
   };
 
   if (to) {
-    return <StyledNavAccessoryView as={Link} to={to} {...sharedProps} />;
+    return <StyledNavAccessoryView as={Link} to={to} data-popup-target="child" {...sharedProps} />;
   } else if (onClick) {
-    return <StyledNavAccessoryView as={StyledButton} onClick={onClick} {...sharedProps} />;
+    return (
+      <StyledNavAccessoryView
+        as={StyledButton}
+        onClick={onClick}
+        data-popup-target="child"
+        {...sharedProps}
+      />
+    );
   } else {
-    return <StyledNavAccessoryView {...sharedProps} />;
+    return <StyledNavAccessoryView data-popup-target="child" {...sharedProps} />;
   }
 }
 

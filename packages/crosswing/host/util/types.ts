@@ -18,9 +18,13 @@ export interface HostContextValue {
   supportsNotifications: boolean;
   supportsLogin: boolean;
   supportsShareSheet?: boolean;
+  /** Whether the host can share/save a binary file (e.g. an export). */
+  supportsFileShare?: boolean;
   supportsMessageSheet?: boolean;
   supportsEmailSheet?: boolean;
   supportsContacts?: boolean;
+  /** Whether reading the OS clipboard is available (host feature, or any web context). */
+  supportsClipboardRead?: boolean;
   supportsWakeLock?: boolean;
   supportsBrightness?: boolean;
   supportsLightStatusBar?: boolean;
@@ -49,8 +53,15 @@ export interface HostContextValue {
   scrollToTop(): void;
   /** Copies the given string to the OS clipboard. */
   copyToClipboard(text: string): void;
+  /** Reads text from the OS clipboard, prompting for permission if required. */
+  readFromClipboard(): Promise<string>;
   /** Displays the system share sheet for the given text, if supported. */
   showShareSheet(text: string): void;
+  /**
+   * Shares/saves a file via the native share sheet (e.g. iOS), letting the user
+   * save to Files, AirDrop, etc. Only meaningful when `supportsFileShare`.
+   */
+  shareFile(args: { blob: Blob; fileName: string }): Promise<void>;
   /** Displays the system message compose sheet, if supported. */
   showMessageSheet(args: { to: string; body: string }): void;
   /** Displays the system email compose sheet, if supported. */
@@ -127,8 +138,12 @@ export interface HostFeatures {
   pendingDeepLink?: string;
   /** Whether this host supports copying text to the OS clipboard. */
   clipboard?: boolean;
+  /** Whether this host supports reading text from the OS clipboard. */
+  clipboardRead?: boolean;
   /** Whether this host supports showing a "share sheet" for text. */
   shareSheet?: boolean;
+  /** Whether this host supports sharing/saving a binary file. */
+  fileShare?: boolean;
   /** Whether this host supports displaying a form for composing a text message. */
   messageSheet?: boolean;
   /** Whether this host supports displaying a form for composing an email. */

@@ -113,8 +113,24 @@ export async function copyToClipboard(text: string) {
   post("copyToClipboard", { text });
 }
 
+export async function readFromClipboard(): Promise<string> {
+  const result = (await send("readClipboard")) as { text?: string };
+  return result.text ?? "";
+}
+
 export async function showShareSheet(text: string) {
   post("showShareSheet", { text });
+}
+
+export async function shareFile(args: {
+  /** Base64-encoded file contents (no data: prefix). */
+  data: string;
+  fileName: string;
+  mimeType: string;
+}) {
+  // Use send() so the returned Promise resolves once the host has actually
+  // presented the share sheet (lets the caller show a working state).
+  await send("shareFile", args);
 }
 
 export async function showMessageSheet(args: { to: string; body: string }) {

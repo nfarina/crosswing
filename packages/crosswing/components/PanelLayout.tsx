@@ -704,9 +704,7 @@ export const StyledPanelLayout = styled.div`
     /* Animate the panel out of view in the correct direction. */
     > .panel {
       &[data-panel-edge="top"] {
-        transform: translateY(
-          calc(0px - var(--panel-size) - var(--shadow-padding))
-        );
+        transform: translateY(calc(0px - var(--panel-size) - var(--shadow-padding)));
       }
 
       &[data-panel-edge="right"] {
@@ -718,9 +716,7 @@ export const StyledPanelLayout = styled.div`
       }
 
       &[data-panel-edge="left"] {
-        transform: translateX(
-          calc(0px - var(--panel-size) - var(--shadow-padding))
-        );
+        transform: translateX(calc(0px - var(--panel-size) - var(--shadow-padding)));
       }
     }
   }

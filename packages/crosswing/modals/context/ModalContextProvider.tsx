@@ -348,9 +348,7 @@ export function ModalContextProvider({
       modalContextRoot,
       allowDesktopPresentation,
     };
-  } else if (
-    contextValueRef.current.allowDesktopPresentation !== allowDesktopPresentation
-  ) {
+  } else if (contextValueRef.current.allowDesktopPresentation !== allowDesktopPresentation) {
     contextValueRef.current = {
       ...contextValueRef.current,
       allowDesktopPresentation,
