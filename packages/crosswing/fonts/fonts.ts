@@ -224,7 +224,7 @@ export function getFontFaceCSS(faces: GlobalFontFace[]) {
         @font-face {
           font-family: '${family}';
           src: url('${url}') format('woff2-variations');
-          src: url('${url}') format('woff2') tech('variations');
+          src: url('${url}') format('woff2') tech(variations);
           font-weight: ${weight};
           font-style: ${style};
         }

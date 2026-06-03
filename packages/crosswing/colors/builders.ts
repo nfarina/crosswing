@@ -308,6 +308,18 @@ function browserHasKnownP3Support(): boolean {
     return version >= 114;
   }
 
+  // Firefox (Gecko) test strings like:
+  //   Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:151.0) Gecko/20100101 Firefox/151.0
+  // Firefox's UA contains none of "Chrome/", "Safari/", or "AppleWebKit/", so it
+  // must be matched explicitly or it falls through to `false` — which forces the
+  // non-P3 fallback path and renders some colors as `undefined`. Firefox has
+  // supported color(display-p3 …) since v113.
+  const firefoxMatch = navigator.userAgent.match(/Firefox\/(\d+)/);
+  if (firefoxMatch) {
+    const version = parseInt(firefoxMatch[1], 10);
+    return version >= 113;
+  }
+
   // Test strings for Apple webkit (iPhone, iPad, macOS) like:
   //   5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1
   // Look for the Safari/x.x.x.x part.
