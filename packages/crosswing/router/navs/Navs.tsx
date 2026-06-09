@@ -43,7 +43,17 @@ export function Navs({
   const routes = flattenChildren(children).filter(isNavRoute);
 
   // Pull our route information from context.
-  const { location, nextLocation, history, parent, flags } = use(RouterContext);
+  const { location: rawLocation, nextLocation, history, parent, flags } = use(RouterContext);
+
+  // A `replace` navigation (e.g. <Redirect>, or history.navigate(to, { replace:
+  // true })) should swap the top of our stack rather than push a new entry, so
+  // the replaced page leaves the back stack — matching history.replaceState
+  // semantics. The intent rides on the location from the history event; we read
+  // it here and then work with a cleaned copy so the flag never leaks into our
+  // stored history or into child route contexts (which would otherwise confuse
+  // a nested <Navs> into replacing its own top on first render).
+  const replace = !!rawLocation.replace;
+  const location = replace ? rawLocation.clone({ replace: undefined }) : rawLocation;
 
   const selected = selectRoute(routes, location);
   const root = selectRoot(routes, location);
@@ -63,7 +73,7 @@ export function Navs({
   // shouldn't be any way to go back further, and also as a safety valve).
   const allLocations = isRootSelected
     ? [location]
-    : pushLocation(root.location, previousLocations, location);
+    : pushLocation(root.location, previousLocations, location, replace);
 
   // Store the list of locations we rendered.
   useEffect(() => {
@@ -202,10 +212,11 @@ function getPreviousLocations(
   return locations;
 }
 
-function pushLocation(
+export function pushLocation(
   root: RouterLocation,
   previous: RouterLocation[],
   current: RouterLocation,
+  replace: boolean = false,
 ): RouterLocation[] {
   // If this is the first place we're landing on, make sure you can go
   // back to the root.
@@ -217,8 +228,17 @@ function pushLocation(
   const penultimateLocation = previous[previous.length - 2];
 
   // If we're already at this location, replace it with the new one (in case
-  // the search string changed).
+  // the search string changed). This also keeps re-renders idempotent once a
+  // replace navigation (below) has been recorded into our history.
   if (lastLocation?.equals(current, { excludeSearch: true })) {
+    return [...previous.slice(0, previous.length - 1), current];
+  }
+
+  // Reached via a replace navigation (e.g. <Redirect>)? Swap the current top
+  // for the new location instead of pushing, so the page being replaced leaves
+  // the back stack. Guarded to never replace away the root, so there's always
+  // somewhere to go back to.
+  if (replace && previous.length > 1) {
     return [...previous.slice(0, previous.length - 1), current];
   }
 

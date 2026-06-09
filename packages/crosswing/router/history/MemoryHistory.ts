@@ -45,10 +45,17 @@ export class MemoryHistory {
     }
 
     const location = RouterLocation.fromHref(to);
+    // Keep our stored "where are we now" location clean; the replace flag
+    // describes how we got here, not the location itself (and top() shouldn't
+    // report it, matching BrowserHistory).
     this.location = location;
 
+    // Carry the replace intent on the copy we hand to listeners so <Navs> can
+    // swap its top entry instead of pushing.
+    const event = replace ? location.clone({ replace: true }) : location;
+
     debug(`Notify ${this.listeners.size} listeners.`);
-    for (const listener of this.listeners) listener(location);
+    for (const listener of this.listeners) listener(event);
   }
 
   public listen(listener: NavigateListener) {

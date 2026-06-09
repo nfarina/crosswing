@@ -80,3 +80,30 @@ test("claimAll", () => {
 
   expect(location.claimAll().toString()).toEqual("[customers/cus1]");
 });
+
+describe("replace flag", () => {
+  test("survives the serialize round-trip (Router's useDeferredValue path)", () => {
+    const location = RouterLocation.fromHref("/orders");
+    location.replace = true;
+    const restored = RouterLocation.deserialize(location.serialize());
+    expect(restored.replace).toBe(true);
+  });
+
+  test("is omitted from serialized output when unset, keeping identity stable", () => {
+    const a = RouterLocation.fromHref("/orders");
+    const b = RouterLocation.fromHref("/orders");
+    b.replace = true;
+    // Two locations differing only by the transient replace flag are still the
+    // same place, but a clean location must not serialize a `replace` key (so
+    // useDeferredValue doesn't see spurious identity churn).
+    expect(a.serialize()).not.toContain("replace");
+    expect(a.equals(b)).toBe(true);
+  });
+
+  test("is preserved through claim/clone", () => {
+    const location = RouterLocation.fromHref("/customers/cus1");
+    location.replace = true;
+    expect(location.claim("customers").replace).toBe(true);
+    expect(location.clone({ search: "?x=1" }).replace).toBe(true);
+  });
+});

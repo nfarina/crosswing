@@ -31,6 +31,17 @@ export class RouterLocation<Path extends string = any> {
   public segments: string[] = [];
   public claimIndex: number = 0;
 
+  /**
+   * Transient marker indicating this location was reached via a `replace`
+   * navigation (`history.navigate(to, { replace: true })`, e.g. <Redirect>),
+   * rather than a push. It rides from the history event down through the claim
+   * chain to <Navs> so the stack can swap its top entry instead of pushing a
+   * new one — matching history.replaceState semantics. It is NOT part of the
+   * location's identity (`equals()` and `href()` ignore it), but it is included
+   * in `serialize()` so it survives the <Router>'s useDeferredValue round-trip.
+   */
+  public replace?: boolean;
+
   constructor(props: Partial<RouterLocation> = {}) {
     for (const prop of Object.keys(props)) {
       this[prop] = props[prop];
@@ -56,12 +67,15 @@ export class RouterLocation<Path extends string = any> {
       params: this.params,
       segments: this.segments,
       claimIndex: this.claimIndex,
+      // Only emitted when set; JSON.stringify drops undefined keys, keeping the
+      // serialized string (and thus useDeferredValue identity) stable otherwise.
+      replace: this.replace,
     });
   }
 
   public static deserialize(serialized: string): RouterLocation {
-    const { search, params, segments, claimIndex } = JSON.parse(serialized);
-    return new RouterLocation({ search, params, segments, claimIndex });
+    const { search, params, segments, claimIndex, replace } = JSON.parse(serialized);
+    return new RouterLocation({ search, params, segments, claimIndex, replace });
   }
 
   /**

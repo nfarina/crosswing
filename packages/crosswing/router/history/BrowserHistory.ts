@@ -81,6 +81,9 @@ export class BrowserHistory {
     }
 
     const location = RouterLocation.fromLocation(window.location, basePath);
+    // Carry the replace intent on the location so <Navs> can swap its top entry
+    // instead of pushing. Only set when true to keep serialized identity stable.
+    if (replace) location.replace = true;
 
     debug(`Notify ${this.listeners.size} listeners.`);
     for (const listener of this.listeners) listener(location);
