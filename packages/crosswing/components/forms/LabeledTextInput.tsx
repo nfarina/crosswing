@@ -168,5 +168,9 @@ export const StyledLabeledTextInput = styled.div`
         color: ${colors.text({ alpha: 0.5 })};
       }
     }
+
+    &[data-has-label="false"] {
+      min-height: 30px;
+    }
   }
 `;
