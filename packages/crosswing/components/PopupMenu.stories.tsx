@@ -163,14 +163,16 @@ export const NestedMenus: Story = () => {
       <PopupMenuText children="Export..." onClick={action("export")} />
       <PopupMenuSeparator />
       <PopupMenuText
-        children="Choose Color →"
+        children="Choose color"
         detail={`Currently: ${selectedColor}`}
+        showDisclosure
         leaveOpen
         onClick={colorSubmenu.onClick}
       />
       <PopupMenuText
-        children="Choose Size →"
+        children="Choose size"
         detail={`Currently: ${selectedSize}`}
+        showDisclosure
         leaveOpen
         onClick={sizeSubmenu.onClick}
       />

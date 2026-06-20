@@ -1,4 +1,4 @@
-import { Check } from "lucide-react";
+import { Check, ChevronRight } from "lucide-react";
 import {
   ComponentType,
   createContext,
@@ -175,6 +175,7 @@ export function PopupMenuText({
   destructive,
   leaveOpen,
   ellipsize,
+  showDisclosure,
   keyboardNavigation,
   ...rest
 }: {
@@ -196,6 +197,8 @@ export function PopupMenuText({
   /** If true, clicking the text will not call onClose() automatically. */
   leaveOpen?: boolean;
   ellipsize?: boolean;
+  /** If true, shows a right-pointing chevron to indicate a sub-menu will appear on click. */
+  showDisclosure?: boolean;
   keyboardNavigation?: boolean;
 } & Omit<HTMLAttributes<HTMLAnchorElement & HTMLDivElement>, "onClick">) {
   // We want to automatically close the menu when you click something.
@@ -251,6 +254,11 @@ export function PopupMenuText({
         <div className="checked">{checked ? <Check /> : <div className="not-checked" />}</div>
       )}
       {hotkeys && <HotkeyView hotkeys={hotkeys} />}
+      {showDisclosure && (
+        <div className="disclosure">
+          <ChevronRight />
+        </div>
+      )}
     </StyledPopupMenuText>
   );
 }
@@ -316,6 +324,19 @@ export const StyledPopupMenuText = styled.div`
     > svg {
       width: 100%;
       height: 100%;
+    }
+  }
+
+  > .disclosure {
+    flex-shrink: 0;
+    flex-grow: 0;
+    margin-right: -4px;
+    margin-top: 2px;
+    color: ${colors.textSecondary()};
+
+    > svg {
+      width: 18px;
+      height: 18px;
     }
   }
 

@@ -32,6 +32,10 @@ export type BasePrompt<T> = {
   validate?: (value: T) => void;
   /** If true (default), the user can submit the prompt by pressing Enter. */
   enterSubmits?: boolean;
+  /** If true (default), the input will be focused automatically. */
+  autoFocus?: boolean;
+  /** If true (default), any existing input text will be selected automatically. */
+  autoSelect?: boolean;
 };
 
 export type RequiredPrompt<T> = BasePrompt<T> & {
@@ -78,6 +82,8 @@ export function PromptView<T = string>({
     validate,
     onSubmit,
     enterSubmits = true,
+    autoFocus = true,
+    autoSelect = true,
   } = prompt;
 
   const nullable = "nullable" in prompt && !!prompt.nullable;
@@ -175,8 +181,8 @@ export function PromptView<T = string>({
         <TextArea
           newStyle
           placeholder={placeholder}
-          autoFocus
-          autoSelect
+          autoFocus={autoFocus}
+          autoSelect={autoSelect}
           spellCheck={!!spellCheck}
           disabled={!!working}
           autoSizing
