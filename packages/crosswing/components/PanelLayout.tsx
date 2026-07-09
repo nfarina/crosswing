@@ -77,6 +77,10 @@ export function PanelLayout({
 }) {
   const layout = edge === "top" || edge === "bottom" ? "vertical" : "horizontal";
   const ref = useRef<HTMLDivElement>(null);
+  // We must use a ref instead of querySelector(".dragger") because PanelLayouts
+  // nest, and an unscoped query can bind our drag listeners to a descendant
+  // layout's dragger, leaving our own dragger inert.
+  const draggerRef = useRef<HTMLDivElement>(null);
   const { isDefaultContext, getInsertionRef } = use(ToolbarContext);
 
   const key = typeof restorationKey === "symbol" ? String(restorationKey) : restorationKey.name;
@@ -207,9 +211,8 @@ export function PanelLayout({
 
   useEffect(() => {
     const container = ref.current;
-    if (!container) return;
-    const dragger = container.querySelector(".dragger");
-    if (!(dragger instanceof HTMLElement)) return;
+    const dragger = draggerRef.current;
+    if (!container || !dragger) return;
 
     // In case this effect is run due to its dependencies changing, update
     // the layout to reflect the current state.
@@ -285,7 +288,7 @@ export function PanelLayout({
         }
 
         // Clamp the size to the min and max sizes.
-        newSize = Math.max(panelMinSize, Math.min(panelMaxSize, newSize));
+        newSize = Math.max(panelMinSize, Math.min(resolvedPanelMaxSize, newSize));
 
         container.style.setProperty("--panel-size", newSize + "px");
 
@@ -296,8 +299,11 @@ export function PanelLayout({
         // amount changes by 1/3 of the distance to the max or min size.
         // We'll set a "--bounce-offset" CSS var to add to the size to
         // show the panel at the dragged size temporarily.
-        if (draggedSize > panelMaxSize) {
-          container.style.setProperty("--bounce-offset", (draggedSize - panelMaxSize) / 3 + "px");
+        if (draggedSize > resolvedPanelMaxSize) {
+          container.style.setProperty(
+            "--bounce-offset",
+            (draggedSize - resolvedPanelMaxSize) / 3 + "px",
+          );
         } else if (draggedSize < panelMinSize) {
           container.style.setProperty("--bounce-offset", (draggedSize - panelMinSize) / 3 + "px");
         } else {
@@ -366,7 +372,7 @@ export function PanelLayout({
         setInitialPanelSize(newSize === panelDefaultSize ? null : newSize);
 
         // If the user dragged the panel to the max, remember that.
-        setPanelMaximized(newSize === panelMaxSize);
+        setPanelMaximized(newSize === resolvedPanelMaxSize);
       };
 
       // We need to prevent the default click handling behavior, otherwise
@@ -425,7 +431,7 @@ export function PanelLayout({
         </div>
         <div className="panel" {...dataAttributes} inert={!panelVisible}>
           {panel}
-          <div className="dragger" {...dataAttributes}>
+          <div className="dragger" ref={draggerRef} {...dataAttributes}>
             <div className="drag-handle" {...dataAttributes}>
               <div className="drag-handle-grabber" />
             </div>
