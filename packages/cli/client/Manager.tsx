@@ -2,10 +2,7 @@ import { CrosswingApp } from "crosswing/app";
 import { colors } from "crosswing/colors";
 import { LoadingCurtain } from "crosswing/components/LoadingCurtain";
 import { Scrollable, StyledScrollable } from "crosswing/components/Scrollable";
-import {
-  StatusBanner,
-  StyledStatusBanner,
-} from "crosswing/components/badges/StatusBanner";
+import { StatusBanner, StyledStatusBanner } from "crosswing/components/badges/StatusBanner";
 import { useAsyncTask } from "crosswing/hooks/useAsyncTask";
 import { HotKey } from "crosswing/hooks/useHotKey";
 import { useInterval } from "crosswing/hooks/useInterval";
@@ -61,24 +58,14 @@ export function ManagerContent() {
       {error && (
         <StatusBanner
           type="error"
-          children={
-            error.message === "Failed to fetch"
-              ? "Server not running"
-              : error.message
-          }
+          children={error.message === "Failed to fetch" ? "Server not running" : error.message}
         />
       )}
       <Scrollable>
         <div className="tasks">
-          {Object.entries(Object.entries(status.tasks)).map(
-            ([i, [name, task]]) => (
-              <TaskView
-                key={name}
-                task={task}
-                hotkey={String(Number(i) + 1) as HotKey}
-              />
-            ),
-          )}
+          {Object.entries(Object.entries(status.tasks)).map(([i, [name, task]]) => (
+            <TaskView key={name} task={task} hotkey={String(Number(i) + 1) as HotKey} />
+          ))}
         </div>
       </Scrollable>
     </StyledManager>

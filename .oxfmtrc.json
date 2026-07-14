@@ -1,0 +1,12 @@
+{
+  "trailingComma": "all",
+  "ignorePatterns": ["packages/crosswing/modals/popup/PopupView.tsx"],
+  "overrides": [
+    {
+      "files": ["**/*.jsonc"],
+      "options": {
+        "trailingComma": "none"
+      }
+    }
+  ]
+}

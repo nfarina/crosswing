@@ -12,13 +12,7 @@ import { styled } from "styled-components";
 import { ClientTask } from "../shared/types.js";
 import { api } from "./api.js";
 
-export function TaskView({
-  task,
-  hotkey,
-}: {
-  task: ClientTask;
-  hotkey: HotKey;
-}) {
+export function TaskView({ task, hotkey }: { task: ClientTask; hotkey: HotKey }) {
   const errorAlert = useErrorAlert();
 
   const running = usePersistedState({
@@ -71,19 +65,13 @@ export function TaskView({
         <div className="title">{task.title}</div>
         <div className="description">{task.description}</div>
       </div>
-      {task.process?.memory && (
-        <div className="memory">{renderMemory(task.process.memory)}</div>
-      )}
+      {task.process?.memory && <div className="memory">{renderMemory(task.process.memory)}</div>}
       {task.link && (
         <a className="link" href={task.link} target="_blank">
           {task.link.split("//")[1].split("/")[0]}
         </a>
       )}
-      <Toggle
-        disabled={running.isUpdating}
-        onClick={running.toggle}
-        on={running.value}
-      />
+      <Toggle disabled={running.isUpdating} onClick={running.toggle} on={running.value} />
     </StyledTaskView>
   );
 }

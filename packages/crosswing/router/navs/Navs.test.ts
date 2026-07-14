@@ -15,11 +15,7 @@ const recipe = RouterLocation.fromHref("/recipes/books/X/recipes/Y2");
 describe("pushLocation", () => {
   test("pushes a new location onto the stack", () => {
     const result = pushLocation(root, [root, book], importPage);
-    expect(hrefs(result)).toEqual([
-      "/recipes",
-      "/recipes/books/X",
-      "/recipes/books/X/imports/Y",
-    ]);
+    expect(hrefs(result)).toEqual(["/recipes", "/recipes/books/X", "/recipes/books/X/imports/Y"]);
   });
 
   test("navigating to the penultimate location pops (back)", () => {
@@ -39,11 +35,7 @@ describe("pushLocation", () => {
   // the recipe (which broke the back button and stranded a tap-eating layer).
   test("replace swaps the top entry instead of pushing", () => {
     const result = pushLocation(root, [root, book, importPage], recipe, true);
-    expect(hrefs(result)).toEqual([
-      "/recipes",
-      "/recipes/books/X",
-      "/recipes/books/X/recipes/Y2",
-    ]);
+    expect(hrefs(result)).toEqual(["/recipes", "/recipes/books/X", "/recipes/books/X/recipes/Y2"]);
     // Back from the recipe now goes to the book, not the dead import page.
     expect(result[result.length - 2].href()).toEqual("/recipes/books/X");
   });

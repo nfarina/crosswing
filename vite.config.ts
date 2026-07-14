@@ -39,6 +39,6 @@ export default defineConfig({
     // will group them together).
     resolveSnapshotPath: (testPath, snapExtension) => testPath + snapExtension,
     // Don't run tests in `submodules`, since they are linked into `packages`.
-    exclude: ["node_modules/**", "submodules/**"],
+    exclude: ["node_modules/**", "submodules/**", "packages/**/lib/**", "packages/**/dist/**"],
   },
 });

@@ -11,9 +11,7 @@ import { styled } from "styled-components";
 export function App() {
   return (
     <MockHostProvider container="ios">
-      <CrosswingApp
-        colors={[colors.primaryGradient.override(colors.blueGradient)]}
-      >
+      <CrosswingApp colors={[colors.primaryGradient.override(colors.blueGradient)]}>
         <ModalRootProvider>
           <MobileAppFrame restorationKey={App}>
             <AppContent />
@@ -32,12 +30,7 @@ function AppContent() {
 
   return (
     <StyledApp>
-      <Button
-        primary
-        title="Hello World"
-        icon={<CrosswingLogoIcon />}
-        onClick={alert.show}
-      />
+      <Button primary title="Hello World" icon={<CrosswingLogoIcon />} onClick={alert.show} />
     </StyledApp>
   );
 }

@@ -4,12 +4,7 @@ import parseArgs from "minimist";
 import { dirname, resolve } from "path";
 import { URL, fileURLToPath } from "url";
 import { ServerStatus } from "../shared/types.js";
-import {
-  ProcessRunner,
-  deleteRunner,
-  getRunner,
-  setRunner,
-} from "./ProcessRunner.js";
+import { ProcessRunner, deleteRunner, getRunner, setRunner } from "./ProcessRunner.js";
 import { ServerTasks, ServerTasksFile } from "./ServerTasks.js";
 import { singleFlight } from "./singleFlight.js";
 
@@ -23,9 +18,7 @@ const {
 } = parseArgs(process.argv.slice(2));
 
 // Parse comma-separated task names from --start flag
-const autoStartTasks = start
-  ? start.split(",").map((task: string) => task.trim())
-  : [];
+const autoStartTasks = start ? start.split(",").map((task: string) => task.trim()) : [];
 
 let tasksJson: ServerTasksFile;
 let tasksJsonFullPath: string;

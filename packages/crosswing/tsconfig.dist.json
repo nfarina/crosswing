@@ -3,7 +3,8 @@
   "compilerOptions": {
     "sourceMap": true,
     "noEmit": false,
-    "incremental": false
+    "incremental": false,
+    "types": ["node", "react/experimental", "vite/client"]
   },
   "include": ["dist/**/*.ts", "dist/**/*.tsx", "../../types.d.ts"],
   // Remove the "dist" exclusion from the root tsconfig.json since that's
