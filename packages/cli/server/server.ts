@@ -11,6 +11,7 @@ import {
   setRunner,
 } from "./ProcessRunner.js";
 import { ServerTasks, ServerTasksFile } from "./ServerTasks.js";
+import { singleFlight } from "./singleFlight.js";
 
 // This script accepts a tasks.json path and optional task names to auto-start.
 // Usage: crosswing [path to tasks.json] --start=task1,task2
@@ -173,7 +174,7 @@ Visit http://localhost:${port} to start local development services.
   }
 });
 
-async function getStatus(): Promise<ServerStatus> {
+const getStatus = singleFlight(async (): Promise<ServerStatus> => {
   const status: ServerStatus = { tasks: {} };
 
   for (const task of tasks.all()) {
@@ -190,7 +191,7 @@ async function getStatus(): Promise<ServerStatus> {
   }
 
   return status;
-}
+});
 
 async function startTask(name: string) {
   const task = tasks.getOne(name);

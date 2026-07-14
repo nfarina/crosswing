@@ -42,7 +42,15 @@ export function ManagerContent() {
     runOnMount: true,
   });
 
-  useInterval(updateStatusTask.run, visible ? 1000 : null);
+  useInterval(
+    () => {
+      // A status request shells out to inspect every managed process. If one
+      // takes longer than the polling interval, do not pile another request on
+      // top of it.
+      if (!updateStatusTask.isRunning) updateStatusTask.run();
+    },
+    visible ? 1000 : null,
+  );
 
   if (!status) {
     return <LoadingCurtain />;
