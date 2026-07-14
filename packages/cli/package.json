@@ -22,14 +22,13 @@
     "ps-tree": "^1.2.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^4.5.1",
-    "babel-plugin-styled-components": "^2.1.4",
+    "@vitejs/plugin-react": "^6.0.3",
     "crosswing": "workspace:*",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "react-is": "^19.1.0",
-    "styled-components": "^6.1.18",
-    "vite": "^6.3.5"
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-is": "^19.2.7",
+    "styled-components": "^6.4.3",
+    "vite": "^8.1.4"
   },
   "files": [
     "**/*.ts?(x)",

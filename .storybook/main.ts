@@ -1,5 +1,7 @@
 // @chatwing
+import babel from "@rolldown/plugin-babel";
 import { StorybookConfig } from "@storybook/react-vite";
+import react, { reactCompilerPreset } from "@vitejs/plugin-react";
 import { mergeConfig } from "vite";
 import { reactClickToComponent } from "vite-plugin-react-click-to-component";
 
@@ -17,7 +19,18 @@ export default {
   // react-compiler or else our modal system will go into infinite render loops.
   async viteFinal(config) {
     return mergeConfig(config, {
-      plugins: [reactClickToComponent()],
+      plugins: [
+        react(),
+        babel({
+          presets: [reactCompilerPreset()],
+        }),
+        reactClickToComponent(),
+      ],
+      oxc: {
+        plugins: {
+          styledComponents: { fileName: false },
+        },
+      },
     });
   },
 } satisfies StorybookConfig;

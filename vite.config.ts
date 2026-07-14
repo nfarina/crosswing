@@ -1,30 +1,23 @@
-import react from "@vitejs/plugin-react";
+import babel from "@rolldown/plugin-babel";
+import react, { reactCompilerPreset } from "@vitejs/plugin-react";
 import { defineConfig } from "vitest/config";
-
-// Actually import this becasue babel-plugin-styled-components wants it as a
-// peer dep but `check-imports` complains if it's not actually imported.
-import "styled-components";
 
 export default defineConfig({
   plugins: [
-    react({
-      babel: {
-        plugins: [
-          ["babel-plugin-react-compiler"],
-          ["babel-plugin-styled-components", { fileName: false }],
-        ],
-      },
+    react(),
+    babel({
+      presets: [reactCompilerPreset()],
     }),
   ],
+  oxc: {
+    plugins: {
+      styledComponents: { fileName: false },
+    },
+  },
   build: {
     // Don't minify the output; it doesn't increase performance, make debugging
     // harder, and breaks image-blob-reduce in particular.
     minify: false,
-  },
-  optimizeDeps: {
-    esbuildOptions: {
-      jsx: "transform",
-    },
   },
   // Don't clear the screen when logging certain things; it makes the
   // manager server harder to read (since multiple Vite servers can be running).
