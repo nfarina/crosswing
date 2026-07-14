@@ -44,7 +44,7 @@ export function ManagerContent() {
       // A status request shells out to inspect every managed process. If one
       // takes longer than the polling interval, do not pile another request on
       // top of it.
-      if (!updateStatusTask.isRunning) updateStatusTask.run();
+      if (!document.hidden && !updateStatusTask.isRunning) updateStatusTask.run();
     },
     visible ? 1000 : null,
   );

@@ -1,19 +1,21 @@
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 
 export function useDocumentVisible(): boolean {
-  const [visible, setVisible] = useState(!document.hidden);
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+}
 
-  useEffect(() => {
-    function handleVisibilityChange() {
-      setVisible(!document.hidden);
-    }
+function subscribe(onStoreChange: () => void) {
+  document.addEventListener("visibilitychange", onStoreChange);
 
-    document.addEventListener("visibilitychange", handleVisibilityChange);
+  return () => {
+    document.removeEventListener("visibilitychange", onStoreChange);
+  };
+}
 
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-    };
-  }, []);
+function getSnapshot() {
+  return !document.hidden;
+}
 
-  return visible;
+function getServerSnapshot() {
+  return true;
 }
