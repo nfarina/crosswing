@@ -165,6 +165,7 @@ export function PopupMenuText({
   onClick,
   component = null,
   to,
+  replace,
   right,
   target,
   disabled,
@@ -186,6 +187,8 @@ export function PopupMenuText({
   onClick?: (e: MouseEvent<HTMLElement>) => void;
   component?: string | ComponentType<any> | null;
   to?: string;
+  /** When `to` renders a Link, replace history instead of pushing. */
+  replace?: boolean;
   target?: string;
   disabled?: boolean;
   /** If false, then behaves like disabled=true, but doesn't dim out the item. Default true. */
@@ -229,7 +232,7 @@ export function PopupMenuText({
   return (
     <StyledPopupMenuText
       as={getAs()}
-      {...(to ? { to, target } : {})}
+      {...(to ? { to, target, replace } : {})}
       onClick={onButtonClick}
       onMouseEnter={onMouseEnter}
       data-disabled={disabled}

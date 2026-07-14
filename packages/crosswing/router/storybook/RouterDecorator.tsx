@@ -17,6 +17,9 @@ export function RouterDecorator(Story: () => any) {
       setTimeout(() => action("navigate")(...params), 0);
     },
     top: () => new RouterLocation(),
+    // No-op subscription so components that listen for navigation (e.g. to react
+    // to returning to a screen) can mount in stories. Returns an unsubscribe.
+    listen: () => () => {},
   } as any;
 
   const location = new RouterLocation();

@@ -29,6 +29,8 @@ export interface HostContextValue {
   supportsBrightness?: boolean;
   supportsLightStatusBar?: boolean;
   supportsPlaid?: boolean;
+  /** Whether this host can present a native "rate this app" star dialog (iOS StoreKit). Only true on shells new enough to handle the requestReview message. */
+  supportsReviewPrompt?: boolean;
   requiresNotificationAuthorization: boolean;
   smsAutoVerificationToken?: string;
   getPlugin(plugin: string): null | HostPlugin;
@@ -48,6 +50,8 @@ export interface HostContextValue {
   }): Promise<void>;
   requestLocationUpdate(): Promise<void>;
   openSettings(): Promise<void>;
+  /** Best-effort: asks the OS to present its native "rate this app" star dialog (iOS StoreKit). No-op off native; the OS rate-limits and may show nothing. */
+  requestReview(): Promise<void>;
   badgeAppIcon(badge: number): Promise<void>;
   /** Attempts to scroll to the top based on what looks scrolled, if on iOS. Otherwise does nothing. */
   scrollToTop(): void;
@@ -163,6 +167,8 @@ export interface HostFeatures {
   smsAutoVerificationToken?: string;
   /** Whether this host supports integrating with the native Plaid SDK. */
   plaid?: boolean;
+  /** Whether this host can present a native "rate this app" star dialog (iOS StoreKit). */
+  reviewPrompt?: boolean;
   /** Any plugins exposed by the host. */
   plugins?: Record<string, HostPlugin>;
 }

@@ -13,6 +13,7 @@ import {
   openSettings,
   openUrl,
   post,
+  requestReview,
   requestLocationUpdate,
   requestLocationWhenInUseAuthorization,
   requestNotificationAuthorization,
@@ -98,6 +99,7 @@ export function HostProvider({
           supportsWakeLock: !!features.wakeLock,
           supportsBrightness: !!features.brightness,
           supportsPlaid: !!features.plaid,
+          supportsReviewPrompt: !!features.reviewPrompt,
           supportsLightStatusBar: container === "ios", // All iOS versions support this.
           requiresNotificationAuthorization: !!features.notificationAuthorization,
           smsAutoVerificationToken: features.smsAutoVerificationToken,
@@ -110,6 +112,7 @@ export function HostProvider({
           requestTemporaryFullAccuracyLocationAuthorization,
           requestLocationUpdate,
           openSettings,
+          requestReview,
           badgeAppIcon,
           scrollToTop,
           copyToClipboard: clipboard.copy,

@@ -37,6 +37,7 @@ export function defaultHostContext(merge?: Partial<HostContextValue>): HostConte
     requestTemporaryFullAccuracyLocationAuthorization: async () => {},
     requestLocationUpdate: async () => {},
     openSettings: async () => {},
+    requestReview: async () => {},
     badgeAppIcon: async () => {},
     scrollToTop: () => {},
     copyToClipboard: (dataString: string) => {

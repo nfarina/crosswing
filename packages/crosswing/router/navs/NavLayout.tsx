@@ -81,7 +81,10 @@ export function NavLayout({
   function getLeftAccessory() {
     if (left) return <NavAccessoryView accessory={left} align="left" />;
 
-    if ((back || backTo) && !hideBackButton) {
+    // An application root has no "up" — even if there's a location behind us in
+    // the stack (e.g. we were reached via a <Redirect> from an index route),
+    // honor the isApplicationRoot contract and never show a back button.
+    if ((back || backTo) && !hideBackButton && !isApplicationRoot) {
       if (customBackAccessory) {
         return (
           <NavAccessoryView

@@ -105,6 +105,10 @@ export async function openSettings() {
   post("openSettings");
 }
 
+export async function requestReview() {
+  post("requestReview");
+}
+
 export async function badgeAppIcon(badge: number) {
   post("badgeAppIcon", { badge });
 }
