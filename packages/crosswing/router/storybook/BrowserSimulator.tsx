@@ -59,6 +59,11 @@ export const StyledBrowserSimulator = styled.div`
     border-bottom: 1px solid ${colors.separator()};
   }
 
+  /* Hide the address bar when captured for documentation screenshots. */
+  html[data-docs-screenshot] && > input {
+    display: none;
+  }
+
   > .children {
     height: 0;
     flex-grow: 1;
