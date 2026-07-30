@@ -17,7 +17,12 @@ export function useResettableState<S>(
   // https://github.com/facebook/react/issues/14738#issuecomment-461868904
   if (depsChanged(deps, prevDeps)) {
     setPrevDeps(deps);
-    setInnerValue(initial);
+    // Wrap in an updater so a lazy initializer is *called* rather than being
+    // mistaken for an updater function itself. Both happen to produce the same
+    // result for an initializer that ignores its argument, but relying on that
+    // is a trap — and it means the initializer only runs when deps actually
+    // change, which is the point of passing one.
+    setInnerValue(() => (typeof initial === "function" ? (initial as () => S)() : initial));
   }
 
   return [innerValue, setInnerValue];

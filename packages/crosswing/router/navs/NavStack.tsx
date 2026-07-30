@@ -2,6 +2,8 @@ import { HTMLAttributes, ReactElement, RefObject, use } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { styled } from "styled-components";
 import { colors } from "../../colors/colors.js";
+import { ErrorBoundary } from "../../components/ErrorBoundary.js";
+import { NoContent } from "../../components/NoContent.js";
 import { useGesture } from "../../hooks/useGesture.js";
 import { HostContext } from "../../host/context/HostContext.js";
 import { easing } from "../../shared/easing.js";
@@ -101,7 +103,27 @@ export function NavStack({
             }}
           >
             <div className="item" ref={item.ref}>
-              <RouterContext value={item.childContext}>{item.child}</RouterContext>
+              <RouterContext value={item.childContext}>
+                {/* Per-page, so a screen that throws leaves the rest of the app
+                    (tab bar included) usable, and — critically — always offers
+                    a way off the broken route. A host that restores the last
+                    route on launch turns "blank screen" into a trap you can't
+                    relaunch out of. */}
+                <ErrorBoundary
+                  resetKey={item.childContext.location.href()}
+                  fallback={({ reset }) => (
+                    <NoContent
+                      title="Something went wrong"
+                      subtitle="This screen ran into an unexpected problem."
+                      action={back ? "Go back" : "Try again"}
+                      actionTo={back?.href()}
+                      onActionClick={back ? undefined : reset}
+                    />
+                  )}
+                >
+                  {item.child}
+                </ErrorBoundary>
+              </RouterContext>
             </div>
           </CSSTransition>
         ))}

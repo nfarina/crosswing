@@ -62,7 +62,7 @@
   "dependencies": {
     "dayjs": "^1.11.21",
     "debug": "^4.4.3",
-    "lucide-react": "^1.25.0",
+    "lucide-react": "^1.26.0",
     "react-transition-group": "^4.4.5"
   },
   "peerDependencies": {
