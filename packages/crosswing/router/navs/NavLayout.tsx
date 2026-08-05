@@ -14,8 +14,10 @@ export interface NavProps {
   title?: ReactNode;
   subtitle?: ReactNode;
   children?: ReactNode;
-  left?: NavAccessory | null;
-  right?: NavAccessory | null;
+  /** One accessory, or several rendered side-by-side in the same slot. */
+  left?: NavAccessory | NavAccessory[] | null;
+  /** One accessory, or several rendered side-by-side in the same slot. */
+  right?: NavAccessory | NavAccessory[] | null;
   /** Custom "back" accessory, only rendered when the back arrow would otherwise be rendered. */
   back?: Omit<NavAccessory, "to" | "back"> | null;
   disabled?: boolean;
@@ -79,7 +81,8 @@ export function NavLayout({
   const statusBar = useHostStatusBar();
 
   function getLeftAccessory() {
-    if (left) return <NavAccessoryView accessory={left} align="left" />;
+    const rendered = renderAccessories(left, "left");
+    if (rendered) return rendered;
 
     // An application root has no "up" — even if there's a location behind us in
     // the stack (e.g. we were reached via a <Redirect> from an index route),
@@ -114,16 +117,17 @@ export function NavLayout({
       return <NavAccessoryView accessory={{ title: "Done" }} align="right" />;
     }
 
-    if (right) return <NavAccessoryView accessory={right} align="right" />;
+    const rendered = renderAccessories(right, "right");
+    if (rendered) return rendered;
 
     return <div />;
   }
 
   if (
     !isApplicationRoot &&
-    !left?.back &&
+    !hasBackAccessory(left) &&
     !back &&
-    !right?.back &&
+    !hasBackAccessory(right) &&
     !flags?.isMock &&
     flags?.isMobileApp
   ) {
@@ -161,6 +165,42 @@ export function NavLayout({
       {fullBleed && darkenUnderStatusBar && statusBar && <div className="top-fade" />}
     </StyledNavLayout>
   );
+}
+
+/**
+ * Renders a slot's accessory (or accessories). A single accessory renders as
+ * the slot itself, exactly as it always has; several are wrapped in a row so
+ * the header's slot layout (and anything targeting it) stays the same shape.
+ */
+function renderAccessories(
+  accessory: NavAccessory | NavAccessory[] | null | undefined,
+  align: "left" | "right",
+) {
+  if (!accessory) return null;
+
+  if (!Array.isArray(accessory)) {
+    return <NavAccessoryView accessory={accessory} align={align} />;
+  }
+
+  if (accessory.length === 0) return null;
+  if (accessory.length === 1) {
+    return <NavAccessoryView accessory={accessory[0]} align={align} />;
+  }
+
+  // The row owns the edge padding, so the accessories themselves get no align
+  // (their padding would land between them instead of at the edge).
+  return (
+    <div className="accessories" data-align={align}>
+      {accessory.map((one, i) => (
+        <NavAccessoryView key={i} accessory={one} />
+      ))}
+    </div>
+  );
+}
+
+function hasBackAccessory(accessory: NavAccessory | NavAccessory[] | null | undefined): boolean {
+  if (!accessory) return false;
+  return Array.isArray(accessory) ? accessory.some((one) => one.back) : !!accessory.back;
 }
 
 export const StyledNavHeader = styled.div`
@@ -219,6 +259,27 @@ export const StyledNavHeader = styled.div`
   > *:nth-child(3) {
     flex-shrink: 0;
     width: 80px;
+  }
+
+  /* Several accessories sharing one slot. The gap is generous because
+     accessories may draw chrome outside their layout box (ImageHeaderNav's
+     floating pills bleed 5px in every direction). */
+  > .accessories {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    box-sizing: border-box;
+    gap: 16px;
+
+    &[data-align="left"] {
+      justify-content: flex-start;
+      padding-left: 10px;
+    }
+
+    &[data-align="right"] {
+      justify-content: flex-end;
+      padding-right: 10px;
+    }
   }
 `;
 
