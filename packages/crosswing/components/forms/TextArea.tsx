@@ -26,7 +26,11 @@ import { Button } from "../Button.js";
 export type TextAreaErrorStyle = "color" | "message" | "none";
 
 export type TextAreaRef = {
-  focus(): void;
+  /**
+   * Focuses the field, optionally placing the caret at a character offset
+   * rather than wherever the browser would put it.
+   */
+  focus(selectionStart?: number): void;
 };
 
 /**
@@ -74,8 +78,17 @@ export function TextArea({
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useImperativeHandle(ref, () => ({
-    focus: () => {
-      textareaRef.current?.focus();
+    focus: (selectionStart?: number) => {
+      const textarea = textareaRef.current;
+      if (!textarea) return;
+
+      // Focus first: on iOS WebKit, focus() moves the caret to the start of
+      // the field, overriding any selection set beforehand.
+      textarea.focus();
+
+      if (selectionStart !== undefined) {
+        textarea.setSelectionRange(selectionStart, selectionStart);
+      }
     },
   }));
 
